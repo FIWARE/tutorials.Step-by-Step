@@ -1,0 +1,31 @@
+site_name: Step-by-Step
+site_url: https://fiware-tutorials.readthedocs.org
+repo_url: https://github.com/fiware/tutorials.git
+site_description: Fiware Tutorial Documentation
+docs_dir: docs
+site_dir: html
+markdown_extensions: [toc,fenced_code]
+use_directory_urls: false
+theme: readthedocs
+# extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
+extra_css: ["https://fiware.org/style/monokai_sublime_.css", "https://fiware.org/style/pygments-monokai.css", './fiware_readthedocs.css']
+pages:
+  - Home: 'index.md'
+  - 'Essential Core Context':
+    - 'Getting Started': 'getting-started.md'
+    - 'Entity Relationships': 'entity-relationships.md'
+    - 'CRUD Operations': 'crud-operations.md'
+    - 'Context Providers': 'context-providers.md'
+    - 'Accessing Context': 'accessing-context.md'
+    - 'Subscriptions': 'subscriptions.md'
+  - 'IoT Agents & Robots': 
+    - 'IoT Sensors': 'iot-sensors.md'
+    - 'IoT Agent': 'iot-agent.md'
+    - 'IoT over MQTT': 'iot-over-mqtt.md'
+    - 'Fast RTPS-Micro RTPS': 'fast-rtps-micro-rtps.md'
+  - 'Core Context Management':
+    - 'Persisting Context': 'historic-context.md'
+    - 'Short Term History': 'short-term-history.md'
+    - 'Time-Series Data': 'time-series-data.md'
+
+    
