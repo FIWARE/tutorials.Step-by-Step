@@ -1,6 +1,6 @@
 
 **Description:** This tutorial teaches FIWARE users about CRUD Operations.
-The tutorial builds on the data created in the previous [stock management example](https://github.com/Fiware/tutorials.Entity-Relationships/) and introduces the concept of [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data held within the context.
+The tutorial builds on the data created in the previous [stock management example](entity-relationships.md) and introduces the concept of [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data held within the context.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.CRUD-Operations/).
 

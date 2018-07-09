@@ -187,7 +187,7 @@ The necessary configuration information can be seen in the services section of t
 
 ```yaml
   context-provider:
-    image: fiware/cp-web-app:latest
+    image: fiware/tutorials.context-provider
     hostname: context-provider
     container_name: context-provider
     networks:

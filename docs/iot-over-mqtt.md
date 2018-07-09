@@ -123,7 +123,7 @@ The attached volume is a [configuration file](https://github.com/Fiware/tutorial
 
 ```yaml
   context-provider:
-    image: fiware/cp-web-app:latest
+    image: fiware/tutorials.context-provider
     hostname: context-provider
     container_name: context-provider
     networks:

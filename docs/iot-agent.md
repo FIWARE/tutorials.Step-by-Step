@@ -142,7 +142,7 @@ The necessary configuration information for wiring up the IoT devices and the Io
 
 ```yaml
   context-provider:
-    image: fiware/cp-web-app:latest
+    image: fiware/tutorials.context-provider
     hostname: context-provider
     container_name: context-provider
     networks:

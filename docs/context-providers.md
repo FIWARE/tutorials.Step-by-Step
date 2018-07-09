@@ -1,6 +1,6 @@
 
 **Description:** This tutorial teaches FIWARE users about context data and context providers.
-The tutorial builds on the **Store** entity created in the previous [stock management example](https://github.com/Fiware/tutorials.CRUD-Operations/) and enables a user to 
+The tutorial builds on the **Store** entity created in the previous [stock management example](crud-operations.md) and enables a user to 
 retrieve data about a store which is not held directly within the Orion Context Broker.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.Context-Providers/).
@@ -95,7 +95,7 @@ The necessary configuration information for the **Context Provider NGSI proxy** 
 
 ```yaml
   context-provider:
-    image: fiware/cp-web-app:latest
+    image: fiware/tutorials.context-provider
     hostname: context-provider
     container_name: context-provider
     networks:
@@ -128,7 +128,7 @@ The other `context-provider` container configuration values described in the YAM
 
 
 The configuration information for MongoDB and the Orion Context Broker
-has been described in a [previous tutorial](https://github.com/Fiware/tutorials.Entity-Relationships/)
+has been described in a [previous tutorial](entity-relationships.md)
 
 
 ## Context Provider NGSI proxy

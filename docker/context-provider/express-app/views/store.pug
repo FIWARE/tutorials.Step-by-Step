@@ -1,0 +1,22 @@
+extends layout
+
+include product
+
+block content
+  img(height="40px" src= "/img/fiware.png")
+  div(style="width=100%; padding-bottom: 10px; box-shadow: 0px 5px 0px 0px #233c68;")
+  h1= title
+  div
+    div(style="float: left; border-width: 1px; border: solid; width:300px;")
+       img(src=`http://staticmap.openstreetmap.de/staticmap.php?center=${store.location.coordinates[1]},${store.location.coordinates[0]}&zoom=15&size=300x200&maptype=mapnik`)
+    div(style="float: left; padding:20px; border: none; height:163px; width:300px;")
+      address
+        | #{store.address.streetAddress} #[br]
+        | #{store.address.addressLocality} #[br]
+        | #{store.address.postalCode} #[br]
+        | #{store.address.addressRegion} #[br]
+    div(style="clear: both;")
+  div
+    iframe(width='560', height='270', src=`/app/store/${store.id}/till`, frameborder='0')
+  div
+    iframe(width='560', height='315', src=`/app/store/${store.id}/warehouse`, frameborder='0')

@@ -1,0 +1,38 @@
+mixin devicesForStore(id)
+  p(style="color:#000000;")
+    strong Devices in Store 
+      code(style="font-size:large") urn:ngsi-ld:Store:#{id}
+  ul.devices
+    li.device(style="background-image: url('/img/door-locked.svg')")
+      code
+        strong door#{id}
+        | &nbsp;
+        span(id=`door${id}`)
+    li.device(style="background-image: url('/img/bell-off.svg')")
+      code 
+        strong bell#{id}
+        | &nbsp;
+        span(id=`bell${id}`)
+    li.device(style="background-image: url('/img/motion-sensor.svg')")
+      code 
+        strong motion#{id}
+        | &nbsp;
+        span(id=`motion${id}`)
+    li.device(style="background-image: url('/img/lamp-off.svg')")
+      code 
+        strong lamp#{id}
+        | &nbsp;
+        span(id=`lamp${id}`)
+  form.device(action="/device/command")
+    input(type="text" style="display:none"  name="id" value=`${id}`)
+    select(name="action")
+      option(value="ring") Ring Bell
+      option(value="presence") Dectect Motion
+      option(value="unlock") Unlock Door
+      option(value="open") Open Door
+      option(value="close") Close Door
+      option(value="lock") Lock Door
+      option(value="on") Lamp On
+      option(value="off") Lamp Off
+    | &nbsp;
+    input(type="submit" value=`Send` class="button")

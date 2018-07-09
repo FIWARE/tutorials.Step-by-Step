@@ -1,0 +1,100 @@
+extends layout
+
+block content
+  img(height="50px" src= "/img/fiware.png")
+  div(style="width=100%; padding-bottom: 10px; box-shadow: 0px 5px 0px 0px #000000;")
+  h1= title
+  p(style="color:#000000;")
+    strong Devices in Store 
+      code(style="font-size:large") urn:ngsi-ld:Store:#{id}
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js')
+  script(src='https://cdn.jsdelivr.net/npm/chart.js@2.7.2/dist/Chart.min.js')
+  script(src='https://code.jquery.com/jquery-1.11.1.js')
+
+  div()
+    div(style="float: left;")
+      h2 Motion Sensor
+      canvas(id="barChart" width="400px" height="200px")
+    div(style="float: left;")
+      h2 Smart Lamp
+      canvas(id="lineChart" width="400px" height="200px")
+    div(style="clear: both;")
+
+  script(type='text/javascript').
+    var sumMotionData =!{JSON.stringify(sumMotionData)}
+    var minLampData =!{JSON.stringify(minLampData)}
+    var maxLampData =!{JSON.stringify(maxLampData)}
+    
+    var ctx = document.getElementById("barChart");
+
+    var barChart = new Chart(ctx, {
+        "type": "bar",
+        "data": {
+            "labels": sumMotionData.labels,
+            "datasets": [{
+                "label": "Motion Sensor Events",
+                "data": sumMotionData.data,
+                "backgroundColor": sumMotionData.color
+            }]
+        },
+        "options": {
+            "responsive": false,
+            "scales": {
+                "xAxes": [{
+                  "ticks": {
+                    "source": "labels"
+                  }
+                }],
+                "yAxes": [{
+                    "ticks": {
+                        "beginAtZero": true
+                    }
+                }]
+            }
+        }
+    });
+
+    var ctx = document.getElementById('lineChart').getContext('2d');
+    ctx.canvas.width = 400;
+    ctx.canvas.height = 200;
+    var cfg = {
+      type: 'bar',
+      data: {
+        labels: minLampData.labels,
+        datasets: [{
+          fill : false,
+          label: 'Minimum Luminosity',
+          data: minLampData.data,
+          type: 'line',
+          backgroundColor : '#45d3dd',
+          borderColor : '#45d3dd',
+          pointRadius : 2
+        }, {
+          fill : false,
+          label: 'Maximum Luminosity',
+          data: maxLampData.data,
+          type: 'line',
+          backgroundColor : '#233c68',
+          borderColor : '#233c68',
+          pointRadius : 2
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          xAxes: [{
+            ticks: {
+              source: 'labels'
+            }
+          }],
+          yAxes: [{
+            scaleLabel: {
+              display: true,
+            }
+          }]
+        }
+      }
+    };
+    var chart = new Chart(ctx, cfg);
+

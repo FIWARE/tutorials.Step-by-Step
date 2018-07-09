@@ -1,0 +1,45 @@
+extends layout
+
+block content
+
+  b Actions
+  form.device(action="/device/command")
+    input(type="text" style="display:none"  name="id" value=`${id}`)
+    select(name="action")
+      option(value="ring") Ring Bell
+      option(value="presence") Dectect Motion
+      option(value="unlock") Unlock Door
+      option(value="open") Open Door
+      option(value="close") Close Door
+      option(value="lock") Lock Door
+      option(value="on") Lamp On
+      option(value="off") Lamp Off
+    | &nbsp;
+    input(type="submit" value=`Send` class="button")
+
+  h2 Warehouse Notifications
+  ul(id="notifications" data-id=`${id}`)
+
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js')
+  script(src='https://code.jquery.com/jquery-1.11.1.js')
+  script.
+    $(function () {
+        var socket = io();
+        store = $('#notifications').data("id");
+        socket.on( store, function(msg){
+            // If we receive a store notification, list it on screen
+            $('#notifications').append($('<li>').text(msg));
+            if($('#notifications li').size() > 5){
+                $('#notifications li').first().remove();
+            }
+        });
+        $("form.device").submit(function(event){
+          event.preventDefault();
+          var serializedData = $(this).serialize();
+          $.ajax({
+              url: "/device/command",
+              type: "post",
+              data: serializedData
+          });
+        });
+    });

@@ -1,0 +1,37 @@
+{
+  "name": "proxy",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "lint": "eslint . --cache --fix"
+  },
+  "engines": {
+    "node": ">=8.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "debug": "~3.1.0",
+    "express": "~4.16.0",
+    "http-errors": "^1.6.3",
+    "lodash": "^4.17.10",
+    "moment": "^2.22.2",
+    "morgan": "~1.9.0",
+    "mqtt": "^2.18.1",
+    "ngsi_v2": "^0.1.0",
+    "node-cache": "^4.2.0",
+    "pug": "2.0.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2",
+    "socket.io": "^2.1.1",
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "eslint-config-tamia": "^5.0.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "memfs": "2.9.0",
+    "prettier": "^1.13.5"
+  }
+}
