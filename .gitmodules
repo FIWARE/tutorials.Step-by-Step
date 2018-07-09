@@ -1,0 +1,39 @@
+[submodule "tutorials.Getting.Started"]
+	path = tutorials.Getting.Started
+	url = git@github.com:Fiware/tutorials.Getting-Started.git
+[submodule "tutorials.Accessing-Context"]
+	path = tutorials.Accessing-Context
+	url = git@github.com:Fiware/tutorials.Accessing-Context.git
+[submodule "tutorials.Context-Providers"]
+	path = tutorials.Context-Providers
+	url = git@github.com:Fiware/tutorials.Context-Providers.git
+[submodule "tutorials.CRUD-Operations"]
+	path = tutorials.CRUD-Operations
+	url = git@github.com:Fiware/tutorials.CRUD-Operations.git
+[submodule "tutorials.Entity-Relationships"]
+	path = tutorials.Entity-Relationships
+	url = git@github.com:Fiware/tutorials.Entity-Relationships.git
+[submodule "tutorials.Fast-RTPS-Micro-RTPS"]
+	path = tutorials.Fast-RTPS-Micro-RTPS
+	url = git@github.com:Fiware/tutorials.Fast-RTPS-Micro-RTPS.git
+[submodule "tutorials.Historic-Context"]
+	path = tutorials.Historic-Context
+	url = git@github.com:Fiware/tutorials.Historic-Context.git
+[submodule "tutorials.IoT-Agent"]
+	path = tutorials.IoT-Agent
+	url = git@github.com:Fiware/tutorials.IoT-Agent.git
+[submodule "tutorials.IoT-over-MQTT"]
+	path = tutorials.IoT-over-MQTT
+	url = git@github.com:Fiware/tutorials.IoT-over-MQTT.git
+[submodule "tutorials.IoT-Sensors"]
+	path = tutorials.IoT-Sensors
+	url = git@github.com:Fiware/tutorials.IoT-Sensors.git
+[submodule "tutorials.Short-Term-History"]
+	path = tutorials.Short-Term-History
+	url = git@github.com:Fiware/tutorials.Short-Term-History.git
+[submodule "tutorials.Subscriptions"]
+	path = tutorials.Subscriptions
+	url = git@github.com:Fiware/tutorials.Subscriptions.git
+[submodule "tutorials.Time-Series-Data"]
+	path = tutorials.Time-Series-Data
+	url = git@github.com:Fiware/tutorials.Time-Series-Data.git
