@@ -1,3 +1,6 @@
+[![FIWARE IoT Agents](https://img.shields.io/badge/FIWARE-IoT_Agents-5dc0cf.svg)](https://www.fiware.org/developers/catalogue/)
+[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+
 **Description:** This tutorial is an introduction to IoT devices and the usage of the 
 [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) Protocol for 
 constrained devices. The tutorial introduces a series of dummy IoT devices  which are displayed within the browser and

@@ -1,3 +1,6 @@
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+
 **Description:** This tutorial is an introduction to [FIWARE Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to perist context data into a **Crate-DB** database. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into the database.
 The **Crate-DB** HTTP endpoint is then used to retrieve time-based aggregations of that data. The results are visualised on a graph or via the **Grafana** time series analytics tool.
 

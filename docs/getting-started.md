@@ -1,3 +1,5 @@
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
 **Description:** This is an Introductory Tutorial to the FIWARE Platform. We will start with the data 
 from a supermarket chain’s store finder and create a very simple *“Powered by FIWARE”* 

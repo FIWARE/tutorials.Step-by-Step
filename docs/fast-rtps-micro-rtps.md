@@ -1,3 +1,4 @@
+[![FIWARE Robots](https://img.shields.io/badge/FIWARE-IoT_Robots-5dc0cf.svg)](https://www.fiware.org/developers/catalogue/)
 
 **Description:** This is an Introductory Tutorial to the [Fast-RTPS](https://eprosima-fast-rtps.readthedocs.io) and [Micro-RTPS](http://micro-rtps.readthedocs.io) protocols for RTPS (Real Time Publish Subscribe) as used in robotics and extremely constrained devices.
 The enablers of the FIWARE platform are not directly involved at this low level of communication but a complete understanding of the protocols is required before proceeding to connect robotic devices to the FIWARE System.

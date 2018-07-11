@@ -1,5 +1,7 @@
 # FIWARE Step-by-Step Tutorials
 
+[![FIWARE Documentation](https://img.shields.io/badge/FIWARE-Documentation-000000.svg)](https://fiware-tutorials.readthedocs.io/en/latest)
+[![Documentation](https://readthedocs.org/projects/fiware-tutorials/badge/?version=latest)](https://fiware-tutorials.readthedocs.io/en/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a collection of tutorials for the FIWARE system. Each tutorial consists of a series

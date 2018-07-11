@@ -1,3 +1,6 @@
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+
 **Description:** This tutorial teaches FIWARE users about how to create and manage context data subscriptions.
 The tutorial builds on the entities and [Stock Management Frontend](https://github.com/Fiware/tutorials.Subscriptions/tree/master/proxy)
 application created in the previous [example](https://github.com/Fiware/tutorials.Accessing-Context/) to enable users to understand

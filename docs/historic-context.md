@@ -1,3 +1,5 @@
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](https://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](http://fiware-cygnus.readthedocs.io/en/latest/) - a generic enabler which is used to persist context data into third-party databases creating a historical view of the context. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists measurements
 from those sensors into a database for further analysis.

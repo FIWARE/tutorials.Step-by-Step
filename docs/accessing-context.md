@@ -1,3 +1,6 @@
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+
 
 **Description:** This tutorial teaches FIWARE users how to alter the context programmatically.
 The tutorial builds on the  entities created in the previous 

@@ -1,6 +1,6 @@
 site_name: Step-by-Step
 site_url: https://fiware-tutorials.readthedocs.org
-repo_url: https://github.com/fiware/tutorials.git
+repo_url: https://github.com/fiware/tutorials.Step-by-Step.git
 site_description: Fiware Tutorial Documentation
 docs_dir: docs
 site_dir: html
