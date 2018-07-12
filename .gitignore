@@ -36,3 +36,4 @@ jspm_packages/
 *.tgz
 .env
 .next
+push.sh
