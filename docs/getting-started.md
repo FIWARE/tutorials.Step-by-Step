@@ -313,7 +313,7 @@ This example returns the data of `urn:ngsi-ld:Store:001`
 curl -G -X GET \
    'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001' \
    -d 'options=keyValues'
- ```
+```
  
 #### Response:
 
