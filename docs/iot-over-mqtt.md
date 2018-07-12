@@ -44,13 +44,13 @@ The UltraLight 2.0 IoT Agent will only send or interpret messages using the [Ult
 however it can be used to send and receive messages over multiple **transport** mechanisms. Therefore we
 are able to use the same FIWARE generic enabler to connect to a wider range of IoT devices.
 
-#### Mosquitto MQTT Broker
+<h4>Mosquitto MQTT Broker</h4>
 
 [Mosquitto](https://mosquitto.org/) is a readily available, open source MQTT broker which will be used during this tutorial.
 It is available licensed under EPL/EDL. More information can be found at https://mosquitto.org/
 
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context broker. Details of the architecture and protocol used can be found in the [IoT Sensors tutorial](iot-sensors.md)
 The state of each device can be seen on the UltraLight device monitor web-page found at: `http://localhost:3000/device/monitor`
@@ -62,7 +62,7 @@ The state of each device can be seen on the UltraLight device monitor web-page f
 # Architecture
 
 This application builds on the components created in [previous tutorials](iot-agent.md). It
-will make use of two FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+will make use of two FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 Both the Orion Context Broker and the IoT Agent rely on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the information they hold. We will also be using the dummy IoT devices created in the [previous tutorial](iot-agent.md) 
 Additionally we will add an instance of the [Mosquitto](https://mosquitto.org/) MQTT broker which is open source and available under the EPL/EDL.
 
@@ -95,7 +95,7 @@ Since all interactions between the elements are initiated by HTTP or MQTT reques
 
 The necessary configuration information for wiring up the Mosquitto MQTT Broker, the IoT devices and the IoT Agent can be seen in the services section of the associated `docker-compose.yml`  file:
 
-## Mosquitto Configuration
+<h3>Mosquitto Configuration</h3>
 
 ```yaml
   mosquitto:
@@ -122,7 +122,7 @@ The `mosquitto` container is listening on two ports:
 
 The attached volume is a [configuration file](https://github.com/Fiware/tutorials.IoT-over-MQTT/blob/master/osquitto/mosquitto.conf) used to increase the debug level of the MQTT Message Broker.
 
-## Dummy IoT Devices Configuration
+<h3>Dummy IoT Devices Configuration</h3>
 
 ```yaml
   context-provider:
@@ -164,7 +164,7 @@ The `context-provider` container is driven by environment variables as shown:
 
 The other `context-provider` container configuration values described in the YAML file are not used in this tutorial.
 
-## IoT Agent for UltraLight 2.0 Configuration
+<h3>IoT Agent for UltraLight 2.0 Configuration</h3>
 
 The [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)  can be instantiated within a Docker container. An official Docker image is available from [Docker Hub](https://hub.docker.com/r/fiware/iotagent-ul/) tagged `fiware/iotagent-ul`. The 
 necessary configuration can be seen below:
@@ -231,7 +231,7 @@ As you can see, use of the MQTT transport is driven by only two environment vari
 
 To follow the tutorial correctly please ensure you have the device monitor page available in your browser and click on the page to enable audio before you enter any cUrl commands. The device monitor displays the current state of an array of dummy devices using Ultralight 2.0 syntax
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 The device monitor can be found at: `http://localhost:3000/device/monitor`
 
 
@@ -342,7 +342,7 @@ The response will look similar to the following:
 >Try the following remedies:
 > * To check that the docker containers are running try the following:
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -353,14 +353,14 @@ The response will look similar to the following:
 > context broker, IoT Agent and Dummy Device docker containers may be running from another IP address -  you will need 
 > to retrieve the virtual host IP as shown:
 >
->```bash
+>```
 >curl -X GET \
 >  'http://$(docker-machine ip default):4041/version'
 >```
 >
 > Alternatively run all your curl commands from within the container network:
 >
->```bash
+>```
 >docker run --network fiware_default --rm appropriate/curl -s \
 >  -X GET 'http://iot-agent:4041/iot/about'
 >```
@@ -518,8 +518,9 @@ Don't forget to add the `fiware-service` and `fiware-service-path` headers.
 #### 5 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsd-ld:Motion:001?type=Motion' \
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsd-ld:Motion:001'
+  -d 'type=Motion' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -656,8 +657,10 @@ The result of the command to ring the bell can be read by querying the entity wi
 #### 8 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Bell:001?type=Bell&options=keyValues' \
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Bell:001' \
+  -d 'type=Bell' \
+  -d 'options=keyValues' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```

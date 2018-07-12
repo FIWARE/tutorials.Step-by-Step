@@ -35,25 +35,25 @@ be informed when something happens. This means the application does not need to 
 Use of the subscription mechanism will therefore reduce both the volume of requests and amount of data being passed between components
 within the system. This reduction in network traffic will improve the overall responsiveness.
 
-## Entities within a stock management system
+<h3>Entities within a stock management system</h3>
 
 The relationship between our entities is defined as shown:
 
 ![](https://fiware.github.io/tutorials.Subscriptions/img/entities.png)
 
-## Stock Management Front-End
+<h3>Stock Management Front-End</h3>
 
 In the previous [tutorial](https://github.com/Fiware/tutorials.Accessing-Context/), a simple Node.js Express application was created.
 This tutorial will use the monitor page to watch the status of recent requests, and a store page to buy products. Once the services
 are running these pages can be accessed from the following URLs:
 
-#### Event Monitor
+<h4>Event Monitor</h4>
 
 The event monitor can be found at: `http://localhost:3000/app/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Subscriptions/img/monitor.png)
 
-#### Store 002
+<h4>Store 002</h4>
 
 Store002 can be found at: `http://localhost:3000/app/store/urn:ngsi-ld:Store:002`
 
@@ -63,7 +63,7 @@ Store002 can be found at: `http://localhost:3000/app/store/urn:ngsi-ld:Store:002
 
 # Architecture
 
-This application will make use of only one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will make use of only one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
 persistence of the context data it holds. To request context data from external sources, a simple **Context Provider NGSI 
@@ -108,7 +108,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -119,11 +119,11 @@ This command will also import seed data from the previous [Stock Management exam
 
 To follow the tutorial correctly please ensure you have the follow pages available on tabs in your browser before you enter any cUrl commands.
 
-#### Event Monitor
+<h4>Event Monitor</h4>
 
 The event monitor can be found at: `http://localhost:3000/app/monitor`
 
-#### Stores
+<h4>Stores</h4>
 
 The stores can be found at:
 
@@ -338,7 +338,7 @@ If you look at the store itself:
 An alert has been raised by the business logic within the application.
 
 
-# Subscription CRUD Actions
+## Subscription CRUD Actions
 
 The **CRUD** operations for subscriptions map on to the expected HTTP verbs under the `/v2/subscriptions/` endpoint.
 

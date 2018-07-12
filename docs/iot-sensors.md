@@ -261,7 +261,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -273,7 +273,7 @@ This command will also import seed data from the previous [Stock Management exam
 To follow the tutorial correctly please ensure you have the device monitor page available in your browser and click on the page to enable audio
 before you enter any cUrl commands. The device monitor displays the current state of an array of dummy devices using Ultralight 2.0 syntax
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 
 The device monitor can be found at: `http://localhost:3000/device/monitor`
 

@@ -5,7 +5,7 @@ of exercises to demonstrate the correct use of individual FIWARE components and 
 data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating 
 the context directly or programmatically.
 
-## How to Use
+<h3>How to Use</h3>
 
 Each tutorial is a self contained learning exercise designed to teach the developer about a single aspect of FIWARE.
 A summary of the goal of the tutorial can be found in the description at the head of each page. Every tutorial
@@ -42,9 +42,9 @@ Docker for Mac, however Linux users will need to follow the instructions found [
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command line functionality similar to a Linux distribution on Windows.
 
-# List of Tutorials
+## List of Tutorials
 
-**Essential Core Context**
+<h3>Essential Core Context</h3>
 
 These first tutorials are an introduction to the FIWARE Context Broker, and are an essential first step
 when learning to use FIWARE
@@ -56,7 +56,7 @@ when learning to use FIWARE
 &nbsp; 105. [Altering the Context Programmatically](accessing-context.md)<br/> 
 &nbsp; 106. [Subscribing to Changes in Context](subscriptions.md)<br/>
 
-**Internet of Things, Robots and third-party system**
+<h3>Internet of Things, Robots and third-party systems</h3>
 
 In order to make a context-based system aware of the state of the real world, it will need to 
 access information from Robots, IoT Sensors or other suppliers of context data such as social media.
@@ -68,7 +68,7 @@ objects themselves.
 &nbsp; 203. [IoT over MQTT](iot-over-mqtt.md)<br/>
 &nbsp; 250. [Introduction to Fast-RTPS and Micro-RTPS ](fast-rtps-micro-rtps.md)<br/>
 
-**Core Context Management**
+<h3>Core Context Management</h3>
 
 These tutorials show how to manipulate and store context data so it can be used for
 further processesing

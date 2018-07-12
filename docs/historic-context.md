@@ -46,7 +46,7 @@ to be used for data persistence. The database you choose to use will depend upon
 However there is a cost to offering this flexibility - each part of the system must be separately configured and
 notifications must be set up to only pass the minimal data required as necessary.
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context broker. Details of the architecture and protocol used can be found in the [IoT Sensors tutorial](iot-sensors.md).
 The state of each device can be seen on the UltraLight device monitor web-page found at: `http://localhost:3000/device/monitor`
@@ -128,7 +128,7 @@ This command will also import seed data from the previous tutorials and provisio
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -144,7 +144,7 @@ can be seen below:
 
 ![](https://fiware.github.io/tutorials.Historic-Context/img/cygnus-mongo.png)
 
-## Mongo DB - Database Server Configuration
+<h3>Mongo DB - Database Server Configuration</h3>
 
 ```yaml
   mongo-db:
@@ -158,7 +158,7 @@ can be seen below:
     command: --bind_ip_all --smallfiles
 ```
 
-## Mongo DB - Cygnus Configuration 
+<h3>Mongo DB - Cygnus Configuration</h3>
 
 ```yaml
   cygnus:
@@ -233,7 +233,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -448,7 +448,7 @@ We now have a system with two databases, since the MongoDB container is still re
 to hold data related to the Orion Context Broker and the IoT Agent. 
 
 
-## PostgreSQL - Database Server Configuration
+<h3>PostgreSQL - Database Server Configuration</h3>
 
 ```yaml
   postgres-db:
@@ -482,7 +482,7 @@ The `postgres-db` container is driven by environment variables as shown:
 
 
 
-## PostgreSQL - Cygnus Configuration
+<h3>PostgreSQL - Cygnus Configuration</h3>
 
 ```yaml
   cygnus:
@@ -564,7 +564,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -792,7 +792,7 @@ Once again we have a system with two databases, since the MongoDB container is s
 to hold data related to the Orion Context Broker and the IoT Agent. 
 
 
-## MySQL - Database Server Configuration
+<h3>MySQL - Database Server Configuration</h3>
 
 ```yaml
   mysql-db:
@@ -823,7 +823,7 @@ The `mysql-db` container is driven by environment variables as shown:
 |MYSQL_ROOT_HOST    |`postgres`| By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts | 
 
 
-## MySQL - Cygnus Configuration
+<h3>MySQL - Cygnus Configuration</h3>
 
 ```yaml
   cygnus:
@@ -906,7 +906,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -1132,7 +1132,7 @@ the architecture from the three previous examples and configure cygnus to listen
 We now have a system with three databases, PostgreSQL and MySQL for data persistence and MongoDB 
 for both data persistence and holding data related to the Orion Context Broker and the IoT Agent. 
 
-## Multi-Agent - Cygnus Configuration for Multiple Databases
+<h3>Multi-Agent - Cygnus Configuration for Multiple Databases</h3>
 
 ```yaml
   cygnus:
@@ -1246,7 +1246,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >

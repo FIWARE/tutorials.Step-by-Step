@@ -102,7 +102,7 @@ protocols, there will a large degree of similarity between IoT agents.
 
 This base functionality has been abstracted out into a common [IoT Agent framework library](https://iotagent-node-lib.readthedocs.io/)
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context broker. Details of the architecture and protocol used can be found in the [IoT Sensors tutorial](iot-sensors.md)
 The state of each device can be seen on the UltraLight device monitor web-page found at: `http://localhost:3000/device/monitor`
@@ -114,7 +114,7 @@ The state of each device can be seen on the UltraLight device monitor web-page f
 # Architecture
 
 This application builds on the components created in [previous tutorials](subscriptions.md). It
-will make use of two FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+will make use of two FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 Both the Orion Context Broker and the IoT Agent rely on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the information they hold. We will also be using the dummy IoT devices created in the [previous tutorial](iot-sensors.md) 
 
 
@@ -141,7 +141,7 @@ Since all interactions between the elements are initiated by HTTP requests, the 
 
 The necessary configuration information for wiring up the IoT devices and the IoT Agent can be seen in the services section of the associated `docker-compose.yml`  file:
 
-## Dummy IoT Devices Configuration
+<h3>Dummy IoT Devices Configuration</h3>
 
 ```yaml
   context-provider:
@@ -187,7 +187,7 @@ The `context-provider` container is driven by environment variables as shown:
 
 The other `context-provider` container configuration values described in the YAML file are not used in this tutorial.
 
-## IoT Agent for UltraLight 2.0 Configuration
+<h3>IoT Agent for UltraLight 2.0 Configuration</h3>
 
 The [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)  can be instantiated within a Docker container. An official Docker image is available from [Docker Hub](https://hub.docker.com/r/fiware/iotagent-ul/) tagged `fiware/iotagent-ul`. The 
 necessary configuration can be seen below:
@@ -250,7 +250,7 @@ The `iot-agent` container is driven by environment variables as shown:
 
 To follow the tutorial correctly please ensure you have the device monitor page available in your browser and click on the page to enable audio before you enter any cUrl commands. The device monitor displays the current state of an array of dummy devices using Ultralight 2.0 syntax
 
-#### Device Monitor
+<h4>Device Monitor</h4>
 The device monitor can be found at: `http://localhost:3000/device/monitor`
 
 
@@ -286,7 +286,7 @@ The response will look similar to the following:
 >Try the following remedies:
 > * To check that the docker containers are running try the following:
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -297,14 +297,14 @@ The response will look similar to the following:
 > context broker, IoT Agent and Dummy Device docker containers may be running from another IP address -  you will need 
 > to retrieve the virtual host IP as shown:
 >
->```bash
+>```
 >curl -X GET \
   'http://$(docker-machine ip default):4041/version'
 >```
 >
 > Alternatively run all your curl commands from within the container network:
 >
->```bash
+>```
 >docker run --network fiware_default --rm appropriate/curl -s \
 >  -X GET 'http://iot-agent:4041/iot/about'
 >```
@@ -457,8 +457,9 @@ Don't forget to add the `fiware-service` and `fiware-service-path` headers.
 #### 5 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsd-ld:Motion:001?type=Motion' \
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsd-ld:Motion:001' \
+  -d 'type=Motion' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -594,8 +595,10 @@ The result of the command to ring the bell can be read by querying the entity wi
 #### 8 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Bell:001?type=Bell&options=keyValues' \
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Bell:001' \
+  -d 'type=Bell' \
+  -d 'options=keyValues' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -887,7 +890,7 @@ curl -iX PATCH \
 ```
 
 
-# Service Group CRUD Actions
+## Service Group CRUD Actions
 
 The **CRUD** operations for provisioning a service group map on to the expected HTTP verbs under the `/iot/services` endpoint
 
@@ -933,8 +936,9 @@ Service group details can be read by making a GET request to the `/iot/services`
 #### 19 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:4041/iot/services?resource=/iot/d' \
+curl -G -X GET \
+  'http://localhost:4041/iot/services' \
+  -d 'resource=/iot/d' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -1032,8 +1036,7 @@ curl -iX DELETE \
   -H 'fiware-servicepath: /'
 ```
 
-
-# Device CRUD Actions
+## Device CRUD Actions
 
 The **CRUD** operations for provisioning individual devices map on to the expected HTTP verbs under the `/iot/devices` endpoint
 

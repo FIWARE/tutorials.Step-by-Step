@@ -16,7 +16,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 Our demo application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/).
-Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker  relies on open source [MongoDB](https://www.mongodb.com/) technology
 to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
@@ -78,7 +78,7 @@ docker run -d --name fiware-orion -h orion --network=fiware_default \
  
 >**Note:**  If you want to clean up and start again you can do so with the following commands
 >
->```bash
+>```
 >docker stop fiware-orion
 >docker rm fiware-orion
 >docker stop mongo-db
@@ -100,7 +100,7 @@ docker-compose -p fiware up -d
 
 >**Note:** If you want to clean up and start again you can do so with the following command:
 >
->```bash
+>```
 >docker-compose -p fiware down
 >``` 
 >
@@ -147,7 +147,7 @@ The response will look similar to the following:
 >Try the following remedies:
 > * To check that the docker containers are running try the following:
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -158,14 +158,14 @@ The response will look similar to the following:
 > orion docker container may be running from another IP address -  you will need to retrieve the virtual
 > host IP as shown:
 >
->```bash
+>```
 >curl -X GET \
 >  'http://$(docker-machine ip default):1026/version'
 >```
 >
 > Alternatively run all your cUrl commands from within the container network:
 >
->```bash
+>```
 >docker run --network fiware_default --rm appropriate/curl -s \
 >  -X GET 'http://orion:1026/version'
 >```
@@ -310,8 +310,9 @@ This example returns the data of `urn:ngsi-ld:Store:001`
 #### 4 Request:
 
 ```bash
-curl -X GET \
-   'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001?options=keyValues'
+curl -G -X GET \
+   'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001' \
+   -d 'options=keyValues'
  ```
  
 #### Response:
@@ -344,8 +345,10 @@ This example returns the data of all `Store` entities within the context data
 #### 5 Request:
 
 ```bash
-curl -X GET \
-    'http://localhost:1026/v2/entities?type=Store&options=keyValues'
+curl -G -X GET \
+    'http://localhost:1026/v2/entities' \
+    -d 'type=Store' \
+    -d 'options=keyValues'
 ```
 
 #### Response:
@@ -398,8 +401,11 @@ This example returns all stores found in the Kreuzberg District
 #### 6 Request:
 
 ```bash
-curl -X GET \
-http://localhost:1026/v2/entities?type=Store&q=address.addressLocality==Kreuzberg&options=keyValues 
+curl -G -X GET \
+    'http://localhost:1026/v2/entities' \
+    -d 'type=Store' \
+    -d 'q=address.addressLocality==Kreuzberg' \
+    -d 'options=keyValues 
 ```
 
 #### Response:
@@ -434,8 +440,12 @@ This example return all Stores within 1.5km the **Brandenburg Gate**  in **Berli
 #### 7 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities?type=Store&georel=near;maxDistance:1500&geometry=point&coords=52.5162,13.3777'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'type=Store' \
+  -d 'georel=near;maxDistance:1500' \
+  -d 'geometry=point' \
+  -d 'coords=52.5162,13.3777'
 ```
  
 #### Response:

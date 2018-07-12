@@ -145,7 +145,7 @@ Thereafter, all services can be initialized from the command line by running the
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -158,7 +158,7 @@ In the configuration, **Quantum Leap** listens to NGSI v2 notifications on port 
 data to the Crate-DB. Crate-DB is accessible using port `4200` and can either be queried directly or attached to the
 Grafana analytics tool.  The rest of the system providing the context data has been described in previous tutorials
 
-## Crate-DB Database Server Configuration
+<h3>Crate-DB Database Server Configuration</h3>
 
 ```yaml
   crate-db:
@@ -170,7 +170,7 @@ Grafana analytics tool.  The rest of the system providing the context data has b
     command: -Ccluster.name=democluster -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
 ```
 
-## Quantum Leap Configuration 
+<h3>Quantum Leap Configuration</h3>
 
 ```yaml
   quantum-leap:
@@ -184,7 +184,7 @@ Grafana analytics tool.  The rest of the system providing the context data has b
       - CRATE_HOST=crate-db
 ```
 
-## Grafana Configuration
+<h3>Grafana Configuration</h3>
 
 ```yaml
   grafana:

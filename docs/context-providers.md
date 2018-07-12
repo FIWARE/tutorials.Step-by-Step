@@ -57,7 +57,7 @@ In order to be able to fulfill these requests, the Orion Context Broker, must fi
 * Registered external context providers associated with existing entities (*Entities that Orion can "find information" about*) 
 
 
-## Entities within a stock management system
+<h3>Entities within a stock management system</h3>
 
 
 Within our simple stock management system, our **Store** entity currently returns `id`, `name`,  `address` and `location` attributes. 
@@ -74,7 +74,7 @@ The relationship between our entities is defined as shown:
 
 # Architecture
 
-This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. 
 To request context data from external sources, we will now need to add a simple Context Provider NGSI proxy.
@@ -174,7 +174,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -563,8 +563,9 @@ Once a Context Provider has been registered, the new context data will be includ
 #### 8 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001?type=Store'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001' \
+  -d 'type=Store'
 ```
 
 #### Response:

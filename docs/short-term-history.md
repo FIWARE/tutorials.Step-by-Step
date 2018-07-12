@@ -148,7 +148,7 @@ This command will also import seed data from the previous tutorials and provisio
 
 >**Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -164,7 +164,7 @@ The overall architecture can be seen below:
 
 ![](https://fiware.github.io/tutorials.Short-Term-History/img/sth-comet.png)
 
-## Database Server Configuration
+<h3>Database Server Configuration</h3>
 
 ```yaml
   mongo-db:
@@ -178,7 +178,7 @@ The overall architecture can be seen below:
     command: --bind_ip_all --smallfiles
 ```
 
-## STH-Comet Configuration 
+<h3>STH-Comet Configuration</h3>
 
 ```yaml
   sth-comet:
@@ -251,7 +251,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >
@@ -416,8 +416,10 @@ the `hLimit` parameter restricts the result to N values. `hOffset=0` will start 
 #### 5 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity?hLimit=3&hOffset=0' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity' \
+  -d 'hLimit=3' \
+  -d 'hOffset=0' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -478,8 +480,10 @@ Setting `hOffset` to a non-zero value will start from the Nth measurement
 #### 6 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count?hLimit=3&hOffset=3' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count' \
+  -d 'hLimit=3' \
+  -d 'hOffset=3' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -539,8 +543,9 @@ If the `lastN` parameter is set, the result will return the N latest measurement
 #### 7 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count?lastN=3' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count' \
+  -d 'lastN=3' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -608,8 +613,10 @@ Always select the most appropriate time period based on the frequency of your da
 #### 8 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count?aggrMethod=sum&aggrPeriod=minute' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Motion/id/Motion:001/attributes/count' \
+  -d 'aggrMethod=sum' \
+  -d 'aggrPeriod=minute' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -681,8 +688,10 @@ the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 #### 9 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity?aggrMethod=sum&aggrPeriod=minute' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity' \
+  -d 'aggrMethod=sum' \
+  -d 'aggrPeriod=minute' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -756,8 +765,10 @@ The **Motion Sensor** is not suitable for this as it only offers binary values.
 #### 10 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity?aggrMethod=min&aggrPeriod=minute' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity' \
+  -d 'aggrMethod=min' \
+  -d 'aggrPeriod=minute' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -828,8 +839,10 @@ the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 #### 11 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity?aggrMethod=max&aggrPeriod=minute' \
+curl -G -X GET \
+  'http://localhost:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity' \
+  -d 'aggrMethod=max' \
+  -d 'aggrPeriod=minute' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
@@ -902,7 +915,7 @@ context data persisted by **Cygnus**. **STH-Comet** is also attached to the same
 
 ![](https://fiware.github.io/tutorials.Short-Term-History/img/cygnus-sth-comet.png)
 
-## Database Server Configuration
+<h3>Database Server Configuration</h3>
 
 ```yaml
   mongo-db:
@@ -916,7 +929,7 @@ context data persisted by **Cygnus**. **STH-Comet** is also attached to the same
     command: --bind_ip_all --smallfiles
 ```
 
-## STH-Comet Configuration 
+<h3>STH-Comet Configuration</h3>
 
 ```yaml
   sth-comet:
@@ -937,7 +950,7 @@ context data persisted by **Cygnus**. **STH-Comet** is also attached to the same
         - LOGOPS_LEVEL=DEBUG
 ```
 
-## Cygnus Configuration 
+<h3>Cygnus Configuration</h3>
 
 ```yaml
   cygnus:
@@ -1051,7 +1064,7 @@ The response will look similar to the following:
 >
 > * To check that a docker container is running try
 >
->```bash
+>```
 >docker ps
 >```
 >

@@ -170,7 +170,7 @@ Obviously, your choice of programming language will depend upon your own busines
 below please keep this in mind and substitute Node.js with your own programming language as appropriate.
 
 
-## Entities within a stock management system
+<h3>Entities within a stock management system</h3>
 
 The relationship between our entities is defined as shown:
 
@@ -182,7 +182,7 @@ The **Store**, **Product** and **InventoryItem** entities will be used to displa
 
 # Architecture
 
-This application will make use of only one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will make use of only one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
 persistence of the context data it holds. To request context data from external sources, a simple Context Provider NGSI 
@@ -226,7 +226,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -337,8 +337,10 @@ Note the re-use of the Store URN in the incoming request.
 The equivalent cUrl command would be as shown:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001?type=Store&options=keyValues'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001' \
+  -d 'type=Store' \
+  -d 'options=keyValues'
 ```
 
 The response will be as shown below:
@@ -384,8 +386,10 @@ store that does not exist. This will forward to an error page as shown:
 The equivalent cUrl command would be as shown:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:005?type=Store&options=keyValues'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:005' \
+  -d 'type=Store' \
+  -d 'options=keyValues'
 ```
 
 The response has a status of **404 Not Found** with a body as shown below:
@@ -473,10 +477,15 @@ Retrieving the full list of **Product** entities for each request is not efficie
 This is the equivalent of the following cURL commands (plus some business logic)
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?type=Product&options=keyValues'
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=InventoryItem&options=keyValues'  
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/' \
+  -d 'type=Product' \
+  -d 'options=keyValues'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refStore==urn:ngsi-ld:Store:001' \
+  -d 'type=InventoryItem' \
+  -d 'options=keyValues'  
 ```
 
 

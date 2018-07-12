@@ -14,7 +14,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 Within the FIWARE platform, an entity represents the state of a physical or conceptural object which exists in the real world.
 
-## Entities within a stock management system
+<h3>Entities within a stock management system</h3>
 
 Within our simple stock management system, currently have four types of entity. The relationship between our entities is defined as shown:
 
@@ -47,7 +47,7 @@ As you can see, each of the entities defined above contain some properties which
 
 # Architecture
 
-This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
@@ -112,7 +112,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -229,8 +229,9 @@ The request will fail if any of the attributes already exist in the context.
 You can check to see if the new **Product** can be found in the context by making a GET request
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010' \
+  -d 'type=Product'
 ```
 
 
@@ -265,8 +266,9 @@ Subsequent requests using the same `id` will update the value of the attribute i
 You can check to see if the new **Product** attribute can be found in the context by making a GET request
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001' \
+  -d 'type=Product'
 ```
 
 As you can see there is now  boolean `specialOffer` flag attached to the "Beer" **Product** entity
@@ -373,8 +375,9 @@ This example reads the full context from an existing **Product** entity with a k
 #### 7 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010' \
+  -d 'type=Product'
 ```
 
 #### Response:
@@ -423,8 +426,11 @@ This example reads the key-value pairs for two requested attributes (`name` and 
 #### 9 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=keyValues&attrs=name,price'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001' \
+  -d 'type=Product' \
+  -d 'options=keyValues' \
+  -d' attrs=name,price'
 ```
 
 #### Response:
@@ -451,8 +457,11 @@ This example reads the value of two requested attributes (`name` and `price`) fr
 #### 10 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=values&attrs=name,price'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'\
+  -d 'type=Product' \
+  -d 'options=values' \
+  -d 'attrs=name,price'
 ```
 
 #### Response:
@@ -478,8 +487,9 @@ This example lists the full context of all **Product** entities.
 #### 11 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities?type=Product'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities' \
+  -d 'type=Product'
 ```
 
 ### Response:
@@ -584,8 +594,11 @@ This example lists the `name` and `price` attributes of all **Product** entities
 #### 12 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities' \
+  -d 'type=Product' \
+  -d 'options=keyValues' \
+  -d 'attrs=name,price'
 ```
 
 #### Response:
@@ -678,8 +691,11 @@ This example lists the `id` and `type` of all **Product** entities.
 #### 13 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities' \
+  -d 'type=Product' \
+  -d 'options=count' \
+  -d 'attrs=id'
 ```
 
 #### Response:
@@ -969,8 +985,11 @@ This example returns the key of all entities directly associated with the `urn:n
 #### 23 Request:
 
 ```bash
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
+curl -G -X GET \
+  --url 'http://localhost:1026/v2/entities' \
+  -d 'q=refProduct==urn:ngsi-ld:Product:001' \
+  -d 'options=count' \
+  -d 'attrs=type'
 ```
 
 #### Response:

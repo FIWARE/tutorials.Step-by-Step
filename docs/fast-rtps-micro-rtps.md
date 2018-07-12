@@ -53,7 +53,7 @@ Thereafter, all services can be initialized from the command line by running the
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -67,7 +67,7 @@ In the subsequent tutorials we will discuss how Fast-RTPS (and therefore ROS2) c
 Broker using FIROS2.
 
 
-## Example usage
+## Fast-RTPS - Usage
 
 At this point, you have Fast-RTPS installed in the Docker container environment. We can now run a **Hello World** example. In the example, we will send a set of messages from a publisher to a subscriber using the Fast-RTPS protocol, as shown in the figure. 
 
@@ -180,7 +180,7 @@ Other examples are available in the `examples` folder, which are beyond the scop
 The goal of this section is to provide you with a simple getting started guide on how to install and use Micro-RTPS. 
 
 
-## Example usage
+## Micro-RTPS - Usage
 
 At this point, you have Micro-RTPS installed in the Docker container environment. We can now run a **Hello World** example. In the example, we will send a set of messages from a Micro-RTPS publisher to a Micro-RTPS subscriber through a Micro-RTPS agent, as shown in the figure. 
 

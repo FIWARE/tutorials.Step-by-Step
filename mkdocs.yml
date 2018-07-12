@@ -4,11 +4,10 @@ repo_url: https://github.com/fiware/tutorials.Step-by-Step.git
 site_description: Fiware Tutorial Documentation
 docs_dir: docs
 site_dir: html
-markdown_extensions: [toc,fenced_code]
 use_directory_urls: false
 theme: readthedocs
-# extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
-extra_css: ["https://fiware.org/style/monokai_sublime_.css", "https://fiware.org/style/pygments-monokai.css", './fiware_readthedocs.css']
+google_analytics: ["UA-83719923-1", 'fiware-tutorials.readthedocs.io']
+extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
 pages:
   - Home: 'index.md'
   - 'Essential Core Context':
@@ -28,4 +27,4 @@ pages:
     - 'Short Term History': 'short-term-history.md'
     - 'Time-Series Data': 'time-series-data.md'
 
-    
+

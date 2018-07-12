@@ -14,7 +14,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 Within the FIWARE platform, the context of an entity represents the state of a physical or conceptural object which exists in the real world.
 
-## Entities within a stock management system
+<h3>Entities within a stock management system</h3>
 
 For a simple stock management system, we will only need four types of entity. The relationship between our entities is defined as shown:
 
@@ -59,7 +59,7 @@ As you can see, each of the entities defined above contain some properties which
 
 # Architecture
 
-This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker is sufficient for an application to qualify as *“Powered by FIWARE”*.
+This application will only make use of one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
@@ -123,7 +123,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 >:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
+>```
 >./services stop
 >``` 
 >
@@ -285,8 +285,10 @@ Shelf information can be requested by making a GET request on the `/v2/entities`
 #### 3 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001' \
+  -d 'type=Shelf' \
+  -d 'options=keyValues'
 ```
 
 #### Response:
@@ -372,8 +374,10 @@ Now when the shelf information is requested again, the response has changed and 
 #### 5 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=keyValues'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001' \
+  -d 'type=Shelf' \
+  -d 'options=keyValues'
 ```
 
 #### Response:
@@ -407,8 +411,11 @@ We can also make a request to retrieve the `refStore` attribute relationship inf
 #### 6 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001/?type=Shelf&options=values&attrs=refStore'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Shelf:unit001' \
+  -d 'type=Shelf' \
+  -d 'options=values' \
+  -d 'attrs=refStore'
 ```
 
 #### Response:
@@ -428,8 +435,12 @@ Reading from a parent to a child can be done using the  `options=count` setting
 #### 7 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type&type=Shelf' 
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refStore==urn:ngsi-ld:Store:001' \
+  -d 'options=count' \
+  -d 'attrs=type' \
+  -d 'type=Shelf' 
 ```
 
 This request is asking for the `id` of all **Shelf** entities associated to the URN `urn:ngsi-ld:Store:001`, the response is a JSON array as shown.
@@ -458,8 +469,12 @@ In plain English, this can be interpreted as "There are three shelves in `urn:ng
 #### 8 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&type=Shelf&options=values&attrs=name'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refStore==urn:ngsi-ld:Store:001' \
+  -d 'type=Shelf' \
+  -d 'options=values' \
+  -d 'attrs=name'
 ```
 
 Can be interpreted as request for *Give me the names of all shelves in `urn:ngsi-ld:Store:001`*.
@@ -532,8 +547,12 @@ After creating at least one **InventoryItem** entity we can query *Which product
 #### 10 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=values&attrs=refStore&type=InventoryItem' 
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refProduct==urn:ngsi-ld:Product:001' \
+  -d 'options=values' \
+  -d 'attrs=refStore'\
+  -d 'type=InventoryItem' 
 ```
 
 #### Response:
@@ -552,8 +571,12 @@ Similarly we can request *Which stores are selling `urn:ngsi-ld:Product:001`?* b
 #### 11 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=values&attrs=refProduct&type=InventoryItem' 
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refStore==urn:ngsi-ld:Store:001' \
+  -d 'options=values' \
+  -d 'attrs=refProduct' \
+  -d 'type=InventoryItem' 
 ```
 
 #### Response:
@@ -577,8 +600,11 @@ It is possible to make a request to see if any remaining entity relationship exi
 #### 12 Request:
 
 ```bash
-curl -X GET \
-  'http://localhost:1026/v2/entities/?q=refStore==urn:ngsi-ld:Store:001&options=count&attrs=type'
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refStore==urn:ngsi-ld:Store:001' \
+  -d 'options=count' \
+  -d 'attrs=type'
 ```
 
 
