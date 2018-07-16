@@ -15,7 +15,8 @@ the context directly or programmatically.
 To download the full set of tutorials, simply clone this repository:
 
 ```console
-git clone git@github.com:Fiware/tutorials.Step-by-Step.git
+git clone https://github.com/Fiware/tutorials.Step-by-Step.git
+cd tutorials.Step-by-Step/
 git submodule update --init --recursive
 ```
 
