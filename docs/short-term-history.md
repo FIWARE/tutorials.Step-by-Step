@@ -1195,12 +1195,12 @@ This is not within the domain of **STH-Comet** as it not a graphical tool, but c
 mashup or dashboard component such as [Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud) or [Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
 
 It can also be retrieved and displayed using a third-party graphing tool appropriate to your coding environment -
-for example [chartjs](http://www.chartjs.org/). An example of this can be found within the `history` controller in the [Git Repository](https://github.com/Fiware/tutorials.Short-Term-History/blob/master/proxy/controllers/history.js)
+for example [chartjs](http://www.chartjs.org/). An example of this can be found within the `history` controller in the [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
 
 The basic processing consists of two steps - retrieval and attribute mapping, sample code can be seen below:
 
 ```javascript
-function readLampLuminosity(id, aggMethod) {
+function readCometLampLuminosity(id, aggMethod) {
     return new Promise(function(resolve, reject) {
       const url ="http://sth-comet:8666/STH/v1/contextEntities/type/Lamp/id/Lamp:001/attributes/luminosity"
       const options = { method: 'GET',

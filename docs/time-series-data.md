@@ -626,6 +626,117 @@ curl -iX POST \
 ```
 
 
+# Accessing Time Series Data Programmatically
+
+Once the JSON response for a specified time series has been retrieved, displaying the raw data is of little 
+use to an end user.  It must be manipulated to be displayed in a bar chart, line graph or table listing. 
+This is not within the domain of **Quantum Leap** as it not a graphical tool, but can be delegated to a
+mashup or dashboard component such as [Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud) or [Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
+
+It can also be retrieved and displayed using a third-party graphing tool appropriate to your coding environment -
+for example [chartjs](http://www.chartjs.org/). An example of this can be found within the `history` controller in the [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
+
+The basic processing consists of two steps - retrieval and attribute mapping, sample code can be seen below:
+
+```javascript
+function readCrateLampLuminosity(id, aggMethod){
+    return new Promise(function(resolve, reject) {
+    const sqlStatement = 'SELECT DATE_FORMAT (DATE_TRUNC (\'minute\', time_index)) AS minute, ' +
+           aggMethod + '(luminosity) AS '+  aggMethod + 
+           ' FROM mtopeniot.etlamp WHERE entity_id = \'Lamp:' + id +
+           '\' GROUP BY minute ORDER BY minute';
+    const options = { method: 'POST',
+        url: crateUrl,
+        headers: 
+         { 'Content-Type': 'application/json' },
+        body: { stmt: sqlStatement },
+        json: true };
+      request(options, (error, response, body) => {
+          return error ? reject(error) : resolve(body);
+      });
+    });
+}
+```
+
+```javascript
+function crateToTimeSeries(crateResponse, aggMethod, hexColor){
+
+  const data = [];
+  const labels = [];
+  const color =  [];
+
+  if(crateResponse && crateResponse.rows && crateResponse.rows.length > 0 ){    
+      _.forEach( crateResponse.rows, element => {
+          const date = moment(element[0]);
+          data.push({ t: date, y: element[1] });
+          labels.push(date.format( 'HH:mm'));
+          color.push(hexColor);
+      });
+  }
+
+  return {
+    labels,
+    data,
+    color
+  };
+}
+```
+
+The modified data is then passed to the front-end to be processed by the third-party graphing tool.
+The result is shown here: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
+
+## Displaying Crate-DB data as a Grafana Dashboard
+
+**Crate-DB** has been chosen as the time-series data sink, as it integrates seamlessly  with the [Grafana](https://grafana.com/) time 
+series analytics tool. Grafana can be used to display the aggregated sensor data - a full tutorial on building dashboards can be found
+[here](https://www.youtube.com/watch?v=sKNZMtoSHN4). The simpified instructions below summarize how to connect and display a graph of the
+Lamp `luminosity` data.
+
+### Logging in
+
+The `docker-compose` file has started an instance of the Grafana UI listening on port `3003`, so the login page can be found at: 
+`http://localhost:3003/login`. The default username is `admin` and the default password is `admin`
+
+### Configuring a Data Source
+
+After logging in, a datasource must be set up at  `http://localhost:3003/datasources` with the following values
+
+* **Name**  Lamp
+* **Type**  Crate
+
+* **URL**   http://crate-db:4200
+* **Access** Server (Default)
+
+* **Schema** mtopeniot
+* **Table**  etlamp
+* **Time column** time_index
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-settings.png)
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-crate-connect.png)
+
+Click on the Save and test button and the message *Data Source added* will be returned
+
+### Configuring a Dashboard
+
+To display a new dashboard, you can either click the **+** button and select **New Dashboard** or go directly to 
+`http://localhost:3003/dashboard/new?orgId=1`. Thereafter select the **Graph** dashboard type.
+
+To configure the dashboard click on Panel title  and select edit from the dropdown list.
+
+The following values in **bold text** need to be placed in the graphing wizard
+
+* Data Source **Lamp** (selected from the previously created Data Sources)
+* FROM **mtopeniot.etlamp** WHERE **entity_id** = **Lamp:001**
+* Select **Min**  **luminosity**
+* Group By time Interval **Minute** Format as **Time Series**
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-graph.png)
+
+The final result can be seen below:
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-result.png)
+
 
 
 
