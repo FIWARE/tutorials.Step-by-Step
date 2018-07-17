@@ -5,8 +5,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This is a collection of tutorials for the FIWARE platform. Each tutorial consists of a series
-of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context 
-data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating 
+of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context
+data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating
 the context directly or programmatically.
 
 
@@ -20,9 +20,9 @@ cd tutorials.Step-by-Step/
 git submodule update --init --recursive
 ```
 
-### Docker and Docker Compose 
+### Docker and Docker Compose
 
-Each tutorial runs all components using [Docker](https://www.docker.com). **Docker** is a container technology which allows to different components isolated into their respective environments. 
+Each tutorial runs all components using [Docker](https://www.docker.com). **Docker** is a container technology which allows to different components isolated into their respective environments.
 
 * To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
 * To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
@@ -30,8 +30,17 @@ Each tutorial runs all components using [Docker](https://www.docker.com). **Dock
 
 **Docker Compose** is a tool for defining and running multi-container Docker applications. A  series of `*.yaml`
 files are used configure the required services for the application. This means all container services can be
-brought up in a single command. Docker Compose is installed by default as part of Docker for Windows and 
+brought up in a single command. Docker Compose is installed by default as part of Docker for Windows and
 Docker for Mac, however Linux users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
+
+You can check your current **Docker** and **Docker Compose** versions using the following commands:
+
+```console
+docker-compose -v
+docker version
+```
+
+Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if necessary.
 
 
 ### Postman
