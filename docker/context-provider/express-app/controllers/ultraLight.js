@@ -210,6 +210,7 @@ function init () {
 
 let isDoorActive = false;
 let isDevicesActive = false;
+let devicesInitialized = false;
 
 // Open and shut an unlocked door
 function activateDoor () {
@@ -464,13 +465,21 @@ function setUpDeviceReading (deviceId) {
 
 // Initialize the array of sensors and periodically update them.
 // Intervals are prime numbers to avoid simultaneous updates.
-init ();
-// Every few seconds, update the state of the dummy devices in a 
-// semi-random fashion. 
-setInterval(activateDoor, 4999);
-// Every second, update the state of the dummy devices in a 
-// semi-random fashion. 
-setInterval(activateDevices, 997);
+function initDevices(req, res, next) {
+
+	if (!devicesInitialized){	
+		init ();
+		// Every few seconds, update the state of the dummy devices in a 
+		// semi-random fashion. 
+		setInterval(activateDoor, 4999);
+		// Every second, update the state of the dummy devices in a 
+		// semi-random fashion. 
+		setInterval(activateDevices, 997);
+		devicesInitialized = true;
+	}
+	
+	next();
+}
 
 
 module.exports = {
@@ -478,5 +487,6 @@ module.exports = {
 	processHttpDoorCommand,
 	processHttpLampCommand,
 	processMqttMessage,
-	sendCommand
+	sendCommand,
+	initDevices
 };

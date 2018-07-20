@@ -35,12 +35,12 @@ router.get('/', function(req, res) {
 });
 
 // Render the monitoring page
-router.get('/device/monitor', function(req, res) {
+router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
 	const traffic = (TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages');
 	res.render('device-monitor', { title: 'UltraLight IoT Devices', traffic});
 });
 
-router.post('/device/command', Ultralight.sendCommand);
+router.post('/device/command', Ultralight.initDevices, Ultralight.sendCommand);
 
 // Retrieve Device History from STH-Comet
 if (process.env.STH_COMET_SERVICE_URL) {
