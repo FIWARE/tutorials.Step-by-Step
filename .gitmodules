@@ -37,3 +37,6 @@
 [submodule "tutorials.Time-Series-Data"]
 	path = tutorials.Time-Series-Data
 	url = https://github.com/Fiware/tutorials.Time-Series-Data.git
+[submodule "tutorials.Media-Streams"]
+	path = tutorials.Media-Streams
+	url = https://github.com/Fiware/tutorials.Media-Streams.git
