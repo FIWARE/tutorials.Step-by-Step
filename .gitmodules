@@ -30,7 +30,7 @@
 	url = https://github.com/Fiware/tutorials.IoT-Sensors.git
 [submodule "tutorials.Media-Streams"]
 	path = tutorials.Media-Streams
-	url = https://github.com/Fiware/tutorials.Media-Streams.git
+	url = https://github.com/Fiware/tutorials.Media-Streams
 [submodule "tutorials.Short-Term-History"]
 	path = tutorials.Short-Term-History
 	url = https://github.com/Fiware/tutorials.Short-Term-History.git
