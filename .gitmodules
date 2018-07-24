@@ -28,6 +28,9 @@
 [submodule "tutorials.IoT-Sensors"]
 	path = tutorials.IoT-Sensors
 	url = https://github.com/Fiware/tutorials.IoT-Sensors.git
+[submodule "tutorials.Media-Streams"]
+	path = tutorials.Media-Streams
+	url = https://github.com/Fiware/tutorials.Media-Streams.git
 [submodule "tutorials.Short-Term-History"]
 	path = tutorials.Short-Term-History
 	url = https://github.com/Fiware/tutorials.Short-Term-History.git
@@ -37,6 +40,4 @@
 [submodule "tutorials.Time-Series-Data"]
 	path = tutorials.Time-Series-Data
 	url = https://github.com/Fiware/tutorials.Time-Series-Data.git
-[submodule "tutorials.Media-Streams"]
-	path = tutorials.Media-Streams
-	url = https://github.com/Fiware/tutorials.Media-Streams.git
+
