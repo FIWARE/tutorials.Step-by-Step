@@ -126,7 +126,7 @@ Thereafter, all services can be initialized from the command line by running the
 Where `<command>` will vary depending upon the databases we wish to activate.
 This command will also import seed data from the previous tutorials and provision the dummy IoT sensors on startup.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```
 >./services stop
@@ -294,7 +294,7 @@ curl -iX POST \
 
 As you can see, the database used to persist context data has no impact on the details of the subscription. It is the same for each database. The response will be **201 - Created**
 
-> :information_source: **Note:**  if you see errors of the following form within the **Cygnus** log:
+>  **Note:**  if you see errors of the following form within the **Cygnus** log:
 >
 >```
 >Received bad request from client.

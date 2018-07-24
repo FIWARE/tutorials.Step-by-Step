@@ -55,7 +55,7 @@ Currently, the Orion Context Broker relies on open source [MongoDB](https://www.
 * The underlying [MongoDB](https://www.mongodb.com/) database :
     +  Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and registrations
 
-Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
+Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports.
 
 ![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture.png)
 
@@ -91,7 +91,7 @@ The necessary configuration information can be seen in the services section of t
     command: --bind_ip_all --smallfiles
 ```
 
-Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` 
+Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026`
 and MongoDB is listening on the default port `271071`. Both containers are also exposing the same ports
 externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
 being part of the same network. The command line initialization should be self explanatory.
@@ -110,11 +110,11 @@ cd tutorials.CRUD-Operations
 
 This command will also import seed data from the previous [Store Finder tutorial](entity-relationships.md) on startup.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```
 >./services stop
->``` 
+>```
 >
 
 ---
@@ -123,7 +123,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 **Create**, **Read**, **Update** and **Delete** are the four basic functions of persistent storage.  These operations are usually referred to using the acronym **CRUD**. Within a database each of these operations map directly to a series of commands, however the relationship with a RESTful API is slightly more complex.
 
-The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)uses [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations. 
+The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)uses [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations.
 
 ## Entity CRUD Operations
 
@@ -138,10 +138,10 @@ It is recommended that entity identifiers should be a URN following [NGSI-LD gui
 | HTTP Verb   | `/v2/entities`  | `/v2/entities/<entity-id>`  |
 |-----------  |:--------------: |:-----------------------: |
 | **POST**    | CREATE a new entity and add to the context.  | CREATE or UPDATE an attribute of a specified entity. |
-| **GET**     | READ entity data from the context. This will return data from multiple entities. The data can be filtered.  | READ entity data from a specified entity. This will return data from a single entity only. The data can be filtered.  | 
+| **GET**     | READ entity data from the context. This will return data from multiple entities. The data can be filtered.  | READ entity data from a specified entity. This will return data from a single entity only. The data can be filtered.  |
 | **PUT**     | :x:   | :x:   |
 | **PATCH**   | :x:   | :x:   |
-| **DELETE**  | :x:  | DELETE an entity from the context   | 
+| **DELETE**  | :x:  | DELETE an entity from the context   |
 
 A complete list of entity endpoints can be found by looking at the [NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Entities)
 
@@ -173,14 +173,14 @@ Additionally the Orion Context Broker a convenience batch operation endpoint `/v
 
 Batch operations are always made using a POST request, where the payload is an object with two properties:
 
-*  `actionType` specifies the kind of action to invoke (e.g. `DELETE`) 
+*  `actionType` specifies the kind of action to invoke (e.g. `DELETE`)
 *  `entities` is an array object holding the list of entities to update, along with the relevant entity data used to make the operation.
 
 
 
 # Example CRUD Operations using FIWARE
 
-The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial seed data has been imported from the previous tutorial. 
+The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial seed data has been imported from the previous tutorial.
 
 All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore relate to adding, reading,  amending and deleting a product or series of products. This is a typical use case for a regional manager of store for example - setting prices and deciding what products can be sold.
 The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by reloading the data from the command line
@@ -239,7 +239,7 @@ curl -G -X GET \
 
 ### Create a New Attribute
 
-This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`. 
+This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`.
 
 #### 3 Request:
 
@@ -452,7 +452,7 @@ Combine the `options=keyValues` parameter and the `attrs` parameter to obtain ke
 
 ### Read Multiple attributes values from a Data Entity
 
-This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known id. 
+This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known id.
 
 #### 10 Request:
 
@@ -482,7 +482,7 @@ Combine the `options=values` parameter and the `attrs` parameter to return a lis
 
 ### List all Data Entities (verbose)
 
-This example lists the full context of all **Product** entities.  
+This example lists the full context of all **Product** entities.
 
 #### 11 Request:
 

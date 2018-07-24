@@ -20,14 +20,14 @@ cUrl commands are also available as [Postman documentation](http://fiware.github
 >
 > — Dorothy Kilgallen (The Voice Of Broadway)
 
-Within the FIWARE platform, an entity represents the state of a physical or conceptual object which exists in the real world. 
-Every smart solution needs to know the current state of these object at any given moment in time. 
+Within the FIWARE platform, an entity represents the state of a physical or conceptual object which exists in the real world.
+Every smart solution needs to know the current state of these object at any given moment in time.
 
 The context of each of these entities is constantly changing. For example, within the stock management example, the context will
 change as new stores open up, products are sold, prices change and so on. For a smart solution based on IoT sensor data, this issue
 is even more pressing as the system will constantly be reacting to changes in the real world.
 
-Until now all the operations we have used to change the state of the system have been **synchronous** - changes have been made by 
+Until now all the operations we have used to change the state of the system have been **synchronous** - changes have been made by
 directly by a user or application and they have been informed of the result. The Orion Context Broker offers also an **asynchronous**
 notification mechanism - applications can subscribe to changes of context information so that they can
 be informed when something happens. This means the application does not need to continuously poll or repeat query requests.
@@ -66,8 +66,8 @@ Store002 can be found at: `http://localhost:3000/app/store/urn:ngsi-ld:Store:002
 This application will make use of only one FIWARE component - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper context data flowing through it) is sufficient for an application to qualify as *“Powered by FIWARE”*.
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
-persistence of the context data it holds. To request context data from external sources, a simple **Context Provider NGSI 
-proxy** has also been added. To visualize and interact with the Context we will add a simple Express **Front End** application 
+persistence of the context data it holds. To request context data from external sources, a simple **Context Provider NGSI
+proxy** has also been added. To visualize and interact with the Context we will add a simple Express **Front End** application
 
 
 Therefore, the architecture will consist of four elements:
@@ -77,7 +77,7 @@ Therefore, the architecture will consist of four elements:
     +  Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and registrations
 * The **Context Provider NGSI proxy** which will will:
     +  receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
-    +  makes requests to publicly available data sources using their own APIs in a proprietory format 
+    +  makes requests to publicly available data sources using their own APIs in a proprietory format
     +  returns context data back to the Orion Context Broker in [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 * The **Stock Management Frontend** which will will:
     +  Display store information
@@ -85,7 +85,7 @@ Therefore, the architecture will consist of four elements:
     +  Allow users to "buy" products and reduce the stock count.
 
 Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
-from exposed ports. 
+from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Subscriptions/img/architecture.png)
 
@@ -106,11 +106,11 @@ cd tutorials.Subscriptions
 
 This command will also import seed data from the previous [Stock Management example](context-providers.md) on startup.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```
 >./services stop
->``` 
+>```
 >
 
 ---
@@ -131,14 +131,14 @@ The stores can be found at:
 * Store 2 -  `http://localhost:3000/app/store/urn:ngsi-ld:Store:002`
 
 
-## Setting up a simple Subscription 
+## Setting up a simple Subscription
 
-Within the stock management example, imagine that the regional manager of the company wants to alter the price of a product. 
+Within the stock management example, imagine that the regional manager of the company wants to alter the price of a product.
 The new price should immediately be reflected at the till in all stores within the system. It would be possible to set up the
 system so that it was constantly polling for new information, however prices are not changed very frequently so this would be
 a waste of resources and create a lot of unnecessary data traffic.
 
-The alternative is to create a subscription which will POST a payload to a "well-known" URL whenever a price has changed. 
+The alternative is to create a subscription which will POST a payload to a "well-known" URL whenever a price has changed.
 A new subscription can be added by making a POST request to the `/v2/subscriptions/` endpoint as shown below:
 
 #### 1 Request:
@@ -151,7 +151,7 @@ curl -iX POST \
   "description": "Notify me of all product price changes",
   "subject": {
     "entities": [{"idPattern": ".*", "type": "Product"}],
-    "condition": { 
+    "condition": {
       "attrs": [ "price" ]
     }
   },
@@ -213,7 +213,7 @@ curl -iX PUT \
   --data 89
 ```
 
-Whenever an attribute of the **Product** entity is updated, the Orion Context Broker checks for any existing subscriptions 
+Whenever an attribute of the **Product** entity is updated, the Orion Context Broker checks for any existing subscriptions
 (which exist for that entity) and  applies the `condition` test. This time only one **Product** entity has changed since the last run therefore a POST request is sent to `subscription/price-change` - which only contains one **Product** in the body:
 
 #### `http://localhost:3000/app/monitor`
@@ -225,31 +225,31 @@ and since the price has changed the till now displays a bottle of beer at 0.89�
 
 #### `http://localhost:3000/app/store/urn:ngsi-ld:Store:002`
 
-![](https://fiware.github.io/tutorials.Subscriptions/img/beer-89.png)   
+![](https://fiware.github.io/tutorials.Subscriptions/img/beer-89.png)
 
 
 ##  Reducing Payload with  `attrs` and `attrsFormat`
 
 With the previous example the full verbose data from each affected **Product** entity was sent with the POST notification.
-This is not very efficient. 
+This is not very efficient.
 
-The amount of data to passed can be reduced by adding an `attrs` attribute which will specify a list of attributes to be 
+The amount of data to passed can be reduced by adding an `attrs` attribute which will specify a list of attributes to be
 included in notification messages - other attributes are ignored
 
 >**Tip** an `exceptAttrs` attribute also exists to return all attributes except for those on the exclude list.
 > `attrs` and `exceptAttrs` cannot be used simultaneously in the same subscription
 
 
-The `attrsFormat` attribute specifies how the entities are represented in notifications. A verbose response is returned by 
+The `attrsFormat` attribute specifies how the entities are represented in notifications. A verbose response is returned by
 default `keyValues` and `values` work in the same manner as a `v2/entities` GET request.
 
-##  Reducing Scope with  `expression` 
+##  Reducing Scope with  `expression`
 
 Lets create two more subscriptions which will only fire under specific conditions - and will only return key-value pairs for
-the entity affected. Imagine that the warehouse of each store now wants to be informed whenever the amount of product on the 
-shelf falls below a threshold level. 
+the entity affected. Imagine that the warehouse of each store now wants to be informed whenever the amount of product on the
+shelf falls below a threshold level.
 
-The subscription is tested whenever the `shelfCount` of an **InventoryItem** is updated, however the addition of an `expression` 
+The subscription is tested whenever the `shelfCount` of an **InventoryItem** is updated, however the addition of an `expression`
 attribute will mean that the subscription will only fire if the expression returns valid data - for example
 `"q": "shelfCount<10;refStore==urn:ngsi-ld:Store:001` tests that the `shelfCount` is below ten and that the item is in store 001.
 This means that we can set up our business logic so that other stores wont be bothered by notifications.
@@ -351,7 +351,7 @@ The `<subscription-id>` is auto generated when the subscription is created and r
 of the POST response to be used by the other operation thereafter.
 
 
-### Creating a Subscription 
+### Creating a Subscription
 
 This example creates a new subscription. The subscription will fire an asynchronous notification to a URL whenever the context is changed and the conditions of the subscription - Any Changes to Product prices - are met.
 

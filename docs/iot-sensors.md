@@ -259,7 +259,7 @@ cd tutorials.IoT-Sensors
 
 This command will also import seed data from the previous [Stock Management example](context-providers.md) on startup.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```
 >./services stop

@@ -45,13 +45,13 @@ As you can see, each of the entities defined above contain some properties which
 
 
 > **Note** this tutorial uses the following typographic styling :
-> 
-> * Entity types have been made **bold text** 
-> * Data attributes are written in `monospace text`  
+>
+> * Entity types have been made **bold text**
+> * Data attributes are written in `monospace text`
 > * Items in the real world use plain text
 >
-> Therefore a store in the real world  is represented in the context data by a **Store** 
-> entity, and a real world shelf found in a store is represented in the context data by 
+> Therefore a store in the real world  is represented in the context data by a **Store**
+> entity, and a real world shelf found in a store is represented in the context data by
 > a **Shelf** entity which has a `refStore` attribute.
 >
 
@@ -67,7 +67,7 @@ Currently, the Orion Context Broker relies on open source [MongoDB](https://www.
 * The underlying [MongoDB](https://www.mongodb.com/) database :
     +  Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and registrations
 
-Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
+Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
 
@@ -103,7 +103,7 @@ The necessary configuration information can be seen in the services section of t
     command: --bind_ip_all --smallfiles
 ```
 
-Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` 
+Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026`
 and MongoDB is listening on the default port `27071`. Both containers are also exposing the same ports
 externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
 being part of the same network. The command line initialization should be self explanatory.
@@ -117,15 +117,15 @@ git clone git@github.com:Fiware/tutorials.Entity-Relationships.git
 cd tutorials.Entity-Relationships
 
 ./services start
-``` 
+```
 
 This command will also import seed data from the previous [Store Finder tutorial](getting-started.md) on startup.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```
 >./services stop
->``` 
+>```
 >
 
 ---
@@ -134,11 +134,11 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 ## Creating Several Entities at Once
 
-In the previous tutorial, we created each **Store** entity individually, 
+In the previous tutorial, we created each **Store** entity individually,
 
 Lets create five shelf units at the same time. This request uses the convenience batch processing endpoint to create five shelf entities. Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the  `entities` attribute holds an array of entities we wish to update.
 
-To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`. 
+To differenciate **Shelf** Entities from **Store** Entities, each shelf has been assigned `type=Shelf`.
 Real-world properties such as `name` and `location` have been added as properties to each shelf.
 
 #### 1 Request:
@@ -313,9 +313,9 @@ As you can see there are currently three additional property attributes present 
 
 ## Creating a one-to-many Relationship
 
-In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the **Shelf** entities to add a `refStore` attribute holding the relationship to each store.  According to the FIWARE Data Modelling Guidelines on [linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an entity attribute is used as a link to other entities  it should be named with the prefix `ref` plus the name of the target (linked) entity type. 
+In databases, foreign keys are often used to designate a one-to-many relationship - for example every shelf is found in a single store and a single store can hold many shelving units. In order to remember this information we need to add an association relationship similar to a foreign key. Batch processing can again be used to amend the existing the **Shelf** entities to add a `refStore` attribute holding the relationship to each store.  According to the FIWARE Data Modelling Guidelines on [linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data), when an entity attribute is used as a link to other entities  it should be named with the prefix `ref` plus the name of the target (linked) entity type.
 
-The value of the `refStore` attribute corresponds to a URN associated to a **Store** entity itself. 
+The value of the `refStore` attribute corresponds to a URN associated to a **Store** entity itself.
 
 The URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`
 
@@ -332,35 +332,35 @@ curl -iX POST \
   "entities":[
     {
       "id":"urn:ngsi-ld:Shelf:unit001", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit002", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit003", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit004", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
       }
     },
     {
       "id":"urn:ngsi-ld:Shelf:unit005", "type":"Shelf",
-      "refStore": { 
+      "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:002"
       }
@@ -440,7 +440,7 @@ curl -G -X GET \
   -d 'q=refStore==urn:ngsi-ld:Store:001' \
   -d 'options=count' \
   -d 'attrs=type' \
-  -d 'type=Shelf' 
+  -d 'type=Shelf'
 ```
 
 This request is asking for the `id` of all **Shelf** entities associated to the URN `urn:ngsi-ld:Store:001`, the response is a JSON array as shown.
@@ -498,9 +498,9 @@ Can be interpreted as request for *Give me the names of all shelves in `urn:ngsi
 
 ## Creating many-to-many Relationships
 
-Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range of products, and each product is sold in many different stores. 
+Bridge Tables are often used to relate many-to-many relationships. For example, every store will sell a different range of products, and each product is sold in many different stores.
 
-In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new data entity **InventoryItem** which exists to associate data from other entities. It has a foreign key relationship to 
+In order to hold the context information to "place a product onto a shelf in a given store" we will need to create a new data entity **InventoryItem** which exists to associate data from other entities. It has a foreign key relationship to
 the **Store**, **Shelf** and **Product** entities and therefore requires relationship attributes called `refStore`, `refShelf` and `refProduct`.
 
 Assigning a product to a shelf is simply done by creating an entity holding the relationship information and any other additional properties (such as `stockCount` and `shelfCount`)
@@ -515,15 +515,15 @@ curl -iX POST \
   -H 'Postman-Token: 0588ef62-6b5c-4d1b-8066-172d63b516fd' \
   -d '{
     "id": "urn:ngsi-ld:InventoryItem:001", "type": "InventoryItem",
-    "refStore": { 
+    "refStore": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Store:001"
     },
-    "refShelf": { 
+    "refShelf": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Shelf:unit001"
     },
-    "refProduct": { 
+    "refProduct": {
         "type": "Relationship",
         "value": "urn:ngsi-ld:Product:001"
     },
@@ -552,7 +552,7 @@ curl -G -X GET \
   -d 'q=refProduct==urn:ngsi-ld:Product:001' \
   -d 'options=values' \
   -d 'attrs=refStore'\
-  -d 'type=InventoryItem' 
+  -d 'type=InventoryItem'
 ```
 
 #### Response:
@@ -566,7 +566,7 @@ curl -G -X GET \
 ```
 
 
-Similarly we can request *Which stores are selling `urn:ngsi-ld:Product:001`?* by altering the request as shown: 
+Similarly we can request *Which stores are selling `urn:ngsi-ld:Product:001`?* by altering the request as shown:
 
 #### 11 Request:
 
@@ -576,7 +576,7 @@ curl -G -X GET \
   -d 'q=refStore==urn:ngsi-ld:Store:001' \
   -d 'options=values' \
   -d 'attrs=refProduct' \
-  -d 'type=InventoryItem' 
+  -d 'type=InventoryItem'
 ```
 
 #### Response:
