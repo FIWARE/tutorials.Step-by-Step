@@ -22,11 +22,11 @@ The tutorial introduces a series of exercises which can be run directly from wit
 [WebRTC](https://webrtc.org/) is a set of protocols enabling direct peer-to-peer Real-Time Communications (RTC) between
 browsers or mobile applications.- this would allow a user to make a direct video call to a person in another remote location.
 However the type of applications which can be created using direct one-to-one communication are limited, and the scope of
-WebRTC can be enhanced by introducing an intellegent middleware application between the two clients.
+WebRTC can be enhanced by introducing an intelligent middleware application between the two clients.
 
 The FIWARE **Kurento** generic enabler is a WebRTC Media Server. Each client makes a direct connection to the server, and
 the server intercepts the stream of data and passes the communication on to another client or clients. This model enables
-additional features such as group communition and broadcasting, but also means that is possible to process and interpret the
+additional features such as group communication and broadcasting, but also means that is possible to process and interpret the
 media stream as it is received enabling object detection - and hence an ability to raise context events - as well as
 transcoding, recording or mixing.
 
@@ -337,7 +337,7 @@ function getKurentoClient(callback) {
 }
 ```
 
-The `KurentoClient` provides a simplied [interface](https://doc-kurento.readthedocs.io/en/stable/features/kurento_client.html)
+The `KurentoClient` provides a simplified [interface](https://doc-kurento.readthedocs.io/en/stable/features/kurento_client.html)
 for  manipulating Media Elements and Media Pipelines - a Node.js `npm` library and Java `jar` file are available.
 
 
@@ -349,7 +349,7 @@ chained together and therefore represent a series of operations on the media str
 
 In the Hello World example we will need a single `WebRtcEndpoint` that connects back to itself (i.e. in loopback)
 
-These functions are called in the `start` function, which is fired when the `start` message is received:
+These functions are called in the `start()` function, which is fired when the `start` message is received:
 
 ```javascript
 function start(sessionId, ws, sdpOffer, callback) {
@@ -503,7 +503,7 @@ ws.onmessage = function(message) {
 
 ```
 
-A fuller description of the code can be found within the **Kurento** documenation.
+A fuller description of the code can be found within the **Kurento** documentation.
 
 
 # Altering Media Streams
