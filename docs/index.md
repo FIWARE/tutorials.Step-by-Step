@@ -16,7 +16,7 @@ complex smart solution which is *"powered by FIWARE"*.
 The tutorials are split according to the chapters defined within the [FIWARE catalog](https://www.fiware.org/developers/catalogue/) and are numbered in order of difficulty within each chapter hence the an introduction to a given
 enabler will occur before the full capabilities of that element are explored in more depth.
 
-It is recommended to start with reading the full **Essential Core Context** Chapter
+It is recommended to start with reading the full **Core Context Managment: Fundamentals** Chapter
 before moving on to other subjects, as this will give you an fuller understanding of the role of context data
 in general. However it is not necessary to follow all the subsequent tutorials sequentially - as FIWARE
 is a modular system, you can choose which enablers are of interest to you.
