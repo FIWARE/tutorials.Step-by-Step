@@ -53,7 +53,7 @@ We will start up our services using a simple Bash script. Windows users should d
 
 ## List of Tutorials
 
-<h3>Essential Core Context</h3>
+<h3>Core Context Managment: Fundamentals</h3>
 
 These first tutorials are an introduction to the FIWARE Context Broker, and are an essential first step
 when learning to use FIWARE
@@ -77,7 +77,7 @@ objects themselves.
 &nbsp; 203. [IoT over MQTT](iot-over-mqtt.md)<br/>
 &nbsp; 250. [Introduction to Fast-RTPS and Micro-RTPS ](fast-rtps-micro-rtps.md)<br/>
 
-<h3>Core Context Management</h3>
+<h3>Core Context Management: History Management</h3>
 
 These tutorials show how to manipulate and store context data so it can be used for
 further processesing

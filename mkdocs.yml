@@ -10,7 +10,7 @@ google_analytics: ["UA-83719923-1", 'fiware-tutorials.readthedocs.io']
 extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
 pages:
   - Home: 'index.md'
-  - 'Essential Core Context':
+  - 'Core Context Mgmt: Fundamentals':
     - 'Getting Started': 'getting-started.md'
     - 'Entity Relationships': 'entity-relationships.md'
     - 'CRUD Operations': 'crud-operations.md'
@@ -22,7 +22,7 @@ pages:
     - 'IoT Agent': 'iot-agent.md'
     - 'IoT over MQTT': 'iot-over-mqtt.md'
     - 'Fast RTPS-Micro RTPS': 'fast-rtps-micro-rtps.md'
-  - 'Core Context Management':
+  - 'Core Context Mgmt: History Management':
     - 'Persisting Context': 'historic-context.md'
     - 'Short Term History': 'short-term-history.md'
     - 'Time-Series Data': 'time-series-data.md'
