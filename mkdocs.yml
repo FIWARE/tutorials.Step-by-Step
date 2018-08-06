@@ -26,6 +26,8 @@ pages:
     - 'Persisting Context': 'historic-context.md'
     - 'Short Term History': 'short-term-history.md'
     - 'Time-Series Data': 'time-series-data.md'
+  - 'Identity Managment':
+    - 'Administrating Users': 'identity-management.md'
   - 'Processing, Analysis and Visualization':
     - 'Media Streams': 'media-streams.md'
 

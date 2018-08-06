@@ -86,6 +86,13 @@ further processesing
 &nbsp; 302. [Querying Time Series Data (Mongo-DB)](short-term-history.md)<br/>
 &nbsp; 303. [Querying Time Series Data (Crate-DB)](time-series-data.md)<br/>
 
+<h3>Security: Identity Management</h3>
+
+These tutorials show how to create and administer users within an application, and how to
+restrict access to assets, by assigning roles and permissions.
+
+&nbsp; 401. [Managing Users and Organizations](identity-management.md)<br/>
+
 <h3>Processing, Analysis and Visualization</h3>
 
 These tutorials show how to create, process, analyze or visualize context information

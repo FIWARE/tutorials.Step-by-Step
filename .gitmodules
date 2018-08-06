@@ -41,3 +41,6 @@
 	path = tutorials.Time-Series-Data
 	url = https://github.com/Fiware/tutorials.Time-Series-Data.git
 
+[submodule "tutorials.Identity-Management"]
+	path = tutorials.Identity-Management
+	url = https://github.com/Fiware/tutorials.Identity-Management.git
