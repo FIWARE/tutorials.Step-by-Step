@@ -1,4 +1,4 @@
-[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAA8NJREFUSEuVlUtIFlEUx+eO+j3Uz8wSLLJ3pBiBUljRu1WLCAKXbXpQEUFERSQF0aKVFAUVrSJalNXGgmphFEhQiZEIPQwKLbEUK7VvZrRvbr8zzjfNl4/swplz7rn/8z/33HtmRhn/MWzbXmloHVeG0a+VSmAXorXS+oehVD9+0zDN9mgk8n0sWtYnHo5tT9daH4BsM+THQC8naK02jCZ83/HlKaVSzBey1sm8BP9nnUpdjOfl/Qyzj5ust6cnO5FItJLoJqB6yJ4QuNcjVOohegpihshS4F6S7DTVVlNtFFxzNBa7kcaEwUGcbVnH8xOJD67WG9n1NILuKtOsQG9FngOc+lciic1iQ8uQGhJ1kVAKKXUs60RoQ5km93IfaREvuoFj7PZsy9rGXE9G/NhBsDOJ63Acp1J82eFU7OIVO1OxWGwpSU5hb0GqfMydMHYSdiMVnncNY5Vy3VbwRUEydvEaRxmAOSSqJMlJISTxS9YWTYLcg3B253xsPkc5lXk3XLlwrPLuDPKDqDIutzYaj3eweMkPeCCahO3+fEIF8SfLtg/5oI3Mh0ylKM4YRBaYzuBgPuRnBYD3mmhA1X5Aka8NKl4nNz7BaKTzSgsLCzWbvyo4eK9r15WwLKRAmmCXXDoA1kaG2F4jWFbgkxUnlcrB/xj5iHxFPiBN4JekY4nZ6ccOiQ87hgwhe+TOdogT1nfpgEDTvYAucIwHxBfNyhpGrR+F8x00WD33VCNTOr/Wd+9C51Ben7S0ZJUq3qZJ2OkZz+cL87ZfWuePlwRcHZjeUMxFwTrJZAJfSvyWZc1VgORTY8rBcubetdiOk+CO+jPOcCRTF+oZ0okUIyuQeSNL/lPrulg8flhmJHmE2gBpE9xrJNkwpN4rQIIyujGoELCQz8ggG38iGzjKkXufJ2Klun1iu65bnJub2yut3xbEK3UvsDEInCmvA6YjMeE1bCn8F9JBe1eAnS2JksmkIlEDfi8R46kkEkMWdqOv+AvS9rcp2bvk8OAESvgox7h4aWNMLd32jSMLvuwDAwORSE7Oe3ZRKrFwvYGrPOBJ2nZ20Op/mqKNzgraOTPt6Bnx5citUINIczX/jUw3xGL2+ia8KAvsvp0ePoL5hXkXO5YvQYSFAiqcJX8E/gyX8QUvv8eh9XUq3h7mE9tLJoNKqnhHXmCO+dtJ4ybSkH1jc9XRaHTMz1tATBe2UEkeAdKu/zWIkUbZxD+veLxEQhhUFmbnvOezsJrk+zmqMo6vIL2OXzPvQ8v7dgtpoQnkF/LP8Ruu9zXdJHg4igAAAABJRU5ErkJgggA=)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](https://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 
 **Description:** This tutorial is an introduction to [FIWARE STH-Comet](https://fiware-sth-comet.readthedocs.io/) - a generic enabler which is used to retrieve trend data from a Mongo-DB database. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into a database and retrieves time-based aggregations of that data.
@@ -16,13 +16,13 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > — Bruce Lee
 
 
-Within the FIWARE platform, historical context data can be persisted to a database (such as Mongo-DB) using a 
-combination of the **Orion Context Broker** and the **Cygnus** generic enabler. This results in a series of data 
+Within the FIWARE platform, historical context data can be persisted to a database (such as Mongo-DB) using a
+combination of the **Orion Context Broker** and the **Cygnus** generic enabler. This results in a series of data
 points being written to the database of your choice. Each time-stamped data point represents the state of context
 entities at a given moment in time. The individual data points are relatively meaningless on their own, it is only
 through combining a series data points that meaningful statistics such as maxima, minima and trends can be observed.
 
-The creation and analysis of trend data is a common requirement of context-driven systems - therefore the FIWARE platform 
+The creation and analysis of trend data is a common requirement of context-driven systems - therefore the FIWARE platform
 offers a generic enabler ([STH-Comet](https://fiware-sth-comet.readthedocs.io/)) specifically to deal with the issue of persisting and interpreting time series data persisted into Mongo-DB. **STH-Comet** itself can be used in two modes:
 
 * In *minimal* mode, **STH-Comet** is responsible for both data collection and interpreting the data when requested
@@ -72,12 +72,12 @@ Once **STH-Comet** has started aggregating data, the historical state of each de
 
 # Architecture
 
-This application builds on the components and dummy IoT devices created in 
+This application builds on the components and dummy IoT devices created in
 [previous tutorials](iot-agent.md). It will use three or four FIWARE components depending on the configuration of the system:
 the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/),
 [STH-Comet](http://fiware-cygnus.readthedocs.io/en/latest/) and
-[Cygnus](http://fiware-cygnus.readthedocs.io/en/latest/). 
+[Cygnus](http://fiware-cygnus.readthedocs.io/en/latest/).
 
 Therefore the overall architecture will consist of the following elements:
 
@@ -87,7 +87,7 @@ Therefore the overall architecture will consist of the following elements:
     * FIWARE [STH-Comet](http://fiware-sth-comet.readthedocs.io/) will:
         + interpret time-based data queries
         + subscribe to context changes and persist them into a **Mongo-DB** database  (*minimal* mode only)
-    * FIWARE [Cygnus](http://fiware-cygnus.readthedocs.io/en/latest/) where it will subscribe to context changes and persist them into a **Mongo-DB** database (*formal* mode only) 
+    * FIWARE [Cygnus](http://fiware-cygnus.readthedocs.io/en/latest/) where it will subscribe to context changes and persist them into a **Mongo-DB** database (*formal* mode only)
 
 > **Note:** **Cygnus** will only be used if **STH-Comet** is configured in *formal* mode.
 
@@ -95,8 +95,8 @@ Therefore the overall architecture will consist of the following elements:
         + Used by the **Orion Context Broker** to hold context data information such as data entities, subscriptions and registrations
         + Used by the **IoT Agent** to hold device information such as device URLs and Keys
         + Used as a data sink to hold time-based historical context data
-         + In *minimal* mode - this is read and populated by **STH-Comet** 
-         + In *formal* mode - this is populated by **Cygnus** and read by **STH-Comet** 
+         + In *minimal* mode - this is read and populated by **STH-Comet**
+         + In *formal* mode - this is populated by **Cygnus** and read by **STH-Comet**
 * Three **Context Providers**:
     * The **Stock Management Frontend** is not used in this tutorial. It does the following:
         + Display store information and allow users to interact with the dummy IoT devices
@@ -105,13 +105,13 @@ Therefore the overall architecture will consist of the following elements:
     * A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the [Ultralight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) protocol running over HTTP.
     * The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
         + receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
-        + makes requests to publicly available data sources using their own APIs in a proprietary format 
+        + makes requests to publicly available data sources using their own APIs in a proprietary format
         + returns context data back to the Orion Context Broker in [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
 
 
 
-Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
+Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports.
 
 The specific architecture of both the *minimal* and *formal* configurations is discussed below.
 
@@ -126,7 +126,7 @@ git clone git@github.com:Fiware/tutorials.Short-Term-History.git
 cd tutorials.Short-Term-History
 
 ./services create
-``` 
+```
 
 >**Note** The `context-provider` image has not yet been pushed to Docker hub.
 > Failing to build the Docker sources before proceeding will result in the following error:
@@ -141,7 +141,7 @@ Thereafter, all services can be initialized from the command line by running the
 
 ```bash
 ./services <command>
-``` 
+```
 
 Where `<command>` will vary depending upon the mode we wish to activate.
 This command will also import seed data from the previous tutorials and provision the dummy IoT sensors on startup.
@@ -150,7 +150,7 @@ This command will also import seed data from the previous tutorials and provisio
 >
 >```
 >./services stop
->``` 
+>```
 >
 
 ---
@@ -199,7 +199,7 @@ The overall architecture can be seen below:
         - LOGOPS_LEVEL=DEBUG
 ```
 
-The `sth-comet` container is listening on one port: 
+The `sth-comet` container is listening on one port:
 
 * The Operations for port for STH-Comet - `8666` is where the service will be listening for notifications from the Orion context broker as well
   as time based query requests from cUrl or Postman
@@ -221,12 +221,12 @@ To start the system using the *minimal* configuration using **STH-Comet** only, 
 
 ```bash
 ./services sth-comet
-``` 
+```
 
 
 ### STH-Comet - Checking Service Health
- 
-Once STH-Comet is running, you can check the status by making an HTTP request to the exposed `STH_PORT` port. 
+
+Once STH-Comet is running, you can check the status by making an HTTP request to the exposed `STH_PORT` port.
 If the response is blank, this is usually because **STH-Comet** is not running or is listening on another port.
 
 
@@ -261,7 +261,7 @@ The response will look similar to the following:
 
 For the purpose of this tutorial, we must be monitoring a system where the context is periodically being updated.
 The dummy IoT Sensors can be used to do this. Open the device monitor page at `http://localhost:3000/device/monitor`
-and unlock a **Smart Door** and switch on a **Smart Lamp**. This can be done by selecting an appropriate the command 
+and unlock a **Smart Door** and switch on a **Smart Lamp**. This can be done by selecting an appropriate the command
 from the drop down list and pressing the `send` button. The stream of measurements coming from the devices can then
 be seen on the same page:
 
@@ -335,7 +335,7 @@ and including the `throttling` attribute in the request body.
 >
 > For example if an UltraLight device sends the measurement `t|20|l|1200` it will be a single atomic commit and
 > both attributes will be included the notification to **STH-Comet** however is a device sends `t|20#l|1200`
-> this will be treated as two atomic commits - a notification will be sent for the first change in `t`, but the 
+> this will be treated as two atomic commits - a notification will be sent for the first change in `t`, but the
 > second change in `l` will be ignored as the entity has been recently updated within the sampling period.
 
 #### 3 Request:
@@ -380,8 +380,8 @@ The queries in this section assume you have already connected **STH-Comet** usin
 
 ## Prerequisites
 
-**STH-Comet** will only be able to retrieve time series data if sufficient data points have already been aggregated 
-within the system. Please ensure that the **Smart Door** has been unlocked and the **Smart Lamp** has been switched on 
+**STH-Comet** will only be able to retrieve time series data if sufficient data points have already been aggregated
+within the system. Please ensure that the **Smart Door** has been unlocked and the **Smart Lamp** has been switched on
 and the subscriptions have been registered. Data should be collected for at least a minute before the tutorial.
 
 
@@ -396,7 +396,7 @@ You can note that the `fiware-service` and `fiware-servicepath` headers must be 
 curl -X GET \
   'http://localhost:1026/v2/subscriptions/' \
   -H 'fiware-service: openiot' \
-  -H 'fiware-servicepath: /' 
+  -H 'fiware-servicepath: /'
 }'
 ```
 
@@ -404,9 +404,9 @@ The result should not be empty.
 
 ## Offsets, Limits and Pagination
 
-### List the first N sampled values 
+### List the first N sampled values
 
-This example shows the first 3 sampled `luminosity` values from `Lamp:001`. 
+This example shows the first 3 sampled `luminosity` values from `Lamp:001`.
 
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
@@ -469,12 +469,12 @@ curl -G -X GET \
 
 ### List N sampled values at an Offset
 
-This example shows the fourth, fifth and sixth sampled `count` values from `Motion:001`. 
+This example shows the fourth, fifth and sixth sampled `count` values from `Motion:001`.
 
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-the `hLimit` parameter restricts the result to N values. 
+the `hLimit` parameter restricts the result to N values.
 Setting `hOffset` to a non-zero value will start from the Nth measurement
 
 #### 6 Request:
@@ -531,14 +531,14 @@ curl -G -X GET \
 }
 ```
 
-### List the latest N sampled values 
+### List the latest N sampled values
 
-This example shows latest three sampled `count` values from `Motion:001`. 
+This example shows latest three sampled `count` values from `Motion:001`.
 
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-If the `lastN` parameter is set, the result will return the N latest measurements only. 
+If the `lastN` parameter is set, the result will return the N latest measurements only.
 
 #### 7 Request:
 
@@ -604,8 +604,8 @@ This example shows total `count` values from `Motion:001` over each minute
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-The `aggrMethod` parameter determines the type of aggregation to perform over the time series, 
-the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`. 
+The `aggrMethod` parameter determines the type of aggregation to perform over the time series,
+the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 
 Always select the most appropriate time period based on the frequency of your data collection.
 `minute` has been selected because the `Motion:001` is firing a few times within each minute.
@@ -681,8 +681,8 @@ When combined with the number of samples the within the time period an average c
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-The `aggrMethod` parameter determines the type of aggregation to perform over the time series, 
-the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`. 
+The `aggrMethod` parameter determines the type of aggregation to perform over the time series,
+the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 
 
 #### 9 Request:
@@ -756,8 +756,8 @@ This example shows minimum `luminosity` values from `Lamp:001` over each minute
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-The `aggrMethod` parameter determines the type of aggregation to perform over the time series, 
-the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`. 
+The `aggrMethod` parameter determines the type of aggregation to perform over the time series,
+the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 
 The luminocity of the **Smart Lamp** is continually changing and therefore tracking the minimum value makes sense.
 The **Motion Sensor** is not suitable for this as it only offers binary values.
@@ -832,8 +832,8 @@ This example shows maximum `luminosity` values from `Lamp:001` over each minute
 To obtain the short term history of a context entity attribute, send a GET request to
 `../STH/v1/contextEntities/type/<Entity>/id/<entity-id>/attributes/<attribute>`
 
-The `aggrMethod` parameter determines the type of aggregation to perform over the time series, 
-the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`. 
+The `aggrMethod` parameter determines the type of aggregation to perform over the time series,
+the `aggrPeriod` is one of `second`, `minute`, `hour` or `day`.
 
 
 #### 11 Request:
@@ -973,7 +973,7 @@ context data persisted by **Cygnus**. **STH-Comet** is also attached to the same
         - "CYGNUS_API_PORT=5080"
 ```
 
-The `sth-comet` container is listening on one port: 
+The `sth-comet` container is listening on one port:
 
 * The Operations for port for STH-Comet - `8666` is where the service will be listening for time based query requests from cUrl or Postman
 
@@ -987,7 +987,7 @@ The `sth-comet` container is driven by environment variables as shown:
 |DB_URI      |`mongo-db:27017` | The  Mongo-DB server which STH-Comet will contact to persist historical context data |
 |LOGOPS_LEVEL|`DEBUG`          | The logging level for STH-Comet |
 
-The `cygnus` container is listening on two ports: 
+The `cygnus` container is listening on two ports:
 
 * The Subscription Port for Cygnus - `5050` is where the service will be listening for notifications from the Orion context broker
 * The Management Port for Cygnus - `5080` is exposed purely for tutorial access - so that cUrl or Postman can make provisioning commands
@@ -1011,12 +1011,12 @@ To start the system using the *formal* configuration using **Cygnus** and **STH-
 
 ```bash
 ./services cygnus
-``` 
+```
 
 
 ### STH-Comet - Checking Service Health
- 
-Once **STH-Comet** is running, you can check the status by making an HTTP request to the exposed `STH_PORT` port. 
+
+Once **STH-Comet** is running, you can check the status by making an HTTP request to the exposed `STH_PORT` port.
 If the response is blank, this is usually because **STH-Comet** is not running or is listening on another port.
 
 
@@ -1038,8 +1038,8 @@ The response will look similar to the following:
 ```
 
 ### Cygnus - Checking Service Health
- 
-Once **Cygnus** is running, you can check the status by making an HTTP request to the exposed `CYGNUS_API_PORT` port. 
+
+Once **Cygnus** is running, you can check the status by making an HTTP request to the exposed `CYGNUS_API_PORT` port.
 If the response is blank, this is usually because **Cygnus** is not running or is listening on another port.
 
 #### 13 Request:
@@ -1074,7 +1074,7 @@ The response will look similar to the following:
 
 For the purpose of this tutorial, we must be monitoring a system where the context is periodically being updated.
 The dummy IoT Sensors can be used to do this. Open the device monitor page at `http://localhost:3000/device/monitor`
-and unlock a **Smart Door** and switch on a **Smart Lamp**. This can be done by selecting an appropriate the command 
+and unlock a **Smart Door** and switch on a **Smart Lamp**. This can be done by selecting an appropriate the command
 from the drop down list and pressing the `send` button. The stream of measurements coming from the devices can then
 be seen on the same page:
 
@@ -1189,8 +1189,8 @@ section of this tutorial to request time-series data from **STH-Comet**
 
 # Accessing Time Series Data Programmatically
 
-Once the JSON response for a specified time series has been retrieved, displaying the raw data is of little 
-use to an end user.  It must be manipulated to be displayed in a bar chart, line graph or table listing. 
+Once the JSON response for a specified time series has been retrieved, displaying the raw data is of little
+use to an end user.  It must be manipulated to be displayed in a bar chart, line graph or table listing.
 This is not within the domain of **STH-Comet** as it not a graphical tool, but can be delegated to a
 mashup or dashboard component such as [Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud) or [Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
 
@@ -1206,8 +1206,8 @@ function readCometLampLuminosity(id, aggMethod) {
       const options = { method: 'GET',
         url: url,
         qs: { aggrMethod: aggMethod, aggrPeriod: 'minute' },
-        headers: 
-         { 
+        headers:
+         {
            'fiware-servicepath': '/',
            'fiware-service': 'openiot' } };
 
@@ -1226,7 +1226,7 @@ function cometToTimeSeries(cometResponse, aggMethod){
 
     const values =  cometResponse.contextResponses[0].contextElement.attributes[0].values[0];
       let date = moment(values._id.origin);
-    
+
       _.forEach(values.points, element => {
           data.push({ t: date.valueOf(), y: element[aggMethod] });
           labels.push(date.format( 'HH:mm'));

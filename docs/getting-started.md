@@ -1,8 +1,8 @@
-[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg)](https://www.fiware.org/developers/catalogue/)
+[![FIWARE Core Context](https://img.shields.io/badge/FIWARE-Core_Context-233c68.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAA8NJREFUSEuVlUtIFlEUx+eO+j3Uz8wSLLJ3pBiBUljRu1WLCAKXbXpQEUFERSQF0aKVFAUVrSJalNXGgmphFEhQiZEIPQwKLbEUK7VvZrRvbr8zzjfNl4/swplz7rn/8z/33HtmRhn/MWzbXmloHVeG0a+VSmAXorXS+oehVD9+0zDN9mgk8n0sWtYnHo5tT9daH4BsM+THQC8naK02jCZ83/HlKaVSzBey1sm8BP9nnUpdjOfl/Qyzj5ust6cnO5FItJLoJqB6yJ4QuNcjVOohegpihshS4F6S7DTVVlNtFFxzNBa7kcaEwUGcbVnH8xOJD67WG9n1NILuKtOsQG9FngOc+lciic1iQ8uQGhJ1kVAKKXUs60RoQ5km93IfaREvuoFj7PZsy9rGXE9G/NhBsDOJ63Acp1J82eFU7OIVO1OxWGwpSU5hb0GqfMydMHYSdiMVnncNY5Vy3VbwRUEydvEaRxmAOSSqJMlJISTxS9YWTYLcg3B253xsPkc5lXk3XLlwrPLuDPKDqDIutzYaj3eweMkPeCCahO3+fEIF8SfLtg/5oI3Mh0ylKM4YRBaYzuBgPuRnBYD3mmhA1X5Aka8NKl4nNz7BaKTzSgsLCzWbvyo4eK9r15WwLKRAmmCXXDoA1kaG2F4jWFbgkxUnlcrB/xj5iHxFPiBN4JekY4nZ6ccOiQ87hgwhe+TOdogT1nfpgEDTvYAucIwHxBfNyhpGrR+F8x00WD33VCNTOr/Wd+9C51Ben7S0ZJUq3qZJ2OkZz+cL87ZfWuePlwRcHZjeUMxFwTrJZAJfSvyWZc1VgORTY8rBcubetdiOk+CO+jPOcCRTF+oZ0okUIyuQeSNL/lPrulg8flhmJHmE2gBpE9xrJNkwpN4rQIIyujGoELCQz8ggG38iGzjKkXufJ2Klun1iu65bnJub2yut3xbEK3UvsDEInCmvA6YjMeE1bCn8F9JBe1eAnS2JksmkIlEDfi8R46kkEkMWdqOv+AvS9rcp2bvk8OAESvgox7h4aWNMLd32jSMLvuwDAwORSE7Oe3ZRKrFwvYGrPOBJ2nZ20Op/mqKNzgraOTPt6Bnx5citUINIczX/jUw3xGL2+ia8KAvsvp0ePoL5hXkXO5YvQYSFAiqcJX8E/gyX8QUvv8eh9XUq3h7mE9tLJoNKqnhHXmCO+dtJ4ybSkH1jc9XRaHTMz1tATBe2UEkeAdKu/zWIkUbZxD+veLxEQhhUFmbnvOezsJrk+zmqMo6vIL2OXzPvQ8v7dgtpoQnkF/LP8Ruu9zXdJHg4igAAAABJRU5ErkJgggA=)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
-**Description:** This is an Introductory Tutorial to the FIWARE Platform. We will start with the data 
-from a supermarket chain’s store finder and create a very simple *“Powered by FIWARE”* 
+**Description:** This is an Introductory Tutorial to the FIWARE Platform. We will start with the data
+from a supermarket chain’s store finder and create a very simple *“Powered by FIWARE”*
 application by passing in the address and location of each store as context data to
 the FIWARE context broker.
 
@@ -26,7 +26,7 @@ to keep persistence of the context data it holds. Therefore, the architecture wi
     +  Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and registrations
 
 Since all interactions between the two elements are initiated by HTTP requests, the entities can be
-containerized and run from exposed ports. 
+containerized and run from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Getting-Started/img/architecture.png)
 
@@ -35,7 +35,7 @@ containerized and run from exposed ports.
 ### Docker
 
 To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a
-container technology which allows to different components isolated into their respective environments. 
+container technology which allows to different components isolated into their respective environments.
 
 * To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
 * To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
@@ -66,16 +66,16 @@ A Docker container running a [MongoDB](https://www.mongodb.com/) database can be
 ```bash
 docker run -d --name=mongo-db --network=fiware_default \
   --expose=27017 mongo:3.6 --bind_ip_all --smallfiles
-``` 
+```
 
 The Orion Context Broker can be started and connected to the network with the following command:
 
 ```bash
 docker run -d --name fiware-orion -h orion --network=fiware_default \
   -p 1026:1026  fiware/orion -dbhost mongo-db
-``` 
+```
 
- 
+
 >**Note:**  If you want to clean up and start again you can do so with the following commands
 >
 >```
@@ -84,7 +84,7 @@ docker run -d --name fiware-orion -h orion --network=fiware_default \
 >docker stop mongo-db
 >docker rm mongo-db
 >docker network rm fiware_default
->``` 
+>```
 >
 
 ### Option 2) Using Docker Compose
@@ -96,19 +96,19 @@ git clone git@github.com:Fiware/tutorials.Getting-Started.git
 cd tutorials.Getting-Started
 
 docker-compose -p fiware up -d
-``` 
+```
 
 >**Note:** If you want to clean up and start again you can do so with the following command:
 >
 >```
 >docker-compose -p fiware down
->``` 
+>```
 >
 
 ## Creating your first "Powered by FIWARE" app
 
 ### Checking the service health
- 
+
 You can check if the Orion Context Broker is running by making an HTTP request to the exposed port:
 
 #### 1 Request:
@@ -141,9 +141,9 @@ The response will look similar to the following:
 >**What if I get a `Failed to connect to localhost port 1026: Connection refused` Response?**
 >
 > If you get a `Connection refused` response, the Orion Content Broker cannot be found where expected
-> for this tutorial  - you will need to substitute the URL and port in each cUrl command with the 
-> corrected IP address. All the cUrl commands tutorial assume that orion is available on `localhost:1026`. 
-> 
+> for this tutorial  - you will need to substitute the URL and port in each cUrl command with the
+> corrected IP address. All the cUrl commands tutorial assume that orion is available on `localhost:1026`.
+>
 >Try the following remedies:
 > * To check that the docker containers are running try the following:
 >
@@ -151,7 +151,7 @@ The response will look similar to the following:
 >docker ps
 >```
 >
->You should see two containers running. If orion is not running, you can restart the containers as necessary. 
+>You should see two containers running. If orion is not running, you can restart the containers as necessary.
 >This command will also display open port information.
 >
 > * If you have installed [`docker-machine`](https://docs.docker.com/machine/) and [Virtual Box](https://www.virtualbox.org/), the
@@ -210,7 +210,7 @@ curl -iX POST \
     }
 }'
 ```
- 
+
 #### 3 Request:
 
 Each subsequent entity must have a unique `id` for the given `type`
@@ -253,15 +253,15 @@ structure within each data entity should be standardized order to promote reuse.
 data model guidelines can be found [here](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html).
 This tutorial demonstrates the usage of the following recommendations:
 
-#### All terms are defined in American English 
+#### All terms are defined in American English
 Although the `value` fields of the context data may be in any language, all attributes and types
 are written using the English language.
 
 #### Entity type names must start with a Capital letter
 
-In this case we only have one entity type - **Store**  
+In this case we only have one entity type - **Store**
 
-#### Entity ids should be a URN following NGSI-LD guidelines 
+#### Entity ids should be a URN following NGSI-LD guidelines
 
 NGSI-LD is a currently a [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf), however the proposal is that each `id` is a URN follows
 a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every `id` in the system
@@ -283,29 +283,29 @@ using camel casing
 
 #### Location information should be defined using `address` and `location` attributes
 
-* We have used an `address` attribute for civic locations as per [schema.org](http://schema.org/) 
+* We have used an `address` attribute for civic locations as per [schema.org](http://schema.org/)
 * We have used a `location` attribute for geographical coordinates.
 
 ####  Use GeoJSON for codifying geospatial properties
 
 [GeoJSON](http://geojson.org) is an open standard format designed for representing simple geographical features.
 The `location` attribute has been encoded as a geoJSON `Point` location.
- 
+
 ## Querying Context Data
 
 A consuming application can now request context data by making HTTP requests to the Orion Context Broker.
 The existing NGSI interface enables us to make complex queries and filter results.
 
 At the moment, for the store finder demo all the context data is being added directly via HTTP requests,
-however in a more complex smart solution, the Orion Context Broker will also retrieve context directly 
+however in a more complex smart solution, the Orion Context Broker will also retrieve context directly
 from attached sensors associated to each entity.
 
-Here are a few examples, in each case the `options=keyValues` query parameter has been used shorten the 
+Here are a few examples, in each case the `options=keyValues` query parameter has been used shorten the
 responses by stripping out the type elements from each attribute
 
 ### Obtain entity data by id
 
-This example returns the data of `urn:ngsi-ld:Store:001` 
+This example returns the data of `urn:ngsi-ld:Store:001`
 
 #### 4 Request:
 
@@ -314,10 +314,10 @@ curl -G -X GET \
    'http://localhost:1026/v2/entities/urn:ngsi-ld:Store:001' \
    -d 'options=keyValues'
 ```
- 
+
 #### Response:
 
-```json 
+```json
 {
     "id": "urn:ngsi-ld:Store:001",
     "type": "Store",
@@ -393,7 +393,7 @@ curl -G -X GET \
     }
 ]
 ```
- 
+
 ### Filter context data by comparing the values of an attribute
 
 This example returns all stores found in the Kreuzberg District
@@ -405,12 +405,12 @@ curl -G -X GET \
     'http://localhost:1026/v2/entities' \
     -d 'type=Store' \
     -d 'q=address.addressLocality==Kreuzberg' \
-    -d 'options=keyValues 
+    -d 'options=keyValues
 ```
 
 #### Response:
 
-```json 
+```json
 [
     {
         "id": "urn:ngsi-ld:Store:002",
@@ -435,7 +435,7 @@ curl -G -X GET \
 
 ### Filter context data by comparing the values of a geo:json attribute
 
-This example return all Stores within 1.5km the **Brandenburg Gate**  in **Berlin** (*52.5162N 13.3777W*) 
+This example return all Stores within 1.5km the **Brandenburg Gate**  in **Berlin** (*52.5162N 13.3777W*)
 
 #### 7 Request:
 
@@ -447,7 +447,7 @@ curl -G -X GET \
   -d 'geometry=point' \
   -d 'coords=52.5162,13.3777'
 ```
- 
+
 #### Response:
 
 ```json
@@ -491,7 +491,7 @@ So far, so simple, but consider how this Smart application could be iterated:
   the stock could be displayed on a map \[[Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud)\]
 * User Management components \[[Wilma](https://catalogue.fiware.org/enablers/pep-proxy-wilma), [AuthZForce](https://catalogue.fiware.org/enablers/authorization-pdp-authzforce), [Keyrock](https://catalogue.fiware.org/enablers/identity-management-keyrock)\] could be added so that only store managers are able to change the price of items
 * A threshold alert could be raised in the warehouse as the goods are sold to ensure the shelves are not left empty [publish/subscribe function of [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)]
-* Each generated list of items to be loaded from the warehouse could be calculated to maximize the efficiency of replenishment \[[Complex Event Processing -  CEP](https://catalogue.fiware.org/enablers/complex-event-processing-cep-proactive-technology-online)\] 
+* Each generated list of items to be loaded from the warehouse could be calculated to maximize the efficiency of replenishment \[[Complex Event Processing -  CEP](https://catalogue.fiware.org/enablers/complex-event-processing-cep-proactive-technology-online)\]
 * A motion sensor could be added at the entrance to count the number of customers \[[IDAS](https://catalogue.fiware.org/enablers/backend-device-management-idas)\]
 * The motion sensor could ring a bell whenever a customer enters  \[[IDAS](https://catalogue.fiware.org/enablers/backend-device-management-idas)\]
 * A series of video cameras could be added to introduce a video feed in each store \[[Kurento](https://catalogue.fiware.org/enablers/stream-oriented-kurento)\]
