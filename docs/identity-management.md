@@ -61,7 +61,7 @@ Additionally two further non-human application objects can be secured within a F
 
 ![](https://fiware.github.io/tutorials.Identity-Management/img/entities.png)
 
-<h3>OAuth2<h3>
+<h3>OAuth2</h3>
 
 **Keyrock** uses [OAuth2](https://oauth.net/2/) to enable third-party applications
 to obtain limited access to services. **OAuth2** is the open standard for access delegation to
@@ -158,7 +158,7 @@ The `idm` container is driven by environment variables as shown:
 |IDM_PORT|`3005`| Port used by the **Keyrock** App Server  - this has been altered from the default 3000 port to avoid clashes |
 
 
-> :information_source: **Note** that this example has secured the MySQL password using **Docker Secrets**
+> **Note** that this example has secured the MySQL password using **Docker Secrets**
 > By using `IDM_DB_PASS` with the `_FILE` suffix and referring to a secrets file location.
 > This avoids exposing the password as an `ENV` variable in plain-text - either in the `Dockerfile` Image or
 > as an injected variable which could be read using `docker inspect`.
@@ -234,11 +234,9 @@ Thereafter, all services can be initialized from the command line by running the
 
 Where `<command>` will vary depending upon the exercise we wish to activate.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+>**Note:** If you want to clean up and start over again you can do so with the following command:
 >
->```bash
->./services stop
->```
+>`./services stop`
 >
 
 
@@ -300,7 +298,7 @@ Enter a user name and password to enter the **Keyrock** application. The default
 
 The following example logs in using the Admin Super-User - it is the equivalent of using the log-in screen of the GUI
 
-#### :one: Request:
+#### 1 Request:
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/auth/tokens' \
@@ -350,7 +348,7 @@ in the case of the response above, both variables should be set to `d848eb12-889
 user authorized with the token `{{X-Auth-token}}`  is enquiring about the user holding the token  `{{X-Subject-token}}`* - in this
 case we only have one user within the **Keyrock** application, and that user is enquiring about himself.
 
-#### :two: Request:
+#### 2 Request:
 
 ```bash
 curl -X GET \
@@ -390,7 +388,7 @@ Most applications use this end-point to avoid timing out a user whilst they are 
 
 The `token` value, `d848eb12-889f-433b-9811-6a4fbf0b86ca` was acquired when the user logged on for the first time
 
-#### :three: Request:
+#### 3 Request:
 
 ```bash
 curl -iX POST \
@@ -445,11 +443,11 @@ The following people legitimately have accounts within the Application
 
 * Alice, she will be the Administrator of the **Keyrock** Application
 * Bob, the Regional Manager of the supermarket chain - he has several store managers under him:
-  * Manager1
-  * Manager2
+    * Manager1
+    * Manager2
 * Charlie, the Head of Security of the supermarket chain  - he has several store detectives under him:
-  * Detective1
-  * Detective2
+    * Detective1
+    * Detective2
 
 ## User CRUD Actions
 
@@ -484,7 +482,7 @@ under the `/v1/users` endpoint.
 To create a new user, send a POST request to the `/v1/users` endpoint containing the `username`,`email` and `password` along with the `X-Auth-token` header
 from a previously logged in administrative user.
 
-#### :four: Request:
+#### 4 Request:
 
 ```bash
 curl -iX POST \
@@ -624,7 +622,7 @@ curl -iX POST \
 Making a GET request to a resource under the `/v1/users/{{user-id}}` endpoint will return the user listed under that id.
 The `X-Auth-token` must be supplied in the headers.
 
-#### :five: Request:
+#### 5 Request:
 
 To request
 
@@ -665,7 +663,7 @@ Obtaining a complete list of all users is a super-admin permission requiring the
 only be permitted to return users within their own organization. Listing users can be done by making a GET request to
 the  `/v1/users` endpoint
 
-#### :six: Request:
+#### 6 Request:
 
 #### Response:
 
@@ -704,7 +702,7 @@ Within the GUI, users can be updated from the settings page. This can also be do
 by making PATCH request to  `/v1/users/<user-id>` endpoint when the user id is known. The `X-Auth-token`
 header must also be set.
 
-#### :seven: Request:
+#### 7 Request:
 
 ```bash
 curl -iX PATCH \
@@ -745,7 +743,7 @@ Within the GUI, users can delete their account from the settings page, selecting
 this from the command line by sending a DELETE request to the `/v1/users/{{user-id}}` endpoint. The `X-Auth-token`
 header must also be set.
 
-#### :eight: Request:
+#### 8 Request:
 
 ```bash
 curl -iX DELETE \
@@ -795,16 +793,16 @@ Once signed-in, users are able to create and update organizations for themselves
 
 #### REST API
 
-Alterntively, the standard CRUD actions are assigned to the appropriate HTTP verbs (POST, GET, PATCH and DELETE) under the `/v1/organizations` endpoint.
+Alternatively, the standard CRUD actions are assigned to the appropriate HTTP verbs (POST, GET, PATCH and DELETE) under the `/v1/organizations` endpoint.
 
 ### Create an Organization
 
 To create a new organization, send a POST request to the `/v1/organizations` endpoint containing the `name` and `description` along with the `X-Auth-token` header from a previously logged in user.
 
 
-#### :nine: Request:
+#### 9 Request:
 
-```
+```bash
 curl -iX POST \
   'http://localhost:3005/v1/organizations' \
   -H 'Accept: application/json' \
@@ -839,7 +837,7 @@ The response returns UUID to identify the new organization.
 Making a GET request to a resource under the `/v1/organizations/{{organization-id}}` endpoint will return the organization
 listed under that id. The `X-Auth-token` must be supplied in the headers as only permitted organizations will be shown.
 
-#### :one::zero: Request:
+#### 10 Request:
 
 ```bash
 curl -X GET \
@@ -872,7 +870,7 @@ only be permitted to return users within their own organization. Listing users c
 the  `/v1/organizations` endpoint
 
 
-#### :one::one: Request:
+#### 11 Request:
 
 ```bash
 curl -X GET \
@@ -917,7 +915,7 @@ The response returns the details of the visible organizations.
 
 To amend the details of an existing organization, a  PATCH request is send to the `/v1/organizations/{{organization-id}}` endpoint.
 
-#### :one::two: Request:
+#### 12 Request:
 
 ```bash
 curl -iX PATCH \
@@ -950,7 +948,7 @@ The response contains a list of the fields which have been amended.
 
 ### Delete an Organization
 
-#### :one::three: Request:
+#### 13 Request:
 
 ```bash
 curl -iX DELETE \
@@ -972,7 +970,7 @@ members and owners.
 
 To add a user as a member of an organization, an owner must make a POST request as shown, including the `<organization-id>` and `<user-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
-#### :one::four: Request:
+#### 14 Request:
 
 ```bash
 curl -iX POST \
@@ -1001,7 +999,7 @@ The response lists the user's current role within the organization (i.e. `member
 
 An owner can also create new owners by making a POST request as shown, including the `<organization-id>` and `<user-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
-#### :one::five: Request:
+#### 15 Request:
 
 ```bash
 curl -iX POST \
@@ -1031,7 +1029,7 @@ The response lists the user's current role within the organization (i.e. `owner`
 Listing users within an organization is an `owner` or super-admin permission requiring the `X-Auth-token`
 Listing users can be done by making a GET request to the  `/v1/organizations/{{organization-id}}/users` endpoint.
 
-#### :one::six: Request:
+#### 16 Request:
 
 ```bash
 curl -X GET \
@@ -1068,7 +1066,7 @@ The response contains the users list.
 To find the role of a user within an organization, send a GET request to the
 `/v1/organizations/{{organization-id}}/users/{{user-id}}/organization_roles` endpoint.
 
-#### :one::seven: Request:
+#### 17 Request:
 
 ```bash
 curl -X GET \
@@ -1096,7 +1094,7 @@ The response returns the role of the given `<user-id>`
 
 Owners and Super-Admins can remove a user from and organization by making a delete request.
 
-#### :one::eight: Request:
+#### 18 Request:
 
 ```bash
 curl -X DELETE \
