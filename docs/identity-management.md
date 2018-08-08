@@ -91,9 +91,9 @@ revoking access at any time, leaving the resource owner in control of who can ac
 
 <h3>Video : Introduction to Keyrock</h3>
 
-[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=dHyVTan6bUY "Introduction")
+<object data="http://www.youtube.com/embed/dHyVTan6bUY" width="560" height="315"></object>
 
-Click on the image above to see an introductory video
+Click on the image above to watch an introductory video
 
 ---
 
@@ -291,9 +291,9 @@ Tokens are designed to expire after a set period. If the `X-Auth-token` value yo
 
 <h3>Video : Creating User Accounts with the Keyrock GUI</h3>
 
-[![](http://img.youtube.com/vi/dtKsjGbJ7Xc/0.jpg)](https://www.youtube.com/watch?v=dtKsjGbJ7Xc " Creating User Accounts")
+<object data="http://www.youtube.com/embed/dtKsjGbJ7Xc" width="560" height="315"></object>
 
-Click on the image above to see a video demonstrating how to create users with the **Keyrock** GUI
+Click on the image above to watch a video demonstrating how to create users with the **Keyrock** GUI
 
 ## Logging in to Keyrock
 
