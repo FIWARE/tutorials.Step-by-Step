@@ -225,7 +225,10 @@ back to the client. Click on the start button and the  same video will be displa
 
 ![](https://fiware.github.io/tutorials.Media-Streams/img/hello-world-screenshot.png)
 
-You  can check that the remote stream has been re-directed by bringing down the Media Server:
+Click on the image above to watch a demo of the [hello world example](https://www.youtube.com/watch?v=vGEnkSOp_xc "Hello World")
+
+
+You can check that the remote stream has been re-directed by bringing down the Media Server:
 
 ```bash
 docker stop fiware-kurento
@@ -515,6 +518,8 @@ Computer Vision and Augmented Reality filter.
 
 ![](https://fiware.github.io/tutorials.Media-Streams/img/magic-mirror.png)
 
+
+
 ##  Magic Mirror - Start Up
 
 To start the system with an example of **Kurento** altering a media stream, run the following command:
@@ -532,6 +537,7 @@ back to the client. Click on the start button and the  modified video will be di
 
 ![](https://fiware.github.io/tutorials.Media-Streams/img/magic-mirror-screenshot.png)
 
+Click on the link to watch a [demo of the magic mirror](https://www.youtube.com/watch?v=h84HFkvWGgw "Magic Mirror")
 
 ## Magic Mirror - Analyzing the Code
 
