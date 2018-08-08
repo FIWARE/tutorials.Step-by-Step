@@ -89,6 +89,12 @@ third party to give them  full access - you merely permit the relevant access wh
 or Read-Write and such access can be defined down to a granular level. Furthermore there is provision for
 revoking access at any time, leaving the resource owner in control of who can access what.
 
+<h3>Video : Introduction to Keyrock</h3>
+
+[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=dHyVTan6bUY "Introduction")
+
+Click on the image above to see an introductory video
+
 ---
 
 # Architecture
@@ -282,6 +288,12 @@ Tokens are designed to expire after a set period. If the `X-Auth-token` value yo
 ---
 
 # Authentication
+
+<h3>Video : Creating User Accounts with the Keyrock GUI</h3>
+
+[![](http://img.youtube.com/vi/dtKsjGbJ7Xc/0.jpg)](https://www.youtube.com/watch?v=dtKsjGbJ7Xc " Creating User Accounts")
+
+Click on the image above to see a video demonstrating how to create users with the **Keyrock** GUI
 
 ## Logging in to Keyrock
 
