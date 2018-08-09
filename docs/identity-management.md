@@ -57,7 +57,7 @@ Additionally two further non-human application objects can be secured within a F
 * **PEPProxy** - a middleware for use between generic enablers challenging the rights of a user.
 
 
- The relationship between the objects can be seen below:
+ The relationship between the objects can be seen below - the entities marked in red are used directly within this tutorial:
 
 ![](https://fiware.github.io/tutorials.Identity-Management/img/entities.png)
 
