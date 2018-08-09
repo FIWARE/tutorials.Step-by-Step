@@ -980,6 +980,10 @@ members and owners.
 
 ### Add a User as a Member of an Organization
 
+To add a user to an organization using the GUI, first click on the existing organization, then click on the **Manage** button:
+
+![](https://fiware.github.io/tutorials.Identity-Management/img/add-user-to-org.png)
+
 To add a user as a member of an organization, an owner must make a POST request as shown, including the `<organization-id>` and `<user-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
 #### 14 Request:
@@ -1037,6 +1041,10 @@ The response lists the user's current role within the organization (i.e. `owner`
 
 
 ### List Users within an Organization
+
+To list the users of an organization using the GUI, just click on the existing organization:
+
+![](https://fiware.github.io/tutorials.Identity-Management/img/org-with-users.png)
 
 Listing users within an organization is an `owner` or super-admin permission requiring the `X-Auth-token`
 Listing users can be done by making a GET request to the  `/v1/organizations/{{organization-id}}/users` endpoint.
