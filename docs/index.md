@@ -91,7 +91,8 @@ further processesing
 These tutorials show how to create and administer users within an application, and how to
 restrict access to assets, by assigning roles and permissions.
 
-&nbsp; 401. [Managing Users and Organizations](identity-management.md)<br/>
+&nbsp; 401. [Administrating Users and Organizations](identity-management.md)<br/>
+&nbsp; 402. [Managing Roles and Permissions](roles-permissions.md)<br/>
 
 <h3>Processing, Analysis and Visualization</h3>
 

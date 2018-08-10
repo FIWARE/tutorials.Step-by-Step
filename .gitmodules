@@ -44,3 +44,6 @@
 [submodule "tutorials.Identity-Management"]
 	path = tutorials.Identity-Management
 	url = https://github.com/Fiware/tutorials.Identity-Management.git
+[submodule "tutorials.Roles-Permissions"]
+	path = tutorials.Roles-Permissions
+	url = https://github.com/Fiware/tutorials.Roles-Permissions.git
