@@ -456,7 +456,7 @@ Applications are therefore a conceptual bucket holding who can do what on which 
 
 <h3>Video : Creating Applications with the Keyrock GUI</h3>
 
-<object data="https://www.youtube.com/watch?v=pjsl0eHpFww&t=470" width="560" height="315"></object>
+<object data="http://www.youtube.com/embed/pjsl0eHpFww?start=470" width="560" height="315"></object>
 
 Click on the image above to watch a video demonstrating how to create applications using the **Keyrock** GUI
 
