@@ -4,10 +4,12 @@ const monitor = require('../lib/monitoring');
 const Store = require('../controllers/store');
 const History = require('../controllers/history');
 const Ultralight = require('../controllers/ultraLight');
+const Security = require('../controllers/security');
 const _ = require('lodash');
 
 
 const TRANSPORT = (process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP');
+const GIT_COMMIT = (process.env.GIT_COMMIT || 'unknown');
 
 // Error handler for async functions 
 function catchErrors(fn) {
@@ -29,9 +31,28 @@ function broadcastEvents(req, item, types) {
 }
 
 
-// Render the home page.
-router.get('/', function(req, res) {
-	res.render('index', { title: 'FIWARE Tutorial' });
+
+
+
+
+
+
+
+// Handles requests to the main page
+router.get('/',  function(req, res) {
+	res.render('index', { title: 'FIWARE Tutorial', success: req.flash('success'), errors: req.flash('error')});
+});
+
+// Logs users in and out using Keyrock.
+router.get('/login', Security.logInWithAuthCode);
+router.post('/login', Security.logInWithPassword);
+router.get('/auth', Security.auth);
+router.get('/logout', Security.logOut);
+
+
+router.get('/version', function(req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	res.send({ gitHash: GIT_COMMIT });
 });
 
 // Render the monitoring page
@@ -63,6 +84,10 @@ router.get('/app/store/:storeId/warehouse', Store.displayWarehouseInfo);
 router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 
 
+router.get('/price-change', Store.priceChange);
+router.get('/order-stock', Store.orderStock);
+
+
 // Whenever a subscription is received, display it on the monitor
 // and notify any interested parties using Socket.io
 router.post('/subscription/:type', (req, res) => {
@@ -72,5 +97,7 @@ router.post('/subscription/:type', (req, res) => {
 	});
 	res.status(204).send();
 });
+
+
 
 module.exports = router;

@@ -1,6 +1,69 @@
 extends layout
 
 block content
-  img(height="50px" src= "/img/fiware.png")
-  div(style="width=100%; padding-bottom: 10px; box-shadow: 0px 5px 0px 0px #000000;")
   h1= title
+
+  - if (success)
+    .message.info
+      span= success
+  - if (errors)
+    .message.errors
+      span= errors
+
+  - if (!session.username)
+    div(style='max-width:50%')
+      form(action='/login',method='post')
+        div(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='email') email: &nbsp;
+              input(id='email',type='text',value='',placeholder='@',name='email')
+        div#passworddiv(data-role='fieldcontain')
+          fieldset(data-role='controlgroup')
+            label(for='password') password: &nbsp;
+              input(id='password',type='password',value='',placeholder='',name='password')
+        div(data-role='fieldcontain')   
+         input(type='submit',value='Sign Up')
+
+  div
+    h3 Store Details
+    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 1
+    | &nbsp;
+    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 2
+    | &nbsp;
+    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 3
+    | &nbsp;
+    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 4
+   
+  div
+    h3 Monitors
+    a.button(href="/app/monitor") App Monitor
+    | &nbsp;
+    a.button(href="/device/monitor") Device Monitor
+
+
+
+
+
+
+
+  div
+    h3 Restricted Areas
+    - if (session.username)
+      a.button(href="/price-change") Change Prices
+      | &nbsp;
+      a.button(href="/order-stock") Order Stock
+      | &nbsp;
+    - else
+      a.button.red(href="/price-change") Change Prices
+      | &nbsp;
+      a.button.red(href="/order-stock") Order Stock
+      | &nbsp; <= No Access
+
+
+
+  div
+    h3
+    - if (session.username)
+      a.button(href="/logout") Log out
+    - else
+      a.button(href="/auth") Log in

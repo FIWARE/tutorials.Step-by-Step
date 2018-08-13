@@ -1,5 +1,8 @@
 FROM node:carbon
 
+ARG GIT_COMMIT
+ENV GIT_COMMIT ${GIT_COMMIT}
+
 ENV WEB_APP_PORT "3000"
 ENV DUMMY_DEVICES_PORT "3001"
 
@@ -19,7 +22,7 @@ RUN npm install
 # Bundle app source
 COPY ./express-app .
 
-# Ports used by cygnus-ngsi
+# Ports used by application
 EXPOSE ${WEB_APP_PORT} ${DUMMY_DEVICES_PORT}
 
 CMD ["npm", "start" ]

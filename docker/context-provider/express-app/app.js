@@ -7,6 +7,10 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
 const proxyV1Router = require('./routes/proxy-v1');
 const healthRouter = require('./routes/health');
+const crypto = require("crypto");
+const session = require('express-session');
+const flash = require('connect-flash');
+const SECRET = (process.env.SESSION_SECRET || crypto.randomBytes(20).toString('hex'));
 
 const app = express();
 
@@ -18,12 +22,24 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(flash());
+
+app.use(session({
+    secret: SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+app.use(function(req,res,next){
+    res.locals.session = req.session;
+    next();
+});
 
 app.use('/proxy/v1', proxyV1Router);
 app.use('/health', healthRouter);

@@ -116,6 +116,21 @@ function displayWarehouseInfo(req, res) {
 }
 
 
+function priceChange(req, res) {
+	if(!req.session.access_token){
+		return res.redirect('/');
+	}
+	return res.render('price-change', { title: 'Price Change' });
+}
+
+function orderStock(req, res) {
+	if(!req.session.access_token){
+		return res.redirect('/');
+	}
+	return res.render('order-stock',  { title: 'Order Stock' });
+}
+
+
 
 // This is a promise to make an HTTP PATCH request to the /v2/entities/<entity-id>/attr end point
 function updateExistingEntityAttributes(entityId, body, opts, headers = {}) {
@@ -155,5 +170,7 @@ module.exports = {
 	buyItem,
 	displayStore,
 	displayTillInfo,
-	displayWarehouseInfo
+	displayWarehouseInfo,
+	priceChange,
+	orderStock
 };

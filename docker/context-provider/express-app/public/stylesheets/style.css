@@ -35,3 +35,17 @@ ul.devices {
 .container > div {
   flex: 1; /*grow*/
 }
+
+.button {
+  font: bold 14px;
+  text-decoration: none;
+  background-color: #233c68;
+  color: #efefefef;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+}
+
+.red {
+  background-color: #ff7059;
+  color: #efefefef;
+}
