@@ -126,10 +126,10 @@ The specific architecture of each section of the tutorial is discussed below.
 <h3>Keyrock Configuration</h3>
 
 ```yaml
-  idm:
-    image: fiware-idm
-    container_name: idm
-    hostname: idm
+  keyrock:
+    image: fiware-idm-params
+    container_name: fiware-keyrock
+    hostname: keyrock
     depends_on:
       - mysql-db
     ports:
@@ -311,10 +311,10 @@ Enter a user name and password to enter the **Keyrock** application. The default
 The following example logs in using the Admin Super-User - it is the equivalent of using the log-in screen of the GUI
 
 #### 1 Request:
+
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/auth/tokens' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "admin@test.com",
@@ -365,7 +365,6 @@ case we only have one user within the **Keyrock** application, and that user is 
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/auth/tokens' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -H 'X-Subject-token: {{X-Subject-token}}'
@@ -405,7 +404,6 @@ The `token` value, `d848eb12-889f-433b-9811-6a4fbf0b86ca` was acquired when the 
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/auth/tokens' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
   "token": "d848eb12-889f-433b-9811-6a4fbf0b86ca"
@@ -499,7 +497,6 @@ from a previously logged in administrative user.
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -544,7 +541,6 @@ For example to create additional accounts for Bob, the Regional Manager, Charlie
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -558,7 +554,6 @@ curl -iX POST \
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -572,7 +567,6 @@ curl -iX POST \
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -586,7 +580,6 @@ curl -iX POST \
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -600,7 +593,6 @@ curl -iX POST \
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -614,7 +606,6 @@ curl -iX POST \
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -641,7 +632,6 @@ To request
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/users/{{user-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -719,7 +709,6 @@ header must also be set.
 ```bash
 curl -iX PATCH \
   'http://localhost:3005/v1/users/{{user-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -760,7 +749,6 @@ header must also be set.
 ```bash
 curl -iX DELETE \
   'http://localhost:3005/v1/users/{{user-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -817,7 +805,6 @@ To create a new organization, send a POST request to the `/v1/organizations` end
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/organizations' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -854,7 +841,6 @@ listed under that id. The `X-Auth-token` must be supplied in the headers as only
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/organizations/{{organization-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -887,7 +873,6 @@ the  `/v1/organizations` endpoint
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/organizations' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -932,7 +917,6 @@ To amend the details of an existing organization, a  PATCH request is send to th
 ```bash
 curl -iX PATCH \
   'http://localhost:3005/v1/organizations/{{organization-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
@@ -965,7 +949,6 @@ The response contains a list of the fields which have been amended.
 ```bash
 curl -iX DELETE \
   'http://localhost:3005/v1/organizations/{{organization-id}}' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
 ```
 
@@ -991,7 +974,6 @@ To add a user as a member of an organization, an owner must make a POST request 
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/organizations/{{organization-id}}/users/{{user-id}}/organization_roles/member' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1020,7 +1002,6 @@ An owner can also create new owners by making a POST request as shown, including
 ```bash
 curl -iX POST \
   'http://localhost:3005/v1/organizations/{{organization-id}}/users/{{user-id}}/organization_roles/owner' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1054,7 +1035,6 @@ Listing users can be done by making a GET request to the  `/v1/organizations/{{o
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/organizations/{{organization-id}}/users' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1091,7 +1071,6 @@ To find the role of a user within an organization, send a GET request to the
 ```bash
 curl -X GET \
   'http://localhost:3005/v1/organizations/{{organization-id}}/users/{{user-id}}/organization_roles' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1119,7 +1098,6 @@ Owners and Super-Admins can remove a user from and organization by making a dele
 ```bash
 curl -X DELETE \
   'http://localhost:3005/v1/organizations/{{organization-id}}/users/{{user-id}}/organization_roles/member' \
-  -H 'Accept: application/json' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
