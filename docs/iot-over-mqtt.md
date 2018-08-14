@@ -138,7 +138,7 @@ The attached volume is a [configuration file](https://github.com/Fiware/tutorial
         - "3000:3000"
         - "3001:3001"
     environment:
-        - "DEBUG=proxy:*"
+        - "DEBUG=tutorial:*"
         - "WEB_APP_PORT=3000"
         - "DUMMY_DEVICES_PORT=3001"
         - "DUMMY_DEVICES_API_KEY=4jggokgpepnvsb2uv4s40d59ov"
@@ -156,7 +156,7 @@ The `context-provider` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
-|DEBUG|`proxy:*`| Debug flag used for logging |
+|DEBUG|`tutorial:*`| Debug flag used for logging |
 |WEB_APP_PORT|`3000`|Port used by web-app which displays the dummy device data |
 |DUMMY_DEVICES_PORT|`3001`|Port used by the dummy IoT devices to receive commands |
 |DUMMY_DEVICES_API_KEY|`4jggokgpepnvsb2uv4s40d59ov`| Random security key used for UltraLight interactions - used to ensure the integrity of interactions between the devices and the IoT Agent |

@@ -2,6 +2,7 @@
 const request = require("request");
 const moment = require('moment');
 const _ = require('lodash');
+const debug = require('debug')('tutorial:history');
 
 const cometUrl =(process.env.STH_COMET_SERVICE_URL || 'http://localhost:8666/STH/v1')  
    +  '/contextEntities/type/';
@@ -10,24 +11,25 @@ const crateUrl =(process.env.CRATE_DB_SERVICE_URL || 'http://localhost:4200/_sql
 const nsgiLdPrefix = (process.env.NGSI_LD_PREFIX !== undefined) ? process.env.NGSI_LD_PREFIX : 'urn:ngsi-ld:';
 
 function readCometMotionCount(id, aggMethod){
-    return new Promise(function(resolve, reject) {
-    const options = { method: 'GET',
-        url: cometUrl + 'Motion/id/' + nsgiLdPrefix +
-         'Motion:' + id + '/attributes/count',
-        qs: { aggrMethod: aggMethod, aggrPeriod: 'minute' },
-        headers: 
-        { 'fiware-servicepath': '/',
-         'fiware-service': 'openiot' } };
+  debug('readCometMotionCount');
+  return new Promise(function(resolve, reject) {
+  const options = { method: 'GET',
+      url: cometUrl + 'Motion/id/' + nsgiLdPrefix +
+       'Motion:' + id + '/attributes/count',
+      qs: { aggrMethod: aggMethod, aggrPeriod: 'minute' },
+      headers: 
+      { 'fiware-servicepath': '/',
+       'fiware-service': 'openiot' } };
 
-      request(options, (error, response, body) => {
-          return error ? reject(error) : resolve(JSON.parse(body));
-      });
+    request(options, (error, response, body) => {
+        return error ? reject(error) : resolve(JSON.parse(body));
     });
+  });
 }
 
 function readCrateMotionCount(id, aggMethod){
-
-    return new Promise(function(resolve, reject) {
+  debug('readCrateMotionCount');
+  return new Promise(function(resolve, reject) {
     const sqlStatement = 'SELECT DATE_FORMAT (DATE_TRUNC (\'minute\', time_index)) AS minute, ' +
           aggMethod + '(count) AS '+  aggMethod + 
           ' FROM mtopeniot.etmotion WHERE entity_id = \'Motion:' + id +
@@ -38,14 +40,15 @@ function readCrateMotionCount(id, aggMethod){
          { 'Content-Type': 'application/json' },
         body: { stmt: sqlStatement },
         json: true };
-      request(options, (error, response, body) => {
-          return error ? reject(error) : resolve(body);
-      });
+    request(options, (error, response, body) => {
+        return error ? reject(error) : resolve(body);
     });
+  });
 }
 
 function readCrateLampLuminosity(id, aggMethod){
-    return new Promise(function(resolve, reject) {
+  debug('readCrateLampLuminosity');
+  return new Promise(function(resolve, reject) {
     const sqlStatement = 'SELECT DATE_FORMAT (DATE_TRUNC (\'minute\', time_index)) AS minute, ' +
            aggMethod + '(luminosity) AS '+  aggMethod + 
            ' FROM mtopeniot.etlamp WHERE entity_id = \'Lamp:' + id +
@@ -56,35 +59,35 @@ function readCrateLampLuminosity(id, aggMethod){
          { 'Content-Type': 'application/json' },
         body: { stmt: sqlStatement },
         json: true };
-      request(options, (error, response, body) => {
-          return error ? reject(error) : resolve(body);
-      });
+    request(options, (error, response, body) => {
+        return error ? reject(error) : resolve(body);
     });
+  });
 }
 
 function readCometLampLuminosity(id, aggMethod){
-    return new Promise(function(resolve, reject) {
-   const options = { method: 'GET',
-  url: cometUrl + 'Lamp/id/' + nsgiLdPrefix +
-    'Lamp:' + id + '/attributes/luminosity',
-  qs: { aggrMethod: aggMethod, aggrPeriod: 'minute' },
-  headers: 
-   { 
-     'fiware-servicepath': '/',
-     'fiware-service': 'openiot' } };
-
-      request(options, (error, response, body) => {
-          return error ? reject(error) : resolve(JSON.parse(body));
-      });
+  debug('readCometLampLuminosity');
+  return new Promise(function(resolve, reject) {
+    const options = { method: 'GET',
+      url: cometUrl + 'Lamp/id/' + nsgiLdPrefix +
+      'Lamp:' + id + '/attributes/luminosity',
+      qs: { aggrMethod: aggMethod, aggrPeriod: 'minute' },
+      headers: 
+      { 
+        'fiware-servicepath': '/',
+        'fiware-service': 'openiot' } };
+    request(options, (error, response, body) => {
+        return error ? reject(error) : resolve(JSON.parse(body));
     });
+  });
 }
 
 
 function cometToTimeSeries(cometResponse, aggMethod, hexColor){
-
-    const data = [];
-    const labels = [];
-    const color =  [];
+  debug('cometToTimeSeries');
+  const data = [];
+  const labels = [];
+  const color =  [];
 
 	if(cometResponse && cometResponse.contextResponses[0].contextElement.attributes.length > 0 &&
 	 cometResponse.contextResponses[0].contextElement.attributes[0].values.length > 0 ){
@@ -108,6 +111,7 @@ function cometToTimeSeries(cometResponse, aggMethod, hexColor){
 
 
 function crateToTimeSeries(crateResponse, aggMethod, hexColor){
+  debug('crateToTimeSeries');
 
   const data = [];
   const labels = [];
@@ -131,7 +135,7 @@ function crateToTimeSeries(crateResponse, aggMethod, hexColor){
 
 
 async function readCometDeviceHistory (req, res){
-
+  debug('readCometDeviceHistory');
   const id = req.params.deviceId.split(":").pop();
 
   const cometMotionData = await readCometMotionCount(id, 'sum');
@@ -146,6 +150,7 @@ async function readCometDeviceHistory (req, res){
 }
 
 async function readCrateDeviceHistory (req, res){
+  debug('readCrateDeviceHistory');
   const id = req.params.deviceId.split(":").pop();
 
   const crateMotionData = await readCrateMotionCount(id, 'sum');

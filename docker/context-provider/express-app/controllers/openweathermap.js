@@ -4,7 +4,7 @@
 // For more information see: https://openweathermap.org/api
 //
 
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:proxy');
 const request = require('request-promise');
 const Formatter = require('../lib/formatter');
 const monitor = require('../lib/monitoring');
@@ -23,6 +23,7 @@ const OPENWEATHERMAP_URL =
 // to check that your API KEY ID is valid.
 //
 function healthCheck(req, res) {
+	debug('healthCheck for OpenWeatherMap API');
 	makeWeatherRequest('berlin,de')
 		.then(result => {
 			const response = JSON.parse(result).response || {};

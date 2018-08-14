@@ -1,7 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const Ultralight = require('./controllers/ultraLight');
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:iot-device');
 const mqtt = require('mqtt');
 
 /* global MQTT_CLIENT */

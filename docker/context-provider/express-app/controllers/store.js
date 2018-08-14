@@ -9,7 +9,7 @@
 // the client instance
 const NgsiV2 = require('ngsi_v2');
 const defaultClient = NgsiV2.ApiClient.instance;
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:context');
 const monitor = require('../lib/monitoring');
 
 // The basePath must be set - this is the location of the Orion
@@ -24,6 +24,7 @@ defaultClient.basePath = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2
 //     'http://{{orion}}/v2/entities/?type=Store&options=keyValues'
 //
 function displayStore(req, res) {
+	debug('displayStore');
 	monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
 	retrieveEntity(
 		req.params.storeId, { options: 'keyValues', type: 'Store' })
@@ -48,6 +49,7 @@ function displayStore(req, res) {
 //     'http://{{orion}}/v2/entities/?type=InventoryItem&options=keyValues&q=refStore==<entity-id>'
 //
 function displayTillInfo(req, res) {
+	debug('displayTillInfo');
 	monitor('NGSI', 'listEntities type=Product');
 	monitor('NGSI', 'listEntities type=InventoryItem refStore=' + req.params.storeId);
 	Promise.all([ 
@@ -87,6 +89,7 @@ function displayTillInfo(req, res) {
 // There is no error handling on this function, it has been
 // left to a function on the router.
 async function buyItem(req, res) {
+	debug('buyItem');
 	monitor('NGSI', 'retrieveEntity ' + req.params.inventoryId);
 	const inventory = await retrieveEntity(req.params.inventoryId, {
 		options: 'keyValues',
@@ -112,11 +115,13 @@ async function buyItem(req, res) {
 // It is used to display alerts based on any low stock subscriptions received
 //
 function displayWarehouseInfo(req, res) {
+	debug('displayWarehouseInfo');
 	res.render('warehouse', { id: req.params.storeId });
 }
 
 
 function priceChange(req, res) {
+	debug('priceChange');
 	if(!req.session.access_token){
 		return res.redirect('/');
 	}
@@ -124,6 +129,7 @@ function priceChange(req, res) {
 }
 
 function orderStock(req, res) {
+	debug('orderStock');
 	if(!req.session.access_token){
 		return res.redirect('/');
 	}
@@ -134,7 +140,8 @@ function orderStock(req, res) {
 
 // This is a promise to make an HTTP PATCH request to the /v2/entities/<entity-id>/attr end point
 function updateExistingEntityAttributes(entityId, body, opts, headers = {}) {
-	return new Promise(function(resolve, reject) {
+	debug('updateExistingEntityAttributes');
+	return new Promise((resolve, reject) => {
 		defaultClient.defaultHeaders = headers;
 		const apiInstance = new NgsiV2.EntitiesApi();
 		apiInstance.updateExistingEntityAttributes(entityId, body, opts, (error, data) => {
@@ -146,7 +153,8 @@ function updateExistingEntityAttributes(entityId, body, opts, headers = {}) {
 
 // This is a promise to make an HTTP GET request to the /v2/entities/<entity-id> end point
 function retrieveEntity(entityId, opts, headers = {}) {
-	return new Promise(function(resolve, reject) {
+	debug('retrieveEntity');
+	return new Promise((resolve, reject) => {
 		defaultClient.defaultHeaders = headers;
 		const apiInstance = new NgsiV2.EntitiesApi();
 		apiInstance.retrieveEntity(entityId, opts, (error, data) => {
@@ -157,7 +165,8 @@ function retrieveEntity(entityId, opts, headers = {}) {
 
 // This is a promise to make an HTTP GET request to the /v2/entities end point
 function listEntities(opts, headers = {}) {
-	return new Promise(function(resolve, reject) {
+	debug('listEntities');
+	return new Promise((resolve, reject) => {
 		defaultClient.defaultHeaders = headers;
 		const apiInstance = new NgsiV2.EntitiesApi();
 		apiInstance.listEntities(opts, (error, data) => {

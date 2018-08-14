@@ -20,7 +20,7 @@ const NodeCache = require("node-cache");
 const myCache = new NodeCache();
 const _ = require('lodash');
 const request = require("request");
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:iot-device');
 
 // Connect to an IoT Agent and use fallback values if necessary
 const UL_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
@@ -53,6 +53,7 @@ const MOTION_DETECTED = 'c|1';
 // this will briefly set the bell to on.
 // The bell  is not a sensor - it will not report state northbound
 function  processHttpBellCommand (req, res) {
+	debug('processHttpBellCommand');
 	const keyValuePairs = req.body.split('|') || [''];
 	const command =   getCommand (keyValuePairs[0]);
 	const deviceId = 'bell' + req.params.id;
@@ -74,6 +75,7 @@ function  processHttpBellCommand (req, res) {
 // Each command alters the state of the door. When the door is unlocked
 // it can be opened and shut by external events.
 function processHttpDoorCommand( req, res) {
+	debug('processHttpDoorCommand');
 	const keyValuePairs = req.body.split('|') || [''];
 	const command = getCommand (keyValuePairs[0]);
 	const deviceId = 'door' + req.params.id;
@@ -94,6 +96,7 @@ function processHttpDoorCommand( req, res) {
 // The lamp can be "on" or "off" - it also registers luminocity.
 // It will slowly dim as time passes (provided no movement is detected)
 function processHttpLampCommand (req, res) {
+	debug('processHttpLampCommand');
 	const keyValuePairs = req.body.split('|') || [''];
 	const command =   getCommand (keyValuePairs[0]);
 	const deviceId = 'lamp' + req.params.id;
@@ -113,6 +116,7 @@ function processHttpLampCommand (req, res) {
 // The device monitor will display all MQTT messages on screen.
 // cmd topics are consumed by the actuators (bell, lamp and door)
 function processMqttMessage (topic, message) {
+	debug('processMqttMessage');
 	const mqttBrokerUrl = process.env.MQTT_BROKER_URL || 'mqtt://mosquitto';
 	SOCKET_IO.emit( 'mqtt' , mqttBrokerUrl + topic + '  ' + message);
 	const path = topic.split("/");
@@ -132,6 +136,7 @@ function processMqttMessage (topic, message) {
 
 // Change the state of a dummy IoT device based on the command received.
 function actuateDevice (deviceId, command) {
+	debug('actuateDevice');
 	switch (deviceId.replace(/\d/g, '')){
 		case "bell":
 			if (command === 'ring'){
@@ -179,6 +184,7 @@ function getCommand (string) {
 // The lamp can be ON or OFF. This also registers luminocity.
 // It will slowly dim as time passes (provided no movement is detected)
 function init () {
+	debug('init');
 	myCache.set( 'door001', DOOR_LOCKED);
 	myCache.set( 'door002', DOOR_LOCKED);
 	myCache.set( 'door003', DOOR_LOCKED);

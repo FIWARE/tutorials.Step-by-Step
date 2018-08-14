@@ -202,7 +202,7 @@ The necessary configuration information can be seen in the services section of t
         - "3000:3000"
         - "3001:3001"
     environment:
-        - "DEBUG=proxy:*"
+        - "DEBUG=tutorial:*"
         - "PORT=3000"
         - "IOTA_HTTP_HOST=iot-agent"
         - "IOTA_HTTP_PORT=7896"
@@ -221,7 +221,7 @@ The `context-provider` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
-|DEBUG|`proxy:*`| Debug flag used for logging |
+|DEBUG|`tutorial:*`| Debug flag used for logging |
 |WEB_APP_PORT|`3000`|Port used by web-app which displays the dummy device data |
 |IOTA_HTTP_HOST|`iot-agent`| The host name of the missing IoT Agent - used in a later tutorial |
 |IOTA_HTTP_PORT|`7896` | The port that the missing IoT Agent will be listening on. `7896` is a common default for UltraLight over HTTP |

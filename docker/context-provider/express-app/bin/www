@@ -5,7 +5,7 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:server');
 const http = require('http');
 
 
@@ -29,7 +29,7 @@ global.SOCKET_IO = require('socket.io')(server, { wsEngine: 'ws' });
 
 server.listen(port);
 server.on('error', onError);
-server.on('listening', onListening);
+server.on('listening', onListeningServer);
 
 
 
@@ -44,7 +44,7 @@ iot.set('port', iotPort);
 const iotServer = http.createServer(iot);
 iotServer.listen(iotPort);
 iotServer.on('error', onError);
-iotServer.on('listening', onListening);
+iotServer.on('listening', onListeningIoT);
 
 
 
@@ -98,8 +98,14 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
+function onListeningServer() {
 	const addr = server.address();
+	const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
+	debug('Listening on ' + bind);
+}
+
+function onListeningIoT() {
+	const addr = iotServer.address();
 	const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port;
 	debug('Listening on ' + bind);
 }

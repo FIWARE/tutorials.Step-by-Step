@@ -4,7 +4,7 @@
 // For more information see: https://developer.twitter.com/
 //
 
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:proxy');
 const Twitter = require('twitter');
 const request = require('request-promise');
 const Formatter = require('../lib/formatter');
@@ -29,6 +29,7 @@ const TWITTER_SEARCH_PATH = 'search/tweets';
 // to check that your CONSUMER KEY and CONSUMER SECRET are valid.
 //
 function healthCheck(req, res) {
+	debug('healthCheck for Twitter API');
 	makeTwitterRequest(
 		{ q: 'FIWARE' },
 		(error, tweets) => {

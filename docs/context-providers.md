@@ -108,7 +108,7 @@ The necessary configuration information for the **Context Provider NGSI proxy** 
     ports:
         - "3000:3000"
     environment:
-        - "DEBUG=proxy:*"
+        - "DEBUG=tutorial:*"
         - "PORT=3000"
         - "CONTEXT_BROKER=http://orion:1026/v2"
         - "OPENWEATHERMAP_KEY_ID=<ADD_YOUR_KEY_ID>"
@@ -120,7 +120,7 @@ The `context-provider` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
-|DEBUG|`proxy:*`| Debug flag used for logging |
+|DEBUG|`tutorial:*`| Debug flag used for logging |
 |WEB_APP_PORT|`3000`|Port used by the Context Provider NGSI proxy and web-app for viewing data |
 |CONTEXT_BROKER|`http://orion:1026/v2`| URL of the context broker to  connect to update context|
 |OPENWEATHERMAP_KEY_ID|`<ADD_YOUR_KEY_ID>`| A consumer key used to obtain access to the Open Weather Map API|
@@ -149,7 +149,7 @@ Replace the placeholders in `docker-compose.yml` in the root of the repository w
 
 ```yaml
     environment:
-        - "DEBUG=proxy:*"
+        - "DEBUG=tutorial:*"
         - "CONTEXT_BROKER=http://orion:1026/v2"
         - "OPENWEATHERMAP_KEY_ID=<ADD_YOUR_KEY_ID>"
         - "TWITTER_CONSUMER_KEY=<ADD_YOUR_CONSUMER_KEY>"

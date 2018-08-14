@@ -2,7 +2,7 @@
 // This controlller is a proxy for the Random API which responds with random data.
 //
 
-const debug = require('debug')('proxy:server');
+const debug = require('debug')('tutorial:proxy');
 const Formatter = require('../lib/formatter');
 const monitor = require('../lib/monitoring');
 
