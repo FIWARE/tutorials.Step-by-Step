@@ -11,52 +11,52 @@ block content
       span= errors
 
   - if (!session.username)
-    div(style='max-width:50%')
-      form(action='/login',method='post')
-        div(data-role='fieldcontain')
-          fieldset(data-role='controlgroup')
-            label(for='email') email: &nbsp;
-              input(id='email',type='text',value='',placeholder='@',name='email')
-        div#passworddiv(data-role='fieldcontain')
-          fieldset(data-role='controlgroup')
-            label(for='password') password: &nbsp;
-              input(id='password',type='password',value='',placeholder='',name='password')
-        div(data-role='fieldcontain')   
-         input(type='submit',value='Sign Up')
-
+    div(style='width:20em;line-height: 1.6;')
+      div
+        li
+          a.button(href="/authCodeGrant") Authorization Code
+        li
+          a.button(href="/clientCredentials") Client Credentials
+        li
+          a.button(href="/implicitGrant") Implicit Grant
+      form(action='/userCredentials',method='post')
+        div
+          label(for='email') email: &nbsp;
+            input(id='email',type='text',value='',placeholder='@',name='email')
+        div
+          label(for='password') password: &nbsp;
+            input(id='password',type='password',value='',placeholder='',name='password')
+        div  
+          ul
+            li
+              input.button(type='submit',value='User Credentials')
   div
     h3 Store Details
-    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 1
+    a(href="app/store/urn:ngsi-ld:Store:001") Store 1
     | &nbsp;
-    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 2
+    a(href="app/store/urn:ngsi-ld:Store:002") Store 2
     | &nbsp;
-    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 3
+    a(href="app/store/urn:ngsi-ld:Store:003") Store 3
     | &nbsp;
-    a.button(href="app/store/urn:ngsi-ld:Store:001") Store 4
-   
+    a(href="app/store/urn:ngsi-ld:Store:004") Store 4
+ 
   div
     h3 Monitors
-    a.button(href="/app/monitor") App Monitor
+    a(href="/app/monitor") App Monitor
     | &nbsp;
-    a.button(href="/device/monitor") Device Monitor
-
-
-
-
-
-
+    a(href="/device/monitor") Device Monitor
 
   div
     h3 Restricted Areas
     - if (session.username)
-      a.button(href="/price-change") Change Prices
+      a(href="/price-change") Change Prices
       | &nbsp;
-      a.button(href="/order-stock") Order Stock
+      a(href="/order-stock") Order Stock
       | &nbsp;
     - else
-      a.button.red(href="/price-change") Change Prices
+      a.red(href="/price-change") Change Prices
       | &nbsp;
-      a.button.red(href="/order-stock") Order Stock
+      a.red(href="/order-stock") Order Stock
       | &nbsp; <= No Access
 
 
@@ -65,5 +65,3 @@ block content
     h3
     - if (session.username)
       a.button(href="/logout") Log out
-    - else
-      a.button(href="/auth") Log in

@@ -10,6 +10,7 @@ const _ = require('lodash');
 
 const TRANSPORT = (process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP');
 const GIT_COMMIT = (process.env.GIT_COMMIT || 'unknown');
+const SECURE_ENDPOINTS =  process.env.SECURE_ENDPOINTS  || false;
 
 // Error handler for async functions 
 function catchErrors(fn) {
@@ -44,9 +45,11 @@ router.get('/',  function(req, res) {
 });
 
 // Logs users in and out using Keyrock.
-router.get('/login', Security.logInWithAuthCode);
-router.post('/login', Security.logInWithPassword);
-router.get('/auth', Security.auth);
+router.get('/login', Security.logInCallback);
+router.get('/clientCredentials', Security.clientCredentialGrant);
+router.get('/implicitGrant', Security.implicitGrant);
+router.post('/userCredentials', Security.userCredentialGrant);
+router.get('/authCodeGrant', Security.authCodeGrant);
 router.get('/logout', Security.logOut);
 
 

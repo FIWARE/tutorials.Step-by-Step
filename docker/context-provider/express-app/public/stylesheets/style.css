@@ -37,7 +37,7 @@ ul.devices {
 }
 
 .button {
-  font: bold 14px;
+  font-size: small;
   text-decoration: none;
   background-color: #233c68;
   color: #efefefef;
@@ -46,6 +46,5 @@ ul.devices {
 }
 
 .red {
-  background-color: #ff7059;
-  color: #efefefef;
+  color: #ff7059;
 }

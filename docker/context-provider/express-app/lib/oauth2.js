@@ -136,69 +136,74 @@ exports.OAuth2.prototype.getAuthorizeUrl= function(responseType) {
 
 }
 
-exports.OAuth2.prototype.getOAuthAccessToken= function(code, callback) {
+function getResults(data){
+  let results;
+  try {
+    results= JSON.parse(data);
+  }
+  catch(e) {
+    results= querystring.parse(data);
+  }
+  return results;
+}
 
-  const postData = 'grant_type=authorization_code&code=' + code + '&redirect_uri=' + this._callbackURL;
+exports.OAuth2.prototype.getOAuthAccessToken= function(code) {
+  const that = this;
 
-  const postHeaders= {
-       'Authorization': this.buildAuthHeader(),
-       'Content-Type': 'application/x-www-form-urlencoded',
-       'Content-Length': postData.length,
-   };
+  return new Promise((resolve, reject) => { 
+    const postData = 'grant_type=authorization_code&code=' + code + '&redirect_uri=' + that._callbackURL;
 
-  this._request("POST", this._getAccessTokenUrl(), postHeaders, postData, null, function(error, data) {
-    if( error )  {callback(error);}
-    else {
-      let results;
-      try {
-        // As of http://tools.ietf.org/html/draft-ietf-oauth-v2-07
-        // responses should be in JSON
-        results= JSON.parse(data);
-      }
-      catch(e) {
-        // .... However both Facebook + Github currently use rev05 of the spec
-        // and neither seem to specify a content-type correctly in their response headers :(
-        // clients of these services will suffer a *minor* performance cost of the exception
-        // being thrown
-        results= querystring.parse(data);
-      }
-      callback(null, results);
-    }
+    const postHeaders= {
+         'Authorization': that.buildAuthHeader(),
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Content-Length': postData.length,
+     };
+
+    that._request("POST", that._getAccessTokenUrl(), postHeaders, postData, null, (error, data) => {
+      return error ? reject(error) : resolve(getResults(data));
+    });
   });
 }
 
 
-exports.OAuth2.prototype.getOAuthPasswordCredentials= function(username, password, callback) {
+exports.OAuth2.prototype.getOAuthClientCredentials= function() {
+  const that = this;
+  return new Promise((resolve, reject) => {
+    const postData = 'grant_type=client_credentials';
+    const postHeaders= {
+         'Authorization': that.buildAuthHeader(),
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Content-Length': postData.length,
+     };
 
-  const postData = 'grant_type=password&username=' + username + '&password=' + password;
-
-  const postHeaders= {
-       'Authorization': this.buildAuthHeader(),
-       'Content-Type': 'application/x-www-form-urlencoded',
-       'Content-Length': postData.length,
-   };
-
-  this._request("POST", this._getAccessTokenUrl(), postHeaders, postData, null, function(error, data) {
-    if( error )  {callback(error);}
-    else {
-      let results;
-      try {
-        // As of http://tools.ietf.org/html/draft-ietf-oauth-v2-07
-        // responses should be in JSON
-        results= JSON.parse(data);
-      }
-      catch(e) {
-        // .... However both Facebook + Github currently use rev05 of the spec
-        // and neither seem to specify a content-type correctly in their response headers :(
-        // clients of these services will suffer a *minor* performance cost of the exception
-        // being thrown
-        results= querystring.parse(data);
-      }
-      callback(null, results);
-    }
+    that._request("POST", that._getAccessTokenUrl(), postHeaders, postData, null, (error, data) => {
+      return error ? reject(error) : resolve(getResults(data));
+    });
   });
 }
 
-exports.OAuth2.prototype.get= function(url, accessToken, callback) {
-  this._request("GET", url, {}, "", accessToken, callback);
+
+exports.OAuth2.prototype.getOAuthPasswordCredentials= function(username, password) {
+  const that = this;
+  return new Promise((resolve, reject) => {
+    const postData = 'grant_type=password&username=' + username + '&password=' + password;
+    const postHeaders= {
+         'Authorization': that.buildAuthHeader(),
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Content-Length': postData.length,
+     };
+
+    that._request("POST", that._getAccessTokenUrl(), postHeaders, postData, null, (error, data) => {
+      return error ? reject(error) : resolve(getResults(data));
+    });
+  });
+}
+
+exports.OAuth2.prototype.get= function(url, accessToken) {
+  const that = this;
+  return new Promise((resolve, reject) => {
+    that._request("GET", url, {}, "", accessToken, (error, data) => {
+      return error ? reject(error) : resolve(data);
+    });
+  });
 }
