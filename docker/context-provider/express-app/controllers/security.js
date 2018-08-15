@@ -17,6 +17,18 @@ const oa = new OAuth2(clientId,
     '/oauth2/token',
     callbackURL);
 
+function logAccessToken(req, accessToken, store=true){
+    debug('Access Token received ' + accessToken);
+    req.flash('success', 'token: '+ accessToken);
+    req.session.access_token =  store ? accessToken: undefined;
+}
+
+function logUser (req, user, message){
+    debug('The user is ' +  user.username);
+    req.flash('success', user.username + ' ' + message);
+    req.session.username = user.username;
+}
+
 
 function getUserFromAccessToken(req, accessToken){
     debug('getUserFromAccessToken')
@@ -25,10 +37,7 @@ function getUserFromAccessToken(req, accessToken){
         oa.get(keyrockIPAddress + '/user', accessToken)
         .then(response => {
             const user = JSON.parse(response);
-            // Store the username in a session cookie
-            req.session.access_token = accessToken;
-            req.session.username = (user !== undefined) ? user.username : undefined;
-            return resolve(req.session.username);
+            return resolve(user);
          })
         .catch(error => {
             debug(error);
@@ -44,7 +53,7 @@ function logInCallback(req, res){
     if (req.query.token){
         // If we have received an access_token, this is an Implicit Grant
         implicitGrantCallback(req,res);
-    } else {
+    } else if (req.query.code){
         // If no access_token is received, this is an authCode Grant
         authCodeGrantCallback(req,res);
     }
@@ -61,14 +70,11 @@ function implicitGrant(req, res){
 function implicitGrantCallback(req,res){
     debug('implicitGrantCallback')
     // With the implicit grant, an access token is included in the response
-    debug('Access Token is ' + req.query.token);
-    req.flash('success', 'token: '+ req.query.token);
-    req.session.access_token = req.query.token;
+    logAccessToken(req, req.query.token);
 
     return getUserFromAccessToken(req, req.query.token)
-    .then (username => {
-        debug('The user is ' +  username);
-        req.flash('success', username + ' logged in with Implicit Grant');
+    .then (user => {
+        logUser(req, user, 'logged in with Implicit Grant');
         return res.redirect('/');
     })
     .catch(error => {
@@ -91,15 +97,14 @@ function authCodeGrantCallback(req,res){
     debug('authCodeGrantCallback')
     // With the authcode grant, a code is included in the response
     // We need to make a second request to obtain an access token
+    debug('Auth Code received ' + req.query.code);
     return oa.getOAuthAccessToken(req.query.code)
     .then(results => {
-        debug('Access Token is ' + results.access_token);
-        req.flash('success', 'token: '+ results.access_token);
+        logAccessToken(req, results.access_token);
         return getUserFromAccessToken(req, results.access_token); 
     })
-    .then (username => {
-        debug('The user is ' +  username);
-        req.flash('success', username + ' logged in with Authcode');
+    .then (user => {
+        logUser(req, user, 'logged in with Authcode');
         return res.redirect('/');
     })
     .catch(error => {
@@ -117,9 +122,8 @@ function clientCredentialGrant(req, res){
     
     oa.getOAuthClientCredentials()
     .then(results => {
-        debug('Access Token is ' + results.access_token);
+        logAccessToken(req, results.access_token, false);
         req.flash('success', 'Application logged in with Client Credentials');
-        req.flash('success', 'token: '+ results.access_token);
         return  res.redirect('/');
     })
     .catch(error => {
@@ -142,13 +146,11 @@ function userCredentialGrant(req, res){
     // the response.
     oa.getOAuthPasswordCredentials(email, password)
     .then(results => {
-        debug('Access Token is ' + results.access_token);
-        req.flash('success', 'token: '+ results.access_token);
+        logAccessToken(req, results.access_token);
         return getUserFromAccessToken(req, results.access_token)
     })
-    .then(username =>{
-        debug('The user is ' + username);
-        req.flash('success', username + ' logged in with Password');
+    .then(user =>{
+        logUser(req, user, 'logged in with Password');
         return res.redirect('/');
     })
     .catch(error => {
