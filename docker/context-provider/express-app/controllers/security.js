@@ -7,6 +7,7 @@ const keyrockIPAddress = (process.env.KEYROCK_IP_ADDRESS || 'http://127.0.0.1' )
 const clientId = (process.env.KEYROCK_CLIENT_ID || 'tutorial-dckr-site-0000-xpresswebapp');
 const clientSecret = (process.env.KEYROCK_CLIENT_SECRET || 'tutorial-dkcr-site-0000-clientsecret');
 const callbackURL = (process.env.CALLBACK_URL || 'http://localhost:3000/login');
+const SECURE_ENDPOINTS =  process.env.SECURE_ENDPOINTS  || false;
 
 // Creates oauth library object with the config data
 const oa = new OAuth2(clientId,
@@ -160,10 +161,36 @@ function userCredentialGrant(req, res){
     });
 }
 
+// Use of Keyrock as a PDP (Policy Decision Point)
+function accessControl (req, res , next, url=req.url){
+    debug('accessControl');
 
-
-
-
+    if (!SECURE_ENDPOINTS){
+        res.locals.authorized = true;
+    } else if(!req.session.access_token){
+        debug('No session found');
+        res.locals.authorized = false;
+    } else {
+        // Using the access token asks the IDM for the user info
+        const keyrockUserUrl = keyrockIPAddress + '/user' +
+            '?access_token=' +  req.session.access_token +
+            '&action='+ req.method + 
+            '&resource='+ url +
+            '&app_id=' + clientId;
+        return oa.get(keyrockUserUrl)
+        .then(response => {
+            const user = JSON.parse(response);
+            res.locals.authorized = (user.authorization_decision === 'Permit' );
+            return next();
+         })
+        .catch(error => {
+            debug(error);
+            res.locals.authorized = false;
+            return next();
+        });
+    }
+    return next();
+}
 
 // Handles logout requests to remove access_token from the session cookie
 function logOut(req, res){
@@ -179,6 +206,7 @@ module.exports = {
     clientCredentialGrant,
     userCredentialGrant,
     implicitGrant,
+    accessControl,
     logInCallback,
     logOut
 };

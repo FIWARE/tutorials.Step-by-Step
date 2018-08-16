@@ -7,10 +7,8 @@ const Ultralight = require('../controllers/ultraLight');
 const Security = require('../controllers/security');
 const _ = require('lodash');
 
-
 const TRANSPORT = (process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP');
 const GIT_COMMIT = (process.env.GIT_COMMIT || 'unknown');
-const SECURE_ENDPOINTS =  process.env.SECURE_ENDPOINTS  || false;
 
 // Error handler for async functions 
 function catchErrors(fn) {
@@ -30,14 +28,6 @@ function broadcastEvents(req, item, types) {
 		}
 	});
 }
-
-
-
-
-
-
-
-
 
 // Handles requests to the main page
 router.get('/',  function(req, res) {
@@ -64,7 +54,10 @@ router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
 	res.render('device-monitor', { title: 'UltraLight IoT Devices', traffic});
 });
 
-router.post('/device/command', Ultralight.initDevices, Ultralight.sendCommand);
+// This endpoint is secured by Keyrock PDP. Ringing the alarm bell
+// and unlocking the Door are restricted to certain users.
+router.post('/device/command', 
+	Ultralight.accessControl, Ultralight.initDevices, Ultralight.sendCommand);
 
 // Retrieve Device History from STH-Comet
 if (process.env.STH_COMET_SERVICE_URL) {
@@ -75,6 +68,7 @@ if (process.env.CRATE_DB_SERVICE_URL ){
 	router.get('/device/history/:deviceId', catchErrors(History.readCrateDeviceHistory));
 }
 
+// Display the app monitor page
 router.get('/app/monitor', function(req, res) {
 	res.render('monitor', { title: 'Event Monitor' });
 });
@@ -86,9 +80,12 @@ router.get('/app/store/:storeId/warehouse', Store.displayWarehouseInfo);
 // Buy something.
 router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 
-
-router.get('/price-change', Store.priceChange);
-router.get('/order-stock', Store.orderStock);
+// These two endpoints are secured by Keyrock PDP.
+// Only managers may change prices and order stock.
+router.get('/app/price-change',
+	Security.accessControl, Store.priceChange);
+router.get('/app/order-stock', 
+	Security.accessControl, Store.orderStock);
 
 
 // Whenever a subscription is received, display it on the monitor

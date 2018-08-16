@@ -122,17 +122,23 @@ function displayWarehouseInfo(req, res) {
 
 function priceChange(req, res) {
 	debug('priceChange');
-	if(!req.session.access_token){
+	// If the user is not authorized, display the main page.
+	if(!res.locals.authorized){
+		req.flash('error', 'Access Denied');
 		return res.redirect('/');
 	}
+	// Render the price page (Managers only)
 	return res.render('price-change', { title: 'Price Change' });
 }
 
 function orderStock(req, res) {
 	debug('orderStock');
-	if(!req.session.access_token){
+	// If the user is not authorized, display the main page.
+	if(!res.locals.authorized){
+		req.flash('error', 'Access Denied');
 		return res.redirect('/');
 	}
+	// Render the stock taking page (Managers only)
 	return res.render('order-stock',  { title: 'Order Stock' });
 }
 

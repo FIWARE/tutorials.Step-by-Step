@@ -14,12 +14,12 @@ block content
     div(style='width:20em;line-height: 1.6;')
       div
         li
-          a.button(href="/authCodeGrant") Authorization Code
+          a.button(href="authCodeGrant") Authorization Code
         li
-          a.button(href="/clientCredentials") Client Credentials
+          a.button(href="clientCredentials") Client Credentials
         li
-          a.button(href="/implicitGrant") Implicit Grant
-      form(action='/userCredentials',method='post')
+          a.button(href="implicitGrant") Implicit Grant
+      form(action='userCredentials',method='post')
         div
           label(for='email') email: &nbsp;
             input(id='email',type='text',value='',placeholder='@',name='email')
@@ -42,26 +42,19 @@ block content
  
   div
     h3 Monitors
-    a(href="/app/monitor") App Monitor
+    a(href="app/monitor") App Monitor
     | &nbsp;
-    a(href="/device/monitor") Device Monitor
+    a(href="device/monitor") Device Monitor
 
   div
-    h3 Restricted Areas
-    - if (session.username)
-      a(href="/price-change") Change Prices
-      | &nbsp;
-      a(href="/order-stock") Order Stock
-      | &nbsp;
-    - else
-      a.red(href="/price-change") Change Prices
-      | &nbsp;
-      a.red(href="/order-stock") Order Stock
-      | &nbsp; <= No Access
-
+    h3 Restricted Areas (Managers only)
+    a.red(href="app/price-change") Change Prices
+    | &nbsp;
+    a.red(href="app/order-stock") Order Stock
+    | &nbsp;
 
 
   div
     h3
     - if (session.username)
-      a.button(href="/logout") Log out
+      a.button(href="logout") Log out

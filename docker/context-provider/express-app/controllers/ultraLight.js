@@ -21,6 +21,7 @@ const myCache = new NodeCache();
 const _ = require('lodash');
 const request = require("request");
 const debug = require('debug')('tutorial:iot-device');
+const Security = require('./security');
 
 // Connect to an IoT Agent and use fallback values if necessary
 const UL_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
@@ -414,9 +415,31 @@ function getRandom () {
 	return  Math.floor(Math.random() * 10) + 1;
 }
 
+
+function accessControl(req, res, next){
+	debug('accessControl');
+	const action = req.body.action;
+	// Ringing the bell and unlocking the door are restricted
+	// actions
+	if(action === "ring") {
+		return Security.accessControl(req, res, next, '/bell/ring');
+	} else if (action === "unlock") {
+		return Security.accessControl(req, res, next, '/door/unlock');
+	} else {
+		res.locals.authorized = true;
+		return next();
+	}
+}
+
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
 // via the Orion Context Broker and the UltraLight IoT Agent.
-function sendCommand (req) {	
+function sendCommand (req, res) {
+	debug('sendCommand');
+	if(!res.locals.authorized){
+		// If the user is not authorized, return an error code.
+		res.setHeader('Content-Type', 'application/json');
+		return res.status(403).send({ message: 'Forbidden' });
+	}
 	let id = req.body.id.split(":").pop();
 	const action = req.body.action;
 	// This is not a command, just a manually activated motion sensor event.
@@ -459,6 +482,8 @@ function sendCommand (req) {
 			}
 		});	
 	}
+	// Return a success code.
+	return res.status(204).send();
 }
 
 // Once a minute, read the existing state of the dummy devices
@@ -472,7 +497,6 @@ function setUpDeviceReading (deviceId) {
 // Initialize the array of sensors and periodically update them.
 // Intervals are prime numbers to avoid simultaneous updates.
 function initDevices(req, res, next) {
-
 	if (!devicesInitialized){	
 		init ();
 		// Every few seconds, update the state of the dummy devices in a 
@@ -493,6 +517,7 @@ module.exports = {
 	processHttpDoorCommand,
 	processHttpLampCommand,
 	processMqttMessage,
+	accessControl,
 	sendCommand,
 	initDevices
 };
