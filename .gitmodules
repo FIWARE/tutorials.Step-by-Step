@@ -47,3 +47,6 @@
 [submodule "tutorials.Roles-Permissions"]
 	path = tutorials.Roles-Permissions
 	url = https://github.com/Fiware/tutorials.Roles-Permissions.git
+[submodule "tutorials.Securing-Access"]
+	path = tutorials.Securing-Access
+	url = https://github.com/Fiware/tutorials.Securing-Access.git

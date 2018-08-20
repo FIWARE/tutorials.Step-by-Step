@@ -74,34 +74,6 @@ Additionally two further non-human application objects can be secured within a F
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/entities.png)
 
-<h3>OAuth2</h3>
-
-**Keyrock** uses [OAuth2](https://oauth.net/2/) to enable third-party applications
-to obtain limited access to services. **OAuth2** is the open standard for access delegation to
-grant access rights. It allows notifying a resource provider (e.g. the Knowage Generic Enabler)
-that the resource  owner (e.g. you) grants permission to a third-party (e.g. a Knowage Application)
-access to their information (e.g. the list of entities).
-
-There are several common OAuth 2.0 grant flows, the details of which can be found below:
-
-* [Authorization Code](https://oauth.net/2/grant-types/authorization-code)
-* [Implicit](https://oauth.net/2/grant-types/implicit)
-* [Password](https://oauth.net/2/grant-types/password)
-* [Client Credentials](https://oauth.net/2/grant-types/client-credentials)
-* [Device Code](https://oauth.net/2/grant-types/device-code)
-* [Refresh Token](https://oauth.net/2/grant-types/refresh-token)
-
-The primary concept is that both **Users**  and **Applications** must first identify themselves using
-a standard OAuth2 Challenge-Response mechanism. Thereafter a user is assigned a token which they
-append to every subsequent request. This token identifies the user, the application and the rights the
-user is able to exercise.  **Keyrock** can then be used with other enablers can be used to limit and
-lock-down access. The details of the access flows are discussed below and in subsequent tutorials.
-
-The reasoning behind OAuth2 is that you never need to expose your own username and password to a
-third party to give them  full access - you merely permit the relevant access which can be either Read-Only
-or Read-Write and such access can be defined down to a granular level. Furthermore there is provision for
-revoking access at any time, leaving the resource owner in control of who can access what.
-
 ---
 
 # Architecture
@@ -292,8 +264,8 @@ Two organizations have also been set up by Alice:
 
 | Name       | Description                         | UUID                                 |
 |------------|-------------------------------------|--------------------------------------|
-| Security   | Security Group for Store Detectives |`security-0000-0000-0000-000000000000`|
-| Management | Management Group for Store Managers |`managers-0000-0000-0000-000000000000`|
+| Security   | Security Group for Store Detectives |`security-team-0000-0000-000000000000`|
+| Management | Management Group for Store Managers |`managers-team-0000-0000-000000000000`|
 
 To save time, the data creating users and organizations from the [previous tutorial](https://github.com/Fiware/tutorials.Identity-Management) has been downloaded and is automatically persisted to the MySQL
 database on start-up so the asigned UUIDs do not change and the data does not need to be entered again
@@ -454,7 +426,7 @@ Applications are therefore a conceptual bucket holding who can do what on which 
 
 <h3>Video : Creating Applications with the Keyrock GUI</h3>
 
-<object data="http://www.youtube.com/embed/pjsl0eHpFww?start=470" width="560" height="315"></object>
+[![](http://img.youtube.com/vi/pjsl0eHpFww/0.jpg)](https://www.youtube.com/watch?v=pjsl0eHpFww&t=470 " Creating Applications")
 
 Click on the image above to watch a video demonstrating how to create applications using the **Keyrock** GUI
 

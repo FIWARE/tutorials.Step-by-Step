@@ -61,37 +61,9 @@ Additionally two further non-human application objects can be secured within a F
 
 ![](https://fiware.github.io/tutorials.Identity-Management/img/entities.png)
 
-<h3>OAuth2</h3>
-
-**Keyrock** uses [OAuth2](https://oauth.net/2/) to enable third-party applications
-to obtain limited access to services. **OAuth2** is the open standard for access delegation to
-grant access rights. It allows notifying a resource provider (e.g. the Knowage Generic Enabler)
-that the resource  owner (e.g. you) grants permission to a third-party (e.g. a Knowage Application)
-access to their information (e.g. the list of entities).
-
-There are several common OAuth 2.0 grant flows, the details of which can be found below:
-
-* [Authorization Code](https://oauth.net/2/grant-types/authorization-code)
-* [Implicit](https://oauth.net/2/grant-types/implicit)
-* [Password](https://oauth.net/2/grant-types/password)
-* [Client Credentials](https://oauth.net/2/grant-types/client-credentials)
-* [Device Code](https://oauth.net/2/grant-types/device-code)
-* [Refresh Token](https://oauth.net/2/grant-types/refresh-token)
-
-The primary concept is that both **Users**  and **Applications** must first identify themselves using
-a standard OAuth2 Challenge-Response mechanism. Thereafter a user is assigned a token which they
-append to every subsequent request. This token identifies the user, the application and the rights the
-user is able to exercise.  **Keyrock** can then be used with other enablers can be used to limit and
-lock-down access. The details of the access flows are discussed below and in subsequent tutorials.
-
-The reasoning behind OAuth2 is that you never need to expose your own user name and password to a
-third party to give them  full access - you merely permit the relevant access which can be either Read-Only
-or Read-Write and such access can be defined down to a granular level. Furthermore there is provision for
-revoking access at any time, leaving the resource owner in control of who can access what.
-
 <h3>Video : Introduction to Keyrock</h3>
 
-<object data="http://www.youtube.com/embed/dHyVTan6bUY" width="560" height="315"></object>
+[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=dHyVTan6bUY "Introduction")
 
 Click on the image above to watch an introductory video
 
@@ -291,7 +263,7 @@ Tokens are designed to expire after a set period. If the `X-Auth-token` value yo
 
 <h3>Video : Creating User Accounts with the Keyrock GUI</h3>
 
-<object data="http://www.youtube.com/embed/dtKsjGbJ7Xc" width="560" height="315"></object>
+[![](http://img.youtube.com/vi/dtKsjGbJ7Xc/0.jpg)](https://www.youtube.com/watch?v=dtKsjGbJ7Xc " Creating User Accounts")
 
 Click on the image above to watch a video demonstrating how to create users with the **Keyrock** GUI
 
