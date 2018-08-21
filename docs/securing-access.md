@@ -101,19 +101,19 @@ Therefore the overall architecture will consist of the following elements:
 * The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 * The FIWARE [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/) which will receive southbound requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to  [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) commands for the devices
 * FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement Identity Management System including:
-    * An OAuth2 authentication system for Applications and Users
-    * A website graphical front-end for Identity Management Administration
-    * An equivalent REST API for Identity Management via HTTP requests
+     * An OAuth2 authentication system for Applications and Users
+     * A website graphical front-end for Identity Management Administration
+     * An equivalent REST API for Identity Management via HTTP requests
 * The underlying [MongoDB](https://www.mongodb.com/) database :
-    * Used by the **Orion Context Broker** to hold context data information such as data entities, subscriptions and registrations
-    * Used by the **IoT Agent** to hold device information such as device URLs and Keys
+     * Used by the **Orion Context Broker** to hold context data information such as data entities, subscriptions and registrations
+     * Used by the **IoT Agent** to hold device information such as device URLs and Keys
 * A [MySQL](https://www.mysql.com/) database :
-    * Used to persist user identities, applications, roles and permissions
+     * Used to persist user identities, applications, roles and permissions
 * The **Stock Management Frontend** does the following:
-   * Displays store information
-   * Shows which products can be bought at each store
-   * Allows users to "buy" products and reduce the stock count.
-   * Allows authorized users into restricted areas
+    * Displays store information
+    * Shows which products can be bought at each store
+    * Allows users to "buy" products and reduce the stock count.
+    * Allows authorized users into restricted areas
 * A webserver acting as set of [dummy IoT devices](https://github.com/Fiware/tutorials.IoT-Sensors) using the [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) protocol running over HTTP - access to certain resources is restricted.
 
 
@@ -776,49 +776,47 @@ function sendCommand (req, res) {
 ### PDP Access Control - Running the Example
 
 > **Note** Only four resources have been secured at level 2:
-> * sending the unlock door command
-> * sending the ring bell command
-> * access to the price-change area
-> * access to the order-stock area
-
-
+>
+>* sending the unlock door command
+>* sending the ring bell command
+>* access to the price-change area
+>* access to the order-stock area
 
 #### Anonymous Access
 
 * Ensure that you are not signed in as any user.
 
-##### Level 1 : Authenication Access
+##### Level 1 : Authentication Access
 * Click on any store page - access is **denied** for anonymous access
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Switch on the lamp - access is **denied** for anonymous access
+    * Switch on the lamp - access is **denied** for anonymous access
 
 ##### Level 2 : Authorization Access
 * Click on the restricted access links at `http://localhost:3000`  - access is **denied**
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Unlock a door - access is **denied**
-   * Ring a bell - access is **denied**
-   * Switch on the lamp - access is **denied**
+    * Unlock a door - access is **denied**
+    * Ring a bell - access is **denied**
 
 
 #### Eve the Eavesdropper
 
 Eve has an account, but no roles in the application.
 
-> **Note** As Eve has a recognized account, she gains full authenication access, even though
+> **Note** As Eve has a recognized account, she gains full authentication access, even though
 > her account has no roles attached.
 
 * From `http://localhost:3000`, log in as `eve@example.com` with the password `test`
 
-##### Level 1 : Authenication Access
+##### Level 1 : Authentication Access
 * Click on any store page - access is **permitted** for any logged in users
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Switch on the lamp - access is **permitted** for any logged in users
+    * Switch on the lamp - access is **permitted** for any logged in users
 
 ##### Level 2 : Authorization Access
 * Click on the restricted access links at `http://localhost:3000` - access is **denied**
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Unlock a door - access is **denied**
-   * Ring a bell - access is **denied**
+    * Unlock a door - access is **denied**
+    * Ring a bell - access is **denied**
 
 #### Bob The Regional Manager
 
@@ -826,7 +824,7 @@ Bob has the **management** role
 
 * From `http://localhost:3000`, log in as `bob-the-manager@test.com` with the password `test`
 
-##### Level 1 : Authenication Access
+##### Level 1 : Authentication Access
 * Click on any store page - access is **permitted** for any logged in users
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
    * Switch on the lamp - access is **permitted** for any logged in users
@@ -835,7 +833,7 @@ Bob has the **management** role
 * Click on the restricted access links at `http://localhost:3000`  - access is **permitted** - This is a management only permission
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
    * Unlock a door - access is **denied**. - This is a security only permission
-   * Ring a bell - access is **permitted** - This is permitted to management users
+    * Ring a bell - access is **permitted** - This is permitted to management users
 
 #### Charlie the Security Manager
 
@@ -843,13 +841,13 @@ Charlie has the **security** role
 
 * From `http://localhost:3000`, log in as  `charlie-security@test.com` with the password `test`
 
-##### Level 1 : Authenication Access
+##### Level 1 : Authentication Access
 * Click on any store page - access is **permitted** for any logged in users
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Switch on the lamp - access is **permitted** for any logged in users
+    * Switch on the lamp - access is **permitted** for any logged in users
 
 ##### Level 2: Authorization Access
 * Click on the restricted access links at `http://localhost:3000` - access is **denied** - This is a management only permission
 * Open the Device Monitor on `http://localhost:3000/device/monitor`
-   * Unlock a door - access is **permitted** - This is a security only permission
-   * Ring a bell - access is **permitted** - This is permitted to security users
+    * Unlock a door - access is **permitted** - This is a security only permission
+    * Ring a bell - access is **permitted** - This is permitted to security users
