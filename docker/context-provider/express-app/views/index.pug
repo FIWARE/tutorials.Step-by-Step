@@ -10,36 +10,27 @@ block content
     .message.errors
       span= errors
 
-  - if (!session.username)
-    div(style='width:20em;line-height: 1.6;')
-      div
-        li
-          a.button(href="authCodeGrant") Authorization Code
-        li
-          a.button(href="clientCredentials") Client Credentials
-        li
-          a.button(href="implicitGrant") Implicit Grant
-      form(action='userCredentials',method='post')
+  - if (securityEnabled)
+    - if (!session.username)
+      div(style='width:20em;line-height: 1.6;')
         div
-          label(for='email') email: &nbsp;
-            input(id='email',type='text',value='',placeholder='@',name='email')
-        div
-          label(for='password') password: &nbsp;
-            input(id='password',type='password',value='',placeholder='',name='password')
-        div  
-          ul
-            li
-              input.button(type='submit',value='User Credentials')
-  div
-    h3 Store Details
-    a(href="app/store/urn:ngsi-ld:Store:001") Store 1
-    | &nbsp;
-    a(href="app/store/urn:ngsi-ld:Store:002") Store 2
-    | &nbsp;
-    a(href="app/store/urn:ngsi-ld:Store:003") Store 3
-    | &nbsp;
-    a(href="app/store/urn:ngsi-ld:Store:004") Store 4
- 
+          li
+            a.button(href="authCodeGrant") Authorization Code
+          li
+            a.button(href="clientCredentials") Client Credentials
+          li
+            a.button(href="implicitGrant") Implicit Grant
+        form(action='userCredentials',method='post')
+          div
+            label(for='email') email: &nbsp;
+              input(id='email',type='text',value='',placeholder='@',name='email')
+          div
+            label(for='password') password: &nbsp;
+              input(id='password',type='password',value='',placeholder='',name='password')
+          div  
+            ul
+              li
+                input.button(type='submit',value='User Credentials')
   div
     h3 Monitors
     a(href="app/monitor") App Monitor
@@ -47,14 +38,44 @@ block content
     a(href="device/monitor") Device Monitor
 
   div
-    h3 Restricted Areas (Managers only)
-    a.red(href="app/price-change") Change Prices
-    | &nbsp;
-    a.red(href="app/order-stock") Order Stock
-    | &nbsp;
+    h3 Store Details
+    - if (securityEnabled)
+      p Any logged-in user can access these:
+      a.red(href="app/store/urn:ngsi-ld:Store:001") Store 1
+      | &nbsp;
+      a.red(href="app/store/urn:ngsi-ld:Store:002") Store 2
+      | &nbsp;
+      a.red(href="app/store/urn:ngsi-ld:Store:003") Store 3
+      | &nbsp;
+      a.red(href="app/store/urn:ngsi-ld:Store:004") Store 4
+    - else
+      a(href="app/store/urn:ngsi-ld:Store:001") Store 1
+      | &nbsp;
+      a(href="app/store/urn:ngsi-ld:Store:002") Store 2
+      | &nbsp;
+      a(href="app/store/urn:ngsi-ld:Store:003") Store 3
+      | &nbsp;
+      a(href="app/store/urn:ngsi-ld:Store:004") Store 4
+
+  - if (securityEnabled)
+    div
+      h3 Restricted Areas
+      p Only Managers have access:
+      a.red(href="app/price-change") Change Prices
+      | &nbsp;
+      a.red(href="app/order-stock") Order Stock
+      | &nbsp;
 
 
   div
     h3
     - if (session.username)
       a.button(href="logout") Log out
+
+  hr
+  small
+    strong
+      - if (securityEnabled)
+        | Security ON. &nbsp;
+      - else
+        | Security OFF. &nbsp;

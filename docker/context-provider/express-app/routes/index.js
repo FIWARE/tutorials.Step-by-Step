@@ -9,6 +9,7 @@ const _ = require('lodash');
 
 const TRANSPORT = (process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP');
 const GIT_COMMIT = (process.env.GIT_COMMIT || 'unknown');
+const SECURE_ENDPOINTS =  process.env.SECURE_ENDPOINTS  || false;
 
 // Error handler for async functions 
 function catchErrors(fn) {
@@ -31,7 +32,8 @@ function broadcastEvents(req, item, types) {
 
 // Handles requests to the main page
 router.get('/',  function(req, res) {
-	res.render('index', { title: 'FIWARE Tutorial', success: req.flash('success'), errors: req.flash('error')});
+	const securityEnabled = SECURE_ENDPOINTS;
+	res.render('index', { title: 'FIWARE Tutorial', success: req.flash('success'), errors: req.flash('error'), securityEnabled});
 });
 
 // Logs users in and out using Keyrock.
@@ -51,11 +53,14 @@ router.get('/version', function(req, res) {
 // Render the monitoring page
 router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
 	const traffic = (TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages');
-	res.render('device-monitor', { title: 'UltraLight IoT Devices', traffic});
+	const securityEnabled = SECURE_ENDPOINTS;
+	res.render('device-monitor', { title: 'UltraLight IoT Devices', traffic, securityEnabled });
 });
 
-// This endpoint is secured by Keyrock PDP. Ringing the alarm bell
-// and unlocking the Door are restricted to certain users.
+// This endpoint is secured by Keyrock PDP.
+// LEVEL 1: AUTHENTICATION ONLY -  For most actions, any user is authorized, just ensure the user exists.
+// LEVEL 2: BASIC AUTHORIZATION -  Ringing the alarm bell and unlocking the Door are restricted to certain 
+//                                 users.
 router.post('/device/command', 
 	Ultralight.accessControl, Ultralight.initDevices, Ultralight.sendCommand);
 
@@ -73,19 +78,27 @@ router.get('/app/monitor', function(req, res) {
 	res.render('monitor', { title: 'Event Monitor' });
 });
 
-// Render a store with products and warehouse notifications
-router.get('/app/store/:storeId', Store.displayStore);
+
+
+// This endpoint is secured by Keyrock PDP.
+// LEVEL 1: AUTHENTICATION ONLY - Users must be logged in to view the store page.
+router.get('/app/store/:storeId', 
+	Security.pdpAuthentication, Store.displayStore);
+// Display products for sale
 router.get('/app/store/:storeId/till', Store.displayTillInfo);
+// Render warehouse notifications
 router.get('/app/store/:storeId/warehouse', Store.displayWarehouseInfo);
 // Buy something.
 router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 
-// These two endpoints are secured by Keyrock PDP.
-// Only managers may change prices and order stock.
+// This endpoint is secured by Keyrock PDP.
+// LEVEL 2: BASIC AUTHORIZATION - Only managers may change prices.
 router.get('/app/price-change',
-	Security.accessControl, Store.priceChange);
+	Security.pdpBasicAuthorization, Store.priceChange);
+// This endpoint is secured by Keyrock PDP.
+// LEVEL 2: BASIC AUTHORIZATION - Only managers may order stock.
 router.get('/app/order-stock', 
-	Security.accessControl, Store.orderStock);
+	Security.pdpBasicAuthorization, Store.orderStock);
 
 
 // Whenever a subscription is received, display it on the monitor

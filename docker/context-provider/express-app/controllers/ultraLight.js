@@ -416,18 +416,21 @@ function getRandom () {
 }
 
 
+
 function accessControl(req, res, next){
 	debug('accessControl');
 	const action = req.body.action;
-	// Ringing the bell and unlocking the door are restricted
-	// actions
+	// Ringing the bell and unlocking the door are restricted actions, everything else
+	// can be done by any user.
 	if(action === "ring") {
-		return Security.accessControl(req, res, next, '/bell/ring');
+		// LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
+		return Security.pdpBasicAuthorization(req, res, next, '/bell/ring');
 	} else if (action === "unlock") {
-		return Security.accessControl(req, res, next, '/door/unlock');
+		// LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
+		return Security.pdpBasicAuthorization(req, res, next, '/door/unlock');
 	} else {
-		res.locals.authorized = true;
-		return next();
+		// LEVEL 1: AUTHENTICATION ONLY - Every user is authorized, just ensure the user exists.
+		return Security.pdpAuthentication(req, res, next);
 	}
 }
 

@@ -25,6 +25,11 @@ defaultClient.basePath = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2
 //
 function displayStore(req, res) {
 	debug('displayStore');
+	// If the user is not authorized, display the main page.
+	if(!res.locals.authorized){
+		req.flash('error', 'Access Denied');
+		return res.redirect('/');
+	}
 	monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
 	retrieveEntity(
 		req.params.storeId, { options: 'keyValues', type: 'Store' })

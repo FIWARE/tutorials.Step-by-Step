@@ -161,9 +161,24 @@ function userCredentialGrant(req, res){
     });
 }
 
+
 // Use of Keyrock as a PDP (Policy Decision Point)
-function accessControl (req, res , next, url=req.url){
-    debug('accessControl');
+// LEVEL 1: AUTHENTICATION ONLY - Any user is authorized, just ensure the user exists.
+function pdpAuthentication (req, res , next){
+    debug('pdpAuthentication');
+
+    if (!SECURE_ENDPOINTS){
+        res.locals.authorized = true;
+    } else {
+        res.locals.authorized = req.session.access_token ? true : false;
+    } 
+    return next();
+}
+
+// Use of Keyrock as a PDP (Policy Decision Point)
+// LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
+function pdpBasicAuthorization (req, res , next, url=req.url){
+    debug('pdpBasicAuthorization');
 
     if (!SECURE_ENDPOINTS){
         res.locals.authorized = true;
@@ -206,7 +221,8 @@ module.exports = {
     clientCredentialGrant,
     userCredentialGrant,
     implicitGrant,
-    accessControl,
+    pdpAuthentication,
+    pdpBasicAuthorization,
     logInCallback,
     logOut
 };
