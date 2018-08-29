@@ -99,7 +99,7 @@ The specific architecture of each section of the tutorial is discussed below.
 
 ```yaml
   keyrock:
-    image: fiware-idm-params
+    image: fiware/idm
     container_name: fiware-keyrock
     hostname: keyrock
     depends_on:
