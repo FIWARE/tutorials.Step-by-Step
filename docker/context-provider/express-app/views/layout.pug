@@ -2,11 +2,13 @@ doctype html
 html
   head
     title= title
+    link(rel="shortcut icon" href='/img/favicon.ico')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     block header
       div(style="display:block;clear:both;")
-        img(height="50px" src= "/img/fiware.png")
+        a(href="/")
+          img(height="50px" src= "/img/fiware.png")
         - if (session && session.username)
           div(style="float:right")
             a(href="/logout") #{session.username}
