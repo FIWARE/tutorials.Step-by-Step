@@ -93,6 +93,7 @@ restrict access to assets, by assigning roles and permissions.
 
 &nbsp; 401. [Administrating Users and Organizations](identity-management.md)<br/>
 &nbsp; 402. [Managing Roles and Permissions](roles-permissions.md)<br/>
+&nbsp; 403. [Securing Application Access](securing-access.md)<br/>
 
 <h3>Processing, Analysis and Visualization</h3>
 
