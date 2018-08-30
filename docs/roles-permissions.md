@@ -113,37 +113,60 @@ The specific architecture of each section of the tutorial is discussed below.
       - mysql-db
     ports:
       - "3005:3005"
-    networks:
-      default:
+      - "3443:3443"
     environment:
+      - DEBUG=idm:*
       - DATABASE_HOST=mysql-db
       - IDM_DB_PASS_FILE=/run/secrets/my_secret_data
       - IDM_DB_USER=root
       - IDM_HOST=http://localhost:3005
       - IDM_PORT=3005
+      - IDM_HTTPS_ENABLED=true
+      - IDM_HTTPS_PORT=3443
+      - IDM_ADMIN_USER=alice
+      - IDM_ADMIN_EMAIL=alice-the-admin@test.com
+      - IDM_ADMIN_PASS=test
     secrets:
       - my_secret_data
 ```
 
-The `idm` container is a web app server listening on a single port:
+The `keyrock` container is a web application server listening on two ports:
 
-* Port `3005` has been  exposed for HTTP traffic so we can display the webpage and interact with the REST API.
+* Port `3005` has been exposed for HTTP traffic so we can display the web page and interact with the REST API.
+* Port `3443` has been exposed for secure HTTPS traffic for the website and REST API
 
-> **Note** The HTTP protocols is being used for demonstration purposes only.
-> In a production environment, all OAuth2 Authentication should occur over HTTPS, to avoid sending
-> any sensitive information using plain-text.
+> **Note** HTTPS should be used throughout for any secured application, but to do this properly,
+> **Keyrock** requires a trusted SSL certificate - the default certificate is self-certified and
+> available for testing purposes. The certificates can be overridden by attaching a volume to
+> replace the files under `/opt/fiware-idm/certs`.
+>
+> In a production environment, all access should occur over HTTPS, to avoid sending
+> any sensitive information using plain-text. Alternatively HTTP can be used within a
+> private network behind a configured HTTPS Reverse Proxy
+>
+> The port `3005` offering the HTTP protocol is being exposed for demonstration purposes only and to
+> simplify the interactions within this tutorial - you may also use HTTPS on port `3443` with certain
+> caveats.
+>
+> If you want to use HTTPS to access the REST API when you are using Postman, ensure that SSL
+> certificate verfication is OFF. If you want to use HTTPS to access the web front-end, please
+> accept any security warnings issued.
 
-The `idm` container is driven by environment variables as shown:
+
+
+The `keyrock` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
 |IDM_DB_PASS|`idm`| Password of the attached MySQL Database - secured by **Docker Secrets** (see below) |
-|IDM_DB_USER|`root`|Username of the default MySQL user - left in plain-text |
-|IDM_HOST|`http://localhost:3005`| Hostname of the **Keyrock**  App Server - used in activation eMails when signing up users|
-|IDM_PORT|`3005`| Port used by the **Keyrock** App Server  - this has been altered from the default 3000 port to avoid clashes |
+|IDM_DB_USER|`root`|User name of the default MySQL user - left in plain-text |
+|IDM_HOST|`http://localhost:3005`| Host name of the **Keyrock**  App Server - used in activation eMails when signing up users|
+|IDM_PORT|`3005`| Port used by the **Keyrock** App Server for HTTP traffic - this has been altered from the default 3000 port to avoid clashes |
+|IDM_HTTPS_ENABLED|`true`| Whether to offer HTTPS Support - this will use the self-signed certs unless overridden |
+|IDM_HTTPS_PORT|`3443`| Port used by the **Keyrock** App Server for HTTP traffic  this has been altered from the default 443 |
 
 
-> :information_source: **Note** that this example has secured the MySQL password using **Docker Secrets**
+> **Note** that this example has secured the MySQL password using **Docker Secrets**
 > By using `IDM_DB_PASS` with the `_FILE` suffix and referring to a secrets file location.
 > This avoids exposing the password as an `ENV` variable in plain-text - either in the `Dockerfile` Image or
 > as an injected variable which could be read using `docker inspect`.
@@ -160,6 +183,7 @@ The `idm` container is driven by environment variables as shown:
 > * `IDM_ADMIN_PASS`
 > * `IDM_EX_AUTH_DB_USER`
 > * `IDM_EX_AUTH_DB_PASS`
+
 
 
 
@@ -219,7 +243,7 @@ Thereafter, all services can be initialized from the command line by running the
 
 Where `<command>` will vary depending upon the exercise we wish to activate.
 
->:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+ **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 >```bash
 >./services stop
@@ -315,7 +339,7 @@ querying for records .Record ids use Universally Unique Identifiers - UUIDs.
 
 | Key |Description                        | Sample Value |
 |-----|-----------------------------------|--------------|
-|`keyrock`| URL for the location of the **Keyrock** service|`localhost:3005`|
+|`keyrock`| URL for the location of the **Keyrock** service|`localhost:3005` for HTTP, `localhost:3443` for HTTPS|
 |`X-Auth-token`| Token received in the Header when logging in as a user |`aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa` = I am Alice|
 |`X-Subject-token`|Token to pass when asking about a subject, alternatively repeat the user token |`bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb` = Asking about Bob|
 |`user-id`| id of an existing user, found with the `user`  table |`bbbbbbbb-good-0000-0000-000000000000` - Bob's User Id|
@@ -334,7 +358,8 @@ so there is usually no need to refresh tokens.
 ## Logging In via REST API calls
 
 
-Enter a username and password to enter the application. The default super-user has the values `alice-the-admin@test.com` and `test`.
+Enter a username and password to enter the application. The default super-user has the values `alice-the-admin@test.com` and `test`. The URL `https://localhost:3443/v1/auth/tokens` should also work in a secure system.
+
 
 ### Create Token with Password
 
