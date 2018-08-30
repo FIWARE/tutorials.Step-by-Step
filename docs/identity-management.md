@@ -106,25 +106,45 @@ The specific architecture of each section of the tutorial is discussed below.
       - mysql-db
     ports:
       - "3005:3005"
-    networks:
-      default:
+      - "3443:3443"
     environment:
       - DATABASE_HOST=mysql-db
       - IDM_DB_PASS_FILE=/run/secrets/my_secret_data
       - IDM_DB_USER=root
       - IDM_HOST=http://localhost:3005
       - IDM_PORT=3005
+      - IDM_HTTPS_ENABLED=true
+      - IDM_HTTPS_PORT=3443
+      - IDM_ADMIN_USER=admin
+      - IDM_ADMIN_EMAIL=admin@test.com
+      - IDM_ADMIN_PASS=1234
     secrets:
       - my_secret_data
 ```
 
-The `idm` container is a web application server listening on a single port:
+The `idm` container is a web application server listening on two ports:
 
-* Port `3005` has been  exposed for HTTP traffic so we can display the web page and interact with the REST API.
+* Port `3005` has been exposed for HTTP traffic so we can display the web page and interact with the REST API.
+* Port `3443` has been exposed for secure HTTPS traffic for the website and REST API
 
-> **Note** The HTTP protocols is being used for demonstration purposes only.
-> In a production environment, all OAuth2 Authentication should occur over HTTPS, to avoid sending
-> any sensitive information using plain-text.
+> **Note** HTTPS should be used throughout for any secured application, but to do this properly,
+> **Keyrock** requires a trusted SSL certificate - the default certificate is self-certified and
+> available for testing purposes. The certificates can be overridden by attaching a volume to
+> replace the files under `/opt/fiware-idm/certs`.
+>
+> In a production environment, all access should occur over HTTPS, to avoid sending
+> any sensitive information using plain-text. Alternatively HTTP can be used within a
+> private network behind a configured HTTPS Reverse Proxy
+>
+> The port `3005` offering the HTTP protocol is being exposed for demonstration purposes only and to
+> simplify the interactions within this tutorial - you may also use HTTPS on port `3443` with certain
+> caveats.
+>
+> If you want to use HTTPS to access the REST API when you are using Postman, ensure that SSL
+> certificate verfication is OFF. If you want to use HTTPS to access the web front-end, please
+> accept any security warnings issued.
+
+
 
 The `idm` container is driven by environment variables as shown:
 
@@ -133,7 +153,9 @@ The `idm` container is driven by environment variables as shown:
 |IDM_DB_PASS|`idm`| Password of the attached MySQL Database - secured by **Docker Secrets** (see below) |
 |IDM_DB_USER|`root`|User name of the default MySQL user - left in plain-text |
 |IDM_HOST|`http://localhost:3005`| Host name of the **Keyrock**  App Server - used in activation eMails when signing up users|
-|IDM_PORT|`3005`| Port used by the **Keyrock** App Server  - this has been altered from the default 3000 port to avoid clashes |
+|IDM_PORT|`3005`| Port used by the **Keyrock** App Server for HTTP traffic - this has been altered from the default 3000 port to avoid clashes |
+|IDM_HTTPS_ENABLED|`true`| Whether to offer HTTPS Support - this will use the self-signed certs unless overridden |
+|IDM_HTTPS_PORT|`3443`| Port used by the **Keyrock** App Server for HTTP traffic  this has been altered from the default 443 |
 
 
 > **Note** that this example has secured the MySQL password using **Docker Secrets**
@@ -153,7 +175,6 @@ The `idm` container is driven by environment variables as shown:
 > * `IDM_ADMIN_PASS`
 > * `IDM_EX_AUTH_DB_USER`
 > * `IDM_EX_AUTH_DB_PASS`
-
 
 
 <h3>MySQL Configuration</h3>
@@ -252,7 +273,7 @@ querying for records. Record IDs use Universally Unique Identifiers - UUIDs.
 
 | Key |Description                        | Sample Value |
 |-----|-----------------------------------|--------------|
-|`keyrock`| URL for the location of the **Keyrock** service|`localhost:3005`|
+|`keyrock`| URL for the location of the **Keyrock** service|`localhost:3005` for HTTP or `localhost:3443` for HTTPS|
 |`X-Auth-token`| Token received in the Header when logging in as a user - in other words *"Who am I?"* |`51f2e380-c959-4dee-a0af-380f730137c3`|
 |`X-Subject-token`|Token added to requests to define *"Who do I want to inquire about?"* - This can also be a repeat the `X-Auth-token` defined above |`51f2e380-c959-4dee-a0af-380f730137c3`|
 |`user-id`| id of an existing user, found with the `user`  table |`96154659-cb3b-4d2d-afef-18d6aec0518e`|
@@ -274,7 +295,7 @@ Click on the image above to watch a video demonstrating how to create users with
 ## Logging in to Keyrock
 
 The Log-in Screen allows an existing user to identify themselves and obtain a token for further operations. It is the initial start-up
-screen of the **Keyrock** GUI - `http://localhost:3005/idm`
+screen of the **Keyrock** GUI - `http://localhost:3005/idm` (or `https://localhost:3443/idm` and accept the warnings)
 
 
 ![](https://fiware.github.io/tutorials.Identity-Management/img/log-in.png)
@@ -284,7 +305,7 @@ Enter a user name and password to enter the **Keyrock** application. The default
 
 ### Create Token with Password
 
-The following example logs in using the Admin Super-User - it is the equivalent of using the log-in screen of the GUI
+The following example logs in using the super-admin user - it is the equivalent of using the log-in screen of the GUI. The URL `https://localhost:3443/v1/auth/tokens` should also work in a secure system.
 
 #### 1 Request:
 
