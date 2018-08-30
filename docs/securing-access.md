@@ -268,6 +268,10 @@ One application, with appropriate roles and permissions has also been created:
 To save time, the data creating users and organizations from the [previous tutorial](https://github.com/Fiware/tutorials.Roles-Permissions) has been downloaded and is automatically persisted to the MySQL
 database on start-up so the assigned UUIDs do not change and the data does not need to be entered again.
 
+The **Keyrock** MySQL database deals with all aspects of application security including storing users,
+passwords etc; defining access rights and dealing with OAuth2 authorization protocols.
+The complete database relationship diagram can be found [here](https://fiware.github.io/tutorials.Securing-Access/img/keyrock-db.png)
+
 To refresh your memory about how to create users and organizations and applications, you can log in at `http://localhost:3005/idm`
 using the account `alice-the-admin@test.com` with a password of `test`.
 

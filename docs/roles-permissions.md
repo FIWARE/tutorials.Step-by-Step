@@ -303,6 +303,10 @@ SQL commands can then be entered from the command line. e.g.:
 select id, username, email, password from user;
 ```
 
+The **Keyrock** MySQL database deals with all aspects of application security including storing users,
+passwords etc; defining access rights and dealing with OAuth2 authorization protocols.
+The complete database relationship diagram can be found [here](https://fiware.github.io/tutorials.Roles-Permissions/img/keyrock-db.png)
+
 
 <h3>UUIDs within Keyrock</h3>
 
