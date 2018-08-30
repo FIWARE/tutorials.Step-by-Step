@@ -299,7 +299,8 @@ will depend on your own use case.
 
 ## User Credentials Grant
 
-The user credentials grant flow, also known as the password grant should only be used when:
+The [User Credentials](https://tools.ietf.org/html/rfc6749#section-1.3.3) grant flow, also known
+as the *resource owner password credentials grant* or password grant should only be used when:
 
 * A User wants to log into an application via a web-app client
 * The web-app client is absolutely trusted
@@ -426,7 +427,7 @@ The response displays the user on the top right of the screen, details of the to
 
 ## Authorization Code Grant
 
-The Authorization Code grant flow can be used where the client (in our case the Tutorial Web-application) doesn't need
+The [Authorization Code](https://tools.ietf.org/html/rfc6749#section-1.3.1) grant flow can be used where the client (in our case the Tutorial Web-application) doesn't need
 access to any passwords directly - it just needs to know who the user is.  With the Authorization Code grant, the
 user is redirected to an Authorization Server such as **Keyrock**, logs in there and permits access. The response returns
 an access-code which can be exchanged for an access-token which then identifies the user.
@@ -489,7 +490,7 @@ The response displays the user on the top right of the screen, details of the to
 
 ## Implicit Grant
 
-The Implicit grant flow is a simplified form of the Authorization grant flow where **Keyrock** returns an
+The [Implicit](https://tools.ietf.org/html/rfc6749#section-1.3.2) grant flow is a simplified form of the Authorization grant flow where **Keyrock** returns an
 `access_token` directly rather than returning an interim access-code. This is less secure than the Authcode flow but
 can be used in some client-side applications
 
@@ -545,7 +546,7 @@ The response displays the user on the top right of the screen, details of the to
 
 ## Client Credentials Grant
 
-The final grant flow does not need a user. It is sometimes necessary for an application to identify itself
+The final grant flow  - the [Client Credentials](https://tools.ietf.org/html/rfc6749#section-1.3.4) grant, does not need a user. It is sometimes necessary for an application to identify itself
 so that the application (rather than the user) is granted access to resources. There are no
 resources secured in such a manner within this tutorial, but the flow has been included for completeness.
 
