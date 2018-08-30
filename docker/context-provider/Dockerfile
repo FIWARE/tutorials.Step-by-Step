@@ -1,10 +1,9 @@
-FROM node:carbon
+FROM node:carbon-alpine
 
 ARG GIT_COMMIT
-ENV GIT_COMMIT ${GIT_COMMIT}
-
-ENV WEB_APP_PORT "3000"
-ENV DUMMY_DEVICES_PORT "3001"
+ENV GIT_COMMIT ${GIT_COMMIT} \
+	WEB_APP_PORT "3000" \
+	DUMMY_DEVICES_PORT "3001"
 
 
 # Create app directory
@@ -15,7 +14,8 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY ./express-app/package*.json ./
 
-RUN npm install
+RUN npm install && \
+    rm -rf /root/.npm/cache/*
 # If you are building your code for production
 # RUN npm install --only=production
 
