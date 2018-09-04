@@ -17,6 +17,17 @@ const monitor = require('../lib/monitoring');
 // variable (with a fallback if necessary)
 defaultClient.basePath = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 
+
+function setAuthHeaders(req){
+	const headers = {};
+	if (req.session.access_token) {
+		// If the system has been secured and we have logged in,
+		// add the access token to the request to the PEP Proxy
+		headers['X-Auth-Token'] = req.session.access_token;
+	}
+	return headers;
+}
+
 // This function receives the details of a store from the context
 //
 // It is effectively processing the following cUrl command:
@@ -32,7 +43,8 @@ function displayStore(req, res) {
 	}
 	monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
 	retrieveEntity(
-		req.params.storeId, { options: 'keyValues', type: 'Store' })
+		req.params.storeId, { options: 'keyValues', type: 'Store' },
+		setAuthHeaders(req))
 	.then(store => {
 		// If a store has been found display it on screen
 		return res.render('store', { title: store.name, store});
@@ -61,11 +73,11 @@ function displayTillInfo(req, res) {
 		listEntities({
 		options: 'keyValues',
 		type: 'Product',
-	}), listEntities({
+	}, setAuthHeaders(req)), listEntities({
 		q: 'refStore==' + req.params.storeId,
 		options: 'keyValues',
 		type: 'InventoryItem',
-	})])
+	}, setAuthHeaders(req))])
 	.then(values => {
 		// If values have been found display it on screen
 		return res.render('till', { products : values[0], inventory : values[1] });
@@ -99,7 +111,7 @@ async function buyItem(req, res) {
 	const inventory = await retrieveEntity(req.params.inventoryId, {
 		options: 'keyValues',
 		type: 'InventoryItem',
-	});
+	}, setAuthHeaders(req));
 	const count = inventory.shelfCount - 1;
 
 	monitor('NGSI', 'updateExistingEntityAttributes ' + req.params.inventoryId,  { 
@@ -110,7 +122,7 @@ async function buyItem(req, res) {
 		{ shelfCount: { type: 'Integer', value: count } },
 		{
 			type: 'InventoryItem',
-		}
+		}, setAuthHeaders(req)
 	);
 	res.redirect(`/app/store/${inventory.refStore}/till`);
 }

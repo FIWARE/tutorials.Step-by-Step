@@ -474,6 +474,12 @@ function sendCommand (req, res) {
 		json: true 
 	};
 
+	if (req.session.access_token) {
+		// If the system has been secured and we have logged in,
+		// add the access token to the request to the PEP Proxy
+		options.headers['X-Auth-Token'] = req.session.access_token;
+	}
+
 	if(isMotionSensor){
 		// The motion sensor does not accept commands,
 		// Update the state of the device directly
