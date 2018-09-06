@@ -125,10 +125,10 @@ The attached volume is a [configuration file](https://github.com/Fiware/tutorial
 <h3>Dummy IoT Devices Configuration</h3>
 
 ```yaml
-  context-provider:
+  tutorial:
     image: fiware/tutorials.context-provider
-    hostname: context-provider
-    container_name: context-provider
+    hostname: iot-sensors
+    container_name: fiware-tutorial
     networks:
         - default
     expose:
@@ -145,14 +145,14 @@ The attached volume is a [configuration file](https://github.com/Fiware/tutorial
         - "DUMMY_DEVICES_TRANSPORT=MQTT"
 ```
 
-The `context-provider` container is listening on two ports:
+The `tutorial` container is listening on two ports:
 
 * Port `3000` is exposed so we can see the web-page displaying the Dummy IoT devices.
 * Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make UltraLight commands
   without being part of the same network.
 
 
-The `context-provider` container is driven by environment variables as shown:
+The `tutorial` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
@@ -162,7 +162,7 @@ The `context-provider` container is driven by environment variables as shown:
 |DUMMY_DEVICES_API_KEY|`4jggokgpepnvsb2uv4s40d59ov`| Random security key used for UltraLight interactions - used to ensure the integrity of interactions between the devices and the IoT Agent |
 |DUMMY_DEVICES_TRANSPORT|`MQTT`| The transport protocol used by the dummy IoT devices |
 
-The other `context-provider` container configuration values described in the YAML file are not used in this tutorial.
+The other `tutorial` container configuration values described in the YAML file are not used in this tutorial.
 
 <h3>IoT Agent for UltraLight 2.0 Configuration</h3>
 

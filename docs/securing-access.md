@@ -123,13 +123,13 @@ Since all interactions between the elements are initiated by HTTP requests, the 
 
 The necessary configuration information for adding security to the **Stock Management Frontend**  can be found in the `context-provider` section of the associated `docker-compose.yml` file - only the relevant variables are shown below:
 
-<h3>Context-Provider Security Configuration</h3>
+<h3>Tutorial Security Configuration</h3>
 
 ```yaml
-  context-provider:
+  tutorial:
     image: fiware/tutorials.context-provider
-    hostname: context-provider
-    container_name: context-provider
+    hostname: tutorial
+    container_name: fiware-tutorial
     networks:
       default:
         ipv4_address: 172.18.1.7
@@ -150,14 +150,14 @@ The necessary configuration information for adding security to the **Stock Manag
         - "CALLBACK_URL=http://localhost:3000/login"
 ```
 
-The `context-provider` container is listening on two ports:
+The `tutorial` container is listening on two ports:
 
 * Port `3000` is exposed so we can see the web-page displaying the Dummy IoT devices.
 * Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make UltraLight commands
   without being part of the same network.
 
 
-The `context-provider` container is driven by environment variables as shown:
+The `tutorial` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
@@ -170,7 +170,7 @@ The `context-provider` container is driven by environment variables as shown:
 |KEYROCK_CLIENT_SECRET|`tutorial-dckr-site-0000-clientsecret`| The Client Secret defined by Keyrock for this application |
 |CALLBACK_URL|`http://localhost:3000/login`| The callback URL used by Keyrock when a challenge has succeeded.|
 
-The other `context-provider` container configuration values described in the YAML file have been described in previous tutorials
+The other `tutorial` container configuration values described in the YAML file have been described in previous tutorials
 
 The separate `KEYROCK_URL` and `KEYROCK_IP_ADDRESS` are only necessary because of the simplified
 Docker containerization used within the tutorial. The `KEYROCK_URL` variable with the value  `localhost` is referring

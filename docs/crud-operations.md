@@ -65,7 +65,7 @@ The necessary configuration information can be seen in the services section of t
   orion:
     image: fiware/orion:latest
     hostname: orion
-    container_name: orion
+    container_name: fiware-orion
     depends_on:
       - mongo-db
     networks:

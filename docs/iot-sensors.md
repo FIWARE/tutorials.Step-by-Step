@@ -189,10 +189,10 @@ Since all interactions are initiated by HTTP requests, the entities can be conta
 The necessary configuration information can be seen in the services section of the associated `docker-compose.yml`  file:
 
 ```yaml
-  context-provider:
+  tutorial:
     image: fiware/tutorials.context-provider
-    hostname: context-provider
-    container_name: context-provider
+    hostname: iot-sensors
+    container_name: fiware-tutorial
     networks:
         - default
     expose:
@@ -210,14 +210,14 @@ The necessary configuration information can be seen in the services section of t
         - "DUMMY_DEVICES_API_KEY=4jggokgpepnvsb2uv4s40d59ov"
 ```
 
-The `context-provider` container is listening on two ports:
+The `tutorial` container is listening on two ports:
 
 * Port `3000` is exposed so we can see the web-page displaying the Dummy IoT devices.
 * Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make UltraLight commands
   without being part of the same network.
 
 
-The `context-provider` container is driven by environment variables as shown:
+The `tutorial` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
@@ -228,7 +228,7 @@ The `context-provider` container is driven by environment variables as shown:
 |DUMMY_DEVICES_PORT|`3001`|Port used by the dummy IoT devices to receive commands |
 |DUMMY_DEVICES_API_KEY|`4jggokgpepnvsb2uv4s40d59ov`| Random security key used for UltraLight interactions - this will be used in a later tutorial to ensure the integrity of interactions between the devices and the missing IoT Agent |
 
-The other `context-provider` container configuration values described in the YAML file are not used in this tutorial.
+The other `tutorial` container configuration values described in the YAML file are not used in this tutorial.
 
 
 When describing the messages being passed through a working smart solution we will refer to two further components which

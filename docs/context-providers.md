@@ -97,10 +97,10 @@ Since all interactions between the elements are initiated by HTTP requests, the 
 The necessary configuration information for the **Context Provider NGSI proxy** can be seen in the services section the of the associated `docker-compose.yml`  file:
 
 ```yaml
-  context-provider:
+  tutorial:
     image: fiware/tutorials.context-provider
     hostname: context-provider
-    container_name: context-provider
+    container_name: fiware-tutorial
     networks:
         - default
     expose:
@@ -116,7 +116,7 @@ The necessary configuration information for the **Context Provider NGSI proxy** 
         - "TWITTER_CONSUMER_SECRET=<ADD_YOUR_CONSUMER_SECRET>"
 ```
 
-The `context-provider` container is driven by environment variables as shown:
+The `tutorial` container is driven by environment variables as shown:
 
 | Key |Value|Description|
 |-----|-----|-----------|
@@ -127,7 +127,7 @@ The `context-provider` container is driven by environment variables as shown:
 |TWITTER_CONSUMER_KEY|`<ADD_YOUR_CONSUMER_KEY>`| A consumer key used to obtain access to the Twitter API|
 |TWITTER_CONSUMER_SECRET|`<ADD_YOUR_CONSUMER_SECRET>`| A user key used to obtain access to the Twitter API |
 
-The other `context-provider` container configuration values described in the YAML file are not used in this tutorial.
+The other `tutorial` container configuration values described in the YAML file are not used in this tutorial.
 
 
 The configuration information for MongoDB and the Orion Context Broker

@@ -108,14 +108,6 @@ cd tutorials.Historic-Context
 ./services create
 ```
 
->**Note** The `context-provider` image has not yet been pushed to Docker hub.
-> Failing to build the Docker sources before proceeding will result in the following error:
->
->```
->Pulling context-provider (fiware/cp-web-app:latest)...
->ERROR: The image for the service you're trying to recreate has been removed.
->```
-
 
 Thereafter, all services can be initialized from the command line by running the [services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services) Bash script provided within the repository:
 

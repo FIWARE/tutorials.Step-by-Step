@@ -496,8 +496,8 @@ curl -iX POST \
   "application": {
     "name": "Tutorial Application",
     "description": "FIWARE Application protected by OAuth2 and Keyrock",
-    "redirect_uri": "http://context-provider/login",
-    "url": "http://context-provider",
+    "redirect_uri": "http://tutorial/login",
+    "url": "http://tutorial",
     "grant_type": [
       "authorization_code",
       "implicit",
@@ -522,8 +522,8 @@ The response includes a Client Id and Secret which can be used to secure the app
         "image": "default",
         "name": "Tutorial Application",
         "description": "FIWARE Application protected by OAuth2 and Keyrock",
-        "redirect_uri": "http://context-provider/login",
-        "url": "http://context-provider",
+        "redirect_uri": "http://tutorial/login",
+        "url": "http://tutorial",
         "grant_type": "password,authorization_code,implicit",
         "response_type": "code,token"
     }
@@ -561,8 +561,8 @@ curl -X GET \
         "name": "Tutorial Application",
         "description": "FIWARE Application protected by OAuth2 and Keyrock",
         "secret": "aa2d0845-0a8e-4ae8-addf-3c87bcab19e1",
-        "url": "http://context-provider",
-        "redirect_uri": "http://context-provider/login",
+        "url": "http://tutorial",
+        "redirect_uri": "http://tutorial/login",
         "image": "default",
         "grant_type": "password,authorization_code,implicit",
         "response_type": "code,token",
@@ -599,8 +599,8 @@ curl -X GET \
             "name": "Tutorial Application",
             "description": "FIWARE Application protected by OAuth2 and Keyrock",
             "image": "default",
-            "url": "http://context-provider",
-            "redirect_uri": "http://context-provider/login",
+            "url": "http://tutorial",
+            "redirect_uri": "http://tutorial/login",
             "grant_type": "password,authorization_code,implicit",
             "response_type": "code,token",
             "client_type": null
@@ -627,7 +627,7 @@ curl -X PATCH \
   "application": {
     "name": "Tutorial New Name",
     "description": "This is a new description",
-    "redirect_uri": "http://context-provider/login",
+    "redirect_uri": "http://tutorial/login",
     "grant_type": [
       "authorization_code",
       "password"
