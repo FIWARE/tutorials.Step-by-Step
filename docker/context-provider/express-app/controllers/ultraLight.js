@@ -31,6 +31,7 @@ const UL_URL = 'http://' + UL_HOST + ':' + UL_PORT + '/iot/d';
 const UL_TRANSPORT = (process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP');
 const UL_CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 const UL_NGSI_PREFIX =  (process.env.NGSI_LD_PREFIX !== undefined) ? process.env.NGSI_LD_PREFIX : 'urn:ngsi-ld:';
+const DUMMY_DEVICE_HTTP_HEADERS = { 'Content-Type': 'text/plain' };
 
 
 // A series of constants used by our set of devices
@@ -186,6 +187,12 @@ function getCommand (string) {
 // It will slowly dim as time passes (provided no movement is detected)
 function init () {
 	debug('init');
+
+	if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD){
+		initSecureDevices();
+	}
+
+
 	myCache.set( 'door001', DOOR_LOCKED);
 	myCache.set( 'door002', DOOR_LOCKED);
 	myCache.set( 'door003', DOOR_LOCKED);
@@ -358,8 +365,7 @@ function setDeviceState (deviceId, state, isSensor = true, force = false) {
 			const options = { method: 'POST',
 			  url: UL_URL,
 			  qs: { k: UL_API_KEY, i: deviceId },
-			  headers: 
-			   { 'Content-Type': 'text/plain' },
+			  headers: DUMMY_DEVICE_HTTP_HEADERS,
 			  body: state };
 			 const debugText =  'POST ' + UL_URL + '?i=' + options.qs.i  + '&k=' + options.qs.k;
 
@@ -433,6 +439,24 @@ function accessControl(req, res, next){
 		return Security.pdpAuthentication(req, res, next);
 	}
 }
+
+// This function offers the Password Authentication flow for a secured IoT Sensors
+// It is just a user filling out the Username and password form and adding the access token to 
+// subsequent requests.
+function initSecureDevices(){
+    debug('initSecureDevices');
+    // With the Password flow, an access token is returned in the response.
+    Security.oa.getOAuthPasswordCredentials(process.env.DUMMY_DEVICES_USER, process.env.DUMMY_DEVICES_PASSWORD)
+    .then(results => {
+        DUMMY_DEVICE_HTTP_HEADERS['X-Auth-Token'] = results.access_token;
+        return;
+    })
+    .catch(error => {
+        debug(error);
+        return;
+    });
+}
+
 
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
 // via the Orion Context Broker and the UltraLight IoT Agent.

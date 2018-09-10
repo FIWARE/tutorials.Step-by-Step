@@ -224,7 +224,8 @@ module.exports = {
     pdpAuthentication,
     pdpBasicAuthorization,
     logInCallback,
-    logOut
+    logOut,
+    oa
 };
 
 
