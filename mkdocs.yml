@@ -30,6 +30,7 @@ pages:
     - 'Administrating Users': 'identity-management.md'
     - 'Managing Roles and Permissions': 'roles-permissions.md'
     - 'Securing Application Access': 'securing-access.md'
+    - 'Securing Microservices': 'pep-proxy.md'
   - 'Processing, Analysis and Visualization':
     - 'Media Streams': 'media-streams.md'
 
