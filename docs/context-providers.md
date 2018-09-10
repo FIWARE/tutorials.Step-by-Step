@@ -63,7 +63,7 @@ In order to be able to fulfill these requests, the Orion Context Broker, must fi
 Within our simple stock management system, our **Store** entity currently returns `id`, `name`,  `address` and `location` attributes.
 We will augment this with additional real-time context data from the following free publicly available data sources:
 
-* The temperature and relative humidity from the [Weather Underground API](https://www.wunderground.com/weather/api/d/docs?MR=1)
+* The temperature and relative humidity from the [Open Weather Map API](https://openweathermap.org/api)
 * Recent social media tweets regarding the store from the [Twitter API](https://developer.twitter.com/)
 
 The relationship between our entities is defined as shown:
@@ -136,11 +136,11 @@ has been described in a [previous tutorial](entity-relationships.md)
 
 ## Context Provider NGSI proxy
 
-A simple [nodejs](https://nodejs.org/) [Express](https://expressjs.com/) application has been bundled as part of the repository. The application offers an NGSI v1 interface for four different context providers - the Weather Underground API, the Twitter Search API and two dummy data context providers - a static data provider (which always returns the same data) and a random data context provider (which will change every time it is invoked).
+A simple [nodejs](https://nodejs.org/) [Express](https://expressjs.com/) application has been bundled as part of the repository. The application offers an NGSI v1 interface for four different context providers - the Open Weather Map API, the Twitter Search API and two dummy data context providers - a static data provider (which always returns the same data) and a random data context provider (which will change every time it is invoked).
 
 More information about the proxy endpoints can be found [here](https://github.com/Fiware/tutorials.Context-Providers/blob/master/proxy/README.md)
 
-* In order to access the Weather Underground API, you will need to sign up for a key at https://www.wunderground.com/weather/api/
+* In order to access the Open Weather Map API, you will need to sign up for a key at https://openweathermap.org/api
 * In order to access the Twitter Search API, you will have to create an app in Twitter via  https://apps.twitter.com/app/new to obtain a
 Consumer Key & Consumer Secret.
 

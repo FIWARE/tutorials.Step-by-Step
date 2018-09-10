@@ -5,7 +5,7 @@ This is a simple nodejs express application which offers an NGSI v1 proxy interf
 
 The following NGSI v1 endpoints are supported
 
-* `/random/<type>/<mapping>/queryContext`. 
+* `/random/<type>/<mapping>/queryContext`.
   returns random data  values of `"type": "<type>"`  - e.g. `/random/text/quote/queryContext` will return  random lorem ipsum
 
 * `/static/<type>/<mapping>/queryContext`
@@ -60,7 +60,7 @@ The following health check endpoints are supported:
 
   If the proxy is correctly configured to connect to the Twitter API, a series of Tweets will be returned.
 
-  The Twitter API uses OAuth2: 
+  The Twitter API uses OAuth2:
 
   * To get Consumer Key & Consumer Secret for the Twitter API, you have to create an app in Twitter via [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new). Then you'll be taken to a page containing Consumer Key & Consumer Secret.
   * For more information see: [https://developer.twitter.com/](https://developer.twitter.com/)
@@ -69,12 +69,12 @@ The following health check endpoints are supported:
 * `/weather/health`
   A non-error response shows that an NGSI proxy for the Weather API is available on the network and returning values.
 
-  If the proxy is correctly configured to connect to the Weather Underground API, the current weather in Berlin will be returned.
+  If the proxy is correctly configured to connect to the Open Weather Map API, the current weather in Berlin will be returned.
 
-  Most of the Weather API features require an API key. 
+  Most of the Weather API features require an API key.
 
-  * Sign up for a key at [https://www.wunderground.com/weather/api/](https://www.wunderground.com/weather/api/)
-  * For more information see: [https://www.wunderground.com/weather/api/d/docs?MR=1](https://www.wunderground.com/weather/api/d/docs?MR=1)
+  * Sign up for a key at [https://openweathermap.org/api](https://openweathermap.org/api)
+  * For more information see: [https://openweathermap.org/appid](https://openweathermap.org/appid)
 
 
 # Keys and Secrets
