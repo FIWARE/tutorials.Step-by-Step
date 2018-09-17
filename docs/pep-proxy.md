@@ -442,7 +442,7 @@ To create a new IoT Agent account within an application, send a POST request to 
 
 ```console
 curl -X POST \
-  'http://{{keyrock}}/v1/applications/{{application-id}}/iot_agents' \
+  'http://localhost:3005/v1/applications/{{application-id}}/iot_agents' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -470,7 +470,7 @@ Making a GET request the `/v1/applications/{{application-id}}/iot_agents/{{iot-a
 
 ```console
 curl -X GET \
-  'http://{{keyrock}}/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
+  'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
@@ -494,7 +494,7 @@ A list of all IoT Agents associated with an application can be obtained by makin
 
 ```console
 curl -X GET \
-  'http://{{keyrock}}/v1/applications/{{application-id}}/iot_agents' \
+  'http://localhost:3005/v1/applications/{{application-id}}/iot_agents' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
@@ -522,7 +522,7 @@ The `X-Auth-token` must be supplied in the headers.
 
 ```console
 curl -iX PATCH \
-  'http://{{keyrock}}/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
+  'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -545,7 +545,7 @@ An existing IoT Agent Account can be deleted by making a DELETE request to the  
 
 ```console
 curl -X DELETE \
-  'http://{{keyrock}}/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
+  'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
