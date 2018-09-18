@@ -18,10 +18,14 @@ const oa = new OAuth2(clientId,
     '/oauth2/token',
     callbackURL);
 
-function logAccessToken(req, accessToken, store=true){
-    debug('Access Token received ' + accessToken);
-    req.flash('success', 'token: '+ accessToken);
+function logAccessToken(req, accessToken,  refreshToken,  store=true){
+    debug('<strong>Access Token</strong> received ' + accessToken);
+    req.flash('info', 'access_token: <code>'+ accessToken + '</code>');
     req.session.access_token =  store ? accessToken: undefined;
+    if(refreshToken){
+        req.flash('info', 'refresh_token:  <code>'+ refreshToken + '</code>');
+        req.session.refresh_token =  store ? refreshToken : undefined;
+    }
 }
 
 function logUser (req, user, message){
@@ -71,11 +75,11 @@ function implicitGrant(req, res){
 function implicitGrantCallback(req,res){
     debug('implicitGrantCallback')
     // With the implicit grant, an access token is included in the response
-    logAccessToken(req, req.query.token);
+    logAccessToken(req, req.query.token , null);
 
     return getUserFromAccessToken(req, req.query.token)
     .then (user => {
-        logUser(req, user, 'logged in with Implicit Grant');
+        logUser(req, user, 'logged in with <strong>Implicit Grant</strong>');
         return res.redirect('/');
     })
     .catch(error => {
@@ -101,11 +105,11 @@ function authCodeGrantCallback(req,res){
     debug('Auth Code received ' + req.query.code);
     return oa.getOAuthAccessToken(req.query.code)
     .then(results => {
-        logAccessToken(req, results.access_token);
+        logAccessToken(req, results.access_token, results.refresh_token);
         return getUserFromAccessToken(req, results.access_token); 
     })
     .then (user => {
-        logUser(req, user, 'logged in with Authcode');
+        logUser(req, user, 'logged in with <strong>Authorization Code</strong>');
         return res.redirect('/');
     })
     .catch(error => {
@@ -123,8 +127,8 @@ function clientCredentialGrant(req, res){
     
     oa.getOAuthClientCredentials()
     .then(results => {
-        logAccessToken(req, results.access_token, false);
-        req.flash('success', 'Application logged in with Client Credentials');
+        logAccessToken(req, results.access_token,  results.refresh_token, false);
+        req.flash('success', 'Application logged in with <strong>Client Credentials</strong>');
         return  res.redirect('/');
     })
     .catch(error => {
@@ -147,11 +151,11 @@ function userCredentialGrant(req, res){
     // the response.
     oa.getOAuthPasswordCredentials(email, password)
     .then(results => {
-        logAccessToken(req, results.access_token);
+        logAccessToken(req, results.access_token, results.refresh_token);
         return getUserFromAccessToken(req, results.access_token)
     })
     .then(user =>{
-        logUser(req, user, 'logged in with Password');
+        logUser(req, user, 'logged in with <strong>Password</strong>');
         return res.redirect('/');
     })
     .catch(error => {
@@ -162,6 +166,37 @@ function userCredentialGrant(req, res){
 }
 
 
+// This function offers the Password Authentication flow
+// It is just a user filling out the Username and password form.
+function refreshTokenGrant(req, res){
+    debug('refreshTokenGrant');
+
+    if (!req.session.refresh_token){
+        req.flash('error', 'No Refresh Token');
+        return res.redirect('/');
+    }
+
+    // With the Refresh Token flow, an access token is returned in 
+    // the response.
+    return oa.getOAuthRefreshToken(req.session.refresh_token)
+    .then(results => {
+        logAccessToken(req, results.access_token, results.refresh_token);
+        return getUserFromAccessToken(req, results.access_token)
+    })
+    .then(user =>{
+        logUser(req, user, '<strong>refreshed token</strong>');
+        return res.redirect('/');
+    })
+    .catch(error => {
+        debug(error);
+        req.flash('error', 'Access Denied');
+        return res.redirect('/');
+    });
+}
+
+
+
+
 // Use of Keyrock as a PDP (Policy Decision Point)
 // LEVEL 1: AUTHENTICATION ONLY - Any user is authorized, just ensure the user exists.
 function pdpAuthentication (req, res , next){
@@ -170,7 +205,7 @@ function pdpAuthentication (req, res , next){
     if (!SECURE_ENDPOINTS){
         res.locals.authorized = true;
     } else {
-        res.locals.authorized = req.session.access_token ? true : false;
+        res.locals.authorized = !!req.session.access_token;
     } 
     return next();
 }
@@ -210,7 +245,7 @@ function pdpBasicAuthorization (req, res , next, url=req.url){
 // Handles logout requests to remove access_token from the session cookie
 function logOut(req, res){
     debug('logOut')
-    req.flash('success', req.session.username + ' logged Out');
+    req.flash('success', req.session.username + ' logged out');
     req.session.access_token = undefined;
     req.session.username = undefined;
     return res.redirect('/');
@@ -221,6 +256,7 @@ module.exports = {
     clientCredentialGrant,
     userCredentialGrant,
     implicitGrant,
+    refreshTokenGrant,
     pdpAuthentication,
     pdpBasicAuthorization,
     logInCallback,

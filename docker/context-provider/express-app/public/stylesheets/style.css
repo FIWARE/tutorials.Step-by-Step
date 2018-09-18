@@ -45,6 +45,10 @@ ul.devices {
   border-top: 1px solid #CCCCCC;
 }
 
+.info code{
+  color: #ff7059;
+}
+
 .red {
   color: #ff7059;
 }

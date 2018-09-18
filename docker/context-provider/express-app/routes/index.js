@@ -33,7 +33,7 @@ function broadcastEvents(req, item, types) {
 // Handles requests to the main page
 router.get('/',  function(req, res) {
 	const securityEnabled = SECURE_ENDPOINTS;
-	res.render('index', { title: 'FIWARE Tutorial', success: req.flash('success'), errors: req.flash('error'), securityEnabled});
+	res.render('index', { title: 'FIWARE Tutorial', success: req.flash('success'), errors: req.flash('error'),  info: req.flash('info'), securityEnabled});
 });
 
 // Logs users in and out using Keyrock.
@@ -41,6 +41,7 @@ router.get('/login', Security.logInCallback);
 router.get('/clientCredentials', Security.clientCredentialGrant);
 router.get('/implicitGrant', Security.implicitGrant);
 router.post('/userCredentials', Security.userCredentialGrant);
+router.post('/refreshToken', Security.refreshTokenGrant);
 router.get('/authCodeGrant', Security.authCodeGrant);
 router.get('/logout', Security.logOut);
 

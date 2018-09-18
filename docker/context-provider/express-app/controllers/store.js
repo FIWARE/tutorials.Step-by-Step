@@ -42,7 +42,7 @@ function displayStore(req, res) {
 		return res.redirect('/');
 	}
 	monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
-	retrieveEntity(
+	return retrieveEntity(
 		req.params.storeId, { options: 'keyValues', type: 'Store' },
 		setAuthHeaders(req))
 	.then(store => {

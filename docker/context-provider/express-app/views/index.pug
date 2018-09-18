@@ -4,16 +4,24 @@ block content
   h1= title
 
   - if (success)
-    .message.info
-      span= success
+    .message.success
+      each item in success
+        div!= item
   - if (errors)
     .message.errors
-      span= errors
+      each item in errors
+        div!= item
+  - if (info)
+    .message.info
+      each item in info
+        div!= item
+
+
 
   - if (securityEnabled)
     - if (!session.username)
       div(style='width:20em;line-height: 1.6;')
-        div
+        ul
           li
             a.button(href="authCodeGrant") Authorization Code
           li
@@ -70,7 +78,12 @@ block content
   div
     h3
     - if (session.username)
-      a.button(href="logout") Log out
+      ul
+        li
+          a.button(href="logout") Log out
+        li
+          form(action='refreshToken',method='post') 
+            input.button(type='submit',value='Refresh Token')
 
   hr
   small

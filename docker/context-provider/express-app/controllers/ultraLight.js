@@ -434,10 +434,10 @@ function accessControl(req, res, next){
 	} else if (action === "unlock") {
 		// LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
 		return Security.pdpBasicAuthorization(req, res, next, '/door/unlock');
-	} else {
+	} 
 		// LEVEL 1: AUTHENTICATION ONLY - Every user is authorized, just ensure the user exists.
 		return Security.pdpAuthentication(req, res, next);
-	}
+	
 }
 
 // This function offers the Password Authentication flow for a secured IoT Sensors
@@ -449,11 +449,11 @@ function initSecureDevices(){
     Security.oa.getOAuthPasswordCredentials(process.env.DUMMY_DEVICES_USER, process.env.DUMMY_DEVICES_PASSWORD)
     .then(results => {
         DUMMY_DEVICE_HTTP_HEADERS['X-Auth-Token'] = results.access_token;
-        return;
+        
     })
     .catch(error => {
         debug(error);
-        return;
+        
     });
 }
 

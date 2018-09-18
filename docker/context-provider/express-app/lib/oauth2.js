@@ -199,6 +199,24 @@ exports.OAuth2.prototype.getOAuthPasswordCredentials= function(username, passwor
   });
 }
 
+exports.OAuth2.prototype.getOAuthRefreshToken= function(refreshToken) {
+  const that = this;
+
+  return new Promise((resolve, reject) => { 
+    const postData = 'grant_type=refresh_token&refresh_token=' + refreshToken;
+
+    const postHeaders= {
+         'Authorization': that.buildAuthHeader(),
+         'Content-Type': 'application/x-www-form-urlencoded',
+         'Content-Length': postData.length,
+     };
+
+    that._request("POST", that._getAccessTokenUrl(), postHeaders, postData, null, (error, data) => {
+      return error ? reject(error) : resolve(getResults(data));
+    });
+  });
+}
+
 exports.OAuth2.prototype.get= function(url, accessToken) {
   const that = this;
   return new Promise((resolve, reject) => {
