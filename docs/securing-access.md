@@ -602,6 +602,105 @@ and clicking on the Client Credentials Button
 The response displays the details of the token. No User is involved.
 
 
+## Refresh Token
+
+Once a User has identified themselves (using any appropriate grant type), they should not need to log-in again,
+even though the `access_token` they are using is time-limited. To provide continued access, an addition
+[Refresh Token](https://tools.ietf.org/html/rfc6749#section-1.5) flow has been defined, allowing a User to
+exchange an expired token for a new one. Offering this exchange is not mandatory for OAuth2 Authorization Servers,
+and is not appropriate for all grant types.
+
+### Availability Check
+
+#### 4 Request
+
+Check to see if Refresh Token flow is available, merely log in using one of the other grant types,
+for example to log in using the user-credentials flow send a POST request to the `oauth2/token` endpoint
+ with the `grant_type=password`
+
+```console
+curl -iX POST \
+  'http://localhost:3005/oauth2/token' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Basic dHV0b3JpYWwtZGNrci1zaXRlLTAwMDAteHByZXNzd2ViYXBwOnR1dG9yaWFsLWRja3Itc2l0ZS0wMDAwLWNsaWVudHNlY3JldA==' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data "username=alice-the-admin@test.com&password=test&grant_type=password"
+```
+
+#### Response
+
+Along with the `access_token` identifying the user, the response returns an `refresh_token`
+
+```json
+{
+    "access_token": "a7e22dfe2bd7d883c8621b9eb50797a7f126eeab",
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "refresh_token": "05e386edd9f95ed0e599c5004db8573e86dff874"
+}
+```
+
+### Refresh Access Token
+
+The  `refresh_token=05e386edd9f95ed0e599c5004db8573e86dff874` from the response above is stored for later use.
+To obtain a new `access_token`  (for example once the previous one has expired) the
+`refresh_token` is used in the OAuth2 refresh token flow and a `grant_type=refresh_token`
+
+#### 5 Request
+
+```console
+curl -iX POST \
+  'http://localhost:3005/oauth2/token' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Basic dHV0b3JpYWwtZGNrci1zaXRlLTAwMDAteHByZXNzd2ViYXBwOnR1dG9yaWFsLWRja3Itc2l0ZS0wMDAwLWNsaWVudHNlY3JldA==' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  --data "refresh_token=05e386edd9f95ed0e599c5004db8573e86dff874&grant_type=refresh_token"
+```
+
+#### Response
+
+The response is similar to the previous response, but the  `access_token` and `refresh_token`  have been
+updated and the expiry window has been moved forward.
+
+```json
+{
+    "access_token": "298717d478980a2f0c3d2e9f9e222f1bb73e1c69",
+    "token_type": "Bearer",
+    "expires_in": 3599,
+    "refresh_token": "4611e3ab68b5b606eb7a43db6835de646bb7d11d"
+}
+```
+
+### Refresh Token - Sample Code
+
+The code delegates all the OAuth2 calls to a separate library [oauth2.js](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/lib/oauth2.js). Every request includes the standard OAuth2 header and each
+request is wrapped in a promise to simplify the application code. The Request Token flow is invoked using the
+`oa.getOAuthRefreshToken()` function - the previously received `refresh_token` used to receive a new `access_token`
+once the previous token has expired.
+
+```javascript
+function refreshTokenGrant(req, res){
+    return oa.getOAuthRefreshToken(req.session.refresh_token)
+    .then(results => {
+        // Store new Access Token
+    });
+}
+```
+
+### Refresh Token - Running the Example
+
+It is possible to invoke the Token Refresh flow programmatically, by bringing up the page `http://localhost:3000/` and filling out the user name and password form.
+
+![](https://fiware.github.io/tutorials.Securing-Access/img/tutorial-log-in.png)
+
+The response displays the user on the top right of the screen, details of the token are also flashed onto the screen:
+
+![](https://fiware.github.io/tutorials.Securing-Access/img/tutorial-reponse.png)
+
+Pressing the **Refresh Token** button invokes returns a new  `access_token` and `refresh_token`
+for the logged in user.
+
+
 ## PDP - Access Control
 
 There are three Levels of PDP Access Control:
@@ -627,7 +726,7 @@ Level 1 PDP can be used in conjunction with any OAuth2 provider using any flow.
 If a user has authenticated using **Keyrock**, the freshness of the access token can be checked by making  a GET
 request to the `/user` endpoint.
 
-#### 4 Request
+#### 6 Request
 
 ```bash
  curl -X GET \
@@ -680,7 +779,7 @@ verb). We can retrieve extended user details including access permisions by addi
 request
 
 
-#### 5 Request
+#### 7 Request
 
 ```bash
  curl -X GET \
