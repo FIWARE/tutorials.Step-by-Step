@@ -247,6 +247,7 @@ function logOut(req, res){
     debug('logOut')
     req.flash('success', req.session.username + ' logged out');
     req.session.access_token = undefined;
+    req.session.refresh_token = undefined;
     req.session.username = undefined;
     return res.redirect('/');
 }
