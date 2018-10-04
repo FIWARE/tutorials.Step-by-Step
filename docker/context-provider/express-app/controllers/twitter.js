@@ -29,25 +29,25 @@ const TWITTER_SEARCH_PATH = 'search/tweets';
 // to check that your CONSUMER KEY and CONSUMER SECRET are valid.
 //
 function healthCheck(req, res) {
-	debug('healthCheck for Twitter API');
-	makeTwitterRequest(
-		{ q: 'FIWARE' },
-		(error, tweets) => {
-			debug(
-				'Twitter is responding - your keys are valid  - responding with the tweets about FIWARE.'
-			);
-			monitor('health', 'Twitter API is healthy');
-			res.send(tweets);
-		},
-		err => {
-			debug(
-				'Twitter is not responding - have you added your Consumer Key & Consumer Secret as environment variables?'
-			);
-			monitor('health', 'Twitter API is unhealthy');
-			res.statusCode = err.statusCode || 501;
-			res.send(err);
-		}
-	);
+  debug('healthCheck for Twitter API');
+  makeTwitterRequest(
+    { q: 'FIWARE' },
+    (error, tweets) => {
+      debug(
+        'Twitter is responding - your keys are valid  - responding with the tweets about FIWARE.'
+      );
+      monitor('health', 'Twitter API is healthy');
+      res.send(tweets);
+    },
+    err => {
+      debug(
+        'Twitter is not responding - have you added your Consumer Key & Consumer Secret as environment variables?'
+      );
+      monitor('health', 'Twitter API is unhealthy');
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    }
+  );
 }
 
 //
@@ -56,28 +56,32 @@ function healthCheck(req, res) {
 // is set to "true" during registration
 //
 function queryContext(req, res) {
-	monitor('queryContext', 'Data requested from Twitter API', req.body);
-	makeTwitterRequest(
-		{ q: req.params.queryString },
-		(error, tweets) => {
-			if (tweets.statuses == null) {
-				// No tweets were returned for the query.
-				throw new Error({ message: 'Not Found', statusCode: 404 });
-			}
+  monitor('queryContext', 'Data requested from Twitter API', req.body);
+  makeTwitterRequest(
+    { q: req.params.queryString },
+    (error, tweets) => {
+      if (tweets.statuses == null) {
+        // No tweets were returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
 
-			res.set('Content-Type', 'application/json');
-			const payload = Formatter.formatAsV1Response(req, tweets.statuses, getValuesFromTweets);
+      res.set('Content-Type', 'application/json');
+      const payload = Formatter.formatAsV1Response(
+        req,
+        tweets.statuses,
+        getValuesFromTweets
+      );
 
-			debug(JSON.stringify(payload));
+      debug(JSON.stringify(payload));
 
-			res.send(payload);
-		},
-		err => {
-			debug(err);
-			res.statusCode = err.statusCode || 501;
-			res.send(err);
-		}
-	);
+      res.send(payload);
+    },
+    err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    }
+  );
 }
 
 //
@@ -88,28 +92,28 @@ function queryContext(req, res) {
 // request to obtain the token, then use the token in the actual request.
 //
 function makeTwitterRequest(params, callback, errorHandler) {
-	request({
-		url: TWITTER_OAUTH_TOKEN_URL,
-		method: 'POST',
-		auth: {
-			user: TWITTER_CONSUMER_KEY,
-			pass: TWITTER_CONSUMER_SECRET,
-		},
-		form: {
-			grant_type: 'client_credentials',
-		},
-	})
-		.then(function(result) {
-			debug('Making a Twitter Search API request: ' + JSON.stringify(params));
-			const client = new Twitter({
-				consumer_key: TWITTER_CONSUMER_KEY,
-				consumer_secret: TWITTER_CONSUMER_SECRET,
-				bearer_token: JSON.parse(result).access_token,
-			});
+  request({
+    url: TWITTER_OAUTH_TOKEN_URL,
+    method: 'POST',
+    auth: {
+      user: TWITTER_CONSUMER_KEY,
+      pass: TWITTER_CONSUMER_SECRET,
+    },
+    form: {
+      grant_type: 'client_credentials',
+    },
+  })
+    .then(function(result) {
+      debug('Making a Twitter Search API request: ' + JSON.stringify(params));
+      const client = new Twitter({
+        consumer_key: TWITTER_CONSUMER_KEY,
+        consumer_secret: TWITTER_CONSUMER_SECRET,
+        bearer_token: JSON.parse(result).access_token,
+      });
 
-			client.get(TWITTER_SEARCH_PATH, params, callback);
-		})
-		.catch(errorHandler);
+      client.get(TWITTER_SEARCH_PATH, params, callback);
+    })
+    .catch(errorHandler);
 }
 
 //
@@ -121,20 +125,20 @@ function makeTwitterRequest(params, callback, errorHandler) {
 // @param {string} data - The Twitter data - an array of status updates.
 //
 function getValuesFromTweets(name, type, key, data) {
-	debug(name + ' was requested - returning tweet data for ' + key);
+  debug(name + ' was requested - returning tweet data for ' + key);
 
-	const value = [];
-	// In order to avoid script injections attack in some circustances
-	// certain  characters are forbidden in any request:
-	_.forEach(data, element => {
-		value.push(element[key].replace(/[<>"'=;()?/%&]/g, ''));
-	});
+  const value = [];
+  // In order to avoid script injections attack in some circustances
+  // certain  characters are forbidden in any request:
+  _.forEach(data, element => {
+    value.push(element[key].replace(/[<>"'=;()?/%&]/g, ''));
+  });
 
-	// Return the data as an array.
-	return value;
+  // Return the data as an array.
+  return value;
 }
 
 module.exports = {
-	healthCheck,
-	queryContext,
+  healthCheck,
+  queryContext,
 };
