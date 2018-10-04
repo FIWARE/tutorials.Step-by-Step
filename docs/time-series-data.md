@@ -1,8 +1,8 @@
 [![FIWARE Core Context Management](https://img.shields.io/badge/FIWARE-Core-233c68.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAVCAYAAAC33pUlAAAABHNCSVQICAgIfAhkiAAAA8NJREFUSEuVlUtIFlEUx+eO+j3Uz8wSLLJ3pBiBUljRu1WLCAKXbXpQEUFERSQF0aKVFAUVrSJalNXGgmphFEhQiZEIPQwKLbEUK7VvZrRvbr8zzjfNl4/swplz7rn/8z/33HtmRhn/MWzbXmloHVeG0a+VSmAXorXS+oehVD9+0zDN9mgk8n0sWtYnHo5tT9daH4BsM+THQC8naK02jCZ83/HlKaVSzBey1sm8BP9nnUpdjOfl/Qyzj5ust6cnO5FItJLoJqB6yJ4QuNcjVOohegpihshS4F6S7DTVVlNtFFxzNBa7kcaEwUGcbVnH8xOJD67WG9n1NILuKtOsQG9FngOc+lciic1iQ8uQGhJ1kVAKKXUs60RoQ5km93IfaREvuoFj7PZsy9rGXE9G/NhBsDOJ63Acp1J82eFU7OIVO1OxWGwpSU5hb0GqfMydMHYSdiMVnncNY5Vy3VbwRUEydvEaRxmAOSSqJMlJISTxS9YWTYLcg3B253xsPkc5lXk3XLlwrPLuDPKDqDIutzYaj3eweMkPeCCahO3+fEIF8SfLtg/5oI3Mh0ylKM4YRBaYzuBgPuRnBYD3mmhA1X5Aka8NKl4nNz7BaKTzSgsLCzWbvyo4eK9r15WwLKRAmmCXXDoA1kaG2F4jWFbgkxUnlcrB/xj5iHxFPiBN4JekY4nZ6ccOiQ87hgwhe+TOdogT1nfpgEDTvYAucIwHxBfNyhpGrR+F8x00WD33VCNTOr/Wd+9C51Ben7S0ZJUq3qZJ2OkZz+cL87ZfWuePlwRcHZjeUMxFwTrJZAJfSvyWZc1VgORTY8rBcubetdiOk+CO+jPOcCRTF+oZ0okUIyuQeSNL/lPrulg8flhmJHmE2gBpE9xrJNkwpN4rQIIyujGoELCQz8ggG38iGzjKkXufJ2Klun1iu65bnJub2yut3xbEK3UvsDEInCmvA6YjMeE1bCn8F9JBe1eAnS2JksmkIlEDfi8R46kkEkMWdqOv+AvS9rcp2bvk8OAESvgox7h4aWNMLd32jSMLvuwDAwORSE7Oe3ZRKrFwvYGrPOBJ2nZ20Op/mqKNzgraOTPt6Bnx5citUINIczX/jUw3xGL2+ia8KAvsvp0ePoL5hXkXO5YvQYSFAiqcJX8E/gyX8QUvv8eh9XUq3h7mE9tLJoNKqnhHXmCO+dtJ4ybSkH1jc9XRaHTMz1tATBe2UEkeAdKu/zWIkUbZxD+veLxEQhhUFmbnvOezsJrk+zmqMo6vIL2OXzPvQ8v7dgtpoQnkF/LP8Ruu9zXdJHg4igAAAABJRU5ErkJgggA=)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
-**Description:** This tutorial is an introduction to [FIWARE Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to perist context data into a **Crate-DB** database. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into the database.
-The **Crate-DB** HTTP endpoint is then used to retrieve time-based aggregations of that data. The results are visualised on a graph or via the **Grafana** time series analytics tool.
+**Description:** This tutorial is an introduction to [FIWARE Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to perist context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into the database.
+The **CrateDB** HTTP endpoint is then used to retrieve time-based aggregations of that data. The results are visualised on a graph or via the **Grafana** time series analytics tool.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.Time-Series-Data/)
 
@@ -10,7 +10,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 ---
 
-# Persisting and Querying Time Series Data (Crate-DB)
+# Persisting and Querying Time Series Data (CrateDB)
 
 > "Forever is composed of nows."
 >
@@ -21,10 +21,10 @@ context data into a range of databases such as **MySQL** and **PostgreSQL**. Fur
 a **Mongo-DB** database.
 
 FIWARE [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) is an alternative generic enabler created
-specifically for data persistence into the **Crate-DB** time-series database, and therefore offers an alternative to the
+specifically for data persistence into the **CrateDB** time-series database, and therefore offers an alternative to the
 [STH-Comet](http://fiware-sth-comet.readthedocs.io/).
 
-[Crate-DB](https://crate.io/) is a distributed SQL DBMS designed for use with the Internet of Things. It is capable of ingesting a large number of data points per second and can be queried in real-time. The database is designed for the
+[CrateDB](https://crate.io/) is a distributed SQL DBMS designed for use with the Internet of Things. It is capable of ingesting a large number of data points per second and can be queried in real-time. The database is designed for the
 execution of complex queries such as geospatial and time series data. Retrieval of this historic context data allows
 for the creation of graphs and dashboards displaying trends over time.
 
@@ -35,10 +35,10 @@ A summary of the differences can be seen below:
 | Quantum Leap               | STH-Comet |
 |----------------------------|-----------|
 | Offers an NGSI v2 interface for notifications | Offers an NGSI v1 interface for notifiations |
-| Persists Data to a Crate-DB database  | Persists Data to Mongo-DB database |
-| Does not offer its own HTTP endpoint for queries, use the Crate-DB SQL endpoint | Offers its own HTTP endpoint for queries - Mongo-DB database cannot be accessed directly |
-| The Crate-DB SQL endpoint is able to satisfy complex data queries using SQL | STH-Comet offers a limited set of queries |
-| Crate-DB is a distributed SQL DBMS built atop NoSQL storage | Mongo-DB is a document based NoSQL database|
+| Persists Data to a CrateDB database  | Persists Data to Mongo-DB database |
+| Does not offer its own HTTP endpoint for queries, use the CrateDB SQL endpoint | Offers its own HTTP endpoint for queries - Mongo-DB database cannot be accessed directly |
+| The CrateDB SQL endpoint is able to satisfy complex data queries using SQL | STH-Comet offers a limited set of queries |
+| CrateDB is a distributed SQL DBMS built atop NoSQL storage | Mongo-DB is a document based NoSQL database|
 
 Further details about the differences between the the underlying database engines can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB)
 
@@ -57,7 +57,7 @@ It can also be used to reduce the significance of each individual data point to 
 #### Grafana
 
 [Grafana](https://grafana.com/) is an open source software for time series analytics tool which will be used
-during this tutorial. It integrates with a variety of time-series databases including Crate-DB
+during this tutorial. It integrates with a variety of time-series databases including CrateDB
 It is available licensed under the Apache License 2.0. More information can be found at https://grafana.com/
 
 
@@ -89,11 +89,11 @@ Therefore the overall architecture will consist of the following elements:
 * Three **FIWARE Generic Enablers**:
     * The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     * The FIWARE [IoT Agent for Ultralight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/) which will receive northbound measurements from the dummy IoT devices in [Ultralight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) format and convert them to [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the context broker to alter the state of the context entities
-    * FIWARE [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) subscribe to context changes and persist them into a **Crate-DB** database
+    * FIWARE [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) subscribe to context changes and persist them into a **CrateDB** database
 * A [MongoDB](https://www.mongodb.com/) database:
     * Used by the **Orion Context Broker** to hold context data information such as data entities, subscriptions and registrations
     * Used by the **IoT Agent** to hold device information such as device URLs and Keys
-* A [Crate-DB](https://crate.io/) database:
+* A [CrateDB](https://crate.io/) database:
     * Used as a data sink to hold time-based historical context data
     * offers an HTTP endpoint to interpret time-based data queries
 
@@ -143,13 +143,13 @@ Thereafter, all services can be initialized from the command line by running the
 
 ---
 
-# Connecting FIWARE to a Crate-DB Database via Quantum Leap
+# Connecting FIWARE to a CrateDB Database via Quantum Leap
 
 In the configuration, **Quantum Leap** listens to NGSI v2 notifications on port `8868` and persists historic context
-data to the Crate-DB. Crate-DB is accessible using port `4200` and can either be queried directly or attached to the
+data to the CrateDB. CrateDB is accessible using port `4200` and can either be queried directly or attached to the
 Grafana analytics tool.  The rest of the system providing the context data has been described in previous tutorials
 
-<h3>Crate-DB Database Server Configuration</h3>
+<h3>CrateDB Database Server Configuration</h3>
 
 ```yaml
   crate-db:
@@ -202,7 +202,7 @@ The `grafana` container has connected up port `3000` internally with port `3003`
 UI is usually available on port `3000`, but this port has already been taken by the dummy devices UI so it has been shifted
 to another port. The Grafana Environment variables are described within their own
 [documentation](http://docs.grafana.org/installation/configuration/). The configuration ensures we will be able to connect
-to the Crate-DB database later on in the tutorial
+to the CrateDB database later on in the tutorial
 
 ### Generating Context Data
 
@@ -233,9 +233,9 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 * The `idPattern` in the request body ensures that **Quantum Leap** will be informed of all **Motion Sensor** data changes.
 * The `notification` url must match the exposed port.
 
-The `metadata` attribute ensures that the `time_index` column within the **Crate-DB** database will match the data found
+The `metadata` attribute ensures that the `time_index` column within the **CrateDB** database will match the data found
 within the **Mongo-DB** database used by the **Orion Context Broker** rather than using the creation time of the record
-within the **Crate-DB** itself.
+within the **CrateDB** itself.
 
 #### 1 Request:
 
@@ -283,9 +283,9 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 * The `notification` url must match the exposed port.
 * The `throttling` value defines the rate that changes are sampled.
 
-The `metadata` attribute ensures that the `time_index` column within the **Crate-DB** database will match the data found
+The `metadata` attribute ensures that the `time_index` column within the **CrateDB** database will match the data found
 within the **Mongo-DB** database used by the **Orion Context Broker** rather than using the creation time of the record
-within the **Crate-DB** itself.
+within the **CrateDB** itself.
 
 #### 2 Request:
 
@@ -322,16 +322,16 @@ curl -iX POST \
 }'
 ```
 
-## Time Series Data Queries (Crate-DB)
+## Time Series Data Queries (CrateDB)
 
 
-Crate-DB offers an [HTTP Endpoint](https://crate.io/docs/crate/reference/en/latest/interfaces/http.html) that can be used to submit SQL queries. The endpoint is accessible under `<servername:port>/_sql`.
+CrateDB offers an [HTTP Endpoint](https://crate.io/docs/crate/reference/en/latest/interfaces/http.html) that can be used to submit SQL queries. The endpoint is accessible under `<servername:port>/_sql`.
 
 SQL statements are sent as the body of POST requests in JSON format, where the SQL statement is the value of the `stmt` attribute.
 
 ### Read Schemas
 
-**Quantum Leap** does not currently offer any interfaces to query for the persisted data A good method to see if data is being persisted is to check to see if a `table_schema` has been created. This can be done by making a request to the **Crate-DB** HTTP endpoint as shown:
+**Quantum Leap** does not currently offer any interfaces to query for the persisted data A good method to see if data is being persisted is to check to see if a `table_schema` has been created. This can be done by making a request to the **CrateDB** HTTP endpoint as shown:
 
 
 #### 3 Request:
@@ -368,7 +368,7 @@ If the `mtopeniot` does not exist, then the subscription to **Quantum Leap** has
 
 ### Read Tables
 
-Quantum Leap will persist data into separate tables within the Crate-DB database based on the entity type. Table names are formed with the et prefix and the entity type name in lowercase.
+Quantum Leap will persist data into separate tables within the CrateDB database based on the entity type. Table names are formed with the et prefix and the entity type name in lowercase.
 
 #### 4 Request:
 
@@ -399,7 +399,7 @@ The response shows that both **Motion Sensor** data and **Smart Lamp** data are 
 
 This example shows the first 3 sampled luminosity values from **Lamp:001**.
 
-The SQL statement uses `ORDER BY` and `LIMIT` clauses to sort the data. More details can be found under within the **Crate-DB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
+The SQL statement uses `ORDER BY` and `LIMIT` clauses to sort the data. More details can be found under within the **CrateDB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
 
 #### 5 Request:
 
@@ -429,7 +429,7 @@ curl -iX POST \
 
 This example shows the fourth, fifth and sixth sampled count values from **Motion:001**.
 
-The SQL statement uses an `OFFSET` clause to retrieve the required rows. More details can be found under within the **Crate-DB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
+The SQL statement uses an `OFFSET` clause to retrieve the required rows. More details can be found under within the **CrateDB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
 
 #### 6 Request:
 
@@ -459,7 +459,7 @@ curl -iX POST \
 
 This example shows latest three sampled count values from **Motion:001**.
 
-The SQL statement uses an `ORDER BY ... DESC` clause combined with a `LIMIT` clause to retrieve the last N rows. More details can be found under within the **Crate-DB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
+The SQL statement uses an `ORDER BY ... DESC` clause combined with a `LIMIT` clause to retrieve the last N rows. More details can be found under within the **CrateDB** [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
 
 #### 7 Request:
 
@@ -489,7 +489,7 @@ curl -iX POST \
 
 This example shows total count values from **Motion:001** over each minute.
 
-The SQL statement uses a `SUM` function and `GROUP BY` clause to retrieve the relevant data.  **Crate-DB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
+The SQL statement uses a `SUM` function and `GROUP BY` clause to retrieve the relevant data.  **CrateDB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
 
 #### 8 Request:
 
@@ -522,7 +522,7 @@ curl -iX POST \
 
 This example shows minimum luminosity values from **Lamp:001** over each minute.
 
-The SQL statement uses a `MIN` function and `GROUP BY` clause to retrieve the relevant data.  **Crate-DB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
+The SQL statement uses a `MIN` function and `GROUP BY` clause to retrieve the relevant data.  **CrateDB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
 
 #### 9 Request:
 
@@ -554,7 +554,7 @@ curl -iX POST \
 
 This example shows maximum luminosity values from **Lamp:001** over each minute.
 
-The SQL statement uses a `MAX` function and `GROUP BY` clause to retrieve the relevant data.  **Crate-DB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
+The SQL statement uses a `MAX` function and `GROUP BY` clause to retrieve the relevant data.  **CrateDB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
 
 #### 10 Request:
 
@@ -586,7 +586,7 @@ curl -iX POST \
 
 This example shows the average of luminosity values from **Lamp:001** over each minute.
 
-The SQL statement uses a `AVG` function and `GROUP BY` clause to retrieve the relevant data. **Crate-DB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
+The SQL statement uses a `AVG` function and `GROUP BY` clause to retrieve the relevant data. **CrateDB** offers a range of [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions) to truncate and convert the timestamps into data which can be grouped.
 
 #### 11 Request:
 
@@ -676,9 +676,9 @@ function crateToTimeSeries(crateResponse, aggMethod, hexColor){
 The modified data is then passed to the front-end to be processed by the third-party graphing tool.
 The result is shown here: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
-## Displaying Crate-DB data as a Grafana Dashboard
+## Displaying CrateDB data as a Grafana Dashboard
 
-**Crate-DB** has been chosen as the time-series data sink, as it integrates seamlessly  with the [Grafana](https://grafana.com/) time
+**CrateDB** has been chosen as the time-series data sink, as it integrates seamlessly  with the [Grafana](https://grafana.com/) time
 series analytics tool. Grafana can be used to display the aggregated sensor data - a full tutorial on building dashboards can be found
 [here](https://www.youtube.com/watch?v=sKNZMtoSHN4). The simpified instructions below summarize how to connect and display a graph of the
 Lamp `luminosity` data.
