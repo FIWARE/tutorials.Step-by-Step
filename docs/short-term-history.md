@@ -5,6 +5,8 @@
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.Short-Term-History/)
 
+> **Note** There are breaking changes to the setup of Cygnus between 1.x and 2.x. The **formal mode** section of the tutorial is describing the use of Cygnus 1.9.0
+
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4824d3171f823935dcab)
 
 ---
