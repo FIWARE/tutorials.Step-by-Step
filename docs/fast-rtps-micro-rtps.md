@@ -1,4 +1,4 @@
-[![FIWARE Robots](https://img.shields.io/badge/FIWARE-Robots-5dc0cf.svg)](https://www.fiware.org/developers/catalogue/)
+[![FIWARE Robots](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/robotics.svg)](https://www.fiware.org/developers/catalogue/)
 [![Fast_RTPS 1.6](https://img.shields.io/badge/Fast_RTPS-1.6-5dc0cf.svg)](http://eprosima-fast-rtps.readthedocs.io/)
 
 **Description:** This is an Introductory Tutorial to the [Fast-RTPS](https://eprosima-fast-rtps.readthedocs.io) and [Micro-RTPS](http://micro-rtps.readthedocs.io) protocols for RTPS (Real Time Publish Subscribe) as used in robotics and extremely constrained devices.
