@@ -63,7 +63,7 @@ downloaded from www.getpostman.com.
 ### Cygwin for Windows
 
 We will start up our services using a simple Bash script. Windows users should
-download [cygwin](http://www.cygwin.com/) to provide a command line
+download [cygwin](http://www.cygwin.com/) to provide a command-line
 functionality similar to a Linux distribution on Windows.
 
 ## Usage
@@ -81,7 +81,7 @@ Each tutorial submodule contains one or more `docker-compose.yml` files, along
 with a Postman collection containing the necessary HTTP requests: import the
 collection into Postman and follow the instructions.
 
-### Following the tutorial exercises from the Command line
+### Following the tutorial exercises from the command-line
 
 Each submodule contains full instructions in README which details the
 appropriate bash commands (cUrl and Docker Compose) to run.

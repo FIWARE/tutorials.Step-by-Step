@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This is an Introductory Tutorial to the FIWARE Platform. We
 will start with the data from a supermarket chain’s store finder and create a
@@ -105,7 +105,7 @@ docker run -d --name fiware-orion -h orion --network=fiware_default \
 
 ### Option 2) Using Docker Compose
 
-All services can be initialised from the command line using the `docker-compose`
+All services can be initialised from the command-line using the `docker-compose`
 command. Please clone the repository and create the necessary images by running
 the commands as shown:
 
@@ -286,7 +286,7 @@ attributes and types are written using the English language.
 
 In this case we only have one entity type - **Store**
 
-#### Entity ids should be a URN following NGSI-LD guidelines
+#### Entity IDs should be a URN following NGSI-LD guidelines
 
 NGSI-LD is a currently a
 [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf),
@@ -338,7 +338,7 @@ Here are a few examples, in each case the `options=keyValues` query parameter
 has been used shorten the responses by stripping out the type elements from each
 attribute
 
-### Obtain entity data by id
+### Obtain entity data by ID
 
 This example returns the data of `urn:ngsi-ld:Store:001`
 
@@ -510,14 +510,14 @@ So far, so simple, but consider how this Smart application could be iterated:
 
 -   Real-time dashboards could be created to monitor the state of the stock
     across each store using a visualization component.
-    \[[Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud)\]
+    \[[Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)\]
 -   The current layout of both the warehouse and store could be passed to the
     context broker so the location of the stock could be displayed on a map
-    \[[Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud)\]
+    \[[Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)\]
 -   User Management components
-    \[[Wilma](https://catalogue.fiware.org/enablers/pep-proxy-wilma),
-    [AuthZForce](https://catalogue.fiware.org/enablers/authorization-pdp-authzforce),
-    [Keyrock](https://catalogue.fiware.org/enablers/identity-management-keyrock)\]
+    \[[Wilma](https://github.com/Fiware/catalogue/blob/master/security/README.md#Wilma),
+    [AuthZForce](https://github.com/Fiware/catalogue/blob/master/security/README.md#Authzforce),
+    [Keyrock](https://github.com/Fiware/catalogue/blob/master/security/README.md#Keyrock)\]
     could be added so that only store managers are able to change the price of
     items
 -   A threshold alert could be raised in the warehouse as the goods are sold to
@@ -525,28 +525,29 @@ So far, so simple, but consider how this Smart application could be iterated:
     [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)]
 -   Each generated list of items to be loaded from the warehouse could be
     calculated to maximize the efficiency of replenishment
-    \[[Complex Event Processing - CEP](https://catalogue.fiware.org/enablers/complex-event-processing-cep-proactive-technology-online)\]
+    \[[Complex Event Processing - CEP](https://github.com/Fiware/catalogue/blob/master/security/README.md#new-perseo-incubated)\]
 -   A motion sensor could be added at the entrance to count the number of
     customers
-    \[[IDAS](https://catalogue.fiware.org/enablers/backend-device-management-idas)\]
+    \[[IDAS](https://github.com/Fiware/catalogue/blob/master/iot-agents/README.md)\]
 -   The motion sensor could ring a bell whenever a customer enters
-    \[[IDAS](https://catalogue.fiware.org/enablers/backend-device-management-idas)\]
+    \[[IDAS](https://github.com/Fiware/catalogue/blob/master/iot-agents/README.md)\]
 -   A series of video cameras could be added to introduce a video feed in each
     store
-    \[[Kurento](https://catalogue.fiware.org/enablers/stream-oriented-kurento)\]
+    \[[Kurento](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Kurento)\]
 -   The video images could be processed to recognize where customers are
     standing within a store
-    \[[Kurento](https://catalogue.fiware.org/enablers/stream-oriented-kurento)\]
+    \[[Kurento](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Kurento)\]
 -   By maintaining and processing historical data within the system, footfall
     and dwell time can be calculated - establishing which areas of the store
     attract the most interest \[connection through
-    [Cygnus](https://catalogue.fiware.org/enablers/cygnus) to Apache Flink\]
+    [Cygnus](https://github.com/Fiware/catalogue/blob/master/core/README.md#Cygnus)
+    to Apache Flink\]
 -   Patterns recognizing unusual behaviour could be used to raise an alert to
     avoid theft
-    \[[Kurento](https://catalogue.fiware.org/enablers/stream-oriented-kurento)\]
+    \[[Kurento](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Kurento)\]
 -   Data on the movement of crowds would be useful for scientific research -
     data about the state of the store could be published externally.
-    \[[extensions to CKAN](https://catalogue.fiware.org/enablers/fiware-ckan-extensions)\]
+    \[[extensions to CKAN](https://github.com/Fiware/catalogue/tree/master/data-publication#extensions-to-ckan)\]
 
 Each iteration adds value to the solution through existing components with
 standard interfaces and therefore minimizes development time.

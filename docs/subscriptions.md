@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about how to create and
 manage context data subscriptions. The tutorial builds on the entities and
@@ -86,7 +86,7 @@ Currently, the Orion Context Broker relies on open source
 [MongoDB](https://www.mongodb.com/) technology to keep persistence of the
 context data it holds. To request context data from external sources, a simple
 **Context Provider NGSI proxy** has also been added. To visualize and interact
-with the Context we will add a simple Express **Front End** application
+with the Context we will add a simple Express **Frontend** application
 
 Therefore, the architecture will consist of four elements:
 
@@ -100,7 +100,7 @@ Therefore, the architecture will consist of four elements:
     -   receive requests using
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   makes requests to publicly available data sources using their own APIs
-        in a proprietory format
+        in a proprietary format
     -   returns context data back to the Orion Context Broker in
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 -   The **Stock Management Frontend** which will will:
@@ -119,7 +119,7 @@ the associated `docker-compose.yml` file. It has been described in a
 
 # Start Up
 
-All services can be initialized from the command line by running the bash script
+All services can be initialized from the command-line by running the bash script
 provided within the repository. Please clone the repository and create the
 necessary images by running the commands as shown:
 
@@ -200,7 +200,7 @@ altered. The notification section of the body states that once the conditions of
 the subscription have been met, a POST request containing all affected
 **Product** entities will be sent to the URL
 `http://tutorial:3000/subscription/price-change` which is handled by the stock
-management front-end application.
+management frontend application.
 
 For a first run, when the subscription is created, the Orion Context Broker runs
 the `condition` test, and since it has not been run before makes the assumption
@@ -211,7 +211,7 @@ that all products have been changed. Therefore a request is sent to
 
 ![](https://fiware.github.io/tutorials.Subscriptions/img/products-subscription.png)
 
-Code within the Stock Management Front-End application handles received the POST
+Code within the Stock Management frontend application handles received the POST
 request as shown:
 
 ```javascript
@@ -270,7 +270,7 @@ since the last run therefore a POST request is sent to
 
 ![](https://fiware.github.io/tutorials.Subscriptions/img/price-change.png)
 
-The business logic of the Stock Management Front End again emits socket I/O
+The business logic of the Stock Management frontend again emits socket I/O
 events to any registered parties (such as the cash till) and since the price has
 changed the till now displays a bottle of beer at 0.89€
 
@@ -362,7 +362,7 @@ curl -iX POST \
 }'
 ```
 
-The two requests are very similiar. It is merely the `url` and the `expression`
+The two requests are very similar. It is merely the `url` and the `expression`
 attributes which differ. The first cUrl command will only fire if the affected
 **InventoryItem** entity has a reference to Store 001 and the second one if the
 affected **InventoryItem** entity has a reference to Store 002. Obviously the
@@ -385,8 +385,8 @@ items the following occurs
 
 ![](https://fiware.github.io/tutorials.Subscriptions/img/low-stock-monitor.png)
 
-As you can see the key value pairs of the affected **InventoryItem** have been
-passed to the Stock Management Front End.
+As you can see the key-value pairs of the affected **InventoryItem** have been
+passed to the Stock Management frontend.
 
 If you look at the store itself:
 
@@ -424,7 +424,7 @@ whenever the price attribute of any Product entity is altered.
 
 The notification section of the body states that a POST request containing all
 affected entities will be sent to the
-http://tutorial:3000/subscription/price-change endpoint.
+`http://tutorial:3000/subscription/price-change` endpoint.
 
 #### 5 Request:
 
@@ -509,7 +509,7 @@ curl -X GET \
 
 ### Read the detail of a Subscription
 
-This example obtains the full details of a subscription with a given id.
+This example obtains the full details of a subscription with a given ID.
 
 The response includes additional details in the notification section showing the
 last time the conditions of the subscription were met, and whether associated

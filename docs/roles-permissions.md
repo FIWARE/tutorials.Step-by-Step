@@ -4,7 +4,7 @@
 assign roles and permissions to them. It takes the users and organizations
 created in the
 [previous tutorial](https://github.com/Fiware/tutorials.Identity-Management) and
-ensures that only legitmate users will have access to resources.
+ensures that only legitimate users will have access to resources.
 
 The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as
 well [cUrl](https://ec.haxx.se/) commands used to access the **Keyrock** REST
@@ -85,7 +85,7 @@ database:
 Additionally two further non-human application objects can be secured within a
 FIWARE application:
 
--   **IoTAgent** - a proxy betwen IoT Sensors and the Context Broker
+-   **IoTAgent** - a proxy between IoT Sensors and the Context Broker
 -   **PEPProxy** - a middleware for use between generic enablers challenging the
     rights of a user.
 
@@ -100,7 +100,7 @@ red are used directly within this tutorial:
 
 This introduction will only make use of one FIWARE component - the
 [Keyrock](http://fiware-idm.readthedocs.io/) Identity Management Generic
-Enabler. Usage of **Keyrock** alone alone is insufficient for an application to
+Enabler. Usage of **Keyrock** alone is insufficient for an application to
 qualify as _“Powered by FIWARE”_. Additionally will be persisting user data in a
 **MySQL** database.
 
@@ -111,7 +111,7 @@ The overall architecture will consist of the following elements:
     -   FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement
         Identity Management System including:
         -   An OAuth2 authentication system for Applications and Users
-        -   A website graphical front-end for Identity Management Administration
+        -   A site graphical frontend for Identity Management Administration
         -   An equivalent REST API for Identity Management via HTTP requests
 
 -   One [MySQL](https://www.mysql.com/) database :
@@ -156,8 +156,8 @@ The `keyrock` container is a web application server listening on two ports:
 
 -   Port `3005` has been exposed for HTTP traffic so we can display the web page
     and interact with the REST API.
--   Port `3443` has been exposed for secure HTTPS traffic for the website and
-    REST API
+-   Port `3443` has been exposed for secure HTTPS traffic for the site and REST
+    API
 
 > **Note** HTTPS should be used throughout for any secured application, but to
 > do this properly, **Keyrock** requires a trusted SSL certificate - the default
@@ -182,8 +182,8 @@ The `keyrock` container is driven by environment variables as shown:
 | Key               | Value                   | Description                                                                                                                  |
 | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | IDM_DB_PASS       | `idm`                   | Password of the attached MySQL Database - secured by **Docker Secrets** (see below)                                          |
-| IDM_DB_USER       | `root`                  | User name of the default MySQL user - left in plain-text                                                                     |
-| IDM_HOST          | `http://localhost:3005` | Host name of the **Keyrock** App Server - used in activation eMails when signing up users                                    |
+| IDM_DB_USER       | `root`                  | Username of the default MySQL user - left in plain-text                                                                      |
+| IDM_HOST          | `http://localhost:3005` | Hostname of the **Keyrock** App Server - used in activation eMails when signing up users                                     |
 | IDM_PORT          | `3005`                  | Port used by the **Keyrock** App Server for HTTP traffic - this has been altered from the default 3000 port to avoid clashes |
 | IDM_HTTPS_ENABLED | `true`                  | Whether to offer HTTPS Support - this will use the self-signed certs unless overridden                                       |
 | IDM_HTTPS_PORT    | `3443`                  | Port used by the **Keyrock** App Server for HTTP traffic this has been altered from the default 443                          |
@@ -255,7 +255,7 @@ cd tutorials.Roles-Permissions
 
 > **Note** The initial creation of Docker images can take up to three minutes
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Roles-Permissions/blob/master/services)
 Bash script provided within the repository:
 
@@ -330,9 +330,9 @@ and look at the organizations list.
 
 <h3>Reading directly from the Keyrock MySQL Database</h3>
 
-All Identify Management records and releationships are held within the the
-attached MySQL database. This can be accessed by entering the running Docker
-container as shown:
+All Identify Management records and releationships are held within the attached
+MySQL database. This can be accessed by entering the running Docker container as
+shown:
 
 ```bash
 docker exec -it db-mysql bash
@@ -346,7 +346,7 @@ Where `<user>` and `<password>` match the values defined in the `docker-compose`
 file for `MYSQL_ROOT_PASSWORD` and `MYSQL_ROOT_USER`. The default values for the
 tutorial are usually `root` and `secret`.
 
-SQL commands can then be entered from the command line. e.g.:
+SQL commands can then be entered from the command-line. e.g.:
 
 ```SQL
 select id, username, email, password from user;
@@ -360,8 +360,8 @@ be found
 
 <h3>UUIDs within Keyrock</h3>
 
-All ids and tokens within **Keyrock** are subject to change. The following
-values will need to be amended when querying for records .Record ids use
+All IDs and tokens within **Keyrock** are subject to change. The following
+values will need to be amended when querying for records .Record IDs use
 Universally Unique Identifiers - UUIDs.
 
 | Key                    | Description                                                                    | Sample Value                                              |
@@ -369,14 +369,14 @@ Universally Unique Identifiers - UUIDs.
 | `keyrock`              | URL for the location of the **Keyrock** service                                | `localhost:3005` for HTTP, `localhost:3443` for HTTPS     |
 | `X-Auth-token`         | Token received in the Header when logging in as a user                         | `aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa` = I am Alice       |
 | `X-Subject-token`      | Token to pass when asking about a subject, alternatively repeat the user token | `bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb` = Asking about Bob |
-| `user-id`              | id of an existing user, found with the `user` table                            | `bbbbbbbb-good-0000-0000-000000000000` - Bob's User Id    |
-| `application-id`       | id of an existing application, found with the `oauth_client` table             | `c978218d-ad63-4427-b12b-542b81299cfb`                    |
-| `role-id`              | id of an existing role, found with the `role` table                            | `d28baa00-839e-4b45-a6b2-1cec563942ee`                    |
-| `permission-id`        | id of an existing permission, found with the `permission` table                | `6b6cd19c-9398-4834-9ba1-1616c57139c0`                    |
-| `organization-id`      | id of an existing organization, found with the `organization` table            | `e424ed98-c966-46e3-b161-a165fd31bc01`                    |
+| `user-id`              | ID of an existing user, found with the `user` table                            | `bbbbbbbb-good-0000-0000-000000000000` - Bob's User ID    |
+| `application-id`       | ID of an existing application, found with the `oauth_client` table             | `c978218d-ad63-4427-b12b-542b81299cfb`                    |
+| `role-id`              | ID of an existing role, found with the `role` table                            | `d28baa00-839e-4b45-a6b2-1cec563942ee`                    |
+| `permission-id`        | ID of an existing permission, found with the `permission` table                | `6b6cd19c-9398-4834-9ba1-1616c57139c0`                    |
+| `organization-id`      | ID of an existing organization, found with the `organization` table            | `e424ed98-c966-46e3-b161-a165fd31bc01`                    |
 | `organization-role-id` | type of role a user has within an organization either `owner` or `member`      | `member`                                                  |
-| `iot-agent-id`         | id of an existing IoT Agent, found with the `iot` table                        | `iot_sensor_f3d0245b-3330-4e64-a513-81bf4b0dae64`         |
-| `pep-proxy-id`         | id of an existing PEP Proxy, found with the `pep_proxy` table                  | `iot_sensor_f3d0245b-3330-4e64-a513-81bf4b0dae64`         |
+| `iot-agent-id`         | ID of an existing IoT Agent, found with the `iot` table                        | `iot_sensor_f3d0245b-3330-4e64-a513-81bf4b0dae64`         |
+| `pep-proxy-id`         | ID of an existing PEP Proxy, found with the `pep_proxy` table                  | `iot_sensor_f3d0245b-3330-4e64-a513-81bf4b0dae64`         |
 
 Tokens are designed to expire after a set period. If the `X-Auth-token` value
 you are using has expired, log-in again to obtain a new token. For this
@@ -545,7 +545,7 @@ curl -iX POST \
 
 #### Response:
 
-The response includes a Client Id and Secret which can be used to secure the
+The response includes a Client ID and Secret which can be used to secure the
 application.
 
 ```json
@@ -564,14 +564,14 @@ application.
 }
 ```
 
-Copy the Application Client id to be used for all other application requests -
-in the case above the id is `3782c5e3-88f9-481a-9b3c-2f2d6f604482`
+Copy the Application Client ID to be used for all other application requests -
+in the case above the ID is `3782c5e3-88f9-481a-9b3c-2f2d6f604482`
 
 ### Read Application Details
 
 Making a GET request to a resource under the
 `/v1/applications/{{application-id}}` endpoint will return the application
-listed under that id. The `X-Auth-token` must be supplied in the headers.
+listed under that ID. The `X-Auth-token` must be supplied in the headers.
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/app-with-oauth.png)
 
@@ -643,8 +643,8 @@ curl -X GET \
 ### Update an Application
 
 Within the GUI, users can be updated by selecting an application and clicking on
-`edit`. This can also be done from the command line by making PATCH request to
-`/v1/applications/<applications-id>` endpoint when the applications id is known.
+`edit`. This can also be done from the command-line by making PATCH request to
+`/v1/applications/<applications-id>` endpoint when the applications ID is known.
 The `X-Auth-token` header must also be set, since a User can only edit
 applications he is associated with.
 
@@ -688,7 +688,7 @@ The response lists the fields which have been updated, note that the
 
 Within the GUI, users can delete an application by selecting an application and
 clicking on `edit`, then scrolling to the bottom of the page and selecting
-**Remove Application**. This can also be done from the command line by sending a
+**Remove Application**. This can also be done from the command-line by sending a
 DELETE request to the `/v1/applications/<applications-id>` endpoint. The
 `X-Auth-token` header must also be set.
 
@@ -779,7 +779,7 @@ The response returns the details of the newly created permission.
 ### Read Permission Details
 
 The `/applications/{{application-id}}/permissions/{permission-id}}` endpoint
-will return the permission listed under that id. The `X-Auth-token` must be
+will return the permission listed under that ID. The `X-Auth-token` must be
 supplied in the headers.
 
 #### 8 Request:
@@ -920,12 +920,12 @@ curl -X DELETE \
 
 A permission is an allowable action on a resource, as noted above. A role
 consists of a group of permissions, in other words a series of permitted actions
-over a group of resources. Roles are usually usually given a description with a
-broad scope so that they can be assigned to a wide range of users or
-organizations for example a _Reader_ role could be able to access but not update
-a series of devices.
+over a group of resources. Roles are usually given a description with a broad
+scope so that they can be assigned to a wide range of users or organizations for
+example a _Reader_ role could be able to access but not update a series of
+devices.
 
-There are two pre-defined roles with **Keyrock** :
+There are two predefined roles with **Keyrock** :
 
 -   a _Purchaser_ who can
     -   Get and assign all public application roles
@@ -992,7 +992,7 @@ The details of the created role are returned
 ### Read Role Details
 
 The `/applications/{{application-id}}/roles/{role-id}}` endpoint will return the
-role listed under that id. The `X-Auth-token` must be supplied in the headers.
+role listed under that ID. The `X-Auth-token` must be supplied in the headers.
 
 #### 13 Request:
 
@@ -1210,7 +1210,7 @@ permissions, and the user is merely associated with a aggregated list of
 permissions via the role(s) they have been granted.
 
 The application can grant roles to either Users or Organizations - the latter
-should always be prefered, as it allows the owners of the organization to add
+should always be preferred, as it allows the owners of the organization to add
 new users - delegating the responsibility for user maintenance to a wider group.
 
 For example, imagine the supermarket gains another store detective. Alice has

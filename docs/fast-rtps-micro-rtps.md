@@ -75,7 +75,7 @@ git clone git@github.com:Fiware/tutorials.Fast-RTPS-Micro-RTPS.git
 
 > **Note** The initial creation of Docker images can take up to fifteen minutes
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Fast-RTPS-Micro-RTPS/blob/master/services)
 Bash script provided within the repository:
 
@@ -208,7 +208,7 @@ terminal.
 exit
 ```
 
-You will then return to the command line.
+You will then return to the command-line.
 
 Other examples are available in the `examples` folder, which are beyond the
 scope of this tutorial. For more information, please refer to the
@@ -357,7 +357,7 @@ To leave the containers and end interactive mode, run the following:
 exit
 ```
 
-You will then return to the command line.
+You will then return to the command-line.
 
 Other examples are available in the _examples_ folder, which are beyond the
 scope of this tutorial. For more information, please refer to the

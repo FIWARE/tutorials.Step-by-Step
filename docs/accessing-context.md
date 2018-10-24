@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users how to alter the context
 programmatically. The tutorial builds on the entities created in the previous
@@ -8,7 +8,7 @@ how to write code in an
 [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) capable
 [Node.js](https://nodejs.org/) [Express](https://expressjs.com/) application in
 order to retrieve and alter context data. This removes the need to use the
-command line to invoke cUrl commands.
+command-line to invoke cUrl commands.
 
 The tutorial is mainly concerned with discussing code written in Node.js,
 however some of the results can be checked by making [cUrl](https://ec.haxx.se/)
@@ -148,7 +148,7 @@ Currently `swagger-codegen` will generate code for the following languages:
 
 -   ActionScript, Ada, Apex, Bash, C#, C++, Clojure, Dart, Elixir, Elm, Eiffel,
     Erlang, Go, Groovy, Haskell, Java, Kotlin, Lua, Node.js, Objective-C, Perl,
-    PHP, PowerShell, Python, R, Ruby, Rust, Scala, Swift, Typescript
+    PHP, PowerShell, Python, R, Ruby, Rust, Scala, Swift, TypeScript
 
 For example the command:
 
@@ -197,7 +197,7 @@ The relationship between our entities is defined as shown:
 ![](https://fiware.github.io/tutorials.Accessing-Context/img/entities.png)
 
 The **Store**, **Product** and **InventoryItem** entities will be used to
-display data on the front-end of our demo application.
+display data on the frontend of our demo application.
 
 ---
 
@@ -226,7 +226,7 @@ Therefore, the architecture will consist of four elements:
     -   receive requests using
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   makes requests to publicly available data sources using their own APIs
-        in a proprietory format
+        in a proprietary format
     -   returns context data back to the Orion Context Broker in
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 -   The **Stock Management Frontend** which will will:
@@ -245,7 +245,7 @@ the associated `docker-compose.yml` file. It has been described in a
 
 # Start Up
 
-All services can be initialized from the command line by running the bash script
+All services can be initialized from the command-line by running the bash script
 provided within the repository. Please clone the repository and create the
 necessary images by running the commands as shown:
 
@@ -321,7 +321,7 @@ The code under discussion can be found within the `store` controller in the
 
 We don't want to reinvent the wheel and spend time writing a unnecessary
 boilerplate code for HTTP access. Therefore we will use the existing `ngsi_v2`
-NPM library. This needs to be included in the header of the file as shown. The
+npm library. This needs to be included in the header of the file as shown. The
 `basePath` must also be set - this defines the location of the Orion Context
 Broker.
 
@@ -440,7 +440,7 @@ The response has a status of **404 Not Found** with a body as shown below:
 ```
 
 The `error` object in the `catch` method hold the error response. This is then
-displayed on the front end.
+displayed on the frontend.
 
 ### Aggregating Products and Inventory Items
 
@@ -495,7 +495,7 @@ function listEntities(opts) {
 ```
 
 The code used for aggregating the results (displaying the product names for each
-item stocked) has been delegated to a `mixin` on the front-end. The foreign key
+item stocked) has been delegated to a `mixin` on the frontend. The foreign key
 aggregation (`item.refProduct === product.id`) could have been added to the
 Node.js code if we were passing on aggregated data to another component:
 

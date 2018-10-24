@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to
 [FIWARE Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) - a
@@ -53,8 +53,8 @@ A summary of the differences can be seen below:
 | The CrateDB SQL endpoint is able to satisfy complex data queries using SQL     | STH-Comet offers a limited set of queries                                                |
 | CrateDB is a distributed SQL DBMS built atop NoSQL storage                     | Mongo-DB is a document based NoSQL database                                              |
 
-Further details about the differences between the the underlying database
-engines can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB)
+Further details about the differences between the underlying database engines
+can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB)
 
 ## Analyzing time series data
 
@@ -84,7 +84,7 @@ For the purpose of this tutorial, a series of dummy IoT devices have been
 created, which will be attached to the context broker. Details of the
 architecture and protocol used can be found in the
 [IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on
-the UltraLight device monitor web-page found at:
+the UltraLight device monitor web page found at:
 `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Time-Series-Data/img/device-monitor.png)
@@ -92,7 +92,7 @@ the UltraLight device monitor web-page found at:
 #### Device History
 
 Once **Quantum Leap** has started aggregating data, the historical state of each
-device can be seen on the device history web-page found at:
+device can be seen on the device history web page found at:
 `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
 ![](https://fiware.github.io/tutorials.Time-Series-Data/img/history-graphs.png)
@@ -175,7 +175,7 @@ cd tutorials.Time-Series-Data
 ./services create
 ```
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services)
 Bash script provided within the repository:
 
@@ -251,7 +251,7 @@ be persisted.
 
 The `crate-db` container is listening on two ports:
 
--   The Admin UI is avaliable on port `4200`
+-   The Admin UI is available on port `4200`
 -   The transport protocol is available on `4300`
 
 The `grafana` container has connected up port `3000` internally with port `3003`
@@ -296,7 +296,7 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the
     subscription to only listen to measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that **Quantum Leap** will be
     informed of all **Motion Sensor** data changes.
--   The `notification` url must match the exposed port.
+-   The `notification` URL must match the exposed port.
 
 The `metadata` attribute ensures that the `time_index` column within the
 **CrateDB** database will match the data found within the **Mongo-DB** database
@@ -351,7 +351,7 @@ body.
     subscription to only listen to measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that **Quantum Leap** will be
     informed of all **Motion Sensor** data changes.
--   The `notification` url must match the exposed port.
+-   The `notification` URL must match the exposed port.
 -   The `throttling` value defines the rate that changes are sampled.
 
 The `metadata` attribute ensures that the `time_index` column within the
@@ -740,7 +740,7 @@ displaying the raw data is of little use to an end user. It must be manipulated
 to be displayed in a bar chart, line graph or table listing. This is not within
 the domain of **Quantum Leap** as it not a graphical tool, but can be delegated
 to a mashup or dashboard component such as
-[Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud)
+[Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)
 or
 [Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
 
@@ -750,7 +750,7 @@ appropriate to your coding environment - for example
 `history` controller in the
 [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
 
-The basic processing consists of two steps - retrieval and attribute mapping,
+The basic processing consists of two-step - retrieval and attribute mapping,
 sample code can be seen below:
 
 ```javascript
@@ -801,7 +801,7 @@ function crateToTimeSeries(crateResponse, aggMethod, hexColor) {
 }
 ```
 
-The modified data is then passed to the front-end to be processed by the
+The modified data is then passed to the frontend to be processed by the
 third-party graphing tool. The result is shown here:
 `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 

@@ -82,7 +82,7 @@ For the purpose of this tutorial, a series of dummy IoT devices have been
 created, which will be attached to the context broker. Details of the
 architecture and protocol used can be found in the
 [IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on
-the UltraLight device monitor web-page found at:
+the UltraLight device monitor web page found at:
 `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Short-Term-History/img/device-monitor.png)
@@ -90,7 +90,7 @@ the UltraLight device monitor web-page found at:
 #### Device History
 
 Once **STH-Comet** has started aggregating data, the historical state of each
-device can be seen on the device history web-page found at:
+device can be seen on the device history web page found at:
 `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
 ![](https://fiware.github.io/tutorials.Short-Term-History/img/history-graphs.png)
@@ -179,7 +179,7 @@ cd tutorials.Short-Term-History
 ./services create
 ```
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services)
 Bash script provided within the repository:
 
@@ -1271,7 +1271,7 @@ displaying the raw data is of little use to an end user. It must be manipulated
 to be displayed in a bar chart, line graph or table listing. This is not within
 the domain of **STH-Comet** as it not a graphical tool, but can be delegated to
 a mashup or dashboard component such as
-[Wirecloud](https://catalogue.fiware.org/enablers/application-mashup-wirecloud)
+[Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)
 or
 [Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
 
@@ -1281,7 +1281,7 @@ appropriate to your coding environment - for example
 `history` controller in the
 [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
 
-The basic processing consists of two steps - retrieval and attribute mapping,
+The basic processing consists of two-step - retrieval and attribute mapping,
 sample code can be seen below:
 
 ```javascript
@@ -1329,6 +1329,6 @@ function cometToTimeSeries(cometResponse, aggMethod) {
 }
 ```
 
-The modified data is then passed to the front-end to be processed by the
+The modified data is then passed to the frontend to be processed by the
 third-party graphing tool. The result is shown here:
 `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`

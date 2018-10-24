@@ -131,7 +131,7 @@ Therefore the overall architecture will consist of the following elements:
 -   FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement
     Identity Management System including:
     -   An OAuth2 authentication system for Applications and Users
-    -   A website graphical front-end for Identity Management Administration
+    -   A site graphical frontend for Identity Management Administration
     -   An equivalent REST API for Identity Management via HTTP requests
 -   FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a PEP Proxy securing
     access to the **Orion** and/or **IoT Agent** microservices
@@ -171,7 +171,7 @@ cd tutorials.PEP-Proxy
 
 > **Note** The initial creation of Docker images can take up to three minutes
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.PEP-PRoxy/blob/master/services)
 Bash script provided within the repository:
 
@@ -672,7 +672,7 @@ orion-proxy:
 
 The `PEP_PROXY_APP_ID` and `PEP_PROXY_USERNAME` would usually be obtained by
 adding new entries to the application in **Keyrock**, however, in this tutorial,
-they have been pre-defined by populating the **MySQL** database with data on
+they have been predefined by populating the **MySQL** database with data on
 start-up.
 
 The `orion-proxy` container is listening on a single port:
@@ -746,15 +746,15 @@ tutorials. One important change is necessary however, rather than accessing
 tutorials, all context broker traffic is now sent to `orion-proxy` on port
 `1027`. As a reminder, the relevant settings are detailed below:
 
-| Key                   | Value                                  | Description                                                                                     |
-| --------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| WEB_APP_PORT          | `3000`                                 | Port used by web-app which displays the login screen & etc.                                     |
-| KEYROCK_URL           | `http://localhost`                     | This is URL of the **Keyrock** Web Front-End itself, used for redirection when forwarding users |
-| KEYROCK_IP_ADDRESS    | `http://172.18.1.5`                    | This is URL of the **Keyrock** OAuth Communications                                             |
-| KEYROCK_PORT          | `3005`                                 | This is the port that **Keyrock** is listening on.                                              |
-| KEYROCK_CLIENT_ID     | `tutorial-dckr-site-0000-xpresswebapp` | The Client ID defined by Keyrock for this application                                           |
-| KEYROCK_CLIENT_SECRET | `tutorial-dckr-site-0000-clientsecret` | The Client Secret defined by Keyrock for this application                                       |
-| CALLBACK_URL          | `http://localhost:3000/login`          | The callback URL used by Keyrock when a challenge has succeeded.                                |
+| Key                   | Value                                  | Description                                                                                    |
+| --------------------- | -------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| WEB_APP_PORT          | `3000`                                 | Port used by web-app which displays the login screen & etc.                                    |
+| KEYROCK_URL           | `http://localhost`                     | This is URL of the **Keyrock** Web frontend itself, used for redirection when forwarding users |
+| KEYROCK_IP_ADDRESS    | `http://172.18.1.5`                    | This is URL of the **Keyrock** OAuth Communications                                            |
+| KEYROCK_PORT          | `3005`                                 | This is the port that **Keyrock** is listening on.                                             |
+| KEYROCK_CLIENT_ID     | `tutorial-dckr-site-0000-xpresswebapp` | The Client ID defined by Keyrock for this application                                          |
+| KEYROCK_CLIENT_SECRET | `tutorial-dckr-site-0000-clientsecret` | The Client Secret defined by Keyrock for this application                                      |
+| CALLBACK_URL          | `http://localhost:3000/login`          | The callback URL used by Keyrock when a challenge has succeeded.                               |
 
 ## Securing Orion - Start up
 
@@ -972,7 +972,7 @@ iot-agent-proxy:
 
 The `PEP_PROXY_APP_ID` and `PEP_PROXY_USERNAME` would usually be obtained by
 adding new entries to the application in **Keyrock**, however, in this tutorial,
-they have been pre-defined by populating the **MySQL** database with data on
+they have been predefined by populating the **MySQL** database with data on
 start-up.
 
 The `iot-agent-proxy` container is listening on a single port:
@@ -1049,9 +1049,9 @@ additions.
 
 | Key                     | Value                                             | Description                                                                                                                        |
 | ----------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| IOTA_HTTP_HOST          | `iot-agent-proxy`                                 | The host name of the Wilma PEP Proxy protecting the IoT Agent for UltraLight 2.0                                                   |
+| IOTA_HTTP_HOST          | `iot-agent-proxy`                                 | The hostname of the Wilma PEP Proxy protecting the IoT Agent for UltraLight 2.0                                                    |
 | IOTA_HTTP_PORT          | `7896`                                            | The port that the Wilma PEP Proxy protecting the IoT Agent is listenting on                                                        |
-| DUMMY_DEVICES_PORT      | `3001`                                            | Port used by the dummy IOT devices to receive commands                                                                             |
+| DUMMY_DEVICES_PORT      | `3001`                                            | Port used by the dummy IoT devices to receive commands                                                                             |
 | DUMMY_DEVICES_TRANSPORT | `HTTP`                                            | Default transport used by dummy Io devices                                                                                         |
 | DUMMY_DEVICES_API_KEY   | `4jggokgpepnvsb2uv4s40d59ov`                      | Random security key used for UltraLight interactions - ensures the integrity of interactions between the devices and the IoT Agent |
 | DUMMY_DEVICES_USER      | `iot_sensor_00000000-0000-0000-0000-000000000000` | Username assigned to the device(s) in **Keyrock**                                                                                  |
@@ -1059,7 +1059,7 @@ additions.
 
 The `DUMMY_DEVICES_USER` and `DUMMY_DEVICES_PASSWORD` would usually be obtained
 by adding new entries to the application in **Keyrock**, however, in this
-tutorial, they have been pre-defined by populating the **MySQL** database with
+tutorial, they have been predefined by populating the **MySQL** database with
 data on start-up.
 
 ## Securing IoT Agent - Start up

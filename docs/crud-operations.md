@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about CRUD Operations. The
 tutorial builds on the data created in the previous
@@ -47,7 +47,7 @@ The relationship between our entities is defined as shown:
 -   An **Inventory Item** is another conceptural entity, used to assocate
     products, stores, shelves and physical objects. It would have properties
     such as:
-    -   An assocation to the product being sold
+    -   An association to the product being sold
     -   An association to the store in which the product is being sold
     -   An association to the shelf where the product is being displayed
     -   A stock count of the quantity of the product available in the warehouse
@@ -119,11 +119,11 @@ Both containers are residing on the same network - the Orion Context Broker is
 listening on Port `1026` and MongoDB is listening on the default port `271071`.
 Both containers are also exposing the same ports externally - this is purely for
 the tutorial access - so that cUrl or Postman can access them without being part
-of the same network. The command line initialization should be self explanatory.
+of the same network. The command-line initialization should be self explanatory.
 
 # Start Up
 
-All services can be initialised from the command line by running the bash script
+All services can be initialised from the command-line by running the bash script
 provided within the repository. Please clone the repository and create the
 necessary images by running the commands as shown:
 
@@ -187,7 +187,7 @@ A complete list of entity endpoints can be found by looking at the
 ## Attribute CRUD Operations
 
 To perform CRUD operations on attributes, the `<entity-id>` must be known. Each
-attribute is effectively a key value pair.
+attribute is effectively a key-value pair.
 
 There are three endpoints:
 
@@ -234,7 +234,7 @@ regional manager of store for example - setting prices and deciding what
 products can be sold. The actual responses you receive in each case will depend
 on the state of the context data in your system at the time. If you find that
 you have already deleted an entity by mistake, you can restore the initial
-context by reloading the data from the command line
+context by reloading the data from the command-line
 
 ```bash
 ./import-data
@@ -489,7 +489,7 @@ shown:
 Context data can be retrieved by making a GET request to the
 `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
 
-### Read a Data Entity (key value pairs)
+### Read a Data Entity (key-value pairs)
 
 This example reads the key-value pairs for two requested attributes (`name` and
 `price`) from the context of existing **Product** entity with a known `id`.
@@ -524,7 +524,7 @@ key-value pairs.
 ### Read Multiple attributes values from a Data Entity
 
 This example reads the value of two requested attributes (`name` and `price`)
-from the context of existing **Product** entity with a known id.
+from the context of existing **Product** entity with a known ID.
 
 #### 10 Request:
 
@@ -656,7 +656,7 @@ create operations so the full context will return twelve products.
 ]
 ```
 
-### List all Data Entities (key value pairs)
+### List all Data Entities (key-value pairs)
 
 This example lists the `name` and `price` attributes of all **Product**
 entities.
@@ -758,7 +758,7 @@ request to the `/v2/entities` endpoint and supplying the `type` parameter,
 combine this with the o`ptions=keyValues` parameter and the `attrs` parameter to
 obtain key-values.
 
-### List Data Entity by id
+### List Data Entity by ID
 
 This example lists the `id` and `type` of all **Product** entities.
 

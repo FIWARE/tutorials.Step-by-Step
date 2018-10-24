@@ -25,7 +25,7 @@ in order of difficulty within each chapter hence the an introduction to a given
 enabler will occur before the full capabilities of that element are explored in
 more depth.
 
-It is recommended to start with reading the full **Core Context Managment:
+It is recommended to start with reading the full **Core Context Management:
 Fundamentals** Chapter before moving on to other subjects, as this will give you
 an fuller understanding of the role of context data in general. However it is
 not necessary to follow all the subsequent tutorials sequentially - as FIWARE is
@@ -67,7 +67,7 @@ Compose 1.21 or higher and upgrade if necessary.
 ### Cygwin for Windows
 
 We will start up our services using a simple Bash script. Windows users should
-download [cygwin](http://www.cygwin.com/) to provide a command line
+download [cygwin](http://www.cygwin.com/) to provide a command-line
 functionality similar to a Linux distribution on Windows.
 
 ## List of Tutorials

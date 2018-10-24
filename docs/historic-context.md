@@ -69,7 +69,7 @@ For the purpose of this tutorial, a series of dummy IoT devices have been
 created, which will be attached to the context broker. Details of the
 architecture and protocol used can be found in the
 [IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on
-the UltraLight device monitor web-page found at:
+the UltraLight device monitor web page found at:
 `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Historic-Context/img/device-monitor.png)
@@ -158,7 +158,7 @@ cd tutorials.Historic-Context
 ./services create
 ```
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services)
 Bash script provided within the repository:
 
@@ -359,9 +359,9 @@ be **201 - Created**
 
 ## Mongo DB - Reading Data from a database
 
-To read mongo-db data from the command line, we will need access to the `mongo`
+To read mongo-db data from the command-line, we will need access to the `mongo`
 tool run an interactive instance of the `mongo` image as shown to obtain a
-command line prompt:
+command-line prompt:
 
 ```bash
 docker run -it --network fiware_default  --entrypoint /bin/bash mongo
@@ -436,7 +436,7 @@ sth_/_Motion:001_Motion.aggr
 
 Looking within the `sth_openiot` you will see that a series of tables have been
 created. The names of each table consist of the `sth_` prefix followed by the
-`fiware-servicepath` header followed by the entity id. Two table are created for
+`fiware-servicepath` header followed by the entity ID. Two table are created for
 each entity - the `.aggr` table holds some aggregated data which will be
 accessed in a later tutorial. The raw data can be seen in the tables without the
 `.aggr` suffix.
@@ -710,10 +710,10 @@ be **201 - Created**
 
 ## PostgreSQL - Reading Data from a database
 
-To read PostgreSQL data from the command line, we will need access to the
+To read PostgreSQL data from the command-line, we will need access to the
 `postgres` client, to do this, run an interactive instance of the
 `postgresql-client` image supplying the connection string as shown to obtain a
-command line prompt:
+command-line prompt:
 
 ```bash
 docker run -it --rm  --network fiware_default jbergknoff/postgresql-client \
@@ -857,7 +857,7 @@ To leave the Postgres client and leave interactive mode, run the following:
 \q
 ```
 
-You will then return to the command line.
+You will then return to the command-line.
 
 # MySQL - Persisting Context Data into a Database
 
@@ -1067,9 +1067,9 @@ be **201 - Created**
 
 ## MySQL - Reading Data from a database
 
-To read MySQL data from the command line, we will need access to the `mysql`
+To read MySQL data from the command-line, we will need access to the `mysql`
 client, to do this, run an interactive instance of the `mysql` image supplying
-the connection string as shown to obtain a command line prompt:
+the connection string as shown to obtain a command-line prompt:
 
 ```bash
 docker run -it --rm  --network fiware_default mysql mysql -h mysql-db -P 3306  -u root -p123
@@ -1216,7 +1216,7 @@ To leave the MySQL client and leave interactive mode, run the following:
 \q
 ```
 
-You will then return to the command line.
+You will then return to the command-line.
 
 # Multi-Agent - Persisting Context Data into a multiple Databases
 

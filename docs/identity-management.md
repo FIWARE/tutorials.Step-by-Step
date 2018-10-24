@@ -90,7 +90,7 @@ Click on the image above to watch an introductory video
 
 This introduction will only make use of one FIWARE component - the
 [Keyrock](http://fiware-idm.readthedocs.io/) Identity Management Generic
-Enabler. Usage of **Keyrock** alone alone is insufficient for an application to
+Enabler. Usage of **Keyrock** alone is insufficient for an application to
 qualify as _“Powered by FIWARE”_. Additionally will be persisting user data in a
 **MySQL** database.
 
@@ -101,7 +101,7 @@ The overall architecture will consist of the following elements:
     -   FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement
         Identity Management System including:
         -   An OAuth2 authentication system for Applications and Users
-        -   A website graphical front-end for Identity Management Administration
+        -   A site graphical frontend for Identity Management Administration
         -   An equivalent REST API for Identity Management via HTTP requests
 
 -   One [MySQL](https://www.mysql.com/) database :
@@ -145,8 +145,8 @@ The `idm` container is a web application server listening on two ports:
 
 -   Port `3005` has been exposed for HTTP traffic so we can display the web page
     and interact with the REST API.
--   Port `3443` has been exposed for secure HTTPS traffic for the website and
-    REST API
+-   Port `3443` has been exposed for secure HTTPS traffic for the site and REST
+    API
 
 > **Note** HTTPS should be used throughout for any secured application, but to
 > do this properly, **Keyrock** requires a trusted SSL certificate - the default
@@ -171,8 +171,8 @@ The `idm` container is driven by environment variables as shown:
 | Key               | Value                   | Description                                                                                                                  |
 | ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | IDM_DB_PASS       | `idm`                   | Password of the attached MySQL Database - secured by **Docker Secrets** (see below)                                          |
-| IDM_DB_USER       | `root`                  | User name of the default MySQL user - left in plain-text                                                                     |
-| IDM_HOST          | `http://localhost:3005` | Host name of the **Keyrock** App Server - used in activation eMails when signing up users                                    |
+| IDM_DB_USER       | `root`                  | Username of the default MySQL user - left in plain-text                                                                      |
+| IDM_HOST          | `http://localhost:3005` | Hostname of the **Keyrock** App Server - used in activation eMails when signing up users                                     |
 | IDM_PORT          | `3005`                  | Port used by the **Keyrock** App Server for HTTP traffic - this has been altered from the default 3000 port to avoid clashes |
 | IDM_HTTPS_ENABLED | `true`                  | Whether to offer HTTPS Support - this will use the self-signed certs unless overridden                                       |
 | IDM_HTTPS_PORT    | `3443`                  | Port used by the **Keyrock** App Server for HTTP traffic this has been altered from the default 443                          |
@@ -244,7 +244,7 @@ cd tutorials.Identity-Management
 
 > **Note** The initial creation of Docker images can take up to three minutes
 
-Thereafter, all services can be initialized from the command line by running the
+Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Identity-Management/blob/master/services)
 Bash script provided within the repository:
 
@@ -261,9 +261,9 @@ Where `<command>` will vary depending upon the exercise we wish to activate.
 
 <h3>Reading directly from the Keyrock MySQL Database</h3>
 
-All Identify Management records and relationships are held within the the
-attached MySQL database. This can be accessed by entering the running Docker
-container as shown:
+All Identify Management records and relationships are held within the attached
+MySQL database. This can be accessed by entering the running Docker container as
+shown:
 
 ```bash
 docker exec -it db-mysql bash
@@ -277,7 +277,7 @@ Where `<user>` and `<password>` match the values defined in the `docker-compose`
 file for `MYSQL_ROOT_PASSWORD` and `MYSQL_ROOT_USER`. The default values for the
 tutorial are usually `root` and `secret`.
 
-SQL commands can then be entered from the command line. e.g.:
+SQL commands can then be entered from the command-line. e.g.:
 
 ```SQL
 select id, username, email, password from user;
@@ -300,8 +300,8 @@ Universally Unique Identifiers - UUIDs.
 | `keyrock`              | URL for the location of the **Keyrock** service                                                                                    | `localhost:3005` for HTTP or `localhost:3443` for HTTPS |
 | `X-Auth-token`         | Token received in the Header when logging in as a user - in other words _"Who am I?"_                                              | `51f2e380-c959-4dee-a0af-380f730137c3`                  |
 | `X-Subject-token`      | Token added to requests to define _"Who do I want to inquire about?"_ - This can also be a repeat the `X-Auth-token` defined above | `51f2e380-c959-4dee-a0af-380f730137c3`                  |
-| `user-id`              | id of an existing user, found with the `user` table                                                                                | `96154659-cb3b-4d2d-afef-18d6aec0518e`                  |
-| `organization-id`      | id of an existing organization, found with the `organization` table                                                                | `e424ed98-c966-46e3-b161-a165fd31bc01`                  |
+| `user-id`              | ID of an existing user, found with the `user` table                                                                                | `96154659-cb3b-4d2d-afef-18d6aec0518e`                  |
+| `organization-id`      | ID of an existing organization, found with the `organization` table                                                                | `e424ed98-c966-46e3-b161-a165fd31bc01`                  |
 | `organization-role-id` | type of role a user has within an organization either `owner` or `member`                                                          | `member`                                                |
 
 Tokens are designed to expire after a set period. If the `X-Auth-token` value
@@ -327,7 +327,7 @@ and accept the warnings)
 
 ![](https://fiware.github.io/tutorials.Identity-Management/img/log-in.png)
 
-Enter a user name and password to enter the **Keyrock** application. The default
+Enter a username and password to enter the **Keyrock** application. The default
 super-user has the values `admin@test.com` and `1234`.
 
 ### Create Token with Password
@@ -425,7 +425,7 @@ Tokens are time limited - it is no longer possible to gain access once a token
 has expired. However it is possible to refresh a token for a newer one prior to
 expiry.
 
-Most applications use this end-point to avoid timing out a user whilst they are
+Most applications use this endpoint to avoid timing out a user whilst they are
 interacting with the application.
 
 The `token` value, `d848eb12-889f-433b-9811-6a4fbf0b86ca` was acquired when the
@@ -472,10 +472,9 @@ Connection: keep-alive
 # Administrating User Accounts
 
 Users accounts are at the heart of any identity management system. The essential
-fields of every account hold a unique user name and email address to identify
-the user, along with a password for authentication. The other optional fields
-add more information about the user such as a user website, description or
-avatar.
+fields of every account hold a unique username and email address to identify the
+user, along with a password for authentication. The other optional fields add
+more information about the user such as a user website, description or avatar.
 
 As the default super-admin user `admin@test.com` with a password of `1234`, we
 will set up a series of user accounts and assign them to relevant organizations
@@ -664,7 +663,7 @@ curl -iX POST \
 ### Read Information About a User
 
 Making a GET request to a resource under the `/v1/users/{{user-id}}` endpoint
-will return the user listed under that id. The `X-Auth-token` must be supplied
+will return the user listed under that ID. The `X-Auth-token` must be supplied
 in the headers.
 
 #### 5 Request:
@@ -741,8 +740,8 @@ own organization. Listing users can be done by making a GET request to the
 ### Update a User
 
 Within the GUI, users can be updated from the settings page. This can also be
-done from the command line by making PATCH request to `/v1/users/<user-id>`
-endpoint when the user id is known. The `X-Auth-token` header must also be set.
+done from the command-line by making PATCH request to `/v1/users/<user-id>`
+endpoint when the user ID is known. The `X-Auth-token` header must also be set.
 
 #### 7 Request:
 
@@ -781,7 +780,7 @@ The response lists the fields which have been updated:
 
 Within the GUI, users can delete their account from the settings page, selecting
 the **Cancel Account** Option, once again a super-admin user can do this from
-the command line by sending a DELETE request to the `/v1/users/{{user-id}}`
+the command-line by sending a DELETE request to the `/v1/users/{{user-id}}`
 endpoint. The `X-Auth-token` header must also be set.
 
 #### 8 Request:
@@ -882,7 +881,7 @@ assigned as a user. The response returns UUID to identify the new organization.
 
 Making a GET request to a resource under the
 `/v1/organizations/{{organization-id}}` endpoint will return the organization
-listed under that id. The `X-Auth-token` must be supplied in the headers as only
+listed under that ID. The `X-Auth-token` must be supplied in the headers as only
 permitted organizations will be shown.
 
 #### 10 Request:

@@ -1,6 +1,6 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](https://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about context data and
 context providers. The tutorial builds on the **Store** entity created in the
@@ -115,7 +115,7 @@ Therefore, the architecture will consist of three elements:
     -   receive requests using
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   makes requests to publicly available data sources using their own APIs
-        in a proprietory format
+        in a proprietary format
     -   returns context data back to the Orion Context Broker in
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
@@ -167,7 +167,7 @@ described in a [previous tutorial](entity-relationships.md)
 
 ## Context Provider NGSI proxy
 
-A simple [nodejs](https://nodejs.org/) [Express](https://expressjs.com/)
+A simple [Node.js](https://nodejs.org/) [Express](https://expressjs.com/)
 application has been bundled as part of the repository. The application offers
 an NGSI v1 interface for four different context providers - the Open Weather Map
 API, the Twitter Search API and two dummy data context providers - a static data
@@ -178,9 +178,9 @@ More information about the proxy endpoints can be found
 [here](https://github.com/Fiware/tutorials.Context-Providers/blob/master/proxy/README.md)
 
 -   In order to access the Open Weather Map API, you will need to sign up for a
-    key at https://openweathermap.org/api
+    key at `https://openweathermap.org/api`
 -   In order to access the Twitter Search API, you will have to create an app in
-    Twitter via https://apps.twitter.com/app/new to obtain a Consumer Key &
+    Twitter via `https://apps.twitter.com/app/new` to obtain a Consumer Key &
     Consumer Secret.
 
 Replace the placeholders in `docker-compose.yml` in the root of the repository
@@ -200,7 +200,7 @@ data context provider instead.
 
 # Start Up
 
-All services can be initialised from the command line by running the bash script
+All services can be initialised from the command-line by running the bash script
 provided within the repository. Please clone the repository and create the
 necessary images by running the commands as shown:
 
@@ -233,7 +233,7 @@ This command will also import seed data from the previous
 
 ## Health Checks
 
-The nodejs proxy application offers a `health` endpoint for each of the four
+The Node.js proxy application offers a `health` endpoint for each of the four
 context providers. Making a request to the appropriate endpoint will check that
 the provider is running and external data can be received. The application runs
 on port `3000`.
@@ -433,7 +433,7 @@ docker run --network fiware_default --rm appropriate/curl \
   -X GET 'http://context-provider:3000/health/random'
 ```
 
-As you can see, within the network, the host name of the Context Provider is
+As you can see, within the network, the hostname of the Context Provider is
 `context-provider`.
 
 ### Retrieving a Single Attribute Value
@@ -701,7 +701,7 @@ curl -X GET \
 
 ### Read a registered Context Provider
 
-This example reads the registration data with the id 5addeffd93e53f86d8264521
+This example reads the registration data with the ID 5addeffd93e53f86d8264521
 from the context.
 
 Registration data can be obtained by making a GET request to the
