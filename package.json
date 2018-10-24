@@ -35,8 +35,8 @@
 	"scripts": {
 		"lint": "eslint . --cache --fix",
 		"precommit": "lint-staged",
-		"prettier": "prettier 'docs/*.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
-		"lint:text": "textlint 'README.md' 'docs/*.md'"
+		"prettier:text": "prettier 'docs/*.md' 'tutorials.*/README.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
+		"lint:text": "textlint 'README.md' 'docs/*.md' 'tutorials.*/README.md'"
 	},
 	"husky": {
 		"hooks": {
