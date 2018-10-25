@@ -1332,7 +1332,7 @@ the `/iot/devices/<device-id>` endpoint.
 
 ```bash
 curl -iX PUT \
-  'http://localhost:4041/iot/services?resource=/iot/d&apikey=4jggokgpepnvsb2uv4s40d59ov' \
+  'http://localhost:4041/iot/devices/bell002' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
@@ -1344,7 +1344,7 @@ curl -iX PUT \
 ### Delete a Provisioned Device
 
 This example removes a provisioned device by making a DELETE request to the
-`/iot/services/<device-id>` endpoint.
+`/iot/devices/<device-id>` endpoint.
 
 The device attributes will no longer be mapped and commands can no longer be
 sent to the device. If the device is making active measurements, they will still
@@ -1354,7 +1354,7 @@ be handled with default values if the associated service has not been deleted.
 
 ```bash
 curl -iX DELETE \
-  'http://localhost:4041/iot/services/?resource=/iot/d&apikey=4jggokgpepnvsb2uv4s40d59ov' \
+  'http://localhost:4041/iot/devices/bell002' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
 ```
