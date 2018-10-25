@@ -124,9 +124,10 @@ the data created in the first
 and reading it programatically. It will make use of three FIWARE components -
 the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
-and integrates the use of the [Keyrock](https://fiware-idm.readthedocs.io/)
-Generic enabler. Usage of the Orion Context Broker is sufficient for an
-application to qualify as _“Powered by FIWARE”_.
+and integrates the use of the
+[Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler. Usage
+of the Orion Context Broker is sufficient for an application to qualify as
+_“Powered by FIWARE”_.
 
 Both the Orion Context Broker and the IoT Agent rely on open source
 [MongoDB](https://www.mongodb.com/) technology to keep persistence of the
@@ -147,8 +148,8 @@ Therefore the overall architecture will consist of the following elements:
     them to
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
--   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/) offer a complement
-    Identity Management System including:
+-   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) offer a
+    complement Identity Management System including:
     -   An OAuth2 authentication system for Applications and Users
     -   A site graphical frontend for Identity Management Administration
     -   An equivalent REST API for Identity Management via HTTP requests

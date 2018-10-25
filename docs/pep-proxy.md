@@ -45,13 +45,13 @@ on a different machine altogether.
 
 FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a simple implentation of a
 **PEP proxy** designed to work with the FIWARE
-[Keyrock](https://fiware-idm.readthedocs.io/) Generic Enabler. Whenever a user
-tries to gain access to the resource behind the **PEP proxy**, the PEP will
-describe the user's attributes to the Policy Decision Point (PDP), request a
-security decision, and enforce the decision. (Permit or Deny). There is mimimal
-disruption of access for authorized users - the response received is the same as
-if they had accessed the secured service directly. Unauthorized users are simply
-returned a **401 - Unauthorized** response.
+[Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic Enabler.
+Whenever a user tries to gain access to the resource behind the **PEP proxy**,
+the PEP will describe the user's attributes to the Policy Decision Point (PDP),
+request a security decision, and enforce the decision. (Permit or Deny). There
+is mimimal disruption of access for authorized users - the response received is
+the same as if they had accessed the secured service directly. Unauthorized
+users are simply returned a **401 - Unauthorized** response.
 
 ## Standard Concepts of Identity Management
 
@@ -104,10 +104,10 @@ created in previous tutorials and uses data pre-populated into the **MySQL**
 database used by **Keyrock**. It will make use of four FIWARE components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
-the [Keyrock](https://fiware-idm.readthedocs.io/) Generic enabler and adds one
-or two instances [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy dependent
-upon which interfaces are to be secured. Usage of the Orion Context Broker is
-sufficient for an application to qualify as _“Powered by FIWARE”_.
+the [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler and
+adds one or two instances [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy
+dependent upon which interfaces are to be secured. Usage of the Orion Context
+Broker is sufficient for an application to qualify as _“Powered by FIWARE”_.
 
 Both the Orion Context Broker and the IoT Agent rely on open source
 [MongoDB](https://www.mongodb.com/) technology to keep persistence of the
@@ -128,8 +128,8 @@ Therefore the overall architecture will consist of the following elements:
     them to
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
--   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/) offer a complement
-    Identity Management System including:
+-   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) offer a
+    complement Identity Management System including:
     -   An OAuth2 authentication system for Applications and Users
     -   A site graphical frontend for Identity Management Administration
     -   An equivalent REST API for Identity Management via HTTP requests

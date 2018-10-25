@@ -89,17 +89,17 @@ Click on the image above to watch an introductory video
 # Architecture
 
 This introduction will only make use of one FIWARE component - the
-[Keyrock](https://fiware-idm.readthedocs.io/) Identity Management Generic
-Enabler. Usage of **Keyrock** alone is insufficient for an application to
-qualify as _“Powered by FIWARE”_. Additionally will be persisting user data in a
-**MySQL** database.
+[Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Management
+Generic Enabler. Usage of **Keyrock** alone is insufficient for an application
+to qualify as _“Powered by FIWARE”_. Additionally will be persisting user data
+in a **MySQL** database.
 
 The overall architecture will consist of the following elements:
 
 -   One **FIWARE Generic Enabler**:
 
-    -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/) offer a complement
-        Identity Management System including:
+    -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) offer a
+        complement Identity Management System including:
         -   An OAuth2 authentication system for Applications and Users
         -   A site graphical frontend for Identity Management Administration
         -   An equivalent REST API for Identity Management via HTTP requests
