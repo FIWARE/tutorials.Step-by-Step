@@ -10,7 +10,7 @@ allowing users to manipulate the data held within the context.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.CRUD-Operations/).
+[Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/825950653bc2350307c3)
 

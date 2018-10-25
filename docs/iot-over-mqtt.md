@@ -1,17 +1,17 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial uses introduces the use of the MQTT protocol
 across IoT devices connecting to FIWARE. The
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 IoT Agent created in the [previous tutorial](iot-agent.md) is reconfigured to
 communicate with a set of dummy IoT devices using MQTT via a
 [Mosquitto](https://mosquitto.org/) message broker
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.IoT-Agent/)
+[Postman documentation](https://fiware.github.io/tutorials.IoT-Agent/)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/acfd27a941ed57a0cae5)
 
@@ -57,7 +57,7 @@ below:
 | Higher Power Requirement                                                            | Low Power Requirement                                                                         |
 
 The UltraLight 2.0 IoT Agent will only send or interpret messages using the
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 syntax, however it can be used to send and receive messages over multiple
 **transport** mechanisms. Therefore we are able to use the same FIWARE generic
 enabler to connect to a wider range of IoT devices.
@@ -87,7 +87,7 @@ This application builds on the components created in
 [previous tutorials](iot-agent.md). It will make use of two FIWARE components -
 the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and
 the
-[IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/).
+[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/).
 Usage of the Orion Context Broker (with proper context data flowing through it)
 is sufficient for an application to qualify as _“Powered by FIWARE”_. Both the
 Orion Context Broker and the IoT Agent rely on open source
@@ -104,12 +104,12 @@ Therefore the overall architecture will consist of the following elements:
     will receive requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE
-    [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)
+    [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
     which will:
     -   receive southbound requests using
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and
         convert them to
-        [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+        [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
         MQTT topics for the MQTT Broker
     -   listen to the **MQTT Broker** on registered topics to send measurements
         northbound
@@ -122,7 +122,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Used by the **IoT Agent** to hold device information such as device URLs
         and Keys
 -   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over MQTT.
 -   The **Context Provider NGSI** proxy is not used in this tutorial. It does
     the following:
@@ -172,7 +172,7 @@ The `mosquitto` container is listening on two ports:
 -   Port `9001` is the standard port for HTTP/Websocket communications
 
 The attached volume is a
-[configuration file](https://github.com/Fiware/tutorials.IoT-over-MQTT/blob/master/osquitto/mosquitto.conf)
+[configuration file](https://github.com/Fiware/tutorials.IoT-over-MQTT/blob/master/mosquitto/mosquitto.conf)
 used to increase the debug level of the MQTT Message Broker.
 
 <h3>Dummy IoT Devices Configuration</h3>
@@ -221,7 +221,7 @@ are not used in this tutorial.
 <h3>IoT Agent for UltraLight 2.0 Configuration</h3>
 
 The
-[IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)
+[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
 can be instantiated within a Docker container. An official Docker image is
 available from [Docker Hub](https://hub.docker.com/r/fiware/iotagent-ul/) tagged
 `fiware/iotagent-ul`. The necessary configuration can be seen below:

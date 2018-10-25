@@ -1,10 +1,10 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial introduces the concept of an **IoT Agent** and
 wires up the dummy
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 IoT devices created in the [previous tutorial](iot-sensors.md) so that
 measurements can be read and commands can be sent using
 [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests sent to
@@ -12,7 +12,7 @@ the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.IoT-Agent/)
+[Postman documentation](https://fiware.github.io/tutorials.IoT-Agent/)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2150531e68299d46f937)
 
@@ -47,15 +47,15 @@ complexity.
 IoT Agents already exist or are in development for many IoT communication
 protocols and data models. Examples include the following:
 
--   [IoTAgent-JSON](http://fiware-iotagent-json.readthedocs.io/en/latest/) - a
+-   [IoTAgent-JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/) - a
     bridge between HTTP/MQTT messaging (with a JSON payload) and NGSI
--   [IoTAgent-LWM2M](http://fiware-iotagent-lwm2m.readthedocs.io/en/latest) - a
+-   [IoTAgent-LWM2M](https://fiware-iotagent-lwm2m.readthedocs.io/en/latest) - a
     bridge between the
     [Lightweight M2M](https://www.omaspecworks.org/what-is-oma-specworks/iot/lightweight-m2m-lwm2m/)
     protocol and NGSI
--   [IoTAgent-UL](http://fiware-iotagent-ul.readthedocs.io/en/latest) - a bridge
-    between HTTP/MQTT messaging (with an UltraLight2.0 payload) and NGSI
--   [IoTagent-LoRaWAN](http://fiware-lorawan.readthedocs.io/en/latest) - a
+-   [IoTAgent-UL](https://fiware-iotagent-ul.readthedocs.io/en/latest) - a
+    bridge between HTTP/MQTT messaging (with an UltraLight2.0 payload) and NGSI
+-   [IoTagent-LoRaWAN](https://fiware-lorawan.readthedocs.io/en/latest) - a
     bridge between the [LoRaWAN](https://www.thethingsnetwork.org/docs/lorawan/)
     protocol and NGSI
 
@@ -157,7 +157,7 @@ This application builds on the components created in
 [previous tutorials](subscriptions.md). It will make use of two FIWARE
 components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the
-[IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/).
+[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/).
 Usage of the Orion Context Broker (with proper context data flowing through it)
 is sufficient for an application to qualify as _“Powered by FIWARE”_. Both the
 Orion Context Broker and the IoT Agent rely on open source
@@ -172,11 +172,11 @@ Therefore the overall architecture will consist of the following elements:
     will receive requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE
-    [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)
+    [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
     which will receive southbound requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert
     them to
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
     -   Used by the **Orion Context Broker** to hold context data information
@@ -197,7 +197,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Show which products can be bought at each store
     -   Allow users to "buy" products and reduce the stock count.
 -   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP.
 
 Since all interactions between the elements are initiated by HTTP requests, the
@@ -259,7 +259,7 @@ are not used in this tutorial.
 <h3>IoT Agent for UltraLight 2.0 Configuration</h3>
 
 The
-[IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)
+[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
 can be instantiated within a Docker container. An official Docker image is
 available from [Docker Hub](https://hub.docker.com/r/fiware/iotagent-ul/) tagged
 `fiware/iotagent-ul`. The necessary configuration can be seen below:

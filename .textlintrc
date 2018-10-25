@@ -6,10 +6,17 @@
       "adverb": false,
       "passive": false,
       "tooWordy": false,
-      "weasel": false
+      "weasel": false,
+      "so": false
     },
     "no-dead-link": {
-       "ignoreRedirects": true
+       "ignoreRedirects": true,
+       "ignore": [
+          "mailto:*",
+          "https://*.rtfd.io",
+          "https://*.readthedocs.io",
+          "https://oauth.net"
+      ]
     }
   }
 }

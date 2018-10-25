@@ -8,7 +8,7 @@ of related data entities to create a simple stock management system.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.Entity-Relationships/).
+[Postman documentation](https://fiware.github.io/tutorials.Entity-Relationships/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/0671934f64958d3200b3)
 
@@ -348,7 +348,7 @@ need to add an association relationship similar to a foreign key. Batch
 processing can again be used to amend the existing the **Shelf** entities to add
 a `refStore` attribute holding the relationship to each store. According to the
 FIWARE Data Modelling Guidelines on
-[linked data](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data),
+[linked data](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html#modelling-linked-data),
 when an entity attribute is used as a link to other entities it should be named
 with the prefix `ref` plus the name of the target (linked) entity type.
 

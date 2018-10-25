@@ -1,9 +1,9 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://www.fiware.org/developers/catalogue/)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial is an introduction to IoT devices and the usage
 of the
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 Protocol for constrained devices. The tutorial introduces a series of dummy IoT
 devices which are displayed within the browser and allows a user to interact
 with them. A complete understanding of all the terms and concepts defined in
@@ -12,7 +12,7 @@ Orion Context Broker via a real IoT Agent.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.IoT-Sensors/)
+[Postman documentation](https://fiware.github.io/tutorials.IoT-Sensors/)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/32975e01a2c250698149)
 
@@ -67,7 +67,7 @@ within the Context Broker is defined in the diagram below:
 
 # What is Ultralight 2.0?
 
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 is a lightweight text based protocol for constrained devices and communications
 where bandwidth and device memory resources are limited. The payload for
 measurement requests is a list of key-value pairs separated by the pipe `|`
@@ -214,7 +214,7 @@ each device can be seen on the UltraLight device monitor web page found at:
 
 The demo application will only make use of a single custom component acting as a
 set of dummy IoT devices. Every IoT device will be using the
-[UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 protocol running over HTTP. Since all interactions are initiated by HTTP
 requests, the entities can be containerized and run from exposed ports.
 
@@ -277,7 +277,7 @@ will be needed to complete the system subsequently.
 -   An IoT Agent acts as a middleware component converting
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests
     (from the context broker) into a protocol (such as
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual))
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual))
     usable by the IoT devices themselves.
 
 It is therefore necessary to understand a sample device protocol first, and

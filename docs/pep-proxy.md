@@ -10,7 +10,7 @@ to authenticating other services are described in detail.
 
 [cUrl](https://ec.haxx.se/) commands are used throughout to access the
 **Keyrock** and **Wilma** REST APIs -
-[Postman documentation](http://fiware.github.io/tutorials.PEP-Proxy/) for these
+[Postman documentation](https://fiware.github.io/tutorials.PEP-Proxy/) for these
 calls is also available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/66d8ba3abaf7319941b1)
@@ -45,7 +45,7 @@ on a different machine altogether.
 
 FIWARE [Wilma](https://fiware-pep-proxy.rtfd.io/) is a simple implentation of a
 **PEP proxy** designed to work with the FIWARE
-[Keyrock](http://fiware-idm.readthedocs.io/) Generic Enabler. Whenever a user
+[Keyrock](https://fiware-idm.readthedocs.io/) Generic Enabler. Whenever a user
 tries to gain access to the resource behind the **PEP proxy**, the PEP will
 describe the user's attributes to the Policy Decision Point (PDP), request a
 security decision, and enforce the decision. (Permit or Deny). There is mimimal
@@ -103,9 +103,9 @@ Sensors-based application by adding PEP Proxy instances around the services
 created in previous tutorials and uses data pre-populated into the **MySQL**
 database used by **Keyrock**. It will make use of four FIWARE components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
-[IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/),
-the [Keyrock](http://fiware-idm.readthedocs.io/) Generic enabler and adds one or
-two instances [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy dependent
+[IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
+the [Keyrock](https://fiware-idm.readthedocs.io/) Generic enabler and adds one
+or two instances [Wilma](https://fiware-pep-proxy.rtfd.io/) PEP Proxy dependent
 upon which interfaces are to be secured. Usage of the Orion Context Broker is
 sufficient for an application to qualify as _“Powered by FIWARE”_.
 
@@ -122,13 +122,13 @@ Therefore the overall architecture will consist of the following elements:
     will receive requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE
-    [IoT Agent for UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/)
+    [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
     which will receive southbound requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert
     them to
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
--   FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement
+-   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/) offer a complement
     Identity Management System including:
     -   An OAuth2 authentication system for Applications and Users
     -   A site graphical frontend for Identity Management Administration
@@ -150,7 +150,7 @@ Therefore the overall architecture will consist of the following elements:
 -   A webserver acting as set of
     [dummy IoT devices](https://github.com/Fiware/tutorials.IoT-Sensors) using
     the
-    [UltraLight 2.0](http://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP - access to certain resources is restricted.
 
 Since all interactions between the elements are initiated by HTTP requests, the

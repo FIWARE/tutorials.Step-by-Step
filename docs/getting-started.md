@@ -8,7 +8,7 @@ location of each store as context data to the FIWARE context broker.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.Getting-Started/)
+[Postman documentation](https://fiware.github.io/tutorials.Getting-Started/)
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d6671a59a7e892629d2b)
 
@@ -274,7 +274,7 @@ curl -iX POST \
 Although the each data entity within your context will vary according to your
 use case, the common structure within each data entity should be standardized
 order to promote reuse. The full FIWARE data model guidelines can be found
-[here](http://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html).
+[here](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html).
 This tutorial demonstrates the usage of the following recommendations:
 
 #### All terms are defined in American English

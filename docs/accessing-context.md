@@ -13,7 +13,7 @@ command-line to invoke cUrl commands.
 The tutorial is mainly concerned with discussing code written in Node.js,
 however some of the results can be checked by making [cUrl](https://ec.haxx.se/)
 commands.
-[Postman documentation](http://fiware.github.io/tutorials.Accessing-Context/)
+[Postman documentation](https://fiware.github.io/tutorials.Accessing-Context/)
 for the same commands is also available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fb5f564d9bc65fc3690e)
@@ -56,7 +56,7 @@ Therefore context data can be accessed by any programming language, simply
 through making HTTP requests.
 
 Here for example is the same HTTP request written in
-[PHP](https://secure.php.net/), [Node.js](https://Node.js.org/) and
+[PHP](https://secure.php.net/), [Node.js](https://nodejs.org/) and
 [Java](https://www.oracle.com/java/)
 
 #### PHP (with `HTTPRequest`)
@@ -155,7 +155,7 @@ For example the command:
 ```bash
 swagger-codegen generate \
   -l javascript \
-  -i http://fiware.github.io/specifications/OpenAPI/ngsiv2/ngsiv2-openapi.json
+  -i https://fiware.github.io/specifications/OpenAPI/ngsiv2/ngsiv2-openapi.json
 ```
 
 Will generate a default ES5 npm package for NGSI v2 directly from the current
@@ -272,7 +272,7 @@ This command will also import seed data from the previous
 
 All the code Node.js Express for the demo can be found within the `proxy` folder
 within the GitHub
-repository.[Stock Management example](https://github.com/Fiware/tutorials.Accessing-Context/tree/master/proxy).
+repository.[Stock Management example](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/docker/context-provider).
 The application runs on the following URLs:
 
 -   `http://localhost:3000/app/store/urn:ngsi-ld:Store:001`
@@ -315,7 +315,7 @@ library map directly onto the NGSI v2
 ## Analyzing the Code
 
 The code under discussion can be found within the `store` controller in the
-[Git Repository](https://github.com/Fiware/tutorials.Context-Providers/blob/master/proxy/controllers/store.js)
+[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/store.js)
 
 ### Initializing the library
 

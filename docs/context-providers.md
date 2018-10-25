@@ -10,7 +10,7 @@ Broker.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](http://fiware.github.io/tutorials.Context-Providers/).
+[Postman documentation](https://fiware.github.io/tutorials.Context-Providers/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7c9bed4bd2ce5213a80b)
 
@@ -175,12 +175,12 @@ provider (which always returns the same data) and a random data context provider
 (which will change every time it is invoked).
 
 More information about the proxy endpoints can be found
-[here](https://github.com/Fiware/tutorials.Context-Providers/blob/master/proxy/README.md)
+[here](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/docker/context-provider)
 
 -   In order to access the Open Weather Map API, you will need to sign up for a
     key at `https://openweathermap.org/api`
 -   In order to access the Twitter Search API, you will have to create an app in
-    Twitter via `https://apps.twitter.com/app/new` to obtain a Consumer Key &
+    Twitter via `https://developer.twitter.com/` to obtain a Consumer Key &
     Consumer Secret.
 
 Replace the placeholders in `docker-compose.yml` in the root of the repository
@@ -305,7 +305,7 @@ The Twitter API uses OAuth2:
 
 -   To get Consumer Key & Consumer Secret for the Twitter API, you have to
     create an app in Twitter via
-    [https://apps.twitter.com/app/new](https://apps.twitter.com/app/new). Then
+    [https://developer.twitter.com/](https://developer.twitter.com/). Then
     you'll be taken to a page containing Consumer Key & Consumer Secret.
 -   For more information see:
     [https://developer.twitter.com/](https://developer.twitter.com/)

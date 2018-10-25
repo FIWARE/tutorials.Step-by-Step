@@ -3,7 +3,7 @@
 
 **Description:** This tutorial teaches FIWARE users about how to create and
 manage context data subscriptions. The tutorial builds on the entities and
-[Stock Management Frontend](https://github.com/Fiware/tutorials.Subscriptions/tree/master/proxy)
+[Stock Management Frontend](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/docker/context-provider)
 application created in the previous
 [example](https://github.com/Fiware/tutorials.Accessing-Context/) to enable
 users to understand the
@@ -12,7 +12,7 @@ paradigm and how to use NGSI subscriptions within their own code.
 
 The tutorial refers to Stock Management actions made within the browser combined
 with [cUrl](https://ec.haxx.se/) commands. The cUrl commands are also available
-as [Postman documentation](http://fiware.github.io/tutorials.Subscriptions/).
+as [Postman documentation](https://fiware.github.io/tutorials.Subscriptions/).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/fb5f564d9bc65fc3690e)
 

@@ -3,7 +3,7 @@
 
 **Description:** This is an Introductory Tutorial to the
 [Fast-RTPS](https://eprosima-fast-rtps.readthedocs.io) and
-[Micro-RTPS](http://micro-rtps.readthedocs.io) protocols for RTPS (Real Time
+[Micro-RTPS](http://micro-xrce-dds.readthedocs.io) protocols for RTPS (Real Time
 Publish Subscribe) as used in robotics and extremely constrained devices. The
 enablers of the FIWARE platform are not directly involved at this low level of
 communication but a complete understanding of the protocols is required before
@@ -51,7 +51,7 @@ including these important cases:
 # What is Micro-RTPS?
 
 [eProsima](http://www.eprosima.com/)
-[Micro-RTPS](http://micro-rtps.readthedocs.io) protocols for RTPS (Real Time
+[Micro-RTPS](http://micro-xrce-dds.readthedocs.io) protocols for RTPS (Real Time
 Publish Subscribe) as used in robotics and extremely constrained devices, which
 is a software solution that provides publisher-subscriber communication between
 eXtremely Resource Constrained Environments (XRCEs) and a DDS network. In
@@ -361,4 +361,4 @@ You will then return to the command-line.
 
 Other examples are available in the _examples_ folder, which are beyond the
 scope of this tutorial. For more information, please refer to the
-[official Micro-RTPS documentation](http://micro-rtps.readthedocs.io/en/latest/).
+[official Micro-RTPS documentation](http://micro-xrce-dds.readthedocs.io/en/latest/).

@@ -9,8 +9,8 @@ ensures that only legitimate users will have access to resources.
 The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as
 well [cUrl](https://ec.haxx.se/) commands used to access the **Keyrock** REST
 API -
-[Postman documentation](http://fiware.github.io/tutorials.Roles-Permissions/) is
-also available.
+[Postman documentation](https://fiware.github.io/tutorials.Roles-Permissions/)
+is also available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/2febc0452a8977734480)
 
@@ -99,7 +99,7 @@ red are used directly within this tutorial:
 # Architecture
 
 This introduction will only make use of one FIWARE component - the
-[Keyrock](http://fiware-idm.readthedocs.io/) Identity Management Generic
+[Keyrock](https://fiware-idm.readthedocs.io/) Identity Management Generic
 Enabler. Usage of **Keyrock** alone is insufficient for an application to
 qualify as _“Powered by FIWARE”_. Additionally will be persisting user data in a
 **MySQL** database.
@@ -108,7 +108,7 @@ The overall architecture will consist of the following elements:
 
 -   One **FIWARE Generic Enabler**:
 
-    -   FIWARE [Keyrock](http://fiware-idm.readthedocs.io/) offer a complement
+    -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/) offer a complement
         Identity Management System including:
         -   An OAuth2 authentication system for Applications and Users
         -   A site graphical frontend for Identity Management Administration
