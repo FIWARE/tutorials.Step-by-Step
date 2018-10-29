@@ -48,7 +48,7 @@ follows:
 For the full guidelines see:
 https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html
 
-# Health Check Endpoints
+## Health Check Endpoints
 
 The following health check endpoints are supported:
 
@@ -87,7 +87,7 @@ The following health check endpoints are supported:
     -   For more information see:
         [https://openweathermap.org/appid](https://openweathermap.org/appid)
 
-# Keys and Secrets
+## Keys and Secrets
 
 All Keys and Secrets must be passed in using Environment variables. The
 following variables **must** be provided
@@ -96,7 +96,9 @@ following variables **must** be provided
 -   `TWITTER_CONSUMER_KEY=<ADD_YOUR_CONSUMER_KEY>`
 -   `TWITTER_CONSUMER_SECRET=<ADD_YOUR_CONSUMER_SECRET>`
 
-# License
+---
+
+## License
 
 MIT © 2018 FIWARE Foundation e.V.
 
@@ -105,6 +107,10 @@ See the LICENSE file in the root of this project for license details.
 The Program includes additional icons downloaded from www.flaticon.com which
 were obtained under license:
 
--   Smashicons - https://www.flaticon.com/authors/smashicons - CC 3.0 BY
--   Those Icons - https://www.flaticon.com/authors/those-icons - CC 3.0 BY
--   Freepik - http://www.freepik.com/ - CC 3.0 BY
+-   Smashicons -
+    [https://www.flaticon.com/authors/smashicons](https://www.flaticon.com/authors/smashicons) -
+    CC 3.0 BY
+-   Those Icons -
+    [https://www.flaticon.com/authors/those-icons](https://www.flaticon.com/authors/those-icons) -
+    CC 3.0 BY
+-   Freepik - [http://www.freepik.com/](http://www.freepik.com/) - CC 3.0 BY

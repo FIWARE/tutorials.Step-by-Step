@@ -13,7 +13,7 @@ devices or manipulating the context directly or programmatically.
 This application provides various sources of context and demonstrates various
 aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
 
-# Store Application
+## Store Application
 
 -   `WEB_APP_PORT=3000` # Port used by the content provider proxy and web-app
     for viewing
@@ -22,7 +22,7 @@ aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
 -   `NGSI_LD_PREFIX=` - Whether to use full URNs for devices
 -   `SECURE_ENDPOINTS=true` - Enable Keyrock as PDP - default is `false`
 
-# Dummy Ultralight Devices
+## Dummy Ultralight Devices
 
 -   `IOTA_HTTP_HOST=iot-agent` - The URL of the IoT Agent
 -   `IOTA_HTTP_PORT=7896` - Port used by the dummy IoT devices to commuicate
@@ -33,7 +33,7 @@ aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
     (either `HTTP` or `MQTT`)
 -   `DUMMY_DEVICES_API_KEY=4jggokgpepnvsb2uv4s40d59ov` - Device API Key.
 
-# Keyrock
+## Keyrock
 
 -   `KEYROCK_URL=http://localhost` - URL for Keyrock IDM
 -   `KEYROCK_IP_ADDRESS=http://172.18.1.5` - IP address for Keyrock IDM
