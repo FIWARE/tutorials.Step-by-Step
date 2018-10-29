@@ -102,8 +102,8 @@ These tutorials show how to manipulate and store context data so it can be used
 for further processesing
 
 &nbsp; 301.
-[Persisting Context Data (Mongo-DB, MySQL, PostgreSQL)](historic-context.md)<br/>
-&nbsp; 302. [Querying Time Series Data (Mongo-DB)](short-term-history.md)<br/>
+[Persisting Context Data (MongoDB, MySQL, PostgreSQL)](historic-context.md)<br/>
+&nbsp; 302. [Querying Time Series Data (MongoDB)](short-term-history.md)<br/>
 &nbsp; 303. [Querying Time Series Data (Crate-DB)](time-series-data.md)<br/>
 
 <h3>Security: Identity Management</h3>

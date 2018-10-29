@@ -3,7 +3,7 @@
 
 **Description:** This tutorial is an introduction to
 [FIWARE STH-Comet](https://fiware-sth-comet.readthedocs.io/) - a generic enabler
-which is used to retrieve trend data from a Mongo-DB database. The tutorial
+which is used to retrieve trend data from a MongoDB database. The tutorial
 activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and
 persists measurements from those sensors into a database and retrieves
 time-based aggregations of that data.
@@ -20,7 +20,7 @@ available as
 
 ---
 
-# Querying Time Series Data (Mongo-DB)
+# Querying Time Series Data (MongoDB)
 
 > "The _"moment"_ has no yesterday or tomorrow. It is not the result of thought
 > and therefore has no time."
@@ -28,7 +28,7 @@ available as
 > — Bruce Lee
 
 Within the FIWARE platform, historical context data can be persisted to a
-database (such as Mongo-DB) using a combination of the **Orion Context Broker**
+database (such as MongoDB) using a combination of the **Orion Context Broker**
 and the **Cygnus** generic enabler. This results in a series of data points
 being written to the database of your choice. Each time-stamped data point
 represents the state of context entities at a given moment in time. The
@@ -40,7 +40,7 @@ The creation and analysis of trend data is a common requirement of
 context-driven systems - therefore the FIWARE platform offers a generic enabler
 ([STH-Comet](https://fiware-sth-comet.readthedocs.io/)) specifically to deal
 with the issue of persisting and interpreting time series data persisted into
-Mongo-DB. **STH-Comet** itself can be used in two modes:
+MongoDB. **STH-Comet** itself can be used in two modes:
 
 -   In _minimal_ mode, **STH-Comet** is responsible for both data collection and
     interpreting the data when requested
@@ -51,16 +51,16 @@ Of the two modes of operation, the _formal_ mode is more flexible, but _minimal_
 mode is simpler and easier to set-up. The key differences between the two are
 summarized in the table below:
 
-|                                                        | _minimal_ mode                                    | _formal_ mode                                                    |
-| ------------------------------------------------------ | ------------------------------------------------- | ---------------------------------------------------------------- |
-| Is the system easy to set-up properly?                 | Only one configuration supported - Easy to set up | Highly configurable - Complex to set up                          |
-| Which component is responsible for a data persistence? | **STH-Comet**                                     | **Cygnus**                                                       |
-| What is the role of **STH-Comet**?                     | Reading and writing data                          | Data Read only                                                   |
-| What is the role of **Cygnus**?                        | Not Used                                          | Data Write only                                                  |
-| Where is the data aggregated?                          | Mongo-DB database connected to **STH-Comet** only | Mongo-DB database connected to both **Cygnus** and **STH-Comet** |
-| Can the system be configured to use other databases?   | No                                                | Yes                                                              |
-| Does the solution scale easily?                        | Does not scale easily - use for simple systems    | Scales easily - use for complex systems                          |
-| Can the system cope with high rates of throughput?     | No - use where throughput is low                  | Yes - use where throughput is high                               |
+|                                                        | _minimal_ mode                                    | _formal_ mode                                                   |
+| ------------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------------- |
+| Is the system easy to set-up properly?                 | Only one configuration supported - Easy to set up | Highly configurable - Complex to set up                         |
+| Which component is responsible for a data persistence? | **STH-Comet**                                     | **Cygnus**                                                      |
+| What is the role of **STH-Comet**?                     | Reading and writing data                          | Data Read only                                                  |
+| What is the role of **Cygnus**?                        | Not Used                                          | Data Write only                                                 |
+| Where is the data aggregated?                          | MongoDB database connected to **STH-Comet** only  | MongoDB database connected to both **Cygnus** and **STH-Comet** |
+| Can the system be configured to use other databases?   | No                                                | Yes                                                             |
+| Does the solution scale easily?                        | Does not scale easily - use for simple systems    | Scales easily - use for complex systems                         |
+| Can the system cope with high rates of throughput?     | No - use where throughput is low                  | Yes - use where throughput is high                              |
 
 ## Analyzing time series data
 
@@ -123,11 +123,11 @@ Therefore the overall architecture will consist of the following elements:
         for the context broker to alter the state of the context entities
     -   FIWARE [STH-Comet](https://fiware-sth-comet.readthedocs.io/) will:
         -   interpret time-based data queries
-        -   subscribe to context changes and persist them into a **Mongo-DB**
+        -   subscribe to context changes and persist them into a **MongoDB**
             database (_minimal_ mode only)
     -   FIWARE [Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) where
-        it will subscribe to context changes and persist them into a
-        **Mongo-DB** database (_formal_ mode only)
+        it will subscribe to context changes and persist them into a **MongoDB**
+        database (_formal_ mode only)
 
 > **Note:** **Cygnus** will only be used if **STH-Comet** is configured in
 > _formal_ mode.
@@ -259,7 +259,7 @@ The `sth-comet` container is driven by environment variables as shown:
 | STH_HOST     | `0.0.0.0`        | The address where STH-Comet is hosted - within this container it means all IPv4 addresses on the local machine |
 | STH_PORT     | `8666`           | Operations Port that STH-Comet listens on, it is also used when subscribing to context data changes            |
 | DB_PREFIX    | `sth_`           | The prefix added to each database entity if none is provided                                                   |
-| DB_URI       | `mongo-db:27017` | The Mongo-DB server which STH-Comet will contact to persist historical context data                            |
+| DB_URI       | `mongo-db:27017` | The MongoDB server which STH-Comet will contact to persist historical context data                             |
 | LOGOPS_LEVEL | `DEBUG`          | The logging level for STH-Comet                                                                                |
 
 ## _minimal_ mode - Start up
@@ -1048,7 +1048,7 @@ The `sth-comet` container is driven by environment variables as shown:
 | STH_HOST     | `0.0.0.0`        | The address where STH-Comet is hosted - within this container it means all IPv4 addresses on the local machine |
 | STH_PORT     | `8666`           | Operations Port that STH-Comet listens on                                                                      |
 | DB_PREFIX    | `sth_`           | The prefix added to each database entity if none is provided                                                   |
-| DB_URI       | `mongo-db:27017` | The Mongo-DB server which STH-Comet will contact to persist historical context data                            |
+| DB_URI       | `mongo-db:27017` | The MongoDB server which STH-Comet will contact to persist historical context data                             |
 | LOGOPS_LEVEL | `DEBUG`          | The logging level for STH-Comet                                                                                |
 
 The `cygnus` container is listening on two ports:
@@ -1061,12 +1061,12 @@ The `cygnus` container is listening on two ports:
 
 The `cygnus` container is driven by environment variables as shown:
 
-| Key                 | Value            | Description                                                                                           |
-| ------------------- | ---------------- | ----------------------------------------------------------------------------------------------------- |
-| CYGNUS_MONGO_HOSTS  | `mongo-db:27017` | Comma separated list of Mongo-DB servers which Cygnus will contact to persist historical context data |
-| CYGNUS_LOG_LEVEL    | `DEBUG`          | The logging level for Cygnus                                                                          |
-| CYGNUS_SERVICE_PORT | `5050`           | Notification Port that Cygnus listens when subscribing to context data changes                        |
-| CYGNUS_API_PORT     | `5080`           | Port that Cygnus listens on for operational reasons                                                   |
+| Key                 | Value            | Description                                                                                          |
+| ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
+| CYGNUS_MONGO_HOSTS  | `mongo-db:27017` | Comma separated list of MongoDB servers which Cygnus will contact to persist historical context data |
+| CYGNUS_LOG_LEVEL    | `DEBUG`          | The logging level for Cygnus                                                                         |
+| CYGNUS_SERVICE_PORT | `5050`           | Notification Port that Cygnus listens when subscribing to context data changes                       |
+| CYGNUS_API_PORT     | `5080`           | Port that Cygnus listens on for operational reasons                                                  |
 
 ## _formal_ mode - Start up
 

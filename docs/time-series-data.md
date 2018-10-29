@@ -2,7 +2,7 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to
-[FIWARE Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) - a
+[FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a
 generic enabler which is used to perist context data into a **CrateDB**
 database. The tutorial activates the IoT sensors connected in the
 [previous tutorial](iot-agent.md) and persists measurements from those sensors
@@ -28,10 +28,10 @@ available as
 context data into a range of databases such as **MySQL** and **PostgreSQL**.
 Furthermore, the [Short Term Historic](short-term-history.md) tutorial has
 introduced the [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic
-enabler for persisting and querying historic context data using a **Mongo-DB**
+enabler for persisting and querying historic context data using a **MongoDB**
 database.
 
-FIWARE [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) is an
+FIWARE [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) is an
 alternative generic enabler created specifically for data persistence into the
 **CrateDB** time-series database, and therefore offers an alternative to the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/).
@@ -45,13 +45,13 @@ displaying trends over time.
 
 A summary of the differences can be seen below:
 
-| Quantum Leap                                                                   | STH-Comet                                                                                |
-| ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| Offers an NGSI v2 interface for notifications                                  | Offers an NGSI v1 interface for notifiations                                             |
-| Persists Data to a CrateDB database                                            | Persists Data to Mongo-DB database                                                       |
-| Does not offer its own HTTP endpoint for queries, use the CrateDB SQL endpoint | Offers its own HTTP endpoint for queries - Mongo-DB database cannot be accessed directly |
-| The CrateDB SQL endpoint is able to satisfy complex data queries using SQL     | STH-Comet offers a limited set of queries                                                |
-| CrateDB is a distributed SQL DBMS built atop NoSQL storage                     | Mongo-DB is a document based NoSQL database                                              |
+| QuantumLeap                                                                    | STH-Comet                                                                               |
+| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
+| Offers an NGSI v2 interface for notifications                                  | Offers an NGSI v1 interface for notifiations                                            |
+| Persists Data to a CrateDB database                                            | Persists Data to MongoDB database                                                       |
+| Does not offer its own HTTP endpoint for queries, use the CrateDB SQL endpoint | Offers its own HTTP endpoint for queries - MongoDB database cannot be accessed directly |
+| The CrateDB SQL endpoint is able to satisfy complex data queries using SQL     | STH-Comet offers a limited set of queries                                               |
+| CrateDB is a distributed SQL DBMS built atop NoSQL storage                     | MongoDB is a document based NoSQL database                                              |
 
 Further details about the differences between the underlying database engines
 can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB)
@@ -91,7 +91,7 @@ the UltraLight device monitor web page found at:
 
 #### Device History
 
-Once **Quantum Leap** has started aggregating data, the historical state of each
+Once **QuantumLeap** has started aggregating data, the historical state of each
 device can be seen on the device history web page found at:
 `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
@@ -105,7 +105,7 @@ This application builds on the components and dummy IoT devices created in
 [previous tutorials](iot-agent.md). It will use three FIWARE components: the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
-and [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/) .
+and [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) .
 
 Therefore the overall architecture will consist of the following elements:
 
@@ -121,7 +121,7 @@ Therefore the overall architecture will consist of the following elements:
         format and convert them to
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests
         for the context broker to alter the state of the context entities
-    -   FIWARE [Quantum Leap](https://smartsdk.github.io/ngsi-timeseries-api/)
+    -   FIWARE [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/)
         subscribe to context changes and persist them into a **CrateDB**
         database
 -   A [MongoDB](https://www.mongodb.com/) database:
@@ -192,9 +192,9 @@ Bash script provided within the repository:
 
 ---
 
-# Connecting FIWARE to a CrateDB Database via Quantum Leap
+# Connecting FIWARE to a CrateDB Database via QuantumLeap
 
-In the configuration, **Quantum Leap** listens to NGSI v2 notifications on port
+In the configuration, **QuantumLeap** listens to NGSI v2 notifications on port
 `8868` and persists historic context data to the CrateDB. CrateDB is accessible
 using port `4200` and can either be queried directly or attached to the Grafana
 analytics tool. The rest of the system providing the context data has been
@@ -214,7 +214,7 @@ crate-db:
         -Chttp.cors.allow-origin="*"
 ```
 
-<h3>Quantum Leap Configuration</h3>
+<h3>QuantumLeap Configuration</h3>
 
 ```yaml
 quantum-leap:
@@ -279,7 +279,7 @@ seen on the same page:
 Once a dynamic context system is up and running, we need to inform **Quantum
 Leap** directly of changes in context. As expected this is done using the
 subscription mechanism of the **Orion Context Broker**. The `attrsFormat=legacy`
-attribute is not required since **Quantum Leap** accepts NGSI v2 notifications
+attribute is not required since **QuantumLeap** accepts NGSI v2 notifications
 directly.
 
 More details about subscriptions can be found in previous tutorials
@@ -294,12 +294,12 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
     subscription to only listen to measurements from the attached IoT Sensors
--   The `idPattern` in the request body ensures that **Quantum Leap** will be
+-   The `idPattern` in the request body ensures that **QuantumLeap** will be
     informed of all **Motion Sensor** data changes.
 -   The `notification` URL must match the exposed port.
 
 The `metadata` attribute ensures that the `time_index` column within the
-**CrateDB** database will match the data found within the **Mongo-DB** database
+**CrateDB** database will match the data found within the **MongoDB** database
 used by the **Orion Context Broker** rather than using the creation time of the
 record within the **CrateDB** itself.
 
@@ -312,7 +312,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Quantum Leap of all Motion Sensor count changes",
+  "description": "Notify QuantumLeap of all Motion Sensor count changes",
   "subject": {
     "entities": [
       {
@@ -349,13 +349,13 @@ body.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
     subscription to only listen to measurements from the attached IoT Sensors
--   The `idPattern` in the request body ensures that **Quantum Leap** will be
+-   The `idPattern` in the request body ensures that **QuantumLeap** will be
     informed of all **Motion Sensor** data changes.
 -   The `notification` URL must match the exposed port.
 -   The `throttling` value defines the rate that changes are sampled.
 
 The `metadata` attribute ensures that the `time_index` column within the
-**CrateDB** database will match the data found within the **Mongo-DB** database
+**CrateDB** database will match the data found within the **MongoDB** database
 used by the **Orion Context Broker** rather than using the creation time of the
 record within the **CrateDB** itself.
 
@@ -368,7 +368,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Quantum Leap to sample Lamp changes every five seconds",
+  "description": "Notify QuantumLeap to sample Lamp changes every five seconds",
   "subject": {
     "entities": [
       {
@@ -406,7 +406,7 @@ SQL statement is the value of the `stmt` attribute.
 
 ### Read Schemas
 
-**Quantum Leap** does not currently offer any interfaces to query for the
+**QuantumLeap** does not currently offer any interfaces to query for the
 persisted data A good method to see if data is being persisted is to check to
 see if a `table_schema` has been created. This can be done by making a request
 to the **CrateDB** HTTP endpoint as shown:
@@ -442,13 +442,13 @@ in lower case. The IoT Agent is forwarding measurements from the dummy IoT
 devices, with the header `openiot` these are being persisted under the
 `mtopeniot` schema.
 
-If the `mtopeniot` does not exist, then the subscription to **Quantum Leap** has
+If the `mtopeniot` does not exist, then the subscription to **QuantumLeap** has
 not been set up correctly. Check that the subscription exists, and has been
 configured to send data to the correct location.
 
 ### Read Tables
 
-Quantum Leap will persist data into separate tables within the CrateDB database
+QuantumLeap will persist data into separate tables within the CrateDB database
 based on the entity type. Table names are formed with the et prefix and the
 entity type name in lowercase.
 
@@ -738,7 +738,7 @@ curl -iX POST \
 Once the JSON response for a specified time series has been retrieved,
 displaying the raw data is of little use to an end user. It must be manipulated
 to be displayed in a bar chart, line graph or table listing. This is not within
-the domain of **Quantum Leap** as it not a graphical tool, but can be delegated
+the domain of **QuantumLeap** as it not a graphical tool, but can be delegated
 to a mashup or dashboard component such as
 [Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)
 or
