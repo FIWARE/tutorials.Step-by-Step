@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _ = require("lodash");
 
 //
 // Entity types are typically title cased following Schema.org
@@ -29,9 +29,9 @@ function toTitleCase(str) {
 function parseMapping(input) {
   const mappedAttributes = {};
 
-  _.forEach(input.split(','), element => {
-    if (element.includes(':')) {
-      const splitElement = element.split(':');
+  _.forEach(input.split(","), element => {
+    if (element.includes(":")) {
+      const splitElement = element.split(":");
       mappedAttributes[splitElement[0]] = splitElement[1];
     } else {
       mappedAttributes[element] = element;
@@ -48,7 +48,7 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
   const mappedAttributes = parseMapping(req.params.mapping);
 
   const ngsiV1Response = {
-    contextResponses: [],
+    contextResponses: []
   };
 
   _.forEach(req.body.entities, entity => {
@@ -56,13 +56,13 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
       contextElement: {
         attributes: [],
         id: entity.id,
-        isPattern: 'false',
-        type: entity.type,
+        isPattern: "false",
+        type: entity.type
       },
       statusCode: {
-        code: '200',
-        reasonPhrase: 'OK',
-      },
+        code: "200",
+        reasonPhrase: "OK"
+      }
     };
 
     _.forEach(req.body.attributes, attribute => {
@@ -75,7 +75,7 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
             req.params.type,
             mappedAttributes[attribute],
             inputData
-          ),
+          )
         });
       }
     });
@@ -88,5 +88,5 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
 
 module.exports = {
   formatAsV1Response,
-  toTitleCase,
+  toTitleCase
 };

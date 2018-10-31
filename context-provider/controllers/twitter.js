@@ -4,12 +4,12 @@
 // For more information see: https://developer.twitter.com/
 //
 
-const debug = require('debug')('tutorial:proxy');
-const Twitter = require('twitter');
-const request = require('request-promise');
-const Formatter = require('../lib/formatter');
-const _ = require('lodash');
-const monitor = require('../lib/monitoring');
+const debug = require("debug")("tutorial:proxy");
+const Twitter = require("twitter");
+const request = require("request-promise");
+const Formatter = require("../lib/formatter");
+const _ = require("lodash");
+const monitor = require("../lib/monitoring");
 
 // The  Twitter Consumer Key & Consumer Secret are personal to you.
 // Do not place them directly in the code - read them in as environment variables.
@@ -21,29 +21,29 @@ const monitor = require('../lib/monitoring');
 //
 const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
 const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-const TWITTER_OAUTH_TOKEN_URL = 'https://api.twitter.com/oauth2/token';
-const TWITTER_SEARCH_PATH = 'search/tweets';
+const TWITTER_OAUTH_TOKEN_URL = "https://api.twitter.com/oauth2/token";
+const TWITTER_SEARCH_PATH = "search/tweets";
 
 //
 // The Health Check function merely requests tweets about FIWARE
 // to check that your CONSUMER KEY and CONSUMER SECRET are valid.
 //
 function healthCheck(req, res) {
-  debug('healthCheck for Twitter API');
+  debug("healthCheck for Twitter API");
   makeTwitterRequest(
-    { q: 'FIWARE' },
+    { q: "FIWARE" },
     (error, tweets) => {
       debug(
-        'Twitter is responding - your keys are valid  - responding with the tweets about FIWARE.'
+        "Twitter is responding - your keys are valid  - responding with the tweets about FIWARE."
       );
-      monitor('health', 'Twitter API is healthy');
+      monitor("health", "Twitter API is healthy");
       res.send(tweets);
     },
     err => {
       debug(
-        'Twitter is not responding - have you added your Consumer Key & Consumer Secret as environment variables?'
+        "Twitter is not responding - have you added your Consumer Key & Consumer Secret as environment variables?"
       );
-      monitor('health', 'Twitter API is unhealthy');
+      monitor("health", "Twitter API is unhealthy");
       res.statusCode = err.statusCode || 501;
       res.send(err);
     }
@@ -56,16 +56,16 @@ function healthCheck(req, res) {
 // is set to "true" during registration
 //
 function queryContext(req, res) {
-  monitor('queryContext', 'Data requested from Twitter API', req.body);
+  monitor("queryContext", "Data requested from Twitter API", req.body);
   makeTwitterRequest(
     { q: req.params.queryString },
     (error, tweets) => {
       if (tweets.statuses == null) {
         // No tweets were returned for the query.
-        throw new Error({ message: 'Not Found', statusCode: 404 });
+        throw new Error({ message: "Not Found", statusCode: 404 });
       }
 
-      res.set('Content-Type', 'application/json');
+      res.set("Content-Type", "application/json");
       const payload = Formatter.formatAsV1Response(
         req,
         tweets.statuses,
@@ -94,21 +94,21 @@ function queryContext(req, res) {
 function makeTwitterRequest(params, callback, errorHandler) {
   request({
     url: TWITTER_OAUTH_TOKEN_URL,
-    method: 'POST',
+    method: "POST",
     auth: {
       user: TWITTER_CONSUMER_KEY,
-      pass: TWITTER_CONSUMER_SECRET,
+      pass: TWITTER_CONSUMER_SECRET
     },
     form: {
-      grant_type: 'client_credentials',
-    },
+      grant_type: "client_credentials"
+    }
   })
     .then(function(result) {
-      debug('Making a Twitter Search API request: ' + JSON.stringify(params));
+      debug("Making a Twitter Search API request: " + JSON.stringify(params));
       const client = new Twitter({
         consumer_key: TWITTER_CONSUMER_KEY,
         consumer_secret: TWITTER_CONSUMER_SECRET,
-        bearer_token: JSON.parse(result).access_token,
+        bearer_token: JSON.parse(result).access_token
       });
 
       client.get(TWITTER_SEARCH_PATH, params, callback);
@@ -125,13 +125,13 @@ function makeTwitterRequest(params, callback, errorHandler) {
 // @param {string} data - The Twitter data - an array of status updates.
 //
 function getValuesFromTweets(name, type, key, data) {
-  debug(name + ' was requested - returning tweet data for ' + key);
+  debug(name + " was requested - returning tweet data for " + key);
 
   const value = [];
   // In order to avoid script injections attack in some circustances
   // certain  characters are forbidden in any request:
   _.forEach(data, element => {
-    value.push(element[key].replace(/[<>"'=;()?/%&]/g, ''));
+    value.push(element[key].replace(/[<>"'=;()?/%&]/g, ""));
   });
 
   // Return the data as an array.
@@ -140,5 +140,5 @@ function getValuesFromTweets(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext,
+  queryContext
 };

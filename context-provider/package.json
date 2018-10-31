@@ -50,13 +50,20 @@
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "memfs": "2.9.4",
-    "prettier": "^1.14.2"
+    "prettier": "^1.14.2",
+    "textlint": "^11.0.1",
+    "textlint-rule-common-misspellings": "^1.0.1",
+    "textlint-rule-no-dead-link": "^4.4.1",
+    "textlint-rule-terminology": "^1.1.29",
+    "textlint-rule-write-good": "^1.6.2"
   },
   "scripts": {
     "start": "node ./bin/www",
     "lint": "eslint . --cache --fix",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write **/*.js *.js"
+    "prettier": "prettier --single-quote --trailing-comma es5 --write **/*.js *.js",
+    "prettier:text": "prettier '../docs/*.md' '../tutorials.*/README.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
+    "test": "textlint 'README.md' '../docs/*.md'"
   },
   "husky": {
     "hooks": {
@@ -67,6 +74,10 @@
     "*.js": [
       "eslint --fix",
       "prettier --parser flow --write",
+      "git add"
+    ],
+    "*.md": [
+      "prettier --tab-width 4 --print-width 80 --write --prose-wrap always",
       "git add"
     ]
   }
