@@ -45,8 +45,8 @@ follows:
     -   `windSpeed` NGSI attribute maps to `wind_speed` attribute on the API
         data
 
-For the full guidelines see:
-https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html
+For the full guidelines see the
+[FIWARE Data Models](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html)
 
 ## Health Check Endpoints
 
@@ -56,7 +56,7 @@ The following health check endpoints are supported:
     on the network and returning values. Each Request will return some random
     dummy data.
 
-*   `/static/health` A non-error response shows that an NGSI proxy is available
+-   `/static/health` A non-error response shows that an NGSI proxy is available
     on the network and returning values. Each Request will return the same data.
 
 -   `/twitter/health` A non-error response shows that an NGSI proxy for the
@@ -74,7 +74,7 @@ The following health check endpoints are supported:
     -   For more information see:
         [https://developer.twitter.com/](https://developer.twitter.com/)
 
-*   `/weather/health` A non-error response shows that an NGSI proxy for the
+-   `/weather/health` A non-error response shows that an NGSI proxy for the
     Weather API is available on the network and returning values.
 
     If the proxy is correctly configured to connect to the Open Weather Map API,
