@@ -15,57 +15,57 @@
 
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
-const NodeCache = require("node-cache");
+const NodeCache = require('node-cache');
 const myCache = new NodeCache();
-const _ = require("lodash");
-const request = require("request");
-const debug = require("debug")("tutorial:iot-device");
-const Security = require("./security");
+const _ = require('lodash');
+const request = require('request');
+const debug = require('debug')('tutorial:iot-device');
+const Security = require('./security');
 
 // Connect to an IoT Agent and use fallback values if necessary
-const UL_API_KEY = process.env.DUMMY_DEVICES_API_KEY || "1234";
-const UL_HOST = process.env.IOTA_HTTP_HOST || "localhost";
+const UL_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
+const UL_HOST = process.env.IOTA_HTTP_HOST || 'localhost';
 const UL_PORT = process.env.IOTA_HTTP_PORT || 7896;
-const UL_URL = "http://" + UL_HOST + ":" + UL_PORT + "/iot/d";
-const UL_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || "HTTP";
+const UL_URL = 'http://' + UL_HOST + ':' + UL_PORT + '/iot/d';
+const UL_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
 const UL_CONTEXT_BROKER =
-  process.env.CONTEXT_BROKER || "http://localhost:1026/v2";
+  process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 const UL_NGSI_PREFIX =
   process.env.NGSI_LD_PREFIX !== undefined
     ? process.env.NGSI_LD_PREFIX
-    : "urn:ngsi-ld:";
-const DUMMY_DEVICE_HTTP_HEADERS = { "Content-Type": "text/plain" };
+    : 'urn:ngsi-ld:';
+const DUMMY_DEVICE_HTTP_HEADERS = { 'Content-Type': 'text/plain' };
 
 // A series of constants used by our set of devices
-const OK = " OK";
-const NOT_OK = " NOT OK";
-const DOOR_LOCKED = "s|LOCKED";
-const DOOR_OPEN = "s|OPEN";
-const DOOR_CLOSED = "s|CLOSED";
+const OK = ' OK';
+const NOT_OK = ' NOT OK';
+const DOOR_LOCKED = 's|LOCKED';
+const DOOR_OPEN = 's|OPEN';
+const DOOR_CLOSED = 's|CLOSED';
 
-const BELL_OFF = "s|OFF";
-const BELL_ON = "s|ON";
+const BELL_OFF = 's|OFF';
+const BELL_ON = 's|ON';
 
-const LAMP_ON = "s|ON|l|1750";
-const LAMP_OFF = "s|OFF|l|0";
+const LAMP_ON = 's|ON|l|1750';
+const LAMP_OFF = 's|OFF|l|0';
 
-const NO_MOTION_DETECTED = "c|0";
-const MOTION_DETECTED = "c|1";
+const NO_MOTION_DETECTED = 'c|0';
+const MOTION_DETECTED = 'c|1';
 
 // The bell will respond to the "ring" command.
 // this will briefly set the bell to on.
 // The bell  is not a sensor - it will not report state northbound
 function processHttpBellCommand(req, res) {
-  debug("processHttpBellCommand");
-  const keyValuePairs = req.body.split("|") || [""];
+  debug('processHttpBellCommand');
+  const keyValuePairs = req.body.split('|') || [''];
   const command = getCommand(keyValuePairs[0]);
-  const deviceId = "bell" + req.params.id;
-  const result = keyValuePairs[0] + "| " + command;
+  const deviceId = 'bell' + req.params.id;
+  const result = keyValuePairs[0] + '| ' + command;
 
   // Check for a valid device and command
   if (
     _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(["ring"], command) === -1
+    _.indexOf(['ring'], command) === -1
   ) {
     return res.status(422).send(result + NOT_OK);
   }
@@ -80,16 +80,16 @@ function processHttpBellCommand(req, res) {
 // Each command alters the state of the door. When the door is unlocked
 // it can be opened and shut by external events.
 function processHttpDoorCommand(req, res) {
-  debug("processHttpDoorCommand");
-  const keyValuePairs = req.body.split("|") || [""];
+  debug('processHttpDoorCommand');
+  const keyValuePairs = req.body.split('|') || [''];
   const command = getCommand(keyValuePairs[0]);
-  const deviceId = "door" + req.params.id;
-  const result = keyValuePairs[0] + "| " + command;
+  const deviceId = 'door' + req.params.id;
+  const result = keyValuePairs[0] + '| ' + command;
 
   // Check for a valid device and command
   if (
     _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(["open", "close", "lock", "unlock"], command) === -1
+    _.indexOf(['open', 'close', 'lock', 'unlock'], command) === -1
   ) {
     return res.status(422).send(result + NOT_OK);
   }
@@ -103,16 +103,16 @@ function processHttpDoorCommand(req, res) {
 // The lamp can be "on" or "off" - it also registers luminocity.
 // It will slowly dim as time passes (provided no movement is detected)
 function processHttpLampCommand(req, res) {
-  debug("processHttpLampCommand");
-  const keyValuePairs = req.body.split("|") || [""];
+  debug('processHttpLampCommand');
+  const keyValuePairs = req.body.split('|') || [''];
   const command = getCommand(keyValuePairs[0]);
-  const deviceId = "lamp" + req.params.id;
-  const result = keyValuePairs[0] + "| " + command;
+  const deviceId = 'lamp' + req.params.id;
+  const result = keyValuePairs[0] + '| ' + command;
 
   // Check for a valid device and command
   if (
     _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(["on", "off"], command) === -1
+    _.indexOf(['on', 'off'], command) === -1
   ) {
     return res.status(422).send(result + NOT_OK);
   }
@@ -125,19 +125,19 @@ function processHttpLampCommand(req, res) {
 // The device monitor will display all MQTT messages on screen.
 // cmd topics are consumed by the actuators (bell, lamp and door)
 function processMqttMessage(topic, message) {
-  debug("processMqttMessage");
-  const mqttBrokerUrl = process.env.MQTT_BROKER_URL || "mqtt://mosquitto";
-  SOCKET_IO.emit("mqtt", mqttBrokerUrl + topic + "  " + message);
-  const path = topic.split("/");
-  if (path.pop() === "cmd") {
-    const keyValuePairs = message.split("|") || [""];
+  debug('processMqttMessage');
+  const mqttBrokerUrl = process.env.MQTT_BROKER_URL || 'mqtt://mosquitto';
+  SOCKET_IO.emit('mqtt', mqttBrokerUrl + topic + '  ' + message);
+  const path = topic.split('/');
+  if (path.pop() === 'cmd') {
+    const keyValuePairs = message.split('|') || [''];
     const command = getCommand(keyValuePairs[0]);
     const deviceId = path.pop();
-    const result = keyValuePairs[0] + "| " + command;
+    const result = keyValuePairs[0] + '| ' + command;
 
     if (_.indexOf(myCache.keys(), deviceId) !== -1) {
       actuateDevice(deviceId, command);
-      const topic = "/" + UL_API_KEY + "/" + deviceId + "/cmdexe";
+      const topic = '/' + UL_API_KEY + '/' + deviceId + '/cmdexe';
       MQTT_CLIENT.publish(topic, result + OK);
     }
   }
@@ -145,28 +145,28 @@ function processMqttMessage(topic, message) {
 
 // Change the state of a dummy IoT device based on the command received.
 function actuateDevice(deviceId, command) {
-  debug("actuateDevice");
-  switch (deviceId.replace(/\d/g, "")) {
-    case "bell":
-      if (command === "ring") {
+  debug('actuateDevice');
+  switch (deviceId.replace(/\d/g, '')) {
+    case 'bell':
+      if (command === 'ring') {
         setDeviceState(deviceId, BELL_ON, false);
         SOCKET_IO.emit(deviceId, BELL_ON);
       }
       break;
-    case "door":
-      if (command === "open") {
+    case 'door':
+      if (command === 'open') {
         setDeviceState(deviceId, DOOR_OPEN);
-      } else if (command === "close" || command === "unlock") {
+      } else if (command === 'close' || command === 'unlock') {
         setDeviceState(deviceId, DOOR_CLOSED);
-      } else if (command === "lock") {
+      } else if (command === 'lock') {
         setDeviceState(deviceId, DOOR_LOCKED);
       }
       break;
-    case "lamp":
-      if (command === "on") {
+    case 'lamp':
+      if (command === 'on') {
         setDeviceState(deviceId, LAMP_ON);
       }
-      if (command === "off") {
+      if (command === 'off') {
         setDeviceState(deviceId, LAMP_OFF);
       }
       break;
@@ -177,9 +177,9 @@ function actuateDevice(deviceId, command) {
 // Splits the deviceId from the command sent.
 //
 function getCommand(string) {
-  const command = string.split("@");
+  const command = string.split('@');
   if (command.length === 1) {
-    command.push("");
+    command.push('');
   }
   return command[1];
 }
@@ -192,31 +192,31 @@ function getCommand(string) {
 // The lamp can be ON or OFF. This also registers luminocity.
 // It will slowly dim as time passes (provided no movement is detected)
 function init() {
-  debug("init");
+  debug('init');
 
   if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD) {
     initSecureDevices();
   }
 
-  myCache.set("door001", DOOR_LOCKED);
-  myCache.set("door002", DOOR_LOCKED);
-  myCache.set("door003", DOOR_LOCKED);
-  myCache.set("door004", DOOR_LOCKED);
+  myCache.set('door001', DOOR_LOCKED);
+  myCache.set('door002', DOOR_LOCKED);
+  myCache.set('door003', DOOR_LOCKED);
+  myCache.set('door004', DOOR_LOCKED);
 
-  myCache.set("bell001", BELL_OFF, false);
-  myCache.set("bell002", BELL_OFF, false);
-  myCache.set("bell003", BELL_OFF, false);
-  myCache.set("bell004", BELL_OFF, false);
+  myCache.set('bell001', BELL_OFF, false);
+  myCache.set('bell002', BELL_OFF, false);
+  myCache.set('bell003', BELL_OFF, false);
+  myCache.set('bell004', BELL_OFF, false);
 
-  myCache.set("lamp001", LAMP_OFF);
-  myCache.set("lamp002", LAMP_OFF);
-  myCache.set("lamp003", LAMP_OFF);
-  myCache.set("lamp004", LAMP_OFF);
+  myCache.set('lamp001', LAMP_OFF);
+  myCache.set('lamp002', LAMP_OFF);
+  myCache.set('lamp003', LAMP_OFF);
+  myCache.set('lamp004', LAMP_OFF);
 
-  myCache.set("motion001", NO_MOTION_DETECTED);
-  myCache.set("motion002", NO_MOTION_DETECTED);
-  myCache.set("motion003", NO_MOTION_DETECTED);
-  myCache.set("motion004", NO_MOTION_DETECTED);
+  myCache.set('motion001', NO_MOTION_DETECTED);
+  myCache.set('motion002', NO_MOTION_DETECTED);
+  myCache.set('motion003', NO_MOTION_DETECTED);
+  myCache.set('motion004', NO_MOTION_DETECTED);
 
   // Once a minute, read the existing state of the dummy devices
   const deviceIds = myCache.keys();
@@ -244,14 +244,14 @@ function activateDoor() {
     const state = getDeviceState(deviceId);
     const isSensor = true;
 
-    switch (deviceId.replace(/\d/g, "")) {
-      case "door":
+    switch (deviceId.replace(/\d/g, '')) {
+      case 'door':
         //  The door is OPEN or CLOSED or LOCKED,
-        if (state.s !== "LOCKED") {
+        if (state.s !== 'LOCKED') {
           // Randomly open and close the door if not locked.
           // lower the rate if the lamp is off.
-          const rate = getLampState(deviceId, "door") === "ON" ? 3 : 6;
-          state.s = getRandom() > rate ? "OPEN" : "CLOSED";
+          const rate = getLampState(deviceId, 'door') === 'ON' ? 3 : 6;
+          state.s = getRandom() > rate ? 'OPEN' : 'CLOSED';
         }
         setDeviceState(deviceId, toUltraLight(state), isSensor);
         break;
@@ -274,18 +274,18 @@ function activateDevices() {
     const state = getDeviceState(deviceId);
     let isSensor = true;
 
-    switch (deviceId.replace(/\d/g, "")) {
-      case "bell":
+    switch (deviceId.replace(/\d/g, '')) {
+      case 'bell':
         // ON or OFF - Switch off the bell if it is still ringing
-        if (state.s === "ON") {
-          state.s = "OFF";
+        if (state.s === 'ON') {
+          state.s = 'OFF';
         }
         isSensor = false;
         break;
 
-      case "motion":
+      case 'motion':
         // If the door is OPEN, randomly switch the count of the motion sensor
-        if (getDoorState(deviceId, "motion") === "OPEN") {
+        if (getDoorState(deviceId, 'motion') === 'OPEN') {
           if (state.c === 1) {
             state.c = 0;
           } else {
@@ -297,10 +297,10 @@ function activateDevices() {
         setDeviceState(deviceId, toUltraLight(state), isSensor);
         break;
 
-      case "lamp":
-        if (state.s === "OFF") {
+      case 'lamp':
+        if (state.s === 'OFF') {
           state.l = 0;
-        } else if (getDoorState(deviceId, "lamp") === "OPEN") {
+        } else if (getDoorState(deviceId, 'lamp') === 'OPEN') {
           // if the door is open set the light to full power
           state.l = parseInt(state.l) || 1000;
           state.l = state.l + getRandom() * getRandom();
@@ -329,7 +329,7 @@ function activateDevices() {
 // Read the existing state of the dummy devices when requested.
 function sendDeviceReading(deviceId) {
   const state = toUltraLight(getDeviceState(deviceId));
-  const isSensor = deviceId.replace(/\d/g, "") !== "bell";
+  const isSensor = deviceId.replace(/\d/g, '') !== 'bell';
   setDeviceState(deviceId, state, isSensor, true);
 }
 
@@ -344,7 +344,7 @@ function sendDeviceReading(deviceId) {
 function getDeviceState(deviceId) {
   const ultraLight = myCache.get(deviceId);
   const obj = {};
-  const keyValuePairs = ultraLight.split("|");
+  const keyValuePairs = ultraLight.split('|');
   for (let i = 0; i < keyValuePairs.length; i = i + 2) {
     obj[keyValuePairs[i]] = keyValuePairs[i + 1];
   }
@@ -362,26 +362,26 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
   myCache.set(deviceId, state);
 
   if (isSensor && (state !== previousState || force)) {
-    if (UL_TRANSPORT === "HTTP") {
+    if (UL_TRANSPORT === 'HTTP') {
       const options = {
-        method: "POST",
+        method: 'POST',
         url: UL_URL,
         qs: { k: UL_API_KEY, i: deviceId },
         headers: DUMMY_DEVICE_HTTP_HEADERS,
         body: state
       };
       const debugText =
-        "POST " + UL_URL + "?i=" + options.qs.i + "&k=" + options.qs.k;
+        'POST ' + UL_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
 
       request(options, error => {
         if (error) {
-          debug(debugText + " " + error.code);
+          debug(debugText + ' ' + error.code);
         }
       });
-      SOCKET_IO.emit("http", debugText + "  " + state);
+      SOCKET_IO.emit('http', debugText + '  ' + state);
     }
-    if (UL_TRANSPORT === "MQTT") {
-      const topic = "/" + UL_API_KEY + "/" + deviceId + "/attrs";
+    if (UL_TRANSPORT === 'MQTT') {
+      const topic = '/' + UL_API_KEY + '/' + deviceId + '/attrs';
       MQTT_CLIENT.publish(topic, state);
     }
   }
@@ -397,9 +397,9 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
 function toUltraLight(object) {
   const strArray = [];
   _.forEach(object, function(value, key) {
-    strArray.push(key + "|" + value);
+    strArray.push(key + '|' + value);
   });
-  return strArray.join("|");
+  return strArray.join('|');
 }
 
 // Return the state of the door with the same number as the current element
@@ -407,16 +407,16 @@ function toUltraLight(object) {
 // both the motion sensor will not increment an the smart lamp will slowly
 // decrease
 function getDoorState(deviceId, type) {
-  const door = getDeviceState(deviceId.replace(type, "door"));
-  return door.s || "LOCKED";
+  const door = getDeviceState(deviceId.replace(type, 'door'));
+  return door.s || 'LOCKED';
 }
 
 // Return the state of the lamp with the same number as the current element
 // this is because fewer people will enter the building if the lamp is OFF,
 // and therefore the motion sensor will increment more slowly
 function getLampState(deviceId, type) {
-  const lamp = getDeviceState(deviceId.replace(type, "lamp"));
-  return lamp.s || "OFF";
+  const lamp = getDeviceState(deviceId.replace(type, 'lamp'));
+  return lamp.s || 'OFF';
 }
 
 // Pick a random number between 1 and 10
@@ -425,16 +425,16 @@ function getRandom() {
 }
 
 function accessControl(req, res, next) {
-  debug("accessControl");
+  debug('accessControl');
   const action = req.body.action;
   // Ringing the bell and unlocking the door are restricted actions, everything else
   // can be done by any user.
-  if (action === "ring") {
+  if (action === 'ring') {
     // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    return Security.pdpBasicAuthorization(req, res, next, "/bell/ring");
-  } else if (action === "unlock") {
+    return Security.pdpBasicAuthorization(req, res, next, '/bell/ring');
+  } else if (action === 'unlock') {
     // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    return Security.pdpBasicAuthorization(req, res, next, "/door/unlock");
+    return Security.pdpBasicAuthorization(req, res, next, '/door/unlock');
   }
   // LEVEL 1: AUTHENTICATION ONLY - Every user is authorized, just ensure the user exists.
   return Security.pdpAuthentication(req, res, next);
@@ -444,7 +444,7 @@ function accessControl(req, res, next) {
 // It is just a user filling out the Username and password form and adding the access token to
 // subsequent requests.
 function initSecureDevices() {
-  debug("initSecureDevices");
+  debug('initSecureDevices');
   // With the Password flow, an access token is returned in the response.
   Security.oa
     .getOAuthPasswordCredentials(
@@ -452,7 +452,7 @@ function initSecureDevices() {
       process.env.DUMMY_DEVICES_PASSWORD
     )
     .then(results => {
-      DUMMY_DEVICE_HTTP_HEADERS["X-Auth-Token"] = results.access_token;
+      DUMMY_DEVICE_HTTP_HEADERS['X-Auth-Token'] = results.access_token;
     })
     .catch(error => {
       debug(error);
@@ -462,40 +462,40 @@ function initSecureDevices() {
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
 // via the Orion Context Broker and the UltraLight IoT Agent.
 function sendCommand(req, res) {
-  debug("sendCommand");
+  debug('sendCommand');
   if (!res.locals.authorized) {
     // If the user is not authorized, return an error code.
-    res.setHeader("Content-Type", "application/json");
-    return res.status(403).send({ message: "Forbidden" });
+    res.setHeader('Content-Type', 'application/json');
+    return res.status(403).send({ message: 'Forbidden' });
   }
-  let id = req.body.id.split(":").pop();
+  let id = req.body.id.split(':').pop();
   const action = req.body.action;
   // This is not a command, just a manually activated motion sensor event.
-  const isMotionSensor = action === "presence";
+  const isMotionSensor = action === 'presence';
   const payload = {};
 
   payload[action] = {
-    type: "command",
-    value: ""
+    type: 'command',
+    value: ''
   };
 
-  if (action === "ring") {
-    id = "Bell:" + id;
-  } else if (action === "on" || action === "off") {
-    id = "Lamp:" + id;
-  } else if (action === "presence") {
-    id = "motion" + id;
+  if (action === 'ring') {
+    id = 'Bell:' + id;
+  } else if (action === 'on' || action === 'off') {
+    id = 'Lamp:' + id;
+  } else if (action === 'presence') {
+    id = 'motion' + id;
   } else {
-    id = "Door:" + id;
+    id = 'Door:' + id;
   }
 
   const options = {
-    method: "PATCH",
-    url: UL_CONTEXT_BROKER + "/entities/" + UL_NGSI_PREFIX + id + "/attrs",
+    method: 'PATCH',
+    url: UL_CONTEXT_BROKER + '/entities/' + UL_NGSI_PREFIX + id + '/attrs',
     headers: {
-      "Content-Type": "application/json",
-      "fiware-servicepath": "/",
-      "fiware-service": "openiot"
+      'Content-Type': 'application/json',
+      'fiware-servicepath': '/',
+      'fiware-service': 'openiot'
     },
     body: payload,
     json: true
@@ -504,7 +504,7 @@ function sendCommand(req, res) {
   if (req.session.access_token) {
     // If the system has been secured and we have logged in,
     // add the access token to the request to the PEP Proxy
-    options.headers["X-Auth-Token"] = req.session.access_token;
+    options.headers['X-Auth-Token'] = req.session.access_token;
   }
 
   if (isMotionSensor) {
@@ -524,8 +524,8 @@ function sendCommand(req, res) {
 
 // Once a minute, read the existing state of the dummy devices
 function setUpDeviceReading(deviceId) {
-  const deviceType = deviceId.replace(/\d/g, "");
-  if (deviceType === "lamp" || deviceType === "motion") {
+  const deviceType = deviceId.replace(/\d/g, '');
+  if (deviceType === 'lamp' || deviceType === 'motion') {
     setInterval(sendDeviceReading, 59999, deviceId);
   }
 }

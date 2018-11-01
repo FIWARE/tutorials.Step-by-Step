@@ -1,4 +1,4 @@
-const _ = require("lodash");
+const _ = require('lodash');
 
 //
 // Entity types are typically title cased following Schema.org
@@ -29,9 +29,9 @@ function toTitleCase(str) {
 function parseMapping(input) {
   const mappedAttributes = {};
 
-  _.forEach(input.split(","), element => {
-    if (element.includes(":")) {
-      const splitElement = element.split(":");
+  _.forEach(input.split(','), element => {
+    if (element.includes(':')) {
+      const splitElement = element.split(':');
       mappedAttributes[splitElement[0]] = splitElement[1];
     } else {
       mappedAttributes[element] = element;
@@ -56,12 +56,12 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
       contextElement: {
         attributes: [],
         id: entity.id,
-        isPattern: "false",
+        isPattern: 'false',
         type: entity.type
       },
       statusCode: {
-        code: "200",
-        reasonPhrase: "OK"
+        code: '200',
+        reasonPhrase: 'OK'
       }
     };
 

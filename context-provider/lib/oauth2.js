@@ -1,10 +1,10 @@
-const querystring = require("querystring");
+const querystring = require('querystring');
 
-const https = require("https");
+const https = require('https');
 
-const http = require("http");
+const http = require('http');
 
-const URL = require("url");
+const URL = require('url');
 
 exports.OAuth2 = function(
   clientId,
@@ -20,11 +20,11 @@ exports.OAuth2 = function(
   this._clientSecret = clientSecret;
   this._baseSite = baseSite;
   this._baseIPAddress = baseIPAddress || baseSite;
-  this._authorizeUrl = authorizePath || "/oauth/authorize";
-  this._accessTokenUrl = accessTokenPath || "/oauth/access_token";
+  this._authorizeUrl = authorizePath || '/oauth/authorize';
+  this._accessTokenUrl = accessTokenPath || '/oauth/access_token';
   this._callbackURL = callbackURL;
-  this._accessTokenName = "access_token";
-  this._authMethod = "Basic";
+  this._accessTokenName = 'access_token';
+  this._authMethod = 'Basic';
   this._customHeaders = customHeaders || {};
 };
 
@@ -44,9 +44,9 @@ exports.OAuth2.prototype._getAccessTokenUrl = function() {
 // Build the authorization header. In particular, build the part after the colon.
 // e.g. Authorization: Bearer <token>  # Build "Bearer <token>"
 exports.OAuth2.prototype.buildAuthHeader = function() {
-  const key = this._clientId + ":" + this._clientSecret;
-  const base64 = new Buffer(key).toString("base64");
-  return this._authMethod + " " + base64;
+  const key = this._clientId + ':' + this._clientSecret;
+  const base64 = new Buffer(key).toString('base64');
+  return this._authMethod + ' ' + base64;
 };
 
 exports.OAuth2.prototype._request = function(
@@ -59,12 +59,12 @@ exports.OAuth2.prototype._request = function(
 ) {
   let httpLibrary = https;
   const parsedUrl = URL.parse(url, true);
-  if (parsedUrl.protocol === "https:" && !parsedUrl.port) {
+  if (parsedUrl.protocol === 'https:' && !parsedUrl.port) {
     parsedUrl.port = 443;
   }
 
   // As this is OAUth2, we *assume* https unless told explicitly otherwise.
-  if (parsedUrl.protocol !== "https:") {
+  if (parsedUrl.protocol !== 'https:') {
     httpLibrary = http;
   }
 
@@ -80,7 +80,7 @@ exports.OAuth2.prototype._request = function(
   realHeaders.Host = parsedUrl.host;
 
   //realHeaders['Content-Length']= postBody ? Buffer.byteLength(postBody) : 0;
-  if (accessToken && !("Authorization" in realHeaders)) {
+  if (accessToken && !('Authorization' in realHeaders)) {
     if (!parsedUrl.query) {
       parsedUrl.query = {};
     }
@@ -89,7 +89,7 @@ exports.OAuth2.prototype._request = function(
 
   let queryStr = querystring.stringify(parsedUrl.query);
   if (queryStr) {
-    queryStr = "?" + queryStr;
+    queryStr = '?' + queryStr;
   }
   const options = {
     host: parsedUrl.hostname,
@@ -111,7 +111,7 @@ exports.OAuth2.prototype._executeRequest = function(
   // Some hosts *cough* google appear to close the connection early / send no content-length header
   // allow this behaviour.
   const allowEarlyClose =
-    options.host && options.host.match(".*google(apis)?.com$");
+    options.host && options.host.match('.*google(apis)?.com$');
   let callbackCalled = false;
   function passBackControl(response, result, err) {
     if (!callbackCalled) {
@@ -129,43 +129,43 @@ exports.OAuth2.prototype._executeRequest = function(
     }
   }
 
-  let result = "";
+  let result = '';
 
   const request = httpLibrary.request(options, function(response) {
-    response.on("data", function(chunk) {
+    response.on('data', function(chunk) {
       result += chunk;
     });
-    response.on("close", function(err) {
+    response.on('close', function(err) {
       if (allowEarlyClose) {
         passBackControl(response, result, err);
       }
     });
-    response.addListener("end", function() {
+    response.addListener('end', function() {
       passBackControl(response, result);
     });
   });
-  request.on("error", function(e) {
+  request.on('error', function(e) {
     callbackCalled = true;
     callback(e);
   });
 
-  if (options.method === "POST" && postBody) {
+  if (options.method === 'POST' && postBody) {
     request.write(postBody);
   }
   request.end();
 };
 
 exports.OAuth2.prototype.getAuthorizeUrl = function(responseType) {
-  responseType = responseType || "code";
+  responseType = responseType || 'code';
 
   return (
     this._baseSite +
     this._authorizeUrl +
-    "?response_type=" +
+    '?response_type=' +
     responseType +
-    "&client_id=" +
+    '&client_id=' +
     this._clientId +
-    "&state=xyz&redirect_uri=" +
+    '&state=xyz&redirect_uri=' +
     this._callbackURL
   );
 };
@@ -185,19 +185,19 @@ exports.OAuth2.prototype.getOAuthAccessToken = function(code) {
 
   return new Promise((resolve, reject) => {
     const postData =
-      "grant_type=authorization_code&code=" +
+      'grant_type=authorization_code&code=' +
       code +
-      "&redirect_uri=" +
+      '&redirect_uri=' +
       that._callbackURL;
 
     const postHeaders = {
       Authorization: that.buildAuthHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Content-Length": postData.length
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': postData.length
     };
 
     that._request(
-      "POST",
+      'POST',
       that._getAccessTokenUrl(),
       postHeaders,
       postData,
@@ -212,15 +212,15 @@ exports.OAuth2.prototype.getOAuthAccessToken = function(code) {
 exports.OAuth2.prototype.getOAuthClientCredentials = function() {
   const that = this;
   return new Promise((resolve, reject) => {
-    const postData = "grant_type=client_credentials";
+    const postData = 'grant_type=client_credentials';
     const postHeaders = {
       Authorization: that.buildAuthHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Content-Length": postData.length
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': postData.length
     };
 
     that._request(
-      "POST",
+      'POST',
       that._getAccessTokenUrl(),
       postHeaders,
       postData,
@@ -239,15 +239,15 @@ exports.OAuth2.prototype.getOAuthPasswordCredentials = function(
   const that = this;
   return new Promise((resolve, reject) => {
     const postData =
-      "grant_type=password&username=" + username + "&password=" + password;
+      'grant_type=password&username=' + username + '&password=' + password;
     const postHeaders = {
       Authorization: that.buildAuthHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Content-Length": postData.length
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': postData.length
     };
 
     that._request(
-      "POST",
+      'POST',
       that._getAccessTokenUrl(),
       postHeaders,
       postData,
@@ -263,16 +263,16 @@ exports.OAuth2.prototype.getOAuthRefreshToken = function(refreshToken) {
   const that = this;
 
   return new Promise((resolve, reject) => {
-    const postData = "grant_type=refresh_token&refresh_token=" + refreshToken;
+    const postData = 'grant_type=refresh_token&refresh_token=' + refreshToken;
 
     const postHeaders = {
       Authorization: that.buildAuthHeader(),
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Content-Length": postData.length
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': postData.length
     };
 
     that._request(
-      "POST",
+      'POST',
       that._getAccessTokenUrl(),
       postHeaders,
       postData,
@@ -287,7 +287,7 @@ exports.OAuth2.prototype.getOAuthRefreshToken = function(refreshToken) {
 exports.OAuth2.prototype.get = function(url, accessToken) {
   const that = this;
   return new Promise((resolve, reject) => {
-    that._request("GET", url, {}, "", accessToken, (error, data) => {
+    that._request('GET', url, {}, '', accessToken, (error, data) => {
       return error ? reject(error) : resolve(data);
     });
   });

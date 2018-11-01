@@ -6,23 +6,23 @@
 
 // Initialization - first require the NGSI v2 npm library and set
 // the client instance
-const NgsiV2 = require("ngsi_v2");
+const NgsiV2 = require('ngsi_v2');
 const defaultClient = NgsiV2.ApiClient.instance;
-const debug = require("debug")("tutorial:context");
-const monitor = require("../lib/monitoring");
+const debug = require('debug')('tutorial:context');
+const monitor = require('../lib/monitoring');
 
 // The basePath must be set - this is the location of the Orion
 // context broker. It is best to do this with an environment
 // variable (with a fallback if necessary)
 defaultClient.basePath =
-  process.env.CONTEXT_BROKER || "http://localhost:1026/v2";
+  process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 
 function setAuthHeaders(req) {
   const headers = {};
   if (req.session.access_token) {
     // If the system has been secured and we have logged in,
     // add the access token to the request to the PEP Proxy
-    headers["X-Auth-Token"] = req.session.access_token;
+    headers['X-Auth-Token'] = req.session.access_token;
   }
   return headers;
 }
@@ -34,26 +34,26 @@ function setAuthHeaders(req) {
 //     'http://{{orion}}/v2/entities/?type=Store&options=keyValues'
 //
 function displayStore(req, res) {
-  debug("displayStore");
+  debug('displayStore');
   // If the user is not authorized, display the main page.
   if (!res.locals.authorized) {
-    req.flash("error", "Access Denied");
-    return res.redirect("/");
+    req.flash('error', 'Access Denied');
+    return res.redirect('/');
   }
-  monitor("NGSI", "retrieveEntity " + req.params.storeId);
+  monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
   return retrieveEntity(
     req.params.storeId,
-    { options: "keyValues", type: "Store" },
+    { options: 'keyValues', type: 'Store' },
     setAuthHeaders(req)
   )
     .then(store => {
       // If a store has been found display it on screen
-      return res.render("store", { title: store.name, store });
+      return res.render('store', { title: store.name, store });
     })
     .catch(error => {
       debug(error);
       // If no store has been found, display an error screen
-      return res.render("store-error", { title: "Error", error });
+      return res.render('store-error', { title: 'Error', error });
     });
 }
 
@@ -67,37 +67,37 @@ function displayStore(req, res) {
 //     'http://{{orion}}/v2/entities/?type=InventoryItem&options=keyValues&q=refStore==<entity-id>'
 //
 function displayTillInfo(req, res) {
-  debug("displayTillInfo");
-  monitor("NGSI", "listEntities type=Product");
+  debug('displayTillInfo');
+  monitor('NGSI', 'listEntities type=Product');
   monitor(
-    "NGSI",
-    "listEntities type=InventoryItem refStore=" + req.params.storeId
+    'NGSI',
+    'listEntities type=InventoryItem refStore=' + req.params.storeId
   );
   Promise.all([
     listEntities(
       {
-        options: "keyValues",
-        type: "Product"
+        options: 'keyValues',
+        type: 'Product'
       },
       setAuthHeaders(req)
     ),
     listEntities(
       {
-        q: "refStore==" + req.params.storeId,
-        options: "keyValues",
-        type: "InventoryItem"
+        q: 'refStore==' + req.params.storeId,
+        options: 'keyValues',
+        type: 'InventoryItem'
       },
       setAuthHeaders(req)
     )
   ])
     .then(values => {
       // If values have been found display it on screen
-      return res.render("till", { products: values[0], inventory: values[1] });
+      return res.render('till', { products: values[0], inventory: values[1] });
     })
     .catch(error => {
       debug(error);
       // An error occurred, return with no results
-      return res.render("till", { products: {}, inventory: {} });
+      return res.render('till', { products: {}, inventory: {} });
     });
 }
 
@@ -117,26 +117,26 @@ function displayTillInfo(req, res) {
 // There is no error handling on this function, it has been
 // left to a function on the router.
 async function buyItem(req, res) {
-  debug("buyItem");
-  monitor("NGSI", "retrieveEntity " + req.params.inventoryId);
+  debug('buyItem');
+  monitor('NGSI', 'retrieveEntity ' + req.params.inventoryId);
   const inventory = await retrieveEntity(
     req.params.inventoryId,
     {
-      options: "keyValues",
-      type: "InventoryItem"
+      options: 'keyValues',
+      type: 'InventoryItem'
     },
     setAuthHeaders(req)
   );
   const count = inventory.shelfCount - 1;
 
-  monitor("NGSI", "updateExistingEntityAttributes " + req.params.inventoryId, {
-    shelfCount: { type: "Integer", value: count }
+  monitor('NGSI', 'updateExistingEntityAttributes ' + req.params.inventoryId, {
+    shelfCount: { type: 'Integer', value: count }
   });
   await updateExistingEntityAttributes(
     req.params.inventoryId,
-    { shelfCount: { type: "Integer", value: count } },
+    { shelfCount: { type: 'Integer', value: count } },
     {
-      type: "InventoryItem"
+      type: 'InventoryItem'
     },
     setAuthHeaders(req)
   );
@@ -147,30 +147,30 @@ async function buyItem(req, res) {
 // It is used to display alerts based on any low stock subscriptions received
 //
 function displayWarehouseInfo(req, res) {
-  debug("displayWarehouseInfo");
-  res.render("warehouse", { id: req.params.storeId });
+  debug('displayWarehouseInfo');
+  res.render('warehouse', { id: req.params.storeId });
 }
 
 function priceChange(req, res) {
-  debug("priceChange");
+  debug('priceChange');
   // If the user is not authorized, display the main page.
   if (!res.locals.authorized) {
-    req.flash("error", "Access Denied");
-    return res.redirect("/");
+    req.flash('error', 'Access Denied');
+    return res.redirect('/');
   }
   // Render the price page (Managers only)
-  return res.render("price-change", { title: "Price Change" });
+  return res.render('price-change', { title: 'Price Change' });
 }
 
 function orderStock(req, res) {
-  debug("orderStock");
+  debug('orderStock');
   // If the user is not authorized, display the main page.
   if (!res.locals.authorized) {
-    req.flash("error", "Access Denied");
-    return res.redirect("/");
+    req.flash('error', 'Access Denied');
+    return res.redirect('/');
   }
   // Render the stock taking page (Managers only)
-  return res.render("order-stock", { title: "Order Stock" });
+  return res.render('order-stock', { title: 'Order Stock' });
 }
 
 // This is a promise to make an HTTP PATCH request to the /v2/entities/<entity-id>/attr end point
@@ -183,7 +183,7 @@ function updateExistingEntityAttributes(entityId, body, opts, headers = {}) {
       body,
       opts,
       (error, data, response) => {
-        debug("updateExistingEntityAttributes returns: " + response.statusCode);
+        debug('updateExistingEntityAttributes returns: ' + response.statusCode);
         return error ? reject(error) : resolve(data);
       }
     );
@@ -196,7 +196,7 @@ function retrieveEntity(entityId, opts, headers = {}) {
     defaultClient.defaultHeaders = headers;
     const apiInstance = new NgsiV2.EntitiesApi();
     apiInstance.retrieveEntity(entityId, opts, (error, data, response) => {
-      debug("retrieveEntity returns: " + response.statusCode);
+      debug('retrieveEntity returns: ' + response.statusCode);
       return error ? reject(error) : resolve(data);
     });
   });
@@ -208,7 +208,7 @@ function listEntities(opts, headers = {}) {
     defaultClient.defaultHeaders = headers;
     const apiInstance = new NgsiV2.EntitiesApi();
     apiInstance.listEntities(opts, (error, data, response) => {
-      debug("listEntities returns: " + response.statusCode);
+      debug('listEntities returns: ' + response.statusCode);
       return error ? reject(error) : resolve(data);
     });
   });
