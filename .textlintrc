@@ -7,7 +7,7 @@
       "passive": false,
       "tooWordy": false,
       "weasel": false,
-      "so": false
+      "so": true
     },
     "no-dead-link": {
        "ignoreRedirects": true,
@@ -16,5 +16,8 @@
           "https://oauth.net"
       ]
     }
+  },
+  "filters": {
+    "comments": true
   }
 }

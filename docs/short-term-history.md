@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](https://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
+[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 
 **Description:** This tutorial is an introduction to
 [FIWARE STH-Comet](https://fiware-sth-comet.readthedocs.io/) - a generic enabler
@@ -1273,13 +1273,13 @@ the domain of **STH-Comet** as it not a graphical tool, but can be delegated to
 a mashup or dashboard component such as
 [Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)
 or
-[Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
+[Knowage](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Knowage)
 
 It can also be retrieved and displayed using a third-party graphing tool
 appropriate to your coding environment - for example
 [chartjs](http://www.chartjs.org/). An example of this can be found within the
 `history` controller in the
-[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
+[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/controllers/history.js)
 
 The basic processing consists of two-step - retrieval and attribute mapping,
 sample code can be seen below:

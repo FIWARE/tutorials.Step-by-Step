@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
-    "cookie-parser": "~1.4.3",
     "connect-flash": "^0.1.1",
+    "cookie-parser": "~1.4.3",
     "debug": "~3.1.0",
     "express": "~4.16.0",
     "express-session": "^1.15.6",
@@ -52,6 +52,7 @@
     "memfs": "2.9.4",
     "prettier": "^1.14.2",
     "textlint": "^11.0.1",
+    "textlint-filter-rule-comments": "^1.2.2",
     "textlint-rule-common-misspellings": "^1.0.1",
     "textlint-rule-no-dead-link": "^4.4.1",
     "textlint-rule-terminology": "^1.1.29",
@@ -61,9 +62,9 @@
     "start": "node ./bin/www",
     "lint": "eslint . --cache --fix",
     "precommit": "lint-staged",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write **/*.js *.js",
-    "prettier:text": "prettier '../docs/*.md' '../tutorials.*/README.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
-    "test": "textlint 'README.md' '../docs/*.md'"
+    "prettier": "prettier --parser flow --single-quote --write **/*.js *.js",
+    "prettier:text": "prettier 'README.md' '../README.md' '../docs/*.md' '../tutorials.*/README.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
+    "test": "textlint 'README.md' '../README.md' '../docs/*.md'"
   },
   "husky": {
     "hooks": {
@@ -73,7 +74,7 @@
   "lint-staged": {
     "*.js": [
       "eslint --fix",
-      "prettier --parser flow --write",
+      "prettier --parser flow --single-quote --write",
       "git add"
     ],
     "*.md": [

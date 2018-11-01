@@ -1,4 +1,4 @@
-This is a simple nodejs express application which offers an NGSI v1 proxy
+This is a simple Node.js express application which offers an NGSI v1 proxy
 interface to four context providers.
 
 # QueryContext Endpoints
@@ -83,9 +83,9 @@ The following health check endpoints are supported:
     Most of the Weather API features require an API key.
 
     -   Sign up for a key at
-        [https://openweathermap.org/api](https://openweathermap.org/api)
+        [`https://openweathermap.org/api`](https://openweathermap.org/api)
     -   For more information see:
-        [https://openweathermap.org/appid](https://openweathermap.org/appid)
+        [`https://openweathermap.org/appid`](https://openweathermap.org/appid)
 
 ## Keys and Secrets
 

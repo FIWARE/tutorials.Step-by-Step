@@ -742,13 +742,13 @@ the domain of **QuantumLeap** as it not a graphical tool, but can be delegated
 to a mashup or dashboard component such as
 [Wirecloud](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Wirecloud)
 or
-[Knowage](https://catalogue-server.fiware.org/enablers/data-visualization-knowage)
+[Knowage](https://github.com/Fiware/catalogue/blob/master/processing/README.md#Knowage)
 
 It can also be retrieved and displayed using a third-party graphing tool
 appropriate to your coding environment - for example
 [chartjs](http://www.chartjs.org/). An example of this can be found within the
 `history` controller in the
-[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/history.js)
+[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/controllers/history.js)
 
 The basic processing consists of two-step - retrieval and attribute mapping,
 sample code can be seen below:

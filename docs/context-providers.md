@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](https://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
+[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about context data and
@@ -175,7 +175,7 @@ provider (which always returns the same data) and a random data context provider
 (which will change every time it is invoked).
 
 More information about the proxy endpoints can be found
-[here](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/docker/context-provider)
+[here](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/context-provider)
 
 -   In order to access the Open Weather Map API, you will need to sign up for a
     key at `https://openweathermap.org/api`

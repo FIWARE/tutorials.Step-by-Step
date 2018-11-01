@@ -272,7 +272,7 @@ This command will also import seed data from the previous
 
 All the code Node.js Express for the demo can be found within the `proxy` folder
 within the GitHub
-repository.[Stock Management example](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/docker/context-provider).
+repository.[Stock Management example](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/context-provider).
 The application runs on the following URLs:
 
 -   `http://localhost:3000/app/store/urn:ngsi-ld:Store:001`
@@ -315,15 +315,19 @@ library map directly onto the NGSI v2
 ## Analyzing the Code
 
 The code under discussion can be found within the `store` controller in the
-[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/docker/context-provider/express-app/controllers/store.js)
+[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/controllers/store.js)
 
 ### Initializing the library
+
+<!-- textlint-disable -->
 
 We don't want to reinvent the wheel and spend time writing a unnecessary
 boilerplate code for HTTP access. Therefore we will use the existing `ngsi_v2`
 npm library. This needs to be included in the header of the file as shown. The
 `basePath` must also be set - this defines the location of the Orion Context
 Broker.
+
+<!-- textlint-enable -->
 
 ```javascript
 const NgsiV2 = require("ngsi_v2");
