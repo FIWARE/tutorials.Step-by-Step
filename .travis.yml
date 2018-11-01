@@ -1,0 +1,20 @@
+language: node_js
+
+sudo: required
+
+node_js:
+  - "8"
+
+branches:
+  only:
+    - master
+
+install:
+  - npm install -C ./context-provider
+
+script:
+  - npm test -C ./context-provider
+ 
+notifications:
+   on_success: change
+   on_failure: always
