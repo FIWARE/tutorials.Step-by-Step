@@ -6,6 +6,7 @@
 [![Docker](https://img.shields.io/docker/pulls/fiware/tutorials.context-provider.svg)](https://hub.docker.com/r/fiware/tutorials.context-provider/)
 <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
+[![Build Status](https://img.shields.io/travis/Fiware/tutorials.Step-by-Step.svg)](https://travis-ci.org/Fiware/tutorials.Step-by-Step)
 
 This is a collection of tutorials for the FIWARE platform. Each tutorial
 consists of a series of exercises to demonstrate the correct use of individual
