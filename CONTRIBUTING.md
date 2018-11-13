@@ -46,8 +46,8 @@ Start reading our code and documentation and you'll get the hang of it:
 -   Start with appropriate badges and an introductory paragraph
 -   Create a **three level** ToC using markdown-toc 
 -   No headings below `###`
--   Use 4th Level headings are used for `### Request` and `#### Response` only
--   Each request should be numbered 
+-   Use 4th Level headings are **reserved** for `#### Request` and `#### Response` only
+-   Every cUrl request should be numbered 
    -  Use emoji numbers in the `README.md` of each individual tutorial
    -  Use plain text numbers in `docs/*.md` used for the ReadtheDocs rendering
 - Each tutorial follows a standard pattern - some sections are mandatory:
