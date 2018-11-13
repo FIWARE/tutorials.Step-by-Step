@@ -48,12 +48,12 @@ Start reading our code and documentation and you'll get the hang of it:
 -   No headings below `###`
 -   4th Level headings are **reserved** for `#### Request` and `#### Response` only
 -   Every cUrl request should be numbered 
-   -  Use emoji numbers in the `README.md` of each individual tutorial
-   -  Use plain text numbers in `docs/*.md` used for the ReadtheDocs rendering
+    -  Use emoji numbers in the `README.md` of each individual tutorial
+    -  Use plain text numbers in `docs/*.md` used for the ReadtheDocs rendering
 - Each tutorial follows a standard pattern - some sections are mandatory:
-   -   *Architecture* - include a reference diagram
-   -   *Prerequisites* (`README.md` only - remove from  `docs/*.md` )
-   -   *Start Up*
+    -   *Architecture* - include a reference diagram
+    -   *Prerequisites* (`README.md` only - remove from  `docs/*.md` )
+    -   *Start Up*
 - Where possible group API calls thematically, switching between two APIs doesn't help the flow of the learning material
 - Use a formal writing style,  use direct verbs and avoid apostrophes, when in doubt follow 
   Chicago Manual of Style conventions.
