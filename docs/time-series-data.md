@@ -3,12 +3,13 @@
 
 **Description:** This tutorial is an introduction to
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a
-generic enabler which is used to perist context data into a **CrateDB**
+generic enabler which is used to persist context data into a **CrateDB**
 database. The tutorial activates the IoT sensors connected in the
-[previous tutorial](iot-agent.md) and persists measurements from those sensors
-into the database. The **CrateDB** HTTP endpoint is then used to retrieve
-time-based aggregations of that data. The results are visualised on a graph or
-via the **Grafana** time series analytics tool.
+[previous tutorial](https://github.com/Fiware/tutorials.IoT-Agent) and persists
+measurements from those sensors into the database. To retrieve time-based
+aggregations of such data, users can either use **QuantumLeap** query API or
+connect directly to the **CrateDB** HTTP endpoint. Results are visualised on a
+graph or via the **Grafana** time series analytics tool.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
@@ -24,12 +25,13 @@ available as
 >
 > — Emily Dickinson
 
-[Previous tutorials](historic-context.md) have shown how to persist historic
-context data into a range of databases such as **MySQL** and **PostgreSQL**.
-Furthermore, the [Short Term Historic](short-term-history.md) tutorial has
-introduced the [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic
-enabler for persisting and querying historic context data using a **MongoDB**
-database.
+[Previous tutorials](https://github.com/Fiware/tutorials.Historic-Context) have
+shown how to persist historic context data into a range of databases such as
+**MySQL** and **PostgreSQL**. Furthermore, the
+[Short Term Historic](https://github.com/Fiware/tutorials.Short-Term-History)
+tutorial has introduced the
+[STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic enabler for
+persisting and querying historic context data using a **MongoDB** database.
 
 FIWARE [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) is an
 alternative generic enabler created specifically for data persistence into the
@@ -37,7 +39,7 @@ alternative generic enabler created specifically for data persistence into the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/).
 
 [CrateDB](https://crate.io/) is a distributed SQL DBMS designed for use with the
-Internet of Things. It is capable of ingesting a large number of data points per
+internet of Things. It is capable of ingesting a large number of data points per
 second and can be queried in real-time. The database is designed for the
 execution of complex queries such as geospatial and time series data. Retrieval
 of this historic context data allows for the creation of graphs and dashboards
@@ -45,16 +47,17 @@ displaying trends over time.
 
 A summary of the differences can be seen below:
 
-| QuantumLeap                                                                    | STH-Comet                                                                               |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| Offers an NGSI v2 interface for notifications                                  | Offers an NGSI v1 interface for notifiations                                            |
-| Persists Data to a CrateDB database                                            | Persists Data to MongoDB database                                                       |
-| Does not offer its own HTTP endpoint for queries, use the CrateDB SQL endpoint | Offers its own HTTP endpoint for queries - MongoDB database cannot be accessed directly |
-| The CrateDB SQL endpoint is able to satisfy complex data queries using SQL     | STH-Comet offers a limited set of queries                                               |
-| CrateDB is a distributed SQL DBMS built atop NoSQL storage                     | MongoDB is a document based NoSQL database                                              |
+| QuantumLeap                                                                                            | STH-Comet                                                                                          |
+| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Offers an NGSI v2 interface for notifications                                                          | Offers an NGSI v1 interface for notifications                                                      |
+| Persists Data to a CrateDB database                                                                    | Persists Data to MongoDB database                                                                  |
+| Offers its own HTTP endpoint for queries, but you can also query CrateDB                               | Offers its own HTTP endpoint for queries - MongoDB database cannot be accessed directly            |
+| QuantumLeap supports complex data queries (thanks to CrateDB)                                          | STH-Comet offers a limited set of queries                                                          |
+| CrateDB is a distributed and scalable SQL DBMS built atop NoSQL storage                                | MongoDB is a document based NoSQL database                                                         |
+| QuantumLeap's API is docummented in OpenAPI [here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb) | STH-Comet's API is explained in its docs [here](https://fiware-sth-comet.readthedocs.io/en/latest) |
 
 Further details about the differences between the underlying database engines
-can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB)
+can be found [here](https://db-engines.com/en/system/CrateDB%3BMongoDB).
 
 ## Analyzing time series data
 
@@ -74,18 +77,18 @@ exclude outliers by smoothing.
 
 [Grafana](https://grafana.com/) is an open source software for time series
 analytics tool which will be used during this tutorial. It integrates with a
-variety of time-series databases including CrateDB It is available licensed
+variety of time-series databases including **CrateDB**. It is available licensed
 under the Apache License 2.0. More information can be found at
-https://grafana.com/
+https://grafana.com/.
 
 #### Device Monitor
 
 For the purpose of this tutorial, a series of dummy IoT devices have been
 created, which will be attached to the context broker. Details of the
 architecture and protocol used can be found in the
-[IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on
-the UltraLight device monitor web page found at:
-`http://localhost:3000/device/monitor`
+[IoT Sensors tutorial](https://github.com/Fiware/tutorials.IoT-Sensors). The
+state of each device can be seen on the UltraLight device monitor web page found
+at: `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Time-Series-Data/img/device-monitor.png)
 
@@ -102,14 +105,16 @@ device can be seen on the device history web page found at:
 # Architecture
 
 This application builds on the components and dummy IoT devices created in
-[previous tutorials](iot-agent.md). It will use three FIWARE components: the
+[previous tutorials](https://github.com/Fiware/tutorials.IoT-Agent/). It will
+use three FIWARE components: the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/),
 and [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) .
 
 Therefore the overall architecture will consist of the following elements:
 
--   Three **FIWARE Generic Enablers**:
+-   The **FIWARE Generic Enablers**:
+
     -   The FIWARE
         [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)
         which will receive requests using
@@ -122,38 +127,27 @@ Therefore the overall architecture will consist of the following elements:
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests
         for the context broker to alter the state of the context entities
     -   FIWARE [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/)
-        subscribe to context changes and persist them into a **CrateDB**
+        subscribed to context changes and persisting them into a **CrateDB**
         database
+
 -   A [MongoDB](https://www.mongodb.com/) database:
+
     -   Used by the **Orion Context Broker** to hold context data information
         such as data entities, subscriptions and registrations
     -   Used by the **IoT Agent** to hold device information such as device URLs
         and Keys
+
 -   A [CrateDB](https://crate.io/) database:
 
     -   Used as a data sink to hold time-based historical context data
     -   offers an HTTP endpoint to interpret time-based data queries
 
--   Three **Context Providers**:
-    -   The **Stock Management Frontend** is not used in this tutorial. It does
-        the following:
-        -   Display store information and allow users to interact with the dummy
-            IoT devices
-        -   Show which products can be bought at each store
-        -   Allow users to "buy" products and reduce the stock count.
-    -   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using
-        the
-        [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
-        protocol running over HTTP.
-    -   The **Context Provider NGSI** proxy is not used in this tutorial. It
-        does the following:
-        -   receive requests using
-            [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
-        -   makes requests to publicly available data sources using their own
-            APIs in a proprietary format
-        -   returns context data back to the Orion Context Broker in
-            [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
-            format.
+-   A **Context Provider**: - A webserver acting as set of
+    [dummy IoT devices](https://github.com/Fiware/tutorials.IoT-Sensors) using
+    the
+    [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+    protocol running over HTTP. - Note the **Stock Management Frontend** and
+    **Context Provider NGSI** proxy are not used in this tutorial.
 
 Since all interactions between the elements are initiated by HTTP requests, the
 entities can be containerized and run from exposed ports.
@@ -164,9 +158,9 @@ The overall architecture can be seen below:
 
 # Start Up
 
-Before you start you should ensure that you have obtained or built the necessary
-Docker images locally. Please clone the repository and create the necessary
-images by running the commands as shown:
+Before you start, you should ensure that you have obtained or built the
+necessary Docker images locally. Please clone the repository and create the
+necessary images by running the commands as shown:
 
 ```bash
 git clone git@github.com:Fiware/tutorials.Time-Series-Data.git
@@ -176,17 +170,17 @@ cd tutorials.Time-Series-Data
 ```
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services)
+[services](https://github.com/Fiware/tutorials.Time-Series-Data/blob/master/services)
 Bash script provided within the repository:
 
 ```bash
 ./services start
 ```
 
-> **Note:** If you want to clean up and start over again you can do so with the
-> following command:
+> :information_source: **Note:** If you want to clean up and start over again
+> you can do so with the following command:
 >
-> ```
+> ```bash
 > ./services stop
 > ```
 
@@ -195,17 +189,17 @@ Bash script provided within the repository:
 # Connecting FIWARE to a CrateDB Database via QuantumLeap
 
 In the configuration, **QuantumLeap** listens to NGSI v2 notifications on port
-`8868` and persists historic context data to the CrateDB. CrateDB is accessible
-using port `4200` and can either be queried directly or attached to the Grafana
-analytics tool. The rest of the system providing the context data has been
-described in previous tutorials
+`8868` and persists historic context data to the **CrateDB**. **CrateDB** is
+accessible using port `4200` and can either be queried directly or attached to
+the Grafana analytics tool. The rest of the system providing the context data
+has been described in previous tutorials
 
 <h3>CrateDB Database Server Configuration</h3>
 
 ```yaml
-crate-db:
-    image: crate:1.0.5
-    hostname: crate-db
+cratedb:
+    image: crate:2.3
+    hostname: cratedb
     ports:
         - "4200:4200"
         - "4300:4300"
@@ -217,15 +211,15 @@ crate-db:
 <h3>QuantumLeap Configuration</h3>
 
 ```yaml
-quantum-leap:
+quantumleap:
     image: smartsdk/quantumleap
-    hostname: quantum-leap
+    hostname: quantumleap
     ports:
         - "8668:8668"
     depends_on:
-        - crate-db
+        - cratedb
     environment:
-        - CRATE_HOST=crate-db
+        - CRATE_HOST=cratedb
 ```
 
 <h3>Grafana Configuration</h3>
@@ -234,32 +228,33 @@ quantum-leap:
 grafana:
     image: grafana/grafana
     depends_on:
-        - crate-db
+        - cratedb
     ports:
         - "3003:3000"
     environment:
         - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
 ```
 
-The `quantum-leap` container is listening on one port:
+The `quantumleap` container is listening on one port:
 
--   The Operations for port for STH-Comet - `8668` is where the service will be
-    listening for notifications from the Orion context broker
+-   The Operations for port for QuantumLeap - `8668` is where the service will
+    be listening for notifications from the Orion context broker and where users
+    can query data from.
 
 The `CRATE_HOST` environment variable defines the location where the data will
 be persisted.
 
-The `crate-db` container is listening on two ports:
+The `cratedb` container is listening on two ports:
 
 -   The Admin UI is available on port `4200`
--   The transport protocol is available on `4300`
+-   The transport protocol is available on `port 4300`
 
 The `grafana` container has connected up port `3000` internally with port `3003`
 externally. This is because the Grafana UI is usually available on port `3000`,
 but this port has already been taken by the dummy devices UI so it has been
 shifted to another port. The Grafana Environment variables are described within
 their own [documentation](http://docs.grafana.org/installation/configuration/).
-The configuration ensures we will be able to connect to the CrateDB database
+The configuration ensures we will be able to connect to the **CrateDB** database
 later on in the tutorial
 
 ### Generating Context Data
@@ -268,11 +263,11 @@ For the purpose of this tutorial, we must be monitoring a system where the
 context is periodically being updated. The dummy IoT Sensors can be used to do
 this. Open the device monitor page at `http://localhost:3000/device/monitor` and
 unlock a **Smart Door** and switch on a **Smart Lamp**. This can be done by
-selecting an appropriate the command from the drop down list and pressing the
-`send` button. The stream of measurements coming from the devices can then be
-seen on the same page:
+selecting an appropriate command from the drop down list and pressing the `send`
+button. The stream of measurements coming from the devices can then be seen on
+the same page:
 
-![](https://fiware.github.io/tutorials.Time-Series-Data/img/door-open.gif)
+![](https://fiware.github.io/tutorials.IoT-Sensors/img/door-open.gif)
 
 ## Setting up Subscriptions
 
@@ -282,7 +277,10 @@ subscription mechanism of the **Orion Context Broker**. The `attrsFormat=legacy`
 attribute is not required since **QuantumLeap** accepts NGSI v2 notifications
 directly.
 
-More details about subscriptions can be found in previous tutorials
+Subscriptions will be covered in the next subsections. More details about
+subscriptions can be found in previous tutorials or in the
+[subscriptions section](https://quantumleap.readthedocs.io/en/latest/user/#orion-subscription)
+of QuantumLeap docs.
 
 ### Aggregate Motion Sensor Count Events
 
@@ -312,7 +310,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify QuantumLeap of all Motion Sensor count changes",
+  "description": "Notify QuantumLeap of count changes of any Motion Sensor",
   "subject": {
     "entities": [
       {
@@ -327,13 +325,14 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://quantum-leap:8668/v2/notify"
+      "url": "http://quantumleap:8668/v2/notify"
     },
     "attrs": [
       "count"
     ],
     "metadata": ["dateCreated", "dateModified"]
-  }
+  },
+  "throttling": 1
 }'
 ```
 
@@ -368,7 +367,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify QuantumLeap to sample Lamp changes every five seconds",
+  "description": "Notify QuantumLeap on luminosity changes on any Lamp",
   "subject": {
     "entities": [
       {
@@ -383,20 +382,312 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://quantum-leap:8668/v2/notify"
+      "url": "http://quantumleap:8668/v2/notify"
     },
     "attrs": [
       "luminosity"
     ],
     "metadata": ["dateCreated", "dateModified"]
   },
-  "throttling": 5
+  "throttling": 1
 }'
 ```
 
-## Time Series Data Queries (CrateDB)
+### Checking Subscriptions for QuantumLeap
 
-CrateDB offers an
+Before anything, check the subscriptions you created in steps :one: and :two:
+are working (i.e., at least one notification for each was sent).
+
+#### 3 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:1026/v2/subscriptions/' \
+  -H 'fiware-service: openiot' \
+  -H 'fiware-servicepath: /'
+}'
+```
+
+#### Response:
+
+```json
+[
+    {
+        "id": "5be07427be9a2d09cf677f08",
+        "description": "Notify QuantumLeap of count changes of any Motion Sensor",
+        "status": "active",
+        "subject": { ...ETC },
+        "notification": {
+            "timesSent": 6,
+            "lastNotification": "2018-09-02T08:36:04.00Z",
+            "attrs": ["count"],
+            "attrsFormat": "normalized",
+            "http": { "url": "http://quantumleap:8668/v2/notify" },
+            "lastSuccess": "2018-09-02T08:36:04.00Z"
+        },
+        "throttling": 1
+    },
+    {
+        "id": "5be07427be9a2d09cf677f09",
+        "description": "Notify QuantumLeap on luminosity changes on any Lamp",
+        "status": "active",
+        "subject": { ...ETC },
+        "notification": {
+            "timesSent": 4,
+            "lastNotification": "2018-09-02T08:36:00.00Z",
+            "attrs": ["luminosity"],
+            "attrsFormat": "normalized",
+            "http": { "url": "http://quantumleap:8668/v2/notify" },
+            "lastSuccess": "2018-09-02T08:36:01.00Z"
+        },
+        "throttling": 1
+    }
+]
+```
+
+## Time Series Data Queries (QuantumLeap API)
+
+**QuantumLeap** offfers an API wrapping CrateDB backend so you can also perform
+multiple types of queries. The documentation of the API is
+[here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb/). Mind the versions.
+If you have access to your `quantumleap` container (e.g. it is running in
+`localhost` or port-forwarding to it), you can navigate its API via
+[http://localhost:8668/v2/ui](http://localhost:8668/v2/ui).
+
+### QuantumLeap API - List the first N Sampled Values
+
+Now, to check QuantumLeap is persisting values, let's get started with our first
+query. This example shows the first 3 sampled `luminosity` values from
+`Lamp:001`.
+
+Note the use of `Fiware-Service` and `Fiware-ServicePath` headers. These are
+required only when data are pushed to orion using such headers (in multitenancy
+scenarios). Failing to align these headers will result in no data being
+returned.
+
+#### 4 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Lamp:001/attrs/luminosity?=3&limit=3' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "luminosity",
+        "entityId": "Lamp:001",
+        "index": [
+            "2018-10-29T14:27:26",
+            "2018-10-29T14:27:28",
+            "2018-10-29T14:27:29"
+        ],
+        "values": [
+            2000,
+            1991,
+            1998
+        ]
+    }
+}
+```
+
+### QuantumLeap API - List N Sampled Values at an Offset
+
+This example shows the fourth, fifth and sixth sampled `count` values of
+`Motion:001`.
+
+#### 5 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Motion:001/attrs/count?offset=3&limit=3' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "count",
+        "entityId": "Motion:001",
+        "index": [
+            "2018-10-29T14:23:53.804000",
+            "2018-10-29T14:23:54.812000",
+            "2018-10-29T14:24:00.849000"
+        ],
+        "values": [
+            0,
+            1,
+            0
+        ]
+    }
+}
+```
+
+### QuantumLeap API - List the latest N Sampled Values
+
+This example shows the latest three sampled `count` values from `Motion:001`.
+
+#### 6 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Motion:001/attrs/count?lastN=3' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "count",
+        "entityId": "Motion:001",
+        "index": [
+            "2018-10-29T15:03:45.113000",
+            "2018-10-29T15:03:46.118000",
+            "2018-10-29T15:03:47.111000"
+        ],
+        "values": [
+            1,
+            0,
+            1
+        ]
+    }
+}
+```
+
+### QuantumLeap API - List the Sum of values grouped by a time period
+
+This example shows last 3 total `count` values of `Motion:001` over each minute.
+
+You need QuantumLeap **version >= 0.4.1**. You can check your version with a
+simple GET like:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/version' \
+  -H 'Accept: application/json'
+```
+
+#### 7 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Motion:001/attrs/count?aggrMethod=count&aggrPeriod=minute&lastN=3' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "count",
+        "entityId": "Motion:001",
+        "index": [
+            "2018-10-29T15:03:00.000000",
+            "2018-10-29T15:04:00.000000",
+            "2018-10-29T15:05:00.000000"
+        ],
+        "values": [
+            21,
+            10,
+            11
+        ]
+    }
+}
+```
+
+### QuantumLeap API - List the Minimum Values grouped by a Time Period
+
+This example shows minimum `luminosity` values from `Lamp:001` over each minute.
+
+> You need QuantumLeap **version >= 0.4.1**. You can check your version with a
+> simple GET like:
+
+> ```
+> curl -X GET \
+>   'http://localhost:8668/v2/version' \
+>   -H 'Accept: application/json'
+> ```
+
+#### 8 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Lamp:001/attrs/luminosity?aggrMethod=min&aggrPeriod=minute&lastN=3' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "count",
+        "entityId": "Motion:001",
+        "index": [
+            "2018-10-29T15:03:00.000000",
+            "2018-10-29T15:04:00.000000",
+            "2018-10-29T15:05:00.000000"
+        ],
+        "values": [
+            1720,
+            1878,
+            1443
+        ]
+    }
+}
+```
+
+### QuantumLeap API - List the Maximum Value over a Time Period
+
+This example shows maximum `luminosity` value of `Lamp:001` that occurred
+between from `2018-06-27T09:00:00` to `2018-06-30T23:59:59`.
+
+#### 9 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:8668/v2/entities/Lamp:001/attrs/luminosity?aggrMethod=max&fromDate=2018-06-27T09:00:00&toDate=2018-06-30T23:59:59' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+    "data": {
+        "attrName": "luminosity",
+        "entityId": "Lamp:001",
+        "index": [],
+        "values": [
+            1753
+        ]
+    }
+}
+```
+
+## Time Series Data Queries (CrateDB API)
+
+**CrateDB** offers an
 [HTTP Endpoint](https://crate.io/docs/crate/reference/en/latest/interfaces/http.html)
 that can be used to submit SQL queries. The endpoint is accessible under
 `<servername:port>/_sql`.
@@ -404,20 +695,35 @@ that can be used to submit SQL queries. The endpoint is accessible under
 SQL statements are sent as the body of POST requests in JSON format, where the
 SQL statement is the value of the `stmt` attribute.
 
-### Read Schemas
+> When to query **CrateDB** and when **QuantumLeap**?. As a rule of thumb,
+> prefer working always with **QuantumLeap** for the following reasons:
+>
+> -   Your experience will be closer to FIWARE NGSI APIs like Orion's.
+> -   Your application will not be tied to CrateDB's specifics nor QuantumLeap's
+>     implementation details, which could change and break your app.
+> -   QuantumLeap can be easily extended to other backends and your app will get
+>     compatibility for free.
+> -   If your deployment is distributed, you won't need to expose the ports of
+>     your database to the outside.
 
-**QuantumLeap** does not currently offer any interfaces to query for the
-persisted data A good method to see if data is being persisted is to check to
-see if a `table_schema` has been created. This can be done by making a request
-to the **CrateDB** HTTP endpoint as shown:
+If your are sure your query is not supported by **QuantumLeap**, you may have to
+end up querying **CrateDB**, however, please open an issue in
+[QuantumLeap's repo](https://github.com/smartsdk/ngsi-timeseries-api/issues) so
+the team is aware.
 
-#### 3 Request:
+### CrateDB API - Checking Data persistence
+
+Another way to see if data are being persisted is to check if a `table_schema`
+has been created. This can be done by making a request to the **CrateDB** HTTP
+endpoint as shown:
+
+#### 10 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT * FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\'' LIMIT 10"}'
+  -d '{"stmt":"SHOW SCHEMAS"}'
 ```
 
 #### Response:
@@ -439,26 +745,24 @@ curl -iX POST \
 
 Schema names are formed with the `mt` prefix followed by `fiware-service` header
 in lower case. The IoT Agent is forwarding measurements from the dummy IoT
-devices, with the header `openiot` these are being persisted under the
-`mtopeniot` schema.
+devices, with the `FIWARE-Service` header `openiot`. These are being persisted
+under the `mtopeniot` schema.
 
 If the `mtopeniot` does not exist, then the subscription to **QuantumLeap** has
 not been set up correctly. Check that the subscription exists, and has been
 configured to send data to the correct location.
 
-### Read Tables
+**QuantumLeap** will persist data into separate tables within the **CrateDB**
+database based on the entity type. Table names are formed with the `et` prefix
+and the entity type name in lowercase.
 
-QuantumLeap will persist data into separate tables within the CrateDB database
-based on the entity type. Table names are formed with the et prefix and the
-entity type name in lowercase.
-
-#### 4 Request:
+#### 11 Request:
 
 ```bash
 curl -X POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT table_schema,table_name FROM information_schema.tables WHERE table_schema ='\''mtopeniot'\''"}'
+  -d '{"stmt":"SHOW TABLES"}'
 ```
 
 #### Response:
@@ -475,21 +779,19 @@ curl -X POST \
 The response shows that both **Motion Sensor** data and **Smart Lamp** data are
 being persisted in the database.
 
-### List the first N Sampled Values
-
-This example shows the first 3 sampled luminosity values from **Lamp:001**.
+### CrateDB API - List the first N Sampled Values
 
 The SQL statement uses `ORDER BY` and `LIMIT` clauses to sort the data. More
 details can be found under within the **CrateDB**
 [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
 
-#### 5 Request:
+#### 12 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT * FROM mtopeniot.etlamp WHERE entity_id = '\''Lamp:001'\''  ORDER BY time_index ASC LIMIT 3"}'
+  -d '{"stmt":"SELECT * FROM mtopeniot.etlamp WHERE entity_id = '\''Lamp:001'\'' ORDER BY time_index ASC LIMIT 3"}'
 ```
 
 #### Response:
@@ -513,22 +815,19 @@ curl -iX POST \
 }
 ```
 
-### List N Sampled Values at an Offset
-
-This example shows the fourth, fifth and sixth sampled count values from
-**Motion:001**.
+### CrateDB API - List N Sampled Values at an Offset
 
 The SQL statement uses an `OFFSET` clause to retrieve the required rows. More
 details can be found under within the **CrateDB**
-[documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
+[documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html).
 
-#### 6 Request:
+#### 13 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT * FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\'' LIMIT 10"}'
+  -d '{"stmt":"SELECT * FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\'' order by time_index ASC LIMIT 3 OFFSET 3"}'
 ```
 
 #### Response:
@@ -552,22 +851,20 @@ curl -iX POST \
 }
 ```
 
-### List the latest N Sampled Values
-
-This example shows latest three sampled count values from **Motion:001**.
+### CrateDB API - List the latest N Sampled Values
 
 The SQL statement uses an `ORDER BY ... DESC` clause combined with a `LIMIT`
 clause to retrieve the last N rows. More details can be found under within the
 **CrateDB**
-[documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
+[documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html).
 
-#### 7 Request:
+#### 14 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT * FROM mtopeniot.motion WHERE entity_id = '\''Motion:001'\''  ORDER BY time_index DESC LIMIT 3"}'
+  -d '{"stmt":"SELECT * FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\''  ORDER BY time_index DESC LIMIT 3"}'
 ```
 
 #### Response:
@@ -591,22 +888,20 @@ curl -iX POST \
 }
 ```
 
-### List the Sum of values over a time period
-
-This example shows total count values from **Motion:001** over each minute.
+### CrateDB API - List the Sum of values grouped by a time period
 
 The SQL statement uses a `SUM` function and `GROUP BY` clause to retrieve the
 relevant data. **CrateDB** offers a range of
 [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
 to truncate and convert the timestamps into data which can be grouped.
 
-#### 8 Request:
+#### 15 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT DATE_FORMAT (DATE_TRUNC ('\''minute'\'', time_index)) AS minute, SUM (count) AS sum FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\'' GROUP BY minute"}'
+  -d '{"stmt":"SELECT DATE_FORMAT (DATE_TRUNC ('\''minute'\'', time_index)) AS minute, SUM (count) AS sum FROM mtopeniot.etmotion WHERE entity_id = '\''Motion:001'\'' GROUP BY minute LIMIT 3"}'
 ```
 
 #### Response:
@@ -626,16 +921,14 @@ curl -iX POST \
 }
 ```
 
-### List the Minimum Values over a Time Period
-
-This example shows minimum luminosity values from **Lamp:001** over each minute.
+### CrateDB API - List the Minimum Values grouped by a Time Period
 
 The SQL statement uses a `MIN` function and `GROUP BY` clause to retrieve the
 relevant data. **CrateDB** offers a range of
 [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
 to truncate and convert the timestamps into data which can be grouped.
 
-#### 9 Request:
+#### 16 Request:
 
 ```bash
 curl -iX POST \
@@ -661,75 +954,30 @@ curl -iX POST \
 }
 ```
 
-### List the Maximum Values over a Time Period
+### CrateDB API - List the Maximum Value over a Time Period
 
-This example shows maximum luminosity values from **Lamp:001** over each minute.
-
-The SQL statement uses a `MAX` function and `GROUP BY` clause to retrieve the
+The SQL statement uses a `MAX` function and a `WHERE` clause to retrieve the
 relevant data. **CrateDB** offers a range of
-[Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
-to truncate and convert the timestamps into data which can be grouped.
+[Aggregate Functions](https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#data-aggregation)
+to aggregate data in different ways.
 
-#### 10 Request:
+#### 17 Request:
 
 ```bash
 curl -iX POST \
   'http://localhost:4200/_sql' \
   -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT DATE_FORMAT (DATE_TRUNC ('\''minute'\'', time_index)) AS minute, MAX (luminosity) AS max FROM mtopeniot.etlamp WHERE entity_id = '\''Lamp:001'\'' GROUP BY minute"}'
+  -d '{"stmt":"SELECT MAX(luminosity) AS max FROM mtopeniot.etlamp WHERE entity_id = '\''Lamp:001'\'' and time_index >= '\''2018-06-27T09:00:00'\'' and time_index < '\''2018-06-30T23:59:59'\''"}'
 ```
 
 #### Response:
 
 ```json
 {
-    "cols": ["minute", "max"],
-    "rows": [
-        ["2018-06-29T09:34:00.000000Z", 2008],
-        ["2018-06-29T09:17:00.000000Z", 1911],
-        ["2018-06-29T09:40:00.000000Z", 2005],
-        ["2018-06-29T09:08:00.000000Z", 2008],
-        ...etc
-    ],
-    "rowcount": 43,
+    "cols": ["max"],
+    "rows": [[1753]],
+    "rowcount": 1,
     "duration": 26.7215
-}
-```
-
-### List the Average Values over a Time Period
-
-This example shows the average of luminosity values from **Lamp:001** over each
-minute.
-
-The SQL statement uses a `AVG` function and `GROUP BY` clause to retrieve the
-relevant data. **CrateDB** offers a range of
-[Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
-to truncate and convert the timestamps into data which can be grouped.
-
-#### 11 Request:
-
-```bash
-curl -iX POST \
-  'http://localhost:4200/_sql' \
-  -H 'Content-Type: application/json' \
-  -d '{"stmt":"SELECT DATE_FORMAT (DATE_TRUNC ('\''minute'\'', time_index)) AS minute, AVG (luminosity) AS average FROM mtopeniot.etlamp WHERE entity_id = '\''Lamp:001'\'' GROUP BY minute"}'
-```
-
-#### Response:
-
-```json
-{
-    "cols": ["minute", "average"],
-    "rows": [
-        ["2018-06-29T09:34:00.000000Z", 1874.9],
-        ["2018-06-29T09:17:00.000000Z", 1867.3333333333333],
-        ["2018-06-29T09:40:00.000000Z", 1909.7142857142858],
-        ["2018-06-29T09:08:00.000000Z", 1955.8333333333333],
-        ["2018-06-29T09:33:00.000000Z", 1933.5],
-        ...etc
-    ],
-    "rowcount": 44,
-    "duration": 22.0911
 }
 ```
 
@@ -807,10 +1055,12 @@ third-party graphing tool. The result is shown here:
 
 ## Displaying CrateDB data as a Grafana Dashboard
 
-**CrateDB** has been chosen as the time-series data sink, as it integrates
-seamlessly with the [Grafana](https://grafana.com/) time series analytics tool.
-Grafana can be used to display the aggregated sensor data - a full tutorial on
-building dashboards can be found
+**CrateDB** has been chosen as the time-series data sink for QuantumLeap,
+because, among
+[many other benefits](https://quantumleap.readthedocs.io/en/latest/), it
+integrates seamlessly with the [Grafana](https://grafana.com/) time series
+analytics tool. Grafana can be used to display the aggregated sensor data - a
+full tutorial on building dashboards can be found
 [here](https://www.youtube.com/watch?v=sKNZMtoSHN4). The simpified instructions
 below summarize how to connect and display a graph of the Lamp `luminosity`
 data.
@@ -829,7 +1079,7 @@ After logging in, a datasource must be set up at
 -   **Name** Lamp
 -   **Type** Crate
 
--   **URL** `http://crate-db:4200`
+-   **URL** `http://cratedb:4200`
 -   **Access** Server (Default)
 
 -   **Schema** mtopeniot
@@ -865,3 +1115,4 @@ The following values in **bold text** need to be placed in the graphing wizard
 The final result can be seen below:
 
 ![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-result.png)
+
