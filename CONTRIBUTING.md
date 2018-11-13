@@ -36,7 +36,7 @@ to `docker-compose` or `services`) require more in-depth testing, and text chang
 
 The code and markdown files are formatted by [prettier](https://prettier.io), you can also run the formatter directly:
 
-```
+```console
 npm run prettier -C ./context-provider
 npm run prettier:text -C ./context-provider
 ```
