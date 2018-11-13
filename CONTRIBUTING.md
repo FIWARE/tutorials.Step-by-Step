@@ -16,7 +16,7 @@ This will check the text for obvious typos, informal grammar and dead links
 
 ## Submitting changes
 
-Please send a [GitHub Pull Request to opengovernment](https://github.com/Fiware/tutorials.Step-by-Step/pull/new/master) 
+Please send a [GitHub Pull Request](https://github.com/Fiware/tutorials.Step-by-Step/pull/new/master) 
 with a clear list of what you've done (read more about [pull requests](http://help.github.com/pull-requests/)). 
 Please follow our coding conventions (below) and make sure all of your commits are atomic (one feature per commit).
 
