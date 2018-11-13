@@ -452,7 +452,7 @@ multiple types of queries. The documentation of the API is
 [here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb/). Mind the versions.
 If you have access to your `quantumleap` container (e.g. it is running in
 `localhost` or port-forwarding to it), you can navigate its API via
-[http://localhost:8668/v2/ui](http://localhost:8668/v2/ui).
+`http://localhost:8668/v2/ui`.
 
 ### QuantumLeap API - List the first N Sampled Values
 
@@ -708,7 +708,7 @@ SQL statement is the value of the `stmt` attribute.
 
 If your are sure your query is not supported by **QuantumLeap**, you may have to
 end up querying **CrateDB**, however, please open an issue in
-[QuantumLeap's repo](https://github.com/smartsdk/ngsi-timeseries-api/issues) so
+[QuantumLeap's GitHub repository](https://github.com/smartsdk/ngsi-timeseries-api/issues) so
 the team is aware.
 
 ### CrateDB API - Checking Data persistence
