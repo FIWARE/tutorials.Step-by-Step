@@ -361,7 +361,7 @@ are not discussed here.
 ### Backend - Connecting to Kurento
 
 **Kurento** offers a well-defined
-[WebSocket API](http://kurento.github.io/doc-kurento/) - To establish a
+[WebSocket API](https://kurento.readthedocs.io/en/stable/doc/open_spec.html) - To establish a
 WebSocket connection, the client needs to send a WebSocket handshake request to
 the `/kurento` endpoint, and the media server will return a WebSocket handshake
 response.
