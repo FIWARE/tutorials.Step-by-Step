@@ -27,6 +27,30 @@ function setAuthHeaders(req) {
   return headers;
 }
 
+function mapTileUrl(zoom, location) {
+  const tilesPerRow = Math.pow(2, zoom);
+  let longitude = location.coordinates[0];
+  let latitude = location.coordinates[1];
+
+  longitude /= 360;
+  longitude += 0.5;
+  latitude =
+    0.5 -
+    Math.log(Math.tan(Math.PI / 4 + (latitude * Math.PI) / 360)) /
+      Math.PI /
+      2.0;
+
+  return (
+    'https://a.tile.openstreetmap.org/' +
+    zoom +
+    '/' +
+    Math.floor(longitude * tilesPerRow) +
+    '/' +
+    Math.floor(latitude * tilesPerRow) +
+    '.png'
+  );
+}
+
 // This function receives the details of a store from the context
 //
 // It is effectively processing the following cUrl command:
@@ -48,6 +72,7 @@ function displayStore(req, res) {
   )
     .then(store => {
       // If a store has been found display it on screen
+      store.mapUrl = mapTileUrl(15, store.location);
       return res.render('store', { title: store.name, store });
     })
     .catch(error => {

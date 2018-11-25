@@ -5,8 +5,11 @@ include product
 block content
   h1= title
   div
-    div(style="float: left; border-width: 1px; border: solid; width:300px;")
-       img(src=`http://staticmap.openstreetmap.de/staticmap.php?center=${store.location.coordinates[1]},${store.location.coordinates[0]}&zoom=15&size=300x200&maptype=mapnik`)
+    div(style="float: left; border-width: 1px; border: solid; padding:2px; background: #efefef;")
+      img(src=`${store.mapUrl}`)
+      small(style="display: inherit")
+        a(href="https://www.openstreetmap.org/copyright")
+          | © OpenStreetMap contributors
     div(style="float: left; padding:20px; border: none; height:163px; width:300px;")
       address
         | #{store.address.streetAddress} #[br]
