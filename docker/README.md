@@ -45,39 +45,42 @@ aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
 
 ## How to build your own image
 
-The [Dockerfile](https://github.com/fiware/tutorials.Step-by-Step/blob/master/docker/Dockerfile)
+The
+[Dockerfile](https://github.com/fiware/tutorials.Step-by-Step/blob/master/docker/Dockerfile)
 associated with this image can be used to build an image in several ways:
 
-* By default, the `Dockerfile` retrieves the **latest** version of the codebase direct
-from GitHub (the `build-arg` is optional):
+-   By default, the `Dockerfile` retrieves the **latest** version of the
+    codebase direct from GitHub (the `build-arg` is optional):
 
 ```console
 docker build -t fiware/tutorials.Step-by-Step . --build-arg DOWNLOAD=latest
 ```
 
-* You can alter this to obtain the last **stable** release run this `Dockerfile` with the build
-  argument `DOWNLOAD=stable`
+-   You can alter this to obtain the last **stable** release run this
+    `Dockerfile` with the build argument `DOWNLOAD=stable`
 
 ```console
 docker build -t fiware/tutorials.Step-by-Step . --build-arg DOWNLOAD=stable
 ```
 
-* You can also download a specific release by running this `Dockerfile` with the build
-  argument `DOWNLOAD=<version>`
+-   You can also download a specific release by running this `Dockerfile` with
+    the build argument `DOWNLOAD=<version>`
 
 ```console
 docker build -t fiware/tutorials.Step-by-Step . --build-arg DOWNLOAD=1.7.0
 ```
 
-* To download code from your own fork of the GitHub repository add the `GITHUB_ACCOUNT`
-  and `GITHUB_REPOSITORY` arguments to the `docker build` command.
+-   To download code from your own fork of the GitHub repository add the
+    `GITHUB_ACCOUNT` and `GITHUB_REPOSITORY` arguments to the `docker build`
+    command.
 
 ```console
 docker build -t fiware/tutorials.Step-by-Step . --build-arg GITHUB_ACCOUNT=<your account> --build-arg GITHUB_REPOSITORY=<your repo>
 ```
 
-Alternatively, if you want to build directly from your own sources, please copy the existing
-`Dockerfile` into file the root of the repository and amend it to copy over your local source using :
+Alternatively, if you want to build directly from your own sources, please copy
+the existing `Dockerfile` into file the root of the repository and amend it to
+copy over your local source using :
 
 ```Dockerfile
 COPY context-provider /usr/src/app

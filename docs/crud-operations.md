@@ -1,8 +1,8 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
-**Description:** This tutorial teaches FIWARE users about CRUD Operations. The tutorial builds on
-the data created in the previous
+**Description:** This tutorial teaches FIWARE users about CRUD Operations. The
+tutorial builds on the data created in the previous
 [stock management example](https://github.com/Fiware/tutorials.Entity-Relationships/)
 and introduces the concept of
 [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete),
@@ -33,8 +33,8 @@ The relationships between our entities are defined as shown below:
     -   Store name, e.g. "Checkpoint Markt"
     -   Address, e.g. "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
     -   Physical location, e.g. _52.5075 N, 13.3903 E_
--   A **Shelf** is a real world object to hold items which we wish to sell.
-    Each shelf would have properties such as:
+-   A **Shelf** is a real world object to hold items which we wish to sell. Each
+    shelf would have properties such as:
     -   Shelf name, e.g. "Wall Unit"
     -   Physical location, e.g. _52.5075 N, 13.3903 E_
     -   Maximum capacity
@@ -54,8 +54,8 @@ The relationships between our entities are defined as shown below:
     -   Shelf count, i.e. number of items available on the shelf
 
 As you can see, each of the entities defined above contain some properties which
-are liable to change. For example, product price could change, stock could be sold
-and the number of items on the shelves would drop.
+are liable to change. For example, product price could change, stock could be
+sold and the number of items on the shelves would drop.
 
 ---
 
@@ -74,8 +74,8 @@ manages. Therefore, the architecture will consist of two components:
     which will receive requests using
     [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The underlying [MongoDB](https://www.mongodb.com/) database:
-    -   Used by the Orion Context Broker to store context information such
-        as data entities, subscriptions and registrations
+    -   Used by the Orion Context Broker to store context information such as
+        data entities, subscriptions and registrations
 
 Since the two components interact by means of HTTP requests, they can be
 containerized and run from exposed ports.
@@ -118,8 +118,8 @@ mongo-db:
 Both containers reside on the same network - the Orion Context Broker is
 listening on port `1026` and MongoDB is listening on the default port `271071`.
 For the sake of this tutorial, we have also made the two ports available from
-outside the network so that cUrl or Postman can access them without having to
-be run from inside the network. The command-line initialization should be self
+outside the network so that cUrl or Postman can access them without having to be
+run from inside the network. The command-line initialization should be self
 explanatory.
 
 # Start Up
@@ -151,7 +151,8 @@ on startup.
 **Create**, **Read**, **Update** and **Delete** are the four basic functions of
 persistent storage. These operations are usually referred to using the acronym
 **CRUD**. Within a database each of these operations map directly to a series of
-commands, however their relationship with a RESTful API is slightly more complex.
+commands, however their relationship with a RESTful API is slightly more
+complex.
 
 The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) uses
 [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the
@@ -218,8 +219,8 @@ Batch operations are always triggered by a POST request where the payload is an
 object with two properties:
 
 -   `actionType` specifies the kind of action to invoke (e.g. `delete`)
--   `entities` is an array of objects holding the list of entities to update, along
-    with the relevant entity data used to perform the operation.
+-   `entities` is an array of objects holding the list of entities to update,
+    along with the relevant entity data used to perform the operation.
 
 # Example CRUD Operations using FIWARE
 
@@ -229,12 +230,12 @@ previous tutorial.
 
 All examples refer to the **Product** entity as defined in the stock management
 system. CRUD operations will therefore relate to adding, reading, amending and
-deleting a product or series of products. This is a typical use case for a
-store regional manager, for example setting prices and deciding what
-products can be sold. The actual responses you receive in each case will depend
-on the state of the context data in your system at the time. If you find that
-you have already deleted an entity by mistake, you can restore the initial
-context by reloading the data from the command-line
+deleting a product or series of products. This is a typical use case for a store
+regional manager, for example setting prices and deciding what products can be
+sold. The actual responses you receive in each case will depend on the state of
+the context data in your system at the time. If you find that you have already
+deleted an entity by mistake, you can restore the initial context by reloading
+the data from the command-line
 
 ```bash
 ./import-data
@@ -368,12 +369,12 @@ The request will fail if any of the attributes already exist in the context.
 Batch processing uses the `/v2/op/update` endpoint with a payload with two
 attributes
 
--   `actionType=append_strict` means that the request only succeeds if all entities
-    / attributes are new.
+-   `actionType=append_strict` means that the request only succeeds if all
+    entities / attributes are new.
 -   The `entities` attribute holds an array of entities we wish to create.
 
-Subsequent requests using the same data with the `actionType=append_strict` batch
-operation will result in an error response.
+Subsequent requests using the same data with the `actionType=append_strict`
+batch operation will result in an error response.
 
 ### Batch Create/Overwrite New Data Entities
 
@@ -416,8 +417,8 @@ attributes:
 -   The entities attribute holds an array of entities we wish to
     create/overwrite.
 
-A subsequent request containing the same data (i.e. same entities and `actionType=append`)
-won't change the context state.
+A subsequent request containing the same data (i.e. same entities and
+`actionType=append`) won't change the context state.
 
 ## Read Operations
 
@@ -427,8 +428,8 @@ won't change the context state.
 
 ### Filtering
 
--   The options parameter (combined with the attrs parameter) can be used to filter
-    the returned fields
+-   The options parameter (combined with the attrs parameter) can be used to
+    filter the returned fields
 -   The q parameter can be used to filter the returned entities
 
 ### Read a Data Entity (verbose)
@@ -475,8 +476,8 @@ curl -X GET \
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is
-shown below:
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown
+below:
 
 ```json
 "Beer"
@@ -487,8 +488,8 @@ Context data can be retrieved by making a GET request to the
 
 ### Read a Data Entity (key-value pairs)
 
-This example reads the key-value pairs of two attributes (`name` and
-`price`) from the context of existing **Product** entities with a known `id`.
+This example reads the key-value pairs of two attributes (`name` and `price`)
+from the context of existing **Product** entities with a known `id`.
 
 #### 9 Request:
 
@@ -499,8 +500,8 @@ curl -X GET \
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is
-shown below:
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown
+below:
 
 ```json
 {
@@ -516,8 +517,8 @@ key-value pairs.
 
 ### Read Multiple attributes values from a Data Entity
 
-This example reads the value of two attributes (`name` and `price`)
-from the context of existing **Product** entities with a known ID.
+This example reads the value of two attributes (`name` and `price`) from the
+context of existing **Product** entities with a known ID.
 
 #### 10 Request:
 
@@ -528,8 +529,8 @@ curl -X GET \
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is
-shown below:
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown
+below:
 
 ```json
 ["Beer", 99]
@@ -551,8 +552,8 @@ curl -X GET \
 
 ### Response:
 
-On start-up the context held nine products, three more have been added by
-create operations so the full context will now contain twelve products.
+On start-up the context held nine products, three more have been added by create
+operations so the full context will now contain twelve products.
 
 ```json
 [
@@ -659,8 +660,8 @@ curl -X GET \
 
 #### Response:
 
-On start-up the context held nine products, three more have been added by
-create operations so the full context will now contain twelve products.
+On start-up the context held nine products, three more have been added by create
+operations so the full context will now contain twelve products.
 
 ```json
 [
@@ -757,8 +758,8 @@ curl -X GET \
 
 #### Response:
 
-On start-up the context held nine products, three more have been added by
-create operations so the full context will now contain twelve products.
+On start-up the context held nine products, three more have been added by create
+operations so the full context will now contain twelve products.
 
 ```json
 [
@@ -896,8 +897,8 @@ to update.
 
 ### Batch Create/Overwrite Attributes of Multiple Data Entities
 
-This example uses the convenience batch processing endpoint to update
-existing products.
+This example uses the convenience batch processing endpoint to update existing
+products.
 
 #### 17 Request:
 
@@ -958,8 +959,8 @@ data we wish to replace.
 Delete Operations map to HTTP DELETE.
 
 -   The `/v2/entities/<entity>` endpoint can be used to delete an entity
--   The `/v2/entities/<entity>/attrs/<attribute>` endpoint can be used to delete an
-    attribute
+-   The `/v2/entities/<entity>/attrs/<attribute>` endpoint can be used to delete
+    an attribute
 
 The response will be **204 - No Content** if the operation is successful or
 **404 - Not Found** if the operation fails.
@@ -985,8 +986,8 @@ curl -iX DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
-Entities can be deleted by making a DELETE request to the `/v2/entities/<entity>`
-endpoint.
+Entities can be deleted by making a DELETE request to the
+`/v2/entities/<entity>` endpoint.
 
 Subsequent requests using the same `id` will result in an error response since
 the entity no longer exists in the context.
@@ -1006,7 +1007,8 @@ curl -iX DELETE \
 Attributes can be deleted by making a DELETE request to the
 `/v2/entities/<entity>/attrs/<attribute>` endpoint.
 
-If the attribute does not exist in the context, the result will be an error response.
+If the attribute does not exist in the context, the result will be an error
+response.
 
 ### Batch Delete Multiple Entities
 
@@ -1036,7 +1038,8 @@ Batch processing uses the `/v2/op/update` endpoint with a payload with two
 attributes - `actionType=delete` means we will delete something from the context
 and the `entities` attribute holds the `id` of the entities we wish to delete.
 
-If an entity does not exist in the context, the result will be an error response.
+If an entity does not exist in the context, the result will be an error
+response.
 
 ### Batch Delete Multiple Attributes from an Entity
 
@@ -1100,4 +1103,3 @@ curl -X GET \
 Note that we deleted **Product** `urn:ngsi-ld:Product:001` earlier, so what we
 see above is actually a dangling reference, i.e. the returned **InventoryItem**
 references a **Product** that no longer exists.
-
