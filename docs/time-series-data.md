@@ -684,10 +684,10 @@ SQL statement is the value of the `stmt` attribute.
 > -   If your deployment is distributed, you won't need to expose the ports of
 >     your database to the outside.
 
-If your are sure your query is not supported by **QuantumLeap**, you may have to
-end up querying **CrateDB**, however, please open an issue in
+If your are certain your query is not supported by **QuantumLeap**, you may have to
+end up querying **CrateDB** directly - in this case please also open an issue in
 [QuantumLeap's GitHub repository](https://github.com/smartsdk/ngsi-timeseries-api/issues)
-so the team is aware.
+to inform the team.
 
 ### CrateDB API - Checking Data persistence
 
