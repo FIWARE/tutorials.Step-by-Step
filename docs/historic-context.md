@@ -12,9 +12,6 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
 [Postman documentation](https://fiware.github.io/tutorials.Historic-Context/)
 
-> **Note** There are breaking changes to the setup of Cygnus between 1.x and
-> 2.x. This tutorial is describing the use of Cygnus 1.9.0
-
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4824d3171f823935dcab)
 
 ---
@@ -1071,7 +1068,7 @@ client, to do this, run an interactive instance of the `mysql` image supplying
 the connection string as shown to obtain a command-line prompt:
 
 ```bash
-docker run -it --rm  --network fiware_default mysql mysql -h mysql-db -P 3306  -u root -p123
+docker exec -it  db-mysql mysql -h mysql-db -P 3306  -u root -p123
 ```
 
 ### Show Available Databases on the MySQL server
