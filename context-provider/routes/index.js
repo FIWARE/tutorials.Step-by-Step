@@ -10,6 +10,7 @@ const _ = require('lodash');
 const TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
 const GIT_COMMIT = process.env.GIT_COMMIT || 'unknown';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
+const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
 // Error handler for async functions
 function catchErrors(fn) {
@@ -67,10 +68,12 @@ router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
   });
 });
 
-// This endpoint is secured by Keyrock PDP.
+// Access to IoT devices is secured by a Policy Decision Point (PDP).
 // LEVEL 1: AUTHENTICATION ONLY -  For most actions, any user is authorized, just ensure the user exists.
 // LEVEL 2: BASIC AUTHORIZATION -  Ringing the alarm bell and unlocking the Door are restricted to certain
 //                                 users.
+// LEVEL 3: XACML AUTHORIZATION -  Ringing the alarm bell and unlocking the Door are restricted via XACML
+//                                 rules to certain users at certain times of day.
 router.post(
   '/device/command',
   Ultralight.accessControl,
@@ -98,13 +101,9 @@ router.get('/app/monitor', function(req, res) {
   res.render('monitor', { title: 'Event Monitor' });
 });
 
-// This endpoint is secured by Keyrock PDP.
+// Viewing Store information is secured by Keyrock PDP.
 // LEVEL 1: AUTHENTICATION ONLY - Users must be logged in to view the store page.
-router.get(
-  '/app/store/:storeId',
-  Security.pdpAuthentication,
-  Store.displayStore
-);
+router.get('/app/store/:storeId', Security.authenticate, Store.displayStore);
 // Display products for sale
 router.get('/app/store/:storeId/till', Store.displayTillInfo);
 // Render warehouse notifications
@@ -112,18 +111,32 @@ router.get('/app/store/:storeId/warehouse', Store.displayWarehouseInfo);
 // Buy something.
 router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 
-// This endpoint is secured by Keyrock PDP.
-// LEVEL 2: BASIC AUTHORIZATION - Only managers may change prices.
+// Changing Prices is secured by a Policy Decision Point (PDP).
+// LEVEL 2: BASIC AUTHORIZATION - Only managers may change prices - use Keyrock as a PDP
+// LEVEL 3: XACML AUTHORIZATION - Only managers may change prices are restricted via XACML
+//                                - use Authzforce as a PDP
 router.get(
   '/app/price-change',
-  Security.pdpBasicAuthorization,
+  function(req, res, next) {
+    // Use Advanced Autorization if Authzforce is present.
+    return AUTHZFORCE_ENABLED
+      ? Security.authorizeAdvancedXACML(req, res, next)
+      : Security.authorizeBasicPDP(req, res, next);
+  },
   Store.priceChange
 );
-// This endpoint is secured by Keyrock PDP.
-// LEVEL 2: BASIC AUTHORIZATION - Only managers may order stock.
+// Ordering Stock is secured by a Policy Decision Point (PDP).
+// LEVEL 2: BASIC AUTHORIZATION - Only managers may order stock - use Keyrock as a PDP
+// LEVEL 3: XACML AUTHORIZATION - Only managers may order stock are restricted via XACML
+//                                - use Authzforce as a PDP
 router.get(
   '/app/order-stock',
-  Security.pdpBasicAuthorization,
+  function(req, res, next) {
+    // Use Advanced Authorization if Authzforce is present.
+    return AUTHZFORCE_ENABLED
+      ? Security.authorizeAdvancedXACML(req, res, next)
+      : Security.authorizeBasicPDP(req, res, next);
+  },
   Store.orderStock
 );
 

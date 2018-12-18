@@ -43,6 +43,11 @@ aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
 -   `KEYROCK_CLIENT_SECRET=tutorial-dckr-site-0000-clientsecret` - Client secret
     for the appliction within keyrock
 
+## Access Control - Authzforce
+
+- `AUTHZFORCE_URL=http://authzforce` - URL for Authzforce
+- `AUTHZFORCE_PORT=8080` - Port that Authzforce is listening on
+
 ## How to build your own image
 
 The

@@ -35,6 +35,7 @@ const UL_NGSI_PREFIX =
     ? process.env.NGSI_LD_PREFIX
     : 'urn:ngsi-ld:';
 const DUMMY_DEVICE_HTTP_HEADERS = { 'Content-Type': 'text/plain' };
+const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
 // A series of constants used by our set of devices
 const OK = ' OK';
@@ -431,13 +432,19 @@ function accessControl(req, res, next) {
   // can be done by any user.
   if (action === 'ring') {
     // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    return Security.pdpBasicAuthorization(req, res, next, '/bell/ring');
+    // LEVEL 3: ADVANCED AUTHORIZATION - Resources are accessible on XACML Rules
+    return AUTHZFORCE_ENABLED
+      ? Security.authorizeAdvancedXACML(req, res, next, '/bell/ring')
+      : Security.authorizeBasicPDP(req, res, next, '/bell/ring');
   } else if (action === 'unlock') {
     // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    return Security.pdpBasicAuthorization(req, res, next, '/door/unlock');
+    // LEVEL 3: ADVANCED AUTHORIZATION - Resources are accessible on XACML Rules
+    return AUTHZFORCE_ENABLED
+      ? Security.authorizeAdvancedXACML(req, res, next, '/door/unlock')
+      : Security.authorizeBasicPDP(req, res, next, '/door/unlock');
   }
   // LEVEL 1: AUTHENTICATION ONLY - Every user is authorized, just ensure the user exists.
-  return Security.pdpAuthentication(req, res, next);
+  return Security.authenticate(req, res, next);
 }
 
 // This function offers the Password Authentication flow for a secured IoT Sensors
