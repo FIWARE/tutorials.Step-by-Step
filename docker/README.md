@@ -45,8 +45,8 @@ aspects of FIWARE To run the application in debug mode add `DEBUG=tutorial:*`
 
 ## Access Control - Authzforce
 
-- `AUTHZFORCE_URL=http://authzforce` - URL for Authzforce
-- `AUTHZFORCE_PORT=8080` - Port that Authzforce is listening on
+-   `AUTHZFORCE_URL=http://authzforce` - URL for Authzforce
+-   `AUTHZFORCE_PORT=8080` - Port that Authzforce is listening on
 
 ## How to build your own image
 
