@@ -5,19 +5,33 @@ include product
 block content
   h1= title
   div
-    div(style="float: left; border-width: 1px; border: solid; padding:2px; background: #efefef;")
+    div(style="float:left; border-width:1px; border:solid; padding:2px; background: #efefef;")
       img(src=`${store.mapUrl}`)
       small(style="display: inherit")
         a(href="https://www.openstreetmap.org/copyright")
           | © OpenStreetMap contributors
-    div(style="float: left; padding:20px; border: none; height:163px; width:300px;")
+    div(style="float:left; padding:20px; border:none;")
       address
         | #{store.address.streetAddress} #[br]
         | #{store.address.addressLocality} #[br]
         | #{store.address.postalCode} #[br]
         | #{store.address.addressRegion} #[br]
+    div(style="float: left; padding:0px 20px 20px 20px; border: none;")
+      iframe(width='560', height='270', src=`/app/store/${store.id}/till`, frameborder='0')
     div(style="clear: both;")
-  div
-    iframe(width='560', height='270', src=`/app/store/${store.id}/till`, frameborder='0')
-  div
-    iframe(width='560', height='315', src=`/app/store/${store.id}/warehouse`, frameborder='0')
+    div(style="padding:5px 20px 20px 20px; border:none;")
+      - if (store.tweets)
+        h3 Tweets:
+        ul
+          each item in store.tweets
+            li= item
+      - if (store.temperature)
+        p 
+          b Temperature:&nbsp;
+          | #{store.temperature}
+      - if (store.relativeHumidity)
+        p 
+          b Humidity:&nbsp;
+          | #{store.relativeHumidity}
+    div(style="float: left; padding:5px 20px 20px 20px; border: none;")
+      iframe(width='560', height='315', src=`/app/store/${store.id}/warehouse`, frameborder='0')
