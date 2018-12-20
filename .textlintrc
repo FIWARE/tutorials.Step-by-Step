@@ -13,7 +13,8 @@
        "ignoreRedirects": true,
        "ignore": [
           "mailto:*",
-          "https://oauth.net"
+          "https://oauth.net",
+          "https://ec.haxx.se"
       ]
     }
   },
