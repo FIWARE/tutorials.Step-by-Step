@@ -6,8 +6,8 @@
 
 const debug = require('debug')('tutorial:proxy');
 const request = require('request-promise');
-const Formatter = require('../lib/formatter');
-const monitor = require('../lib/monitoring');
+const Formatter = require('../../lib/formatter');
+const monitor = require('../../lib/monitoring');
 
 //  The  OpenWeatherMap API key is personal to you.
 //  Do not place them directly in the code - read them in as environment variables.

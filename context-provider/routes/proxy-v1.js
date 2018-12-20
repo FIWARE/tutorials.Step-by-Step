@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const StaticNGSIProxy = require('../controllers/static');
-const RandomNGSIProxy = require('../controllers/random');
-const TwitterNGSIProxy = require('../controllers/twitter');
-const WeatherNGSIProxy = require('../controllers/openweathermap');
+const StaticNGSIProxy = require('../controllers/proxy/static-api');
+const RandomNGSIProxy = require('../controllers/proxy/random-api');
+const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
+const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
+const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
+router.post(
+  '/catfacts/:type/:mapping/queryContext',
+  CatFactsNGSIProxy.queryContext
+);
 router.post(
   '/random/:type/:mapping/queryContext',
   RandomNGSIProxy.queryContext
@@ -151,6 +156,17 @@ router.post(
   TwitterNGSIProxy.queryContext
 );
 
+router.post(
+  '/catfacts/tweets/queryContext',
+  (req, res, next) => {
+    req.params.type = 'list';
+    req.params.mapping = 'tweets:fact';
+    req.params.queryString = '';
+    next();
+  },
+  CatFactsNGSIProxy.queryContext
+);
+
 router.get('/', (req, res) => {
   res.status(200).send({
     context_urls: [
@@ -162,6 +178,7 @@ router.get('/', (req, res) => {
       '/proxy/v1/static/relativeHumidity/queryContext',
       '/proxy/v1/static/tweets/queryContext',
       '/proxy/v1/static/weatherConditions/queryContext',
+      '/proxy/v1/catfacts/tweets/queryContext',
       '/proxy/v1/twitter/tweets/queryContext',
       '/proxy/v1/weather/temperature/queryContext',
       '/proxy/v1/weather/relativeHumidity/queryContext',

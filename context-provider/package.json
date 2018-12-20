@@ -63,7 +63,7 @@
     "start": "node ./bin/www",
     "lint": "eslint . --cache --fix",
     "precommit": "lint-staged",
-    "prettier": "prettier --parser flow --single-quote --write **/*.js *.js",
+    "prettier": "prettier --parser flow --single-quote --write **/**/*.js  **/*.js *.js",
     "prettier:text": "prettier 'README.md' '../README.md' '../docs/*.md' '../docker/*.md' '../tutorials.*/README.md' --tab-width 4 --print-width 80 --write --prose-wrap always",
     "test": "textlint 'README.md' '../README.md' '../docs/*.md'"
   },

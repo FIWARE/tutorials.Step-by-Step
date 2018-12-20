@@ -3,8 +3,8 @@
 //
 
 const debug = require('debug')('tutorial:proxy');
-const Formatter = require('../lib/formatter');
-const monitor = require('../lib/monitoring');
+const Formatter = require('../../lib/formatter');
+const monitor = require('../../lib/monitoring');
 
 const LOREM_IPSUM =
   'lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ' +

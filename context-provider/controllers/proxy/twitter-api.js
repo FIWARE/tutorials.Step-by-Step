@@ -7,9 +7,9 @@
 const debug = require('debug')('tutorial:proxy');
 const Twitter = require('twitter');
 const request = require('request-promise');
-const Formatter = require('../lib/formatter');
+const Formatter = require('../../lib/formatter');
 const _ = require('lodash');
-const monitor = require('../lib/monitoring');
+const monitor = require('../../lib/monitoring');
 
 // The  Twitter Consumer Key & Consumer Secret are personal to you.
 // Do not place them directly in the code - read them in as environment variables.
