@@ -509,7 +509,7 @@ curl -iX POST \
  "devices": [
    {
      "device_id":   "motion001",
-     "entity_name": "urn:ngsd-ld:Motion:001",
+     "entity_name": "urn:ngsi-ld:Motion:001",
      "entity_type": "Motion",
      "timezone":    "Europe/Berlin",
      "attributes": [
@@ -525,7 +525,7 @@ curl -iX POST \
 ```
 
 In the request we are associating the device `motion001` with the URN
-`urn:ngsd-ld:Motion:001` and mapping the device reading `c` with the context
+`urn:ngsi-ld:Motion:001` and mapping the device reading `c` with the context
 attribute `count` (which is defined as an `Integer`) A `refStore` is defined as
 a `static_attribute`, placing the device within **Store**
 `urn:ngsi-ld:Store:001`
@@ -564,7 +564,7 @@ from the context broker. Don't forget to add the `fiware-service` and
 
 ```bash
 curl -G -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsd-ld:Motion:001' \
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Motion:001' \
   -d 'type=Motion' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
@@ -574,7 +574,7 @@ curl -G -X GET \
 
 ```json
 {
-    "id": "urn:ngsd-ld:Motion:001", "type": "Motion",
+    "id": "urn:ngsi-ld:Motion:001", "type": "Motion",
     "TimeInstant": {
         "type": "ISO8601","value": "2018-05-25T10:51:32.00Z",
         "metadata": {}
@@ -597,7 +597,7 @@ curl -G -X GET \
 
 The response shows that the **Motion Sensor** device with `id=motion001` has
 been successfully identified by the IoT Agent and mapped to the entity
-`id=urn:ngsd-ld:Motion:001`. This new entity has been created within the context
+`id=urn:ngsi-ld:Motion:001`. This new entity has been created within the context
 data. The `c` attribute from the dummy device measurement request has been
 mapped to the more meaningful `count` attribute within the context. As you will
 notice, a `TimeInstant` attribute has been added to both the entity and the meta
