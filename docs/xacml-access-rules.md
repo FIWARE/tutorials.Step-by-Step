@@ -510,7 +510,7 @@ multiple applications. **Authzforce** is implicitly multi-tenant, in that it
 allows separate organizations to work on their policies in isolation from one
 another. This is done by separating the security policies for each application
 into a separate **domain** where they can access their own `<PolicySets>`. A
-domain holds meta data about the secured application along with versions of the
+domain holds metadata about the secured application along with versions of the
 policies themselves (effectively a series of files which can be accessed by a
 file server). The domain management API can be used to query **Authzforce**
 about the domains served and policies held.
@@ -548,7 +548,7 @@ corresponds to the directory structure uploaded to **Authzforce** on start-up.
 To read information about a domain, and to explore further, make a request to
 the `authzforce-ce/domains/{{domain-id}}` endpoint. The following request
 obtains information about the `gQqnLOnIEeiBFQJCrBIBDA` domain, which has been
-generated using using a random key by an external Policy Adminstration Point in
+generated using a random key by an external Policy Administration Point in
 this case **Keyrock** has been used as the PAP, and pre-generated the rule sets.
 
 #### 3 Request
@@ -560,7 +560,7 @@ curl -X GET \
 
 #### Response
 
-The response lists more information about the domain, including the id used
+The response lists more information about the domain, including the ID used
 within **Keyrock** (`tutorial-dckr-site-0000-xpresswebapp`)
 
 ```xml
@@ -582,9 +582,9 @@ within **Keyrock** (`tutorial-dckr-site-0000-xpresswebapp`)
 
 ### List all PolicySets available within a Domain
 
-To list the generated ids for all of the PolicySets found within a domain make a
+To list the generated IDs for all of the PolicySets found within a domain make a
 request to the `authzforce-ce/domains/{{domain-id}}/pap/policies` endpoint. The
-following request obtains a list of a given policy ids found within the
+following request obtains a list of a given policy IDs found within the
 `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
 #### 4 Request
@@ -616,7 +616,7 @@ files `1.xml`, `2.xml` etc.
 
 To list the available revisions of a policy, make a request to the
 `authzforce-ce/domains/{{domain-id}}/pap/policies/{{policy-id}}` endpoint.
-Available policy id are randomly generated, and can be obtained by drilling down
+Available policy ID are randomly generated, and can be obtained by drilling down
 using the previous request. The following request obtains a list revision of a
 given policy found within the `gQqnLOnIEeiBFQJCrBIBDA` domain.
 
@@ -709,7 +709,7 @@ access.
 To request a decision from Authzforce, a structured request containing all
 relevant information must be sent to the `domains/{domain-id}/pdp` endpoint. In
 this case, the Body of the request includes information such as the roles that
-the User has, the application id that is being requested
+the User has, the application ID that is being requested
 (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb and resource that are
 being requested ( a GET request on the `/app/price-change` URL). Obviously the
 information passed in the Body can be expanded as the rules become more complex.
@@ -718,7 +718,7 @@ information passed in the Body can be expanded as the rules become more complex.
 
 To request a decision from Authzforce, make a POST requets to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
-`managers-role-0000-0000-000000000000` and is requesting access the the
+`managers-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
 
 #### 7 Request
@@ -774,7 +774,7 @@ The `managers-role-0000-0000-000000000000` permits access to the
 
 To request a decision from Authzforce, make a POST requets to the
 `domains/{domain-id}/pdp` endpoint. In this case the user has the
-`security-role-0000-0000-000000000000` and is requesting access the the
+`security-role-0000-0000-000000000000` and is requesting access the
 `/app/price-change` resource.
 
 #### 8 Request
@@ -950,7 +950,7 @@ roles and the `app_azf_domain` associated to the `app-id` are returned.
 To request a decision from Authzforce, a structured request containing all
 relevant information must be sent to the `domains/{domain-id}/pdp` endpoint. In
 this case, the Body of the request includes information such as the roles that
-the User has (`managers-role-0000-0000-000000000000`), the application id that
+the User has (`managers-role-0000-0000-000000000000`), the application ID that
 is being requested (`tutorial-dckr-site-0000-xpresswebapp`) and the HTTP verb
 and resource that are being requested ( a POST request on the `/v2/entities`
 URL)
@@ -1095,7 +1095,7 @@ Applying advanced authorization within a PEP proxy requires very similar code to
 the programmatic example described above. The **Wilma** generic enabler extracts
 a token from the header supplied by the request and makes a request to
 **Keyrock** to obtain further information about the user. A PDP request is then
-made to **Authzforce** to decide whether to procede.
+made to **Authzforce** to decide whether to proceed.
 
 Obviously any scalable solution should also cache information about the PDP
 requests made and the responses to avoid making unnecessary requests.
