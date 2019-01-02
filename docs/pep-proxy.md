@@ -188,7 +188,7 @@ Where `<command>` will vary depending upon the exercise we wish to activate.
 > ./services stop
 > ```
 
-## Dramatis Personae
+<h3>Dramatis Personae</h3>
 
 The following people at `test.com` legitimately have accounts within the
 Application
@@ -633,7 +633,7 @@ curl -X DELETE \
 
 ![](https://fiware.github.io/tutorials.PEP-Proxy/img/pep-proxy-orion.png)
 
-## Securing Orion - PEP Proxy Configuration
+<h3>Securing Orion - PEP Proxy Configuration</h3>
 
 The `orion-proxy` container is an instance of FIWARE **Wilma** listening on port
 `1027`, it is configured to forward traffic to `orion` on port `1026`, which is
@@ -701,7 +701,7 @@ For this example, the PEP Proxy is checking for Level 1 - _Authentication
 Access_ not Level 2 - _Basic Authorization_ or Level 3 - _Advanced
 Authorization_.
 
-## Securing Orion - Application Configuration
+<h3>Securing Orion - Application Configuration</h3>
 
 The tutorial application has already been registered in **Keyrock**,
 programmatically the tutorial application will be making requests to the
@@ -756,7 +756,7 @@ tutorials, all context broker traffic is now sent to `orion-proxy` on port
 | KEYROCK_CLIENT_SECRET | `tutorial-dckr-site-0000-clientsecret` | The Client Secret defined by Keyrock for this application                                      |
 | CALLBACK_URL          | `http://localhost:3000/login`          | The callback URL used by Keyrock when a challenge has succeeded.                               |
 
-## Securing Orion - Start up
+<h2>Securing Orion - Start up</h2>
 
 To start the system with a PEP Proxy protecting access to **Orion**, run the
 following command:
@@ -765,7 +765,7 @@ following command:
 ./services orion
 ```
 
-### Video : Securing A REST API
+<h3>Video : Securing A REST API</h3>
 
 [![](http://img.youtube.com/vi/coxFQEY0_So/0.jpg)](https://www.youtube.com/watch?v=coxFQEY0_So "Securing a REST API")
 
@@ -933,7 +933,7 @@ async function buyItem(req, res) {
 
 ![](https://fiware.github.io/tutorials.PEP-Proxy/img/pep-proxy-iot-agent.png)
 
-## Securing an IoT Agent - PEP Proxy Configuration
+<h3>Securing an IoT Agent - PEP Proxy Configuration</h3>
 
 The `iot-agent-proxy` container is an instance of FIWARE **Wilma** listening on
 port `7897`, it is configured to forward traffic to `iot-agent` on port `7896`,
@@ -1001,7 +1001,7 @@ For this example, the PEP Proxy is checking for Level 1 - _Authentication
 Access_ not Level 2 - _Basic Authorization_ or Level 3 - _Advanced
 Authorization_.
 
-## Securing an IoT Agent - Application Configuration
+<h3>Securing an IoT Agent - Application Configuration</h3>
 
 The tutorial application also plays the role of providing data from our dummy
 IoT Sensors. The IoT Sensors are making HTTP request containing commands and
@@ -1062,7 +1062,7 @@ by adding new entries to the application in **Keyrock**, however, in this
 tutorial, they have been predefined by populating the **MySQL** database with
 data on start-up.
 
-## Securing IoT Agent - Start up
+<h2>Securing IoT Agent - Start up</h2>
 
 To start the system with a PEP Proxies protecting access to both **Orion** and
 the **IoT Agent** run the following command:

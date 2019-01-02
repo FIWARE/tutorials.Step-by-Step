@@ -53,3 +53,6 @@
 [submodule "tutorials.PEP-Proxy"]
 	path = tutorials.PEP-Proxy
 	url = https://github.com/Fiware/tutorials.PEP-Proxy.git
+[submodule "tutorials.XACML-Access-Rules"]
+	path = tutorials.XACML-Access-Rules
+	url = https://github.com/Fiware/tutorials.XACML-Access-Rules
