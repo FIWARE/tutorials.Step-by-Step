@@ -385,7 +385,7 @@ curl -iX POST \
       "url": "http://quantumleap:8668/v2/notify"
     },
     "attrs": [
-      "luminosity"
+      "luminosity", "location"
     ],
     "metadata": ["dateCreated", "dateModified"]
   },
@@ -663,6 +663,116 @@ curl -X GET \
 }
 ```
 
+
+### QuantumLeap API - List the latest N Sampled Values of Devices near a Point
+
+This example shows the latest four sampled `luminosity` values of lamps that
+are within a 5 km radius from `52°33'16.9"N 13°23'55.0"E` (Bornholmer Straße
+65, Berlin, Germany). If you have turned on all the lamps available on the
+device monitor page, you should be able to see data for `Lamp:001` and
+`Lamp:004`.
+
+> **Note:** Geographical queries are only available
+> starting from version `0.5` of QuantumLeap which implements the full
+> set of queries detailed in the Geographical Queries section of the
+> [NGSI v2 specification](http://fiware.github.io/specifications/ngsiv2/stable/).
+
+#### 10 Request:
+
+```console
+curl -X GET \
+  'http://localhost:8668/v2/types/Lamp/attrs/luminosity?lastN=4&georel=near;maxDistance:5000&geometry=point&coords=52.5547,13.3986' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+  "data": {
+    "attrName": "luminosity",
+    "entities": [
+      {
+        "entityId": "Lamp:001",
+        "index": [
+          "2018-12-13T16:35:58.284",
+          "2018-12-13T16:36:58.216"
+        ],
+        "values": [
+          999,
+          999
+        ]
+      },
+      {
+        "entityId": "Lamp:004",
+        "index": [
+          "2018-12-13T16:35:04.351",
+          "2018-12-13T16:36:04.282"
+        ],
+        "values": [
+          948,
+          948
+        ]
+      }
+    ],
+    "entityType": "Lamp"
+  }
+}
+```
+
+### QuantumLeap API - List the latest N Sampled Values of Devices in an Area
+
+This example shows the latest four sampled `luminosity` values of lamps that
+are inside a square of side 200 m centred at `52°33'16.9"N 13°23'55.0"E`
+(Bornholmer Straße 65, Berlin, Germany). Even if you have turned on all the
+lamps available on the device monitor page, you should only see data for
+`Lamp:001`.
+
+> **Note:** Geographical queries are only available
+> starting from version `0.5` of QuantumLeap which implements the full
+> set of queries detailed in the Geographical Queries section of the
+> [NGSI v2 specification](http://fiware.github.io/specifications/ngsiv2/stable/).
+
+#### 11 Request:
+
+```console
+curl -X GET \
+  'http://localhost:8668/v2/types/Lamp/attrs/luminosity?lastN=4&georel=coveredBy&geometry=polygon&coords=52.5537,13.3996;52.5557,13.3996;52.5557,13.3976;52.5537,13.3976;52.5537,13.3996' \
+  -H 'Accept: application/json' \
+  -H 'Fiware-Service: openiot' \
+  -H 'Fiware-ServicePath: /'
+```
+
+#### Response:
+
+```json
+{
+  "data": {
+    "attrName": "luminosity",
+    "entities": [
+      {
+        "entityId": "Lamp:001",
+        "index": [
+          "2018-12-13T17:08:56.041",
+          "2018-12-13T17:09:55.976",
+          "2018-12-13T17:10:55.907",
+          "2018-12-13T17:11:55.833"
+        ],
+        "values": [
+          999,
+          999,
+          999,
+          999
+        ]
+      }
+    ],
+    "entityType": "Lamp"
+  }
+}
+```
+
 ## Time Series Data Queries (CrateDB API)
 
 **CrateDB** offers an
@@ -696,7 +806,7 @@ Another way to see if data are being persisted is to check if a `table_schema`
 has been created. This can be done by making a request to the **CrateDB** HTTP
 endpoint as shown:
 
-#### 10 Request:
+#### 12 Request:
 
 ```bash
 curl -iX POST \
@@ -735,7 +845,7 @@ configured to send data to the correct location.
 database based on the entity type. Table names are formed with the `et` prefix
 and the entity type name in lowercase.
 
-#### 11 Request:
+#### 13 Request:
 
 ```bash
 curl -X POST \
@@ -764,7 +874,7 @@ The SQL statement uses `ORDER BY` and `LIMIT` clauses to sort the data. More
 details can be found under within the **CrateDB**
 [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html)
 
-#### 12 Request:
+#### 14 Request:
 
 ```bash
 curl -iX POST \
@@ -800,7 +910,7 @@ The SQL statement uses an `OFFSET` clause to retrieve the required rows. More
 details can be found under within the **CrateDB**
 [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html).
 
-#### 13 Request:
+#### 15 Request:
 
 ```bash
 curl -iX POST \
@@ -837,7 +947,7 @@ clause to retrieve the last N rows. More details can be found under within the
 **CrateDB**
 [documentation](https://crate.io/docs/crate/reference/en/latest/sql/statements/select.html).
 
-#### 14 Request:
+#### 16 Request:
 
 ```bash
 curl -iX POST \
@@ -874,7 +984,7 @@ relevant data. **CrateDB** offers a range of
 [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
 to truncate and convert the timestamps into data which can be grouped.
 
-#### 15 Request:
+#### 17 Request:
 
 ```bash
 curl -iX POST \
@@ -907,7 +1017,7 @@ relevant data. **CrateDB** offers a range of
 [Date-Time Functions](https://crate.io/docs/crate/reference/en/latest/general/builtins/scalar.html#date-and-time-functions)
 to truncate and convert the timestamps into data which can be grouped.
 
-#### 16 Request:
+#### 18 Request:
 
 ```bash
 curl -iX POST \
@@ -940,7 +1050,7 @@ relevant data. **CrateDB** offers a range of
 [Aggregate Functions](https://crate.io/docs/crate/reference/en/latest/general/dql/selects.html#data-aggregation)
 to aggregate data in different ways.
 
-#### 17 Request:
+#### 19 Request:
 
 ```bash
 curl -iX POST \
