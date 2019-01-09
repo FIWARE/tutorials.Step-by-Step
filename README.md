@@ -98,4 +98,4 @@ Full instructions can be found within the
 
 ## License
 
-[MIT](LICENSE) © FIWARE Foundation e.V.
+[MIT](LICENSE) © 2018-2019 FIWARE Foundation e.V.
