@@ -138,7 +138,10 @@ block content
         $.ajax({
             url: "/device/command",
             type: "post",
-            data: serializedData
+            data: serializedData,
+            error: function (xhr, ajaxOptions, thrownError) {
+              alert('ACCESS DENIED');
+            }
         });
       });
 
