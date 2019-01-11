@@ -205,7 +205,7 @@ described in previous tutorials.
 
 To start the installation, do the following:
 
-```console
+```bash
 git clone git@github.com:Fiware/tutorials.Administrating-XACML.git
 cd tutorials.Administrating-XACML
 
@@ -218,14 +218,14 @@ Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.Administrating-XACML/blob/master/services)
 Bash script provided within the repository:
 
-```console
+```bash
 ./services start
 ```
 
-> :information_source: **Note:** If you want to clean up and start over again
+> **Note:** If you want to clean up and start over again
 > you can do so with the following command:
 >
-> ```console
+> ```
 > ./services stop
 > ```
 
@@ -244,18 +244,6 @@ Application
     -   Detective1
     -   Detective2
 
-The following people at `example.com` have signed up for accounts, but have no
-reason to be granted access
-
--   Eve - Eve the Eavesdropper
--   Mallory - Mallory the malicious attacker
--   Rob - Rob the Robber
-
-<details>
-  <summary>
-   For more details <b>(Click to expand)</b>
-  </summary>
-
 | Name       | eMail                     | Password |
 | ---------- | ------------------------- | -------- |
 | alice      | alice-the-admin@test.com  | `test`   |
@@ -266,13 +254,19 @@ reason to be granted access
 | detective1 | detective1@test.com       | `test`   |
 | detective2 | detective2@test.com       | `test`   |
 
+<br/>
+The following people at `example.com` have signed up for accounts, but have no
+reason to be granted access
+
+-   Eve - Eve the Eavesdropper
+-   Mallory - Mallory the malicious attacker
+-   Rob - Rob the Robber
+
 | Name    | eMail               | Password |
 | ------- | ------------------- | -------- |
 | eve     | eve@example.com     | `test`   |
 | mallory | mallory@example.com | `test`   |
 | rob     | rob@example.com     | `test`   |
-
-</details>
 
 # XACML Administration
 
@@ -316,7 +310,7 @@ To create a new domain in **Authzforce**, make a POST request to the
 
 #### 1 Request
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains \
   -H 'Content-Type: application/xml' \
@@ -348,7 +342,7 @@ to `loading` in the `white` zone.
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pdp \
   -H 'Content-Type: application/xml' \
@@ -401,92 +395,16 @@ For this initial Policy, the following rules will be enforced
 The full data for an XACML `<PolicySet>` is very verbose and has been omitted
 from the request below:
 
-<details>
-  <summary>
-
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/policies \
   -H 'Content-Type: application/xml' \
   -d '<PolicySet>...etc</PolicySet>'
 ```
 
-**(Click to expand)**
-
-  </summary>
-
-Remember to amend the request below to use your own `{domain-id}`:
-
-```console
-curl -X POST \
-  http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/policies \
-  -H 'Content-Type: application/xml' \
-  -d '<?xml version="1.0" encoding="UTF-8"?>
-<PolicySet xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" PolicySetId="f8194af5-8a07-486a-9581-c1f05d05483c" Version="1" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:deny-unless-permit">
-   <Description>Policy Set for Airplane!</Description>
-   <Target />
-   <Policy PolicyId="airplane" Version="1.0" RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit">
-      <Description>Vehicle Roles from the Male announcer in the movie Airplane!</Description>
-      <Target>
-         <AnyOf>
-            <AllOf>
-               <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">airplane!</AttributeValue>
-                  <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-               </Match>
-            </AllOf>
-         </AnyOf>
-      </Target>
-      <Rule RuleId="white-zone" Effect="Permit">
-         <Description>The white zone is for immediate loading and unloading of passengers only</Description>
-         <Target>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">white</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">loading</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-         </Target>
-      </Rule>
-      <Rule RuleId="red-zone" Effect="Deny">
-         <Description>There is no stopping in the red zone</Description>
-         <Target>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">red</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">stopping</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-         </Target>
-      </Rule>
-   </Policy>
-</PolicySet>
-'
-```
-
-</details>
+[**(Click to EXPAND)**](cmds/administrating-xacml.md#3-request)
 
 #### Response
 
@@ -509,7 +427,7 @@ To activate a `PolicySet`, make a PUT request to the
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X PUT \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/pdp.properties \
   -H 'Content-Type: application/xml' \
@@ -543,7 +461,7 @@ return `Permit`
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pdp \
   -H 'Content-Type: application/xml' \
@@ -584,7 +502,7 @@ return `Deny`
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pdp \
   -H 'Content-Type: application/xml' \
@@ -635,92 +553,16 @@ For the updated Policy, the previous rules will be reversed
 The full data for an XACML `<PolicySet>` is very verbose and has been omitted
 from the request below:
 
-<details>
-  <summary>
-
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/policies \
   -H 'Content-Type: application/xml' \
   -d '<PolicySet>...etc</PolicySet>'
 ```
 
-**(Click to expand)**
-
-  </summary>
-
-Remember to amend the request below to use your own `{domain-id}`:
-
-```console
-curl -X POST \
-  http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/policies \
-  -H 'Content-Type: application/xml' \
-  -d '<?xml version="1.0" encoding="UTF-8"?>
-<PolicySet xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" PolicySetId="f8194af5-8a07-486a-9581-c1f05d05483c" Version="2" PolicyCombiningAlgId="urn:oasis:names:tc:xacml:3.0:policy-combining-algorithm:deny-unless-permit">
-   <Description>Policy Set for Airplane!</Description>
-   <Target />
-   <Policy PolicyId="airplane" Version="1.0" RuleCombiningAlgId="urn:oasis:names:tc:xacml:3.0:rule-combining-algorithm:deny-unless-permit">
-      <Description>Vehicle Roles from the Female announcer in the movie Airplane!</Description>
-      <Target>
-         <AnyOf>
-            <AllOf>
-               <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                  <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">airplane!</AttributeValue>
-                  <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-               </Match>
-            </AllOf>
-         </AnyOf>
-      </Target>
-      <Rule RuleId="red-zone" Effect="Permit">
-         <Description>The red zone is for immediate loading and unloading of passengers only</Description>
-         <Target>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">red</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">loading</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-         </Target>
-      </Rule>
-      <Rule RuleId="white-zone" Effect="Deny">
-         <Description>There is no stopping in the white zone</Description>
-         <Target>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">white</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-            <AnyOf>
-               <AllOf>
-                  <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                     <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">stopping</AttributeValue>
-                     <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                  </Match>
-               </AllOf>
-            </AnyOf>
-         </Target>
-      </Rule>
-   </Policy>
-</PolicySet>
-'
-```
-
-</details>
+[**(Click to EXPAND)**](cmds/administrating-xacml.md#7-request)
 
 #### Response
 
@@ -744,7 +586,7 @@ ruleset will be updated to apply the latest uploaded version.
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X PUT \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pap/pdp.properties \
   -H 'Content-Type: application/xml' \
@@ -778,7 +620,7 @@ access to `loading` in the `white` zone will return `Deny`
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pdp \
   -H 'Content-Type: application/xml' \
@@ -819,7 +661,7 @@ policy will return `Permit`
 
 Remember to amend the request below to use your own `{domain-id}`:
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/{domain-id}/pdp \
   -H 'Content-Type: application/xml' \
@@ -919,7 +761,7 @@ to access the system outside of core hours.
 Enter a username and password to enter the application. The default super-user
 has the values `alice-the-admin@test.com` and `test`.
 
-```console
+```bash
 curl -iX POST \
   http://localhost:3005/v1/auth/tokens \
   -H 'Accept: application/json' \
@@ -971,7 +813,7 @@ headers.
 
 #### 12 Request
 
-```console
+```bash
 curl -X GET \
   http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/permissions/entrance-open-0000-0000-000000000000 \
   -H 'Content-Type: application/json' \
@@ -1009,7 +851,7 @@ headers.
 
 #### 13 Request
 
-```console
+```bash
 curl -X GET \
   http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/permissions/alrmbell-ring-24hr-xaml-000000000000 \
   -H 'Content-Type: application/json' \
@@ -1028,63 +870,9 @@ following:
 > **Security Staff** Can only ring the alarm bell **before** 9 a.m. or **after**
 > 5 p.m.
 
-<details>
-  <summary>
-   To see the full `<Rule>`  <b>(Click to expand)</b>
-  </summary>
 
-```xml
-<Rule RuleId="alrmbell-ring-24hr-hours-000000000000" Effect="Permit">
-    <Description>Ring Alarm Bell (Outside Core Hours)</Description>
-    <Target>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/bell/ring</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">POST</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">security-role-0000-0000-000000000000</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-    </Target>
-    <Condition>
-        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
-            <Apply FunctionId="urn:oasis:names:tc:xacml:2.0:function:time-in-range">
-                <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" AttributeId="urn:oasis:names:tc:xacml:1.0:environment:current-time" DataType="http://www.w3.org/2001/XMLSchema#time" MustBePresent="false" />
-                </Apply>
-                <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
-                    <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-bag">
-                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">08:00:00</AttributeValue>
-                    </Apply>
-                </Apply>
-                <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-one-and-only">
-                    <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:time-bag">
-                        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#time">17:00:00</AttributeValue>
-                    </Apply>
-                </Apply>
-            </Apply>
-        </Apply>
-    </Condition>
-</Rule>
-```
+To see the full `<Rule>`  [**(Click to EXPAND)**](cmds/administrating-xacml.md#13-request)
 
-</details>
 
 The `<Target>` element of the `<Rule>` defines access on a Verb-Resource level
 in a similar manner as seen in the previous tutorial. The a `<Condition>`
@@ -1117,7 +905,7 @@ access to `POST` to the `/ring/bell` endpoint.
 
 #### 14 Request
 
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/gQqnLOnIEeiBFQJCrBIBDA/pdp \
   -H 'Content-Type: application/xml' \
@@ -1172,45 +960,7 @@ The policy will now be updated as follows:
 This means that the `alrmbell-ring-24hr-xaml-000000000000` permission will need
 to be amended to apply two rules:
 
-<details>
-  <summary>
-   To see the new `<Rule>`  <b>(Click to expand)</b>
-  </summary>
-
-```xml
-<Rule RuleId="alrmbell-ring-only-000000000000" Effect="Permit">
-    <Description>Allow Full Access to Charlie the Security Manager</Description>
-    <Target>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/bell/ring</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource" AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">POST</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action" AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-        <AnyOf>
-            <AllOf>
-                <Match MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-                    <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">charlie</AttributeValue>
-                    <AttributeDesignator Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject" AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="true" />
-                </Match>
-            </AllOf>
-        </AnyOf>
-    </Target>
-</Rule>
-```
-
-</details>
-
+To see the new `<Rule>`  [**(Click to EXPAND)**](cmds/administrating-xacml.md#update-an-xacml-permission)
 
 This is most easily be done in the GUI by pasting the rule into the appropriate
 text box, however it can also be done programmatically.
@@ -1243,10 +993,7 @@ set to `""` and the `xml` attribute should hold the XACML text.
 
 The full data for the request very verbose and has been omitted below:
 
-<details>
-  <summary>
-
-```console
+```bash
 curl -X PATCH \
   http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/permissions/alrmbell-ring-24hr-xaml-000000000000 \
   -H 'Content-Type: application/json' \
@@ -1260,25 +1007,8 @@ curl -X PATCH \
 }
 ```
 
-**(Click to expand)**
+[**(Click to EXPAND)**](cmds/administrating-xacml.md#15-request)
 
-  </summary>
-
-```console
-curl -X PATCH \
-  http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/permissions/alrmbell-ring-24hr-xaml-000000000000 \
-  -H 'Content-Type: application/json' \
-  -H 'X-Auth-token: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' \
-  -d '{
-    "permission": {
-        "action": "",
-        "resource": "",
-        "xml": "<Rule RuleId=\"alrmbell-ring-only-000000000000\" Effect=\"Permit\">\n<Description>Allow Full Access to Charlie the Security Manager</Description>\n<Target>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">/bell/ring</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\" AttributeId=\"urn:thales:xacml:2.0:resource:sub-resource-id\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">POST</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\" AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">charlie</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\" AttributeId=\"urn:oasis:names:tc:xacml:1.0:subject:subject-id\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n</Target>\n</Rule>\n<Rule RuleId=\"alrmbell-ring-24hr-hours-000000000000\" Effect=\"Permit\">\n<Description>Ring Alarm Bell (Outside Core Hours)</Description>\n<Target>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">/bell/ring</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:resource\" AttributeId=\"urn:thales:xacml:2.0:resource:sub-resource-id\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">POST</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:action\" AttributeId=\"urn:oasis:names:tc:xacml:1.0:action:action-id\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n<AnyOf>\n<AllOf>\n<Match MatchId=\"urn:oasis:names:tc:xacml:1.0:function:string-equal\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#string\">security-role-0000-0000-000000000000</AttributeValue>\n<AttributeDesignator Category=\"urn:oasis:names:tc:xacml:1.0:subject-category:access-subject\" AttributeId=\"urn:oasis:names:tc:xacml:2.0:subject:role\" DataType=\"http://www.w3.org/2001/XMLSchema#string\" MustBePresent=\"true\" />\n</Match>\n</AllOf>\n</AnyOf>\n</Target>\n<Condition>\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:not\">\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:2.0:function:time-in-range\">\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:time-one-and-only\">\n<AttributeDesignator AttributeId=\"urn:oasis:names:tc:xacml:1.0:environment:current-time\" DataType=\"http://www.w3.org/2001/XMLSchema#time\" Category=\"urn:oasis:names:tc:xacml:3.0:attribute-category:environment\" MustBePresent=\"false\"></AttributeDesignator>\n</Apply>\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:time-one-and-only\">\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:time-bag\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#time\">08:00:00</AttributeValue>\n</Apply>\n</Apply>\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:time-one-and-only\">\n<Apply FunctionId=\"urn:oasis:names:tc:xacml:1.0:function:time-bag\">\n<AttributeValue DataType=\"http://www.w3.org/2001/XMLSchema#time\">17:00:00</AttributeValue>\n</Apply>\n</Apply>\n</Apply>\n</Apply>\n</Condition>\n</Rule>"
-    }
-}'
-```
-
-</details>
 
 #### Response
 
@@ -1304,7 +1034,7 @@ Firstly delete an association using a DELETE request:
 
 #### 16 Request
 
-```console
+```bash
 curl -X DELETE \
   http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/roles/security-role-0000-0000-000000000000/permissions/alrmbell-ring-24hr-xaml-000000000000 \
   -H 'Content-Type: application/json' \
@@ -1315,7 +1045,7 @@ Then re-create it using a POST request as shown:
 
 #### 17 Request
 
-```console
+```bash
 curl -X POST \
   http://localhost:3005/v1/applications/tutorial-dckr-site-0000-xpresswebapp/roles/security-role-0000-0000-000000000000/permissions/alrmbell-ring-24hr-xaml-000000000000 \
   -H 'Content-Type: application/json' \
@@ -1358,14 +1088,11 @@ category.
 With the new rule in place, the user `charlie` will be able to access the
 `/bell/ring` endpoint at all times of day.
 
-#### 17 Request
+#### 18 Request
 
 The full data for the request very verbose and has been omitted below:
 
-<details>
-  <summary>
-
-```console
+```bash
 curl -X POST \
   http://localhost:8080/authzforce-ce/domains/gQqnLOnIEeiBFQJCrBIBDA/pdp \
   -H 'Content-Type: application/xml' \
@@ -1375,45 +1102,7 @@ curl -X POST \
 </Request>'
 ```
 
-**(Click to expand)**
-
-  </summary>
-
-```console
-curl -X POST \
-  http://localhost:8080/authzforce-ce/domains/gQqnLOnIEeiBFQJCrBIBDA/pdp \
-  -H 'Content-Type: application/xml' \
-  -d '<?xml version="1.0" encoding="UTF-8"?>
-<Request xmlns="urn:oasis:names:tc:xacml:3.0:core:schema:wd-17" CombinedDecision="false" ReturnPolicyIdList="false">
-  <Attributes Category="urn:oasis:names:tc:xacml:1.0:subject-category:access-subject">
-     <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">charlie</AttributeValue>
-     </Attribute>
-     <Attribute AttributeId="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">charlie-security@test.com</AttributeValue>
-     </Attribute>
-     <Attribute AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">security-role-0000-0000-000000000000</AttributeValue>
-     </Attribute>
-  </Attributes>
-  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:resource">
-     <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">tutorial-dckr-site-0000-xpresswebapp</AttributeValue>
-     </Attribute>
-     <Attribute AttributeId="urn:thales:xacml:2.0:resource:sub-resource-id" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">/bell/ring</AttributeValue>
-     </Attribute>
-  </Attributes>
-  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:action">
-     <Attribute AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id" IncludeInResult="false">
-        <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">POST</AttributeValue>
-     </Attribute>
-  </Attributes>
-  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" />
-</Request>'
-```
-
-</details>
+[**(Click to EXPAND)**](cmds/administrating-xacml.md#18-Request)
 
 #### Response
 

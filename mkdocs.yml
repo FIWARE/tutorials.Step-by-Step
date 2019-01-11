@@ -35,5 +35,7 @@ pages:
     - 'Administrating XACML Rules': 'administrating-xacml.md'
   - 'Processing, Analysis and Visualization':
     - 'Media Streams': 'media-streams.md'
+  - 'Appendix':
+    - 'Curl Commands': 'cmds/administrating-xacml.md'
 
 
