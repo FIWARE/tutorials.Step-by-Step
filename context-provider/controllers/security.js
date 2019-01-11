@@ -292,6 +292,8 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
       return azf.policyDomainRequest(
         user.app_azf_domain,
         user.roles,
+        user.username,
+        user.email,
         resource,
         req.method
       );
