@@ -582,7 +582,7 @@ To update an active a `PolicySet`, make another PUT request to the
 `policy-id` to update within the `<rootPolicyRefExpresion>` attribute. The
 ruleset will be updated to apply the latest uploaded version.
 
-#### :8 Request
+#### 8 Request
 
 Remember to amend the request below to use your own `{domain-id}`:
 
@@ -1152,10 +1152,10 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
             return azf.policyDomainRequest(
                 user.app_azf_domain,
                 user.roles,
-                user.username,
-                user.email,
                 resource,
-                req.method
+                req.method,
+                user.username,
+                user.email
             );
         })
         .then(authzforceResponse => {
