@@ -114,9 +114,10 @@ and how to restrict access to assets, by assigning roles and permissions.
 &nbsp; 401.
 [Administrating Users and Organizations](identity-management.md)<br/>
 &nbsp; 402. [Managing Roles and Permissions](roles-permissions.md)<br/>
-&nbsp; 403. [Securing Application Access](securing-access.md)<br/>
-&nbsp; 404. [Securing Microservices with a PEP Proxy](pep-proxy.md)<br/>
-&nbsp; 405. [XACML Rules-based Permissions](xacml-access-rules.md)<br/>
+&nbsp; 403. [Securing Application Access](securing-access.md)<br/> &nbsp; 404.
+[Securing Microservices with a PEP Proxy](pep-proxy.md)<br/> &nbsp; 405.
+[XACML Rules-based Permissions](xacml-access-rules.md)<br/> &nbsp; 406.
+[Administrating XACML via a PAP](administrating-xacml.md)<br/>
 
 <h3>Processing, Analysis and Visualization</h3>
 

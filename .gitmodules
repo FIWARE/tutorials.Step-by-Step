@@ -56,3 +56,6 @@
 [submodule "tutorials.XACML-Access-Rules"]
 	path = tutorials.XACML-Access-Rules
 	url = https://github.com/Fiware/tutorials.XACML-Access-Rules
+[submodule "tutorials.Administrating-XACML"]
+	path = tutorials.Administrating-XACML
+	url = https://github.com/Fiware/tutorials.Administrating-XACML.git

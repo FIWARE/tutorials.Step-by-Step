@@ -5,7 +5,7 @@
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a
 generic enabler which is used to persist context data into a **CrateDB**
 database. The tutorial activates the IoT sensors connected in the
-[previous tutorial](https://github.com/Fiware/tutorials.IoT-Agent) and persists
+[previous tutorial](iot-agent.md) and persists
 measurements from those sensors into the database. To retrieve time-based
 aggregations of such data, users can either use **QuantumLeap** query API or
 connect directly to the **CrateDB** HTTP endpoint. Results are visualised on a
@@ -663,18 +663,16 @@ curl -X GET \
 }
 ```
 
-
 ### QuantumLeap API - List the latest N Sampled Values of Devices near a Point
 
-This example shows the latest four sampled `luminosity` values of lamps that
-are within a 5 km radius from `52°33'16.9"N 13°23'55.0"E` (Bornholmer Straße
-65, Berlin, Germany). If you have turned on all the lamps available on the
-device monitor page, you should be able to see data for `Lamp:001` and
-`Lamp:004`.
+This example shows the latest four sampled `luminosity` values of lamps that are
+within a 5 km radius from `52°33'16.9"N 13°23'55.0"E` (Bornholmer Straße 65,
+Berlin, Germany). If you have turned on all the lamps available on the device
+monitor page, you should be able to see data for `Lamp:001` and `Lamp:004`.
 
-> **Note:** Geographical queries are only available
-> starting from version `0.5` of QuantumLeap which implements the full
-> set of queries detailed in the Geographical Queries section of the
+> **Note:** Geographical queries are only available starting from version `0.5`
+> of QuantumLeap which implements the full set of queries detailed in the
+> Geographical Queries section of the
 > [NGSI v2 specification](http://fiware.github.io/specifications/ngsiv2/stable/).
 
 #### 10 Request:
@@ -691,48 +689,35 @@ curl -X GET \
 
 ```json
 {
-  "data": {
-    "attrName": "luminosity",
-    "entities": [
-      {
-        "entityId": "Lamp:001",
-        "index": [
-          "2018-12-13T16:35:58.284",
-          "2018-12-13T16:36:58.216"
+    "data": {
+        "attrName": "luminosity",
+        "entities": [
+            {
+                "entityId": "Lamp:001",
+                "index": ["2018-12-13T16:35:58.284", "2018-12-13T16:36:58.216"],
+                "values": [999, 999]
+            },
+            {
+                "entityId": "Lamp:004",
+                "index": ["2018-12-13T16:35:04.351", "2018-12-13T16:36:04.282"],
+                "values": [948, 948]
+            }
         ],
-        "values": [
-          999,
-          999
-        ]
-      },
-      {
-        "entityId": "Lamp:004",
-        "index": [
-          "2018-12-13T16:35:04.351",
-          "2018-12-13T16:36:04.282"
-        ],
-        "values": [
-          948,
-          948
-        ]
-      }
-    ],
-    "entityType": "Lamp"
-  }
+        "entityType": "Lamp"
+    }
 }
 ```
 
 ### QuantumLeap API - List the latest N Sampled Values of Devices in an Area
 
-This example shows the latest four sampled `luminosity` values of lamps that
-are inside a square of side 200 m centred at `52°33'16.9"N 13°23'55.0"E`
-(Bornholmer Straße 65, Berlin, Germany). Even if you have turned on all the
-lamps available on the device monitor page, you should only see data for
-`Lamp:001`.
+This example shows the latest four sampled `luminosity` values of lamps that are
+inside a square of side 200 m centred at `52°33'16.9"N 13°23'55.0"E` (Bornholmer
+Straße 65, Berlin, Germany). Even if you have turned on all the lamps available
+on the device monitor page, you should only see data for `Lamp:001`.
 
-> **Note:** Geographical queries are only available
-> starting from version `0.5` of QuantumLeap which implements the full
-> set of queries detailed in the Geographical Queries section of the
+> **Note:** Geographical queries are only available starting from version `0.5`
+> of QuantumLeap which implements the full set of queries detailed in the
+> Geographical Queries section of the
 > [NGSI v2 specification](http://fiware.github.io/specifications/ngsiv2/stable/).
 
 #### 11 Request:
@@ -749,27 +734,22 @@ curl -X GET \
 
 ```json
 {
-  "data": {
-    "attrName": "luminosity",
-    "entities": [
-      {
-        "entityId": "Lamp:001",
-        "index": [
-          "2018-12-13T17:08:56.041",
-          "2018-12-13T17:09:55.976",
-          "2018-12-13T17:10:55.907",
-          "2018-12-13T17:11:55.833"
+    "data": {
+        "attrName": "luminosity",
+        "entities": [
+            {
+                "entityId": "Lamp:001",
+                "index": [
+                    "2018-12-13T17:08:56.041",
+                    "2018-12-13T17:09:55.976",
+                    "2018-12-13T17:10:55.907",
+                    "2018-12-13T17:11:55.833"
+                ],
+                "values": [999, 999, 999, 999]
+            }
         ],
-        "values": [
-          999,
-          999,
-          999,
-          999
-        ]
-      }
-    ],
-    "entityType": "Lamp"
-  }
+        "entityType": "Lamp"
+    }
 }
 ```
 

@@ -13,7 +13,7 @@ to authenticating other services are described in detail.
 [Postman documentation](https://fiware.github.io/tutorials.PEP-Proxy/) for these
 calls is also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/66d8ba3abaf7319941b1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/66d8ba3abaf7319941b1)
 
 ---
 

@@ -14,7 +14,7 @@ The tutorial refers to Stock Management actions made within the browser combined
 with [cUrl](https://ec.haxx.se/) commands. The cUrl commands are also available
 as [Postman documentation](https://fiware.github.io/tutorials.Subscriptions/).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/fb5f564d9bc65fc3690e)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fb5f564d9bc65fc3690e)
 
 ---
 

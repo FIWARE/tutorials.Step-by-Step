@@ -32,6 +32,7 @@ pages:
     - 'Securing Application Access': 'securing-access.md'
     - 'Securing Microservices': 'pep-proxy.md'
     - 'Ruleset-based Permissons': 'xacml-access-rules.md'
+    - 'Administrating XACML Rules': 'administrating-xacml.md'
   - 'Processing, Analysis and Visualization':
     - 'Media Streams': 'media-streams.md'
 

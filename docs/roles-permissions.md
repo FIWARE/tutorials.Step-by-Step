@@ -3,7 +3,7 @@
 **Description:** The tutorial explains how to create applications, and how to
 assign roles and permissions to them. It takes the users and organizations
 created in the
-[previous tutorial](https://github.com/Fiware/tutorials.Identity-Management) and
+[previous tutorial](identity-management.md) and
 ensures that only legitimate users will have access to resources.
 
 The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as
@@ -12,7 +12,7 @@ API -
 [Postman documentation](https://fiware.github.io/tutorials.Roles-Permissions/)
 is also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/2febc0452a8977734480)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2febc0452a8977734480)
 
 ---
 
@@ -315,7 +315,7 @@ Two organizations have also been set up by Alice:
 | Management | Management Group for Store Managers | `managers-team-0000-0000-000000000000` |
 
 To save time, the data creating users and organizations from the
-[previous tutorial](https://github.com/Fiware/tutorials.Identity-Management) has
+[previous tutorial](identity-management.md) has
 been downloaded and is automatically persisted to the MySQL database on start-up
 so the asigned UUIDs do not change and the data does not need to be entered
 again

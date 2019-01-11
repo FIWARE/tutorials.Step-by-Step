@@ -2,7 +2,7 @@
 
 **Description:** This tutorial secures access to a FIWARE application using the
 entities created in the
-[previous tutorial](https://github.com/Fiware/tutorials.Roles-Permissions). The
+[previous tutorial](roles-permissions.md). The
 tutorial explains appropriate use of the various OAuth2 grant flows, and how to
 use the **Keyrock** generic enabler as an Authorization Server to identify
 users. **Keyrock** is also used as a Policy Decision Point (PDP) to restrict
@@ -15,7 +15,7 @@ access the **Keyrock** REST API -
 [Postman documentation](https://fiware.github.io/tutorials.Securing-Access/) is
 also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/66d8ba3abaf7319941b1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/66d8ba3abaf7319941b1)
 
 ---
 
@@ -75,7 +75,7 @@ Once the application is able to authenticate users, it is also possible to lock
 down access using access control mechanisms. Access control requires having an
 access policy - in other words defining who can do what. We have already defined
 roles and permisions within the
-[previous tutorial](https://github.com/Fiware/tutorials.Roles-Permissions), and
+[previous tutorial](roles-permissions.md), and
 now need to programatically enforce this policy by adding in a simple Policy
 Decision Point (PDP) – which evaluates and issues authorization decisions, and
 then secure access by enforcing the decision using a Policy Enforcement Point
@@ -136,7 +136,7 @@ _“Powered by FIWARE”_.
 Both the Orion Context Broker and the IoT Agent rely on open source
 [MongoDB](https://www.mongodb.com/) technology to keep persistence of the
 information they hold. We will also be using the dummy IoT devices created in
-the [previous tutorial](https://github.com/Fiware/tutorials.IoT-Sensors/).
+the [previous tutorial](iot-sensors.md).
 **Keyrock** uses its own [MySQL](https://www.mysql.com/) database.
 
 Therefore the overall architecture will consist of the following elements:
@@ -330,7 +330,7 @@ One application, with appropriate roles and permissions has also been created:
 | RedirectURL   | `http://localhost:3000/login`          |
 
 To save time, the data creating users and organizations from the
-[previous tutorial](https://github.com/Fiware/tutorials.Roles-Permissions) has
+[previous tutorial](roles-permissions.md) has
 been downloaded and is automatically persisted to the MySQL database on start-up
 so the assigned UUIDs do not change and the data does not need to be entered
 again.

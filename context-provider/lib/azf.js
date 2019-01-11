@@ -13,10 +13,10 @@ exports.Authzforce = function(clientId) {
 exports.Authzforce.prototype.policyDomainRequest = function(
   domain,
   roles,
-  username,
-  email,
   resource,
-  action
+  action,
+  username,
+  email
 ) {
   const that = this;
 
@@ -86,7 +86,7 @@ exports.Authzforce.prototype.policyDomainRequest = function(
     '</AttributeValue>\n' +
     '     </Attribute>\n' +
     '  </Attributes>\n' +
-    // Include alny further information as necessary.
+    // Include any further information as necessary.
     '  <Attributes Category="urn:oasis:names:tc:xacml:3.0:attribute-category:environment" />\n' +
     '</Request>';
 
