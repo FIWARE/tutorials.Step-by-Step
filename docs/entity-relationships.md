@@ -585,26 +585,6 @@ products are sold in `urn:ngsi-ld:Store:001`?_ by making the following request
 ```bash
 curl -G -X GET \
   'http://localhost:1026/v2/entities' \
-  -d 'q=refProduct==urn:ngsi-ld:Product:001' \
-  -d 'options=values' \
-  -d 'attrs=refStore'\
-  -d 'type=InventoryItem'
-```
-
-#### Response:
-
-```json
-[["urn:ngsi-ld:Store:001"]]
-```
-
-Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_
-by altering the request as shown:
-
-#### 11 Request:
-
-```bash
-curl -G -X GET \
-  'http://localhost:1026/v2/entities' \
   -d 'q=refStore==urn:ngsi-ld:Store:001' \
   -d 'options=values' \
   -d 'attrs=refProduct' \
@@ -615,6 +595,26 @@ curl -G -X GET \
 
 ```json
 [["urn:ngsi-ld:Product:prod001"]]
+```
+
+Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_
+by altering the request as shown:
+
+#### 11 Request:
+
+```bash
+curl -G -X GET \
+  'http://localhost:1026/v2/entities' \
+  -d 'q=refProduct==urn:ngsi-ld:Product:001' \
+  -d 'options=values' \
+  -d 'attrs=refStore'\
+  -d 'type=InventoryItem'
+```
+
+#### Response:
+
+```json
+[["urn:ngsi-ld:Store:001"]]
 ```
 
 ## Data Integrity
