@@ -286,7 +286,7 @@ making a GET request
 
 ```bash
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
 ### Create a New Attribute
@@ -324,7 +324,7 @@ context by making a GET request
 
 ```bash
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
 ```
 
 As you can see there is now a boolean `specialOffer` flag attached to the "Beer"
@@ -441,7 +441,7 @@ known `id`.
 
 ```bash
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
 #### Response:
@@ -495,7 +495,7 @@ from the context of existing **Product** entities with a known `id`.
 
 ```bash
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=keyValues&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?options=keyValues&attrs=name,price'
 ```
 
 #### Response:
@@ -524,7 +524,7 @@ context of existing **Product** entities with a known ID.
 
 ```bash
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=values&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?options=values&attrs=name,price'
 ```
 
 #### Response:
