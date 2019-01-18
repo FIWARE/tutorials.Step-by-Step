@@ -60,7 +60,7 @@ function staticValueForType(type) {
     case 'integer':
     case 'number':
       return 42;
-    case 'structuredValue':
+    case 'structuredvalue':
       return {
         somevalue: 'this'
       };

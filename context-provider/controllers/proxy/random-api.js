@@ -82,7 +82,7 @@ function randomValueForType(type) {
     case 'number':
       ret = Math.floor(Math.random() * 43);
       break;
-    case 'structuredValue':
+    case 'structuredvalue':
       ret = {
         somevalue: 'this'
       };
