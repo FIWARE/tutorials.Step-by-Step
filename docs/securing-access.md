@@ -218,9 +218,9 @@ repository:
 
 Where `<command>` will vary depending upon the exercise we wish to activate.
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
-> ```console
+> ```
 > ./services stop
 > ```
 
@@ -615,7 +615,7 @@ appropriate for all grant types.
 Check to see if Refresh Token flow is available, merely log in using one of the other grant types, for example to log in
 using the user-credentials flow send a POST request to the `oauth2/token` endpoint with the `grant_type=password`
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/oauth2/token' \
   -H 'Accept: application/json' \
@@ -645,7 +645,7 @@ token flow and a `grant_type=refresh_token`
 
 #### 5 Request
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/oauth2/token' \
   -H 'Accept: application/json' \

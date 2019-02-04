@@ -394,7 +394,7 @@ In the example the IoT Agent is informed that the `/iot/d` endpoint will be used
 themselves by including the token `4jggokgpepnvsb2uv4s40d59ov`. For an UltraLight IoT Agent this means devices will be
 sending GET or POST requests to:
 
-```
+```text
 http://iot-agent:7896/iot/d?i=<device_id>&k=4jggokgpepnvsb2uv4s40d59ov
 ```
 

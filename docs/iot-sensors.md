@@ -60,13 +60,13 @@ are limited. The payload for measurement requests is a list of key-value pairs s
 
 e.g.
 
-```
+```text
 <key>|<value>|<key>|<value>|<key>|<value> etc..
 ```
 
 For example a payload such as:
 
-```
+```text
 t|15|k|abc
 ```
 
@@ -93,7 +93,7 @@ the endpoint supplied by the device. The body of the POST request holds the comm
 
 The payload for Ultralight commands has the following format:
 
-```
+```text
 <device name>@<command>|<param|<param>
 ```
 
@@ -110,7 +110,7 @@ required for the device to be able to perform the maneuver"_.
 
 The defined Northbound response to an IoT Agent is as follows:
 
-```
+```text
 urn:ngsi-ld:Robot:001@turn|Turn ok
 ```
 
@@ -146,7 +146,7 @@ The `i` and `k` parameters are mandatory.
 
 For example the request:
 
-```
+```text
 <iot-agent>/iot/d?i=motion001&d=c|12
 ```
 
@@ -301,7 +301,7 @@ curl -iX POST \
 
 #### Response:
 
-```
+```text
 urn:ngsi-ld:Bell:001@ring| ring OK
 ```
 
@@ -341,7 +341,7 @@ the name of the command (`on`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Lamp:001@on| on OK
 ```
 
@@ -368,7 +368,7 @@ the name of the command (`off`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Lamp:001@off| off OK
 ```
 
@@ -387,7 +387,7 @@ curl -iX POST \
 
 #### Response:
 
-```
+```text
 urn:ngsi-ld:Lamp:001@on| on OK
 ```
 
@@ -418,7 +418,7 @@ the name of the command (`unlock`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Door:001@unlock| unlock OK
 ```
 
@@ -453,7 +453,7 @@ the name of the command (`open`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Door:001@open| open OK
 ```
 
@@ -483,7 +483,7 @@ the name of the command (`close`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Door:001@close| close OK
 ```
 
@@ -512,7 +512,7 @@ the name of the command (`lock`) to invoke on the device.
 
 The response returns the command and the result of the action.
 
-```
+```text
 urn:ngsi-ld:Door:001@close| close OK
 ```
 

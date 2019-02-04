@@ -315,7 +315,7 @@ curl -iX POST \
 The response header returns an `X-Subject-token` which identifies who has logged on the application. This token is
 required in all subsequent requests to gain access
 
-```
+```text
 HTTP/1.1 201 Created
 X-Subject-Token: d848eb12-889f-433b-9811-6a4fbf0b86ca
 Content-Type: application/json; charset=utf-8
@@ -402,7 +402,7 @@ curl -iX POST \
 
 A new token is returned in the `X-Subject-Token` header
 
-```
+```text
 HTTP/1.1 201 Created
 X-Subject-Token: a5b83d68-ebad-4514-9d3a-dd892f6e6174
 Content-Type: application/json; charset=utf-8
@@ -495,7 +495,7 @@ curl -iX POST \
 
 The response returns the details of the created user
 
-```
+```json
 {
     "user": {
         "id": "3b3a5ad5-afd3-4baa-a538-25c7fe7cbf6a",

@@ -118,7 +118,7 @@ First we start a subscriber:
 
 The Fast-RTPS Subscriber has started and is awaiting messages:
 
-```
+```text
 Starting
 Subscriber running. Please press enter to stop the Subscriber
 ```
@@ -144,7 +144,7 @@ publisher and subscriber terminals respectively you should see something like:
 
 The Fast-RTPS Subscriber has received a series of messages:
 
-```
+```text
 Subscriber matched
 Message HelloWorld 1 RECEIVED
 Message HelloWorld 2 RECEIVED
@@ -163,7 +163,7 @@ Subscriber unmatched
 
 The Fast-RTPS Publisher sends a series of messages:
 
-```
+```text
 Starting
 Publisher matched
 Message: HelloWorld with index: 1 SENT
@@ -225,7 +225,7 @@ MicroRTPSAgent udp 2018
 
 The Micro-RTPS Agent is up and running
 
-```
+```text
 UDP agent initialization... OK
 Running DDS-XRCE Agent...
 ```
@@ -253,7 +253,7 @@ cd /usr/local/examples/micrortps/SubscribeHelloWorldClient/bin/
 
 The Micro-RTPS Subscriber is running and awaiting messages
 
-```
+```text
 << UDP mode => ip: 127.0.0.1 - port: 2018 >>
 ```
 
@@ -279,7 +279,7 @@ publisher and subscriber terminals respectively you should see something like:
 
 The Micro-RTPS Agent has started receiving messages from the Publisher
 
-```
+```text
 UDP agent initialization... OK
 Running DDS-XRCE Agent...
 RTPS Publisher matched
@@ -290,7 +290,7 @@ RTPS Publisher matched
 
 The Micro-RTPS Subscriber has received the messages passed on by the Micro-RTPS Agent
 
-```
+```text
 << UDP mode => ip: 127.0.0.1 - port: 2018 >>
 Receive topic: Hello DDS world!, count: 1
 Receive topic: Hello DDS world!, count: 2
@@ -307,7 +307,7 @@ Receive topic: Hello DDS world!, count: 8
 
 The Micro-RTPS Publisher has sent a series of messages as shown:
 
-```
+```text
 << UDP mode => ip: 127.0.0.1 - port: 2018 >>
 Send topic: Hello DDS world!, count: 1
 Send topic: Hello DDS world!, count: 2

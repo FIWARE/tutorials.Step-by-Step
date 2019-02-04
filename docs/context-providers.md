@@ -639,7 +639,7 @@ curl -X GET \
 
 #### Response:
 
-```
+```text
 "58%"
 ```
 

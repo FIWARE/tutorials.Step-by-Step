@@ -151,9 +151,9 @@ repository:
 ./services start
 ```
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
-> ```bash
+> ```
 > ./services stop
 > ```
 
@@ -606,7 +606,7 @@ the device monitor page, you should be able to see data for `Lamp:001` and `Lamp
 
 #### 10 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:8668/v2/types/Lamp/attrs/luminosity?lastN=4&georel=near;maxDistance:5000&geometry=point&coords=52.5547,13.3986' \
   -H 'Accept: application/json' \
@@ -649,7 +649,7 @@ available on the device monitor page, you should only see data for `Lamp:001`.
 
 #### 11 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:8668/v2/types/Lamp/attrs/luminosity?lastN=4&georel=coveredBy&geometry=polygon&coords=52.5537,13.3996;52.5557,13.3996;52.5557,13.3976;52.5537,13.3976;52.5537,13.3996' \
   -H 'Accept: application/json' \

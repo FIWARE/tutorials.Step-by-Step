@@ -698,7 +698,7 @@ curl -iX POST \
 The response header from **Keyrock** returns an `X-Subject-token` which identifies who has logged on the application.
 This token is required in all subsequent requests to gain access
 
-```
+```text
 HTTP/1.1 201 Created
 X-Subject-Token: d848eb12-889f-433b-9811-6a4fbf0b86ca
 Content-Type: application/json; charset=utf-8

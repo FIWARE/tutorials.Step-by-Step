@@ -128,7 +128,7 @@ The specific architecture of each section of the tutorial is discussed below.
 
 To start the installation, do the following:
 
-```console
+```bash
 git clone git@github.com:Fiware/tutorials.PEP-Proxy.git
 cd tutorials.PEP-Proxy
 
@@ -141,15 +141,15 @@ Thereafter, all services can be initialized from the command-line by running the
 [services](https://github.com/Fiware/tutorials.PEP-PRoxy/blob/master/services) Bash script provided within the
 repository:
 
-```console
+```bash
 ./services <command>
 ```
 
 Where `<command>` will vary depending upon the exercise we wish to activate.
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
-> ```console
+> ```
 > ./services stop
 > ```
 
@@ -229,7 +229,7 @@ The following example logs in using the Admin Super-User:
 
 #### 1 Request:
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/v1/auth/tokens' \
   -H 'Content-Type: application/json' \
@@ -244,7 +244,7 @@ curl -iX POST \
 The response header returns an `X-Subject-token` which identifies who has logged on the application. This token is
 required in all subsequent requests to gain access
 
-```
+```text
 HTTP/1.1 201 Created
 X-Subject-Token: d848eb12-889f-433b-9811-6a4fbf0b86ca
 Content-Type: application/json; charset=utf-8
@@ -278,7 +278,7 @@ making an enquiry about herself.
 
 #### 2 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:3005/v1/auth/tokens' \
   -H 'Content-Type: application/json' \
@@ -323,7 +323,7 @@ Click on the image above to see a video about configuring the Wilma PEP Proxy us
 
 To start the system run the following command:
 
-```console
+```bash
 ./services orion
 ```
 
@@ -351,7 +351,7 @@ in administrative user.
 
 #### 3 Request:
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/v1/applications/{{application-id}}/pep_proxies' \
   -H 'Content-Type: application/json' \
@@ -379,7 +379,7 @@ associated PEP Proxy Account. The `X-Auth-token` must be supplied in the headers
 
 #### 4 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:3005/v1/applications/{{application-id}}/pep_proxies/' \
   -H 'X-Auth-token: {{X-Auth-token}}'
@@ -404,7 +404,7 @@ The `X-Auth-token` must be supplied in the headers.
 
 #### 5 Request:
 
-```console
+```bash
 curl -X PATCH \
   'http://localhost:3005/v1/applications/{{application-id}}/pep_proxies' \
   -H 'Content-Type: application/json' \
@@ -428,7 +428,7 @@ An existing PEP Proxy Account can be deleted by making a DELETE request to the
 
 #### 6 Request:
 
-```console
+```bash
 curl -X DELETE \
   'http://localhost:3005/v1/applications/{{application-id}}/pep_proxies' \
   -H 'Content-Type: application/json' \
@@ -457,7 +457,7 @@ in administrative user.
 
 #### 7 Request:
 
-```console
+```bash
 curl -X POST \
   'http://localhost:3005/v1/applications/{{application-id}}/iot_agents' \
   -H 'Content-Type: application/json' \
@@ -484,7 +484,7 @@ details of the associated IoT Agent Account. The `X-Auth-token` must be supplied
 
 #### 8 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'X-Auth-token: {{X-Auth-token}}'
@@ -508,7 +508,7 @@ A list of all IoT Agents associated with an application can be obtained by makin
 
 #### 9 Request:
 
-```console
+```bash
 curl -X GET \
   'http://localhost:3005/v1/applications/{{application-id}}/iot_agents' \
   -H 'X-Auth-token: {{X-Auth-token}}'
@@ -537,7 +537,7 @@ To renew the password of an individual IoT Agent Account, make a PATCH request t
 `/v1/applications/{{application-id}}//iot_agents/{{iot-agent-id}}` endpoint. The `X-Auth-token` must be supplied in the
 headers.
 
-```console
+```bash
 curl -iX PATCH \
   'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'Content-Type: application/json' \
@@ -562,7 +562,7 @@ headers.
 
 #### 11 Request:
 
-```console
+```bash
 curl -X DELETE \
   'http://localhost:3005/v1/applications/{{application-id}}/iot_agents/{{iot-agent-id}}' \
   -H 'X-Auth-token: {{X-Auth-token}}'
@@ -693,7 +693,7 @@ below:
 
 To start the system with a PEP Proxy protecting access to **Orion**, run the following command:
 
-```console
+```bash
 ./services orion
 ```
 
@@ -715,7 +715,7 @@ present a valid token results in a denial of access.
 
 If a request to the PEP Proxy is made without any access token as shown:
 
-```console
+```bash
 curl -X GET \
   http://localhost:1027/v2/entities/urn:ngsi-ld:Store:001?options=keyValues
 ```
@@ -724,7 +724,7 @@ curl -X GET \
 
 The response is a **401 Unauthorized** error code, with the following explanation:
 
-```
+```text
 Auth-token not found in request header
 ```
 
@@ -735,7 +735,7 @@ Auth-token not found in request header
 To log in to the application using the user-credentials flow send a POST request to **Keyock** using the `oauth2/token`
 endpoint with the `grant_type=password`. For example to log-in as Alice the Admin:
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/oauth2/token' \
   -H 'Accept: application/json' \
@@ -768,7 +768,7 @@ expected.
 
 #### 14 Request
 
-```console
+```bash
 curl -X GET \
   http://localhost:1027/v2/entities/urn:ngsi-ld:Store:001?options=keyValues \
   -H 'X-Auth-Token: {{X-Access-token}}'
@@ -981,7 +981,7 @@ start-up.
 To start the system with a PEP Proxies protecting access to both **Orion** and the **IoT Agent** run the following
 command:
 
-```console
+```bash
 ./services iot-agent
 ```
 
@@ -995,7 +995,7 @@ Logging in as an IoT Sensor follows the same user-credentials flow as for a User
 
 #### 15 Request:
 
-```console
+```bash
 curl -iX POST \
   'http://localhost:3005/oauth2/token' \
   -H 'Accept: application/json' \
@@ -1028,7 +1028,7 @@ to the IoT Agent itself.
 
 #### Request:
 
-```console
+```bash
 curl -X POST \
   'http://localhost:7897/iot/d?k=4jggokgpepnvsb2uv4s40d59ov&i=motion001' \
   -H 'X-Auth-Token: {{X-Access-token}}' \

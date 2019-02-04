@@ -199,7 +199,7 @@ curl -iX GET \
 
 The expected response is :
 
-```
+```text
 HTTP/1.1 426 Upgrade Required
 Server: WebSocket++/0.7.0
 ```
@@ -680,7 +680,7 @@ Further Vehicle Registration Plate images are available on
 
 For example with the vehicle registration plate displayed in the screenshot above, the following output is obtained.
 
-```
+```text
 License plate detected --8886AJR
 ```
 

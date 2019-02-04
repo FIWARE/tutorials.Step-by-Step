@@ -234,7 +234,7 @@ Where `<command>` will vary depending upon the exercise we wish to activate.
 
 **Note:** If you want to clean up and start over again you can do so with the following command:
 
-> ```bash
+> ```
 > ./services stop
 > ```
 
@@ -359,7 +359,7 @@ curl -iX POST \
 
 #### Response:
 
-```
+```text
 HTTP/1.1 201 Created
 X-Subject-Token: d848eb12-889f-433b-9811-6a4fbf0b86ca
 Content-Type: application/json; charset=utf-8

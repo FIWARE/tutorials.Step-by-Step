@@ -327,13 +327,13 @@ To show the list of available databases, run the statement as shown:
 
 #### Query:
 
-```
+```sql
 show dbs
 ```
 
 #### Result:
 
-```
+```text
 admin          0.000GB
 iotagentul     0.000GB
 local          0.000GB
@@ -359,14 +359,14 @@ The default value for a **Mongo DB** database holding historic context consists 
 
 #### Query:
 
-```
+```sql
 use sth_openiot
 show collections
 ```
 
 #### Result:
 
-```
+```text
 switched to db sth_openiot
 
 sth_/_Door:001_Door
@@ -387,13 +387,13 @@ value of a single attribute.
 
 #### Query:
 
-```
+```javascript
 db["sth_/_Door:001_Door"].find().limit(10)
 ```
 
 #### Result:
 
-```
+```text
 { "_id" : ObjectId("5b1fa48630c49e0012f7635d"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "TimeInstant", "attrType" : "ISO8601", "attrValue" : "2018-06-12T10:46:30.836Z" }
 { "_id" : ObjectId("5b1fa48630c49e0012f7635e"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "close_status", "attrType" : "commandStatus", "attrValue" : "UNKNOWN" }
 { "_id" : ObjectId("5b1fa48630c49e0012f7635f"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "lock_status", "attrType" : "commandStatus", "attrValue" : "UNKNOWN" }
@@ -411,13 +411,13 @@ which the **Motion Sensor** with the `id=Motion:001_Motion` is accumulating, you
 
 #### Query:
 
-```
+```javascript
 db["sth_/_Motion:001_Motion"].find({attrName: "count"},{_id: 0, attrType: 0, attrName: 0 } ).limit(10)
 ```
 
 #### Result:
 
-```
+```text
 { "recvTime" : ISODate("2018-06-12T10:46:18.756Z"), "attrValue" : "8" }
 { "recvTime" : ISODate("2018-06-12T10:46:36.881Z"), "attrValue" : "10" }
 { "recvTime" : ISODate("2018-06-12T10:46:42.947Z"), "attrValue" : "11" }
@@ -650,13 +650,13 @@ To show the list of available databases, run the statement as shown:
 
 #### Query:
 
-```
+```text
 \list
 ```
 
 #### Result:
 
-```
+```text
    Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
 -----------+----------+----------+------------+------------+-----------------------
  postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
@@ -674,13 +674,13 @@ To show the list of available schemas, run the statement as shown:
 
 #### Query:
 
-```
+```text
 \dn
 ```
 
 #### Result:
 
-```
+```text
   List of schemas
   Name   |  Owner
 ---------+----------
@@ -708,7 +708,7 @@ ORDER BY table_schema,table_name;
 
 #### Result:
 
-```
+```text
  table_schema |    table_name
 --------------+-------------------
  openiot      | door_001_door
@@ -729,7 +729,7 @@ SELECT * FROM openiot.motion_001_motion limit 10;
 
 #### Result:
 
-```
+```text
   recvtimets   |         recvtime         | fiwareservicepath |  entityid  | entitytype |  attrname   |   attrtype   |        attrvalue         |                                    attrmd
 ---------------+--------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------
  1528803005491 | 2018-06-12T11:30:05.491Z | /                 | Motion:001 | Motion     | TimeInstant | ISO8601      | 2018-06-12T11:30:05.423Z | []
@@ -755,7 +755,7 @@ SELECT recvtime, attrvalue FROM openiot.motion_001_motion WHERE attrname ='count
 
 #### Result:
 
-```
+```text
          recvtime         | attrvalue
 --------------------------+-----------
  2018-06-12T11:30:05.491Z | 7
@@ -990,7 +990,7 @@ SHOW DATABASES;
 
 #### Result:
 
-```
+```text
 +--------------------+
 | Database           |
 +--------------------+
@@ -1013,7 +1013,7 @@ SHOW SCHEMAS;
 
 #### Result:
 
-```
+```text
 +--------------------+
 | Database           |
 +--------------------+
@@ -1042,7 +1042,7 @@ SHOW tables FROM openiot;
 
 #### Result:
 
-```
+```text
  table_schema |    table_name
 --------------+-------------------
  openiot      | door_001_door
@@ -1063,7 +1063,7 @@ SELECT * FROM openiot.Motion_001_Motion limit 10;
 
 #### Result:
 
-```
+```text
 +---------------+-------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------+
 | recvTimeTs    | recvTime                | fiwareServicePath | entityId   | entityType | attrName    | attrType     | attrValue                | attrMd                                                                       |
 +---------------+-------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------+
@@ -1091,7 +1091,7 @@ SELECT recvtime, attrvalue FROM openiot.Motion_001_Motion WHERE attrname ='count
 
 #### Result:
 
-```
+```text
 +-------------------------+-----------+
 | recvtime                | attrvalue |
 +-------------------------+-----------+

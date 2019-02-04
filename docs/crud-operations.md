@@ -123,9 +123,9 @@ cd tutorials.CRUD-Operations
 This command will also import seed data from the previous
 [Store Finder tutorial](https://github.com/Fiware/tutorials.Entity-Relationships) on startup.
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
-> ```bash
+> ```
 > ./services stop
 > ```
 

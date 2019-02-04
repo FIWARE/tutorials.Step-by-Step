@@ -293,7 +293,7 @@ docker run -it --rm --name mqtt-publisher \
 
 If the MQTT Broker is functioning correctly, the message should be received in the other terminal
 
-```
+```text
 HELLO WORLD
 ```
 
@@ -316,7 +316,7 @@ docker logs --tail 10 mosquitto
 
 #### Result:
 
-```
+```text
 1529661883: New client connected from 172.18.0.5 as mqttjs_8761e518 (c1, k0).
 1529662472: New connection from 172.18.0.7 on port 1883.
 1529662472: New client connected from 172.18.0.7 as mosqpub|1-5637527c63c1 (c1, k60).
@@ -512,7 +512,7 @@ docker run -it --rm --name mqtt-publisher --network \
 
 The **topic** must be in the following form:
 
-```
+```text
 /<api-key>/<device-id>/attrs
 ```
 
