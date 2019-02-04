@@ -414,7 +414,7 @@ curl -iX DELETE \
 
 ### Update an Existing Subscription
 
-This example amends an existing subscription with the id `5ae07c7e6e4f353c5163c93e` and updates the notification URL.
+This example amends an existing subscription with the ID `5ae07c7e6e4f353c5163c93e` and updates the notification URL.
 
 Subscriptions can be updated making a PATCH request to the `/v2/subscriptions/<subscription-id>` endpoint.
 

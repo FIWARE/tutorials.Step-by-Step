@@ -518,7 +518,7 @@ curl -G -X GET \
 The response shows that the **Motion Sensor** device with `id=motion001` has been successfully identified by the IoT
 Agent and mapped to the entity `id=urn:ngsi-ld:Motion:001`. This new entity has been created within the context data.
 The `c` attribute from the dummy device measurement request has been mapped to the more meaningful `count` attribute
-within the context. As you will notice, a `TimeInstant` attribute has been added to both the entity and the meta data of
+within the context. As you will notice, a `TimeInstant` attribute has been added to both the entity and the metadata of
 the attribute - this represents the last time the entity and attribute have been updated, and is automatically added to
 each new entity because the `IOTA_TIMESTAMP` environment variable was set when the IoT Agent was started up. The
 `refStore` attribute comes from the `static_attributes` set when the device was provisioned.

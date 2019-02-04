@@ -258,7 +258,7 @@ removed from the code snippets under discussion to make them easier to read.
 
 ### Backend - WebSocket Connection
 
-Dynamic communication between the frontend rendered web page and the Back-End application server occurs using
+Dynamic communication between the frontend rendered web page and the backend application server occurs using
 [WebSockets](https://www.html5rocks.com/en/tutorials/websockets/basics/). The code handling the connection at the server
 can be seen below:
 
@@ -563,7 +563,7 @@ connections between the web page and the Application Server, and the connections
 ### Backend - Adding a built-in Filter to a Media Pipeline
 
 The main difference compared to the previous example, is that we are going to add a **filter** to alter the video output
-prior to sending it to the web-page. The `kms-filters` module is loaded by default as part of the **Kurento Media
+prior to sending it to the web page. The `kms-filters` module is loaded by default as part of the **Kurento Media
 Server** - it contains the following built-in
 [filters](https://doc-kurento.readthedocs.io/en/latest/features/kurento_api.html#filters):
 

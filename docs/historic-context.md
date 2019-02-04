@@ -315,7 +315,7 @@ To read MongoDB data from the command-line, we will need access to the `mongo` t
 docker run -it --network fiware_default  --entrypoint /bin/bash mongo
 ```
 
-You can then log into to the running `mongo-db` database by using the command line as shown:
+You can then log into to the running `mongo-db` database by using the command-line as shown:
 
 ```bash
 mongo --host mongo-db

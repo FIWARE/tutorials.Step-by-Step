@@ -496,7 +496,7 @@ requests. The reading of the **InventoryItem** entity data can be done using the
 as shown previously. The data is then amended in memory before being sent to the Orion Context Broker using the
 `apiInstance.updateExistingEntityAttributes()` method. This is effectively just a wrapper around an HTTP PATCH request
 to `http://localhost:1026/v2/entities/<inventory-id>?type=InventoryItem`, with a body containing the elements to be
-updated. There is no error handling on this function, it has been left to a function on the router.
+updated. No error handling  has been added to this function - it has been left to a function on the router.
 
 ```javascript
 async function buyItem(req, res) {
