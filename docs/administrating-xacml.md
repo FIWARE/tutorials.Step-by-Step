@@ -30,10 +30,10 @@ commands used to access the REST APIs of **Keyrock** and **Authzforce** -
 > — Los Angeles International Airport Rules and Regulations, Section 12 - Landside Motor Vehicle Operations
 
 Business rules change over time, and it is necessary to be able to amend access controls accordingly. The [previous
-tutorial](xacml-access-rules.md included a static XACML `<PolicySet>` loaded into **Authzforce**. This component offers
+tutorial](xacml-access-rules.md) included a static XACML `<PolicySet>` loaded into **Authzforce**. This component offers
 advanced authorization (level 3) access control where every policy decision is calculated on the fly and new rules can
 be applied under new circumstances. The details of the [Authzforce](https://authzforce-ce-fiware.readthedocs.io/) Policy
-Decision Point (PDP) were discussed in the [previous tutorial](xacml-access-rules.md, suffice to say, the **Authzforce**
+Decision Point (PDP) were discussed in the [previous tutorial](xacml-access-rules.md), suffice to say, the **Authzforce**
 PDP interprets rules according to the
 [XACML standard](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml) and offers a means to adjudicate on
 any access request provided that sufficient information can be supplied.
@@ -91,7 +91,7 @@ a valid `<PolicySet>` for **Authzforce**.
 
 When using advanced authorization (level 3), a policy execution point sends the an authorization request to he relevant
 domain endpoint within **Authzforce**, providing all of the information necessary for **Authzforce** to provide a
-judgement. Details of the interaction can be found in the [previous tutorial](xacml-access-rules.md.
+judgement. Details of the interaction can be found in the [previous tutorial](xacml-access-rules.md).
 
 The full code to supply each request to **Authzforce** can be found within the tutorials'
 [Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/lib/azf.js)
