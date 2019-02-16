@@ -10,7 +10,7 @@ commands used to access the **Keyrock** REST API -
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2150531e68299d46f937)
 
----
+<hr class="security"/>
 
 # Identity Management
 

@@ -14,7 +14,7 @@ commands. The cUrl commands are also available as
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fb5f564d9bc65fc3690e)
 
----
+<hr class="core"/>
 
 # Subscribing to Changes of State
 

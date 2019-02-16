@@ -6,36 +6,34 @@ docs_dir: docs
 site_dir: html
 use_directory_urls: false
 theme: readthedocs
-google_analytics: ["UA-83719923-1", 'fiware-tutorials.readthedocs.io']
-extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
+google_analytics: ["UA-83719923-1", "fiware-tutorials.readthedocs.io"]
+extra_css: ["https://fiware.org/style/fiware_readthedocs.css", "cross-chapter.css"]
 pages:
-  - Home: 'index.md'
-  - 'Core Context Managment: Fundamentals':
-    - 'Getting Started': 'getting-started.md'
-    - 'Entity Relationships': 'entity-relationships.md'
-    - 'CRUD Operations': 'crud-operations.md'
-    - 'Context Providers': 'context-providers.md'
-    - 'Accessing Context': 'accessing-context.md'
-    - 'Subscriptions': 'subscriptions.md'
-  - 'IoT Agents & Robots': 
-    - 'IoT Sensors': 'iot-sensors.md'
-    - 'IoT Agent': 'iot-agent.md'
-    - 'IoT over MQTT': 'iot-over-mqtt.md'
-    - 'Fast RTPS-Micro RTPS': 'fast-rtps-micro-rtps.md'
-  - 'Core Context Managment: History Management':
-    - 'Persisting Context': 'historic-context.md'
-    - 'Short Term History': 'short-term-history.md'
-    - 'Time-Series Data': 'time-series-data.md'
-  - 'Identity Management':
-    - 'Administrating Users': 'identity-management.md'
-    - 'Managing Roles and Permissions': 'roles-permissions.md'
-    - 'Securing Application Access': 'securing-access.md'
-    - 'Securing Microservices': 'pep-proxy.md'
-    - 'Ruleset-based Permissons': 'xacml-access-rules.md'
-    - 'Administrating XACML Rules': 'administrating-xacml.md'
-  - 'Processing, Analysis and Visualization':
-    - 'Media Streams': 'media-streams.md'
-  - 'Appendix':
-    - 'Curl Commands': 'cmds/administrating-xacml.md'
-
-
+  - Home: "index.md"
+  - "Core Context Managment: Fundamentals":
+      - "Getting Started": "getting-started.md"
+      - "Entity Relationships": "entity-relationships.md"
+      - "CRUD Operations": "crud-operations.md"
+      - "Context Providers": "context-providers.md"
+      - "Accessing Context": "accessing-context.md"
+      - "Subscriptions": "subscriptions.md"
+  - "IoT Agents & Robots":
+      - "IoT Sensors": "iot-sensors.md"
+      - "IoT Agent": "iot-agent.md"
+      - "IoT over MQTT": "iot-over-mqtt.md"
+      - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
+  - "Core Context Managment: History Management":
+      - "Persisting Context": "historic-context.md"
+      - "Short Term History": "short-term-history.md"
+      - "Time-Series Data": "time-series-data.md"
+  - "Identity Management":
+      - "Administrating Users": "identity-management.md"
+      - "Managing Roles and Permissions": "roles-permissions.md"
+      - "Securing Application Access": "securing-access.md"
+      - "Securing Microservices": "pep-proxy.md"
+      - "Ruleset-based Permissons": "xacml-access-rules.md"
+      - "Administrating XACML Rules": "administrating-xacml.md"
+  - "Processing, Analysis and Visualization":
+      - "Media Streams": "media-streams.md"
+  - "Appendix":
+      - "Curl Commands": "cmds/administrating-xacml.md"

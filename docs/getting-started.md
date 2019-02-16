@@ -10,7 +10,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/d6671a59a7e892629d2b)
 
----
+<hr class="core"/>
 
 # Architecture
 

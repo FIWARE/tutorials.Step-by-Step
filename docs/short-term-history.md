@@ -14,7 +14,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4824d3171f823935dcab)
 
----
+<hr class="core"/>
 
 # Querying Time Series Data (MongoDB)
 

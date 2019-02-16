@@ -13,7 +13,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2150531e68299d46f937)
 
----
+<hr class="iotagents"/>
 
 # What is an IoT Agent?
 

@@ -12,7 +12,7 @@ available.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/66d8ba3abaf7319941b1)
 
----
+<hr class="security"/>
 
 # Securing Access
 

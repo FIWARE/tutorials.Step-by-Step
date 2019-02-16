@@ -12,7 +12,7 @@ commands used to access the REST APIs of **Keyrock** and **Authzforce** -
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/23b7045a5b52a54a2666)
 
----
+<hr class="security"/>
 
 <!--lint disable no-shortcut-reference-link -->
 <!--lint disable no-undefined-references -->

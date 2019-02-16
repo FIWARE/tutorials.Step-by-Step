@@ -10,7 +10,7 @@ also available.
 The tutorial introduces a series of exercises which can be run directly from within a [Docker](https://www.docker.com)
 container, no HTTP calls are required.
 
----
+<hr class="processing"/>
 
 # What are Media Streams?
 

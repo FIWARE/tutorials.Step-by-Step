@@ -1,0 +1,23 @@
+hr.core ~ h1{box-shadow: 0px 7px 0px 0px #233c68;}
+hr.core ~ h2{box-shadow: 0px 7px 0px 0px #233c68;}
+hr.core ~ h3 {box-shadow: 0px 4px 0px 0px #233c68;}
+hr.core ~ pre {border-color: #233c68}
+hr.core ~ table thead th {background-color:#233c68}
+
+hr.iotagents ~ h1{box-shadow: 0px 7px 0px 0px #5dc0cf;}
+hr.iotagents ~ h2{box-shadow: 0px 7px 0px 0px #5dc0cf;}
+hr.iotagents ~ h3 {box-shadow: 0px 4px 0px 0px #5dc0cf;}
+hr.iotagents ~ pre {border-color: #5dc0cf}
+hr.iotagents ~ table thead th {background-color:#5dc0cf}
+
+hr.security ~ h1{box-shadow: 0px 7px 0px 0px #ff7059;}
+hr.security ~ h2{box-shadow: 0px 7px 0px 0px #ff7059;}
+hr.security ~ h3 {box-shadow: 0px 4px 0px 0px #ff7059;}
+hr.security ~ pre {border-color: #ff7059}
+hr.security ~ table thead th {background-color:#ff7059}
+
+hr.processing ~ h1{box-shadow: 0px 7px 0px 0px #88a1ce;}
+hr.processing ~ h2{box-shadow: 0px 7px 0px 0px #88a1ce;}
+hr.processing ~ h3 {box-shadow: 0px 4px 0px 0px #88a1ce;}
+hr.processing ~ pre {border-color: #88a1ce}
+hr.processing ~ table thead th {background-color:#88a1ce}

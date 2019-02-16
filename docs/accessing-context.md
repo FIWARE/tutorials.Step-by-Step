@@ -13,7 +13,7 @@ making [cUrl](https://ec.haxx.se/) commands.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/fb5f564d9bc65fc3690e)
 
----
+<hr class="security"/>
 
 # Accessing the Context Data
 

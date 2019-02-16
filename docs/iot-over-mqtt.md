@@ -12,7 +12,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/acfd27a941ed57a0cae5)
 
----
+<hr class="iotagents"/>
 
 # What is MQTT?
 

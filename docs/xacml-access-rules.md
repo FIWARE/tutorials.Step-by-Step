@@ -13,7 +13,7 @@ between generic enablers. [Postman documentation](https://fiware.github.io/tutor
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/724e8e1ab1af11063d15)
 
----
+<hr class="security"/>
 
 # Ruleset Based Permissions
 
