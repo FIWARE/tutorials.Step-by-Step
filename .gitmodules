@@ -17,7 +17,7 @@
 	path = tutorials.Fast-RTPS-Micro-RTPS
 	url = https://github.com/Fiware/tutorials.Fast-RTPS-Micro-RTPS.git
 [submodule "tutorials.Historic-Context"]
-	path = tutorials.Historic-Context
+	path = tutorials.Historic-Context-Flume
 	url = https://github.com/Fiware/tutorials.Historic-Context.git
 [submodule "tutorials.IoT-Agent"]
 	path = tutorials.IoT-Agent
@@ -59,3 +59,6 @@
 [submodule "tutorials.Administrating-XACML"]
 	path = tutorials.Administrating-XACML
 	url = https://github.com/Fiware/tutorials.Administrating-XACML.git
+[submodule "tutorials.Historic-Context-NIFI"]
+	path = tutorials.Historic-Context-NIFI
+	url = https://github.com/Fiware/tutorials.Historic-Context-NIFI
