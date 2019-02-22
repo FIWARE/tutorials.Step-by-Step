@@ -63,11 +63,11 @@ function processHttpBellCommand(req, res) {
   const deviceId = 'bell' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  // Check for a valid device and command
-  if (
-    _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(['ring'], command) === -1
-  ) {
+  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+    debug('Unknown IoT device: ' + deviceId);
+    return res.status(404).send(result + NOT_OK);
+  } else if (_.indexOf(['ring'], command) === -1) {
+    debug('Invalid command for a Bell: ' + command);
     return res.status(422).send(result + NOT_OK);
   }
 
@@ -87,11 +87,11 @@ function processHttpDoorCommand(req, res) {
   const deviceId = 'door' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  // Check for a valid device and command
-  if (
-    _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(['open', 'close', 'lock', 'unlock'], command) === -1
-  ) {
+  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+    debug('Unknown IoT device: ' + deviceId);
+    return res.status(404).send(result + NOT_OK);
+  } else if (_.indexOf(['open', 'close', 'lock', 'unlock'], command) === -1) {
+    debug('Invalid command for a Door: ' + command);
     return res.status(422).send(result + NOT_OK);
   }
 
@@ -110,11 +110,11 @@ function processHttpLampCommand(req, res) {
   const deviceId = 'lamp' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  // Check for a valid device and command
-  if (
-    _.indexOf(myCache.keys(), deviceId) === -1 ||
-    _.indexOf(['on', 'off'], command) === -1
-  ) {
+  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+    debug('Unknown IoT device: ' + deviceId);
+    return res.status(404).send(result + NOT_OK);
+  } else if (_.indexOf(['on', 'off'], command) === -1) {
+    debug('Invalid command for a Lamp: ' + command);
     return res.status(422).send(result + NOT_OK);
   }
 
@@ -136,7 +136,9 @@ function processMqttMessage(topic, message) {
     const deviceId = path.pop();
     const result = keyValuePairs[0] + '| ' + command;
 
-    if (_.indexOf(myCache.keys(), deviceId) !== -1) {
+    if (_.indexOf(myCache.keys(), deviceId) === -1) {
+      debug('Unknown IoT device: ' + deviceId);
+    } else {
       actuateDevice(deviceId, command);
       const topic = '/' + UL_API_KEY + '/' + deviceId + '/cmdexe';
       MQTT_CLIENT.publish(topic, result + OK);
@@ -146,7 +148,7 @@ function processMqttMessage(topic, message) {
 
 // Change the state of a dummy IoT device based on the command received.
 function actuateDevice(deviceId, command) {
-  debug('actuateDevice');
+  debug('actuateDevice: ' + deviceId + ' ' + command);
   switch (deviceId.replace(/\d/g, '')) {
     case 'bell':
       if (command === 'ring') {
@@ -192,45 +194,52 @@ function getCommand(string) {
 // The motion sensor counts the number of people passing by
 // The lamp can be ON or OFF. This also registers luminocity.
 // It will slowly dim as time passes (provided no movement is detected)
-function init() {
-  debug('init');
+function initDevices() {
+  debug('initDevices');
 
   if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD) {
     initSecureDevices();
   }
-
-  myCache.set('door001', DOOR_LOCKED);
-  myCache.set('door002', DOOR_LOCKED);
-  myCache.set('door003', DOOR_LOCKED);
-  myCache.set('door004', DOOR_LOCKED);
-
-  myCache.set('bell001', BELL_OFF, false);
-  myCache.set('bell002', BELL_OFF, false);
-  myCache.set('bell003', BELL_OFF, false);
-  myCache.set('bell004', BELL_OFF, false);
-
-  myCache.set('lamp001', LAMP_OFF);
-  myCache.set('lamp002', LAMP_OFF);
-  myCache.set('lamp003', LAMP_OFF);
-  myCache.set('lamp004', LAMP_OFF);
-
-  myCache.set('motion001', NO_MOTION_DETECTED);
-  myCache.set('motion002', NO_MOTION_DETECTED);
-  myCache.set('motion003', NO_MOTION_DETECTED);
-  myCache.set('motion004', NO_MOTION_DETECTED);
 
   // Once a minute, read the existing state of the dummy devices
   const deviceIds = myCache.keys();
   let wait = 4000;
   _.forEach(deviceIds, deviceId => {
     wait = wait + 1999;
-    setTimeout(setUpDeviceReading, wait, deviceId);
+    setTimeout(setUpSensorReading, wait, deviceId);
   });
+
+  // Every few seconds, update the state of the dummy devices in a
+  // semi-random fashion.
+  setInterval(activateDoor, 4999);
+  // Every second, update the state of the dummy devices in a
+  // semi-random fashion.
+  setInterval(activateDevices, 997);
 }
 
 let isDoorActive = false;
 let isDevicesActive = false;
 let devicesInitialized = false;
+
+myCache.set('door001', DOOR_LOCKED);
+myCache.set('door002', DOOR_LOCKED);
+myCache.set('door003', DOOR_LOCKED);
+myCache.set('door004', DOOR_LOCKED);
+
+myCache.set('bell001', BELL_OFF, false);
+myCache.set('bell002', BELL_OFF, false);
+myCache.set('bell003', BELL_OFF, false);
+myCache.set('bell004', BELL_OFF, false);
+
+myCache.set('lamp001', LAMP_OFF);
+myCache.set('lamp002', LAMP_OFF);
+myCache.set('lamp003', LAMP_OFF);
+myCache.set('lamp004', LAMP_OFF);
+
+myCache.set('motion001', NO_MOTION_DETECTED);
+myCache.set('motion002', NO_MOTION_DETECTED);
+myCache.set('motion003', NO_MOTION_DETECTED);
+myCache.set('motion004', NO_MOTION_DETECTED);
 
 // Open and shut an unlocked door
 function activateDoor() {
@@ -361,6 +370,11 @@ function getDeviceState(deviceId) {
 function setDeviceState(deviceId, state, isSensor = true, force = false) {
   const previousState = myCache.get(deviceId);
   myCache.set(deviceId, state);
+
+  if (!devicesInitialized) {
+    initDevices();
+    devicesInitialized = true;
+  }
 
   if (isSensor && (state !== previousState || force)) {
     if (UL_TRANSPORT === 'HTTP') {
@@ -530,28 +544,11 @@ function sendCommand(req, res) {
 }
 
 // Once a minute, read the existing state of the dummy devices
-function setUpDeviceReading(deviceId) {
+function setUpSensorReading(deviceId) {
   const deviceType = deviceId.replace(/\d/g, '');
   if (deviceType === 'lamp' || deviceType === 'motion') {
     setInterval(sendDeviceReading, 59999, deviceId);
   }
-}
-
-// Initialize the array of sensors and periodically update them.
-// Intervals are prime numbers to avoid simultaneous updates.
-function initDevices(req, res, next) {
-  if (!devicesInitialized) {
-    init();
-    // Every few seconds, update the state of the dummy devices in a
-    // semi-random fashion.
-    setInterval(activateDoor, 4999);
-    // Every second, update the state of the dummy devices in a
-    // semi-random fashion.
-    setInterval(activateDevices, 997);
-    devicesInitialized = true;
-  }
-
-  next();
 }
 
 module.exports = {
@@ -560,6 +557,5 @@ module.exports = {
   processHttpLampCommand,
   processMqttMessage,
   accessControl,
-  sendCommand,
-  initDevices
+  sendCommand
 };

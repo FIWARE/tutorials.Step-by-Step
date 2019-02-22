@@ -58,7 +58,7 @@ router.get('/version', function(req, res) {
 });
 
 // Render the monitoring page
-router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
+router.get('/device/monitor', function(req, res) {
   const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
   const securityEnabled = SECURE_ENDPOINTS;
   res.render('device-monitor', {
@@ -77,7 +77,6 @@ router.get('/device/monitor', Ultralight.initDevices, function(req, res) {
 router.post(
   '/device/command',
   Ultralight.accessControl,
-  Ultralight.initDevices,
   Ultralight.sendCommand
 );
 
