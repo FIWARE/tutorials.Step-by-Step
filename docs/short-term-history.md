@@ -144,7 +144,7 @@ cd tutorials.Short-Term-History
 ```
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Historic-Context/blob/master/services) Bash script provided within the
+[services](https://github.com/Fiware/tutorials.Short-Term-History/blob/master/services) Bash script provided within the
 repository:
 
 ```bash
