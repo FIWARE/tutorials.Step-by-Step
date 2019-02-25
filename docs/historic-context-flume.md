@@ -2,9 +2,10 @@
 [![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) -
-a generic enabler which is used to persist context data into third-party databases using [Apache Flume](https://flume.apache.org) creating a historical view of the
-context. The tutorial activates the IoT sensors connected in the [previous tutorial](iot-agent.md) and persists
-measurements from those sensors into a database for further analysis.
+a generic enabler which is used to persist context data into third-party databases using
+[Apache Flume](https://flume.apache.org) creating a historical view of the context. The tutorial activates the IoT
+sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into a database
+for further analysis.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Historic-Context-Flume/)
@@ -388,7 +389,7 @@ value of a single attribute.
 #### Query:
 
 ```javascript
-db["sth_/_Door:001_Door"].find().limit(10)
+db["sth_/_Door:001_Door"].find().limit(10);
 ```
 
 #### Result:
@@ -412,7 +413,7 @@ which the **Motion Sensor** with the `id=Motion:001_Motion` is accumulating, you
 #### Query:
 
 ```javascript
-db["sth_/_Motion:001_Motion"].find({attrName: "count"},{_id: 0, attrType: 0, attrName: 0 } ).limit(10)
+db["sth_/_Motion:001_Motion"].find({ attrName: "count" }, { _id: 0, attrType: 0, attrName: 0 }).limit(10);
 ```
 
 #### Result:

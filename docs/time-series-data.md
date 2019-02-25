@@ -21,8 +21,9 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 >
 > — Emily Dickinson
 
-Previous tutorials have shown how to persist historic context
-data into a range of databases such as **MySQL** and **PostgreSQL** using [Apache Flume](https://github.com/Fiware/tutorials.Historic-Context-Flume) and [Apache NIFI](https://github.com/Fiware/tutorials.Historic-Context-NIFI)Furthermore, the
+Previous tutorials have shown how to persist historic context data into a range of databases such as **MySQL** and
+**PostgreSQL** using [Apache Flume](https://github.com/Fiware/tutorials.Historic-Context-Flume) and
+[Apache NIFI](https://github.com/Fiware/tutorials.Historic-Context-NIFI)Furthermore, the
 [Short Term Historic](https://github.com/Fiware/tutorials.Short-Term-History) tutorial has introduced the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic enabler for persisting and querying historic context data
 using a **MongoDB** database.

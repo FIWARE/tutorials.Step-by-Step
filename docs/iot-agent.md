@@ -233,17 +233,19 @@ iot-agent:
         - "4041:4041"
         - "7896:7896"
     environment:
-        - "IOTA_CB_HOST=orion"
-        - "IOTA_CB_PORT=1026"
-        - "IOTA_NORTH_PORT=4041"
-        - "IOTA_REGISTRY_TYPE=mongodb"
-        - "IOTA_LOG_LEVEL=DEBUG"
-        - "IOTA_TIMESTAMP=true"
-        - "IOTA_MONGO_HOST=mongo-db"
-        - "IOTA_MONGO_PORT=27017"
-        - "IOTA_MONGO_DB=iotagentul"
-        - "IOTA_HTTP_PORT=7896"
-        - "IOTA_PROVIDER_URL=http://iot-agent:4041"
+        - IOTA_CB_HOST=orion
+        - IOTA_CB_PORT=1026
+        - IOTA_NORTH_PORT=4041
+        - IOTA_REGISTRY_TYPE=mongodb
+        - IOTA_LOG_LEVEL=DEBUG
+        - IOTA_TIMESTAMP=true
+        - IOTA_CB_NGSI_VERSION=v2
+        - IOTA_AUTOCAST=true
+        - IOTA_MONGO_HOST=mongo-db
+        - IOTA_MONGO_PORT=27017
+        - IOTA_MONGO_DB=iotagentul
+        - IOTA_HTTP_PORT=7896
+        - IOTA_PROVIDER_URL=http://iot-agent:4041
 ```
 
 The `iot-agent` container relies on the precence of the Orion Context Broker and uses a MongoDB database to hold device
@@ -255,19 +257,21 @@ information such as device URLs and Keys. The container is listening on two port
 
 The `iot-agent` container is driven by environment variables as shown:
 
-| Key                | Value                   | Description                                                                                                                                           |
-| ------------------ | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IOTA_CB_HOST       | `orion`                 | Hostname of the context broker to update context                                                                                                      |
-| IOTA_CB_PORT       | `1026`                  | Port that context broker listens on to update context                                                                                                 |
-| IOTA_NORTH_PORT    | `4041`                  | Port used for Configuring the IoT Agent and receiving context updates from the context broker                                                         |
-| IOTA_REGISTRY_TYPE | `mongodb`               | Whether to hold IoT device info in memory or in a database                                                                                            |
-| IOTA_LOG_LEVEL     | `DEBUG`                 | The log level of the IoT Agent                                                                                                                        |
-| IOTA_TIMESTAMP     | `true`                  | Whether to supply timestamp information with each measurement received from attached devices                                                          |
-| IOTA_MONGO_HOST    | `context-db`            | The hostname of mongoDB - used for holding device information                                                                                         |
-| IOTA_MONGO_PORT    | `27017`                 | The port mongoDB is listening on                                                                                                                      |
-| IOTA_MONGO_DB      | `iotagentul`            | The name of the database used in mongoDB                                                                                                              |
-| IOTA_HTTP_PORT     | `7896`                  | The port where the IoT Agent listens for IoT device traffic over HTTP                                                                                 |
-| IOTA_PROVIDER_URL  | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
+| Key                  | Value                   | Description                                                                                                                                           |
+| -------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| IOTA_CB_HOST         | `orion`                 | Hostname of the context broker to update context                                                                                                      |
+| IOTA_CB_PORT         | `1026`                  | Port that context broker listens on to update context                                                                                                 |
+| IOTA_NORTH_PORT      | `4041`                  | Port used for Configuring the IoT Agent and receiving context updates from the context broker                                                         |
+| IOTA_REGISTRY_TYPE   | `mongodb`               | Whether to hold IoT device info in memory or in a database                                                                                            |
+| IOTA_LOG_LEVEL       | `DEBUG`                 | The log level of the IoT Agent                                                                                                                        |
+| IOTA_TIMESTAMP       | `true`                  | Whether to supply timestamp information with each measurement received from attached devices                                                          |
+| IOTA_CB_NGSI_VERSION | `v2`                    | Whether to supply use NGSIv2 when sending updates for active attributes                                                                               |
+| IOTA_AUTOCAST        | `true`                  | Ensure Ultralight number values are read as numbers not strings                                                                                       |
+| IOTA_MONGO_HOST      | `context-db`            | The hostname of mongoDB - used for holding device information                                                                                         |
+| IOTA_MONGO_PORT      | `27017`                 | The port mongoDB is listening on                                                                                                                      |
+| IOTA_MONGO_DB        | `iotagentul`            | The name of the database used in mongoDB                                                                                                              |
+| IOTA_HTTP_PORT       | `7896`                  | The port where the IoT Agent listens for IoT device traffic over HTTP                                                                                 |
+| IOTA_PROVIDER_URL    | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
 
 ---
 
