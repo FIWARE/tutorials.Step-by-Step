@@ -191,7 +191,8 @@
        "ignore": [
           "mailto:*",
           "https://oauth.net",
-          "https://ec.haxx.se"
+          "https://ec.haxx.se",
+          "https://commons.wikimedia.org/wiki/User:*"
       ]
     }
   }

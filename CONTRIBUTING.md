@@ -37,7 +37,7 @@ in-depth testing, and text changes can be landed more quickly
 
 ## Coding conventions
 
-The code and markdown files are formatted by [prettier](https://prettier.io),
+The code and Markdown files are formatted by [prettier](https://prettier.io),
 you can also run the formatter directly:
 
 ```console
@@ -48,7 +48,7 @@ npm run prettier:text -C ./context-provider
 Start reading our code and documentation and you'll get the hang of it:
 
 -   Start with appropriate badges and an introductory paragraph
--   Create a **three level** ToC using markdown-toc
+-   Create a **three level** ToC using `markdown-toc`
 -   No headings below `###`
 -   4th Level headings are **reserved** for `#### Request` and `#### Response`
     only
