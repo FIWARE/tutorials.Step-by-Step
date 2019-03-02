@@ -65,7 +65,7 @@
     "start": "node ./bin/www",
     "lint": "eslint . --cache --fix",
     "lint:text": "textlint 'README.md' '../README.md' '../docs/*.md'",
-    "lint:md": "remark 'README.md' '../README.md' '../docs/*.md' '../tutorials.*/README.md'",
+    "lint:md": "remark -f 'README.md' '../README.md' '../docs/*.md' '../tutorials.*/README.md'",
     "precommit": "lint-staged",
     "prettier": "prettier --parser flow --single-quote --write **/**/*.js  **/*.js *.js",
     "prettier:text": "prettier 'README.md' '../README.md' '../docs/*.md' '../docker/*.md' '../tutorials.*/README.md' --tab-width 4 --print-width 120 --write --prose-wrap always",
@@ -86,5 +86,12 @@
       "prettier --tab-width 4 --print-width 80 --write --prose-wrap always",
       "git add"
     ]
+  },
+  "remarkConfig": {
+    "settings" : { 
+      "bullet": "-",
+      "paddedTable": true 
+    },
+    "plugins": ["remark-preset-lint-recommended"]
   }
 }
