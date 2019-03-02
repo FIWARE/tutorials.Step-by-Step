@@ -154,7 +154,7 @@ curl -X POST \
 
 #### 13 Request
 
-The full `<Rule>`  is shown below:
+The full `<Rule>` is shown below:
 
 ```xml
 <Rule RuleId="alrmbell-ring-24hr-hours-000000000000" Effect="Permit">
@@ -206,6 +206,7 @@ The full `<Rule>`  is shown below:
     </Condition>
 </Rule>
 ```
+
 The `<Target>` element of the `<Rule>` defines access on a Verb-Resource level
 in a similar manner as seen in the previous tutorial. The a `<Condition>`
 element holds the time part of the rule and is evaluated by **Authzforce** based
@@ -223,7 +224,7 @@ The policy will now be updated as follows:
 This means that the `alrmbell-ring-24hr-xaml-000000000000` permission will need
 to be amended to apply two rules:
 
-The full `<Rule>`  is shown below:
+The full `<Rule>` is shown below:
 
 ```xml
 <Rule RuleId="alrmbell-ring-only-000000000000" Effect="Permit">
