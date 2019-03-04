@@ -246,7 +246,7 @@ The `mysql-db` container is driven by environment variables as shown:
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:Fiware/tutorials.Roles-Permissions.git
+git clone git@github.com:FIWARE/tutorials.Roles-Permissions.git
 cd tutorials.Roles-Permissions
 
 ./services create
@@ -255,7 +255,7 @@ cd tutorials.Roles-Permissions
 > **Note** The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Roles-Permissions/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Roles-Permissions/blob/master/services)
 Bash script provided within the repository:
 
 ```bash

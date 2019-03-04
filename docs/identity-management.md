@@ -236,7 +236,7 @@ The `mysql-db` container is driven by environment variables as shown:
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:Fiware/tutorials.Identity-Management.git
+git clone git@github.com:FIWARE/tutorials.Identity-Management.git
 cd tutorials.Identity-Management
 
 ./services create
@@ -245,7 +245,7 @@ cd tutorials.Identity-Management
 > **Note** The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Identity-Management/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Identity-Management/blob/master/services)
 Bash script provided within the repository:
 
 ```bash

@@ -172,7 +172,7 @@ The `mosquitto` container is listening on two ports:
 -   Port `9001` is the standard port for HTTP/Websocket communications
 
 The attached volume is a
-[configuration file](https://github.com/Fiware/tutorials.IoT-over-MQTT/blob/master/mosquitto/mosquitto.conf)
+[configuration file](https://github.com/FIWARE/tutorials.IoT-over-MQTT/blob/master/mosquitto/mosquitto.conf)
 used to increase the debug level of the MQTT Message Broker.
 
 <h3>Dummy IoT Devices Configuration</h3>

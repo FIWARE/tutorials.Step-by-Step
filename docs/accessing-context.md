@@ -250,7 +250,7 @@ provided within the repository. Please clone the repository and create the
 necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:Fiware/tutorials.Accessing-Context.git
+git clone git@github.com:FIWARE/tutorials.Accessing-Context.git
 cd tutorials.Accessing-Context
 
 ./services create; ./services start;
@@ -272,7 +272,7 @@ This command will also import seed data from the previous
 
 All the code Node.js Express for the demo can be found within the `proxy` folder
 within the GitHub
-repository.[Stock Management example](https://github.com/Fiware/tutorials.Step-by-Step/tree/master/context-provider).
+repository.[Stock Management example](https://github.com/FIWARE/tutorials.Step-by-Step/tree/master/context-provider).
 The application runs on the following URLs:
 
 -   `http://localhost:3000/app/store/urn:ngsi-ld:Store:001`
@@ -315,7 +315,7 @@ library map directly onto the NGSI v2
 ## Analyzing the Code
 
 The code under discussion can be found within the `store` controller in the
-[Git Repository](https://github.com/Fiware/tutorials.Step-by-Step/blob/master/context-provider/controllers/store.js)
+[Git Repository](https://github.com/FIWARE/tutorials.Step-by-Step/blob/master/context-provider/controllers/store.js)
 
 ### Initializing the library
 

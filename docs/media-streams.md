@@ -50,7 +50,7 @@ a media stream to potentially raise events and alter the context of a product
 _"powered by FIWARE"_.
 
 All the code for the demo can be found within the `nodejs` folder within the
-[kurento-examples](https://github.com/Fiware/tutorials.Media-Streams/tree/master/kurento-examples)
+[kurento-examples](https://github.com/FIWARE/tutorials.Media-Streams/tree/master/kurento-examples)
 directory. Alternative `client-side-javascript` and `java` examples are also
 available. Obviously, your choice of programming language will depend upon your
 own business needs - when reading the code below please keep this in mind and
@@ -154,7 +154,7 @@ The `kurento-examples` container is driven by environment variables as shown:
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:Fiware/tutorials.Media-Streams.git
+git clone git@github.com:FIWARE/tutorials.Media-Streams.git
 cd tutorials.Media-Streams
 git submodule update --init --recursive
 
@@ -164,7 +164,7 @@ git submodule update --init --recursive
 > **Note** The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/Fiware/tutorials.Media-Streams/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Media-Streams/blob/master/services)
 Bash script provided within the repository:
 
 ```bash
@@ -792,7 +792,7 @@ custom modules already created by the Kurento development team:
 
 To install the modules, we must extend the default
 `fiware/stream-oriented-kurento` Docker image by using a custom
-[Dockerfile](https://github.com/Fiware/tutorials.Media-Streams/blob/master/docker-compose/Dockerfile),
+[Dockerfile](https://github.com/FIWARE/tutorials.Media-Streams/blob/master/docker-compose/Dockerfile),
 which installs the modules as shown:
 
 ```bash

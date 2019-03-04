@@ -16,7 +16,7 @@ This will check the text for obvious typos, informal grammar and dead links
 ## Submitting changes
 
 Please send a
-[GitHub Pull Request](https://github.com/Fiware/tutorials.Step-by-Step/pull/new/master)
+[GitHub Pull Request](https://github.com/FIWARE/tutorials.Step-by-Step/pull/new/master)
 with a clear list of what you've done (read more about
 [pull requests](https://help.github.com/en/articles/about-pull-requests). Please
 follow our coding conventions (below) and make sure all of your commits are
