@@ -24,6 +24,7 @@ pages:
       - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
   - "Core Context Managment: History Management":
       - "Persisting Context (Apache Flume)": "historic-context-flume.md"
+      - "Persisting Context (Apache NIFI)": "historic-context-nifi.md"
       - "Short Term History": "short-term-history.md"
       - "Time-Series Data": "time-series-data.md"
   - "Identity Management":

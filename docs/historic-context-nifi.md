@@ -1,65 +1,49 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
-[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fi-ware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to
-[FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) - a generic
-enabler which is used to persist context data into third-party databases using
-[Apache Flume](https://flume.apache.org) creating a historical view of the
-context. The tutorial activates the IoT sensors connected in the
-[previous tutorial](iot-agent.md) and persists measurements from those sensors
-into a database for further analysis.
+[FIWARE Draco](https://fiware-draco.readthedocs.io/en/latest/) - an alternative
+generic enabler which is used to persist context data into third-party databases
+using [Apache NIFI](https://nifi.apache.org) creating a historical view of the
+context. The in the same manner asthe
+[previous tutorial](historic-context-flume.md), activates the dummy IoT sensors
+persists measurements from those sensors into a database for further analysis.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also
 available as
-[Postman documentation](https://fiware.github.io/tutorials.Historic-Context-Flume/)
+[Postman documentation](https://fiware.github.io/tutorials.Historic-Context-NIFI/)
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/4824d3171f823935dcab)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/9658043920d9be43914a)
 
 <hr class="core"/>
 
-# Data Persistence using Apache Flume
+# Data Persistence using Apache NIFI
 
-> "History will be kind to me for I intend to write it."
+> "Plots within plots, but all roads lead down the dragon’s gullet."
 >
-> — Winston Churchill
+> — George R.R. Martin (A Dance With Dragons)
 
-Previous tutorials have introduced a set of IoT Sensors (providing measurements
-of the state of the real world), and two FIWARE Components - the **Orion Context
-Broker** and an **IoT Agent**. This tutorial will introduce a new data
-persistence component - FIWARE **Cygnus**.
+[FIWARE Draco](https://fiware-draco.readthedocs.io/en/latest/) is an alternative
+generic enabler which is able to persist historical context data to a series of
+databases. Like **Cygnus** - **Draco** is able subscribe to chnages of state
+from the **Orion Context Broker** and provide a funnel to process that data
+before persisting to a data sink.
 
-The system so far has been built up to handle the current context, in other
-words it holds the data entities defining the state of the real-world objects at
-a given moment in time.
+As mentioned previously, persisting historical context data is useful for big
+data analysis or discovering trends or removing outliers. Which tool you use to
+do this will depend on your needs, and unlike **Cygnus** **Draco** offers a
+graphical interface to set up and monitor the procedure.
 
-From this definition you can see - context is only interested in the **current**
-state of the system It is not the responsibility of any of the existing
-components to report on the historical state of the system, the context is based
-on the last measurement each sensor has sent to the context broker.
+A summary of the differences can be seen below:
 
-In order to do this, we will need to extend the existing architecture to persist
-changes of state into a database whenever the context is updated.
-
-Persisting historical context data is useful for big data analysis - it can be
-used to discover trends, or data can be sampled and aggregated to remove the
-influence of outlying data measurements. However within each Smart Solution, the
-significance of each entity type will differ and entities and attributes may
-need to be sampled at different rates.
-
-Since the business requirements for using context data differ from application
-to application, there is no one standard use case for historical data
-persistence - each situation is unique - it is not the case that one size fits
-all. Therefore rather than overloading the context broker with the job of
-historical context data persistence, this role has been separated out into a
-separate, highly configurable component - **Cygnus**.
-
-As you would expect, **Cygnus**, as part of an Open Source platform, is
-technology agnostic regarding the database to be used for data persistence. The
-database you choose to use will depend upon your own business needs.
-
-However there is a cost to offering this flexibility - each part of the system
-must be separately configured and notifications must be set up to only pass the
-minimal data required as necessary.
+| Draco                                                                           | Cygnus                                                                           |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Offers an NGSI v2 interface for notifications                                   | Offers an NGSI v1 interface for notifications                                    |
+| configurable subscription endpoint, but defaults to `/v2/notify`                | subscription endpoint listens on `/notify`                                       |
+| listens on a single port                                                        | listens on separate ports for each input                                         |
+| Configured by a graphical interface                                             | Configured via config files                                                      |
+| Based on Apache NIFI                                                            | Based on Apache Flume                                                            |
+| **Draco** is docummented [here](https://fiware-draco.readthedocs.io/en/latest/) | **Cygnus** is documented [here](https://fiware-cygnus.readthedocs.io/en/latest/) |
 
 <h4>Device Monitor</h4>
 
@@ -70,7 +54,7 @@ architecture and protocol used can be found in the
 the UltraLight device monitor web page found at:
 `http://localhost:3000/device/monitor`
 
-![FIWARE Monitor](https://fiware.github.io/tutorials.Historic-Context-Flume/img/device-monitor.png)
+![FIWARE Monitor](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/device-monitor.png)
 
 ---
 
@@ -82,7 +66,7 @@ components - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/)
 and introduce the
-[Cygnus Generic Enabler](https://fiware-cygnus.readthedocs.io/en/latest/) for
+[Draco Generic Enabler](https://fiware-draco.readthedocs.io/en/latest/) for
 persisting context data to a database. Additional databases are now involved -
 both the Orion Context Broker and the IoT Agent rely on
 [MongoDB](https://www.mongodb.com/) technology to keep persistence of the
@@ -103,7 +87,7 @@ Therefore the overall architecture will consist of the following elements:
         format and convert them to
         [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests
         for the context broker to alter the state of the context entities
-    -   FIWARE [Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) which
+    -   FIWARE [Draco](https://fiware-draco.readthedocs.io/en/latest/) which
         will subscribe to context changes and persist them into a database
         (**MySQL** , **PostgreSQL** or **MongoDB**)
 -   One, two or three of the following **Databases**:
@@ -149,18 +133,18 @@ Before you start you should ensure that you have obtained or built the necessary
 Docker images locally. Please clone the repository and create the necessary
 images by running the commands as shown:
 
-```bash
-git clone git@github.com:FIWARE/tutorials.Historic-Context.git
-cd tutorials.Historic-Context
+```console
+git clone git@github.com:fiware/tutorials.Historic-Context-NIFI.git
+cd tutorials.Historic-Context-NIFI
 
 ./services create
 ```
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.Historic-Context/blob/master/services)
+[services](https://github.com/FIWARE/tutorials.Historic-Context-NIFI/blob/master/services)
 Bash script provided within the repository:
 
-```bash
+```console
 ./services <command>
 ```
 
@@ -168,10 +152,10 @@ Where `<command>` will vary depending upon the databases we wish to activate.
 This command will also import seed data from the previous tutorials and
 provision the dummy IoT sensors on startup.
 
-> **Note:** If you want to clean up and start over again you can do so with the
-> following command:
+> :information_source: **Note:** If you want to clean up and start over again
+> you can do so with the following command:
 >
-> ```
+> ```console
 > ./services stop
 > ```
 
@@ -184,7 +168,7 @@ to configure since we are already using a MongoDB instance to hold data related
 to the Orion Context Broker and the IoT Agent. The MongoDB instance is listening
 on the standard `27017` port and the overall architecture can be seen below:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/cygnus-mongo.png)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/mongo-draco-tutorial.png)
 
 <h3>MongoDB - Database Server Configuration</h3>
 
@@ -200,65 +184,65 @@ mongo-db:
     command: --bind_ip_all --smallfiles
 ```
 
-<h3>MongoDB - Cygnus Configuration</h3>
+<h3>MongoDB - Draco Configuration</h3>
 
 ```yaml
-cygnus:
-    image: fiware/cygnus-ngsi:latest
-    hostname: cygnus
-    container_name: fiware-cygnus
+draco:
+    image: ging/fiware-draco:1.1.0
+    container_name: draco
     depends_on:
         - mongo-db
-    networks:
-        - default
-    expose:
-        - "5080"
-    ports:
-        - "5050:5050"
-        - "5080:5080"
     environment:
-        - "CYGNUS_MONGO_HOSTS=mongo-db:27017"
-        - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
-        - "CYGNUS_API_PORT=5080"
+        - NIFI_WEB_HTTP_PORT=9090
+    ports:
+        - "9090:9090"
+        - "5050:5050"
+    healthcheck:
+        test:
+            curl --fail -s http://localhost:9090/nifi-api/system-diagnostics ||
+            exit 1
 ```
 
-The `cygnus` container is listening on two ports:
+The `draco` container is listening on two ports:
 
--   The Subscription Port for Cygnus - `5050` is where the service will be
+-   The Subscription Port for Draco - `5050` is where the service will be
     listening for notifications from the Orion context broker
--   The Management Port for Cygnus - `5080` is exposed purely for tutorial
-    access - so that cUrl or Postman can make provisioning commands without
-    being part of the same network.
-
-The `cygnus` container is driven by environment variables as shown:
-
-| Key                 | Value            | Description                                                                                          |
-| ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
-| CYGNUS_MONGO_HOSTS  | `mongo-db:27017` | Comma separated list of MongoDB servers which Cygnus will contact to persist historical context data |
-| CYGNUS_LOG_LEVEL    | `DEBUG`          | The logging level for Cygnus                                                                         |
-| CYGNUS_SERVICE_PORT | `5050`           | Notification Port that Cygnus listens when subscribing to context data changes                       |
-| CYGNUS_API_PORT     | `5080`           | Port that Cygnus listens on for operational reasons                                                  |
+-   The Web interface for Draco - `9090` is exposed purely for configuring the
+    processors
 
 ## MongoDB - Start up
 
 To start the system with a **MongoDB** database only, run the following command:
 
-```bash
+```console
 ./services mongodb
 ```
 
-### Checking the Cygnus Service Health
+Then go to your browser and open Draco using this URL
+`http://localhost:9090/nifi`
 
-Once Cygnus is running, you can check the status by making an HTTP request to
-the exposed `CYGNUS_API_PORT` port. If the response is blank, this is usually
-because Cygnus is not running or is listening on another port.
+Now go to the Components toolbar which is placed in the upper section of the
+NiFi GUI, find the template icon and drag and drop it inside the Draco user
+space. At this point, a popup should be displayed with a list of all the
+templates available. Please select the template MONGO-TUTORIAL.
+
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/mongo-tutorial-template.png)
+
+Select all the processors (press shift and click on every processor) and start
+them by clicking on the start button. Now, you can see that the status icon of
+each processor turned from red to green.
+
+### Checking the Draco Service Health
+
+Once Draco is running, you can check the status by making an HTTP request to the
+exposed draco port to `/nifi-api/system-diagnostics`. If the response is blank,
+this is usually because Draco is not running or is listening on another port.
 
 #### 1 Request:
 
-```bash
+```console
 curl -X GET \
-  'http://localhost:5080/v1/version'
+  'http://localhost:9090/nifi-api/system-diagnostics'
 ```
 
 #### Response:
@@ -267,8 +251,40 @@ The response will look similar to the following:
 
 ```json
 {
-    "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "systemDiagnostics": {
+        "aggregateSnapshot": {
+            "totalNonHeap": "value",
+            "totalNonHeapBytes": 0,
+            "usedNonHeap": "value",
+            "usedNonHeapBytes": 0,
+            "freeNonHeap": "value",
+            "freeNonHeapBytes": 0,
+            "maxNonHeap": "value",
+            "maxNonHeapBytes": 0,
+            "nonHeapUtilization": "value",
+            "totalHeap": "value",
+            "totalHeapBytes": 0,
+            "usedHeap": "value",
+            "usedHeapBytes": 0,
+            "freeHeap": "value",
+            "freeHeapBytes": 0,
+            "maxHeap": "value",
+            "maxHeapBytes": 0,
+            "heapUtilization": "value",
+            "availableProcessors": 0,
+            "processorLoadAverage": 0.0,
+            "totalThreads": 0,
+            "daemonThreads": 0,
+            "uptime": "value",
+            "flowFileRepositoryStorageUsage": {},
+            "contentRepositoryStorageUsage": [{}],
+            "provenanceRepositoryStorageUsage": [{}],
+            "garbageCollection": [{}],
+            "statsLastRefreshed": "value",
+            "versionInfo": {}
+        },
+        "nodeSnapshots": [{}]
+    }
 }
 ```
 
@@ -276,11 +292,11 @@ The response will look similar to the following:
 >
 > -   To check that a docker container is running try
 >
-> ```
+> ```bash
 > docker ps
 > ```
 >
-> You should see several containers running. If `cygnus` is not running, you can
+> You should see several containers running. If `draco` is not running, you can
 > restart the containers as necessary.
 
 ### Generating Context Data
@@ -293,11 +309,11 @@ selecting an appropriate the command from the drop down list and pressing the
 `send` button. The stream of measurements coming from the devices can then be
 seen on the same page:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/door-open.gif)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/door-open.gif)
 
 ### Subscribing to Context Changes
 
-Once a dynamic context system is up and running, we need to inform **Cygnus** of
+Once a dynamic context system is up and running, we need to inform **Draco** of
 changes in context.
 
 This is done by making a POST request to the `/v2/subscription` endpoint of the
@@ -306,23 +322,22 @@ Orion Context Broker.
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
     subscription to only listen to measurements from the attached IoT Sensors,
     since they had been provisioned using these settings
--   The `idPattern` in the request body ensures that Cygnus will be informed of
+-   The `idPattern` in the request body ensures that Draco will be informed of
     all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts
-    notifications in the older NGSI v1 format.
+-   The notification `url` must match the configured
+    `Base Path and Listening port` of the Draco Listen HTTP Processor
 -   The `throttling` value defines the rate that changes are sampled.
 
 #### 2 Request:
 
-```bash
+```console
 curl -iX POST \
   'http://localhost:1026/v2/subscriptions' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Draco of all context changes",
   "subject": {
     "entities": [
       {
@@ -332,9 +347,8 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+      "url": "http://draco:5050/v2/notify"
+    }
   },
   "throttling": 5
 }'
@@ -344,15 +358,68 @@ As you can see, the database used to persist context data has no impact on the
 details of the subscription. It is the same for each database. The response will
 be **201 - Created**
 
-> **Note:** if you see errors of the following form within the **Cygnus** log:
->
-> ```
-> Received bad request from client.
-> cygnus         | org.apache.flume.source.http.HTTPBadRequestException: 'fiware-servicepath' header
-> value does not match the number of notified context responses
-> ```
->
-> This is usually because the `"attrsFormat": "legacy"` flag has been omitted.
+If a subscription has been created, you can check to see if it is firing by
+making a GET request to the `/v2/subscriptions` endpoint.
+
+#### 3 Request:
+
+```console
+curl -X GET \
+  'http://localhost:1026/v2/subscriptions/' \
+  -H 'fiware-service: openiot' \
+  -H 'fiware-servicepath: /'
+```
+
+#### Response:
+
+```json
+[
+    {
+        "id": "5b39d7c866df40ed84284174",
+        "description": "Notify Draco of all context changes",
+        "status": "active",
+        "subject": {
+            "entities": [
+                {
+                    "idPattern": ".*"
+                }
+            ],
+            "condition": {
+                "attrs": []
+            }
+        },
+        "notification": {
+            "timesSent": 158,
+            "lastNotification": "2018-07-02T07:59:21.00Z",
+            "attrs": [],
+            "http": {
+                "url": "http://draco:5050/v2/notify"
+            },
+            "lastSuccess": "2018-07-02T07:59:21.00Z"
+        },
+        "throttling": 5
+    }
+]
+```
+
+Within the `notification` section of the response, you can see several
+additional `attributes` which describe the health of the subscription
+
+If the criteria of the subscription have been met, `timesSent` should be greater
+than `0`. A zero value would indicate that the `subject` of the subscription is
+incorrect or the subscription has created with the wrong `fiware-service-path`
+or `fiware-service` header
+
+The `lastNotification` should be a recent timestamp - if this is not the case,
+then the devices are not regularly sending data. Remember to unlock the **Smart
+Door** and switch on the **Smart Lamp**
+
+The `lastSuccess` should match the `lastNotification` date - if this is not the
+case then **Draco** is not receiving the subscription properly. Check that the
+hostname and port are correct.
+
+Finally, check that the `status` of the subscription is `active` - an expired
+subscription will not fire.
 
 ## MongoDB - Reading Data from a database
 
@@ -360,7 +427,7 @@ To read MongoDB data from the command-line, we will need access to the `mongo`
 tool run an interactive instance of the `mongo` image as shown to obtain a
 command-line prompt:
 
-```bash
+```console
 docker run -it --network fiware_default  --entrypoint /bin/bash mongo
 ```
 
@@ -377,13 +444,13 @@ To show the list of available databases, run the statement as shown:
 
 #### Query:
 
-```sql
+```
 show dbs
 ```
 
 #### Result:
 
-```text
+```
 admin          0.000GB
 iotagentul     0.000GB
 local          0.000GB
@@ -403,24 +470,24 @@ Orion Context Broker has created two separate database instance for each
     held separately. The IoT Agent was initialized to hold the IoT sensor data
     in a separate **MongoDB** database called `iotagentul`.
 
-As a result of the subscription of Cygnus to Orion Context Broker, a new
-database has been created called `sth_openiot`. The default value for a **Mongo
-DB** database holding historic context consists of the `sth_` prefix followed by
-the `fiware-service` header - therefore `sth_openiot` holds the historic context
-of the IoT devices.
+As a result of the subscription of Draco to Orion Context Broker, a new database
+has been created called `sth_openiot`. The default value for a **Mongo DB**
+database holding historic context consists of the `sth_` prefix followed by the
+`fiware-service` header - therefore `sth_openiot` holds the historic context of
+the IoT devices.
 
 ### Read Historical Context from the server
 
 #### Query:
 
-```sql
+```
 use sth_openiot
 show collections
 ```
 
 #### Result:
 
-```text
+```
 switched to db sth_openiot
 
 sth_/_Door:001_Door
@@ -443,13 +510,13 @@ default each row will contain the sampled value of a single attribute.
 
 #### Query:
 
-```javascript
-db["sth_/_Door:001_Door"].find().limit(10);
+```
+db["sth_/_Door:001_Door"].find().limit(10)
 ```
 
 #### Result:
 
-```text
+```
 { "_id" : ObjectId("5b1fa48630c49e0012f7635d"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "TimeInstant", "attrType" : "ISO8601", "attrValue" : "2018-06-12T10:46:30.836Z" }
 { "_id" : ObjectId("5b1fa48630c49e0012f7635e"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "close_status", "attrType" : "commandStatus", "attrValue" : "UNKNOWN" }
 { "_id" : ObjectId("5b1fa48630c49e0012f7635f"), "recvTime" : ISODate("2018-06-12T10:46:30.897Z"), "attrName" : "lock_status", "attrType" : "commandStatus", "attrValue" : "UNKNOWN" }
@@ -468,15 +535,13 @@ values. For example to read the rate at which the **Motion Sensor** with the
 
 #### Query:
 
-```javascript
-db["sth_/_Motion:001_Motion"]
-    .find({ attrName: "count" }, { _id: 0, attrType: 0, attrName: 0 })
-    .limit(10);
+```
+db["sth_/_Motion:001_Motion"].find({attrName: "count"},{_id: 0, attrType: 0, attrName: 0 } ).limit(10)
 ```
 
 #### Result:
 
-```text
+```
 { "recvTime" : ISODate("2018-06-12T10:46:18.756Z"), "attrValue" : "8" }
 { "recvTime" : ISODate("2018-06-12T10:46:36.881Z"), "attrValue" : "10" }
 { "recvTime" : ISODate("2018-06-12T10:46:42.947Z"), "attrValue" : "11" }
@@ -491,11 +556,11 @@ db["sth_/_Motion:001_Motion"]
 
 To leave the MongoDB client and leave interactive mode, run the following:
 
-```bash
+```console
 exit
 ```
 
-```bash
+```console
 exit
 ```
 
@@ -507,7 +572,7 @@ server - the default Docker image for this data can be used. The PostgreSQL
 instance is listening on the standard `5432` port and the overall architecture
 can be seen below:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/cygnus-postgres.png)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/postgres-draco-tutorial.png)
 
 We now have a system with two databases, since the MongoDB container is still
 required to hold data related to the Orion Context Broker and the IoT Agent.
@@ -544,84 +609,96 @@ The `postgres-db` container is driven by environment variables as shown:
 | POSTGRES_USER     | `postgres` | Username for the PostgreSQL database user |
 | POSTGRES_DB       | `postgres` | The name of the PostgreSQL database       |
 
-> **Note:** Passing the Username and Password in plain text environment
-> variables like this is a security risk. Whereas this is acceptable practice in
-> a tutorial, for a production environment, you can avoid this risk by applying
+> :information_source: **Note:** Passing the Username and Password in plain text
+> environment variables like this is a security risk. Whereas this is acceptable
+> practice in a tutorial, for a production environment, you can avoid this risk
+> by applying
 > [Docker Secrets](https://blog.docker.com/2017/02/docker-secrets-management/)
 
-<h3>PostgreSQL - Cygnus Configuration</h3>
+<h3>PostgreSQL - Draco Configuration</h3>
 
 ```yaml
-cygnus:
-    image: fiware/cygnus-ngsi:latest
-    hostname: cygnus
-    container_name: fiware-cygnus
-    networks:
-        - default
+draco:
+    image: ging/fiware-draco:1.1.0
+    container_name: draco
     depends_on:
         - postgres-db
-    expose:
-        - "5080"
-    ports:
-        - "5050:5050"
-        - "5080:5080"
     environment:
-        - "CYGNUS_POSTGRESQL_HOST=postgres-db"
-        - "CYGNUS_POSTGRESQL_PORT=5432"
-        - "CYGNUS_POSTGRESQL_USER=postgres"
-        - "CYGNUS_POSTGRESQL_PASS=password"
-        - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
-        - "CYGNUS_API_PORT=5080"
-        - "CYGNUS_POSTGRESQL_ENABLE_CACHE=true"
+        - NIFI_WEB_HTTP_PORT=9090
+    ports:
+        - "9090:9090"
+        - "5050:5050"
+    healthcheck:
+        test:
+            curl --fail -s http://localhost:9090/nifi-api/system-diagnostics ||
+            exit 1
 ```
 
-The `cygnus` container is listening on two ports:
+The `draco` container is listening on two ports:
 
--   The Subscription Port for Cygnus - `5050` is where the service will be
+-   The Subscription Port for Draco - `5050` is where the service will be
     listening for notifications from the Orion context broker
--   The Management Port for Cygnus - `5080` is exposed purely for tutorial
-    access - so that cUrl or Postman can make provisioning commands without
-    being part of the same network.
-
-The `cygnus` container is driven by environment variables as shown:
-
-| Key                            | Value         | Description                                                                    |
-| ------------------------------ | ------------- | ------------------------------------------------------------------------------ |
-| CYGNUS_POSTGRESQL_HOST         | `postgres-db` | Hostname of the PostgreSQL server used to persist historical context data      |
-| CYGNUS_POSTGRESQL_PORT         | `5432`        | Port that the PostgreSQL server uses to listen to commands                     |
-| CYGNUS_POSTGRESQL_USER         | `postgres`    | Username for the PostgreSQL database user                                      |
-| CYGNUS_POSTGRESQL_PASS         | `password`    | Password for the PostgreSQL database user                                      |
-| CYGNUS_LOG_LEVEL               | `DEBUG`       | The logging level for Cygnus                                                   |
-| CYGNUS_SERVICE_PORT            | `5050`        | Notification Port that Cygnus listens when subscribing to context data changes |
-| CYGNUS_API_PORT                | `5080`        | Port that Cygnus listens on for operational reasons                            |
-| CYGNUS_POSTGRESQL_ENABLE_CACHE | `true`        | Switch to enable caching within the PostgreSQL configuration                   |
-
-> **Note:** Passing the Username and Password in plain text environment
-> variables like this is a security risk. Whereas this is acceptable practice in
-> a tutorial, for a production environment, `CYGNUS_POSTGRESQL_USER` and
-> `CYGNUS_POSTGRESQL_PASS` should be injected using
-> [Docker Secrets](https://blog.docker.com/2017/02/docker-secrets-management/)
+-   The Web interface for Draco - `9090` is exposed purely for configuring the
+    processors.
 
 ## PostgreSQL - Start up
 
 To start the system with a **PostgreSQL** database run the following command:
 
-```bash
+```console
 ./services postgres
 ```
 
-### Checking the Cygnus Service Health
+Then go to your browser and open Draco using this URL
+`http://localhost:9090/nifi`
 
-Once Cygnus is running, you can check the status by making an HTTP request to
-the exposed `CYGNUS_API_PORT` port. If the response is blank, this is usually
-because Cygnus is not running or is listening on another port.
+Now go to the Components toolbar which is placed in the upper section of the
+NiFi GUI, find the template icon and drag and drop it inside the Draco user
+space. At this point, a popup should be displayed with a list of all the
+templates available. Please select the template POSTGRESQL-TUTORIAL.
 
-#### 3 Request:
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/postgres-tutorial-template.png)
 
-```bash
+Before starting the processors, you need to set your PostgreSQL password and
+enable the DBCConnectionPool controller. For doing that please follow the
+instructions:
+
+1.  Do right click on any part of the Draco GUI user space, and then click on
+    configure.
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step1.png)
+
+2.  Go to the Controller Services Tab, at this point a list of controllers
+    should be displayed, locate the DBCConnectionPool controller.
+
+3.  Click on the configuration button of the "DBCPConnectionPool"
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step2.png)
+
+4.  Go to the controller Properties tab and put "password" in the password
+    field, then apply the changes.
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/controller-postgresql.png)
+
+5.  Enable the processor by clicking on the thunder icon and then click on
+    enable, then close the controller configuration page.
+
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step4.png)
+
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step5.png)
+
+6.  Select all the processors (press shift and click on every processor) and
+    start them by clicking on the start button. Now, you can see that the status
+    icon of each processor turned from red to green.
+
+### Checking the Draco Service Health
+
+Once Draco is running, you can check the status by making an HTTP request to the
+exposed draco port to `/nifi-api/system-diagnostics`. If the response is blank,
+this is usually because Draco is not running or is listening on another port.
+
+#### 4 Request:
+
+```console
 curl -X GET \
-  'http://localhost:5080/v1/version'
+  'http://localhost:9090/nifi-api/system-diagnostics'
 ```
 
 #### Response:
@@ -630,8 +707,40 @@ The response will look similar to the following:
 
 ```json
 {
-    "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "systemDiagnostics": {
+        "aggregateSnapshot": {
+            "totalNonHeap": "value",
+            "totalNonHeapBytes": 0,
+            "usedNonHeap": "value",
+            "usedNonHeapBytes": 0,
+            "freeNonHeap": "value",
+            "freeNonHeapBytes": 0,
+            "maxNonHeap": "value",
+            "maxNonHeapBytes": 0,
+            "nonHeapUtilization": "value",
+            "totalHeap": "value",
+            "totalHeapBytes": 0,
+            "usedHeap": "value",
+            "usedHeapBytes": 0,
+            "freeHeap": "value",
+            "freeHeapBytes": 0,
+            "maxHeap": "value",
+            "maxHeapBytes": 0,
+            "heapUtilization": "value",
+            "availableProcessors": 0,
+            "processorLoadAverage": 0.0,
+            "totalThreads": 0,
+            "daemonThreads": 0,
+            "uptime": "value",
+            "flowFileRepositoryStorageUsage": {},
+            "contentRepositoryStorageUsage": [{}],
+            "provenanceRepositoryStorageUsage": [{}],
+            "garbageCollection": [{}],
+            "statsLastRefreshed": "value",
+            "versionInfo": {}
+        },
+        "nodeSnapshots": [{}]
+    }
 }
 ```
 
@@ -639,11 +748,11 @@ The response will look similar to the following:
 >
 > -   To check that a docker container is running try
 >
-> ```
+> ```bash
 > docker ps
 > ```
 >
-> You should see several containers running. If `cygnus` is not running, you can
+> You should see several containers running. If `draco` is not running, you can
 > restart the containers as necessary.
 
 ### Generating Context Data
@@ -656,11 +765,11 @@ selecting an appropriate the command from the drop down list and pressing the
 `send` button. The stream of measurements coming from the devices can then be
 seen on the same page:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/door-open.gif)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/door-open.gif)
 
 ### Subscribing to Context Changes
 
-Once a dynamic context system is up and running, we need to inform **Cygnus** of
+Once a dynamic context system is up and running, we need to inform **Draco** of
 changes in context.
 
 This is done by making a POST request to the `/v2/subscription` endpoint of the
@@ -669,23 +778,20 @@ Orion Context Broker.
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
     subscription to only listen to measurements from the attached IoT Sensors,
     since they had been provisioned using these settings
--   The `idPattern` in the request body ensures that Cygnus will be informed of
+-   The `idPattern` in the request body ensures that Draco will be informed of
     all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts
-    notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 4 Request:
+#### 5 Request:
 
-```bash
+```console
 curl -iX POST \
   'http://localhost:1026/v2/subscriptions' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Draco of all context changes",
   "subject": {
     "entities": [
       {
@@ -695,9 +801,8 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+      "url": "http://draco:5050/v2/notify"
+    }
   },
   "throttling": 5
 }'
@@ -714,7 +819,7 @@ To read PostgreSQL data from the command-line, we will need access to the
 `postgresql-client` image supplying the connection string as shown to obtain a
 command-line prompt:
 
-```bash
+```console
 docker run -it --rm  --network fiware_default jbergknoff/postgresql-client \
    postgresql://postgres:password@postgres-db:5432/postgres
 ```
@@ -725,13 +830,13 @@ To show the list of available databases, run the statement as shown:
 
 #### Query:
 
-```text
+```
 \list
 ```
 
 #### Result:
 
-```text
+```
    Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
 -----------+----------+----------+------------+------------+-----------------------
  postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
@@ -749,13 +854,13 @@ To show the list of available schemas, run the statement as shown:
 
 #### Query:
 
-```text
+```
 \dn
 ```
 
 #### Result:
 
-```text
+```
   List of schemas
   Name   |  Owner
 ---------+----------
@@ -764,7 +869,7 @@ To show the list of available schemas, run the statement as shown:
 (2 rows)
 ```
 
-As a result of the subscription of Cygnus to Orion Context Broker, a new schema
+As a result of the subscription of Draco to Orion Context Broker, a new schema
 has been created called `openiot`. The name of the schema matches the
 `fiware-service` header - therefore `openiot` holds the historic context of the
 IoT devices.
@@ -785,7 +890,7 @@ ORDER BY table_schema,table_name;
 
 #### Result:
 
-```text
+```
  table_schema |    table_name
 --------------+-------------------
  openiot      | door_001_door
@@ -807,7 +912,7 @@ SELECT * FROM openiot.motion_001_motion limit 10;
 
 #### Result:
 
-```text
+```
   recvtimets   |         recvtime         | fiwareservicepath |  entityid  | entitytype |  attrname   |   attrtype   |        attrvalue         |                                    attrmd
 ---------------+--------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------
  1528803005491 | 2018-06-12T11:30:05.491Z | /                 | Motion:001 | Motion     | TimeInstant | ISO8601      | 2018-06-12T11:30:05.423Z | []
@@ -834,7 +939,7 @@ SELECT recvtime, attrvalue FROM openiot.motion_001_motion WHERE attrname ='count
 
 #### Result:
 
-```text
+```
          recvtime         | attrvalue
 --------------------------+-----------
  2018-06-12T11:30:05.491Z | 7
@@ -852,7 +957,7 @@ SELECT recvtime, attrvalue FROM openiot.motion_001_motion WHERE attrname ='count
 
 To leave the Postgres client and leave interactive mode, run the following:
 
-```bash
+```console
 \q
 ```
 
@@ -865,7 +970,7 @@ need an additional container which hosts the MySQL server, once again the
 default Docker image for this data can be used. The MySQL instance is listening
 on the standard `3306` port and the overall architecture can be seen below:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/cygnus-mysql.png)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/mysql-draco-tutorial.png)
 
 Once again we have a system with two databases, since the MongoDB container is
 still required to hold data related to the Orion Context Broker and the IoT
@@ -890,6 +995,12 @@ mysql-db:
         - "MYSQL_ROOT_HOST=%"
 ```
 
+> :information_source: **Note:** Using the default `root` user and displaying
+> the password in an environment variables like this is a security risk. Whereas
+> this is acceptable practice in a tutorial, for a production environment, you
+> can avoid this risk by setting up another user and applying
+> [Docker Secrets](https://blog.docker.com/2017/02/docker-secrets-management/)
+
 The `mysql-db` container is listening on a single port:
 
 -   Port `3306` is the default port for a MySQL server. It has been exposed so
@@ -902,83 +1013,88 @@ The `mysql-db` container is driven by environment variables as shown:
 | MYSQL_ROOT_PASSWORD | `123`.     | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
 | MYSQL_ROOT_HOST     | `postgres` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
-> **Note:** Using the default `root` user and displaying the password in an
-> environment variables like this is a security risk. Whereas this is acceptable
-> practice in a tutorial, for a production environment, you can avoid this risk
-> by setting up another user and applying
-> [Docker Secrets](https://blog.docker.com/2017/02/docker-secrets-management/)
-
-<h3>MySQL - Cygnus Configuration</h3>
+<h3>MySQL - Draco Configuration</h3>
 
 ```yaml
-cygnus:
-    image: fiware/cygnus-ngsi:latest
-    hostname: cygnus
-    container_name: fiware-cygnus
-    networks:
-        - default
+draco:
+    image: ging/fiware-draco:1.1.0
+    container_name: draco
     depends_on:
         - mysql-db
-    expose:
-        - "5080"
-    ports:
-        - "5050:5050"
-        - "5080:5080"
     environment:
-        - "CYGNUS_MYSQL_HOST=mysql-db"
-        - "CYGNUS_MYSQL_PORT=3306"
-        - "CYGNUS_MYSQL_USER=root"
-        - "CYGNUS_MYSQL_PASS=123"
-        - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
-        - "CYGNUS_API_PORT=5080"
+        - NIFI_WEB_HTTP_PORT=9090
+    ports:
+        - "9090:9090"
+        - "5050:5050"
+    healthcheck:
+        test:
+            curl --fail -s http://localhost:9090/nifi-api/system-diagnostics ||
+            exit 1
 ```
 
-> **Note:** Passing the Username and Password in plain text environment
-> variables like this is a security risk. Whereas this is acceptable practice in
-> a tutorial, for a production environment, `CYGNUS_MYSQL_USER` and
-> `CYGNUS_MYSQL_PASS` should be injected using
-> [Docker Secrets](https://blog.docker.com/2017/02/docker-secrets-management/)
+The `draco` container is listening on two ports:
 
-The `cygnus` container is listening on two ports:
-
--   The Subscription Port for Cygnus - `5050` is where the service will be
+-   The Subscription Port for Draco - `5050` is where the service will be
     listening for notifications from the Orion context broker
--   The Management Port for Cygnus - `5080` is exposed purely for tutorial
-    access - so that cUrl or Postman can make provisioning commands without
-    being part of the same network.
-
-The `cygnus` container is driven by environment variables as shown:
-
-| Key                 | Value      | Description                                                                    |
-| ------------------- | ---------- | ------------------------------------------------------------------------------ |
-| CYGNUS_MYSQL_HOST   | `mysql-db` | Hostname of the MySQL server used to persist historical context data           |
-| CYGNUS_MYSQL_PORT   | `3306`     | Port that the MySQL server uses to listen to commands                          |
-| CYGNUS_MYSQL_USER   | `root`     | Username for the MySQL database user                                           |
-| CYGNUS_MYSQL_PASS   | `123`      | Password for the MySQL database user                                           |
-| CYGNUS_LOG_LEVEL    | `DEBUG`    | The logging level for Cygnus                                                   |
-| CYGNUS_SERVICE_PORT | `5050`     | Notification Port that Cygnus listens when subscribing to context data changes |
-| CYGNUS_API_PORT     | `5080`     | Port that Cygnus listens on for operational reasons                            |
+-   The Web interface for Draco - `9090` is exposed purely for configuring the
+    processors
 
 ## MySQL - Start up
 
 To start the system with a **MySQL** database run the following command:
 
-```bash
+```console
 ./services mysql
 ```
 
-### Checking the Cygnus Service Health
+Then go to your browser and open Draco using this URL
+`http://localhost:9090/nifi`
 
-Once Cygnus is running, you can check the status by making an HTTP request to
-the exposed `CYGNUS_API_PORT` port. If the response is blank, this is usually
-because Cygnus is not running or is listening on another port.
+Now go to the Components toolbar which is placed in the upper section of the
+NiFi GUI, find the template icon and drag and drop it inside the Draco user
+space. At this point, a popup should be displayed with a list of all the
+templates available. Please select the template MYSQL-TUTORIAL.
 
-#### 5 Request:
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/draco-template1.png)
 
-```bash
+Before starting the processors, you need to set your MySQL password and enable
+the DBCConnectionPool controller. For doing that please follow the instructions:
+
+1.  Do right click on any part of the Draco GUI user space, and then click on
+    configure.
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step1.png)
+
+2.  Go to the Controller Services Tab, at this point a list of controllers
+    should be displayed, locate the DBCConnectionPool controller.
+
+3.  Click on the configuration button of the "DBCPConnectionPool"
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step2.png)
+
+4.  Go to the controller Properties tab and put "123" in the password field,
+    then apply the changes.
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step3.png)
+
+5.  Enable the processor by clicking on the thunder icon and then click on
+    enable, then close the controller configuration page.
+    ![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step4.png)
+
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/step5.png)
+
+6.  Select all the processors (press shift and click on every processor) and
+    start them by clicking on the start button. Now, you can see that the status
+    icon of each processor turned from red to green.
+
+### Checking the Draco Service Health
+
+Once Draco is running, you can check the status by making an HTTP request to the
+exposed draco port to `/system-diagnostics`. If the response is blank, this is
+usually because Draco is not running or is listening on another port.
+
+#### 6 Request:
+
+```console
 curl -X GET \
-  'http://localhost:5080/v1/version'
+  'http://localhost:9090/system-diagnostics'
 ```
 
 #### Response:
@@ -987,8 +1103,40 @@ The response will look similar to the following:
 
 ```json
 {
-    "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "systemDiagnostics": {
+        "aggregateSnapshot": {
+            "totalNonHeap": "value",
+            "totalNonHeapBytes": 0,
+            "usedNonHeap": "value",
+            "usedNonHeapBytes": 0,
+            "freeNonHeap": "value",
+            "freeNonHeapBytes": 0,
+            "maxNonHeap": "value",
+            "maxNonHeapBytes": 0,
+            "nonHeapUtilization": "value",
+            "totalHeap": "value",
+            "totalHeapBytes": 0,
+            "usedHeap": "value",
+            "usedHeapBytes": 0,
+            "freeHeap": "value",
+            "freeHeapBytes": 0,
+            "maxHeap": "value",
+            "maxHeapBytes": 0,
+            "heapUtilization": "value",
+            "availableProcessors": 0,
+            "processorLoadAverage": 0.0,
+            "totalThreads": 0,
+            "daemonThreads": 0,
+            "uptime": "value",
+            "flowFileRepositoryStorageUsage": {},
+            "contentRepositoryStorageUsage": [{}],
+            "provenanceRepositoryStorageUsage": [{}],
+            "garbageCollection": [{}],
+            "statsLastRefreshed": "value",
+            "versionInfo": {}
+        },
+        "nodeSnapshots": [{}]
+    }
 }
 ```
 
@@ -996,11 +1144,11 @@ The response will look similar to the following:
 >
 > -   To check that a docker container is running try
 >
-> ```
+> ```bash
 > docker ps
 > ```
 >
-> You should see several containers running. If `cygnus` is not running, you can
+> You should see several containers running. If `draco` is not running, you can
 > restart the containers as necessary.
 
 ### Generating Context Data
@@ -1013,11 +1161,11 @@ selecting an appropriate the command from the drop down list and pressing the
 `send` button. The stream of measurements coming from the devices can then be
 seen on the same page:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/door-open.gif)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/door-open.gif)
 
 ### Subscribing to Context Changes
 
-Once a dynamic context system is up and running, we need to inform **Cygnus** of
+Once a dynamic context system is up and running, we need to inform **Draco** of
 changes in context.
 
 This is done by making a POST request to the `/v2/subscription` endpoint of the
@@ -1026,23 +1174,20 @@ Orion Context Broker.
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
     subscription to only listen to measurements from the attached IoT Sensors,
     since they had been provisioned using these settings
--   The `idPattern` in the request body ensures that Cygnus will be informed of
+-   The `idPattern` in the request body ensures that Draco will be informed of
     all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts
-    notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 6 Request:
+#### 7 Request:
 
-```bash
+```console
 curl -iX POST \
   'http://localhost:1026/v2/subscriptions' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Draco of all context changes",
   "subject": {
     "entities": [
       {
@@ -1052,9 +1197,8 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+      "url": "http://draco:5050/v2/notify"
+    }
   },
   "throttling": 5
 }'
@@ -1070,7 +1214,7 @@ To read MySQL data from the command-line, we will need access to the `mysql`
 client, to do this, run an interactive instance of the `mysql` image supplying
 the connection string as shown to obtain a command-line prompt:
 
-```bash
+```console
 docker exec -it  db-mysql mysql -h mysql-db -P 3306  -u root -p123
 ```
 
@@ -1086,7 +1230,7 @@ SHOW DATABASES;
 
 #### Result:
 
-```text
+```
 +--------------------+
 | Database           |
 +--------------------+
@@ -1109,7 +1253,7 @@ SHOW SCHEMAS;
 
 #### Result:
 
-```text
+```
 +--------------------+
 | Database           |
 +--------------------+
@@ -1122,7 +1266,7 @@ SHOW SCHEMAS;
 5 rows in set (0.00 sec)
 ```
 
-As a result of the subscription of Cygnus to Orion Context Broker, a new schema
+As a result of the subscription of Draco to Orion Context Broker, a new schema
 has been created called `openiot`. The name of the schema matches the
 `fiware-service` header - therefore `openiot` holds the historic context of the
 IoT devices.
@@ -1140,7 +1284,7 @@ SHOW tables FROM openiot;
 
 #### Result:
 
-```text
+```
  table_schema |    table_name
 --------------+-------------------
  openiot      | door_001_door
@@ -1162,7 +1306,7 @@ SELECT * FROM openiot.Motion_001_Motion limit 10;
 
 #### Result:
 
-```text
+```
 +---------------+-------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------+
 | recvTimeTs    | recvTime                | fiwareServicePath | entityId   | entityType | attrName    | attrType     | attrValue                | attrMd                                                                       |
 +---------------+-------------------------+-------------------+------------+------------+-------------+--------------+--------------------------+------------------------------------------------------------------------------+
@@ -1191,7 +1335,7 @@ SELECT recvtime, attrvalue FROM openiot.Motion_001_Motion WHERE attrname ='count
 
 #### Result:
 
-```text
+```
 +-------------------------+-----------+
 | recvtime                | attrvalue |
 +-------------------------+-----------+
@@ -1211,7 +1355,7 @@ SELECT recvtime, attrvalue FROM openiot.Motion_001_Motion WHERE attrname ='count
 
 To leave the MySQL client and leave interactive mode, run the following:
 
-```bash
+```console
 \q
 ```
 
@@ -1219,111 +1363,80 @@ You will then return to the command-line.
 
 # Multi-Agent - Persisting Context Data into a multiple Databases
 
-It is also possible to configure Cygnus to populate multiple databases
+It is also possible to configure Draco to populate multiple databases
 simultaneously. We can combine the architecture from the three previous examples
-and configure cygnus to listen on multiple ports
+and configure Draco to store data in multiple sinks.
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/cygnus-all-three.png)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/multiple-draco-tutorial.png)
 
 We now have a system with three databases, PostgreSQL and MySQL for data
 persistence and MongoDB for both data persistence and holding data related to
 the Orion Context Broker and the IoT Agent.
 
-<h3>Multi-Agent - Cygnus Configuration for Multiple Databases</h3>
+<h3>Multi-Agent - Draco Configuration for Multiple Databases</h3>
 
 ```yaml
-cygnus:
-    image: fiware/cygnus-ngsi:latest
-    hostname: cygnus
-    container_name: fiware-cygnus
+draco:
+    image: ging/fiware-draco:1.1.0
+    container_name: draco
     depends_on:
-        - mongo-db
         - mysql-db
+        - mongo-db
         - postgres-db
-    networks:
-        - default
-    expose:
-        - "5080"
-        - "5081"
-        - "5084"
-    ports:
-        - "5050:5050"
-        - "5051:5051"
-        - "5054:5054"
-        - "5080:5080"
-        - "5081:5081"
-        - "5084:5084"
     environment:
-        - "CYGNUS_MULTIAGENT=true"
-        - "CYGNUS_POSTGRESQL_HOST=postgres-sb"
-        - "CYGNUS_POSTGRESQL_PORT=5432"
-        - "CYGNUS_POSTGRESQL_USER=postgres"
-        - "CYGNUS_POSTGRESQL_PASS=password"
-        - "CYGNUS_POSTGRESQL_ENABLE_CACHE=true"
-        - "CYGNUS_MYSQL_HOST=mysql-db"
-        - "CYGNUS_MYSQL_PORT=3306"
-        - "CYGNUS_MYSQL_USER=root"
-        - "CYGNUS_MYSQL_PASS=123"
-        - "CYGNUS_LOG_LEVEL=DEBUG"
+        - NIFI_WEB_HTTP_PORT=9090
+    ports:
+        - "9090:9090"
+        - "5050:5050"
+    healthcheck:
+        test:
+            curl --fail -s http://localhost:9090/nifi-api/system-diagnostics ||
+            exit 1
 ```
 
-In multi-agent mode, the `cygnus` container is listening on multiple ports:
+The `draco` container is listening on two ports:
 
--   The service will be listening on ports `5050-5055` for notifications from
-    the Orion context broker
--   The Management Ports `5080-5085` are exposed purely for tutorial access - so
-    that cUrl or Postman can make provisioning commands without being part of
-    the same network.
-
-The default port mapping can be seen below:
-
-|       sink | port | admin_port |
-| ---------: | ---: | ---------: |
-|      mysql | 5050 |       5080 |
-|      mongo | 5051 |       5081 |
-|       ckan | 5052 |       5082 |
-|       hdfs | 5053 |       5083 |
-| postgresql | 5054 |       5084 |
-|    cartodb | 5055 |       5085 |
-
-Since we are not persisting CKAN, HDFS or CartoDB data, there is no need to open
-those ports.
-
-The `cygnus` container is driven by environment variables as shown:
-
-| Key                    | Value            | Description                                                                                          |
-| ---------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
-| CYGNUS_MULTIAGENT      | `true`           | Whether to persist data into multiple databases.                                                     |
-| CYGNUS_MONGO_HOSTS     | `mongo-db:27017` | Comma separated list of MongoDB servers which Cygnus will contact to persist historical context data |
-| CYGNUS_POSTGRESQL_HOST | `postgres-db`    | Hostname of the PostgreSQL server used to persist historical context data                            |
-| CYGNUS_POSTGRESQL_PORT | `5432`           | Port that the PostgreSQL server uses to listen to commands                                           |
-| CYGNUS_POSTGRESQL_USER | `postgres`       | Username for the PostgreSQL database user                                                            |
-| CYGNUS_POSTGRESQL_PASS | `password`       | Password for the PostgreSQL database user                                                            |
-| CYGNUS_MYSQL_HOST      | `mysql-db`       | Hostname of the MySQL server used to persist historical context data                                 |
-| CYGNUS_MYSQL_PORT      | `3306`           | Port that the MySQL server uses to listen to commands                                                |
-| CYGNUS_MYSQL_USER      | `root`           | Username for the MySQL database user                                                                 |
-| CYGNUS_MYSQL_PASS      | `123`            | Password for the MySQL database user                                                                 |
-| CYGNUS_LOG_LEVEL       | `DEBUG`          | The logging level for Cygnus                                                                         |
+-   The Subscription Port for Draco - `5050` is where the service will be
+    listening for notifications from the Orion context broker
+-   The Web interface for Draco - `9090` is exposed purely for configuring the
+    processors
 
 ## Multi-Agent - Start up
 
 To start the system with **multiple** databases run the following command:
 
-```bash
+```console
 ./services multiple
 ```
 
-### Checking the Cygnus Service Health
+Then go to your browser and open Draco using this URL
+`http://localhost:9090/nifi`
 
-Once Cygnus is running, you can check the status by making an HTTP request to
-the exposed `CYGNUS_API_PORT` port. If the response is blank, this is usually
-because Cygnus is not running or is listening on another port.
+Now go to the Components toolbar which is placed in the upper section of the
+NiFi GUI, find the template icon and drag and drop it inside the Draco user
+space. At this point, a popup should be displayed with a list of all the
+templates available. Please select the template MULTIPLE-SINKS-TUTORIAL.
 
-#### 7 Request:
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/multiple-tutorial-template.png)
 
-```bash
+Now repeat the process for setting the password in the controller
+"DBCPConnectionPool" each connection MySQL and PostgreSQL
+
+Select all the processors (press shift and click on every processor) and start
+them by clicking on the start button. Now, you can see that the status icon of
+each processor turned from red to green.
+
+### Checking the Draco Service Health
+
+Once Draco is running, you can check the status by making an HTTP request to the
+exposed draco port to `/system-diagnostics`. If the response is blank, this is
+usually because Draco is not running or is listening on another port.
+
+#### 8 Request:
+
+```console
 curl -X GET \
-  'http://localhost:5080/v1/version'
+  'http://localhost:9090/nifi-api/system-diagnostics'
 ```
 
 #### Response:
@@ -1332,8 +1445,40 @@ The response will look similar to the following:
 
 ```json
 {
-    "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "systemDiagnostics": {
+        "aggregateSnapshot": {
+            "totalNonHeap": "value",
+            "totalNonHeapBytes": 0,
+            "usedNonHeap": "value",
+            "usedNonHeapBytes": 0,
+            "freeNonHeap": "value",
+            "freeNonHeapBytes": 0,
+            "maxNonHeap": "value",
+            "maxNonHeapBytes": 0,
+            "nonHeapUtilization": "value",
+            "totalHeap": "value",
+            "totalHeapBytes": 0,
+            "usedHeap": "value",
+            "usedHeapBytes": 0,
+            "freeHeap": "value",
+            "freeHeapBytes": 0,
+            "maxHeap": "value",
+            "maxHeapBytes": 0,
+            "heapUtilization": "value",
+            "availableProcessors": 0,
+            "processorLoadAverage": 0.0,
+            "totalThreads": 0,
+            "daemonThreads": 0,
+            "uptime": "value",
+            "flowFileRepositoryStorageUsage": {},
+            "contentRepositoryStorageUsage": [{}],
+            "provenanceRepositoryStorageUsage": [{}],
+            "garbageCollection": [{}],
+            "statsLastRefreshed": "value",
+            "versionInfo": {}
+        },
+        "nodeSnapshots": [{}]
+    }
 }
 ```
 
@@ -1341,11 +1486,11 @@ The response will look similar to the following:
 >
 > -   To check that a docker container is running try
 >
-> ```
+> ```bash
 > docker ps
 > ```
 >
-> You should see several containers running. If `cygnus` is not running, you can
+> You should see several containers running. If `draco` is not running, you can
 > restart the containers as necessary.
 
 ### Generating Context Data
@@ -1358,36 +1503,32 @@ selecting an appropriate the command from the drop down list and pressing the
 `send` button. The stream of measurements coming from the devices can then be
 seen on the same page:
 
-![](https://fiware.github.io/tutorials.Historic-Context-Flume/img/door-open.gif)
+![](https://fiware.github.io/tutorials.Historic-Context-NIFI/img/door-open.gif)
 
 ### Subscribing to Context Changes
 
-Once a dynamic context system is up and running, we need to inform **Cygnus** of
+Once a dynamic context system is up and running, we need to inform **Draco** of
 changes in context.
 
 This is done by making a POST request to the `/v2/subscription` endpoint of the
 Orion Context Broker.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the
-    subscription to only listen to measurements from the attached IoT Sensors,
-    since they had been provisioned using these settings
--   The `idPattern` in the request body ensures that Cygnus will be informed of
+    subscription to only listen to measurements from the attached IoT Sensors
+-   The `idPattern` in the request body ensures that Draco will be informed of
     all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts
-    notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 8 Request:
+#### 9 Request:
 
-```bash
+```console
 curl -iX POST \
   'http://localhost:1026/v2/subscriptions' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Draco of all context changes",
   "subject": {
     "entities": [
       {
@@ -1397,9 +1538,8 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+      "url": "http://draco:5050/v2/notify"
+    }
   },
   "throttling": 5
 }'
