@@ -199,9 +199,9 @@ has been described in previous tutorials
 <h3>CrateDB Database Server Configuration</h3>
 
 ```yaml
-cratedb:
+crate-db:
     image: crate:2.3
-    hostname: cratedb
+    hostname: crate-db
     ports:
         - "4200:4200"
         - "4300:4300"
@@ -213,15 +213,16 @@ cratedb:
 <h3>QuantumLeap Configuration</h3>
 
 ```yaml
-quantumleap:
-    image: smartsdk/quantumleap
-    hostname: quantumleap
+crate-db:
+    image: crate:3.1.2
+    hostname: crate-db
     ports:
-        - "8668:8668"
-    depends_on:
-        - cratedb
-    environment:
-        - CRATE_HOST=cratedb
+        - "4200:4200"
+        - "4300:4300"
+    command:
+        crate -Clicense.enterprise=false
+        -Cauth.host_based.enabled=false  -Ccluster.name=democluster
+        -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
 ```
 
 <h3>Grafana Configuration</h3>
@@ -230,11 +231,9 @@ quantumleap:
 grafana:
     image: grafana/grafana
     depends_on:
-        - cratedb
+        - crate-db
     ports:
         - "3003:3000"
-    environment:
-        - GF_INSTALL_PLUGINS=crate-datasource,grafana-clock-panel,grafana-worldmap-panel
 ```
 
 The `quantumleap` container is listening on one port:
