@@ -200,22 +200,9 @@ has been described in previous tutorials
 
 ```yaml
 crate-db:
-    image: crate:2.3
-    hostname: crate-db
-    ports:
-        - "4200:4200"
-        - "4300:4300"
-    command:
-        -Ccluster.name=democluster -Chttp.cors.enabled=true
-        -Chttp.cors.allow-origin="*"
-```
-
-<h3>QuantumLeap Configuration</h3>
-
-```yaml
-crate-db:
     image: crate:3.1.2
     hostname: crate-db
+    container_name: db-crate
     ports:
         - "4200:4200"
         - "4300:4300"
@@ -223,6 +210,22 @@ crate-db:
         crate -Clicense.enterprise=false
         -Cauth.host_based.enabled=false  -Ccluster.name=democluster
         -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    volumes:
+        - crate-db:/data
+```
+
+<h3>QuantumLeap Configuration</h3>
+
+```yaml
+quantumleap:
+    image: smartsdk/quantumleap
+    hostname: quantumleap
+    ports:
+        - "8668:8668"
+    depends_on:
+        - crate-db
+    environment:
+        - CRATE_HOST=crate-db
 ```
 
 <h3>Grafana Configuration</h3>
