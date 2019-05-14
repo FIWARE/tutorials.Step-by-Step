@@ -431,7 +431,7 @@ curl -G -X GET \
     'http://localhost:1026/v2/entities' \
     -d 'type=Store' \
     -d 'q=address.addressLocality==Kreuzberg' \
-    -d 'options=keyValues
+    -d 'options=keyValues'
 ```
 
 #### Response:
