@@ -7,7 +7,7 @@ site_dir: html
 use_directory_urls: false
 theme: readthedocs
 google_analytics: ["UA-83719923-1", "fiware-tutorials.readthedocs.io"]
-extra_css: ["https://fiware.org/style/fiware_readthedocs.css"]
+extra_css: ["https://fiware.org/style/fiware_readthedocs.css", "https://fiware.org/style/fiware_readthedocs_neutral.css"]
 pages:
   - Home: "index.md"
   - "Core Context Managment: Fundamentals":
