@@ -594,7 +594,7 @@ curl -G -X GET \
 #### Response:
 
 ```json
-[["urn:ngsi-ld:Product:prod001"]]
+[["urn:ngsi-ld:Product:001"]]
 ```
 
 Similarly we can request _Which stores are selling `urn:ngsi-ld:Product:001`?_
