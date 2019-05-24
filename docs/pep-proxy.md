@@ -1,4 +1,4 @@
-[![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://www.fiware.org/developers/catalogue/)
+[![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://github.com/FIWARE/catalogue/blob/master/security/README.md)
 
 **Description:** This tutorial uses a PEP Proxy combined with the Keyrock to
 secure access to endpoints exposed by FIWARE generic enablers. Users (or other

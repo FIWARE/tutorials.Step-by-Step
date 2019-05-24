@@ -1,4 +1,4 @@
-[![FIWARE Media Streams](https://img.shields.io/badge/FIWARE-Media_Streams-4f3495.svg)](https://www.fiware.org/developers/catalogue/)
+[![FIWARE Media Streams](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/media-streams.svg)](https://github.com/FIWARE/catalogue/blob/master/processing/README.md)
 [![Kurento 6.7.1](https://img.shields.io/badge/Kurento-6.7.1-4f3495.svg)](http://doc-kurento.readthedocs.io/)
 
 **Description:** This is an Introductory Tutorial to
