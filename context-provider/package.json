@@ -3,10 +3,10 @@
   "description": "An Express App for providing context data to FIWARE Components",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fiware/tutorials.step-by-step.git"
+    "url": "git+https://github.com/FIWARE/tutorials.step-by-step.git"
   },
   "bugs": {
-    "url": "https://github.com/fiware/tutorials.step-by-step/issues"
+    "url": "https://github.com/FIWARE/tutorials.step-by-step/issues"
   },
   "homepage": "https://fiware-tutorials.rtfd.io/",
   "author": "FIWARE Foundation e.V.",

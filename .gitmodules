@@ -1,64 +1,64 @@
 [submodule "tutorials.Getting.Started"]
 	path = tutorials.Getting.Started
-	url = https://github.com/Fiware/tutorials.Getting-Started.git
+	url = https://github.com/FIWARE/tutorials.Getting-Started.git
 [submodule "tutorials.Accessing-Context"]
 	path = tutorials.Accessing-Context
-	url = https://github.com/Fiware/tutorials.Accessing-Context.git
+	url = https://github.com/FIWARE/tutorials.Accessing-Context.git
 [submodule "tutorials.Context-Providers"]
 	path = tutorials.Context-Providers
-	url = https://github.com/Fiware/tutorials.Context-Providers.git
+	url = https://github.com/FIWARE/tutorials.Context-Providers.git
 [submodule "tutorials.CRUD-Operations"]
 	path = tutorials.CRUD-Operations
-	url = https://github.com/Fiware/tutorials.CRUD-Operations.git
+	url = https://github.com/FIWARE/tutorials.CRUD-Operations.git
 [submodule "tutorials.Entity-Relationships"]
 	path = tutorials.Entity-Relationships
-	url = https://github.com/Fiware/tutorials.Entity-Relationships.git
+	url = https://github.com/FIWARE/tutorials.Entity-Relationships.git
 [submodule "tutorials.Fast-RTPS-Micro-RTPS"]
 	path = tutorials.Fast-RTPS-Micro-RTPS
-	url = https://github.com/Fiware/tutorials.Fast-RTPS-Micro-RTPS.git
+	url = https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS.git
 [submodule "tutorials.Historic-Context"]
 	path = tutorials.Historic-Context-Flume
-	url = https://github.com/Fiware/tutorials.Historic-Context.git
+	url = https://github.com/FIWARE/tutorials.Historic-Context.git
 [submodule "tutorials.IoT-Agent"]
 	path = tutorials.IoT-Agent
-	url = https://github.com/Fiware/tutorials.IoT-Agent.git
+	url = https://github.com/FIWARE/tutorials.IoT-Agent.git
 [submodule "tutorials.IoT-over-MQTT"]
 	path = tutorials.IoT-over-MQTT
-	url = https://github.com/Fiware/tutorials.IoT-over-MQTT.git
+	url = https://github.com/FIWARE/tutorials.IoT-over-MQTT.git
 [submodule "tutorials.IoT-Sensors"]
 	path = tutorials.IoT-Sensors
-	url = https://github.com/Fiware/tutorials.IoT-Sensors.git
+	url = https://github.com/FIWARE/tutorials.IoT-Sensors.git
 [submodule "tutorials.Media-Streams"]
 	path = tutorials.Media-Streams
-	url = https://github.com/Fiware/tutorials.Media-Streams
+	url = https://github.com/FIWARE/tutorials.Media-Streams
 [submodule "tutorials.Short-Term-History"]
 	path = tutorials.Short-Term-History
-	url = https://github.com/Fiware/tutorials.Short-Term-History.git
+	url = https://github.com/FIWARE/tutorials.Short-Term-History.git
 [submodule "tutorials.Subscriptions"]
 	path = tutorials.Subscriptions
-	url = https://github.com/Fiware/tutorials.Subscriptions.git
+	url = https://github.com/FIWARE/tutorials.Subscriptions.git
 [submodule "tutorials.Time-Series-Data"]
 	path = tutorials.Time-Series-Data
-	url = https://github.com/Fiware/tutorials.Time-Series-Data.git
+	url = https://github.com/FIWARE/tutorials.Time-Series-Data.git
 
 [submodule "tutorials.Identity-Management"]
 	path = tutorials.Identity-Management
-	url = https://github.com/Fiware/tutorials.Identity-Management.git
+	url = https://github.com/FIWARE/tutorials.Identity-Management.git
 [submodule "tutorials.Roles-Permissions"]
 	path = tutorials.Roles-Permissions
-	url = https://github.com/Fiware/tutorials.Roles-Permissions.git
+	url = https://github.com/FIWARE/tutorials.Roles-Permissions.git
 [submodule "tutorials.Securing-Access"]
 	path = tutorials.Securing-Access
-	url = https://github.com/Fiware/tutorials.Securing-Access.git
+	url = https://github.com/FIWARE/tutorials.Securing-Access.git
 [submodule "tutorials.PEP-Proxy"]
 	path = tutorials.PEP-Proxy
-	url = https://github.com/Fiware/tutorials.PEP-Proxy.git
+	url = https://github.com/FIWARE/tutorials.PEP-Proxy.git
 [submodule "tutorials.XACML-Access-Rules"]
 	path = tutorials.XACML-Access-Rules
-	url = https://github.com/Fiware/tutorials.XACML-Access-Rules
+	url = https://github.com/FIWARE/tutorials.XACML-Access-Rules
 [submodule "tutorials.Administrating-XACML"]
 	path = tutorials.Administrating-XACML
-	url = https://github.com/Fiware/tutorials.Administrating-XACML.git
+	url = https://github.com/FIWARE/tutorials.Administrating-XACML.git
 [submodule "tutorials.Historic-Context-NIFI"]
 	path = tutorials.Historic-Context-NIFI
-	url = https://github.com/Fiware/tutorials.Historic-Context-NIFI
+	url = https://github.com/FIWARE/tutorials.Historic-Context-NIFI
