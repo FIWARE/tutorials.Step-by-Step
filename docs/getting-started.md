@@ -525,6 +525,21 @@ Because of the use of the `options=keyValues`, the response consists of JSON onl
 ```json
 [
     {
+        "id": "urn:ngsi-ld:Store:001",
+        "type": "Store",
+        "address": {
+            "streetAddress": "Bornholmer Straße 65",
+            "addressRegion": "Berlin",
+            "addressLocality": "Prenzlauer Berg",
+            "postalCode": "10439"
+        },
+        "location": {
+            "type": "Point",
+            "coordinates": [13.3986, 52.5547]
+        },
+        "name": "Bösebrücke Einkauf"
+    },
+    {
         "id": "urn:ngsi-ld:Store:002",
         "type": "Store",
         "address": {
@@ -564,21 +579,6 @@ Because of the use of the `options=keyValues`, the response consists of JSON onl
 
 ```json
 [
-    {
-        "id": "urn:ngsi-ld:Store:001",
-        "type": "Store",
-        "address": {
-            "streetAddress": "Bornholmer Straße 65",
-            "addressRegion": "Berlin",
-            "addressLocality": "Prenzlauer Berg",
-            "postalCode": "10439"
-        },
-        "location": {
-            "type": "Point",
-            "coordinates": [13.3986, 52.5547]
-        },
-        "name": "Bösebrücke Einkauf"
-    },
     {
         "id": "urn:ngsi-ld:Store:002",
         "type": "Store",
