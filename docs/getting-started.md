@@ -195,6 +195,12 @@ curl -iX POST \
             "addressRegion": "Berlin",
             "addressLocality": "Prenzlauer Berg",
             "postalCode": "10439"
+        },
+        "metadata": {
+            "verified": {
+                "value": true,
+                "type": "Boolean"
+            }
         }
     },
     "location": {
@@ -230,6 +236,12 @@ curl -iX POST \
             "addressRegion": "Berlin",
             "addressLocality": "Kreuzberg",
             "postalCode": "10969"
+        },
+        "metadata": {
+            "verified": {
+                "value": true,
+                "type": "Boolean"
+            }
         }
     },
     "location": {
@@ -293,6 +305,19 @@ casing
 [GeoJSON](http://geojson.org) is an open standard format designed for representing simple geographical features. The
 `location` attribute has been encoded as a geoJSON `Point` location.
 
+### Attribute Metadata
+
+Metadata is _"data about data"_, it is additional data to describe properties of the attribute value itself like
+accuracy, provider, or a timestamp. Several built-in metadata attribute already exist and these names are reserved
+
+-   `dateCreated` (type: DateTime): attribute creation date as an ISO 8601 string.
+-   `dateModified` (type: DateTime): attribute modification date as an ISO 8601 string.
+-   `previousValue` (type: any): only in notifications. The value of this
+-   `actionType` (type: Text): only in notifications.
+
+One element of metadata can be found within the `address` attribute. a `verified` flag indicates whether the address has
+been confirmed.
+
 ## Querying Context Data
 
 A consuming application can now request context data by making HTTP requests to the Orion Context Broker. The existing
@@ -319,6 +344,9 @@ curl -G -X GET \
 
 #### Response:
 
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
+
 ```json
 {
     "id": "urn:ngsi-ld:Store:001",
@@ -339,7 +367,8 @@ curl -G -X GET \
 
 ### Obtain entity data by type
 
-This example returns the data of all `Store` entities within the context data
+This example returns the data of all `Store` entities within the context data The `type` parameter limits the response
+to store entities only.
 
 #### 5 Request:
 
@@ -351,6 +380,9 @@ curl -G -X GET \
 ```
 
 #### Response:
+
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
 
 ```json
 [
@@ -389,9 +421,52 @@ curl -G -X GET \
 
 ### Filter context data by comparing the values of an attribute
 
-This example returns all stores found in the Kreuzberg District
+This example returns all stores with the `name` attribute _Checkpoint Markt_. Filtering can be done using the `q`
+parameter - if a string has spaces in it, it can be URL encoded and held within single quote characters `'` = `%27`
 
 #### 6 Request:
+
+```bash
+curl -G -X GET \
+    'http://localhost:1026/v2/entities' \
+    -d 'type=Store' \
+    -d 'q=name==%27Checkpoint%20Markt%27' \
+    -d 'options=keyValues'
+```
+
+#### Response:
+
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:Store:002",
+        "type": "Store",
+        "address": {
+            "streetAddress": "Friedrichstraße 44",
+            "addressRegion": "Berlin",
+            "addressLocality": "Kreuzberg",
+            "postalCode": "10969"
+        },
+        "location": {
+            "type": "Point",
+            "coordinates": [13.3903, 52.5075]
+        },
+        "name": "Checkpoint Markt"
+    }
+]
+```
+
+### Filter context data by comparing the values of a sub-attribute
+
+This example returns all stores found in the Kreuzberg District.
+
+Filtering can be done using the `q` parameter - sub-attributes are annotated using the dot syntax e.g.
+`address.addressLocality`
+
+#### 7 Request:
 
 ```bash
 curl -G -X GET \
@@ -402,6 +477,50 @@ curl -G -X GET \
 ```
 
 #### Response:
+
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:Store:002",
+        "type": "Store",
+        "address": {
+            "streetAddress": "Friedrichstraße 44",
+            "addressRegion": "Berlin",
+            "addressLocality": "Kreuzberg",
+            "postalCode": "10969"
+        },
+        "location": {
+            "type": "Point",
+            "coordinates": [13.3903, 52.5075]
+        },
+        "name": "Checkpoint Markt"
+    }
+]
+```
+
+### Filter context data by querying metadata
+
+This example returns the data of all `Store` entities with a verified address.
+
+Metadata queries can be made using the `mq` parameter.
+
+#### 8 Request:
+
+```bash
+curl -G -X GET \
+    'http://localhost:1026/v2/entities' \
+    -d 'type=Store' \
+    -d 'mq=address.verified==true' \
+    -d 'options=keyValues'
+```
+
+#### Response:
+
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
 
 ```json
 [
@@ -427,7 +546,7 @@ curl -G -X GET \
 
 This example return all Stores within 1.5km the **Brandenburg Gate** in **Berlin** (_52.5162N 13.3777W_)
 
-#### 7 Request:
+#### 9 Request:
 
 ```bash
 curl -G -X GET \
@@ -440,8 +559,26 @@ curl -G -X GET \
 
 #### Response:
 
+Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
+`metadata` elements.
+
 ```json
 [
+    {
+        "id": "urn:ngsi-ld:Store:001",
+        "type": "Store",
+        "address": {
+            "streetAddress": "Bornholmer Straße 65",
+            "addressRegion": "Berlin",
+            "addressLocality": "Prenzlauer Berg",
+            "postalCode": "10439"
+        },
+        "location": {
+            "type": "Point",
+            "coordinates": [13.3986, 52.5547]
+        },
+        "name": "Bösebrücke Einkauf"
+    },
     {
         "id": "urn:ngsi-ld:Store:002",
         "type": "Store",
