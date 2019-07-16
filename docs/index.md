@@ -126,4 +126,5 @@ and how to restrict access to assets, by assigning roles and permissions.
 These tutorials show how to create, process, analyze or visualize context
 information
 
+&nbsp; 501. [Creating Application Mashups](application-mashups.md)<br/>
 &nbsp; 503. [Introduction to Media Streams](media-streams.md)<br/>

@@ -35,6 +35,7 @@ pages:
       - "Ruleset-based Permissons": "xacml-access-rules.md"
       - "Administrating XACML Rules": "administrating-xacml.md"
   - "Processing, Analysis and Visualization":
+      - "Application Mashups": "application-mashups.md"
       - "Media Streams": "media-streams.md"
   - "Appendix":
       - "Curl Commands": "cmds/administrating-xacml.md"

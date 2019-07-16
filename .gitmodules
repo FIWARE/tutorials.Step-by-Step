@@ -62,3 +62,6 @@
 [submodule "tutorials.Historic-Context-NIFI"]
 	path = tutorials.Historic-Context-NIFI
 	url = https://github.com/FIWARE/tutorials.Historic-Context-NIFI
+[submodule "tutorials.Application-Mashup"]
+	path = tutorials.Application-Mashup
+	url = https://github.com/FIWARE/tutorials.Application-Mashup
