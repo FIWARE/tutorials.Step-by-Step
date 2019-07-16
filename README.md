@@ -8,11 +8,9 @@
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 [![Build Status](https://img.shields.io/travis/FIWARE/tutorials.Step-by-Step.svg)](https://travis-ci.org/FIWARE/tutorials.Step-by-Step)
 
-This is a collection of tutorials for the FIWARE platform. Each tutorial
-consists of a series of exercises to demonstrate the correct use of individual
-FIWARE components and shows the flow of context data within a simple Smart
-Solution either by connecting to a series of dummy IoT devices or manipulating
-the context directly or programmatically.
+This is a collection of tutorials for the FIWARE platform. Each tutorial consists of a series of exercises to
+demonstrate the correct use of individual FIWARE components and shows the flow of context data within a simple Smart
+Solution either by connecting to a series of dummy IoT devices or manipulating the context directly or programmatically.
 
 | :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -30,46 +28,37 @@ git submodule update --init --recursive
 
 ### Docker and Docker Compose
 
-Each tutorial runs all components using [Docker](https://www.docker.com).
-**Docker** is a container technology which allows to different components
-isolated into their respective environments.
+Each tutorial runs all components using [Docker](https://www.docker.com). **Docker** is a container technology which
+allows to different components isolated into their respective environments.
 
--   To install Docker on Windows follow the instructions
-    [here](https://docs.docker.com/docker-for-windows/)
--   To install Docker on Mac follow the instructions
-    [here](https://docs.docker.com/docker-for-mac/)
--   To install Docker on Linux follow the instructions
-    [here](https://docs.docker.com/install/)
+-   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
+-   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
+-   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
 
-**Docker Compose** is a tool for defining and running multi-container Docker
-applications. A series of `*.yaml` files are used configure the required
-services for the application. This means all container services can be brought
-up in a single command. Docker Compose is installed by default as part of Docker
-for Windows and Docker for Mac, however Linux users will need to follow the
-instructions found [here](https://docs.docker.com/compose/install/)
+**Docker Compose** is a tool for defining and running multi-container Docker applications. A series of `*.yaml` files
+are used configure the required services for the application. This means all container services can be brought up in a
+single command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux
+users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
 
-You can check your current **Docker** and **Docker Compose** versions using the
-following commands:
+You can check your current **Docker** and **Docker Compose** versions using the following commands:
 
 ```console
 docker-compose -v
 docker version
 ```
 
-Please ensure that you are using Docker version 18.03 or higher and Docker
-Compose 1.21 or higher and upgrade if necessary.
+Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
+necessary.
 
 ### Postman
 
-The tutorials which use HTTP requests supply a collection for use with the
-Postman utility. Postman is a testing framework for REST APIs. The tool can be
-downloaded from www.getpostman.com.
+The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
+framework for REST APIs. The tool can be downloaded from www.getpostman.com.
 
 ### Cygwin for Windows
 
-We will start up our services using a simple Bash script. Windows users should
-download [cygwin](http://www.cygwin.com/) to provide a command-line
-functionality similar to a Linux distribution on Windows.
+We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
+to provide a command-line functionality similar to a Linux distribution on Windows.
 
 ## Usage
 
@@ -82,17 +71,15 @@ cd <tutorial-name>
 
 ### Following the tutorial exercises via Postman
 
-Each tutorial submodule contains one or more `docker-compose.yml` files, along
-with a Postman collection containing the necessary HTTP requests: import the
-collection into Postman and follow the instructions.
+Each tutorial submodule contains one or more `docker-compose.yml` files, along with a Postman collection containing the
+necessary HTTP requests: import the collection into Postman and follow the instructions.
 
 ### Following the tutorial exercises from the command-line
 
-Each submodule contains full instructions in README which details the
-appropriate bash commands (cUrl and Docker Compose) to run.
+Each submodule contains full instructions in README which details the appropriate bash commands (cUrl and Docker
+Compose) to run.
 
-Full instructions can be found within the
-[documentation](https://fiware-tutorials.rtfd.io)
+Full instructions can be found within the [documentation](https://fiware-tutorials.rtfd.io)
 
 ---
 
