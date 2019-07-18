@@ -273,6 +273,32 @@ The `iot-agent` container is driven by environment variables as shown:
 | IOTA_HTTP_PORT       | `7896`                  | The port where the IoT Agent listens for IoT device traffic over HTTP                                                                                 |
 | IOTA_PROVIDER_URL    | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
 
+# Start Up
+
+Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
+repository and create the necessary images by running the commands as shown:
+
+```bash
+git clone git@github.com:FIWARE/tutorials.IoT-Agent.git
+cd tutorials.IoT-Agent
+
+./services create
+```
+
+Thereafter, all services can be initialized from the command-line by running the
+[services](https://github.com/FIWARE/tutorials.IoT-Agent/blob/master/services) Bash script provided within the
+repository:
+
+```bash
+./services start
+```
+
+> **Note:** If you want to clean up and start over again you can do so with the following command:
+>
+> ```
+> ./services stop
+> ```
+
 ---
 
 # Provisioning an IoT Agent

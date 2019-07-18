@@ -248,6 +248,32 @@ The `iot-agent` container is driven by environment variables as shown:
 As you can see, use of the MQTT transport is driven by only two environment variables `IOTA_MQTT_HOST` and
 `IOTA_MQTT_PORT`
 
+# Start Up
+
+Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
+repository and create the necessary images by running the commands as shown:
+
+```bash
+git clone git@github.com:FIWARE/tutorials.IoT-over-MQTT.git
+cd tutorials.IoT-over-MQTT
+
+./services create
+```
+
+Thereafter, all services can be initialized from the command-line by running the
+[services](https://github.com/FIWARE/tutorials.IoT-over-MQTT/blob/master/services) Bash script provided within the
+repository:
+
+```bash
+./services start
+```
+
+> **Note:** If you want to clean up and start over again you can do so with the following command:
+>
+> ```
+> ./services stop
+> ```
+
 ---
 
 # Provisioning an IoT Agent (UltraLight over MQTT)
