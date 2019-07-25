@@ -110,4 +110,4 @@ These tutorials show how to create, process, analyze or visualize context inform
 
 These tutorials show how to create, process, analyze or visualize context information
 
-&nbsp; 601. [Introduction to Linked Data](linked.md)<br/>
+&nbsp; 601. [Introduction to Linked Data](linked-data.md)<br/>
