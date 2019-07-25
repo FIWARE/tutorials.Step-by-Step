@@ -105,3 +105,9 @@ These tutorials show how to create, process, analyze or visualize context inform
 
 &nbsp; 501. [Creating Application Mashups](application-mashups.md)<br/> &nbsp; 503.
 [Introduction to Media Streams](media-streams.md)<br/>
+
+<h3>Core Context Management: Linked Data</h3>
+
+These tutorials show how to create, process, analyze or visualize context information
+
+&nbsp; 601. [Introduction to Linked Data](linked.md)<br/>

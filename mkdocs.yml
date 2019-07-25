@@ -37,5 +37,7 @@ pages:
   - "Processing, Analysis and Visualization":
       - "Application Mashups": "application-mashups.md"
       - "Media Streams": "media-streams.md"
+  - "Core Context Managment: NGSI-LD":
+      - "Linked Data": "linked-data.md"
   - "Appendix":
       - "Curl Commands": "cmds/administrating-xacml.md"

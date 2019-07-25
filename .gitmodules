@@ -65,3 +65,6 @@
 [submodule "tutorials.Application-Mashup"]
 	path = tutorials.Application-Mashup
 	url = https://github.com/FIWARE/tutorials.Application-Mashup
+[submodule "tutorials.Linked-Data"]
+	path = tutorials.Linked-Data
+	url = https://github.com/FIWARE/tutorials.Linked-Data.git
