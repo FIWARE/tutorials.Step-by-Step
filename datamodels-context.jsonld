@@ -5,13 +5,13 @@
         "name": "http://schema.org/name",
         "maxCapacity": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity",
     	"price": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price",
-    	"sells": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/sells",
     	"shelves": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/shelves",
     	"size": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size",
     	"stocks": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks",
-    	"stockList": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/stockList",
-        "Inventory":"http://schema.org/ItemList",
+    	"inventory": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/inventory",
+        "Inventory":"https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory",
         "Product": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product",
-        "Shelf": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf"
+        "Shelf": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf",
+        "Store": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store"
     }
  }
