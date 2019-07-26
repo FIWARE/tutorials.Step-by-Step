@@ -2,9 +2,9 @@
 [![NGSI LD](https://img.shields.io/badge/NGSI-linked_data-red.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/004/01.01.01_60/gs_CIM004v010101p.pdf)
 
 **Description:** This tutorial introduces linked data concepts to the FIWARE Platform. The supermarket chain’s store
-finder application is recreated using **NGSI-LD** the differences between the **NSGI v2** and **NGSI-LD** interfaces are
-highlighted and discussed. The tutorial is a direct analogue of the original getting started tutorial but uses API calls
-from the **NGSI-LD** interface.
+finder application is recreated using **NGSI-LD** and the differences between the **NSGI v2** and **NGSI-LD** interfaces
+are highlighted and discussed. The tutorial is a direct analogue of the original getting started tutorial but uses API
+calls from the **NGSI-LD** interface.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Linked-Data/)
