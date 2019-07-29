@@ -5,7 +5,11 @@
     "Product": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product",
     "Shelf": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf",
     "Store": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store",
+    
     "address": "https://schema.org/address",
+    "itemListElement": "https://schema.org/itemListElement",
+    "name": "https://schema.org/name",
+    
     "category": "https://uri.fiware.org/ns/datamodels/category",
     "containedInPlace": "https://uri.fiware.org/ns/datamodels/containedInPlace",
     "dataProvider": "https://uri.fiware.org/ns/datamodels/dataProvider",
@@ -16,15 +20,19 @@
     "owner": "https://uri.fiware.org/ns/datamodels/owner",
     "occupier": "https://uri.fiware.org/ns/datamodels/occupier",
     "refMap": "https://uri.fiware.org/ns/datamodels/refMap",
-    "source": "https://uri.fiware.org/ns/datamodels/source",
-    "itemListElement": "https://schema.org/itemListElement",
-    "inventory": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/inventory",
+    "source": "https://uri.fiware.org/ns/datamodels/source",   
+
     "locatedIn": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn",
-    "name": "https://schema.org/name",
     "maxCapacity": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity",
+    "stocks": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks",
+    
     "price": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price",
-    "shelves": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/shelves",
     "size": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size",
-    "stocks": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks"
+    
+    "stockList": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/stockList",
+    "furniture": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/furniture",
+   
+    "stockCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inWarehouseStockCount",
+    "shelfCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inStoreStockCount"
   }
 }
