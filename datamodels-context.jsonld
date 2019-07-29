@@ -1,33 +1,30 @@
 {
-	"@context": {
-
-        "Building": {"@id": "https://uri.fiware.org/ns/datamodels/Building"},
-        "Inventory": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory"},
-        "Product": {"@id" :"https://fiware.github.io/tutorials.Step-by-Step/schema/Product"},
-        "Shelf": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf"},
-        "Store": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store"},
-
-        "address": {"@id": "https://schema.org/address"},
-        "category": {"@id": "https://uri.fiware.org/ns/datamodels/category"},
-        "containedInPlace": {"@id": "https://uri.fiware.org/ns/datamodels/containedInPlace"},
-        "dataProvider": {"@id": "https://uri.fiware.org/ns/datamodels/dataProvider"},
-        "description": {"@id": "https://uri.fiware.org/ns/datamodels/description"},
-        "floorsAboveGround": {"@id": "https://uri.fiware.org/ns/datamodels/floorsAboveGround"},
-        "floorsBelowGround": {"@id": "https://uri.fiware.org/ns/datamodels/floorsBelowGround"},
-        "location": {"@id": "http://uri.etsi.org/ngsi-ld/location"},
-        "owner": {"@id": "https://uri.fiware.org/ns/datamodels/owner"},
-        "occupier": {"@id": "https://uri.fiware.org/ns/datamodels/occupier"},
-        "refMap": {"@id": "https://uri.fiware.org/ns/datamodels/refMap"},
-        "source": {"@id": "https://uri.fiware.org/ns/datamodels/source"},
-
-    	"itemListElement": {"@id": "https://schema.org/itemListElement"},
-    	"inventory": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/inventory"},
-    	"locatedIn": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn"},
-        "name": {"@id": "https://schema.org/name"},
-        "maxCapacity": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity"},
-    	"price": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price"},
-    	"shelves": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/shelves"},
-    	"size": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size"},
-    	"stocks": {"@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks"}
-    }
- }
+  "@context": {
+    "Building": "https://uri.fiware.org/ns/datamodels/Building",
+    "Inventory": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory",
+    "Product": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product",
+    "Shelf": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf",
+    "Store": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store",
+    "address": "https://schema.org/address",
+    "category": "https://uri.fiware.org/ns/datamodels/category",
+    "containedInPlace": "https://uri.fiware.org/ns/datamodels/containedInPlace",
+    "dataProvider": "https://uri.fiware.org/ns/datamodels/dataProvider",
+    "description": "https://uri.fiware.org/ns/datamodels/description",
+    "floorsAboveGround": "https://uri.fiware.org/ns/datamodels/floorsAboveGround",
+    "floorsBelowGround": "https://uri.fiware.org/ns/datamodels/floorsBelowGround",
+    "location": "http://uri.etsi.org/ngsi-ld/location",
+    "owner": "https://uri.fiware.org/ns/datamodels/owner",
+    "occupier": "https://uri.fiware.org/ns/datamodels/occupier",
+    "refMap": "https://uri.fiware.org/ns/datamodels/refMap",
+    "source": "https://uri.fiware.org/ns/datamodels/source",
+    "itemListElement": "https://schema.org/itemListElement",
+    "inventory": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/inventory",
+    "locatedIn": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn",
+    "name": "https://schema.org/name",
+    "maxCapacity": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity",
+    "price": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price",
+    "shelves": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/shelves",
+    "size": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size",
+    "stocks": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks"
+  }
+}
