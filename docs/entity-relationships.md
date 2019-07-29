@@ -67,7 +67,7 @@ persistence of the context data it holds. Therefore, the architecture will consi
     -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
         registrations
 
-Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and
+Since all interactions between the two services are initiated by HTTP requests, the services can be containerized and
 run from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)

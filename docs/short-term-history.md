@@ -123,7 +123,7 @@ Therefore the overall architecture will consist of the following elements:
         -   returns context data back to the Orion Context Broker in
             [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
-Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
+Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.
 
 The specific architecture of both the _minimal_ and _formal_ configurations is discussed below.

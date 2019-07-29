@@ -125,7 +125,7 @@ Therefore the overall architecture will consist of the following elements:
     protocol running over HTTP. - Note the **Stock Management Frontend** and **Context Provider NGSI** proxy are not
     used in this tutorial.
 
-Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
+Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.
 
 The overall architecture can be seen below:

@@ -208,7 +208,7 @@ Therefore, the architecture will consist of four elements:
     -   Show which products can be bought at each store
     -   Allow users to "buy" products and reduce the stock count.
 
-Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
+Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Accessing-Context/img/architecture.png)

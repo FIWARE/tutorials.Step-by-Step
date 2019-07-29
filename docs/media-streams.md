@@ -71,7 +71,7 @@ The overall architecture will consist of the following elements:
     -   Sends a [WebRTC](https://webrtc.org/) media stream and displays results (either received processed video or
         detected events )
 
-Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
+Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Media-Streams/img/architecture.png)
