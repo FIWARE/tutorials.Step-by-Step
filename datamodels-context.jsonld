@@ -17,21 +17,43 @@
     "floorsAboveGround": "https://uri.fiware.org/ns/datamodels/floorsAboveGround",
     "floorsBelowGround": "https://uri.fiware.org/ns/datamodels/floorsBelowGround",
     "location": "http://uri.etsi.org/ngsi-ld/location",
-    "owner": "https://uri.fiware.org/ns/datamodels/owner",
-    "occupier": "https://uri.fiware.org/ns/datamodels/occupier",
+    "owner": {
+      "@id": "https://uri.fiware.org/ns/datamodels/owner",   
+      "@type": "@id"
+    },
+    "occupier": {
+      "@id": "https://uri.fiware.org/ns/datamodels/occupier",   
+      "@type": "@id"
+    },
     "refMap": "https://uri.fiware.org/ns/datamodels/refMap",
     "source": "https://uri.fiware.org/ns/datamodels/source",   
 
-    "locatedIn": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn",
+    "locatedIn": {
+      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn",   
+      "@type": "@id"
+    },
     "maxCapacity": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity",
-    "stocks": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks",
+    "stocks": {
+      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks",   
+      "@type": "@id"
+    },
     
     "price": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price",
     "size": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size",
     
-    "stockList": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/stockList",
-    "furniture": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/furniture",
-   
+    "stockList": {
+      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/stockList",   
+      "@type": "@id"
+    },
+    "furniture": {
+      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/furniture",   
+      "@type": "@id"
+    },
+    
+    "ownedBy": {
+      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/ownedBy",   
+      "@type": "@id"
+    },
     "stockCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inWarehouseStockCount",
     "shelfCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inStoreStockCount"
   }
