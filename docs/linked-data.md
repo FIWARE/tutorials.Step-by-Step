@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI LD](https://img.shields.io/badge/NGSI-linked_data-red.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/004/01.01.01_60/gs_CIM004v010101p.pdf)
+[![NGSI LD](https://img.shields.io/badge/NGSI-Linked_Data-red.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/004/01.01.01_60/gs_CIM004v010101p.pdf)
 
 **Description:** This tutorial introduces linked data concepts to the FIWARE Platform. The supermarket chain’s store
 finder application is recreated using **NGSI-LD** and the differences between the **NSGI v2** and **NGSI-LD** interfaces
