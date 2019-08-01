@@ -308,7 +308,8 @@ NGSI-LD, that it is added by default to any `@context` sent to a request.
 
 [https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld](https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld)
 refers to the definition of standard data models supplied by FIWARE. Adding this to the `@context` will load the
-definitions of all the [data models](https://fiware-datamodels.readthedocs.io) defined by the FIWARE Foundation, a
+definitions of all the [data models](https://fiware-datamodels.readthedocs.io) defined by the FIWARE Foundation in
+collaboration with other organizations such as [GSMA](https://www.gsma.com/) and [TM Forum](https://tmforum.org/), a
 summary of the FQNs related to **Building** can be seen below:
 
 ```json
@@ -437,10 +438,10 @@ The `type` of a _property_ attribute must be one of the following:
 -   `"GeoProperty"`: `"http://uri.etsi.org/ngsi-ld/GeoProperty"` for locations. Locations should be specified as
     Longitude-Latitude pairs in [GeoJSON format](https://tools.ietf.org/html/rfc7946). The preferred name for the
     primary location attribute is `location`
--   `"TemporalProperty"`: `"http://uri.etsi.org/ngsi-ld/TemporalProperty"` for time-based values. Temporal properties
-    should be Date, Time or DateTime strings encoded be [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) - e.g.
+-   `"Property"`: `"http://uri.etsi.org/ngsi-ld/Property"` - for everything else.
+-   `"Property"` should also be used for all time-based values, but the property `value` should be Date, Time or
+    DateTime strings encoded in the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) - e.g.
     `YYYY-MM-DDThh:mm:ssZ`
--   `"Property"`: `"http://uri.etsi.org/ngsi-ld/Property"` - for everything else
 
 > **Note:** that for simplicity, this data entity has no relationships defined. Relationships must be given the
 > `type="Relationship`. Relationships will be discussed in a subsequent tutorial.
