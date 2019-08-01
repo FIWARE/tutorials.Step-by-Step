@@ -642,7 +642,7 @@ the resource in question. In the case of NGSI-LD, the metadata is a file of in `
 curl -G -X GET \
   'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
-    'http://localhost:1026/v2/entities' \
+    'http://localhost:1026/ngsi-ld/v1/entities' \
     -d 'type=Building' \
     -d 'options=keyValues'
 ```
@@ -702,7 +702,7 @@ the `q` parameter - if a string has spaces in it, it can be URL encoded and held
 
 ```bash
 curl -G -X GET \
-    'http://localhost:1026/v2/entities' \
+    'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -d 'type=Building' \
     -d 'q=name==%27Checkpoint%20Markt%27' \
@@ -759,7 +759,7 @@ done using the `q` parameter, comma separating the acceptable values.
 
 ```bash
 curl -G -X GET \
-    'http://localhost:1026/v2/entities' \
+    'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -d 'type=Building' \
     -d 'q=category==%27commercial%27,%27office%27 \
@@ -820,7 +820,7 @@ Filtering can be done using the `q` parameter - sub-attributes are annotated usi
 
 ```bash
 curl -G -X GET \
-    'http://localhost:1026/v2/entities' \
+    'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -d 'type=Building' \
     -d 'q=address[addressLocality]==Kreuzberg' \
@@ -865,7 +865,7 @@ This supersedes the `mq` parameter from NGSI v2.
 
 ```bash
 curl -G -X GET \
-    'http://localhost:1026/v2/entities' \
+    'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -d 'type=Building' \
     -d 'mq=address.verified==true' \
@@ -928,7 +928,7 @@ If another attribute is to be used, an additional `geoproperty` parameter is req
 
 ```bash
 curl -G -X GET \
-  'http://localhost:1026/v2/entities' \
+  'http://localhost:1026/ngsi-ld/v1/entities' \
   -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
   -d 'type=Building' \
   -d 'geometry=Point' \
