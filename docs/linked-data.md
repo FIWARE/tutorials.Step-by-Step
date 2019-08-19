@@ -875,7 +875,7 @@ This supersedes the `mq` parameter from NGSI v2.
 curl -G -X GET \
     'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
-    -H 'Accept: application/ld+json' \
+    -H 'Accept: application/json' \
     -d 'type=Building' \
     -d 'mq=address.verified==true' \
     -d 'options=keyValues'
@@ -883,8 +883,8 @@ curl -G -X GET \
 
 #### Response:
 
-Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
-`metadata` elements.
+Because of the use of the `options=keyValues`, together with the Accept HTTP header (`application/json`), the response
+consists of **JSON only** without an `@context` or attribute `type` and `metadata` elements.
 
 ```json
 [
@@ -938,7 +938,8 @@ If another attribute is to be used, an additional `geoproperty` parameter is req
 ```bash
 curl -G -X GET \
   'http://localhost:1026/ngsi-ld/v1/entities' \
-  -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+  -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/json"'
+  -H 'Accept: application/json' \
   -d 'type=Building' \
   -d 'geometry=Point' \
   -d 'coordinates=[13.3777,52.5162]' \
@@ -948,8 +949,8 @@ curl -G -X GET \
 
 #### Response:
 
-Because of the use of the `options=keyValues`, the response consists of JSON only without the attribute `type` and
-`metadata` elements.
+Because of the use of the `options=keyValues` together with the Accept HTTP header (`application/json`), the response
+consists of **JSON only** without an `@context` or attribute `type` and `metadata` elements.
 
 ```json
 [
