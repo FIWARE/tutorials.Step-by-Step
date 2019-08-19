@@ -107,7 +107,7 @@ Therefore the overall architecture will consist of the following elements:
     protocol running over HTTP - access to certain resources is restricted.
 -   Three additional microservices are used by **Wirecloud**:
     -   [Memcache](https://memcached.org), a general-purpose distributed memory caching system.
-    -   [ElasticSearch](https://elastic.co/products/elasticsearch), a full-text search engine
+    -   [ElasticSearch](https://www.elastic.co/products/elasticsearch), a full-text search engine
     -   [NGSI Proxy](https://github.com/conwetlab/ngsi-proxy), a server that is capable of redirecting **Orion**
         notifications to web pages.
 
