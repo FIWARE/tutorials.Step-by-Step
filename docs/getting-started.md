@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This is an Introductory Tutorial to the FIWARE Platform. We will start with the data from a supermarket
 chain’s store finder and create a very simple _“Powered by FIWARE”_ application by passing in the address and location
@@ -286,7 +286,7 @@ that each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<e
 [Schema.org](http://schema.org/) is an initiative to create common structured data schemas. In order to promote reuse we
 have deliberately used the [`Text`](http://schema.org/PostalAddress) and
 [`PostalAddress`](http://schema.org/PostalAddress) type names within our **Store** entity. Other existing standards such
-as [Open311](http://www.open311.org/) (for civic issue tracking) or [Datex II](http://www.datex2.eu/) (for transport
+as [Open311](http://www.open311.org/) (for civic issue tracking) or [Datex II](https://datex2.eu/) (for transport
 systems) can also be used, but the point is to check for the existence of the same attribute on existing data models and
 reuse it.
 

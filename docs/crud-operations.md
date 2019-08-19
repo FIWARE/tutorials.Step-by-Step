@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about CRUD Operations. The tutorial builds on the data created in
 the previous [stock management example](https://github.com/FIWARE/tutorials.Entity-Relationships/) and introduces the

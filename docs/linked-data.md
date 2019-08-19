@@ -309,7 +309,7 @@ NGSI-LD, that it is added by default to any `@context` sent to a request.
 [https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld](https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld)
 refers to the definition of standard data models supplied by FIWARE. Adding this to the `@context` will load the
 definitions of all the [data models](https://fiware-datamodels.readthedocs.io) defined by the FIWARE Foundation in
-collaboration with other organizations such as [GSMA](https://www.gsma.com/) and [TM Forum](https://tmforum.org/), a
+collaboration with other organizations such as [GSMA](https://www.gsma.com/) and [TM Forum](https://www.tmforum.org/), a
 summary of the FQNs related to **Building** can be seen below:
 
 ```json
