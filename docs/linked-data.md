@@ -481,7 +481,7 @@ NGSI-LD and is used to filter the response. The Accept HTTP header is needed to 
 curl -G -X GET \
   'http://localhost:1026/ngsi-ld/v1/entities' \
   -H 'Accept: application/ld+json' \
-  -d 'type=https://uri.fiware.org/ns/datamodels#Building'
+  -d 'type=https://uri.fiware.org/ns/datamodels%23Building'
 ```
 
 #### Response:
