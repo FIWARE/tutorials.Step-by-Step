@@ -4,7 +4,7 @@
     "id": "@id",
     "schema": "https://schema.org/",
     "fiware": "https://uri.fiware.org/ns/datamodels#",
-    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
     "Building": "fiware:Building",
     "Product": "tutorial:Product",
     "Shelf": "tutorial:Shelf",
@@ -31,35 +31,36 @@
     "refMap": "fiware:refMap",
     "source": "fiware:source", 
     "installedBy": {
-      "@id": "tutorial:installedBy",   
+      "@id": "tutorial:Shelf/installedBy",   
       "@type": "@id"
     },  
     "locatedIn": {
-      "@id": "tutorial:locatedIn",   
+      "@id": "tutorial:Shelf/locatedIn",   
       "@type": "@id"
     },
-    "maxCapacity": "tutorial:maxCapacity",
-    "statusOfWork": "tutorial:statusOfWork",
+    "maxCapacity": "tutorial:Shelf/maxCapacity",
+    "statusOfWork": "tutorial:Shelf/statusOfWork",
     "stocks": {
-      "@id": "tutorial:stocks",   
+      "@id": "tutorial:Shelf/stocks",   
       "@type": "@id"
     },
-    "price": "tutorial:price",
-    "size": "tutorial:size",
+    "currency": "tutorial:Product/currency",
+    "price": "tutorial:Product/price",
+    "size": "tutorial:Product/size",
     "stockList": {
-      "@id": "tutorial:stockList",   
+      "@id": "tutorial:Store/stockList",   
       "@type": "@id"
     },
     "furniture": {
-      "@id": "tutorial:furniture",   
+      "@id": "tutorial:Store/furniture",   
       "@type": "@id"
     },
-    "ownedBy": {
-      "@id": "tutorial:ownedBy",   
+    "verified": "tutorial:Store/verified",
+    "soldBy": {
+      "@id": "tutorial:StockItem/soldBy",   
       "@type": "@id"
     },
-    "stockCount": "tutorial:stockCount",
-    "shelfCount": "tutorial:storeCount",
-    "shelfCount": "tutorial:verified"
+    "stockCount": "tutorial:StockItem/stockCount",
+    "shelfCount": "tutorial:StockItem/storeCount"
   }
 }
