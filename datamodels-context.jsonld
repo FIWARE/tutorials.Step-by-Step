@@ -1,60 +1,65 @@
 {
   "@context": {
-    "Building": "https://uri.fiware.org/ns/datamodels/Building",
-    "Inventory": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory",
-    "Product": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product",
-    "Shelf": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf",
-    "Store": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store",
-    
-    "address": "https://schema.org/address",
-    "itemListElement": "https://schema.org/itemListElement",
-    "name": "https://schema.org/name",
-    
-    "category": "https://uri.fiware.org/ns/datamodels/category",
-    "containedInPlace": "https://uri.fiware.org/ns/datamodels/containedInPlace",
-    "dataProvider": "https://uri.fiware.org/ns/datamodels/dataProvider",
-    "description": "https://uri.fiware.org/ns/datamodels/description",
-    "floorsAboveGround": "https://uri.fiware.org/ns/datamodels/floorsAboveGround",
-    "floorsBelowGround": "https://uri.fiware.org/ns/datamodels/floorsBelowGround",
+    "type": "@type",
+    "id": "@id",
+    "schema": "https://schema.org/",
+    "fiware": "https://uri.fiware.org/ns/datamodels#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema#",
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+    "Shelf": "tutorial:Shelf",
+    "StockItem": "tutorial:StockItem",
+    "Person": "schema:Person",
+    "address": "schema:address",
+    "description": "http://uri.etsi.org/ngsi-ld/description",
+    "name": "http://uri.etsi.org/ngsi-ld/name",
     "location": "http://uri.etsi.org/ngsi-ld/location",
+    "category": "fiware:category",
+    "containedInPlace": "fiware:containedInPlace",
+    "dataProvider": "fiware:dataProvider",
+    "description": "fiware:description",
+    "floorsAboveGround": "fiware:floorsAboveGround",
+    "floorsBelowGround": "fiware:floorsBelowGround",
     "owner": {
-      "@id": "https://uri.fiware.org/ns/datamodels/owner",   
+      "@id": "fiware:owner",   
       "@type": "@id"
     },
     "occupier": {
-      "@id": "https://uri.fiware.org/ns/datamodels/occupier",   
+      "@id": "fiware:occupier",   
       "@type": "@id"
     },
-    "refMap": "https://uri.fiware.org/ns/datamodels/refMap",
-    "source": "https://uri.fiware.org/ns/datamodels/source",   
-
+    "refMap": "fiware:refMap",
+    "source": "fiware:source", 
+    "installedBy": {
+      "@id": "tutorial:installedBy",   
+      "@type": "@id"
+    },  
     "locatedIn": {
-      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/locatedIn",   
+      "@id": "tutorial:locatedIn",   
       "@type": "@id"
     },
-    "maxCapacity": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/maxCapacity",
+    "maxCapacity": "tutorial:maxCapacity",
+    "statusOfWork": "tutorial:statusOfWork",
     "stocks": {
-      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Shelf/stocks",   
+      "@id": "tutorial:stocks",   
       "@type": "@id"
     },
-    
-    "price": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/price",
-    "size": "https://fiware.github.io/tutorials.Step-by-Step/schema/Product/size",
-    
+    "price": "tutorial:price",
+    "size": "tutorial:size",
     "stockList": {
-      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/stockList",   
+      "@id": "tutorial:stockList",   
       "@type": "@id"
     },
     "furniture": {
-      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Store/furniture",   
+      "@id": "tutorial:furniture",   
       "@type": "@id"
     },
-    
     "ownedBy": {
-      "@id": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/ownedBy",   
+      "@id": "tutorial:ownedBy",   
       "@type": "@id"
     },
-    "stockCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inWarehouseStockCount",
-    "shelfCount": "https://fiware.github.io/tutorials.Step-by-Step/schema/Inventory/inStoreStockCount"
+    "stockCount": "tutorial:stockCount",
+    "shelfCount": "tutorial:storeCount",
+    "shelfCount": "tutorial:verified"
   }
 }
