@@ -6,6 +6,8 @@
 body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
 a {font-weight: 600;color: #233c68; text-decoration: none;}
 a:hover {color: #45d3dd;}
+thead th, th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
 	</style>
   </head>
   <body>
@@ -23,7 +25,7 @@ a:hover {color: #45d3dd;}
   		</thead>
 
 		<tbody><tr>
-     		<th colspan="3">Properties from <a href="../Store">Store</a></th>
+     		<th  class="head" colspan="3">Properties from <a href="../Store">Store</a></th>
 			</tr>
 		</tbody>
 		<tbody>
@@ -54,7 +56,7 @@ a:hover {color: #45d3dd;}
  		</tbody>
 
     <tbody><tr>
-        <th colspan="3">Properties from FIWARE <a href="https://fiware-datamodels.readthedocs.io/en/latest/Building/Building/doc/spec/index.html">Building</a></th>
+        <th  class="head" colspan="3">Properties from FIWARE <a href="https://fiware-datamodels.readthedocs.io/en/latest/Building/Building/doc/spec/index.html">Building</a></th>
       </tr>
     </tbody>
     <tbody>
@@ -78,7 +80,7 @@ a:hover {color: #45d3dd;}
           <th id="location" class="prop-nam" scope="row">
           <code property="rdfs:label">location</code>
           </th>
-          <td>Property: <code>geo:json</code> </td>
+          <td>GeoProperty: <code>geo:json</code> </td>
         <td class="prop-ect">The location of the Store
         </td>
       </tr>
