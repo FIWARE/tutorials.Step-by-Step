@@ -12,6 +12,9 @@ a:hover {color: #45d3dd;}
   	<img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title="">
 
      <p>FIWARE Tutorial Schema:<b>Store</b></p>
+
+     <p><b>Store</b> - a building which sells things.</p>
+
     <table>
         <thead>
   			<tr>
@@ -28,6 +31,7 @@ a:hover {color: #45d3dd;}
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">stockList</code>
     			</th>
+          <td>Relationship: <a href="../Product">StockItem</a></td>
  				<td class="prop-ect">A list of items sold in the store
  				</td>
  			</tr>
@@ -35,6 +39,7 @@ a:hover {color: #45d3dd;}
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">furniture</code>
     			</th>
+           <td>Relationship: <a href="../Shelf">Shelf</a></td>
  				<td class="prop-ect">A list of Shelf Units found in the store
  				</td>
  			</tr>
@@ -42,6 +47,7 @@ a:hover {color: #45d3dd;}
           <th class="prop-nam" scope="row">
           <code property="rdfs:label">address</code>
           </th>
+          <td>Property: <a href="schema.org/address">address</a> </td>
         <td class="prop-ect">The address of the Store
         </td>
       </tr>
@@ -49,6 +55,7 @@ a:hover {color: #45d3dd;}
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">name</code>
     			</th>
+          <td>Property: <a href="schema.org/text">text</a> </td>
  				<td class="prop-ect">The name of the Store
  				</td>
  			</tr>
@@ -56,6 +63,7 @@ a:hover {color: #45d3dd;}
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">verified</code>
     			</th>
+          <td>Property: <a href="schema.org/boolean">boolean</a> </td>
  				<td class="prop-ect">Whether the address of the Store has been verified
  				</td>
  			</tr>

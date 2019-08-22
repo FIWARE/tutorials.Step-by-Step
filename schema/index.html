@@ -12,49 +12,94 @@ a:hover {color: #45d3dd;}
   <body>
   	<img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title="">
 
+
+<p>
+    A simple "supermarket" NGSI-LD Data Model consisting of 4 entities:
+</p>
+
+<ul>
+    <li><a href="Product">Product</a> - something sold in a Store</li>
+    <li><a href="Shelf">Shelf</a> - a unit of Store Furniture. Products are found on a shelf</li>
+    <li><a href="StockItem">StockItem</a> - an entry in a list of items sold in one or more stores</li>
+    <li><a href="Store">Store</a> - a building which sells things.</li>
+</ul>
+
+
+
+
 <pre>
 	<code>
 {
-	"@context": {
-        "type": "@type",
-        "id": "@id",
-
-        "@vocab": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
-        "fiware": "https://uri.fiware.org/ns/datamodels/",
-        "schema": "https://schema.org/",
-        "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
-
-        "Building": {"@id": "fiware:Building"},
-        "Inventory": {"@id": "tutorial:Inventory"},
-        "Product": {"@id" :"tutorial:Product"},
-        "Shelf": {"@id": "tutorial:Shelf"},
-        "Store": {"@id": "tutorial:Store"},
-
-        "address": {"@id": "schema:address"},
-        "category": {"@id": "fiware:Building"},
-        "containedInPlace": {"@id": "fiware:containedInPlace"},
-        "dataProvider": {"@id": "fiware:dataProvider"},
-        "description": {"@id": "fiware:description"},
-        "floorsAboveGround": {"@id": "fiware:floorsAboveGround"},
-        "floorsBelowGround": {"@id": "fiware:floorsBelowGround"},
-        "location": {"@id": "http://uri.etsi.org/ngsi-ld/location"},
-        "owner": {"@id": "fiware:owner"},
-        "occupier": {"@id": "fiware:occupier"},
-        "refMap": {"@id": "fiware:refMap"},
-        "source": {"@id": "fiware:source"},
-
-    	"itemListElement": {"@id": "schema:itemListElement"},
-    	"inventory": {"@id": "tutorial:Store/inventory"},
-    	"locatedIn": {"@id": "fiware:Shelf/locatedIn"},
-        "name": {"@id": "schema:name"},
-        "maxCapacity": {"@id": "fiware:Shelf/maxCapacity"},
-    	"price": {"@id": "tutorial:Product/price"},
-    	"shelves": {"@id": "tutorial:Store/shelves"},
-    	"size": {"@id": "tutorial:Product/size"},
-    	"stocks": {"@id": "tutorial:Shelf/stocks"}
-    }
- }
+  "@context": {
+    "type": "@type",
+    "id": "@id",
+    "schema": "https://schema.org/",
+    "fiware": "https://uri.fiware.org/ns/datamodels#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+    "Shelf": "tutorial:Shelf",
+    "StockItem": "tutorial:StockItem",
+    "Person": "schema:Person",
+    "address": "schema:address",
+    "description": "http://uri.etsi.org/ngsi-ld/description",
+    "name": "http://uri.etsi.org/ngsi-ld/name",
+    "location": "http://uri.etsi.org/ngsi-ld/location",
+    "category": "fiware:category",
+    "containedInPlace": "fiware:containedInPlace",
+    "dataProvider": "fiware:dataProvider",
+    "description": "fiware:description",
+    "floorsAboveGround": "fiware:floorsAboveGround",
+    "floorsBelowGround": "fiware:floorsBelowGround",
+    "owner": {
+      "@id": "fiware:owner",   
+      "@type": "@id"
+    },
+    "occupier": {
+      "@id": "fiware:occupier",   
+      "@type": "@id"
+    },
+    "refMap": "fiware:refMap",
+    "source": "fiware:source", 
+    "installedBy": {
+      "@id": "tutorial:Shelf/installedBy",   
+      "@type": "@id"
+    },  
+    "locatedIn": {
+      "@id": "tutorial:Shelf/locatedIn",   
+      "@type": "@id"
+    },
+    "maxCapacity": "tutorial:Shelf/maxCapacity",
+    "statusOfWork": "tutorial:Shelf/statusOfWork",
+    "stocks": {
+      "@id": "tutorial:Shelf/stocks",   
+      "@type": "@id"
+    },
+    "currency": "tutorial:Product/currency",
+    "price": "tutorial:Product/price",
+    "size": "tutorial:Product/size",
+    "stockList": {
+      "@id": "tutorial:Store/stockList",   
+      "@type": "@id"
+    },
+    "furniture": {
+      "@id": "tutorial:Store/furniture",   
+      "@type": "@id"
+    },
+    "verified": "tutorial:Store/verified",
+    "soldBy": {
+      "@id": "tutorial:StockItem/soldBy",   
+      "@type": "@id"
+    },
+    "stockCount": "tutorial:StockItem/stockCount",
+    "shelfCount": "tutorial:StockItem/storeCount"
+  }
+}
  	</code>
  </pre>
+
+
+
+
 </body>
 </html>

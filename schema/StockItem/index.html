@@ -12,6 +12,15 @@ a:hover {color: #45d3dd;}
   	<img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title="">
 
      <p>FIWARE Tutorial Schema:<b>StockItem</b></p>
+
+
+
+
+     <p><b>StockItem</b> - an entry in a list of items sold in one or more stores</p>
+
+
+
+
     <table>
         <thead>
   			<tr>
@@ -28,6 +37,7 @@ a:hover {color: #45d3dd;}
     			<th id="product" class="prop-nam" scope="row">
 					<code property="rdfs:label">product</code>
     			</th>
+        <td>Relationship: <a href="../Product">Product</a></td>
  				<td class="prop-ect">The product associated to this stock item
  				</td>
  			</tr>
@@ -35,6 +45,7 @@ a:hover {color: #45d3dd;}
           <th id="soldBy" class="prop-nam" scope="row">
           <code property="rdfs:label">soldBy</code>
           </th>
+          <td>Relationship: <a href="../Store">Building</a> </td>
         <td class="prop-ect">The id of the store this product is sold by
         </td>
       </tr>

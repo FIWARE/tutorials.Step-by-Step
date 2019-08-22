@@ -12,6 +12,11 @@ a:hover {color: #45d3dd;}
   	<img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title="">
 
     <p>FIWARE Tutorial Schema:<b>Shelf</b></p>
+
+    <p><b>Shelf</b> - a unit of Store Furniture. Products are found on a shelf</p>
+
+
+
     <table>
         <thead>
   			<tr>
@@ -28,13 +33,15 @@ a:hover {color: #45d3dd;}
     			<th id="locatedIn" class="prop-nam" scope="row">
 					<code property="rdfs:label">locatedIn</code>
     			</th>
+          <td>Relationship: <a href="../Store">Building</a></td>
  				<td class="prop-ect">The Building that the Shelf Unit is located in.
  				</td>
  			</tr>
  			<tr>
     			<th id="maxCapacity" class="prop-nam" scope="row">
-					<code property="rdfs:label">maxCapcity</code>
+					<code property="rdfs:label">maxCapacity</code>
     			</th>
+          <td>Property: <a href="schema.org/number">number</a> </td>
  				<td class="prop-ect">The maximum number of items the shelf can hold
  				</td>
  			</tr>
@@ -42,6 +49,7 @@ a:hover {color: #45d3dd;}
     			<th id="name" class="prop-nam" scope="row">
 					<code property="rdfs:label">name</code>
     			</th>
+          <td>Property: <a href="schema.org/text">text</a> </td>
  				<td class="prop-ect">The name of the Shelf Unit
  				</td>
  			</tr>
@@ -49,6 +57,7 @@ a:hover {color: #45d3dd;}
     			<th id="stocks"class="prop-nam" scope="row">
 					<code property="rdfs:label">stocks</code>
     			</th>
+          <td>Relationship: <a href="../Product">Product</a></td>
  				<td class="prop-ect">The Product currently found on the Shelf Unit
  				</td>
  			</tr>
@@ -56,6 +65,7 @@ a:hover {color: #45d3dd;}
           <th id="installedBy"class="prop-nam" scope="row">
           <code property="rdfs:label">installedBy</code>
           </th>
+          <td>Relationship: <a href="schema.org/Person">Person</a> </td>
         <td class="prop-ect">The Person who installed the shelf
         </td>
       </tr>
@@ -63,6 +73,7 @@ a:hover {color: #45d3dd;}
           <th id="installedBy"class="prop-nam" scope="row">
           <code property="rdfs:label">statusOfWork</code>
           </th>
+          <td>Property: <a href="schema.org/boolean">boolean</a> </td>
         <td class="prop-ect">The status of the shelf installation (e.g. pending, in progress, completed)
         </td>
       </tr>
