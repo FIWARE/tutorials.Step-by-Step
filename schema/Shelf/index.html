@@ -41,7 +41,7 @@ a:hover {color: #45d3dd;}
     			<th id="maxCapacity" class="prop-nam" scope="row">
 					<code property="rdfs:label">maxCapacity</code>
     			</th>
-          <td>Property: <a href="schema.org/number">number</a> </td>
+          <td>Property: <a href="http://schema.org/number">number</a> </td>
  				<td class="prop-ect">The maximum number of items the shelf can hold
  				</td>
  			</tr>
@@ -49,7 +49,7 @@ a:hover {color: #45d3dd;}
     			<th id="name" class="prop-nam" scope="row">
 					<code property="rdfs:label">name</code>
     			</th>
-          <td>Property: <a href="schema.org/text">text</a> </td>
+          <td>Property: <a href="http://schema.org/text">text</a> </td>
  				<td class="prop-ect">The name of the Shelf Unit
  				</td>
  			</tr>
@@ -65,7 +65,7 @@ a:hover {color: #45d3dd;}
           <th id="installedBy"class="prop-nam" scope="row">
           <code property="rdfs:label">installedBy</code>
           </th>
-          <td>Relationship: <a href="schema.org/Person">Person</a> </td>
+          <td>Relationship: <a href="http://schema.org/Person">Person</a> </td>
         <td class="prop-ect">The Person who installed the shelf
         </td>
       </tr>
@@ -73,8 +73,16 @@ a:hover {color: #45d3dd;}
           <th id="installedBy"class="prop-nam" scope="row">
           <code property="rdfs:label">statusOfWork</code>
           </th>
-          <td>Property: <a href="schema.org/boolean">boolean</a> </td>
+          <td>Property: <a href="http://schema.org/boolean">boolean</a> </td>
         <td class="prop-ect">The status of the shelf installation (e.g. pending, in progress, completed)
+        </td>
+      </tr>
+      <tr>
+          <th id="location" class="prop-nam" scope="row">
+          <code property="rdfs:label">location</code>
+          </th>
+          <td>Property: <code>geo:json</code> </td>
+        <td class="prop-ect">The location of the Shelf
         </td>
       </tr>
  		</tbody>

@@ -23,7 +23,7 @@ a:hover {color: #45d3dd;}
   		</thead>
 
 		<tbody><tr>
-     		<th colspan="3">Properties from <a href="../Store">Store</a> extends <b>Building</b></th>
+     		<th colspan="3">Properties from <a href="../Store">Store</a></th>
 			</tr>
 		</tbody>
 		<tbody>
@@ -43,31 +43,46 @@ a:hover {color: #45d3dd;}
  				<td class="prop-ect">A list of Shelf Units found in the store
  				</td>
  			</tr>
-      <tr>
-          <th class="prop-nam" scope="row">
-          <code property="rdfs:label">address</code>
-          </th>
-          <td>Property: <a href="schema.org/address">address</a> </td>
-        <td class="prop-ect">The address of the Store
-        </td>
-      </tr>
- 			<tr>
-    			<th class="prop-nam" scope="row">
-					<code property="rdfs:label">name</code>
-    			</th>
-          <td>Property: <a href="schema.org/text">text</a> </td>
- 				<td class="prop-ect">The name of the Store
- 				</td>
- 			</tr>
  			<tr>
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">verified</code>
     			</th>
-          <td>Property: <a href="schema.org/boolean">boolean</a> </td>
+          <td>Property: <a href="http://schema.org/boolean">boolean</a> </td>
  				<td class="prop-ect">Whether the address of the Store has been verified
  				</td>
  			</tr>
  		</tbody>
+
+    <tbody><tr>
+        <th colspan="3">Properties from FIWARE <a href="https://fiware-datamodels.readthedocs.io/en/latest/Building/Building/doc/spec/index.html">Building</a></th>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+          <th id="address" class="prop-nam" scope="row">
+          <code property="rdfs:label">address</code>
+          </th>
+          <td>Property: <a href="http://schema.org/address">address</a> </td>
+        <td class="prop-ect">The address of the Store
+        </td>
+      </tr>
+      <tr>
+          <th id="name" class="prop-nam" scope="row">
+          <code property="rdfs:label">name</code>
+          </th>
+          <td>Property: <a href="http://schema.org/text">text</a> </td>
+        <td class="prop-ect">The name of the Store
+        </td>
+      </tr>
+       <tr>
+          <th id="location" class="prop-nam" scope="row">
+          <code property="rdfs:label">location</code>
+          </th>
+          <td>Property: <code>geo:json</code> </td>
+        <td class="prop-ect">The location of the Store
+        </td>
+      </tr>
+    </tbody>
  	</table>
   </body>
 </html>
