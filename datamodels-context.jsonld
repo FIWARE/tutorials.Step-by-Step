@@ -82,7 +82,7 @@
     },
     "orderDate": {
       "@id": "tutorial:orderDate",   
-      "@type": "http://uri.etsi.org/ngsi-ld/DateTime",
+      "@type": "http://uri.etsi.org/ngsi-ld/DateTime"
     },
     "stockCount":  {
       "@id": "tutorial:stockCount",
