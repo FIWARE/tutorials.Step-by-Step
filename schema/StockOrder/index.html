@@ -13,12 +13,12 @@ th.head {color: white; background: #233c68;}
   <body>
   	<a href=".."><img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title=""></a>
 
-     <p>FIWARE Tutorial Schema:<b>StockItem</b></p>
+     <p>FIWARE Tutorial Schema:<b>StockOrder</b></p>
 
 
 
 
-     <p><b>StockItem</b> - an entry in a list of items sold in one or more stores</p>
+     <p><b>StockOrder</b> - an entry in a list of items sold in one or more stores</p>
 
 
 
@@ -31,13 +31,13 @@ th.head {color: white; background: #233c68;}
   		</thead>
 
 		<tbody><tr>
-     		<th  class="head" colspan="3">Properties from <a href="../StockItem">StockItem</a></th>
+     		<th  class="head" colspan="3">Properties from <a href="../StockOrder">StockOrder</a></th>
 			</tr>
 		</tbody>
 		<tbody>
 			<tr>
     			<th id="productId" class="prop-nam" scope="row">
-					<code property="rdfs:label">productId</code>
+					<code property="rdfs:label">orderedProduct</code>
     			</th>
         <td>Relationship: <a href="../Product">Product</a></td>
  				<td class="prop-ect">The product associated to this stock item
@@ -45,10 +45,34 @@ th.head {color: white; background: #233c68;}
  			</tr>
       <tr>
           <th id="soldBy" class="prop-nam" scope="row">
-          <code property="rdfs:label">soldBy</code>
+          <code property="rdfs:label">requestedBy</code>
           </th>
           <td>Relationship: <a href="../Store">Building</a> </td>
         <td class="prop-ect">The id of the store this product is sold by
+        </td>
+      </tr>
+      <tr>
+          <th id="orderData" class="prop-nam" scope="row">
+          <code property="rdfs:label">orderDate</code>
+          </th>
+          <td>Property: <a href="https://schema.org/DateTime">DateTime</a> </td>
+        <td class="prop-ect">The date the order was placed.
+        </td>
+      </tr>
+       <tr>
+          <th id="stockCount" class="prop-nam" scope="row">
+          <code property="rdfs:label">stockCount</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Integer">integer</a> </td>
+        <td class="prop-ect">The number of items left in stock in the warehouse
+        </td>
+      </tr>
+       <tr>
+          <th id="storeCount" class="prop-nam" scope="row">
+          <code property="rdfs:label">storeCount</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Integer">integer</a> </td>
+        <td class="prop-ect">The number of items currently found on the shelves of the store
         </td>
       </tr>
  		</tbody>

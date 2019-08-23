@@ -3,12 +3,13 @@
     "type": "@type",
     "id": "@id",
     "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
     "fiware": "https://uri.fiware.org/ns/datamodels#",
     "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
     "Building": "fiware:Building",
     "Product": "tutorial:Product",
     "Shelf": "tutorial:Shelf",
-    "StockItem": "tutorial:StockItem",
+    "StockOrder": "tutorial:StockOrder",
     "Person": "schema:Person",
     "address": "schema:address",
     "description": "http://uri.etsi.org/ngsi-ld/description",
@@ -38,15 +39,27 @@
       "@id": "tutorial:locatedIn",   
       "@type": "@id"
     },
-    "maxCapacity": "tutorial:maxCapacity",
+    "maxCapacity":  {
+      "@id": "tutorial:maxCapacity",
+      "@type": "xsd:integer"
+    },  
     "statusOfWork": "tutorial:statusOfWork",
     "stocks": {
       "@id": "tutorial:stocks",   
       "@type": "@id"
     },
-    "currency": "tutorial:currency",
-    "price": "tutorial:price",
-    "size": "tutorial:size",
+    "currency": {
+      "@id": "tutorial:currency",
+      "@type": "xsd:string"
+    }, 
+    "price": {
+      "@id": "tutorial:price",
+      "@type": "xsd:decimal"
+    }, 
+    "size":  {
+      "@id": "tutorial:size",
+      "@type": "xsd:string"
+    },
     "stockList": {
       "@id": "tutorial:stockList",   
       "@type": "@id"
@@ -55,16 +68,29 @@
       "@id": "tutorial:furniture",   
       "@type": "@id"
     },
-    "verified": "tutorial:verified",
-    "soldBy": {
-      "@id": "tutorial:soldBy",   
+    "verified": {
+      "@id": "tutorial:verified",
+      "@type": "xsd:boolean"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
       "@type": "@id"
     },
-    "productId": {
-      "@id": "tutorial:productId",   
+    "orderedProduct": {
+      "@id": "tutorial:orderedProduct",   
       "@type": "@id"
     },
-    "stockCount": "tutorial:stockCount",
-    "shelfCount": "tutorial:storeCount"
+    "orderDate": {
+      "@id": "tutorial:orderDate",   
+      "@type": "http://uri.etsi.org/ngsi-ld/DateTime",
+    },
+    "stockCount":  {
+      "@id": "tutorial:stockCount",
+      "@type": "xsd:integer"
+    }, 
+    "shelfCount":  {
+      "@id": "tutorial:storeCount",
+      "@type": "xsd:integer"
+    }
   }
 }
