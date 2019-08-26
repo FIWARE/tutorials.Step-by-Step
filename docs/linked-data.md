@@ -700,8 +700,8 @@ used as the `@context` returned in the response.
 ### Filter context data by comparing the values of an attribute
 
 This example returns all `Building` entities with the `name` attribute _Checkpoint Markt_. Filtering can be done using
-the `q` parameter - if a string has spaces in it, it can be URL encoded and held within single quote characters `'` =
-`%27`.
+the `q` parameter - if a string has spaces in it, it can be URL encoded and held within double quote characters `"` =
+`%22`.
 
 #### 7 Request:
 
@@ -711,7 +711,7 @@ curl -G -X GET \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -H 'Accept: application/ld+json' \
     -d 'type=Building' \
-    -d 'q=name==%27Checkpoint%20Markt%27' \
+    -d 'q=name==%22Checkpoint%20Markt%22' \
     -d 'options=keyValues'
 ```
 
@@ -769,7 +769,7 @@ curl -G -X GET \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -H 'Accept: application/ld+json' \
     -d 'type=Building' \
-    -d 'q=category==%27commercial%27,%27office%27 \
+    -d 'q=category==%22commercial%22,%22office%22 \
     -d 'options=keyValues'
 ```
 
