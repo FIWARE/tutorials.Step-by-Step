@@ -821,7 +821,7 @@ The response is returned in JSON-LD format with short form attribute names:
 This example returns all stores found in the Kreuzberg District.
 
 Filtering can be done using the `q` parameter - sub-attributes are annotated using the bracket syntax e.g.
-`q=address[addressLocality]==Kreuzberg`. This differs from NGSI v2 where dot syntax was used.
+`q=address[addressLocality]=="Kreuzberg"`. This differs from NGSI v2 where dot syntax was used.
 
 #### 9 Request:
 
@@ -831,7 +831,7 @@ curl -G -X GET \
     -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -H 'Accept: application/ld+json' \
     -d 'type=Building' \
-    -d 'q=address[addressLocality]==Kreuzberg' \
+    -d 'q=address[addressLocality]==%22Kreuzberg%22' \
     -d 'options=keyValues'
 ```
 
