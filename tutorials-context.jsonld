@@ -85,8 +85,8 @@
       "@id": "tutorial:stockCount",
       "@type": "xsd:integer"
     }, 
-    "shelfCount":  {
-      "@id": "tutorial:storeCount",
+    "numberOfItems":  {
+      "@id": "tutorial:numberOfItems",
       "@type": "xsd:integer"
     }
   }
