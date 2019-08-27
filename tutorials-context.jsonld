@@ -3,6 +3,7 @@
     "type": "@type",
     "id": "@id",
     "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "fiware": "https://uri.fiware.org/ns/datamodels#",
     "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
@@ -89,5 +90,49 @@
       "@id": "tutorial:numberOfItems",
       "@type": "xsd:integer"
     }
-  }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Product",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "Product is something sold in a Store.",
+      "rdfs:label": "Product",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:Shelf",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "A Shelf is a unit of Store Furniture",
+      "rdfs:label": "Shelf",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:StockOrder",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
+      "rdfs:label": "StockOrder",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "schema:Person",
+      "@type": "rdfs:Class",
+      "http://purl.org/dc/terms/source": {
+        "@id": "http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews"
+      },
+      "http://www.w3.org/2002/07/owl#equivalentClass": {
+        "@id": "http://xmlns.com/foaf/0.1/Person"
+      },
+      "rdfs:comment": "A person (alive, dead, undead, or fictional).",
+      "rdfs:label": "Person",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    }
+  ]
 }
