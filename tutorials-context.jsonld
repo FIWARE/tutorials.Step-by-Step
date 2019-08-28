@@ -89,8 +89,7 @@
     "numberOfItems":  {
       "@id": "tutorial:numberOfItems",
       "@type": "xsd:integer"
-    },
-    "linkedTo": "tutorial:linkedTo"
+    }
   },
   "@graph": [
     {
@@ -137,7 +136,7 @@
     },
     {
       "@id": "tutoral:requestedBy",
-      "@type": "rdf:Property",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
       "schema:domainIncludes": [
         {
           "@id": "tutorial:Shelf"
@@ -148,31 +147,37 @@
       ],
       "schema:rangeIncludes": [
         {
-          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+          "@id": "schema:Person"
         }
       ],
-      "tutorial:linkedTo": [
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "requestedBy"
+    },
+    {
+      "@id": "tutoral:installedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
         {
           "@id": "schema:Person"
         }
       ],
       "rdfs:comment": "Object requested by person.",
-      "rdfs:label": "owns"
+      "rdfs:label": "installedBy"
     },
     {
       "@id": "tutorial:furniture",
-      "@type": "rdf:Property",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
       "schema:domainIncludes": [
         {
           "@id": "fiware:Building"
         }
       ],
       "schema:rangeIncludes": [
-        {
-          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
-        }
-      ],
-      "tutorial:linkedTo": [
         {
           "@id": "tutorial:Shelf"
         }
@@ -182,41 +187,47 @@
     },
     {
       "@id": "tutorial:locatedIn",
-      "@type": "rdf:Property",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
       "schema:domainIncludes": [
         {
-          "@id": "fiware:Shelf"
+          "@id": "tutorial:Shelf"
         }
       ],
       "schema:rangeIncludes": [
         {
-          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
-        }
-      ],
-      "tutorial:linkedTo": [
-        {
-          "@id": "tutorial:Building"
+          "@id": "fiware:Building"
         }
       ],
       "rdfs:comment": "Building in which an item is found",
       "rdfs:label": "locatedIn"
     },
     {
-      "@id": "tutorial:requestedFor",
-      "@type": "rdf:Property",
+      "@id": "tutorial:stocks",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
       "schema:domainIncludes": [
         {
-          "@id": "fiware:StockOrder"
+          "@id": "tutorial:Shelf"
         }
       ],
       "schema:rangeIncludes": [
         {
-          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+          "@id": "tutorial:Product"
         }
       ],
-      "tutorial:linkedTo": [
+      "rdfs:comment": "The product found on a shelf",
+      "rdfs:label": "stocks"
+    },
+    {
+      "@id": "tutorial:requestedFor",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
         {
-          "@id": "tutorial:Building"
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
         }
       ],
       "rdfs:comment": "Store for which an item is requested",
@@ -224,30 +235,19 @@
     },
     {
       "@id": "tutorial:orderedProduct",
-      "@type": "rdf:Property",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
       "schema:domainIncludes": [
         {
-          "@id": "fiware:StockOrder"
+          "@id": "tutorial:StockOrder"
         }
       ],
       "schema:rangeIncludes": [
-        {
-          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
-        }
-      ],
-      "tutorial:linkedTo": [
         {
           "@id": "tutorial:Product"
         }
       ],
       "rdfs:comment": "The Product ordered for a store",
       "rdfs:label": "orderedProduct"
-    },
-    {
-      "@id": "tutorial:linkedTo",
-      "rdfs:comment": "The Entity type this relationship is linked to",
-      "rdfs:label": "linkedTo",
-      "@type": "rdfs:Property"
     }
   ]
 }
