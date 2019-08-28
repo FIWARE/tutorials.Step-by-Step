@@ -58,10 +58,6 @@
       "@id": "tutorial:size",
       "@type": "xsd:string"
     },
-    "stockList": {
-      "@id": "tutorial:stockList",   
-      "@type": "@id"
-    },
     "furniture": {
       "@id": "tutorial:furniture",   
       "@type": "@id"
@@ -69,6 +65,10 @@
     "verified": {
       "@id": "tutorial:verified",
       "@type": "xsd:boolean"
+    },
+    "requestedFor": {
+      "@id": "tutorial:requestedFor",   
+      "@type": "@id"
     },
     "requestedBy": {
       "@id": "tutorial:requestedBy",   
@@ -89,7 +89,8 @@
     "numberOfItems":  {
       "@id": "tutorial:numberOfItems",
       "@type": "xsd:integer"
-    }
+    },
+    "linkedTo": "tutorial:linkedTo"
   },
   "@graph": [
     {
@@ -116,7 +117,7 @@
       "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
       "rdfs:label": "StockOrder",
       "rdfs:subClassOf": {
-        "@id": "http://schema.org/Thing"
+        "@id": "http://schema.org/Intangible"
       }
     },
     {
@@ -133,6 +134,120 @@
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "rdf:Property",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+        }
+      ],
+      "tutorial:linkedTo": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "owns"
+    },
+    {
+      "@id": "tutorial:furniture",
+      "@type": "rdf:Property",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+        }
+      ],
+      "tutorial:linkedTo": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "rdfs:comment": "Units found within a Building",
+      "rdfs:label": "furniture"
+    },
+    {
+      "@id": "tutorial:locatedIn",
+      "@type": "rdf:Property",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+        }
+      ],
+      "tutorial:linkedTo": [
+        {
+          "@id": "tutorial:Building"
+        }
+      ],
+      "rdfs:comment": "Building in which an item is found",
+      "rdfs:label": "locatedIn"
+    },
+    {
+      "@id": "tutorial:requestedFor",
+      "@type": "rdf:Property",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+        }
+      ],
+      "tutorial:linkedTo": [
+        {
+          "@id": "tutorial:Building"
+        }
+      ],
+      "rdfs:comment": "Store for which an item is requested",
+      "rdfs:label": "requestedFor"
+    },
+    {
+      "@id": "tutorial:orderedProduct",
+      "@type": "rdf:Property",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "https://uri.etsi.org/ngsi-ld/Relationship"
+        }
+      ],
+      "tutorial:linkedTo": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The Product ordered for a store",
+      "rdfs:label": "orderedProduct"
+    },
+    {
+      "@id": "tutorial:linkedTo",
+      "rdfs:comment": "The Entity type this relationship is linked to",
+      "rdfs:label": "linkedTo",
+      "@type": "rdfs:Property"
     }
   ]
 }

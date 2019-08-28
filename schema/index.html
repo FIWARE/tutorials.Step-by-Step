@@ -45,9 +45,6 @@ th.head {color: white; background: #233c68;}
     "StockOrder": "tutorial:StockOrder",
     "Person": "schema:Person",
     "address": "schema:address",
-    "description": "https://uri.etsi.org/ngsi-ld/description",
-    "name": "https://uri.etsi.org/ngsi-ld/name",
-    "location": "https://uri.etsi.org/ngsi-ld/location",
     "category": "fiware:category",
     "containedInPlace": "fiware:containedInPlace",
     "dataProvider": "fiware:dataProvider",
@@ -93,10 +90,6 @@ th.head {color: white; background: #233c68;}
       "@id": "tutorial:size",
       "@type": "xsd:string"
     },
-    "stockList": {
-      "@id": "tutorial:stockList",   
-      "@type": "@id"
-    },
     "furniture": {
       "@id": "tutorial:furniture",   
       "@type": "@id"
@@ -104,6 +97,10 @@ th.head {color: white; background: #233c68;}
     "verified": {
       "@id": "tutorial:verified",
       "@type": "xsd:boolean"
+    },
+    "requestedFor": {
+      "@id": "tutorial:requestedFor",   
+      "@type": "@id"
     },
     "requestedBy": {
       "@id": "tutorial:requestedBy",   
@@ -121,8 +118,8 @@ th.head {color: white; background: #233c68;}
       "@id": "tutorial:stockCount",
       "@type": "xsd:integer"
     }, 
-    "shelfCount":  {
-      "@id": "tutorial:storeCount",
+    "numberOfItems":  {
+      "@id": "tutorial:numberOfItems",
       "@type": "xsd:integer"
     }
   }
