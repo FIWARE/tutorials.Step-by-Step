@@ -66,6 +66,49 @@ th.head {color: white; background: #233c68;}
 
  		</tbody>
  	</table>
+
+
+  <p>
+  A snippet of the <code style="font-size: large;color: #d6604d;">@context</code> and <code style="font-size: large;color: #d6604d;">@graph</code> can be seen below (scroll to see more detail):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+
+    "Product": "tutorial:Product",
+
+    "currency": {
+      "@id": "tutorial:currency",
+      "@type": "xsd:string"
+    }, 
+    "price": {
+      "@id": "tutorial:price",
+      "@type": "xsd:decimal"
+    }, 
+    "size":  {
+      "@id": "tutorial:size",
+      "@type": "xsd:string"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Product",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "Product is something sold in a Store.",
+      "rdfs:label": "Product",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    }
+  ]
+}
+  </code>
+ </pre>
+ 
     
   </body>
 </html>

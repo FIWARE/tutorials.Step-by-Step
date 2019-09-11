@@ -97,5 +97,127 @@ th.head {color: white; background: #233c68;}
       </tr>
  		</tbody>
  	</table>
+
+
+<p>
+  A snippet of the <code style="font-size: large;color: #d6604d;">@context</code> and <code style="font-size: large;color: #d6604d;">@graph</code> can be seen below (scroll to see more detail):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+ 
+    "Shelf": "tutorial:Shelf",
+
+    "installedBy": {
+      "@id": "tutorial:installedBy",   
+      "@type": "@id"
+    },  
+    "locatedIn": {
+      "@id": "tutorial:locatedIn",   
+      "@type": "@id"
+    },
+    "maxCapacity":  {
+      "@id": "tutorial:maxCapacity",
+      "@type": "xsd:integer"
+    },
+    "numberOfItems":  {
+      "@id": "tutorial:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
+      "@type": "@id"
+    },  
+    "statusOfWork": "tutorial:statusOfWork",
+    "stocks": {
+      "@id": "tutorial:stocks",   
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Shelf",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "A Shelf is a unit of Store Furniture",
+      "rdfs:label": "Shelf",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "requestedBy"
+    },
+    {
+      "@id": "tutoral:installedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "installedBy"
+    },
+    {
+      "@id": "tutorial:locatedIn",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": "Building in which an item is found",
+      "rdfs:label": "locatedIn"
+    },
+    {
+      "@id": "tutorial:stocks",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The product found on a shelf",
+      "rdfs:label": "stocks"
+    }
+  ]
+}
+  </code>
+ </pre>
   </body>
 </html>

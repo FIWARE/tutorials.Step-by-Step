@@ -29,14 +29,6 @@ th.head {color: white; background: #233c68;}
 			</tr>
 		</tbody>
 		<tbody>
-			<tr>
-    			<th class="prop-nam" scope="row">
-					<code property="rdfs:label">stockList</code>
-    			</th>
-          <td>Relationship: <a href="../Product">StockItem</a></td>
- 				<td class="prop-ect">A list of items sold in the store
- 				</td>
- 			</tr>
  			<tr>
     			<th class="prop-nam" scope="row">
 					<code property="rdfs:label">furniture</code>
@@ -84,7 +76,64 @@ th.head {color: white; background: #233c68;}
         <td class="prop-ect">The location of the Store
         </td>
       </tr>
+       <tr>
+          <th id="category" class="prop-nam" scope="row">
+          <code property="rdfs:label">category</code>
+          </th>
+          <td>Property: <a href="http://schema.org/category">category</a> </td>
+        <td class="prop-ect">The category of the Building
+        </td>
+      </tr>
     </tbody>
  	</table>
   </body>
+
+  <p>
+  A snippet of the <code style="font-size: large;color: #d6604d;">@context</code> and <code style="font-size: large;color: #d6604d;">@graph</code> can be seen below (scroll to see more detail):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+
+    "fiware": "https://uri.fiware.org/ns/datamodels#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+    
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+
+    "address": "schema:address",
+    "category": "fiware:category",
+    "furniture": {
+      "@id": "tutorial:furniture",   
+      "@type": "@id"
+    },
+    "verified": {
+      "@id": "tutorial:verified",
+      "@type": "xsd:boolean"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:furniture",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "rdfs:comment": "Units found within a Building",
+      "rdfs:label": "furniture"
+    }
+  ]
+}
+  </code>
+ </pre>
 </html>
