@@ -25,7 +25,7 @@ The introduction to FIWARE [Getting Started tutorial](https://github.com/FIWARE/
 the [NSGI v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface that is commonly used to create and
 manipulate context data entities. An evolution of that interface has created a supplementary specification called
 [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
-as a mechanism to enhance context data entities though adding the concept of **linked data**. This tutorial will
+as a mechanism to enhance context data entities through adding the concept of **linked data**. This tutorial will
 introduce the background of the ideas behind the new interface and compare and contrast how to create and manipulate
 data entities as linked data.
 
@@ -281,7 +281,7 @@ work with the requests defined below.
 When creating linked data entities, it is important to use common data models. This will allow us to easily combine data
 from multiple sources and remove ambiguity when comparing data coming from different sources.
 
-Creating linked data using full qualified names throughout would be painful, as each attribute would need to be a URN,
+Creating linked data using fully qualified names throughout would be painful, as each attribute would need to be a URI,
 so JSON-LD introduces the idea of an `@context` attribute which can hold pointers to context definitions. To add a
 FIWARE [Building](https://fiware-datamodels.readthedocs.io/en/latest/Building/Building/doc/spec/index.html) data entity,
 the following `@context` would be required
@@ -292,7 +292,7 @@ the following `@context` would be required
     "type": "Building",
     ...  other data attributes
     "@context": [
-        "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld",
+        "https://schema.lab.fiware.org/ld/context",
         "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
     ]
 }
@@ -307,11 +307,11 @@ NGSI-LD, that it is added by default to any `@context` sent to a request.
 
 ### FIWARE Data Models
 
-[https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld](https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld)
-refers to the definition of standard data models supplied by FIWARE. Adding this to the `@context` will load the
-definitions of all the [data models](https://fiware-datamodels.readthedocs.io) defined by the FIWARE Foundation in
-collaboration with other organizations such as [GSMA](https://www.gsma.com/) and [TM Forum](https://www.tmforum.org/), a
-summary of the FQNs related to **Building** can be seen below:
+[https://schema.lab.fiware.org/ld/context](https://schema.lab.fiware.org/ld/context) refers to the definition of
+standard data models supplied by FIWARE. Adding this to the `@context` will load the definitions of all the
+[data models](https://fiware-datamodels.readthedocs.io) defined by the FIWARE Foundation in collaboration with other
+organizations such as [GSMA](https://www.gsma.com/) and [TM Forum](https://www.tmforum.org/). A summary of the FQNs
+related to **Building** can be seen below:
 
 ```json
 {
@@ -321,7 +321,6 @@ summary of the FQNs related to **Building** can be seen below:
         "address": "http://schema.org/address",
         "category": "https://uri.fiware.org/ns/datamodels#category",
         "location": "http://uri.etsi.org/ngsi-ld/location",
-        "name": "http://schema.org/name",
         ...etc
     }
 }
@@ -372,7 +371,7 @@ curl -iX POST \
         "value": "Bösebrücke Einkauf"
     },
     "@context": [
-        "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld",
+        "https://schema.lab.fiware.org/ld/context",
         "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
     ]
 }'
@@ -421,7 +420,7 @@ curl -iX POST \
         "value": "Checkpoint Markt"
     },
     "@context": [
-        "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld",
+        "https://schema.lab.fiware.org/ld/context",
         "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
     ]
 }'
@@ -486,13 +485,11 @@ curl -G -X GET \
 
 #### Response:
 
-The response returns the Core `@context` by default
-(`https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/defaultContext/defaultContext.jsonld`) and all attributes are
-expanded whenever possible.
+The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld`) and
+all attributes are expanded whenever possible.
 
--   `id`, `type` and `location` are defined in the core context and are not expanded.
+-   `id`, `type`, `location` and `name` are defined in the core context and are not expanded.
 -   `address` has been mapped to `http://schema.org/address`
--   `name` has been mapped to `http://schema.org/name`
 -   `category` has been mapped to `https://uri.fiware.org/ns/datamodels#category`
 
 Note that if an attribute has not been not associated to an FQN when the entity was created, the short name will
@@ -516,7 +513,7 @@ Note that if an attribute has not been not associated to an FQN when the entity 
                 "value": true
             }
         },
-        "http://schema.org/name": {
+        "name": {
             "type": "Property",
             "value": "Bösebrücke Einkauf"
         },
@@ -531,7 +528,7 @@ Note that if an attribute has not been not associated to an FQN when the entity 
                 "coordinates": [13.3986, 52.5547]
             }
         },
-        "@context": "https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/defaultContext/defaultContext.jsonld"
+        "@context": "https://uri.etsi.org/ngsi-lv1/ngsi-ld-core-context.jsonld"
     },
     {
         "id": "urn:ngsi-ld:Building:store002",
@@ -549,7 +546,7 @@ Note that if an attribute has not been not associated to an FQN when the entity 
                 "value": true
             }
         },
-        "http://schema.org/name": {
+        "name": {
             "type": "Property",
             "value": "Checkpoint Markt"
         },
@@ -564,7 +561,7 @@ Note that if an attribute has not been not associated to an FQN when the entity 
                 "coordinates": [13.3903, 52.5075]
             }
         },
-        "@context": "https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/defaultContext/defaultContext.jsonld"
+        "@context": "https://uri.etsi.org/ngsi-lv1/ngsi-ld-core-context.jsonld"
     }
 ]
 ```
@@ -583,9 +580,8 @@ curl -G -X GET \
 
 #### Response:
 
-The response returns the Core `@context` by default
-(`https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/defaultContext/defaultContext.jsonld`) and all attributes are
-expanded whenever possible.
+The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld`) and
+all attributes are expanded whenever possible.
 
 ```json
 {
@@ -604,7 +600,7 @@ expanded whenever possible.
             "value": true
         }
     },
-    "http://schema.org/name": {
+    "name": {
         "type": "Property",
         "value": "Bösebrücke Einkauf"
     },
@@ -619,7 +615,7 @@ expanded whenever possible.
             "coordinates": [13.3986, 52.5547]
         }
     },
-    "@context": "https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/defaultContext/defaultContext.jsonld"
+    "@context": "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
 }
 ```
 
@@ -634,18 +630,18 @@ A [`Link` header](https://www.w3.org/wiki/LinkHeader) must be supplied to associ
 with the FQN `https://uri.fiware.org/ns/datamodels#Building`. The full link header syntax can be seen below:
 
 ```text
-Link: <https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json
+Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json
 ```
 
 The standard HTTP `Link` header allows metadata (in this case the `@context`) to be passed in without actually touching
-the resource in question. In the case of NGSI-LD, the metadata is a file of in `application/ld+json` format.
+the resource in question. In the case of NGSI-LD, the metadata is a file in `application/ld+json` format.
 
 #### 6 Request:
 
 ```bash
 curl -G -X GET \
   'http://localhost:1026/ngsi-ld/v1/entities' \
-    -H 'Link: <https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+    -H 'Link: <https://schema.lab.fiware.org/ld/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
     'http://localhost:1026/ngsi-ld/v1/entities' \
     -H 'Accept: application/ld+json' \
     -d 'type=Building' \
@@ -675,7 +671,7 @@ used as the `@context` returned in the response.
             "type": "Point",
             "coordinates": [13.3986, 52.5547]
         },
-        "@context": "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld"
+        "@context": "https://schema.lab.fiware.org/ld/context"
     },
     {
         "id": "urn:ngsi-ld:Building:store002",
@@ -692,7 +688,7 @@ used as the `@context` returned in the response.
             "type": "Point",
             "coordinates": [13.3903, 52.5075]
         },
-        "@context": "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld"
+        "@context": "https://schema.lab.fiware.org/ld/context"
     }
 ]
 ```
@@ -722,7 +718,7 @@ The `Link` header `https://schema.lab.fiware.org/ld/context` holds an array of `
 ```json
 {
     "@context": [
-        "https://schema.lab.fiware.org/ld/fiware-datamodels-context.jsonld",
+        "https://schema.lab.fiware.org/ld/context",
         "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld"
     ]
 }
