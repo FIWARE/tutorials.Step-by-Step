@@ -51,7 +51,7 @@ Properly defined linked data can be used to help answer big data questions, and 
 to answer questions like _"Which products are currently available on the shelves of Store X and what prices are they
 sold at?"_
 
-### :arrow_forward: Video: What is Linked Data?
+### Video: What is Linked Data?
 
 [![](http://img.youtube.com/vi/4x_xzT5eF5Q/0.jpg)](https://www.youtube.com/watch?v=4x_xzT5eF5Q "Introduction")
 
@@ -72,7 +72,7 @@ interpret the rest of the data with more clarity and depth.
 Furthermore the JSON-LD specification enables you to define a unique `@type` associating a well-defined
 [data model](https://fiware-datamodels.readthedocs.io/en/latest/guidelines/index.html) to the data itself.
 
-### :arrow_forward: Video: What is JSON-LD?
+### Video: What is JSON-LD?
 
 [![](http://img.youtube.com/vi/vioCbTo3C-4/0.jpg)](https://www.youtube.com/watch?v=vioCbTo3C-4 "JSON-LD")
 
