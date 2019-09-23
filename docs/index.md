@@ -58,7 +58,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 
 ## List of Tutorials
 
-<h3>Core Context Managment: Fundamentals</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Managment: Fundamentals</h3>
 
 These first tutorials are an introduction to the FIWARE Context Broker, and are an essential first step when learning to
 use FIWARE
@@ -68,7 +68,7 @@ use FIWARE
 &nbsp; 105. [Altering the Context Programmatically](accessing-context.md)<br/> &nbsp; 106.
 [Subscribing to Changes in Context](subscriptions.md)<br/>
 
-<h3>Internet of Things, Robots and third-party systems</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #5dc0cf;">Internet of Things, Robots and third-party systems</h3>
 
 In order to make a context-based system aware of the state of the real world, it will need to access information from
 Robots, IoT Sensors or other suppliers of context data such as social media. It is also possible to generate commands
@@ -78,7 +78,7 @@ from the context broker to alter the state of real-world objects themselves.
 [Provisioning an IoT Agent](iot-agent.md)<br/> &nbsp; 203. [IoT over MQTT](iot-over-mqtt.md)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](fast-rtps-micro-rtps.md)<br/>
 
-<h3>Core Context Management: History Management</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: History Management</h3>
 
 These tutorials show how to manipulate and store context data so it can be used for further processesing
 
@@ -87,7 +87,7 @@ These tutorials show how to manipulate and store context data so it can be used 
 &nbsp; 303. [Querying Time Series Data (MongoDB)](short-term-history.md)<br/> &nbsp; 304.
 [Querying Time Series Data (Crate-DB)](time-series-data.md)<br/>
 
-<h3>Security: Identity Management</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #ff7059;">Security: Identity Management</h3>
 
 These tutorials show how to create and administer users within an application, and how to restrict access to assets, by
 assigning roles and permissions.
@@ -99,15 +99,16 @@ assigning roles and permissions.
 [XACML Rules-based Permissions](xacml-access-rules.md)<br/> &nbsp; 406.
 [Administrating XACML via a PAP](administrating-xacml.md)<br/>
 
-<h3>Processing, Analysis and Visualization</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #88a1ce;">Processing, Analysis and Visualization</h3>
 
 These tutorials show how to create, process, analyze or visualize context information
 
 &nbsp; 501. [Creating Application Mashups](application-mashups.md)<br/> &nbsp; 503.
 [Introduction to Media Streams](media-streams.md)<br/>
 
-<h3>Core Context Management: Linked Data</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: Linked Data</h3>
 
 These tutorials show how to create, process, analyze or visualize context information
 
-&nbsp; 601. [Introduction to Linked Data](linked-data.md)<br/>
+&nbsp; 601. [Introduction to Linked Data](linked-data.md)<br/> &nbsp; 602.
+[Linked Data Relationships and Data Models](relationships-linked-data.md)<br/>

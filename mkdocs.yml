@@ -39,5 +39,6 @@ pages:
       - "Media Streams": "media-streams.md"
   - "Core Context Managment: NGSI-LD":
       - "Linked Data": "linked-data.md"
+      - "Relationships & Data Models": "relationships-linked-data.md"
   - "Appendix":
       - "Curl Commands": "cmds/administrating-xacml.md"

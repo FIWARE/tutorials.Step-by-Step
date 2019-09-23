@@ -53,7 +53,7 @@ sold at?"_
 
 ### Video: What is Linked Data?
 
-[![](http://img.youtube.com/vi/4x_xzT5eF5Q/0.jpg)](https://www.youtube.com/watch?v=4x_xzT5eF5Q "Introduction")
+[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=4x_xzT5eF5Q "Introduction")
 
 Click on the image above to watch an introductory video on linked data concepts
 
@@ -74,7 +74,7 @@ Furthermore the JSON-LD specification enables you to define a unique `@type` ass
 
 ### Video: What is JSON-LD?
 
-[![](http://img.youtube.com/vi/vioCbTo3C-4/0.jpg)](https://www.youtube.com/watch?v=vioCbTo3C-4 "JSON-LD")
+[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=vioCbTo3C-4 "JSON-LD")
 
 Click on the image above to watch a video describing the basic concepts behind JSON-LD.
 
@@ -92,7 +92,7 @@ attribute and its value. Relationships allow to establish associations between i
 
 As a reminder, the NGSI v2 data model is quite simple. It can be summarized as shown below:
 
-![](https://jason-fox.github.io/tutorials.Linked-Data/img/ngsi-v2.png)
+![](https://fiware.github.io/tutorials.Linked-Data/img/ngsi-v2.png)
 
 The core element of NGSI v2 is the data _entity_, typically a real object with a changing state (such as a **Store**, a
 **Shelf** and so on). Entities have _attributes_ (such as `name` and `location`) and these in turn hold _metadata_ such
@@ -111,7 +111,7 @@ defined by convention ( e.g. starting with `ref`, such as `refManagedBy`) and as
 
 The NGSI LD data model is more complex, with more rigid definitions of use which lead to a navigable knowledge graph.
 
-![](https://jason-fox.github.io/tutorials.Linked-Data/img/ngsi-ld.png)
+![](https://fiware.github.io/tutorials.Linked-Data/img/ngsi-ld.png)
 
 Once again, _entity_ can be considered to be the core element. Every entity must use a unique `id` which must be a URI,
 often a [URN](https://en.wikipedia.org/wiki/Uniform_resource_name), there is also a `type`, used to define the structure
@@ -169,7 +169,7 @@ persistence of the context data it holds. Therefore, the architecture will consi
 Since all interactions between the two elements are initiated by HTTP requests, the elements can be containerized and
 run from exposed ports.
 
-![](https://jason-fox.github.io/tutorials.Linked-Data/img/architecture.png)
+![](https://fiware.github.io/tutorials.Linked-Data/img/architecture.png)
 
 The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file:
 
