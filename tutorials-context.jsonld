@@ -95,8 +95,26 @@
     {
       "@id": "tutorial:Product",
       "@type": "rdfs:Class",
-      "rdfs:comment": "Product is something sold in a Store.",
-      "rdfs:label": "Product",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Product is something sold in a Store."
+        },
+        {
+          "@language": "ja",
+          "@value": "製品は、ストアで販売されているものです。"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value":    "Product"
+        },
+        {
+          "@language": "ja",
+          "@value": "製品"
+        }
+      ],      
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -104,8 +122,27 @@
     {
       "@id": "tutorial:Shelf",
       "@type": "rdfs:Class",
-      "rdfs:comment": "A Shelf is a unit of Store Furniture",
-      "rdfs:label": "Shelf",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "A Shelf is a unit of Store Furniture"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚は店舗家具の単位です"
+        }
+      ],
+      "rdfs:label":
+      [
+        { 
+          "@language": "en",
+          "@value": "Shelf"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚"
+        }
+      ],
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -113,8 +150,26 @@
     {
       "@id": "tutorial:StockOrder",
       "@type": "rdfs:Class",
-      "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
-      "rdfs:label": "StockOrder",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "StockOrder an entry in a list of items sold in one or more stores"
+        },
+        {
+          "@language": "ja",
+          "@value": "在庫注文は、1 つ以上の店舗で販売される品目の一覧のエントリです。"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "StockOrder"
+        },
+        {
+          "@language": "ja",
+          "@value": "在庫注文"
+        }
+      ],
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Intangible"
       }
@@ -128,8 +183,27 @@
       "http://www.w3.org/2002/07/owl#equivalentClass": {
         "@id": "http://xmlns.com/foaf/0.1/Person"
       },
-      "rdfs:comment": "A person (alive, dead, undead, or fictional).",
-      "rdfs:label": "Person",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "A person (alive, dead, undead, or fictional)."
+        },
+        {
+          "@language": "ja",
+          "@value": "人(生きている、死んでいる、アンデッド、または架空の人)。"
+        }
+      ],
+      "rdfs:label": 
+      [
+        { 
+          "@language": "en",
+          "@value": "Person"
+        },
+        {
+          "@language": "ja",
+          "@value": "人"
+        }
+      ],
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -150,8 +224,26 @@
           "@id": "schema:Person"
         }
       ],
-      "rdfs:comment": "Object requested by person.",
-      "rdfs:label": "requestedBy"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Object requested by person."
+        },
+        {
+          "@language": "ja",
+          "@value": "人が要求したオブジェクト。"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "requestedBy"
+        },
+        {
+          "@language": "ja",
+          "@value": "要求者"
+        }
+      ]
     },
     {
       "@id": "tutoral:installedBy",
@@ -166,8 +258,26 @@
           "@id": "schema:Person"
         }
       ],
-      "rdfs:comment": "Object requested by person.",
-      "rdfs:label": "installedBy"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Person who installs an Object"
+        },
+        {
+          "@language": "ja",
+          "@value": "オブジェクトをインストールするユーザー"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "installedBy"
+        },
+        {
+          "@language": "ja",
+          "@value": "インストール者"
+        }
+      ]
     },
     {
       "@id": "tutorial:furniture",
@@ -182,8 +292,26 @@
           "@id": "tutorial:Shelf"
         }
       ],
-      "rdfs:comment": "Units found within a Building",
-      "rdfs:label": "furniture"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Units found within a Building"
+        },
+        {
+          "@language": "ja",
+          "@value": "建物内で見つかったユニット"
+        }
+      ],
+      "rdfs:label": [  
+        {
+          "@language": "en",
+          "@value":   "furniture"
+        },
+        {
+          "@language": "ja",
+          "@value": "家具"
+        }
+      ]
     },
     {
       "@id": "tutorial:locatedIn",
@@ -198,8 +326,26 @@
           "@id": "fiware:Building"
         }
       ],
-      "rdfs:comment": "Building in which an item is found",
-      "rdfs:label": "locatedIn"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Building in which an item is found"
+        },
+        {
+          "@language": "ja",
+          "@value": "アイテムが見つかった建物"
+        }
+      ],
+      "rdfs:label": [
+        {
+          "@language": "en",
+          "@value":   "locatedIn"
+        },
+        {
+          "@language": "ja",
+          "@value": "に位置する"
+        }
+      ]
     },
     {
       "@id": "tutorial:stocks",
@@ -214,8 +360,26 @@
           "@id": "tutorial:Product"
         }
       ],
-      "rdfs:comment": "The product found on a shelf",
-      "rdfs:label": "stocks"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "The product found on a shelf"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚の上にある製品"
+        }
+      ],
+      "rdfs:label": [
+        {
+          "@language": "en",
+          "@value": "stocks"
+        },
+        {
+          "@language": "ja",
+          "@value": "株式"
+        }
+      ]
     },
     {
       "@id": "tutorial:requestedFor",
@@ -230,8 +394,26 @@
           "@id": "fiware:Building"
         }
       ],
-      "rdfs:comment": "Store for which an item is requested",
-      "rdfs:label": "requestedFor"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Store for which an item is requested"
+        },
+        {
+          "@language": "ja",
+          "@value": "品目が要求される店舗"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "requestedFor"
+        },
+        {
+          "@language": "ja",
+          "@value": "要求対象"
+        }
+      ]
     },
     {
       "@id": "tutorial:orderedProduct",
@@ -246,8 +428,26 @@
           "@id": "tutorial:Product"
         }
       ],
-      "rdfs:comment": "The Product ordered for a store",
-      "rdfs:label": "orderedProduct"
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "The Product ordered for a store"
+        },
+        {
+          "@language": "ja",
+          "@value": "店舗に対して注文された製品"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "orderedProduct"
+        },
+        {
+          "@language": "ja",
+          "@value": "注文された製品"
+        }
+      ]
     }
   ]
 }
