@@ -185,17 +185,6 @@
       "weasel": false,
       "so": false,
       "thereIs": false
-    },
-    "no-dead-link": {
-       "ignoreRedirects": true,
-       "ignore": [
-          "mailto:*",
-          "https://oauth.net",
-          "https://ec.haxx.se",
-          "https://commons.wikimedia.org/wiki/User:*",
-          "https://openweathermap.org/api",
-          "https://*.rtfd.io",
-      ]
     }
   },
   "filters": {

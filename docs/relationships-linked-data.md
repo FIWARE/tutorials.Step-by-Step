@@ -128,7 +128,7 @@ star rating.
 
 Click on the image above to watch an introductory video on rich snippets for product search.
 
-Further machine readable data model examples can be found on the [Steal Our JSON-LD](https://jsonld.com/) website.
+Further machine readable data model examples can be found on the [Steal Our JSON-LD](https://jsonld.com/) site.
 
 ## Traversing relationships
 
