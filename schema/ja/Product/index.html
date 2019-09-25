@@ -1,0 +1,114 @@
+<html>
+  <head>
+
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&ver=4.9.6#038;subset=latin,latin-ext');
+body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
+a {font-weight: 600;color: #233c68; text-decoration: none;}
+th a, a:hover {color: #45d3dd;}
+thead th, th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
+	</style>
+  </head>
+  <body>
+  	<a href=".."><img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title=""></a>
+
+
+    <p>FIWARE チュートリアル・スキーマ:<b>Product</b></p>
+
+    <p><b>Product</b> - ストアで販売されている物</p>
+
+
+    <table>
+        <thead>
+  			<tr>
+                                <th>プロパティ</th><th>期待されるタイプ</th><th>説明</th>
+  			</tr>
+  		</thead>
+
+		<tbody><tr>
+     		<th class="head" colspan="3"><a href="../Product">Product</a> のプロパティ</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+    			<th id="name" class="prop-nam" scope="row">
+					<code property="rdfs:label">name</code>
+    			</th>
+        <td>Property: <a href="http://schema.org/Text">text</a> </td>
+ 				<td class="prop-ect">製品の名前
+ 				</td>
+ 			</tr>
+			<tr>
+    			<th id="price" class="prop-nam" scope="row">
+					<code property="rdfs:label">price</code>
+    			</th>
+        <td>Property: <a href="http://schema.org/Text">number</a> </td>
+ 				<td class="prop-ect">製品の価格
+ 				</td>
+ 			</tr>
+ 			<tr>
+    			<th id="size" class="prop-nam" scope="row">
+					<code property="rdfs:label">size</code>
+    			</th>
+          <td>Property: <a href="http://schema.org/Text">text</a> </td>
+ 				<td class="prop-ect">T シャツのサイズ設定における製品のサイズ (<code>S</code>, <code>M</code>, <code>L</code>, <code>XL</code> etc.)
+ 				</td>
+ 			</tr>
+      <tr>
+          <th id="currency" class="prop-nam" scope="row">
+          <code property="rdfs:label">currency</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Text">text</a> </td>
+        <td class="prop-ect">製品の価格設定に使用される通貨
+        </td>
+      </tr>
+
+ 		</tbody>
+ 	</table>
+
+
+  <p>
+  <code style="font-size: large;color: #d6604d;">@context</code> と <code style="font-size: large;color: #d6604d;">@graph</code>  のスニペットは、以下にあります (詳細を見るためにスクロールしてください):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+
+    "Product": "tutorial:Product",
+
+    "currency": {
+      "@id": "tutorial:currency",
+      "@type": "xsd:string"
+    }, 
+    "price": {
+      "@id": "tutorial:price",
+      "@type": "xsd:decimal"
+    }, 
+    "size":  {
+      "@id": "tutorial:size",
+      "@type": "xsd:string"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Product",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "Product is something sold in a Store.",
+      "rdfs:label": "Product",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    }
+  ]
+}
+  </code>
+ </pre>
+ 
+    
+  </body>
+</html>

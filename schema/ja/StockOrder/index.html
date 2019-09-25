@@ -1,0 +1,183 @@
+<html>
+  <head>
+
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&ver=4.9.6#038;subset=latin,latin-ext');
+body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
+a {font-weight: 600;color: #233c68; text-decoration: none;}
+th a, a:hover {color: #45d3dd;}
+thead th, th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
+	</style>
+  </head>
+  <body>
+  	<a href=".."><img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title=""></a>
+
+     <p>FIWARE チュートリアル・スキーマ:<b>StockOrder</b></p>
+
+
+
+
+     <p><b>StockOrder</b> - 1つ以上のストアで販売されているアイテムの一覧のエントリ</p>
+
+
+
+
+    <table>
+        <thead>
+  			<tr>
+  				<th>プロパティ</th><th>期待されるタイプ</th><th>説明</th>    
+  			</tr>
+  		</thead>
+
+		<tbody><tr>
+     		<th  class="head" colspan="3"><a href="../StockOrder">StockOrder</a> のプロパティ</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+    			<th id="productId" class="prop-nam" scope="row">
+					<code property="rdfs:label">orderedProduct</code>
+    			</th>
+        <td>Relationship: <a href="../Product">Product</a></td>
+ 				<td class="prop-ect">この在庫アイテムに関連付けられている製品
+ 				</td>
+ 			</tr>
+      <tr>
+          <th id="requestedFor" class="prop-nam" scope="row">
+          <code property="rdfs:label">requestedFor</code>
+          </th>
+          <td>Relationship: <a href="../Store">Building</a> </td>
+        <td class="prop-ect">この製品が販売されているストアの id
+        </td>
+      </tr>
+       <tr>
+          <th id="soldBy" class="prop-nam" scope="row">
+          <code property="rdfs:label">requestedBy</code>
+          </th>
+          <td>Relationship: Person</td>
+        <td class="prop-ect">この StockOrder を作成した人
+        </td>
+      </tr>
+      <tr>
+          <th id="orderData" class="prop-nam" scope="row">
+          <code property="rdfs:label">orderDate</code>
+          </th>
+          <td>Property: <a href="https://schema.org/DateTime">DateTime</a> </td>
+        <td class="prop-ect">注文された日付
+        </td>
+      </tr>
+       <tr>
+          <th id="stockCount" class="prop-nam" scope="row">
+          <code property="rdfs:label">stockCount</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Integer">integer</a> </td>
+        <td class="prop-ect">倉庫に在庫が残っているアイテムの数
+        </td>
+      </tr>
+ 		</tbody>
+ 	</table>
+  </body>
+
+
+    <p>
+  <code style="font-size: large;color: #d6604d;">@context</code> と <code style="font-size: large;color: #d6604d;">@graph</code>  のスニペットは、以下にあります (詳細を見るためにスクロールしてください):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+
+    "StockOrder": "tutorial:StockOrder",
+
+    "orderDate": {
+      "@id": "tutorial:orderDate",   
+      "@type": "https://uri.etsi.org/ngsi-ld/DateTime"
+    },
+    "orderedProduct": {
+      "@id": "tutorial:orderedProduct",   
+      "@type": "@id"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
+      "@type": "@id"
+    },
+    "requestedFor": {
+      "@id": "tutorial:requestedFor",   
+      "@type": "@id"
+    },
+    "stockCount":  {
+      "@id": "tutorial:stockCount",
+      "@type": "xsd:integer"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:StockOrder",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
+      "rdfs:label": "StockOrder",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Intangible"
+      }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "requestedBy"
+    },
+    {
+      "@id": "tutorial:requestedFor",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": "Store for which an item is requested",
+      "rdfs:label": "requestedFor"
+    },
+    {
+      "@id": "tutorial:orderedProduct",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The Product ordered for a store",
+      "rdfs:label": "orderedProduct"
+    }
+  ]
+}
+  </code>
+ </pre>
+</html>

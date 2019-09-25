@@ -1,0 +1,139 @@
+<html>
+  <head>
+
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&ver=4.9.6#038;subset=latin,latin-ext');
+body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
+a {font-weight: 600;color: #233c68; text-decoration: none;}
+th a, a:hover {color: #45d3dd;}
+thead th, th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
+	</style>
+  </head>
+  <body>
+  	<a href=".."><img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title=""></a>
+
+     <p>FIWARE チュートリアル・スキーマ:<b>Store</b></p>
+
+     <p><b>Store</b> - 物を販売する建物</p>
+
+    <table>
+        <thead>
+  			<tr>
+  				<th>プロパティ</th><th>期待されるタイプ</th><th>説明</th>               
+  			</tr>
+  		</thead>
+
+		<tbody><tr>
+     		<th  class="head" colspan="3"><a href="../Store">Store</a> のプロパティ</th>
+			</tr>
+		</tbody>
+		<tbody>
+ 			<tr>
+    			<th class="prop-nam" scope="row">
+					<code property="rdfs:label">furniture</code>
+    			</th>
+           <td>Relationship: <a href="../Shelf">Shelf</a></td>
+ 				<td class="prop-ect">ストアで見つかった棚ユニットのリスト
+ 				</td>
+ 			</tr>
+ 			<tr>
+    			<th class="prop-nam" scope="row">
+					<code property="rdfs:label">verified</code>
+    			</th>
+          <td>Property: <a href="http://schema.org/Boolean">boolean</a> </td>
+ 				<td class="prop-ect">ストアの住所が確認されたかどうか
+ 				</td>
+ 			</tr>
+ 		</tbody>
+
+    <tbody><tr>
+        <th  class="head" colspan="3">FIWARE <a href="https://fiware-datamodels.readthedocs.io/en/latest/Building/Building/doc/spec/index.html">Building</a> のプロパティ</th>
+      </tr>
+    </tbody>
+    <tbody>
+      <tr>
+          <th id="address" class="prop-nam" scope="row">
+          <code property="rdfs:label">address</code>
+          </th>
+          <td>Property: <a href="http://schema.org/address">address</a> </td>
+        <td class="prop-ect">ストアの住所
+        </td>
+      </tr>
+      <tr>
+          <th id="name" class="prop-nam" scope="row">
+          <code property="rdfs:label">name</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Text">text</a> </td>
+        <td class="prop-ect">ストアの名前
+        </td>
+      </tr>
+       <tr>
+          <th id="location" class="prop-nam" scope="row">
+          <code property="rdfs:label">location</code>
+          </th>
+          <td>GeoProperty: <code>geo:json</code> </td>
+        <td class="prop-ect">ストアの場所
+        </td>
+      </tr>
+       <tr>
+          <th id="category" class="prop-nam" scope="row">
+          <code property="rdfs:label">category</code>
+          </th>
+          <td>Property: <a href="http://schema.org/category">category</a> </td>
+        <td class="prop-ect">建物のカテゴリ
+        </td>
+      </tr>
+    </tbody>
+ 	</table>
+  </body>
+
+  <p>
+  <code style="font-size: large;color: #d6604d;">@context</code> と <code style="font-size: large;color: #d6604d;">@graph</code> のスニペットは、以下にあります (詳細を見るためにスクロールしてください):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+
+    "fiware": "https://uri.fiware.org/ns/datamodels#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+    
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+
+    "address": "schema:address",
+    "category": "fiware:category",
+    "furniture": {
+      "@id": "tutorial:furniture",   
+      "@type": "@id"
+    },
+    "verified": {
+      "@id": "tutorial:verified",
+      "@type": "xsd:boolean"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:furniture",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "rdfs:comment": "Units found within a Building",
+      "rdfs:label": "furniture"
+    }
+  ]
+}
+  </code>
+ </pre>
+</html>

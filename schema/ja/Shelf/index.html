@@ -1,0 +1,223 @@
+<html>
+  <head>
+
+    <style>
+@import url('https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&ver=4.9.6#038;subset=latin,latin-ext');
+body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
+a {font-weight: 600;color: #233c68; text-decoration: none;}
+th a, a:hover {color: #45d3dd;}
+thead th, th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
+	</style>
+  </head>
+  <body>
+  	<a href=".."><img src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png" alt="FIWARE Banner" title=""></a>
+    
+    <p>FIWARE チュートリアル・スキーマ:<b>Shelf</b></p>
+
+    <p><b>Shelf</b> - ストア用家具のユニット。製品は棚にあります</p>
+
+
+
+    <table>
+        <thead>
+  			<tr>
+  				<th>プロパティ</th><th>期待されるタイプ</th><th>説明</th> 
+  			</tr>
+  		</thead>
+
+		<tbody><tr>
+     		<th  class="head" colspan="3"><a href="../Shelf">Shelf</a> のプロパティ</th>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+    			<th id="locatedIn" class="prop-nam" scope="row">
+					<code property="rdfs:label">locatedIn</code>
+    			</th>
+          <td>Relationship: <a href="../Store">Building</a></td>
+ 				<td class="prop-ect">棚ユニットがある建物
+ 				</td>
+ 			</tr>
+ 			<tr>
+    			<th id="maxCapacity" class="prop-nam" scope="row">
+					<code property="rdfs:label">maxCapacity</code>
+    			</th>
+          <td>Property: <a href="http://schema.org/Integer">integer</a> </td>
+ 				<td class="prop-ect">棚が保持できるアイテムの最大数
+ 				</td>
+ 			</tr>
+ 			<tr>
+    			<th id="name" class="prop-nam" scope="row">
+					<code property="rdfs:label">name</code>
+    			</th>
+          <td>Property: <a href="http://schema.org/Text">text</a> </td>
+ 				<td class="prop-ect">棚ユニットの名前
+ 				</td>
+ 			</tr>
+ 			<tr>
+    			<th id="stocks"class="prop-nam" scope="row">
+					<code property="rdfs:label">stocks</code>
+    			</th>
+          <td>Relationship: <a href="../Product">Product</a></td>
+ 				<td class="prop-ect">棚ユニットで現在見つかっている製品
+ 				</td>
+ 			</tr>
+      <tr>
+          <th id="numberOfItems" class="prop-nam" scope="row">
+          <code property="rdfs:label">numberOfItems</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Integer">integer</a> </td>
+        <td class="prop-ect">現在棚にある製品のアイテムの数
+        </td>
+      </tr>
+      <tr>
+          <th id="installedBy"class="prop-nam" scope="row">
+          <code property="rdfs:label">installedBy</code>
+          </th>
+          <td>Relationship: <a href="http://schema.org/Person">Person</a> </td>
+        <td class="prop-ect">棚を設置した人
+        </td>
+      </tr>
+       <tr>
+          <th id="installedBy"class="prop-nam" scope="row">
+          <code property="rdfs:label">statusOfWork</code>
+          </th>
+          <td>Property: <a href="http://schema.org/Boolean">boolean</a> </td>
+        <td class="prop-ect">棚の設置のステータス (例 <code>pending (保留中)</code>, <code>in progress (進行中)</code>, <code>completed (完了)</code>)
+        </td>
+      </tr>
+      <tr>
+          <th id="location" class="prop-nam" scope="row">
+          <code property="rdfs:label">location</code>
+          </th>
+          <td>GeoProperty: <code>geo:json</code> </td>
+        <td class="prop-ect">棚の場所
+        </td>
+      </tr>
+ 		</tbody>
+ 	</table>
+
+
+<p>
+  <code style="font-size: large;color: #d6604d;">@context</code> と <code style="font-size: large;color: #d6604d;">@graph</code>  のスニペットは、以下にあります (詳細を見るためにスクロールしてください):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+  <code>
+{
+  "@context": {
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+ 
+    "Shelf": "tutorial:Shelf",
+
+    "installedBy": {
+      "@id": "tutorial:installedBy",   
+      "@type": "@id"
+    },  
+    "locatedIn": {
+      "@id": "tutorial:locatedIn",   
+      "@type": "@id"
+    },
+    "maxCapacity":  {
+      "@id": "tutorial:maxCapacity",
+      "@type": "xsd:integer"
+    },
+    "numberOfItems":  {
+      "@id": "tutorial:numberOfItems",
+      "@type": "xsd:integer"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
+      "@type": "@id"
+    },  
+    "statusOfWork": "tutorial:statusOfWork",
+    "stocks": {
+      "@id": "tutorial:stocks",   
+      "@type": "@id"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Shelf",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "A Shelf is a unit of Store Furniture",
+      "rdfs:label": "Shelf",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "requestedBy"
+    },
+    {
+      "@id": "tutoral:installedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "installedBy"
+    },
+    {
+      "@id": "tutorial:locatedIn",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": "Building in which an item is found",
+      "rdfs:label": "locatedIn"
+    },
+    {
+      "@id": "tutorial:stocks",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The product found on a shelf",
+      "rdfs:label": "stocks"
+    }
+  ]
+}
+  </code>
+ </pre>
+  </body>
+</html>
