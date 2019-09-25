@@ -786,7 +786,7 @@ curl -G -X GET \
 }
 ```
 
-### Find the ids of all Shelf Units in a Store
+### Find the IDs of all Shelf Units in a Store
 
 This example returns the `locatedIn` URNs of all **Shelf** entities found within `urn:ngsi-ld:Building:store001`. This
 is purely an instance of using the `q` parameter to filter on attribute value
