@@ -143,8 +143,8 @@ th.head {color: white; background: #233c68;}
     {
       "@id": "tutorial:Product",
       "@type": "rdfs:Class",
-      "rdfs:comment": "Product is something sold in a Store.",
-      "rdfs:label": "Product",
+      "rdfs:comment": "製品はストアで販売されている物",
+      "rdfs:label": "製品",
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -152,8 +152,8 @@ th.head {color: white; background: #233c68;}
     {
       "@id": "tutorial:Shelf",
       "@type": "rdfs:Class",
-      "rdfs:comment": "A Shelf is a unit of Store Furniture",
-      "rdfs:label": "Shelf",
+      "rdfs:comment": "棚はストア用家具のユニット",
+      "rdfs:label": "棚",
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -161,8 +161,8 @@ th.head {color: white; background: #233c68;}
     {
       "@id": "tutorial:StockOrder",
       "@type": "rdfs:Class",
-      "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
-      "rdfs:label": "StockOrder",
+      "rdfs:comment": "在庫注文は1つ以上のストアで販売されるアイテムの一覧のエントリ",
+      "rdfs:label": "在庫注文",
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Intangible"
       }
@@ -176,8 +176,8 @@ th.head {color: white; background: #233c68;}
       "http://www.w3.org/2002/07/owl#equivalentClass": {
         "@id": "http://xmlns.com/foaf/0.1/Person"
       },
-      "rdfs:comment": "A person (alive, dead, undead, or fictional).",
-      "rdfs:label": "Person",
+      "rdfs:comment": "人 (生きている, 死んでいる, 完全に死んでいない, または架空の人)",
+      "rdfs:label": "人",
       "rdfs:subClassOf": {
         "@id": "http://schema.org/Thing"
       }
@@ -198,8 +198,8 @@ th.head {color: white; background: #233c68;}
           "@id": "schema:Person"
         }
       ],
-      "rdfs:comment": "Object requested by person.",
-      "rdfs:label": "requestedBy"
+      "rdfs:comment": "人が要求したオブジェクト",
+      "rdfs:label": "要求者"
     },
     {
       "@id": "tutoral:installedBy",
@@ -214,8 +214,8 @@ th.head {color: white; background: #233c68;}
           "@id": "schema:Person"
         }
       ],
-      "rdfs:comment": "Object requested by person.",
-      "rdfs:label": "installedBy"
+      "rdfs:comment": "オブジェクトを設置する人",
+      "rdfs:label": "設置者"
     },
     {
       "@id": "tutorial:furniture",
@@ -230,8 +230,8 @@ th.head {color: white; background: #233c68;}
           "@id": "tutorial:Shelf"
         }
       ],
-      "rdfs:comment": "Units found within a Building",
-      "rdfs:label": "furniture"
+      "rdfs:comment": "建物内で見つかったユニット",
+      "rdfs:label": "家具"
     },
     {
       "@id": "tutorial:locatedIn",
@@ -246,8 +246,8 @@ th.head {color: white; background: #233c68;}
           "@id": "fiware:Building"
         }
       ],
-      "rdfs:comment": "Building in which an item is found",
-      "rdfs:label": "locatedIn"
+      "rdfs:comment": "アイテムが見つかった建物",
+      "rdfs:label": "置き場所"
     },
     {
       "@id": "tutorial:stocks",
@@ -262,8 +262,8 @@ th.head {color: white; background: #233c68;}
           "@id": "tutorial:Product"
         }
       ],
-      "rdfs:comment": "The product found on a shelf",
-      "rdfs:label": "stocks"
+      "rdfs:comment": "棚の上にある製品",
+      "rdfs:label": "在庫"
     },
     {
       "@id": "tutorial:requestedFor",
@@ -278,8 +278,8 @@ th.head {color: white; background: #233c68;}
           "@id": "fiware:Building"
         }
       ],
-      "rdfs:comment": "Store for which an item is requested",
-      "rdfs:label": "requestedFor"
+      "rdfs:comment": "アイテムが要求されたストア",
+      "rdfs:label": "要求対象"
     },
     {
       "@id": "tutorial:orderedProduct",
@@ -294,8 +294,8 @@ th.head {color: white; background: #233c68;}
           "@id": "tutorial:Product"
         }
       ],
-      "rdfs:comment": "The Product ordered for a store",
-      "rdfs:label": "orderedProduct"
+      "rdfs:comment": "ストアで注文された製品",
+      "rdfs:label": "注文された製品"
     }
   ]
 }
