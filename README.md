@@ -12,8 +12,10 @@ This is a collection of tutorials for the FIWARE platform. Each tutorial consist
 demonstrate the correct use of individual FIWARE components and shows the flow of context data within a simple Smart
 Solution either by connecting to a series of dummy IoT devices or manipulating the context directly or programmatically.
 
-| :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) |  
+:information_source: [Data Models](https://fiware.github.io/tutorials.Step-by-Step/schema/) |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------- | --- |
+
 
 
 ## Install
