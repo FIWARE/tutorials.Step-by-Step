@@ -1,0 +1,375 @@
+
+<html>
+  <head>
+
+  
+    <link href="https://fiware.github.io/tutorials.Step-by-Step/schema/fiware.css" rel="stylesheet">
+    <script src="https://fiware.github.io/tutorials.Step-by-Step/schema/language.js">
+    </script>
+
+  </head>
+  <body>
+    <div class="header-container">
+      <div>
+        <img class="banner" src="https://fiware.github.io/tutorials.Step-by-Step/img/fiware.png"/>
+        
+      </div>
+      <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn"/>
+        <div id="myDropdown" class="dropdown-content">
+          <a href="../en">🇬🇧 English</a>
+          <a href="../ja">🇯🇵 日本語</a>
+        </div>
+      </div>
+    </div>
+<br/>
+<br/>
+<a href="https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf"><img src="https://img.shields.io/badge/NGSI-linked_data-red.svg"/></a>
+
+<p>
+    This is the description of a simple "supermarket" <b>NGSI-LD</b> Data Model consisting of 4 entities:
+</p>
+
+<ul>
+    <li><a href="Product">Product</a> - something sold in a Store.</li>
+    <li><a href="Shelf">Shelf</a> - a unit of Store Furniture. Products are found on a shelf.</li>
+    <li><a href="StockOrder">StockOrder</a> - an entry in a list of items sold in one or more stores.</li>
+    <li><a href="Store">Store</a> - a building which sells things.</li>
+</ul>
+
+<p>
+  Further human-readable information about each of the entities defined for this tutorial can be found by clicking through the links.
+</p>
+
+
+<section>
+    <h3>The Full NGSI-LD <code style="font-size: x-large;color: #d6604d;">@context</code> for the Supermarket</h3>
+
+<p>
+  The full tutorial NGSI-LD <code>@context</code> is publicly available at:
+   <code>https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld</code>
+</p>
+<p>
+  A snippet of the <code>@context</code> and <code>@graph</code> can be seen below (scroll to see more detail):
+</p>
+<pre style="padding-left: 1em; max-height: 16em; overflow: scroll; background: aliceblue; border: solid 1px #233c68;
+"
+>
+	<code>
+{
+  "@context": {
+    "type": "@type",
+    "id": "@id",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "fiware": "https://uri.fiware.org/ns/datamodels#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+    "Shelf": "tutorial:Shelf",
+    "StockOrder": "tutorial:StockOrder",
+    "Person": "schema:Person",
+    "address": "schema:address",
+    "category": "fiware:category",
+    "containedInPlace": "fiware:containedInPlace",
+    "dataProvider": "fiware:dataProvider",
+    "description": "fiware:description",
+    "floorsAboveGround": "fiware:floorsAboveGround",
+    "floorsBelowGround": "fiware:floorsBelowGround",
+    "owner": {
+      "@id": "fiware:owner",   
+      "@type": "@id"
+    },
+    "occupier": {
+      "@id": "fiware:occupier",   
+      "@type": "@id"
+    },
+    "refMap": "fiware:refMap",
+    "source": "fiware:source", 
+    "installedBy": {
+      "@id": "tutorial:installedBy",   
+      "@type": "@id"
+    },  
+    "locatedIn": {
+      "@id": "tutorial:locatedIn",   
+      "@type": "@id"
+    },
+    "maxCapacity":  {
+      "@id": "tutorial:maxCapacity",
+      "@type": "xsd:integer"
+    },  
+    "statusOfWork": "tutorial:statusOfWork",
+    "stocks": {
+      "@id": "tutorial:stocks",   
+      "@type": "@id"
+    },
+    "currency": {
+      "@id": "tutorial:currency",
+      "@type": "xsd:string"
+    }, 
+    "price": {
+      "@id": "tutorial:price",
+      "@type": "xsd:decimal"
+    }, 
+    "size":  {
+      "@id": "tutorial:size",
+      "@type": "xsd:string"
+    },
+    "furniture": {
+      "@id": "tutorial:furniture",   
+      "@type": "@id"
+    },
+    "verified": {
+      "@id": "tutorial:verified",
+      "@type": "xsd:boolean"
+    },
+    "requestedFor": {
+      "@id": "tutorial:requestedFor",   
+      "@type": "@id"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
+      "@type": "@id"
+    },
+    "orderedProduct": {
+      "@id": "tutorial:orderedProduct",   
+      "@type": "@id"
+    },
+    "orderDate": {
+      "@id": "tutorial:orderDate",   
+      "@type": "https://uri.etsi.org/ngsi-ld/DateTime"
+    },
+    "stockCount":  {
+      "@id": "tutorial:stockCount",
+      "@type": "xsd:integer"
+    }, 
+    "numberOfItems":  {
+      "@id": "tutorial:numberOfItems",
+      "@type": "xsd:integer"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Product",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "Product is something sold in a Store.",
+      "rdfs:label": "Product",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:Shelf",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "A Shelf is a unit of Store Furniture",
+      "rdfs:label": "Shelf",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:StockOrder",
+      "@type": "rdfs:Class",
+      "rdfs:comment": "StockOrder an entry in a list of items sold in one or more stores",
+      "rdfs:label": "StockOrder",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Intangible"
+      }
+    },
+    {
+      "@id": "schema:Person",
+      "@type": "rdfs:Class",
+      "http://purl.org/dc/terms/source": {
+        "@id": "http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews"
+      },
+      "http://www.w3.org/2002/07/owl#equivalentClass": {
+        "@id": "http://xmlns.com/foaf/0.1/Person"
+      },
+      "rdfs:comment": "A person (alive, dead, undead, or fictional).",
+      "rdfs:label": "Person",
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Object requested by person.",
+      "rdfs:label": "requestedBy"
+    },
+    {
+      "@id": "tutoral:installedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": "Person who installs an Object",
+      "rdfs:label": "installedBy"
+    },
+    {
+      "@id": "tutorial:furniture",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "rdfs:comment": "Units found within a Building",
+      "rdfs:label": "furniture"
+    },
+    {
+      "@id": "tutorial:locatedIn",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": "Building in which an item is found",
+      "rdfs:label": "locatedIn"
+    },
+    {
+      "@id": "tutorial:stocks",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The product found on a shelf",
+      "rdfs:label": "stocks"
+    },
+    {
+      "@id": "tutorial:requestedFor",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": "Store for which an item is requested",
+      "rdfs:label": "requestedFor"
+    },
+    {
+      "@id": "tutorial:orderedProduct",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": "The Product ordered for a store",
+      "rdfs:label": "orderedProduct"
+    }
+  ]
+}
+ 	</code>
+ </pre>
+ 
+</section>
+
+<section>
+  <h3>How to read an NGSI-LD <code style="font-size: large;color: #d6604d;">@context</code> -  syntax tokens and keywords  </h3>
+
+    <p>As defined in the <a href="https://json-ld.org/spec/FCGS/json-ld/20130328">JSON-LD 1.0 specification</a>,
+      JSON-LD specifies a number of syntax tokens and keywords that used in NGSI-LD.  To facilitate the understanding of the tutorial NGSI-LD data model, the main keywords are listed below:</p>
+    <ul>
+      <li>The <em>context</em> defined by <code  style="font-size: large;color: #d6604d;">@context</code><br/>Used to define the short-hand names that are used throughout a JSON-LD
+        document.<br/> More information:
+        <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#the-context" class="sectionRef sec-ref">Section 5.1 </a>.<br/><br/></li>
+      <li><em>Node identifiers</em> defined by <code  style="font-size: large;color: #d6604d;">@id</code><br/>Used to uniquely identify <em>things</em> that are being defined.<br/>
+        More information: <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#node-identifiers" class="sectionRef sec-ref">Section 5.3</a>.<br/><br/></li>
+      <li> <em>Values</em> defined by <code  style="font-size: large;color: #d6604d;">@value</code><br/>Used to specify the data that is associated with a particular
+        <a title="property" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-property">property</a> in the graph.<br/>More information: <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#typed-values" class="sectionRef sec-ref">Section 6.4</a>.<br/><br/></li>
+      <li> <em>Data types</em> defined by <code  style="font-size: large;color: #d6604d;">@type</code> (typed values)<br/>Used to set the data type of a <a title="node" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-node">node</a> or
+        <a title="typed-value" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-typed-value">typed value</a>.<br/>Described in
+        <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#typed-values" class="sectionRef sec-ref">Section 6.4</a>.<br/><br/></li>     
+      <li>Default <em>vocabulary</em> defined by <code  style="font-size: large;color: #d6604d;">@vocab</code><br/>Used to expand properties and values in <code  style="font-size: large;color: #d6604d;">@type</code> with a common prefix
+        <a title="iri" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-iri"><abbr title="Internationalized Resource Identifier">IRI</abbr></a>.<br/>More information: <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#default-vocabulary" class="sectionRef sec-ref">Section 6.2</a>.<br/><br/></li>
+      <li><em>Named Graphs</em> defined by <code  style="font-size: large;color: #d6604d;">@graph</code><br/>Used to explicitly label a <a title="json-ld-graph" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-json-ld-graph">JSON-LD graph</a>.
+        More information: <a href="https://json-ld.org/spec/FCGS/json-ld/20130328/#named-graphs" class="sectionRef sec-ref">Section 6.13</a>.<br/><br/></li>
+    </ul>
+
+    <p>Note that all keys, <a title="keyword" href="https://json-ld.org/spec/FCGS/json-ld/20130328/#dfn-keyword">keywords</a>, and values in JSON-LD and NSGI-LD are case-sensitive.</p>
+  </section>
+
+
+
+ <section>
+    <h3>Relationship between NGSI-LD and JSON-LD</h3>
+
+    <p> The
+      <a href="https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf">NGSI-LD  specification</a> states that  NGSI-LD is based on <a href="http://www.w3.org/TR/2014/REC-json-ld-20140116/">JSON-LD</a>, 
+      a JSON-based format to serialize Linked Data. The <code style="font-size: large;color: #d6604d;">@context</code> in JSON-LD is used
+      to map terms provided as strings to concepts specified as URIs. The Core NGSI-LD (JSON-LD)
+      <code style="font-size: large;color: #d6604d;">@context</code> is defined as a JSON-LD <code style="font-size: large;color: #d6604d;">@context</code> which contains:
+    </p>
+<ul>
+  <li>
+    The core terms needed to uniquely represent the key concepts defined by the NGSI-LD Information Model
+  </li>
+  <li>
+    The terms needed to uniquely represent all the members that define the API-related Data Types
+  </li>
+</ul>
+<p>
+  All NGSI-LD compliant implementations support the use of the Core <code style="font-size: large;color: #d6604d;">@context</code>, which is implicitly
+  present when  processing or generating context information. However, when rendering NGSI-LD Elements, 
+  the Core <code style="font-size: large;color: #d6604d;">@context</code> should always be explicitly referenced, so that, if needed, JSON-LD processors
+  can properly expand the resulting JSON-LD documents provided by API implementations.
+</p>
+<p>
+  The full core NGSI-LD <code style="font-size: large;color: #d6604d;">@context</code> is publicly available at:
+   <code>http://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld</code>
+</p>
+</section>
+
+
+</body>
+</html>
