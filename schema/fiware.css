@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&ver=4.9.6#038;subset=latin,latin-ext');
+body {padding: 10px; font: 14px; font-family: Montserrat,Helvetica,Arial,sans-serif; color:#4c4c4c;}
+a {font-weight: 600;color: #233c68; text-decoration: none;}
+a:hover {color: #45d3dd;}
+th.head {box-shadow: 0px 4px 0px 0px #000000;}
+th.head {color: white; background: #233c68;}
+
+
+.dropbtn {
+  color: white;
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  background-image:  url('language-icon.png');
+  background-repeat: no-repeat;
+  background-size: 45px 45px;
+  height: 48px;
+  width: 48px;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-image:  url('language-icon-high.png');
+}
+
+.dropdown {
+  top: -55px;
+  position: relative;
+  display: inline-block;
+  text-align: right; 
+  width: 100%;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0px;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+.header-container {height: 30px;}
