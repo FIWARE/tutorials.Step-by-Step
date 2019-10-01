@@ -13,7 +13,15 @@
     "StockOrder": "tutorial:StockOrder",
     "Person": "schema:Person",
     "address": "schema:address",
-    "category": "fiware:category",
+    "category": { 
+      "@id" :"fiware:category",
+      "@type": "@vocab"
+    }, 
+    "commercial": "fiware:commercial",
+    "office": "fiware:office",
+    "industrial": "fiware:industrial",
+    "retail": "fiware:retail",
+    "residential": "fiware:residential",
     "containedInPlace": "fiware:containedInPlace",
     "dataProvider": "fiware:dataProvider",
     "description": "fiware:description",
@@ -41,7 +49,14 @@
       "@id": "tutorial:maxCapacity",
       "@type": "xsd:integer"
     },  
-    "statusOfWork": "tutorial:statusOfWork",
+    "statusOfWork": { 
+      "@id": "tutorial:statusOfWork",
+      "@type": "@vocab"
+    },
+    "requested": "tutorial:requested",
+    "completed": "tutorial:completed",
+    "scheduled": "tutorial:scheduled",
+    "inProgress": "tutorial:inProgress",
     "stocks": {
       "@id": "tutorial:stocks",   
       "@type": "@id"
