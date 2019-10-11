@@ -930,6 +930,7 @@ The response contains a list of the fields which have been amended.
 curl -iX DELETE \
   'http://localhost:3005/v1/organizations/{{organization-id}}' \
   -H 'Content-Type: application/json' \
+  -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
 ## Administrating Users within an Organization
