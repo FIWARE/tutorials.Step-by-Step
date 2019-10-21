@@ -1,12 +1,13 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
-**Description:** This tutorial is an introduction to
+\*Description:** This tutorial is an introduction to
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to persist
 context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the
-[previous tutorial](iot-agent.md) and persists measurements from those sensors into the database. To retrieve time-based
-aggregations of such data, users can either use **QuantumLeap** query API or connect directly to the **CrateDB** HTTP
-endpoint. Results are visualised on a graph or via the **Grafana** time series analytics tool.
+[previous tutorial](https://github.com/FIWARE/tutorials.IoT-Agent) and persists measurements from those sensors into the
+database. To retrieve time-based aggregations of such data, users can either use **QuantumLeap** query API or connect
+directly to the **CrateDB** HTTP endpoint. Results are visualised on a graph or via the **Grafana\*\* time series
+analytics tool.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Time-Series-Data/)
@@ -22,34 +23,39 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > — Emily Dickinson
 
 Previous tutorials have shown how to persist historic context data into a range of databases such as **MySQL** and
-**PostgreSQL** using [Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) and
-[Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI)Furthermore, the
+**PostgreSQL**. using [Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context) and
+[Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context) Furthermore, the
 [Short Term Historic](https://github.com/FIWARE/tutorials.Short-Term-History) tutorial has introduced the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic enabler for persisting and querying historic context data
 using a **MongoDB** database.
 
 FIWARE [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) is an alternative generic enabler created
-specifically for data persistence into the **CrateDB** time-series database, and therefore offers an alternative to the
-[STH-Comet](https://fiware-sth-comet.readthedocs.io/).
+specifically that offers an API to persist and query time-series database (CrateDB and TimescaleDB as of today), and
+therefore offers an alternative to the [STH-Comet](https://fiware-sth-comet.readthedocs.io/).
 
 [CrateDB](https://crate.io/) is a distributed SQL DBMS designed for use with the internet of Things. It is capable of
 ingesting a large number of data points per second and can be queried in real-time. The database is designed for the
 execution of complex queries such as geospatial and time series data. Retrieval of this historic context data allows for
 the creation of graphs and dashboards displaying trends over time.
 
+[TimescaleDB](https://www.timescale.com/) scales PostgreSQL for time-series data via automatic partitioning across time
+and space (partitioning key), yet retains the standard PostgreSQL interface. In other words, TimescaleDB exposes what
+look like regular tables, but are actually only an abstraction (or a virtual view) of many individual tables comprising
+the actual data. In combination with [PostGIS](https://postgis.net/) extension can support geo-timeseries.
+
 A summary of the differences can be seen below:
 
-| QuantumLeap                                                                                            | STH-Comet                                                                                          |
-| ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| Offers an NGSI v2 interface for notifications                                                          | Offers an NGSI v1 interface for notifications                                                      |
-| Persists Data to a CrateDB database                                                                    | Persists Data to MongoDB database                                                                  |
-| Offers its own HTTP endpoint for queries, but you can also query CrateDB                               | Offers its own HTTP endpoint for queries - MongoDB database cannot be accessed directly            |
-| QuantumLeap supports complex data queries (thanks to CrateDB)                                          | STH-Comet offers a limited set of queries                                                          |
-| CrateDB is a distributed and scalable SQL DBMS built atop NoSQL storage                                | MongoDB is a document based NoSQL database                                                         |
-| QuantumLeap's API is docummented in OpenAPI [here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb) | STH-Comet's API is explained in its docs [here](https://fiware-sth-comet.readthedocs.io/en/latest) |
+| QuantumLeap                                                                                                      | STH-Comet                                                                                          |
+| ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Offers an NGSI v2 interface for notifications                                                                    | Offers an NGSI v1 interface for notifications                                                      |
+| Persists Data to CrateDB or TimescaleDB database                                                                 | Persists Data to MongoDB database                                                                  |
+| Offers its own HTTP endpoint for queries (currently for CrateDB), but you can also query CrateDB and TimescaleDB | Offers its own HTTP endpoint for queries, you can also query MongoDB directly                      |
+| QuantumLeap supports complex data queries (thanks to CrateDB and TimescaleDB)                                    | STH-Comet offers a limited set of queries                                                          |
+| QuantumLeap leverage two natives distributed and scalable SQL DBMS                                               | MongoDB is a document based NoSQL database                                                         |
+| QuantumLeap's API is docummented in OpenAPI [here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb)           | STH-Comet's API is explained in its docs [here](https://fiware-sth-comet.readthedocs.io/en/latest) |
 
 Further details about the differences between the underlying database engines can be found
-[here](https://db-engines.com/en/system/CrateDB%3BMongoDB).
+[here](https://db-engines.com/en/system/CrateDB%3BMongoDB%3BTimescaleDB).
 
 ## Analyzing time series data
 
@@ -65,8 +71,8 @@ It can also be used to reduce the significance of each individual data point to 
 #### Grafana
 
 [Grafana](https://grafana.com/) is an open source software for time series analytics tool which will be used during this
-tutorial. It integrates with a variety of time-series databases including **CrateDB**. It is available licensed under
-the Apache License 2.0. More information can be found at `https://grafana.com/`.
+tutorial. It integrates with a variety of time-series databases including **CrateDB** and **TimescaleDB**. It is
+available licensed under the Apache License 2.0. More information can be found at `https://grafana.com/`.
 
 #### Device Monitor
 
@@ -125,7 +131,7 @@ Therefore the overall architecture will consist of the following elements:
     protocol running over HTTP. - Note the **Stock Management Frontend** and **Context Provider NGSI** proxy are not
     used in this tutorial.
 
-Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
+Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
 from exposed ports.
 
 The overall architecture can be seen below:
@@ -172,15 +178,12 @@ Grafana analytics tool. The rest of the system providing the context data has be
 crate-db:
     image: crate:3.1.2
     hostname: crate-db
-    container_name: db-crate
     ports:
         - "4200:4200"
         - "4300:4300"
     command:
         crate -Clicense.enterprise=false -Cauth.host_based.enabled=false  -Ccluster.name=democluster
         -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
-    volumes:
-        - crate-db:/data
 ```
 
 <h3>QuantumLeap Configuration</h3>
@@ -206,6 +209,8 @@ grafana:
         - crate-db
     ports:
         - "3003:3000"
+    environment:
+        - GF_INSTALL_PLUGINS=https://github.com/orchestracities/grafana-map-plugin/archive/master.zip;grafana-map-plugin,grafana-clock-panel,grafana-worldmap-panel
 ```
 
 The `quantumleap` container is listening on one port:
@@ -224,7 +229,8 @@ The `grafana` container has connected up port `3000` internally with port `3003`
 UI is usually available on port `3000`, but this port has already been taken by the dummy devices UI so it has been
 shifted to another port. The Grafana Environment variables are described within their own
 [documentation](https://grafana.com/docs/installation/configuration/). The configuration ensures we will be able to
-connect to the **CrateDB** database later on in the tutorial
+connect to the **CrateDB** database later on in the tutorial. The configuration also imports a custom map plugin that
+helps you in displaying NGSIv2 entities over a map.
 
 ### Generating Context Data
 
@@ -238,7 +244,7 @@ the same page:
 
 ## Setting up Subscriptions
 
-Once a dynamic context system is up and running, we need to inform **Quantum Leap** directly of changes in context. As
+Once a dynamic context system is up and running, we need to inform **QuantumLeap** directly of changes in context. As
 expected this is done using the subscription mechanism of the **Orion Context Broker**. The `attrsFormat=legacy`
 attribute is not required since **QuantumLeap** accepts NGSI v2 notifications directly.
 
@@ -354,8 +360,8 @@ curl -iX POST \
 
 ### Checking Subscriptions for QuantumLeap
 
-Before anything, check the subscriptions you created in steps :one: and :two: are working (i.e., at least one
-notification for each was sent).
+Before anything, check the subscriptions you created in steps 1 and 2 are working (i.e., at least one notification for
+each was sent).
 
 #### 3 Request:
 
@@ -364,7 +370,6 @@ curl -X GET \
   'http://localhost:1026/v2/subscriptions/' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
-}'
 ```
 
 #### Response:
@@ -406,7 +411,7 @@ curl -X GET \
 
 ## Time Series Data Queries (QuantumLeap API)
 
-**QuantumLeap** offfers an API wrapping CrateDB backend so you can also perform multiple types of queries. The
+**QuantumLeap** offers an API wrapping CrateDB backend so you can also perform multiple types of queries. The
 documentation of the API is [here](https://app.swaggerhub.com/apis/smartsdk/ngsi-tsdb/). Mind the versions. If you have
 access to your `quantumleap` container (e.g. it is running in `localhost` or port-forwarding to it), you can navigate
 its API via `http://localhost:8668/v2/ui`.
@@ -539,7 +544,7 @@ This example shows minimum `luminosity` values from `Lamp:001` over each minute.
 
 > You need QuantumLeap **version >= 0.4.1**. You can check your version with a simple GET like:
 
-> ```
+> ```bash
 > curl -X GET \
 >   'http://localhost:8668/v2/version' \
 >   -H 'Accept: application/json'
@@ -604,8 +609,8 @@ This example shows the latest four sampled `luminosity` values of lamps that are
 `52°33'16.9"N 13°23'55.0"E` (Bornholmer Straße 65, Berlin, Germany). If you have turned on all the lamps available on
 the device monitor page, you should be able to see data for `Lamp:001` and `Lamp:004`.
 
-> **Note:** Geographical queries are only available starting from version `0.5` of QuantumLeap which implements the full
-> set of queries detailed in the Geographical Queries section of the
+> :information_source: **Note:** Geographical queries are only available starting from version `0.5` of QuantumLeap
+> which implements the full set of queries detailed in the Geographical Queries section of the
 > [NGSI v2 specification](http://fiware.github.io/specifications/ngsiv2/stable/).
 
 #### 10 Request:
@@ -701,9 +706,9 @@ attribute.
 > -   QuantumLeap can be easily extended to other backends and your app will get compatibility for free.
 > -   If your deployment is distributed, you won't need to expose the ports of your database to the outside.
 
-If your are certain your query is not supported by **QuantumLeap**, you may have to end up querying **CrateDB**
-directly - in this case please also open an issue in
-[QuantumLeap's GitHub repository](https://github.com/smartsdk/ngsi-timeseries-api/issues) to inform the team.
+If your are sure your query is not supported by **QuantumLeap**, you may have to end up querying **CrateDB**, however,
+please open an issue in [QuantumLeap's GitHub repository](https://github.com/smartsdk/ngsi-timeseries-api/issues) so the
+team is aware.
 
 ### CrateDB API - Checking Data persistence
 
@@ -948,11 +953,11 @@ Once the JSON response for a specified time series has been retrieved, displayin
 end user. It must be manipulated to be displayed in a bar chart, line graph or table listing. This is not within the
 domain of **QuantumLeap** as it not a graphical tool, but can be delegated to a mashup or dashboard component such as
 [Wirecloud](https://github.com/FIWARE/catalogue/blob/master/processing/README.md#Wirecloud) or
-[Knowage](https://github.com/FIWARE/catalogue/blob/master/processing/README.md#Knowage)
+[Knowage](https://github.com/FIWARE/catalogue/blob/master/processing/README.md#Knowage).
 
 It can also be retrieved and displayed using a third-party graphing tool appropriate to your coding environment - for
 example [chartjs](http://www.chartjs.org/). An example of this can be found within the `history` controller in the
-[Git Repository](https://github.com/FIWARE/tutorials.Step-by-Step/blob/master/context-provider/controllers/history.js)
+[Git Repository](https://github.com/FIWARE/tutorials.Step-by-Step/blob/master/context-provider/controllers/history.js).
 
 The basic processing consists of two-step - retrieval and attribute mapping, sample code can be seen below:
 
@@ -1005,7 +1010,7 @@ function crateToTimeSeries(crateResponse, aggMethod, hexColor) {
 ```
 
 The modified data is then passed to the frontend to be processed by the third-party graphing tool. The result is shown
-here: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
+here: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`.
 
 ## Displaying CrateDB data as a Grafana Dashboard
 
@@ -1018,43 +1023,75 @@ instructions below summarize how to connect and display a graph of the Lamp `lum
 ### Logging in
 
 The `docker-compose` file has started an instance of the Grafana UI listening on port `3003`, so the login page can be
-found at: `http://localhost:3003/login`. The default username is `admin` and the default password is `admin`
+found at: `http://localhost:3003/login`. The default username is `admin` and the default password is `admin`.
 
 ### Configuring a Data Source
 
-After logging in, a datasource must be set up at `http://localhost:3003/datasources` with the following values
+After logging in, a PostgreSQL datasource must be set up at `http://localhost:3003/datasources` with the following
+values
 
--   **Name** Lamp
--   **Type** Crate
-
--   **URL** `http://cratedb:4200`
--   **Access** Server (Default)
-
--   **Schema** mtopeniot
--   **Table** etlamp
--   **Time column** time_index
-
-![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-settings.png)
+-   **Name** `CrateDB`
+-   **Host** `crate-db:5432`
+-   **Database** `mtopeniot`
+-   **User** `crate`
+-   **SSL Mode** `disable`
 
 ![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-crate-connect.png)
 
-Click on the Save and test button and the message _Data Source added_ will be returned
+Click on the Save and test button and make sure it says _Database Connection OK_.
 
 ### Configuring a Dashboard
 
-To display a new dashboard, you can either click the **+** button and select **New Dashboard** or go directly to
-`http://localhost:3003/dashboard/new?orgId=1`. Thereafter select the **Graph** dashboard type.
-
-To configure the dashboard click on Panel title and select edit from the dropdown list.
+To display a new dashboard, you can either click the **+** button and select **Dashboard** or go directly to
+`http://localhost:3003/dashboard/new?orgId=1`. Thereafter click **Add Query**.
 
 The following values in **bold text** need to be placed in the graphing wizard
 
--   Data Source **Lamp** (selected from the previously created Data Sources)
--   FROM **mtopeniot.etlamp** WHERE **entity_id** = **Lamp:001**
--   Select **Min** **luminosity**
--   Group By time Interval **Minute** Format as **Time Series**
+-   Queries to **CrateDB** (the previously created Data Source)
+-   FROM **etlamp**
+-   Time column **time_index**
+-   Metric column **entity_id**
+-   Select value **column:luminosity**
 
 ![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-graph.png)
+
+Then click on `ESC` on your keyboard and you will see a dashboard including the graph you created.
+
+The click on the `Add Panel` button and select `Choose Visualisation` and pick `Map panel`.
+
+In the map layout options set the following values:
+
+-   Center: **custom**
+-   Latitude: **52.5031**
+-   Longitude: **13.4447**
+-   Initial Zoom: **12**
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-map-config-1.png)
+
+Click on `Queries` tab on the left and set as follows:
+
+-   Format as: **Table**
+-   FROM **etlamp**
+-   Time column **time_index**
+-   Metric column **entity_id**
+-   Select value
+    -   **column:luminosity** **alias:value**
+    -   **column:location** **alias:geojson**
+    -   **column:entity_type** **alias:type**
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-map-config-2.png)
+
+Click on `Visualisation` tab on the left and set as follows:
+
+-   Map Layers:
+    -   Lamp:
+        -   Icon: **lightbulb-o**
+        -   ClusterType: **average**
+        -   ColorType: **fix**
+        -   Column for value: **value**
+        -   Maker color: **red**
+
+![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-lamp-map-config-3.png)
 
 The final result can be seen below:
 
