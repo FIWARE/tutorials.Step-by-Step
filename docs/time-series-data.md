@@ -1,12 +1,12 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
-\*Description:** This tutorial is an introduction to
+**Description:** This tutorial is an introduction to
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to persist
 context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the
 [previous tutorial](https://github.com/FIWARE/tutorials.IoT-Agent) and persists measurements from those sensors into the
 database. To retrieve time-based aggregations of such data, users can either use **QuantumLeap** query API or connect
-directly to the **CrateDB** HTTP endpoint. Results are visualised on a graph or via the **Grafana\*\* time series
+directly to the **CrateDB** HTTP endpoint. Results are visualised on a graph or via the **Grafana** time series
 analytics tool.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
@@ -230,7 +230,7 @@ UI is usually available on port `3000`, but this port has already been taken by 
 shifted to another port. The Grafana Environment variables are described within their own
 [documentation](https://grafana.com/docs/installation/configuration/). The configuration ensures we will be able to
 connect to the **CrateDB** database later on in the tutorial. The configuration also imports a custom map plugin that
-helps you in displaying NGSIv2 entities over a map.
+helps you in displaying NGSI v2 entities over a map.
 
 ### Generating Context Data
 
