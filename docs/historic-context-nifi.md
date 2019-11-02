@@ -3,7 +3,7 @@
 
 **Description:** This tutorial is an introduction to [FIWARE Draco](https://fiware-draco.readthedocs.io/en/latest/) - an
 alternative generic enabler which is used to persist context data into third-party databases using
-[Apache NIFI](https://nifi.apache.org) creating a historical view of the context. The in the same manner asthe
+[Apache NIFI](https://nifi.apache.org) creating a historical view of the context. The in the same manner as the
 [previous tutorial](historic-context-flume.md), activates the dummy IoT sensors persists measurements from those sensors
 into a database for further analysis.
 
