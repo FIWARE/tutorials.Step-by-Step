@@ -1306,7 +1306,7 @@ To list all organizations which are authorized to use an application, make a GET
 
 ```bash
 curl -X GET \
-  'http://localhost:3005/v1/applications/{{application-id}}/users/{{user-id}}/roles' \
+  'http://localhost:3005/v1/applications/{{application-id}}/organizations/{{organizations-id}}/roles' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
