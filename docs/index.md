@@ -83,7 +83,7 @@ from the context broker to alter the state of real-world objects themselves.
 These tutorials show how to manipulate and store context data so it can be used for further processesing
 
 &nbsp; 301. [Persisting Context Data using Apache Flume (MongoDB, MySQL, PostgreSQL)](historic-context-flume.md)<br/>
-&nbsp; 301. [Persisting Context Data using Apache NIFI (MongoDB, MySQL, PostgreSQL)](historic-context-nifi.md)<br/>
+&nbsp; 302. [Persisting Context Data using Apache NIFI (MongoDB, MySQL, PostgreSQL)](historic-context-nifi.md)<br/>
 &nbsp; 303. [Querying Time Series Data (MongoDB)](short-term-history.md)<br/> &nbsp; 304.
 [Querying Time Series Data (Crate-DB)](time-series-data.md)<br/>
 
