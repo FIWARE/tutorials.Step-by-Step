@@ -758,10 +758,10 @@ curl -X POST \
 
 ```json
 {
-    "cols": ["table_schema", "table_name"],
-    "rows": [["mtopeniot", "etmotion"], ["mtopeniot", "etlamp"]],
-    "rowcount": 2,
-    "duration": 14.2762
+    "cols": ["table_name"],
+    "rows": [["etlamp"], ["etmotion"], ["md_ets_metadata"]],
+    "rowcount": 3,
+    "duration": 42.3912
 }
 ```
 
