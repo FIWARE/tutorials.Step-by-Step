@@ -12,7 +12,7 @@ The tutorial refers to Stock Management actions made within the browser combined
 commands. The cUrl commands are also available as
 [Postman documentation](https://fiware.github.io/tutorials.Subscriptions/).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/18ea15017244c70d1fe4)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/18ea15017244c70d1fe4)
 
 <hr class="core"/>
 

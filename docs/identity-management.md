@@ -8,7 +8,7 @@ The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as
 commands used to access the **Keyrock** REST API -
 [Postman documentation](https://fiware.github.io/tutorials.Identity-Management/) is also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/5f9e1736f979b86ec94a)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/5f9e1736f979b86ec94a)
 
 <hr class="security"/>
 
@@ -653,7 +653,7 @@ be permitted to return users within their own organization. Listing users can be
 
 ```bash
 curl -X GET \
-  'http://localhost:3005/v1/users' \                   
+  'http://localhost:3005/v1/users' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
