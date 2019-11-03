@@ -9,7 +9,7 @@ authenticating other services are described in detail.
 [cUrl](https://ec.haxx.se/) commands are used throughout to access the **Keyrock** and **Wilma** REST APIs -
 [Postman documentation](https://fiware.github.io/tutorials.PEP-Proxy/) for these calls is also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/66d8ba3abaf7319941b1)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/6b143a6b3ad8bcba69cf)
 
 <hr class="security"/>
 
