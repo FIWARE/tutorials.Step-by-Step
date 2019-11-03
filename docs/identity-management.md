@@ -8,7 +8,7 @@ The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as
 commands used to access the **Keyrock** REST API -
 [Postman documentation](https://fiware.github.io/tutorials.Identity-Management/) is also available.
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/2150531e68299d46f937)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://www.getpostman.com/collections/5f9e1736f979b86ec94a)
 
 <hr class="security"/>
 
