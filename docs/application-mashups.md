@@ -272,7 +272,7 @@ Fill in the dialog as shown to create an empty workspace.
 
 ![](https://fiware.github.io/tutorials.Application-Mashup/img/create-workspace.png)
 
-Tthe workspace will open. The URL in the browser bar will alter to `http://localhost:8000/<user>/<workspace>`.
+The workspace will open. The URL in the browser bar will alter to `http://localhost:8000/<user>/<workspace>`.
 
 ![](https://fiware.github.io/tutorials.Application-Mashup/img/workspace.png)
 
