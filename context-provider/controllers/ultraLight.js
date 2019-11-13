@@ -28,14 +28,8 @@ const UL_HOST = process.env.IOTA_HTTP_HOST || 'localhost';
 const UL_PORT = process.env.IOTA_HTTP_PORT || 7896;
 const UL_URL = 'http://' + UL_HOST + ':' + UL_PORT + '/iot/d';
 const UL_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
-const UL_CONTEXT_BROKER =
-  process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
-const UL_NGSI_PREFIX =
-  process.env.NGSI_LD_PREFIX !== undefined
-    ? process.env.NGSI_LD_PREFIX
-    : 'urn:ngsi-ld:';
+
 const DUMMY_DEVICE_HTTP_HEADERS = { 'Content-Type': 'text/plain' };
-const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
 // A series of constants used by our set of devices
 const OK = ' OK';
@@ -439,28 +433,6 @@ function getRandom() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
-function accessControl(req, res, next) {
-  debug('accessControl');
-  const action = req.body.action;
-  // Ringing the bell and unlocking the door are restricted actions, everything else
-  // can be done by any user.
-  if (action === 'ring') {
-    // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    // LEVEL 3: ADVANCED AUTHORIZATION - Resources are accessible on XACML Rules
-    return AUTHZFORCE_ENABLED
-      ? Security.authorizeAdvancedXACML(req, res, next, '/bell/ring')
-      : Security.authorizeBasicPDP(req, res, next, '/bell/ring');
-  } else if (action === 'unlock') {
-    // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
-    // LEVEL 3: ADVANCED AUTHORIZATION - Resources are accessible on XACML Rules
-    return AUTHZFORCE_ENABLED
-      ? Security.authorizeAdvancedXACML(req, res, next, '/door/unlock')
-      : Security.authorizeBasicPDP(req, res, next, '/door/unlock');
-  }
-  // LEVEL 1: AUTHENTICATION ONLY - Every user is authorized, just ensure the user exists.
-  return Security.authenticate(req, res, next);
-}
-
 // This function offers the Password Authentication flow for a secured IoT Sensors
 // It is just a user filling out the Username and password form and adding the access token to
 // subsequent requests.
@@ -480,67 +452,8 @@ function initSecureDevices() {
     });
 }
 
-// This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
-// via the Orion Context Broker and the UltraLight IoT Agent.
-function sendCommand(req, res) {
-  debug('sendCommand');
-  if (!res.locals.authorized) {
-    // If the user is not authorized, return an error code.
-    res.setHeader('Content-Type', 'application/json');
-    return res.status(403).send({ message: 'Forbidden' });
-  }
-  let id = req.body.id.split(':').pop();
-  const action = req.body.action;
-  // This is not a command, just a manually activated motion sensor event.
-  const isMotionSensor = action === 'presence';
-  const payload = {};
-
-  payload[action] = {
-    type: 'command',
-    value: ''
-  };
-
-  if (action === 'ring') {
-    id = 'Bell:' + id;
-  } else if (action === 'on' || action === 'off') {
-    id = 'Lamp:' + id;
-  } else if (action === 'presence') {
-    id = 'motion' + id;
-  } else {
-    id = 'Door:' + id;
-  }
-
-  const options = {
-    method: 'PATCH',
-    url: UL_CONTEXT_BROKER + '/entities/' + UL_NGSI_PREFIX + id + '/attrs',
-    headers: {
-      'Content-Type': 'application/json',
-      'fiware-servicepath': '/',
-      'fiware-service': 'openiot'
-    },
-    body: payload,
-    json: true
-  };
-
-  if (req.session.access_token) {
-    // If the system has been secured and we have logged in,
-    // add the access token to the request to the PEP Proxy
-    options.headers['X-Auth-Token'] = req.session.access_token;
-  }
-
-  if (isMotionSensor) {
-    // The motion sensor does not accept commands,
-    // Update the state of the device directly
-    setDeviceState(id, MOTION_DETECTED, true);
-  } else {
-    request(options, error => {
-      if (error) {
-        debug(error);
-      }
-    });
-  }
-  // Return a success code.
-  return res.status(204).send();
+function fireMotionSensor(id) {
+  setDeviceState(id, MOTION_DETECTED, true);
 }
 
 // Once a minute, read the existing state of the dummy devices
@@ -556,6 +469,5 @@ module.exports = {
   processHttpDoorCommand,
   processHttpLampCommand,
   processMqttMessage,
-  accessControl,
-  sendCommand
+  fireMotionSensor
 };

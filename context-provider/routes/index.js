@@ -3,7 +3,7 @@ const router = express.Router();
 const monitor = require('../lib/monitoring');
 const Store = require('../controllers/store');
 const History = require('../controllers/history');
-const Ultralight = require('../controllers/ultraLight');
+const DeviceListener = require('../controllers/deviceListener');
 const Security = require('../controllers/security');
 const _ = require('lodash');
 
@@ -76,8 +76,8 @@ router.get('/device/monitor', function(req, res) {
 //                                 rules to certain users at certain times of day.
 router.post(
   '/device/command',
-  Ultralight.accessControl,
-  Ultralight.sendCommand
+  DeviceListener.accessControl,
+  DeviceListener.sendCommand
 );
 
 // Retrieve Device History from STH-Comet
