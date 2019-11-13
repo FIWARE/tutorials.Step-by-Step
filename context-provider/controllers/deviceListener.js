@@ -1,7 +1,7 @@
 const request = require('request');
 const debug = require('debug')('tutorial:iot-device');
 const Security = require('./security');
-const Ultralight = require('./ultralight');
+const IotDevices = require('./iotDevices');
 
 // Connect to an IoT Agent and use fallback values if necessary
 const UL_CONTEXT_BROKER =
@@ -63,7 +63,7 @@ function sendCommand(req, res) {
   if (isMotionSensor) {
     // The motion sensor does not accept commands,
     // Update the state of the device directly
-    Ultralight.fireMotionSensor(id);
+    IotDevices.fireMotionSensor(id);
   } else {
     request(options, error => {
       if (error) {
