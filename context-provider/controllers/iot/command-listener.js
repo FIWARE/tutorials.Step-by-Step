@@ -1,9 +1,16 @@
-const request = require('request');
-const debug = require('debug')('tutorial:device-listener');
-const Security = require('./security');
-const IoTDevices = require('./iotDevices');
+//
+// This controller is a backdoor which allows a user to directly
+// interact with the IoT devices by pressing a button on screen.
+// The button press is converted to an NGSI call to the context
+// broker.
+//
 
-// Connect to an IoT Agent and use fallback values if necessary
+const request = require('request');
+const debug = require('debug')('tutorial:command-listener');
+const Security = require('../security');
+const IoTDevices = require('./devices');
+
+// Connect to the context broker and use fallback values if necessary
 const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 const NGSI_PREFIX =
   process.env.NGSI_LD_PREFIX !== undefined
@@ -12,7 +19,7 @@ const NGSI_PREFIX =
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
-// via the Orion Context Broker and the UltraLight IoT Agent.
+// via the Orion Context Broker and an IoT Agent.
 function sendCommand(req, res) {
   debug('sendCommand');
   let id = req.body.id.split(':').pop();
@@ -26,10 +33,9 @@ function sendCommand(req, res) {
   if (action === 'presence') {
     // The motion sensor does not accept commands,
     // Update the state of the device directly
-    debug('fireMotionSensor');
     IoTDevices.fireMotionSensor('motion' + id);
     return res.status(204).send();
-  } 
+  }
 
   if (action === 'ring') {
     id = 'Bell:' + id;
@@ -74,11 +80,13 @@ function sendCommand(req, res) {
   return res.status(204).send();
 }
 
+
+// Ringing the bell and unlocking the door are restricted actions, everything else
+// can be done by any user. This is a simple access control function to ensure 
+// only users who are authorized can do certain things.
 function accessControl(req, res, next) {
   debug('accessControl');
   const action = req.body.action;
-  // Ringing the bell and unlocking the door are restricted actions, everything else
-  // can be done by any user.
   if (action === 'ring') {
     // LEVEL 2: BASIC AUTHORIZATION - Resources are accessible on a User/Verb/Resource basis
     // LEVEL 3: ADVANCED AUTHORIZATION - Resources are accessible on XACML Rules

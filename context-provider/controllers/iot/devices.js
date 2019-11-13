@@ -1,25 +1,15 @@
 //
-// This controlller is simulates a series of devices using the Ultralight protocol
+// This controller is simulates a series of devices.
+// The internal state is maintained using the Ultralight protocol
 //
-// Ultralight 2.0 is a lightweight text based protocol aimed to constrained devices and communications
-// where the bandwidth and device memory may be limited resources.
-//
-// A device can report new measures to the IoT Platform using an HTTP GET request to the /iot/d path with the following query parameters:
-//
-//  i (device ID): Device ID (unique for the API Key).
-//  k (API Key): API Key for the service the device is registered on.
-//  t (timestamp): Timestamp of the measure. Will override the automatic IoTAgent timestamp (optional).
-//  d (Data): Ultralight 2.0 payload.
-//
-// At the moment the API key and timestamp are unused by the simulator.
 
 /* global SOCKET_IO */
 
 const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const _ = require('lodash');
-const debug = require('debug')('tutorial:iot-devices');
-const sendDevicePayload = require('./devicePayload');
+const debug = require('debug')('tutorial:devices');
+const Northbound = require('./northbound');
 
 // A series of constants used by our set of devices
 const DOOR_LOCKED = 's|LOCKED';
@@ -34,6 +24,12 @@ const LAMP_OFF = 's|OFF|l|0';
 
 const NO_MOTION_DETECTED = 'c|0';
 const MOTION_DETECTED = 'c|1';
+
+const VALID_COMMANDS = {
+  door: ['open', 'close', 'lock', 'unlock'],
+  lamp: ['on', 'off'],
+  bell: ['ring']
+};
 
 // Change the state of a dummy IoT device based on the command received.
 function actuateDevice(deviceId, command) {
@@ -239,8 +235,6 @@ function getDeviceState(deviceId) {
 // it also reports (and attempts to send) the northbound traffic to the IoT agent.
 // The state of the dummy device is also sent to the browser for display
 //
-// * If we are running under HTTP mode the device will respond with a result
-// * If we are running under MQTT mode the device will post the result as a topic
 function setDeviceState(deviceId, state, isSensor = true, force = false) {
   const previousState = myCache.get(deviceId);
   myCache.set(deviceId, state);
@@ -250,8 +244,10 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
     devicesInitialized = true;
   }
 
+  // If we are running under HTTP mode the device will respond with a result
+  // If we are running under MQTT mode the device will post the result as a topic
   if (isSensor && (state !== previousState || force)) {
-    sendDevicePayload(deviceId, state);
+    Northbound.sendMeasure(deviceId, state);
   }
 
   SOCKET_IO.emit(deviceId, state);
@@ -292,7 +288,9 @@ function getRandom() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
+// Directly alter the state of a motion sensor.
 function fireMotionSensor(id) {
+  debug('fireMotionSensor');
   setDeviceState(id, MOTION_DETECTED, true);
 }
 
@@ -304,12 +302,27 @@ function setUpSensorReading(deviceId) {
   }
 }
 
+// Check to see if a deviceId has a corresponding entry in the cache
 function notFound(deviceId) {
-  return _.indexOf(myCache.keys(), deviceId) === -1;
+  const deviceUnknown = _.indexOf(myCache.keys(), deviceId) === -1;
+  if (deviceUnknown) {
+    debug('Unknown IoT device: ' + deviceId);
+  }
+  return deviceUnknown;
+}
+
+// Check to see if a command can be processed by a class of devices
+function isUnknownCommand(device, command) {
+  const invalid = _.indexOf(VALID_COMMANDS[device], command) === -1;
+  if (invalid) {
+    debug('Invalid command for a ' + device + ': ' + command);
+  }
+  return invalid;
 }
 
 module.exports = {
   actuateDevice,
   fireMotionSensor,
-  notFound
+  notFound,
+  isUnknownCommand
 };

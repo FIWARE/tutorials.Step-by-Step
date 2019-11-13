@@ -3,11 +3,12 @@ const router = express.Router();
 const monitor = require('../lib/monitoring');
 const Store = require('../controllers/store');
 const History = require('../controllers/history');
-const DeviceListener = require('../controllers/deviceListener');
+const DeviceListener = require('../controllers/iot/command-listener');
 const Security = require('../controllers/security');
 const _ = require('lodash');
 
 const TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
+const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 const GIT_COMMIT = process.env.GIT_COMMIT || 'unknown';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
@@ -60,9 +61,10 @@ router.get('/version', function(req, res) {
 // Render the monitoring page
 router.get('/device/monitor', function(req, res) {
   const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
+  const title = 'IoT Devices (' + DEVICE_PAYLOAD + ' over ' + TRANSPORT + ')';
   const securityEnabled = SECURE_ENDPOINTS;
   res.render('device-monitor', {
-    title: 'UltraLight IoT Devices',
+    title,
     traffic,
     securityEnabled
   });
