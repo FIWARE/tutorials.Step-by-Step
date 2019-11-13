@@ -1,12 +1,11 @@
 const request = require('request');
 const debug = require('debug')('tutorial:device-listener');
 const Security = require('./security');
-const IotDevices = require('./iotDevices');
+const IoTDevices = require('./iotDevices');
 
 // Connect to an IoT Agent and use fallback values if necessary
-const UL_CONTEXT_BROKER =
-  process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
-const UL_NGSI_PREFIX =
+const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
+const NGSI_PREFIX =
   process.env.NGSI_LD_PREFIX !== undefined
     ? process.env.NGSI_LD_PREFIX
     : 'urn:ngsi-ld:';
@@ -16,15 +15,30 @@ const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 // via the Orion Context Broker and the UltraLight IoT Agent.
 function sendCommand(req, res) {
   debug('sendCommand');
+  let id = req.body.id.split(':').pop();
+  const action = req.body.action;
   if (!res.locals.authorized) {
     // If the user is not authorized, return an error code.
     res.setHeader('Content-Type', 'application/json');
     return res.status(403).send({ message: 'Forbidden' });
   }
-  let id = req.body.id.split(':').pop();
-  const action = req.body.action;
-  // This is not a command, just a manually activated motion sensor event.
-  const isMotionSensor = action === 'presence';
+
+  if (action === 'presence') {
+    // The motion sensor does not accept commands,
+    // Update the state of the device directly
+    debug('fireMotionSensor');
+    IoTDevices.fireMotionSensor('motion' + id);
+    return res.status(204).send();
+  } 
+
+  if (action === 'ring') {
+    id = 'Bell:' + id;
+  } else if (action === 'on' || action === 'off') {
+    id = 'Lamp:' + id;
+  } else {
+    id = 'Door:' + id;
+  }
+
   const payload = {};
 
   payload[action] = {
@@ -32,19 +46,9 @@ function sendCommand(req, res) {
     value: ''
   };
 
-  if (action === 'ring') {
-    id = 'Bell:' + id;
-  } else if (action === 'on' || action === 'off') {
-    id = 'Lamp:' + id;
-  } else if (action === 'presence') {
-    id = 'motion' + id;
-  } else {
-    id = 'Door:' + id;
-  }
-
   const options = {
     method: 'PATCH',
-    url: UL_CONTEXT_BROKER + '/entities/' + UL_NGSI_PREFIX + id + '/attrs',
+    url: CONTEXT_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs',
     headers: {
       'Content-Type': 'application/json',
       'fiware-servicepath': '/',
@@ -60,17 +64,12 @@ function sendCommand(req, res) {
     options.headers['X-Auth-Token'] = req.session.access_token;
   }
 
-  if (isMotionSensor) {
-    // The motion sensor does not accept commands,
-    // Update the state of the device directly
-    IotDevices.fireMotionSensor(id);
-  } else {
-    request(options, error => {
-      if (error) {
-        debug(error);
-      }
-    });
-  }
+  request(options, error => {
+    if (error) {
+      debug(error);
+    }
+  });
+
   // Return a success code.
   return res.status(204).send();
 }

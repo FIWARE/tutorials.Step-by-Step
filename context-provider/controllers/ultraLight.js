@@ -15,26 +15,26 @@
 
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
-const NodeCache = require('node-cache');
-const myCache = new NodeCache();
 const _ = require('lodash');
-const request = require('request');
+
 const debug = require('debug')('tutorial:ultralight');
-const IotDevices = require('./iotDevices');
-const Security = require('./security');
-
-// Connect to an IoT Agent and use fallback values if necessary
-const UL_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
-const UL_HOST = process.env.IOTA_HTTP_HOST || 'localhost';
-const UL_PORT = process.env.IOTA_HTTP_PORT || 7896;
-const UL_URL = 'http://' + UL_HOST + ':' + UL_PORT + '/iot/d';
-const UL_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
-
-const DUMMY_DEVICE_HTTP_HEADERS = { 'Content-Type': 'text/plain' };
+const IoTDevices = require('./iotDevices');
+const DEVICE_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
 
 // A series of constants used by our set of devices
 const OK = ' OK';
 const NOT_OK = ' NOT OK';
+
+//
+// Splits the deviceId from the command sent.
+//
+function getCommand(string) {
+  const command = string.split('@');
+  if (command.length === 1) {
+    command.push('');
+  }
+  return command[1];
+}
 
 // The bell will respond to the "ring" command.
 // this will briefly set the bell to on.
@@ -46,7 +46,7 @@ function processHttpBellCommand(req, res) {
   const deviceId = 'bell' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+  if (IoTDevices.notFound(deviceId)) {
     debug('Unknown IoT device: ' + deviceId);
     return res.status(404).send(result + NOT_OK);
   } else if (_.indexOf(['ring'], command) === -1) {
@@ -55,7 +55,7 @@ function processHttpBellCommand(req, res) {
   }
 
   // Update device state
-  IotDevices.actuateDevice(deviceId, command);
+  IoTDevices.actuateDevice(deviceId, command);
 
   return res.status(200).send(result + OK);
 }
@@ -70,7 +70,7 @@ function processHttpDoorCommand(req, res) {
   const deviceId = 'door' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+  if (IoTDevices.notFound(deviceId)) {
     debug('Unknown IoT device: ' + deviceId);
     return res.status(404).send(result + NOT_OK);
   } else if (_.indexOf(['open', 'close', 'lock', 'unlock'], command) === -1) {
@@ -79,7 +79,7 @@ function processHttpDoorCommand(req, res) {
   }
 
   // Update device state
-  IotDevices.actuateDevice(deviceId, command);
+  IoTDevices.actuateDevice(deviceId, command);
 
   return res.status(200).send(result + OK);
 }
@@ -93,7 +93,7 @@ function processHttpLampCommand(req, res) {
   const deviceId = 'lamp' + req.params.id;
   const result = keyValuePairs[0] + '| ' + command;
 
-  if (_.indexOf(myCache.keys(), deviceId) === -1) {
+  if (IoTDevices.notFound(deviceId)) {
     debug('Unknown IoT device: ' + deviceId);
     return res.status(404).send(result + NOT_OK);
   } else if (_.indexOf(['on', 'off'], command) === -1) {
@@ -102,7 +102,7 @@ function processHttpLampCommand(req, res) {
   }
 
   // Update device state
-  IotDevices.actuateDevice(deviceId, command);
+  IoTDevices.actuateDevice(deviceId, command);
   return res.status(200).send(result + OK);
 }
 
@@ -119,94 +119,19 @@ function processMqttMessage(topic, message) {
     const deviceId = path.pop();
     const result = keyValuePairs[0] + '| ' + command;
 
-    if (_.indexOf(myCache.keys(), deviceId) === -1) {
+    if (IoTDevices.notFound(deviceId)) {
       debug('Unknown IoT device: ' + deviceId);
     } else {
-      IotDevices.actuateDevice(deviceId, command);
-      const topic = '/' + UL_API_KEY + '/' + deviceId + '/cmdexe';
+      IoTDevices.actuateDevice(deviceId, command);
+      const topic = '/' + DEVICE_API_KEY + '/' + deviceId + '/cmdexe';
       MQTT_CLIENT.publish(topic, result + OK);
     }
   }
 }
 
-
-//
-// Splits the deviceId from the command sent.
-//
-function getCommand(string) {
-  const command = string.split('@');
-  if (command.length === 1) {
-    command.push('');
-  }
-  return command[1];
-}
-
-function sendPayload(deviceId, state){
-   if (UL_TRANSPORT === 'HTTP') {
-      const options = {
-        method: 'POST',
-        url: UL_URL,
-        qs: { k: UL_API_KEY, i: deviceId },
-        headers: DUMMY_DEVICE_HTTP_HEADERS,
-        body: state
-      };
-      const debugText =
-        'POST ' + UL_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
-
-      request(options, error => {
-        if (error) {
-          debug(debugText + ' ' + error.code);
-        }
-      });
-      SOCKET_IO.emit('http', debugText + '  ' + state);
-    }
-    if (UL_TRANSPORT === 'MQTT') {
-      const topic = '/' + UL_API_KEY + '/' + deviceId + '/attrs';
-      MQTT_CLIENT.publish(topic, state);
-    }
-}
-
-
-// This function offers the Password Authentication flow for a secured IoT Sensors
-// It is just a user filling out the Username and password form and adding the access token to
-// subsequent requests.
-function addAuthtoken() {
-  debug('initSecureDevices');
-  // With the Password flow, an access token is returned in the response.
-  Security.oa
-    .getOAuthPasswordCredentials(
-      process.env.DUMMY_DEVICES_USER,
-      process.env.DUMMY_DEVICES_PASSWORD
-    )
-    .then(results => {
-      DUMMY_DEVICE_HTTP_HEADERS['X-Auth-Token'] = results.access_token;
-    })
-    .catch(error => {
-      debug(error);
-    });
-}
-
-
-
-// Transformation function from a state object to the Ultralight Protocol
-// Ultralight is a series of pipe separated key-value pairs.
-// Each key and value is in turn separated by a pipe character
-//
-// e.g. s|ON,l|1000
-/*function toUltraLight(object) {
-  const strArray = [];
-  _.forEach(object, function(value, key) {
-    strArray.push(key + '|' + value);
-  });
-  return strArray.join('|');
-}*/
-
-
 module.exports = {
   processHttpBellCommand,
   processHttpDoorCommand,
   processHttpLampCommand,
-  processMqttMessage,
-  sendPayload,
-  addAuthtoken
+  processMqttMessage
 };

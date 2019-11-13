@@ -14,11 +14,12 @@
 // At the moment the API key and timestamp are unused by the simulator.
 
 /* global SOCKET_IO */
+
 const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const _ = require('lodash');
 const debug = require('debug')('tutorial:iot-devices');
-const Ultralight = require('./ultralight');
+const sendDevicePayload = require('./devicePayload');
 
 // A series of constants used by our set of devices
 const DOOR_LOCKED = 's|LOCKED';
@@ -33,8 +34,6 @@ const LAMP_OFF = 's|OFF|l|0';
 
 const NO_MOTION_DETECTED = 'c|0';
 const MOTION_DETECTED = 'c|1';
-
-
 
 // Change the state of a dummy IoT device based on the command received.
 function actuateDevice(deviceId, command) {
@@ -66,7 +65,6 @@ function actuateDevice(deviceId, command) {
   }
 }
 
-
 // Set up 16 IoT devices, a door, bell, motion sensor and lamp for each of 4 locations.
 //
 // The door can be OPEN CLOSED or LOCKED
@@ -76,11 +74,6 @@ function actuateDevice(deviceId, command) {
 // It will slowly dim as time passes (provided no movement is detected)
 function initDevices() {
   debug('initDevices');
-
-  if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD) {
-    // If Ultralight
-    Ultralight.addAuthtoken();
-  }
 
   // Once a minute, read the existing state of the dummy devices
   const deviceIds = myCache.keys();
@@ -258,8 +251,7 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
   }
 
   if (isSensor && (state !== previousState || force)) {
-    // if Ultralight then
-    Ultralight.sendPayload(deviceId, state)
+    sendDevicePayload(deviceId, state);
   }
 
   SOCKET_IO.emit(deviceId, state);
@@ -300,8 +292,6 @@ function getRandom() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
-
-
 function fireMotionSensor(id) {
   setDeviceState(id, MOTION_DETECTED, true);
 }
@@ -314,7 +304,12 @@ function setUpSensorReading(deviceId) {
   }
 }
 
+function notFound(deviceId) {
+  return _.indexOf(myCache.keys(), deviceId) === -1;
+}
+
 module.exports = {
   actuateDevice,
-  fireMotionSensor
+  fireMotionSensor,
+  notFound
 };
