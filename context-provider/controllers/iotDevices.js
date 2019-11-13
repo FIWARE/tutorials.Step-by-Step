@@ -17,7 +17,7 @@
 const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const _ = require('lodash');
-const debug = require('debug')('tutorial:iot-device');
+const debug = require('debug')('tutorial:iot-devices');
 const Ultralight = require('./ultralight');
 
 // A series of constants used by our set of devices

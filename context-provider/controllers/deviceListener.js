@@ -1,5 +1,5 @@
 const request = require('request');
-const debug = require('debug')('tutorial:iot-device');
+const debug = require('debug')('tutorial:device-listener');
 const Security = require('./security');
 const IotDevices = require('./iotDevices');
 

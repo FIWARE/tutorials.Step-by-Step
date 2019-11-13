@@ -19,7 +19,7 @@ const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const _ = require('lodash');
 const request = require('request');
-const debug = require('debug')('tutorial:iot-device');
+const debug = require('debug')('tutorial:ultralight');
 const IotDevices = require('./iotDevices');
 const Security = require('./security');
 
