@@ -21,7 +21,7 @@ const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
 // via the Orion Context Broker and an IoT Agent.
 function sendCommand(req, res) {
-  debug('sendCommand');
+  debug('sendCommand: ' + req.body.id + ' ' + req.body.action);
   let id = req.body.id.split(':').pop();
   const action = req.body.action;
   if (!res.locals.authorized) {
