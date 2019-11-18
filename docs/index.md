@@ -51,6 +51,13 @@ docker version
 Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
 necessary.
 
+If using a linux distro with an outdated docker-compose, the files can be installed directly as shown:
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+
 ### Cygwin for Windows
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
