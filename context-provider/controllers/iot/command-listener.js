@@ -80,9 +80,8 @@ function sendCommand(req, res) {
   return res.status(204).send();
 }
 
-
 // Ringing the bell and unlocking the door are restricted actions, everything else
-// can be done by any user. This is a simple access control function to ensure 
+// can be done by any user. This is a simple access control function to ensure
 // only users who are authorized can do certain things.
 function accessControl(req, res, next) {
   debug('accessControl');

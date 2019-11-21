@@ -7,16 +7,19 @@
 /* global SOCKET_IO */
 const debug = require('debug')('tutorial:southbound');
 const UltralightCommand = require('./command/ultralight');
+const JSONCommand = require('./command/json');
+const XMLCommand = require('./command/xml');
+
 const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 
 let Command;
 
-switch (DEVICE_PAYLOAD) {
+switch (DEVICE_PAYLOAD.toLowerCase()) {
   case 'ultralight':
     Command = new UltralightCommand();
     break;
   case 'json':
-    //Command = new JSONCommand();
+    Command = new JSONCommand();
     break;
   case 'lorawan':
     //Command = new LoraCommand();
@@ -25,7 +28,7 @@ switch (DEVICE_PAYLOAD) {
     //Command = new SigfoxCommand();
     break;
   case 'xml':
-    //Command = new CustomXMLCommand();
+    Command = new XMLCommand();
     break;
   default:
     debug('Device payload not recognized. Using default');

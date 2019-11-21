@@ -7,6 +7,8 @@
 const Security = require('../security');
 const debug = require('debug')('tutorial:northbound');
 const UltralightMeasure = require('./measure/ultralight');
+const JSONMeasure = require('./measure/json');
+const XMLMeasure = require('./measure/xml');
 
 // Connect to an IoT Agent and use fallback values if necessary
 const DEVICE_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
@@ -31,19 +33,16 @@ function setAuthToken(header) {
   }
 }
 
-
-
 let Measure;
 const headers = {};
 setAuthToken(headers);
 
-
-switch (DEVICE_PAYLOAD) {
+switch (DEVICE_PAYLOAD.toLowerCase()) {
   case 'ultralight':
     Measure = new UltralightMeasure(headers);
     break;
   case 'json':
-    //Measure = new JSONMeasure();
+    Measure = new JSONMeasure(headers);
     break;
   case 'lorawan':
     //Measure = new LoraMeasure();
@@ -52,7 +51,7 @@ switch (DEVICE_PAYLOAD) {
     //Measure = new SigfoxMeasure();
     break;
   case 'xml':
-    //Measure = new CustomXMLMeasure();
+    Measure = new XMLMeasure(headers);
     break;
   default:
     debug('Device payload not recognized. Using default');
