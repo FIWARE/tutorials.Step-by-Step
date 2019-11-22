@@ -13,11 +13,11 @@ const NOT_OK = 'error';
 //
 // Splits the deviceId from the command sent.
 //
-function getResult(status, info) {
+function getResult(status, command, id, info) {
   if (info) {
-    return '<' + status + '>' + info + '</' + status + '/>';
+    return '<' + status + ' command="' + command + '" device="' + id + '">' + info + '</' + status + '/>';
   }
-  return '<' + status + '/>';
+  return '<' + status + ' command="' + command + '" device="' + id + '"/>';
 }
 
 // This processor sends XML payload northbound to
@@ -34,14 +34,14 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, 'not found'));
+      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('bell', command)) {
-      return res.status(422).send(getResult(NOT_OK, 'unknown command'));
+      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state
     IoTDevices.actuateDevice(deviceId, command);
-    return res.status(200).send(getResult(OK));
+    return res.status(200).send(getResult(OK, command, deviceId));
   }
 
   // The door responds to "open", "close", "lock" and "unlock" commands
@@ -53,14 +53,14 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, 'not found'));
+      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('door', command)) {
-      return res.status(422).send(getResult(NOT_OK, 'unknown command'));
+      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state
     IoTDevices.actuateDevice(deviceId, command);
-    return res.status(200).send(getResult(OK));
+    return res.status(200).send(getResult(OK, command, deviceId));
   }
 
   // The lamp can be "on" or "off" - it also registers luminosity.
@@ -71,14 +71,14 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, 'not found'));
+      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('lamp', command)) {
-      return res.status(422).send(getResult(NOT_OK, 'unknown command'));
+      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state
     IoTDevices.actuateDevice(deviceId, command);
-    return res.status(200).send(getResult(OK));
+    return res.status(200).send(getResult(OK, command, deviceId));
   }
 
   // cmd topics are consumed by the actuators (bell, lamp and door)
@@ -92,7 +92,7 @@ class XMLCommand {
       if (!IoTDevices.notFound(deviceId)) {
         IoTDevices.actuateDevice(deviceId, command);
         const topic = '/' + DEVICE_API_KEY + '/' + deviceId + '/cmdexe';
-        MQTT_CLIENT.publish(topic, getResult(OK));
+        MQTT_CLIENT.publish(topic, getResult(OK, command, deviceId));
       }
     }
   }
