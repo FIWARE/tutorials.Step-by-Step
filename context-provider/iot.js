@@ -3,6 +3,7 @@ const express = require('express');
 const Southbound = require('./controllers/iot/southbound');
 const debug = require('debug')('tutorial:iot-device');
 const mqtt = require('mqtt');
+const logger = require('morgan');
 
 /* global MQTT_CLIENT */
 const DEVICE_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
@@ -22,6 +23,7 @@ function rawBody(req, res, next) {
 }
 
 const iot = express();
+iot.use(logger('dev'));
 iot.use(rawBody);
 
 const mqttBrokerUrl = process.env.MQTT_BROKER_URL || 'mqtt://mosquitto';

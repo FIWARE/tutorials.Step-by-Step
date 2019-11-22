@@ -16,11 +16,8 @@ const IOT_AGENT_URL =
   IOT_AGENT_SOUTH_PORT +
   IOT_AGENT_DEFAULT_RESOURCE;
 
-
-
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
-
 
 // This processor sends XML payloads northbound to
 // the southport of the IoT Agent and sends measures
@@ -28,21 +25,25 @@ const IOT_AGENT_URL =
 
 function ultralightToXML(key, deviceId, state) {
   const keyValuePairs = state.split('|');
-  let payload ="";
+  let payload = '';
 
   payload = payload + '<measure device="' + deviceId + '" key="' + key + '">\n';
   for (let i = 0; i < keyValuePairs.length; i = i + 2) {
-   payload = payload +  '<' + keyValuePairs[i] + ' value="' + keyValuePairs[i+1] + '"/>\n';
+    payload =
+      payload +
+      '<' +
+      keyValuePairs[i] +
+      ' value="' +
+      keyValuePairs[i + 1] +
+      '"/>\n';
   }
   payload = payload + '</measure>';
   return payload;
 }
 
-
-
 class XMLMeasure {
   constructor(headers) {
-    this.headers =  headers;
+    this.headers = headers;
     this.headers['Content-Type'] = 'application/xml';
   }
 
@@ -55,8 +56,7 @@ class XMLMeasure {
       headers: this.headers,
       body: payload
     };
-    const debugText =
-      'POST ' + IOT_AGENT_URL 
+    const debugText = 'POST ' + IOT_AGENT_URL;
 
     request(options, error => {
       if (error) {
@@ -64,7 +64,15 @@ class XMLMeasure {
       }
     });
 
-    SOCKET_IO.emit('http',  debugText  + "<br/>" + ' ' + payload.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\n/g, "<br/>"));
+    SOCKET_IO.emit(
+      'http',
+      debugText +
+        '<br/> ' +
+        payload
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/\n/g, '<br/>')
+    );
   }
 
   // measures sent over MQTT are posted as topics (motion sensor, lamp and door)
@@ -74,5 +82,4 @@ class XMLMeasure {
   }
 }
 
-module.exports =  XMLMeasure;
-
+module.exports = XMLMeasure;
