@@ -24,19 +24,6 @@ function getResult(status, info) {
 // the southport of the IoT Agent and sends measures
 // for the motion sensor, door and lamp.
 
-// XML 2.0 is a lightweight text based protocol aimed to constrained
-// devices and communications
-// where the bandwidth and device memory may be limited resources.
-//
-// A device can report new measures to the IoT Platform using an HTTP GET request to the /iot/d path with the following query parameters:
-//
-//  i (device ID): Device ID (unique for the API Key).
-//  k (API Key): API Key for the service the device is registered on.
-//  t (timestamp): Timestamp of the measure. Will override the automatic IoTAgent timestamp (optional).
-//  d (Data): XML 2.0 payload.
-//
-// At the moment the API key and timestamp are unused by the simulator.
-
 class XMLCommand {
   // The bell will respond to the "ring" command.
   // this will briefly set the bell to on.
