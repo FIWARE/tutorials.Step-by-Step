@@ -1,13 +1,11 @@
 // Connect to an IoT Agent and use fallback values if necessary
 
-
 const IoTDevices = require('../devices');
 const DEVICE_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
 
 // A series of constants used by our set of devices
 const OK = 'OK';
 const NOT_OK = 'NOT OK';
-
 
 /* global MQTT_CLIENT */
 
@@ -19,7 +17,7 @@ function getJSONCommand(string) {
   return Object.keys(obj)[0];
 }
 
-function getResult (cmd, status){
+function getResult(cmd, status) {
   const result = {};
   result[cmd] = status;
   return JSON.stringify(result);
@@ -43,7 +41,6 @@ class JSONCommand {
   // this will briefly set the bell to on.
   // The bell  is not a sensor - it will not report state northbound
   actuateBell(req, res) {
-
     const command = getJSONCommand(req.body);
     const deviceId = 'bell' + req.params.id;
 
@@ -64,7 +61,6 @@ class JSONCommand {
   actuateDoor(req, res) {
     const command = getJSONCommand(req.body);
     const deviceId = 'door' + req.params.id;
-    
 
     if (IoTDevices.notFound(deviceId)) {
       return res.status(404).send(getResult(command, NOT_OK));
@@ -110,7 +106,4 @@ class JSONCommand {
   }
 }
 
-
-
 module.exports = JSONCommand;
-

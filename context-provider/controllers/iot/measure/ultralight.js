@@ -16,11 +16,8 @@ const IOT_AGENT_URL =
   IOT_AGENT_SOUTH_PORT +
   IOT_AGENT_DEFAULT_RESOURCE;
 
-
-
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
-
 
 // This processor sends ultralight payload northbound to
 // the southport of the IoT Agent and sends measures
@@ -41,7 +38,7 @@ const IOT_AGENT_URL =
 
 class UltralightMeasure {
   constructor(headers) {
-    this.headers =  headers;
+    this.headers = headers;
     this.headers['Content-Type'] = 'text/plain';
   }
 
@@ -72,5 +69,4 @@ class UltralightMeasure {
   }
 }
 
-module.exports =  UltralightMeasure;
-
+module.exports = UltralightMeasure;

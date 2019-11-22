@@ -16,11 +16,8 @@ const IOT_AGENT_URL =
   IOT_AGENT_SOUTH_PORT +
   IOT_AGENT_DEFAULT_RESOURCE;
 
-
-
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
-
 
 // This processor sends ultralight payload northbound to
 // the southport of the IoT Agent and sends measures
@@ -39,7 +36,6 @@ const IOT_AGENT_URL =
 //
 // At the moment the API key and timestamp are unused by the simulator.
 
-
 function ultralightToJSON(state) {
   const keyValuePairs = state.split('|');
   const obj = {};
@@ -51,7 +47,7 @@ function ultralightToJSON(state) {
 
 class JSONMeasure {
   constructor(headers) {
-    this.headers =  headers;
+    this.headers = headers;
     this.headers['Content-Type'] = 'application/json';
   }
 
@@ -62,7 +58,7 @@ class JSONMeasure {
       url: IOT_AGENT_URL,
       qs: { k: DEVICE_API_KEY, i: deviceId },
       headers: this.headers,
-      body: ultralightToJSON(state) 
+      body: ultralightToJSON(state)
     };
     const debugText =
       'POST ' + IOT_AGENT_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
@@ -82,5 +78,4 @@ class JSONMeasure {
   }
 }
 
-module.exports =  JSONMeasure;
-
+module.exports = JSONMeasure;

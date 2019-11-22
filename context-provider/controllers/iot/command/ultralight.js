@@ -1,9 +1,7 @@
 // Connect to an IoT Agent and use fallback values if necessary
 
-
 const IoTDevices = require('../devices');
 const DEVICE_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
-
 
 // A series of constants used by our set of devices
 const OK = ' OK';
@@ -117,7 +115,4 @@ class UltralightCommand {
   }
 }
 
-
-
 module.exports = UltralightCommand;
-
