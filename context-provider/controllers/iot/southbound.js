@@ -6,9 +6,9 @@
 
 /* global SOCKET_IO */
 const debug = require('debug')('tutorial:southbound');
-const UltralightCommand = require('./command/ultralight');
-const JSONCommand = require('./command/json');
-const XMLCommand = require('./command/xml');
+const UltralightCommand = require('../../models/command/ultralight');
+const JSONCommand = require('../../models/command/json');
+const XMLCommand = require('../../models/command/xml');
 
 const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 
