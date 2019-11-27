@@ -1,11 +1,10 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fiware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
 
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) -
 a generic enabler which is used to persist context data into third-party databases using
 [Apache Flume](https://flume.apache.org) creating a historical view of the context. The tutorial activates the IoT
-sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into a database
-for further analysis.
+sensors connected in the [previous tutorial](https://github.com/FIWARE/tutorials.IoT-Agent) and persists measurements
+from those sensors into a database for further analysis.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Historic-Context-Flume/)
@@ -117,15 +116,15 @@ Before you start you should ensure that you have obtained or built the necessary
 repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Historic-Context.git
-cd tutorials.Historic-Context
+git clone https://github.com/FIWARE/tutorials.Historic-Context-Flume.git
+cd tutorials.Historic-Context-Flume
 
 ./services create
 ```
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.Historic-Context/blob/master/services) Bash script provided within the
-repository:
+[services](https://github.com/FIWARE/tutorials.Historic-Context-Flume/blob/master/services) Bash script provided within
+the repository:
 
 ```bash
 ./services <command>
@@ -178,18 +177,19 @@ cygnus:
     expose:
         - "5080"
     ports:
-        - "5050:5050"
+        - "5051:5051"
         - "5080:5080"
     environment:
         - "CYGNUS_MONGO_HOSTS=mongo-db:27017"
+        - "CYGNUS_MONGO_SERVICE_PORT=5051"
         - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
         - "CYGNUS_API_PORT=5080"
+        - "CYGNUS_SERVICE_PORT=5051"
 ```
 
 The `cygnus` container is listening on two ports:
 
--   The Subscription Port for Cygnus - `5050` is where the service will be listening for notifications from the Orion
+-   The Subscription Port for Cygnus - `5051` is where the service will be listening for notifications from the Orion
     context broker
 -   The Management Port for Cygnus - `5080` is exposed purely for tutorial access - so that cUrl or Postman can make
     provisioning commands without being part of the same network.
@@ -200,7 +200,7 @@ The `cygnus` container is driven by environment variables as shown:
 | ------------------- | ---------------- | ---------------------------------------------------------------------------------------------------- |
 | CYGNUS_MONGO_HOSTS  | `mongo-db:27017` | Comma separated list of MongoDB servers which Cygnus will contact to persist historical context data |
 | CYGNUS_LOG_LEVEL    | `DEBUG`          | The logging level for Cygnus                                                                         |
-| CYGNUS_SERVICE_PORT | `5050`           | Notification Port that Cygnus listens when subscribing to context data changes                       |
+| CYGNUS_SERVICE_PORT | `5051`           | Notification Port that Cygnus listens when subscribing to context data changes                       |
 | CYGNUS_API_PORT     | `5080`           | Port that Cygnus listens on for operational reasons                                                  |
 
 ## MongoDB - Start up
@@ -230,7 +230,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "version": "1.17.0_SNAPSHOT.etc"
 }
 ```
 
@@ -263,7 +263,7 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
+-   The notification `url` must match the configured `CYGNUS_MONGO_SERVICE_PORT`
 -   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
@@ -276,7 +276,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Cygnus (Mongo-DB) of all context changes",
   "subject": {
     "entities": [
       {
@@ -286,7 +286,7 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
+      "url": "http://cygnus:5051/notify"
     },
     "attrsFormat": "legacy"
   },
@@ -306,6 +306,66 @@ same for each database. The response will be **201 - Created**
 > ```
 >
 > This is usually because the `"attrsFormat": "legacy"` flag has been omitted.
+
+If a subscription has been created, you can check to see if it is firing by making a GET request to the
+`/v2/subscriptions` endpoint.
+
+#### 3 Request:
+
+```bash
+curl -X GET \
+  'http://localhost:1026/v2/subscriptions/' \
+  -H 'fiware-service: openiot' \
+  -H 'fiware-servicepath: /'
+```
+
+#### Response:
+
+```json
+[
+    {
+        "id": "5b39d7c866df40ed84284174",
+        "description": "Notify Cygnus (Mongo-DB) of all context changes",
+        "status": "active",
+        "subject": {
+            "entities": [
+                {
+                    "idPattern": ".*"
+                }
+            ],
+            "condition": {
+                "attrs": []
+            }
+        },
+        "notification": {
+            "timesSent": 158,
+            "lastNotification": "2018-07-02T07:59:21.00Z",
+            "attrs": [],
+            "attrsFormat": "legacy",
+            "http": {
+                "url": "http://cygnus:5050/notify"
+            },
+            "lastSuccess": "2018-07-02T07:59:21.00Z"
+        },
+        "throttling": 5
+    }
+]
+```
+
+Within the `notification` section of the response, you can see several additional `attributes` which describe the health
+of the subscription
+
+If the criteria of the subscription have been met, `timesSent` should be greater than `0`. A zero value would indicate
+that the `subject` of the subscription is incorrect or the subscription has created with the wrong `fiware-service-path`
+or `fiware-service` header
+
+The `lastNotification` should be a recent timestamp - if this is not the case, then the devices are not regularly
+sending data. Remember to unlock the **Smart Door** and switch on the **Smart Lamp**
+
+The `lastSuccess` should match the `lastNotification` date - if this is not the case then **Cygnus** is not receiving
+the subscription properly. Check that the hostname and port are correct.
+
+Finally, check that the `status` of the subscription is `active` - an expired subscription will not fire.
 
 ## MongoDB - Reading Data from a database
 
@@ -502,22 +562,23 @@ cygnus:
     expose:
         - "5080"
     ports:
-        - "5050:5050"
+        - "5055:5055"
         - "5080:5080"
     environment:
         - "CYGNUS_POSTGRESQL_HOST=postgres-db"
         - "CYGNUS_POSTGRESQL_PORT=5432"
         - "CYGNUS_POSTGRESQL_USER=postgres"
         - "CYGNUS_POSTGRESQL_PASS=password"
-        - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
-        - "CYGNUS_API_PORT=5080"
         - "CYGNUS_POSTGRESQL_ENABLE_CACHE=true"
+        - "CYGNUS_POSTGRESQL_SERVICE_PORT=5055"
+        - "CYGNUS_LOG_LEVEL=DEBUG"
+        - "CYGNUS_API_PORT=5080"
+        - "CYGNUS_SERVICE_PORT=5055"
 ```
 
 The `cygnus` container is listening on two ports:
 
--   The Subscription Port for Cygnus - `5050` is where the service will be listening for notifications from the Orion
+-   The Subscription Port for Cygnus - `5055` is where the service will be listening for notifications from the Orion
     context broker
 -   The Management Port for Cygnus - `5080` is exposed purely for tutorial access - so that cUrl or Postman can make
     provisioning commands without being part of the same network.
@@ -553,7 +614,7 @@ To start the system with a **PostgreSQL** database run the following command:
 Once Cygnus is running, you can check the status by making an HTTP request to the exposed `CYGNUS_API_PORT` port. If the
 response is blank, this is usually because Cygnus is not running or is listening on another port.
 
-#### 3 Request:
+#### 4 Request:
 
 ```bash
 curl -X GET \
@@ -567,7 +628,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "version": "1.17.0_SNAPSHOT.etc"
 }
 ```
 
@@ -575,7 +636,7 @@ The response will look similar to the following:
 >
 > -   To check that a docker container is running try
 >
-> ```
+> ```bash
 > docker ps
 > ```
 >
@@ -600,11 +661,11 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
+-   The notification `url` must match the configured `CYGNUS_POSTGRESQL_SERVICE_PORT`
 -   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 4 Request:
+#### 5 Request:
 
 ```bash
 curl -iX POST \
@@ -613,7 +674,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Cygnus (Postgres) of all context changes",
   "subject": {
     "entities": [
       {
@@ -623,7 +684,7 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
+      "url": "http://cygnus:5055/notify"
     },
     "attrsFormat": "legacy"
   },
@@ -848,9 +909,10 @@ cygnus:
         - "CYGNUS_MYSQL_PORT=3306"
         - "CYGNUS_MYSQL_USER=root"
         - "CYGNUS_MYSQL_PASS=123"
+        - "CYGNUS_MYSQL_SERVICE_PORT=5050"
         - "CYGNUS_LOG_LEVEL=DEBUG"
-        - "CYGNUS_SERVICE_PORT=5050"
         - "CYGNUS_API_PORT=5080"
+        - "CYGNUS_SERVICE_PORT=5050"
 ```
 
 > **Note:** Passing the Username and Password in plain text environment variables like this is a security risk. Whereas
@@ -889,7 +951,7 @@ To start the system with a **MySQL** database run the following command:
 Once Cygnus is running, you can check the status by making an HTTP request to the exposed `CYGNUS_API_PORT` port. If the
 response is blank, this is usually because Cygnus is not running or is listening on another port.
 
-#### 5 Request:
+#### 6 Request:
 
 ```bash
 curl -X GET \
@@ -903,7 +965,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "version": "1.17.0_SNAPSHOT.etc"
 }
 ```
 
@@ -936,11 +998,11 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
+-   The notification `url` must match the configured `CYGNUS_MYSQL_SERVICE_PORT`
 -   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 6 Request:
+#### 7 Request:
 
 ```bash
 curl -iX POST \
@@ -949,7 +1011,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Cygnus (MySQL) of all context changes",
   "subject": {
     "entities": [
       {
@@ -1214,7 +1276,7 @@ To start the system with **multiple** databases run the following command:
 Once Cygnus is running, you can check the status by making an HTTP request to the exposed `CYGNUS_API_PORT` port. If the
 response is blank, this is usually because Cygnus is not running or is listening on another port.
 
-#### 7 Request:
+#### 8 Request:
 
 ```bash
 curl -X GET \
@@ -1228,7 +1290,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.8.0_SNAPSHOT.ed50706880829e97fd4cf926df434f1ef4fac147"
+    "version": "1.17.0_SNAPSHOT.etc"
 }
 ```
 
@@ -1259,13 +1321,28 @@ Once a dynamic context system is up and running, we need to inform **Cygnus** of
 This is done by making a POST request to the `/v2/subscription` endpoint of the Orion Context Broker.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
-    measurements from the attached IoT Sensors, since they had been provisioned using these settings
+    measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
 -   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
-#### 8 Request:
+When running in **multi-agent** mode, the notification `url` for each subscription must match the defaults for the given
+database.
+
+The default port mapping can be seen below:
+
+|       sink | port |
+| ---------: | ---: |
+|      mysql | 5050 |
+|      mongo | 5051 |
+|       ckan | 5052 |
+|       hdfs | 5053 |
+| postgresql | 5054 |
+|    cartodb | 5055 |
+
+Since this subscription is using port `5050` the context data will eventually be persisted to the _MySQL_ database.
+
+#### 9 Request:
 
 ```bash
 curl -iX POST \
@@ -1274,7 +1351,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus of all context changes",
+  "description": "Notify Cygnus of all context changes for MySQL on port 5050",
   "subject": {
     "entities": [
       {
