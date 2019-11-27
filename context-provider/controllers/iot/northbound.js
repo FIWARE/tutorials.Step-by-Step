@@ -6,9 +6,9 @@
 
 const Security = require('../security');
 const debug = require('debug')('tutorial:northbound');
-const UltralightMeasure = require('./measure/ultralight');
-const JSONMeasure = require('./measure/json');
-const XMLMeasure = require('./measure/xml');
+const UltralightMeasure = require('../../models/measure/ultralight');
+const JSONMeasure = require('../../models/measure/json');
+const XMLMeasure = require('../../models/measure/xml');
 
 // Connect to an IoT Agent and use fallback values if necessary
 const DEVICE_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';

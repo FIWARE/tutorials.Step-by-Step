@@ -8,7 +8,7 @@
 const request = require('request');
 const debug = require('debug')('tutorial:command-listener');
 const Security = require('../security');
-const IoTDevices = require('./devices');
+const IoTDevices = require('../../models/devices');
 
 // Connect to the context broker and use fallback values if necessary
 const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';

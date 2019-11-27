@@ -9,7 +9,7 @@ const NodeCache = require('node-cache');
 const myCache = new NodeCache();
 const _ = require('lodash');
 const debug = require('debug')('tutorial:devices');
-const Northbound = require('./northbound');
+const Northbound = require('../controllers/iot/northbound');
 
 // A series of constants used by our set of devices
 const DOOR_LOCKED = 's|LOCKED';
