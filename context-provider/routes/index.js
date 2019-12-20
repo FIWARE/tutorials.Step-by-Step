@@ -1,7 +1,9 @@
+const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
+
 const express = require('express');
 const router = express.Router();
 const monitor = require('../lib/monitoring');
-const Store = require('../controllers/store');
+const Store = require('../controllers/' + NGSI_VERSION + '/store');
 const History = require('../controllers/history');
 const DeviceListener = require('../controllers/iot/command-listener');
 const Security = require('../controllers/security');
@@ -12,6 +14,44 @@ const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 const GIT_COMMIT = process.env.GIT_COMMIT || 'unknown';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
+
+const NGSI_V2_STORES = [
+  {
+    href: 'app/store/urn:ngsi-ld:Store:001',
+    name: 'Store 1',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Store:002',
+    name: 'Store 2',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Store:003',
+    name: 'Store 3',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Store:004',
+    name: 'Store 4',
+  },
+];
+
+const NGSI_LD_STORES = [
+  {
+    href: 'app/store/urn:ngsi-ld:Building:store001',
+    name: 'Store 1',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Building:store002',
+    name: 'Store 2',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Building:store003',
+    name: 'Store 3',
+  },
+  {
+    href: 'app/store/urn:ngsi-ld:Building:store004',
+    name: 'Store 4',
+  },
+];
 
 // Error handler for async functions
 function catchErrors(fn) {
@@ -35,12 +75,14 @@ function broadcastEvents(req, item, types) {
 // Handles requests to the main page
 router.get('/', function(req, res) {
   const securityEnabled = SECURE_ENDPOINTS;
+  const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
   res.render('index', {
     title: 'FIWARE Tutorial',
     success: req.flash('success'),
     errors: req.flash('error'),
     info: req.flash('info'),
-    securityEnabled
+    securityEnabled,
+    stores,
   });
 });
 
@@ -66,7 +108,7 @@ router.get('/device/monitor', function(req, res) {
   res.render('device-monitor', {
     title,
     traffic,
-    securityEnabled
+    securityEnabled,
   });
 });
 

@@ -49,21 +49,13 @@ block content
     h3 Store Details
     - if (securityEnabled)
       p Any logged-in user can access these:
-      a.red(href="app/store/urn:ngsi-ld:Store:001") Store 1
-      | &nbsp;
-      a.red(href="app/store/urn:ngsi-ld:Store:002") Store 2
-      | &nbsp;
-      a.red(href="app/store/urn:ngsi-ld:Store:003") Store 3
-      | &nbsp;
-      a.red(href="app/store/urn:ngsi-ld:Store:004") Store 4
+      each store in stores
+        a.red(href=`${store.href}`)  #{store.name}
+        | &nbsp;
     - else
-      a(href="app/store/urn:ngsi-ld:Store:001") Store 1
-      | &nbsp;
-      a(href="app/store/urn:ngsi-ld:Store:002") Store 2
-      | &nbsp;
-      a(href="app/store/urn:ngsi-ld:Store:003") Store 3
-      | &nbsp;
-      a(href="app/store/urn:ngsi-ld:Store:004") Store 4
+      each store in stores
+        a(href=`${store.href}`)  #{store.name}
+        | &nbsp;
 
   - if (securityEnabled)
     div

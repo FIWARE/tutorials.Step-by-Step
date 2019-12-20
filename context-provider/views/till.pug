@@ -9,7 +9,7 @@ block content
   ul
     each item in inventory
       li
-        +product(item, products)
+        +product(item, products, storeId)
         br
 
   script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js')
