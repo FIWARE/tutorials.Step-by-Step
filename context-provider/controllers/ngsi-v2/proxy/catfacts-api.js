@@ -6,9 +6,9 @@
 
 const debug = require('debug')('tutorial:proxy');
 const request = require('request-promise');
-const Formatter = require('../../lib/formatter');
+const Formatter = require('../../../lib/formatter');
 const _ = require('lodash');
-const monitor = require('../../lib/monitoring');
+const monitor = require('../../../lib/monitoring');
 
 //  The  Cat Facts API key is personal to you.
 //  Do not place them directly in the code - read them in as environment variables.
@@ -79,7 +79,7 @@ function makeCatFactsRequest() {
   debug('Making a Cat Facts API request');
   return request({
     url: CAT_FACTS_URL,
-    method: 'GET'
+    method: 'GET',
   });
 }
 
@@ -107,5 +107,5 @@ function getValuesFromCatFacts(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext
+  queryContext,
 };

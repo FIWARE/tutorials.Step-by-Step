@@ -3,8 +3,8 @@
 //
 
 const debug = require('debug')('tutorial:proxy');
-const Formatter = require('../../lib/formatter');
-const monitor = require('../../lib/monitoring');
+const Formatter = require('../../../lib/formatter');
+const monitor = require('../../../lib/monitoring');
 
 const LOREM_IPSUM =
   'lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ' +
@@ -24,7 +24,7 @@ function healthCheck(req, res) {
     boolean: randomValueForType('boolean'),
     number: randomValueForType('number'),
     structuredValue: randomValueForType('structuredValue'),
-    text: randomValueForType('text')
+    text: randomValueForType('text'),
   });
 }
 
@@ -84,7 +84,7 @@ function randomValueForType(type) {
       break;
     case 'structuredvalue':
       ret = {
-        somevalue: 'this'
+        somevalue: 'this',
       };
       break;
     case 'string':
@@ -121,5 +121,5 @@ function getLoremIpsum() {
 
 module.exports = {
   healthCheck,
-  queryContext
+  queryContext,
 };

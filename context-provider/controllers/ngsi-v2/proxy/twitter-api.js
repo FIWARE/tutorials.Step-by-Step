@@ -7,9 +7,9 @@
 const debug = require('debug')('tutorial:proxy');
 const Twitter = require('twitter');
 const request = require('request-promise');
-const Formatter = require('../../lib/formatter');
+const Formatter = require('../../../lib/formatter');
 const _ = require('lodash');
-const monitor = require('../../lib/monitoring');
+const monitor = require('../../../lib/monitoring');
 
 // The  Twitter Consumer Key & Consumer Secret are personal to you.
 // Do not place them directly in the code - read them in as environment variables.
@@ -97,18 +97,18 @@ function makeTwitterRequest(params, callback, errorHandler) {
     method: 'POST',
     auth: {
       user: TWITTER_CONSUMER_KEY,
-      pass: TWITTER_CONSUMER_SECRET
+      pass: TWITTER_CONSUMER_SECRET,
     },
     form: {
-      grant_type: 'client_credentials'
-    }
+      grant_type: 'client_credentials',
+    },
   })
     .then(function(result) {
       debug('Making a Twitter Search API request: ' + JSON.stringify(params));
       const client = new Twitter({
         consumer_key: TWITTER_CONSUMER_KEY,
         consumer_secret: TWITTER_CONSUMER_SECRET,
-        bearer_token: JSON.parse(result).access_token
+        bearer_token: JSON.parse(result).access_token,
       });
 
       client.get(TWITTER_SEARCH_PATH, params, callback);
@@ -140,5 +140,5 @@ function getValuesFromTweets(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext
+  queryContext,
 };

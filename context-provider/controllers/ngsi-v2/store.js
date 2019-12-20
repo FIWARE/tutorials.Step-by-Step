@@ -8,8 +8,8 @@
 // the client instance
 const NgsiV2 = require('ngsi_v2');
 const defaultClient = NgsiV2.ApiClient.instance;
-const debug = require('debug')('tutorial:context');
-const monitor = require('../lib/monitoring');
+const debug = require('debug')('tutorial:ngsi-v2');
+const monitor = require('../../lib/monitoring');
 
 // The basePath must be set - this is the location of the Orion
 // context broker. It is best to do this with an environment
@@ -102,7 +102,7 @@ function displayTillInfo(req, res) {
     listEntities(
       {
         options: 'keyValues',
-        type: 'Product'
+        type: 'Product',
       },
       setAuthHeaders(req)
     ),
@@ -110,19 +110,29 @@ function displayTillInfo(req, res) {
       {
         q: 'refStore==' + req.params.storeId,
         options: 'keyValues',
-        type: 'InventoryItem'
+        type: 'InventoryItem',
       },
       setAuthHeaders(req)
-    )
+    ),
   ])
     .then(values => {
       // If values have been found display it on screen
-      return res.render('till', { products: values[0], inventory: values[1] });
+      return res.render('till', {
+        products: values[0],
+        inventory: values[1],
+        ngsiLd: false,
+        storeId: req.params.storeId,
+      });
     })
     .catch(error => {
       debug(error);
       // An error occurred, return with no results
-      return res.render('till', { products: {}, inventory: {} });
+      return res.render('till', {
+        products: {},
+        inventory: {},
+        ngsiLd: false,
+        storeId: req.params.storeId,
+      });
     });
 }
 
@@ -148,20 +158,20 @@ async function buyItem(req, res) {
     req.params.inventoryId,
     {
       options: 'keyValues',
-      type: 'InventoryItem'
+      type: 'InventoryItem',
     },
     setAuthHeaders(req)
   );
   const count = inventory.shelfCount - 1;
 
   monitor('NGSI', 'updateExistingEntityAttributes ' + req.params.inventoryId, {
-    shelfCount: { type: 'Integer', value: count }
+    shelfCount: { type: 'Integer', value: count },
   });
   await updateExistingEntityAttributes(
     req.params.inventoryId,
     { shelfCount: { type: 'Integer', value: count } },
     {
-      type: 'InventoryItem'
+      type: 'InventoryItem',
     },
     setAuthHeaders(req)
   );
@@ -245,5 +255,5 @@ module.exports = {
   displayTillInfo,
   displayWarehouseInfo,
   priceChange,
-  orderStock
+  orderStock,
 };
