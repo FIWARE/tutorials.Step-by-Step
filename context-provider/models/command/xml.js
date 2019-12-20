@@ -15,7 +15,19 @@ const NOT_OK = 'error';
 //
 function getResult(status, command, id, info) {
   if (info) {
-    return '<' + status + ' command="' + command + '" device="' + id + '">' + info + '</' + status + '/>';
+    return (
+      '<' +
+      status +
+      ' command="' +
+      command +
+      '" device="' +
+      id +
+      '">' +
+      info +
+      '</' +
+      status +
+      '/>'
+    );
   }
   return '<' + status + ' command="' + command + '" device="' + id + '"/>';
 }
@@ -34,9 +46,13 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
+      return res
+        .status(404)
+        .send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('bell', command)) {
-      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
+      return res
+        .status(422)
+        .send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state
@@ -53,9 +69,13 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
+      return res
+        .status(404)
+        .send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('door', command)) {
-      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
+      return res
+        .status(422)
+        .send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state
@@ -71,9 +91,13 @@ class XMLCommand {
     const command = data.root.name;
 
     if (IoTDevices.notFound(deviceId)) {
-      return res.status(404).send(getResult(NOT_OK, command, deviceId, 'not found'));
+      return res
+        .status(404)
+        .send(getResult(NOT_OK, command, deviceId, 'not found'));
     } else if (IoTDevices.isUnknownCommand('lamp', command)) {
-      return res.status(422).send(getResult(NOT_OK, command, deviceId, 'unknown command'));
+      return res
+        .status(422)
+        .send(getResult(NOT_OK, command, deviceId, 'unknown command'));
     }
 
     // Update device state

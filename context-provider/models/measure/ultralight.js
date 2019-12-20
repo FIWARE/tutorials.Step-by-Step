@@ -5,16 +5,21 @@ const debug = require('debug')('tutorial:ultralight');
 
 const DEVICE_API_KEY = process.env.DUMMY_DEVICES_API_KEY || '1234';
 
-const IOT_AGENT_HOST = process.env.IOTA_HTTP_HOST || 'localhost';
-const IOT_AGENT_SOUTH_PORT = process.env.IOTA_HTTP_PORT || 7896;
-const IOT_AGENT_DEFAULT_RESOURCE =
-  process.env.IOTA_DEFAULT_RESOURCE || '/iot/d';
 const IOT_AGENT_URL =
   'http://' +
-  IOT_AGENT_HOST +
+  (process.env.IOTA_HTTP_HOST || 'localhost') +
   ':' +
-  IOT_AGENT_SOUTH_PORT +
-  IOT_AGENT_DEFAULT_RESOURCE;
+  (process.env.IOTA_HTTP_PORT || 7896) +
+  (process.env.IOTA_DEFAULT_RESOURCE || '/iot/d');
+
+function getIoTAgentSouthport(deviceId) {
+  let url = IOT_AGENT_URL;
+
+  if (!process.env.IOTA_DEFAULT_RESOURCE) {
+    url = url + '/' + deviceId.replace(/[0-9]/gi, '');
+  }
+  return url;
+}
 
 /* global SOCKET_IO */
 /* global MQTT_CLIENT */
@@ -46,13 +51,18 @@ class UltralightMeasure {
   sendAsHTTP(deviceId, state) {
     const options = {
       method: 'POST',
-      url: IOT_AGENT_URL,
+      url: getIoTAgentSouthport(deviceId),
       qs: { k: DEVICE_API_KEY, i: deviceId },
       headers: this.headers,
-      body: state
+      body: state,
     };
     const debugText =
-      'POST ' + IOT_AGENT_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
+      'POST ' +
+      getIoTAgentSouthport(deviceId) +
+      '?i=' +
+      options.qs.i +
+      '&k=' +
+      options.qs.k;
 
     request(options, error => {
       if (error) {
