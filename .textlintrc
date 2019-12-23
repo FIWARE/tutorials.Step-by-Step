@@ -18,6 +18,7 @@
         "EditorConfig",
         "ESLint",
         "FIWARE",
+        ["NSGI", "NGSI"],
         "GitHub",
         "GraphQL",
         "iOS",
