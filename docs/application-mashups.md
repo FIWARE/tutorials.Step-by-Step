@@ -312,7 +312,7 @@ widget or operator to the workspace
 
 The components sidebar will be displayed
 
-### NSGI Browser Widget
+### NGSI Browser Widget
 
 Since we require a visual component, in the components sidebar select **Widgets** and then scroll down until you find
 the NGSI Browser
@@ -358,7 +358,7 @@ From the workspace page, click on edit and then click on the jigsaw button to br
 Then click on add components to bring up the components sidebar. We will require a combination of both **Operators** and
 **Widgets**
 
-Click on the **operators** tab, and select an instance of _NSGI Source_ and an instance of _NGSI-Entity-to-POI_ by
+Click on the **operators** tab, and select an instance of _NGSI Source_ and an instance of _NGSI-Entity-to-POI_ by
 pressing the **+** button. A green bar will appear below each entry which can be dragged-and-dropped onto the wiring
 editor view.
 
@@ -379,7 +379,7 @@ connect the elements as shown.
 ![](https://fiware.github.io/tutorials.Application-Mashup/img/osm-wired.png)
 
 You can see that flow of data can be visualized on screen, in the mashup we wish to display Points of Interest (_POIs_)
-on screen. In order to do this we will receive data _entities_ from an NSGI source, the data from each _entity_ will be
+on screen. In order to do this we will receive data _entities_ from an NGSI source, the data from each _entity_ will be
 converted into a _POI_. Finally each _POI_ will be inserted onto the _OpenLayers Map_.
 
 ### NGSI Source Operator
@@ -392,7 +392,7 @@ Full details of the operator documentation can be found within the running appli
 screen:
 `http://localhost:8000/wirecloud/home#view=myresources&subview=details&resource=CoNWeT%2Fngsi-source%2F4.0.0&tab=Documentation`
 
-To configure the component, click on the _NSGI Source_ hamburger button and select settings:
+To configure the component, click on the _NGSI Source_ hamburger button and select settings:
 
 ![](https://fiware.github.io/tutorials.Application-Mashup/img/ngsi-source-wiring.png)
 

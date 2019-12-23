@@ -2,7 +2,7 @@
 [![NGSI LD](https://img.shields.io/badge/NGSI-linked_data-red.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)
 
 **Description:** This tutorial introduces linked data concepts to the FIWARE Platform. The supermarket chain’s store
-finder application is recreated using **NGSI-LD** and the differences between the **NSGI v2** and **NGSI-LD** interfaces
+finder application is recreated using **NGSI-LD** and the differences between the **NGSI v2** and **NGSI-LD** interfaces
 are highlighted and discussed. The tutorial is a direct analogue of the original getting started tutorial but uses API
 calls from the **NGSI-LD** interface.
 
@@ -22,7 +22,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > ― Malcolm Gladwell, The Tipping Point
 
 The introduction to FIWARE [Getting Started tutorial](https://github.com/FIWARE/tutorials.Getting-Started) introduced
-the [NSGI v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface that is commonly used to create and
+the [NGSI v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface that is commonly used to create and
 manipulate context data entities. An evolution of that interface has created a supplementary specification called
 [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
 as a mechanism to enhance context data entities through adding the concept of **linked data**. This tutorial will
@@ -152,7 +152,7 @@ Relationships will be dealt with in more detail in a subsequent tutorial.
 
 # Architecture
 
-The demo application will send and receive NGSI-LD calls to a compliant context broker. Since both NSGI v2 and NSGI-LD
+The demo application will send and receive NGSI-LD calls to a compliant context broker. Since both NGSI v2 and NGSI-LD
 interfaces are available to an experimental version fo the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), our demo application will only make use of one
 FIWARE component.
@@ -301,7 +301,7 @@ the following `@context` would be required
 ### Core Context
 
 [https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld](https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context.jsonld)
-refers to the Core `@context` of NSGI-LD, this defines element such as `id` and `type` which are common to all NGSI
+refers to the Core `@context` of NGSI-LD, this defines element such as `id` and `type` which are common to all NGSI
 entities, as well as defining terms such as `Property` and `Relationship`. The core context is so fundamental to
 NGSI-LD, that it is added by default to any `@context` sent to a request.
 
@@ -428,7 +428,7 @@ curl -iX POST \
 
 ### Defining Properties within the NGSI-LD entity definition
 
-The attributes `id` and `type` should be familiar to anyone who has used NSGI v2, and these have not changed. As
+The attributes `id` and `type` should be familiar to anyone who has used NGSI v2, and these have not changed. As
 mentioned above, the type should refer to an included data model, in this case `Building` is being used as a short name
 for the included URN `https://uri.fiware.org/ns/data-models#Building`. Thereafter each _property_ is defined as a JSON
 element containing two attributes, a `type` and a `value`.
