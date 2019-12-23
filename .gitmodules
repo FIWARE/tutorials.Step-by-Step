@@ -71,3 +71,15 @@
 [submodule "tutorials.Relationships-Linked-Data"]
 	path = tutorials.Relationships-Linked-Data
 	url = https://github.com/FIWARE/tutorials.Relationships-Linked-Data.git
+[submodule "tutorials.Big-Data-Analysis"]
+	path = tutorials.Big-Data-Analysis
+	url = https://github.com/FIWARE/tutorials.Big-Data-Analysis.git
+[submodule "tutorials.Accessing-Linked-Data"]
+	path = tutorials.Accessing-Linked-Data
+	url = https://github.com/FIWARE/tutorials.Accessing-Linked-Data.git
+[submodule "tutorials.Custom-IoT-Agent"]
+	path = tutorials.Custom-IoT-Agent
+	url = https://github.com/FIWARE/tutorials.Custom-IoT-Agent.git
+[submodule "tutorials.IoT-Agent-JSON"]
+	path = tutorials.IoT-Agent-JSON
+	url = https://github.com/FIWARE/tutorials.IoT-Agent-JSON.git

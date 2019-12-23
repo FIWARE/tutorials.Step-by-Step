@@ -12,11 +12,11 @@ This is a collection of tutorials for the FIWARE platform. Each tutorial consist
 demonstrate the correct use of individual FIWARE components and shows the flow of context data within a simple Smart
 Solution either by connecting to a series of dummy IoT devices or manipulating the context directly or programmatically.
 
-| :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) |  
-:capital_abcd: [NGSI-LD Data Models](https://fiware.github.io/tutorials.Step-by-Step/schema/) |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------- | --- |
-
-
+| :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale:
+[Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) | :capital_abcd:
+[NGSI-LD Data Models](https://fiware.github.io/tutorials.Step-by-Step/schema/) | |
+--------------------------------------------------------- |
+--------------------------------------------------------------------------------- | --- |
 
 ## Install
 
@@ -73,7 +73,9 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 
 &nbsp; 201. [Introduction to IoT Sensors](https://github.com/FIWARE/tutorials.IoT-Sensors)<br/> &nbsp; 202.
 [Provisioning an IoT Agent](https://github.com/FIWARE/tutorials.IoT-Agent)<br/> &nbsp; 203.
-[IoT over MQTT](https://github.com/FIWARE/tutorials.IoT-over-MQTT)<br/> &nbsp; 250.
+[IoT over MQTT](https://github.com/FIWARE/tutorials.IoT-over-MQTT)<br/> &nbsp; 204.
+[Using an alternative IoT Agent](https://github.com/FIWARE/tutorials.IoT-Agent-JSON)<br/> &nbsp; 205.
+[Creating a Custom IoT Agent](https://github.com/FIWARE/tutorials.Custom-IoT-Agent)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS)<br/>
 
 &nbsp; 301.
@@ -81,7 +83,8 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 &nbsp; 302.
 [Persisting Context Data using Apache NIFI (MongoDB, MySQL, PostgreSQL)](https://github.com/FIWARE/tutorials.Historic-Context-NIFI)<br/>
 &nbsp; 303. [Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History)<br/>
-&nbsp; 304. [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)<br/>
+&nbsp; 304. [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)<br/> &nbsp; 305.
+[Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis)<br/>
 
 &nbsp; 401. [Managing Users and Organizations](https://github.com/FIWARE/tutorials.Identity-Management)<br/> &nbsp; 402.
 [Roles and Permissions](https://github.com/FIWARE/tutorials.Roles-Permissions)<br/> &nbsp; 403.
@@ -93,10 +96,9 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 &nbsp; 501. [Creating Application Mashups](https://github.com/FIWARE/tutorials.Application-Mashup)<br/> &nbsp; 503.
 [Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams)<br/>
 
-&nbsp; 601. [Introduction to Linked Data](https://github.com/FIWARE/tutorials.Linked-Data)<br/>
-&nbsp; 602. [Linked Data Relationships and Data Models](https://github.com/FIWARE/tutorials.Relationships-Linked-Data)<br/>
-
-
+&nbsp; 601. [Introduction to Linked Data](https://github.com/FIWARE/tutorials.Linked-Data)<br/> &nbsp; 602.
+[Linked Data Relationships and Data Models](https://github.com/FIWARE/tutorials.Relationships-Linked-Data)<br/>
+&nbsp; 603. [Traversing Linked Data Programmatically](https://github.com/FIWARE/tutorials.Accessing-Linked-Data)<br/>
 
 ## Usage
 
