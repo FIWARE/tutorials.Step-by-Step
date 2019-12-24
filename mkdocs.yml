@@ -19,7 +19,8 @@ pages:
       - "Subscriptions": "subscriptions.md"
   - "IoT Agents & Robots":
       - "IoT Sensors": "iot-sensors.md"
-      - "IoT Agent": "iot-agent.md"
+      - "IoT Agent (Ultralight)": "iot-agent.md"
+      - "IoT Agent (JSON)": "iot-agent-json.md"
       - "IoT over MQTT": "iot-over-mqtt.md"
       - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
   - "Core Context Managment: History Management":

@@ -642,62 +642,35 @@ curl -iX POST \
 '
 ```
 
-Before we wire-up the context broker, we can test that a command can be sent from the IoT Agent to a device by making a
-REST request directly to the IoT Agent's North Port using the `/v1/updateContext` endpoint. It is this endpoint that
-will eventually be invoked by the context broker once we have connected it up. To test the configuration you can run the
-command directly as shown:
+Before we wire-up the context broker, we can test that a command can be send to a device by making a REST request
+directly to the IoT Agent's North Port using the `/v2/op/update` endpoint. It is this endpoint that will eventually be
+invoked by the context broker once we have connected it up. To test the configuration you can run the command directly
+as shown below.
+
+Note that the Context Broker command remains exactly the same regardless of the **transport** being used to communicate
+with the actual IoT device.
 
 #### 7 Request:
 
 ```bash
 curl -iX POST \
-  'http://localhost:4041/v1/updateContext' \
+  http://localhost:4041/v2/op/update \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-    "contextElements": [
+    "actionType": "update",
+    "entities": [
         {
             "type": "Bell",
-            "isPattern": "false",
             "id": "urn:ngsi-ld:Bell:001",
-            "attributes": [
-                { "name": "ring", "type": "command", "value": "" }
-            ],
-            "static_attributes": [
-               {"name":"refStore", "type": "Relationship","value": "urn:ngsi-ld:Store:001"}
-            ]
-        }
-    ],
-    "updateAction": "UPDATE"
-}'
-```
-
-#### Response:
-
-```json
-{
-    "contextResponses": [
-        {
-            "contextElement": {
-                "attributes": [
-                    {
-                        "name": "ring",
-                        "type": "command",
-                        "value": ""
-                    }
-                ],
-                "id": "urn:ngsi-ld:Bell:001",
-                "isPattern": false,
-                "type": "Bell"
-            },
-            "statusCode": {
-                "code": 200,
-                "reasonPhrase": "OK"
+            "ring" : {
+                "type": "command",
+                "value": ""
             }
         }
     ]
-}
+}'
 ```
 
 If you are viewing the device monitor page, you can also see the state of the bell change.
@@ -825,9 +798,9 @@ curl -X GET \
 
 ## Enabling Context Broker Commands
 
-Having connected up the IoT Agent to the IoT devices, we now need to inform the Orion Context Broker that the commands
-are available. In other words we need to register the IoT Agent as a [Context Provider](context-providers.md) for the
-command attributes.
+Having connected up the IoT Agent to the IoT devices, the Orion Context Broker was informed that the commands are now
+available. In other words the IoT Agent registered itself as a [Context Provider](context-providers.md) for the command
+attributes.
 
 Once the commands have been registered it will be possible to ring the **Bell**, open and close the **Smart Door** and
 switch the **Smart Lamp** on and off by sending requests to the Orion Context Broker, rather than sending UltraLight 2.0
@@ -840,43 +813,11 @@ Effectively the IoT Agent is offering a simplified facade pattern of well-known 
 Therefore this section of registering and invoking commands **duplicates** the instructions found in the
 [previous tutorial](iot-agent.md)
 
-### Registering a Bell Command
-
-The **Bell** entity has been mapped to `id="urn:ngsi-ld:Bell:001"` with an entity `type="Bell"`. To register the command
-we need to inform Orion that the URL `http://orion:1026/v1` is able to provide the missing `ring` attribute. This will
-then be forwarded on to the IoT Agent. As you see this is an NGSI v1 endpoint and therefore the `legacyForwarding`
-attribute must also be set.
-
-#### 12 Request:
-
-```bash
-curl -iX POST \
-  'http://localhost:1026/v2/registrations' \
-  -H 'Content-Type: application/json' \
-  -H 'fiware-service: openiot' \
-  -H 'fiware-servicepath: /' \
-  -d '{
-  "description": "Bell Commands",
-  "dataProvided": {
-    "entities": [
-      {
-        "id": "urn:ngsi-ld:Bell:001", "type": "Bell"
-      }
-    ],
-    "attrs": ["ring"]
-  },
-  "provider": {
-    "http": {"url": "http://orion:1026/v1"},
-    "legacyForwarding": true
-  }
-}'
-```
-
 ### Ringing the Bell
 
 To invoke the `ring` command, the `ring` attribute must be updated in the context.
 
-#### 13 Request:
+#### 12 Request:
 
 ```bash
 curl -iX PATCH \
@@ -896,43 +837,11 @@ If you are viewing the device monitor page, you can also see the state of the be
 
 ![](https://fiware.github.io/tutorials.IoT-over-MQTT/img/bell-ring.gif)
 
-### Registering Smart Door Commands
-
-The **Smart Door** entity has been mapped to `id="urn:ngsi-ld:Door:001"` with an entity `type="Door"`. To register the
-commands we need to inform Orion that the URL `http://orion:1026/v1` is able to provide the missing attributes. This
-will then be forwarded on to the IoT Agent. As you see this is an NGSI v1 endpoint and therefore the `legacyForwarding`
-attribute must also be set.
-
-#### 14 Request:
-
-```bash
-curl -iX POST \
-  'http://localhost:1026/v2/registrations' \
-  -H 'Content-Type: application/json' \
-  -H 'fiware-service: openiot' \
-  -H 'fiware-servicepath: /' \
-  -d '{
-  "description": "Door Commands",
-  "dataProvided": {
-    "entities": [
-      {
-        "id": "urn:ngsi-ld:Door:001", "type": "Door"
-      }
-    ],
-    "attrs": [ "lock", "unlock", "open", "close"]
-  },
-  "provider": {
-    "http": {"url": "http://orion:1026/v1"},
-    "legacyForwarding": true
-  }
-}'
-```
-
 ### Opening the Smart Door
 
 To invoke the `open` command, the `open` attribute must be updated in the context.
 
-#### 15 Request:
+#### 13 Request:
 
 ```bash
 curl -iX PATCH \
@@ -948,43 +857,11 @@ curl -iX PATCH \
 }'
 ```
 
-### Registering Smart Lamp Commands
-
-The **Smart Lamp** entity has been mapped to `id="urn:ngsi-ld:Lamp:001"` with an entity `type="Lamp"`. To register the
-commands we need to inform Orion that the URL `http://orion:1026/v1` is able to provide the missing attributes. This
-will then be forwarded on to the IoT Agent. As you see this is an NGSI v1 endpoint and therefore the `legacyForwarding`
-attribute must also be set.
-
-#### 16 Request:
-
-```bash
-curl -iX POST \
-  'http://localhost:1026/v2/registrations' \
-  -H 'Content-Type: application/json' \
-  -H 'fiware-service: openiot' \
-  -H 'fiware-servicepath: /' \
-  -d '{
-  "description": "Lamp Commands",
-  "dataProvided": {
-    "entities": [
-      {
-        "id": "urn:ngsi-ld:Lamp:001","type": "Lamp"
-      }
-    ],
-    "attrs": [ "on", "off" ]
-  },
-  "provider": {
-    "http": {"url": "http://orion:1026/v1"},
-    "legacyForwarding": true
-  }
-}'
-```
-
 ### Switching on the Smart Lamp
 
 To switch on the **Smart Lamp**, the `on` attribute must be updated in the context.
 
-#### 17 Request:
+#### 14 Request:
 
 ```bash
 curl -iX PATCH \
