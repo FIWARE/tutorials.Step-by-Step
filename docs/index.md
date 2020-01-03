@@ -27,7 +27,7 @@ enablers are of interest to you.
 
 ## Prerequisites
 
-### Docker and Docker Compose
+### Docker and Docker Compose <img src="https://www.docker.com/favicon.ico" align="left"  height="30" width="30">
 
 To keep things simple all components will be run using [Docker](https://www.docker.com). **Docker** is a container
 technology which allows to different components isolated into their respective environments.
@@ -58,7 +58,11 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-### Cygwin for Windows
+### Postman <img src="https://www.getpostman.com/favicon.ico" align="left"  height="30" width="30">
+
+The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing framework for REST APIs. The tool can be downloaded from www.getpostman.com. All the Postman collections can downloaded directly from the [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
+
+### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30">
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
 to provide a command-line functionality similar to a Linux distribution on Windows.
