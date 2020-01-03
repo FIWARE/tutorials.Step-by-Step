@@ -831,7 +831,7 @@ curl -iX PATCH \
 
 To switch on the **Smart Lamp**, the `on` attribute must be updated in the context.
 
-#### :one::four: Request:
+#### 14 Request:
 
 ```bash
 curl -iX PATCH \
