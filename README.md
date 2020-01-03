@@ -25,7 +25,7 @@ cd tutorials.Step-by-Step/
 git submodule update --init --recursive
 ```
 
-### Docker and Docker Compose
+### Docker and Docker Compose <img src="https://www.docker.com/favicon.ico" align="left"  height="30" width="30">
 
 Each tutorial runs all components using [Docker](https://www.docker.com). **Docker** is a container technology which
 allows to different components isolated into their respective environments.
@@ -49,12 +49,12 @@ docker version
 Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
 necessary.
 
-### Postman
+### Postman <img src="https://www.getpostman.com/favicon.ico" align="left"  height="30" width="30">
 
 The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
-framework for REST APIs. The tool can be downloaded from www.getpostman.com.
+framework for REST APIs. The tool can be downloaded from [www.getpostman.com](www.getpostman.com). All the FIWARE Postman collections can downloaded directly from the [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
 
-### Cygwin for Windows
+### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30">
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
 to provide a command-line functionality similar to a Linux distribution on Windows.
