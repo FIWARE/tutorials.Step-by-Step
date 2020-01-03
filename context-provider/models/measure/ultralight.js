@@ -12,13 +12,25 @@ const IOT_AGENT_URL =
   (process.env.IOTA_HTTP_PORT || 7896) +
   (process.env.IOTA_DEFAULT_RESOURCE || '/iot/d');
 
-function getIoTAgentSouthport(deviceId) {
-  let url = IOT_AGENT_URL;
+function getAPIKey(deviceId) {
+  return process.env.DUMMY_DEVICES_API_KEY
+    ? DEVICE_API_KEY
+    : hashCode(deviceId.replace(/[0-9]/gi, ''));
+}
 
-  if (!process.env.IOTA_DEFAULT_RESOURCE) {
-    url = url + '/' + deviceId.replace(/[0-9]/gi, '');
+function hashCode(str) {
+  let hash = 0;
+  let i;
+  let chr;
+  if (str.length === 0) {
+    return hash;
   }
-  return url;
+  for (i = 0; i < str.length; i++) {
+    chr = str.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return Math.abs(hash);
 }
 
 /* global SOCKET_IO */
@@ -51,18 +63,13 @@ class UltralightMeasure {
   sendAsHTTP(deviceId, state) {
     const options = {
       method: 'POST',
-      url: getIoTAgentSouthport(deviceId),
-      qs: { k: DEVICE_API_KEY, i: deviceId },
+      url: IOT_AGENT_URL,
+      qs: { k: getAPIKey(deviceId), i: deviceId },
       headers: this.headers,
       body: state,
     };
     const debugText =
-      'POST ' +
-      getIoTAgentSouthport(deviceId) +
-      '?i=' +
-      options.qs.i +
-      '&k=' +
-      options.qs.k;
+      'POST ' + IOT_AGENT_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
 
     request(options, error => {
       if (error) {
@@ -74,7 +81,7 @@ class UltralightMeasure {
 
   // measures sent over MQTT are posted as topics (motion sensor, lamp and door)
   sendAsMQTT(deviceId, state) {
-    const topic = '/' + DEVICE_API_KEY + '/' + deviceId + '/attrs';
+    const topic = '/' + getAPIKey(deviceId) + '/' + deviceId + '/attrs';
     MQTT_CLIENT.publish(topic, state);
   }
 }
