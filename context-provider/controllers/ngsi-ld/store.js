@@ -63,7 +63,7 @@ function mapTileUrl(zoom, location) {
 //
 // It is effectively processing the following cUrl command:
 //   curl -X GET \
-//     'http://{{orion}}/v2/entities/?type=Store&options=keyValues'
+//     'http://{{orion}}/ngsi-ld/v1/entities/?type=Store&options=keyValues'
 //
 async function displayStore(req, res) {
   debug('displayStore');
@@ -94,9 +94,9 @@ async function displayStore(req, res) {
 //
 // It is effectively processing the following cUrl commands:
 //   curl -X GET \
-//     'http://{{orion}}/v2/entities/?type=Product&options=keyValues'
+//     'http://{{orion}}/ngsi-ld/v1/entities/?type=Product&options=keyValues'
 //   curl -X GET \
-//     'http://{{orion}}/v2/entities/?type=InventoryItem&options=keyValues&q=refStore==<entity-id>'
+//     'http://{{orion}}/ngsi-ld/v1/entities/?type=InventoryItem&options=keyValues&q=refStore==<entity-id>'
 //
 async function displayTillInfo(req, res) {
   debug('displayTillInfo');
@@ -190,9 +190,9 @@ async function displayTillInfo(req, res) {
 // It is effectively processing the following cUrl commands:
 //
 //   curl -X GET \
-//     'http://{{orion}}/v2/entities/<entity-id>?type=InventoryItem&options=keyValues'
+//     'http://{{orion}}/ngsi-ld/v1/entities/<entity-id>?type=InventoryItem&options=keyValues'
 //   curl -X PATCH \
-//     'http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/attrs' \
+//     'http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Product:001/attrs' \
 //     -H 'Content-Type: application/json' \
 //     -d ' {
 //        "shelfCount":{"type":"Integer", "value": 89}
@@ -264,7 +264,7 @@ function orderStock(req, res) {
   return res.render('order-stock', { title: 'Order Stock' });
 }
 
-// This is a promise to make an HTTP PATCH request to the /v2/entities/<entity-id>/attr end point
+// This is a promise to make an HTTP PATCH request to the /ngsi-ld/v1/entities/<entity-id>/attr end point
 function updateExistingEntityAttribute(entityId, body, headers = {}) {
   return request({
     url: basePath + '/entities/' + entityId + '/attrs',
@@ -275,7 +275,7 @@ function updateExistingEntityAttribute(entityId, body, headers = {}) {
   });
 }
 
-// This is a promise to make an HTTP GET request to the /v2/entities/<entity-id> end point
+// This is a promise to make an HTTP GET request to the /ngsi-ld/v1/entities/<entity-id> end point
 function retrieveEntity(entityId, opts, headers = {}) {
   return request({
     qs: opts,
@@ -286,10 +286,8 @@ function retrieveEntity(entityId, opts, headers = {}) {
   });
 }
 
-// This is a promise to make an HTTP GET request to the /v2/entities/ end point
+// This is a promise to make an HTTP GET request to the /ngsi-ld/v1/entities/ end point
 function listEntities(opts, headers = {}) {
-  debug(opts);
-
   return request({
     qs: opts,
     url: basePath + '/entities',
