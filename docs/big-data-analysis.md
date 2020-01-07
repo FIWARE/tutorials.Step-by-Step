@@ -174,7 +174,7 @@ To start the system, run the following command:
 ./services start
 ```
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
 > ```
 > ./services stop
@@ -280,7 +280,7 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 
 -   The notification `url` must match the one our Flink program is listening to.
 
-#### :one: Request:
+#### 1 Request:
 
 ```bash
 curl -iX POST \
@@ -309,7 +309,7 @@ The response will be `**201 - Created**`
 If a subscription has been created, we can check to see if it is firing by making a GET request to the
 `/v2/subscriptions` endpoint.
 
-#### :two: Request:
+#### 2 Request:
 
 ```bash
 curl -X GET \
