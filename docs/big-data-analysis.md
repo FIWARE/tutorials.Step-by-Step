@@ -43,7 +43,7 @@ either in sequentiallly or in parallel as required. The data flow processing its
 
 Obviously in reality our existing Supermarket scenario is far too small to require the use of a Big Data solution, but
 will serve as a basis for demonstrating the type of real-time processing which may be required in a larger solution
-which is processing a continous stream of context-data events.
+which is processing a continuous stream of context-data events.
 
 # Architecture
 
@@ -140,8 +140,8 @@ taskmanager:
 
 The `jobmanager` container is listening on three ports:
 
--   Port `8081` is exposed so we can see the web front-end of the Apache Flink Dashobard
--   Port `9001` is exposed so that the installation can recieve context data subscriptions
+-   Port `8081` is exposed so we can see the web frontend of the Apache Flink Dashboard
+-   Port `9001` is exposed so that the installation can receive context data subscriptions
 -   Port `6123` is the standard **JobManager** RPC port, used for internal communications
 
 The `taskmanager` container is listening on two ports:
@@ -212,7 +212,7 @@ this tutorial can be found within the
 [cosmos-examples](https://github.com/FIWARE/tutorials.Big-Data-Analysis/tree/master/cosmos-examples) directory.
 
 Further Flink processing examples can be found on the
-[Apache Flink Website](https://ci.apache.org/projects/flink/flink-docs-release-1.9/getting-started) and
+[Apache Flink site](https://ci.apache.org/projects/flink/flink-docs-release-1.9/getting-started) and
 [Flink Connector Examples](https://fiware-cosmos-flink-examples.readthedocs.io/).
 
 ### Compiling a JAR file for Flink
