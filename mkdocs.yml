@@ -38,6 +38,7 @@ pages:
   - "Processing, Analysis and Visualization":
       - "Application Mashups": "application-mashups.md"
       - "Media Streams": "media-streams.md"
+      - "Big Data Analysis": "big-data-analysis.md"
   - "Core Context Managment: NGSI-LD":
       - "Linked Data": "linked-data.md"
       - "Relationships & Data Models": "relationships-linked-data.md"
