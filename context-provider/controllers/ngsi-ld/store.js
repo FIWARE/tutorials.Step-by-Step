@@ -4,36 +4,13 @@
 // necessary HTTP calls and responds with success or failure.
 //
 
-const request = require('request-promise');
 const debug = require('debug')('tutorial:ngsi-ld');
 const monitor = require('../../lib/monitoring');
+const ngsiLD = require('../../lib/ngsi-ld');
 const _ = require('lodash');
-
-// The basePath must be set - this is the location of the Orion
-// context broker. It is best to do this with an environment
-// variable (with a fallback if necessary)
-const basePath =
-  process.env.CONTEXT_BROKER || 'http://localhost:1026/ngsi-ld/v1';
 
 const LinkHeader =
   '<https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json">';
-const jsonLdHeader = 'application/ld+json';
-
-function setAuthHeaders(req, link, contentType) {
-  const headers = {};
-  if (req.session.access_token) {
-    // If the system has been secured and we have logged in,
-    // add the access token to the request to the PEP Proxy
-    headers['X-Auth-Token'] = req.session.access_token;
-  }
-  if (link) {
-    headers.Link = link;
-  }
-  if (contentType) {
-    headers['Content-Type'] = contentType || jsonLdHeader;
-  }
-  return headers;
-}
 
 function mapTileUrl(zoom, location) {
   const tilesPerRow = Math.pow(2, zoom);
@@ -73,11 +50,11 @@ async function displayStore(req, res) {
     return res.redirect('/');
   }
   try {
-    monitor('NGSI', 'retrieveEntity ' + req.params.storeId);
-    const store = await retrieveEntity(
+    monitor('NGSI', 'readEntity ' + req.params.storeId);
+    const store = await ngsiLD.readEntity(
       req.params.storeId,
       { options: 'keyValues' },
-      setAuthHeaders(req, LinkHeader)
+      ngsiLD.setHeaders(req.session.access_token, LinkHeader)
     );
     // If a store has been found display it on screen
     store.mapUrl = mapTileUrl(15, store.location);
@@ -103,15 +80,15 @@ async function displayTillInfo(req, res) {
   try {
     const stockedProducts = [];
     const inventory = [];
-    const headers = setAuthHeaders(req, LinkHeader);
+    const headers = ngsiLD.setHeaders(req.session.access_token, LinkHeader);
 
-    monitor('NGSI', 'retrieveEntity type=Building id=' + req.params.storeId);
-    const building = await retrieveEntity(
+    monitor('NGSI', 'readEntity type=Building id=' + req.params.storeId);
+    const building = await ngsiLD.readEntity(
       req.params.storeId,
       {
         type: 'Building',
         options: 'keyValues',
-        attrs: 'furniture',
+        attrs: 'furniture'
       },
       headers
     );
@@ -120,12 +97,12 @@ async function displayTillInfo(req, res) {
       'NGSI',
       'listEntities type=Shelf id=' + building.furniture.join(',')
     );
-    let productsList = await listEntities(
+    let productsList = await ngsiLD.listEntities(
       {
         type: 'Shelf',
         options: 'keyValues',
         attrs: 'stocks,numberOfItems',
-        id: building.furniture.join(','),
+        id: building.furniture.join(',')
       },
       headers
     );
@@ -144,7 +121,7 @@ async function displayTillInfo(req, res) {
             return sum + shelf.numberOfItems;
           },
           0
-        ),
+        )
       });
     });
 
@@ -152,12 +129,12 @@ async function displayTillInfo(req, res) {
       'NGSI',
       'listEntities type=Product id=' + stockedProducts.join(',')
     );
-    let productsInStore = await listEntities(
+    let productsInStore = await ngsiLD.listEntities(
       {
         type: 'Product',
         options: 'keyValues',
         attrs: 'name,price',
-        id: stockedProducts.join(','),
+        id: stockedProducts.join(',')
       },
       headers
     );
@@ -171,7 +148,7 @@ async function displayTillInfo(req, res) {
       products: productsInStore,
       inventory,
       ngsiLd: true,
-      storeId: req.params.storeId,
+      storeId: req.params.storeId
     });
   } catch (error) {
     debug(error);
@@ -180,32 +157,19 @@ async function displayTillInfo(req, res) {
       products: {},
       inventory: {},
       ngsiLd: true,
-      storeId: req.params.storeId,
+      storeId: req.params.storeId
     });
   }
 }
 
 // This asynchronous function retrieves and updates an inventory item from the context
 //
-// It is effectively processing the following cUrl commands:
-//
-//   curl -X GET \
-//     'http://{{orion}}/ngsi-ld/v1/entities/<entity-id>?type=InventoryItem&options=keyValues'
-//   curl -X PATCH \
-//     'http://{{orion}}/ngsi-ld/v1/entities/urn:ngsi-ld:Product:001/attrs' \
-//     -H 'Content-Type: application/json' \
-//     -d ' {
-//        "shelfCount":{"type":"Integer", "value": 89}
-//     }'
-//
-// There is no error handling on this function, it has been
-// left to a function on the router.
 async function buyItem(req, res) {
   debug('buyItem');
   monitor('NGSI', 'listEntities ' + req.body.productId);
 
-  const headers = setAuthHeaders(req, LinkHeader);
-  const shelf = await listEntities(
+  const headers = ngsiLD.setHeaders(req.session.access_token, LinkHeader);
+  const shelf = await ngsiLD.listEntities(
     {
       type: 'Shelf',
       options: 'keyValues',
@@ -216,17 +180,17 @@ async function buyItem(req, res) {
         '";stocks=="' +
         req.body.productId +
         '"',
-      limit: 1,
+      limit: 1
     },
     headers
   );
 
   const count = shelf[0].numberOfItems - 1;
 
-  monitor('NGSI', 'updateExistingEntityAttributes ' + shelf[0].id, {
-    numberOfItems: { type: 'Property', value: count },
+  monitor('NGSI', 'updateAttribute ' + shelf[0].id, {
+    numberOfItems: { type: 'Property', value: count }
   });
-  await updateExistingEntityAttribute(
+  await ngsiLD.updateAttribute(
     shelf[0].id,
     { numberOfItems: { type: 'Property', value: count } },
     headers
@@ -264,44 +228,11 @@ function orderStock(req, res) {
   return res.render('order-stock', { title: 'Order Stock' });
 }
 
-// This is a promise to make an HTTP PATCH request to the /ngsi-ld/v1/entities/<entity-id>/attr end point
-function updateExistingEntityAttribute(entityId, body, headers = {}) {
-  return request({
-    url: basePath + '/entities/' + entityId + '/attrs',
-    method: 'PATCH',
-    body,
-    headers,
-    json: true,
-  });
-}
-
-// This is a promise to make an HTTP GET request to the /ngsi-ld/v1/entities/<entity-id> end point
-function retrieveEntity(entityId, opts, headers = {}) {
-  return request({
-    qs: opts,
-    url: basePath + '/entities/' + entityId,
-    method: 'GET',
-    headers,
-    json: true,
-  });
-}
-
-// This is a promise to make an HTTP GET request to the /ngsi-ld/v1/entities/ end point
-function listEntities(opts, headers = {}) {
-  return request({
-    qs: opts,
-    url: basePath + '/entities',
-    method: 'GET',
-    headers,
-    json: true,
-  });
-}
-
 module.exports = {
   buyItem,
   displayStore,
   displayTillInfo,
   displayWarehouseInfo,
   priceChange,
-  orderStock,
+  orderStock
 };

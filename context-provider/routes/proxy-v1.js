@@ -185,8 +185,8 @@ router.get('/', (req, res) => {
       '/proxy/v1/twitter/tweets/queryContext',
       '/proxy/v1/weather/temperature/queryContext',
       '/proxy/v1/weather/relativeHumidity/queryContext',
-      '/proxy/v1/weather/weatherConditions/queryContext',
-    ],
+      '/proxy/v1/weather/weatherConditions/queryContext'
+    ]
   });
 });
 

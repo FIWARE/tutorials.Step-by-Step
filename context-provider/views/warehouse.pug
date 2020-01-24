@@ -4,21 +4,6 @@ block header
 
 block content
 
-  b Actions
-  form.device(action="/device/command")
-    input(type="text" style="display:none"  name="id" value=`${id}`)
-    select(name="action")
-      option(value="ring") Ring Bell
-      option(value="presence") Dectect Motion
-      option(value="unlock") Unlock Door
-      option(value="open") Open Door
-      option(value="close") Close Door
-      option(value="lock") Lock Door
-      option(value="on") Lamp On
-      option(value="off") Lamp Off
-    | &nbsp;
-    input(type="submit" value=`Send` class="button")
-
   h3 Warehouse Notifications
   ul(id="notifications" data-id=`${id}`)
 

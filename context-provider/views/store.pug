@@ -33,5 +33,9 @@ block content
         p 
           b Humidity:&nbsp;
           | #{store.relativeHumidity}
+      - if (store.luminosity)
+        p 
+          b Luminosity:&nbsp;
+          | #{!isNaN(store.luminosity) ? store.luminosity : 'Unknown'}
     div(style="float: left; padding:5px 20px 20px 20px; border: none;")
       iframe(width='560', height='315', src=`/app/store/${store.id}/warehouse`, frameborder='0')

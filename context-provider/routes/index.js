@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const monitor = require('../lib/monitoring');
 const Store = require('../controllers/' + NGSI_VERSION + '/store');
+const DeviceConvertor = require('../controllers/ngsi-ld/device-convert');
 const History = require('../controllers/history');
 const DeviceListener = require('../controllers/iot/command-listener');
 const Security = require('../controllers/security');
@@ -18,39 +19,39 @@ const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 const NGSI_V2_STORES = [
   {
     href: 'app/store/urn:ngsi-ld:Store:001',
-    name: 'Store 1',
+    name: 'Store 1'
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:002',
-    name: 'Store 2',
+    name: 'Store 2'
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:003',
-    name: 'Store 3',
+    name: 'Store 3'
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:004',
-    name: 'Store 4',
-  },
+    name: 'Store 4'
+  }
 ];
 
 const NGSI_LD_STORES = [
   {
     href: 'app/store/urn:ngsi-ld:Building:store001',
-    name: 'Store 1',
+    name: 'Store 1'
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store002',
-    name: 'Store 2',
+    name: 'Store 2'
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store003',
-    name: 'Store 3',
+    name: 'Store 3'
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store004',
-    name: 'Store 4',
-  },
+    name: 'Store 4'
+  }
 ];
 
 // Error handler for async functions
@@ -82,7 +83,7 @@ router.get('/', function(req, res) {
     errors: req.flash('error'),
     info: req.flash('info'),
     securityEnabled,
-    stores,
+    stores
   });
 });
 
@@ -108,7 +109,7 @@ router.get('/device/monitor', function(req, res) {
   res.render('device-monitor', {
     title,
     traffic,
-    securityEnabled,
+    securityEnabled
   });
 });
 
@@ -136,6 +137,17 @@ if (process.env.CRATE_DB_SERVICE_URL) {
   router.get(
     '/device/history/:deviceId',
     catchErrors(History.readCrateDeviceHistory)
+  );
+}
+
+if (NGSI_VERSION === 'ngsi-ld') {
+  router.post(
+    '/device/subscription/initialize',
+    DeviceConvertor.duplicateDevices
+  );
+  router.post(
+    '/device/subscription/:attrib',
+    DeviceConvertor.shadowDeviceMeasures
   );
 }
 

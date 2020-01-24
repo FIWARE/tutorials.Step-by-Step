@@ -12,6 +12,7 @@ const IoTDevices = require('../../models/devices');
 
 // Connect to the context broker and use fallback values if necessary
 const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
+const DEVICE_BROKER = process.env.DEVICE_BROKER || CONTEXT_BROKER;
 const NGSI_PREFIX =
   process.env.NGSI_LD_PREFIX !== undefined
     ? process.env.NGSI_LD_PREFIX
@@ -54,7 +55,7 @@ function sendCommand(req, res) {
 
   const options = {
     method: 'PATCH',
-    url: CONTEXT_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs',
+    url: DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs',
     headers: {
       'Content-Type': 'application/json',
       'fiware-servicepath': '/',
