@@ -341,7 +341,8 @@ curl -iX POST \
     ],
     "condition": {
       "attrs": [
-        "luminosity"
+        "luminosity",
+        "location"
       ]
     }
   },
