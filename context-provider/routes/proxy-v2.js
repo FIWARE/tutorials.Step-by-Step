@@ -7,6 +7,25 @@ const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
 const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
 const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
+/*
+  Supported NGSI-v2 context provider endpoints
+
+  '/random/temperature/op/query',
+  '/random/relativeHumidity/op/query',
+  '/random/tweets/op/query',
+  '/random/weatherConditions/op/query',
+  '/static/temperature/op/query',
+  '/static/relativeHumidity/op/query',
+  '/static/tweets/op/query',
+  '/static/weatherConditions/op/query',
+  '/catfacts/tweets/op/query',
+  '/twitter/tweets/op/query',
+  '/weather/temperature/op/query',
+  '/weather/relativeHumidity/op/query',
+  '/weather/weatherConditions/op/query'
+
+*/
+
 router.post('/catfacts/:type/:mapping/op/query', CatFactsNGSIProxy.getAsNGSIv2);
 router.post('/random/:type/:mapping/op/query', RandomNGSIProxy.getAsNGSIv2);
 router.post('/static/:type/:mapping/op/query', StaticNGSIProxy.getAsNGSIv2);
@@ -157,25 +176,5 @@ router.post(
   },
   CatFactsNGSIProxy.getAsNGSIv2
 );
-
-router.get('/', (req, res) => {
-  res.status(200).send({
-    context_urls: [
-      '/random/temperature/op/query',
-      '/random/relativeHumidity/op/query',
-      '/random/tweets/op/query',
-      '/random/weatherConditions/op/query',
-      '/static/temperature/op/query',
-      '/static/relativeHumidity/op/query',
-      '/static/tweets/op/query',
-      '/static/weatherConditions/op/query',
-      '/catfacts/tweets/op/query',
-      '/twitter/tweets/op/query',
-      '/weather/temperature/op/query',
-      '/weather/relativeHumidity/op/query',
-      '/weather/weatherConditions/op/query'
-    ]
-  });
-});
 
 module.exports = router;

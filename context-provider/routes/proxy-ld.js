@@ -7,6 +7,25 @@ const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
 const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
 const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
+/*
+  Supported NGSI-LD context provider endpoints
+
+  '/random/temperature/ngsi-ld/v1/entities/',
+  '/random/relativeHumidity/ngsi-ld/v1/entities/',
+  '/random/tweets/ngsi-ld/v1/entities/',
+  '/random/weatherConditions/ngsi-ld/v1/entities/',
+  '/static/temperature/ngsi-ld/v1/entities/',
+  '/static/relativeHumidity/ngsi-ld/v1/entities/',
+  '/static/tweets/ngsi-ld/v1/entities/',
+  '/static/weatherConditions/ngsi-ld/v1/entities/',
+  '/catfacts/tweets/ngsi-ld/v1/entities/',
+  '/twitter/tweets/ngsi-ld/v1/entities/',
+  '/weather/temperature/ngsi-ld/v1/entities/',
+  '/weather/relativeHumidity/ngsi-ld/v1/entities/',
+  '/weather/weatherConditions/ngsi-ld/v1/entities/'
+
+*/
+
 function weatherDefaults(req, res, next) {
   req.params.type = 'number';
   req.params.mapping = 'temperature,relativeHumidity';
@@ -141,25 +160,5 @@ router.get(
   tweetDefaults,
   CatFactsNGSIProxy.getAsNgsiLD
 );
-
-router.get('/', (req, res) => {
-  res.status(200).send({
-    context_urls: [
-      '/proxy/random/temperature/ngsi-ld/v1/entities/',
-      '/proxy/random/relativeHumidity/ngsi-ld/v1/entities/',
-      '/proxy/random/tweets/ngsi-ld/v1/entities/',
-      '/proxy/random/weatherConditions/ngsi-ld/v1/entities/',
-      '/proxy/static/temperature/ngsi-ld/v1/entities/',
-      '/proxy/static/relativeHumidity/ngsi-ld/v1/entities/',
-      '/proxy/static/tweets/ngsi-ld/v1/entities/',
-      '/proxy/static/weatherConditions/ngsi-ld/v1/entities/',
-      '/proxy/catfacts/tweets/ngsi-ld/v1/entities/',
-      '/proxy/twitter/tweets/ngsi-ld/v1/entities/',
-      '/proxy/weather/temperature/ngsi-ld/v1/entities/',
-      '/proxy/weather/relativeHumidity/ngsi-ld/v1/entities/',
-      '/proxy/weather/weatherConditions/ngsi-ld/v1/entities/'
-    ]
-  });
-});
 
 module.exports = router;
