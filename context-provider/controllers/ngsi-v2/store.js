@@ -102,7 +102,7 @@ function displayTillInfo(req, res) {
     listEntities(
       {
         options: 'keyValues',
-        type: 'Product',
+        type: 'Product'
       },
       setAuthHeaders(req)
     ),
@@ -110,10 +110,10 @@ function displayTillInfo(req, res) {
       {
         q: 'refStore==' + req.params.storeId,
         options: 'keyValues',
-        type: 'InventoryItem',
+        type: 'InventoryItem'
       },
       setAuthHeaders(req)
-    ),
+    )
   ])
     .then(values => {
       // If values have been found display it on screen
@@ -121,7 +121,7 @@ function displayTillInfo(req, res) {
         products: values[0],
         inventory: values[1],
         ngsiLd: false,
-        storeId: req.params.storeId,
+        storeId: req.params.storeId
       });
     })
     .catch(error => {
@@ -131,7 +131,7 @@ function displayTillInfo(req, res) {
         products: {},
         inventory: {},
         ngsiLd: false,
-        storeId: req.params.storeId,
+        storeId: req.params.storeId
       });
     });
 }
@@ -158,20 +158,20 @@ async function buyItem(req, res) {
     req.params.inventoryId,
     {
       options: 'keyValues',
-      type: 'InventoryItem',
+      type: 'InventoryItem'
     },
     setAuthHeaders(req)
   );
   const count = inventory.shelfCount - 1;
 
   monitor('NGSI', 'updateExistingEntityAttributes ' + req.params.inventoryId, {
-    shelfCount: { type: 'Integer', value: count },
+    shelfCount: { type: 'Integer', value: count }
   });
   await updateExistingEntityAttributes(
     req.params.inventoryId,
     { shelfCount: { type: 'Integer', value: count } },
     {
-      type: 'InventoryItem',
+      type: 'InventoryItem'
     },
     setAuthHeaders(req)
   );
@@ -255,5 +255,5 @@ module.exports = {
   displayTillInfo,
   displayWarehouseInfo,
   priceChange,
-  orderStock,
+  orderStock
 };

@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const monitor = require('../lib/monitoring');
 const Store = require('../controllers/' + NGSI_VERSION + '/store');
-const DeviceConvertor = require('../controllers/ngsi-ld/device-convert');
 const History = require('../controllers/history');
 const DeviceListener = require('../controllers/iot/command-listener');
 const Security = require('../controllers/security');
@@ -137,17 +136,6 @@ if (process.env.CRATE_DB_SERVICE_URL) {
   router.get(
     '/device/history/:deviceId',
     catchErrors(History.readCrateDeviceHistory)
-  );
-}
-
-if (NGSI_VERSION === 'ngsi-ld') {
-  router.post(
-    '/device/subscription/initialize',
-    DeviceConvertor.duplicateDevices
-  );
-  router.post(
-    '/device/subscription/:attrib',
-    DeviceConvertor.shadowDeviceMeasures
   );
 }
 

@@ -5,13 +5,13 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const indexRouter = require('./routes/index');
-const proxyV1Router = require('./routes/proxy-v1');
 const healthRouter = require('./routes/health');
 const crypto = require('crypto');
 const session = require('express-session');
 const flash = require('connect-flash');
 const SECRET =
   process.env.SESSION_SECRET || crypto.randomBytes(20).toString('hex');
+const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 
 const app = express();
 
@@ -44,7 +44,22 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/proxy/v1', proxyV1Router);
+if (NGSI_VERSION === 'ngsi-ld') {
+  const proxyLDRouter = require('./routes/proxy-ld');
+  const DeviceConvertor = require('./controllers/ngsi-ld/device-convert');
+  app.use('/', proxyLDRouter);
+  app.post('/device/subscription/initialize', DeviceConvertor.duplicateDevices);
+  app.post(
+    '/device/subscription/:attrib',
+    DeviceConvertor.shadowDeviceMeasures
+  );
+} else {
+  const proxyV1Router = require('./routes/proxy-v1');
+  const proxyV2Router = require('./routes/proxy-v2');
+  app.use('/', proxyV1Router);
+  app.use('/', proxyV2Router);
+}
+
 app.use('/health', healthRouter);
 app.use('/', indexRouter);
 

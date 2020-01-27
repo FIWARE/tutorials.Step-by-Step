@@ -7,182 +7,173 @@ const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
 const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
 const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
+router.post('/catfacts/:type/:mapping/op/query', CatFactsNGSIProxy.getAsNGSIv2);
+router.post('/random/:type/:mapping/op/query', RandomNGSIProxy.getAsNGSIv2);
+router.post('/static/:type/:mapping/op/query', StaticNGSIProxy.getAsNGSIv2);
 router.post(
-  '/catfacts/:type/:mapping/queryContext',
-  CatFactsNGSIProxy.getAsLegacyNGSIv1
+  '/twitter/:type/:mapping/:queryString/op/query',
+  TwitterNGSIProxy.getAsNGSIv2
 );
 router.post(
-  '/random/:type/:mapping/queryContext',
-  RandomNGSIProxy.getAsLegacyNGSIv1
-);
-router.post(
-  '/static/:type/:mapping/queryContext',
-  StaticNGSIProxy.getAsLegacyNGSIv1
-);
-router.post(
-  '/twitter/:type/:mapping/:queryString/queryContext',
-  TwitterNGSIProxy.getAsLegacyNGSIv1
-);
-router.post(
-  '/weather/:type/:mapping/:queryString/queryContext',
-  WeatherNGSIProxy.getAsLegacyNGSIv1
+  '/weather/:type/:mapping/:queryString/op/query',
+  WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for temperature readings
 router.post(
-  '/random/temperature/queryContext',
+  '/random/temperature/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature';
     next();
   },
-  RandomNGSIProxy.getAsLegacyNGSIv1
+  RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/temperature/queryContext',
+  '/static/temperature/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature';
     next();
   },
-  StaticNGSIProxy.getAsLegacyNGSIv1
+  StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/temperature/queryContext',
+  '/weather/temperature/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature:temp';
-    req.params.queryString = 'berlin,de';
+    req.params.getAsNGSIv2String = 'berlin,de';
     next();
   },
-  WeatherNGSIProxy.getAsLegacyNGSIv1
+  WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for humidity readings
 router.post(
-  '/random/relativeHumidity/queryContext',
+  '/random/relativeHumidity/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'relativeHumidity';
     next();
   },
-  RandomNGSIProxy.getAsLegacyNGSIv1
+  RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/relativeHumidity/queryContext',
+  '/static/relativeHumidity/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'relativeHumidity';
     next();
   },
-  StaticNGSIProxy.getAsLegacyNGSIv1
+  StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/relativeHumidity/queryContext',
+  '/weather/relativeHumidity/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'relativeHumidity:humidity';
-    req.params.queryString = 'berlin,de';
+    req.params.getAsNGSIv2String = 'berlin,de';
     next();
   },
-  WeatherNGSIProxy.getAsLegacyNGSIv1
+  WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for weather conditions readings
 router.post(
-  '/random/weatherConditions/queryContext',
+  '/random/weatherConditions/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature,relativeHumidity';
     next();
   },
-  RandomNGSIProxy.getAsLegacyNGSIv1
+  RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/weatherConditions/queryContext',
+  '/static/weatherConditions/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature,relativeHumidity';
     next();
   },
-  StaticNGSIProxy.getAsLegacyNGSIv1
+  StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/weatherConditions/queryContext',
+  '/weather/weatherConditions/op/query',
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature:temp,relativeHumidity:humidity';
-    req.params.queryString = 'berlin,de';
+    req.params.getAsNGSIv2String = 'berlin,de';
     next();
   },
-  WeatherNGSIProxy.getAsLegacyNGSIv1
+  WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for tweets readings
 router.post(
-  '/random/tweets/queryContext',
+  '/random/tweets/op/query',
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:array';
     next();
   },
-  RandomNGSIProxy.getAsLegacyNGSIv1
+  RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/tweets/queryContext',
+  '/static/tweets/op/query',
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:array';
     next();
   },
-  StaticNGSIProxy.getAsLegacyNGSIv1
+  StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/twitter/tweets/queryContext',
+  '/twitter/tweets/op/query',
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:text';
-    req.params.queryString = 'FIWARE';
+    req.params.getAsNGSIv2String = 'FIWARE';
     next();
   },
-  TwitterNGSIProxy.getAsLegacyNGSIv1
+  TwitterNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/catfacts/tweets/queryContext',
+  '/catfacts/tweets/op/query',
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:fact';
-    req.params.queryString = '';
+    req.params.getAsNGSIv2String = '';
     next();
   },
-  CatFactsNGSIProxy.getAsLegacyNGSIv1
+  CatFactsNGSIProxy.getAsNGSIv2
 );
 
 router.get('/', (req, res) => {
   res.status(200).send({
     context_urls: [
-      '/random/temperature/queryContext',
-      '/random/relativeHumidity/queryContext',
-      '/random/tweets/queryContext',
-      '/random/weatherConditions/queryContext',
-      '/static/temperature/queryContext',
-      '/static/relativeHumidity/queryContext',
-      '/static/tweets/queryContext',
-      '/static/weatherConditions/queryContext',
-      '/catfacts/tweets/queryContext',
-      '/twitter/tweets/queryContext',
-      '/weather/temperature/queryContext',
-      '/weather/relativeHumidity/queryContext',
-      '/weather/weatherConditions/queryContext'
+      '/random/temperature/op/query',
+      '/random/relativeHumidity/op/query',
+      '/random/tweets/op/query',
+      '/random/weatherConditions/op/query',
+      '/static/temperature/op/query',
+      '/static/relativeHumidity/op/query',
+      '/static/tweets/op/query',
+      '/static/weatherConditions/op/query',
+      '/catfacts/tweets/op/query',
+      '/twitter/tweets/op/query',
+      '/weather/temperature/op/query',
+      '/weather/relativeHumidity/op/query',
+      '/weather/weatherConditions/op/query'
     ]
   });
 });

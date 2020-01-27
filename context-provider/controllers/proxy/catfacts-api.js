@@ -6,9 +6,9 @@
 
 const debug = require('debug')('tutorial:proxy');
 const request = require('request-promise');
-const Formatter = require('../../../lib/formatter');
+const Formatter = require('../../lib/formatter');
 const _ = require('lodash');
-const monitor = require('../../../lib/monitoring');
+const monitor = require('../../lib/monitoring');
 
 //  The  Cat Facts API key is personal to you.
 //  Do not place them directly in the code - read them in as environment variables.
@@ -45,11 +45,11 @@ function healthCheck(req, res) {
 }
 
 //
-// The Query Context endpoint responds with data in the NGSI v1 queryContext format
+// The queryContext endpoint responds with data in the legacy NGSI v1 format
 // This endpoint is called by the Orion Broker when "legacyForwarding"
 // is set to "true" during registration
 //
-function queryContext(req, res) {
+function getAsLegacyNGSIv1(req, res) {
   monitor('queryContext', 'Data requested from Cat Facts API', req.body);
   makeCatFactsRequest()
     .then(result => {
@@ -72,6 +72,65 @@ function queryContext(req, res) {
 }
 
 //
+// The op/query endpoint responds with data in the NGSI v2 format
+// This endpoint is called by the Orion Broker when "legacyForwarding"
+// is not set during registration
+//
+function getAsNGSIv2(req, res) {
+  monitor('op/query', 'Data requested from Cat Facts API', req.body);
+  makeCatFactsRequest()
+    .then(result => {
+      // Cat facts data is held in the main attribute
+      const facts = JSON.parse(result).data;
+
+      if (facts == null) {
+        // No weather facts was returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+
+      res.set('Content-Type', 'application/json');
+      res.send(Formatter.formatAsV2Response(req, facts, getValuesFromCatFacts));
+    })
+    .catch(err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    });
+}
+
+function getAsNgsiLD(req, res) {
+  monitor('entities', 'Data requested from Cat Facts API', req.body);
+  makeCatFactsRequest()
+    .then(result => {
+      // Cat facts data is held in the main attribute
+      const facts = JSON.parse(result).data;
+
+      if (facts == null) {
+        // No weather facts was returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+      const response = Formatter.formatAsLDResponse(
+        req,
+        facts,
+        getValuesFromCatFacts
+      );
+
+      if (req.headers.accept === 'application/json') {
+        res.set('Content-Type', 'application/json');
+        delete response['@context'];
+      } else {
+        res.set('Content-Type', 'application/ld+json');
+      }
+      res.send(response);
+    })
+    .catch(err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    });
+}
+
+//
 // When calling the Cat Facts API we need to supply the API Key as part of the
 // URL. This method logs the request and appends the query to the base URL
 //
@@ -79,7 +138,7 @@ function makeCatFactsRequest() {
   debug('Making a Cat Facts API request');
   return request({
     url: CAT_FACTS_URL,
-    method: 'GET',
+    method: 'GET'
   });
 }
 
@@ -98,7 +157,7 @@ function getValuesFromCatFacts(name, type, key, data) {
   // In order to avoid script injections attack in some circustances
   // certain  characters are forbidden in any request:
   _.forEach(data, element => {
-    value.push(element[key].replace(/[<>"'=;()?/%&]/g, ''));
+    value.push(element.fact.replace(/[<>"'=;()?/%&]/g, ''));
   });
 
   // Return the data as an array.
@@ -107,5 +166,7 @@ function getValuesFromCatFacts(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext,
+  getAsLegacyNGSIv1,
+  getAsNGSIv2,
+  getAsNgsiLD
 };

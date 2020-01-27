@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
-const CONTROLLER_PATH = '../controllers/' + NGSI_VERSION + '/proxy/';
-
-const StaticNGSIProxy = require(CONTROLLER_PATH + 'static-api');
-const RandomNGSIProxy = require(CONTROLLER_PATH + 'random-api');
-const TwitterNGSIProxy = require(CONTROLLER_PATH + 'twitter-api');
-const WeatherNGSIProxy = require(CONTROLLER_PATH + 'openweathermap-api');
-const CatFactsNGSIProxy = require(CONTROLLER_PATH + 'catfacts-api');
+const StaticNGSIProxy = require('../controllers/proxy/static-api');
+const RandomNGSIProxy = require('../controllers/proxy/random-api');
+const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
+const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
+const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
 router.get('/catfacts', CatFactsNGSIProxy.healthCheck);
 router.get('/random', RandomNGSIProxy.healthCheck);

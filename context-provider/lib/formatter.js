@@ -1,4 +1,6 @@
 const _ = require('lodash');
+const parseLinks = require('parse-links');
+const moment = require('moment');
 
 //
 // Entity types are typically title cased following Schema.org
@@ -41,6 +43,35 @@ function parseMapping(input) {
   return mappedAttributes;
 }
 
+function formatAsV2Response(req, inputData, attributeValueCallback) {
+  const mappedAttributes = parseMapping(req.params.mapping);
+  const queryResponse = [];
+
+  _.forEach(req.body.entities, entity => {
+    const element = {
+      id: entity.id,
+      type: entity.type
+    };
+
+    _.forEach(req.body.attrs, attribute => {
+      if (mappedAttributes[attribute]) {
+        element[attribute] = {
+          type: toTitleCase(req.params.type),
+          value: attributeValueCallback(
+            attribute,
+            req.params.type,
+            mappedAttributes[attribute],
+            inputData
+          )
+        };
+      }
+    });
+
+    queryResponse.push(element);
+  });
+  return queryResponse;
+}
+
 //
 // Formatting function for an NGSI v1 response to a context query.
 //
@@ -50,6 +81,9 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
   const ngsiV1Response = {
     contextResponses: []
   };
+
+  const addUnitCode = _.indexOf(req.body.meta, 'unitCode') > -1;
+  const addObservedAt = _.indexOf(req.body.meta, 'observedAt') > -1;
 
   _.forEach(req.body.entities, entity => {
     const entityResponse = {
@@ -67,7 +101,7 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
 
     _.forEach(req.body.attributes, attribute => {
       if (mappedAttributes[attribute]) {
-        entityResponse.contextElement.attributes.push({
+        const element = {
           name: attribute,
           type: toTitleCase(req.params.type),
           value: attributeValueCallback(
@@ -76,7 +110,24 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
             mappedAttributes[attribute],
             inputData
           )
-        });
+        };
+
+        if (attribute === 'temperature' || attribute === 'relativeHumidity') {
+          if (addUnitCode) {
+            element.metadata = element.metadata || {};
+            if (attribute === 'temperature') {
+              element.metadata.unitCode = 'CEL';
+            } else if (attribute === 'relativeHumidity') {
+              element.metadata.unitCode = 'P1';
+            }
+          }
+          if (addObservedAt) {
+            element.metadata = element.metadata || {};
+            element.metadata.observedAt = moment.utc().format();
+          }
+        }
+
+        entityResponse.contextElement.attributes.push(element);
       }
     });
 
@@ -86,7 +137,53 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
   return ngsiV1Response;
 }
 
+//
+// Formatting function for an NGSI LD response to a context query.
+//
+function formatAsLDResponse(req, inputData, attributeValueCallback) {
+  const mappedAttributes = parseMapping(req.params.mapping);
+  const regex = /:.*/gi;
+  const type = req.params.id.replace('urn:ngsi-ld:', '').replace(regex, '');
+  const links = parseLinks(req.headers.link);
+  const attrs = (req.query.attrs || '').split(',');
+
+  const response = {
+    '@context': links.context,
+    id: req.params.id,
+    type
+  };
+
+  _.forEach(attrs, attribute => {
+    if (mappedAttributes[attribute]) {
+      const value = attributeValueCallback(
+        attribute,
+        req.params.type,
+        mappedAttributes[attribute],
+        inputData
+      );
+      if (req.query.options === 'keyValues') {
+        response[attribute] = value;
+      } else {
+        response[attribute] = {
+          type: 'Property',
+          value
+        };
+        if (attribute === 'temperature') {
+          response.temperature.unitCode = 'CEL';
+          response.temperature.observedAt = moment.utc().format();
+        } else if (attribute === 'relativeHumidity') {
+          response.relativeHumidity.unitCode = 'P1';
+          response.relativeHumidity.observedAt = moment.utc().format();
+        }
+      }
+    }
+  });
+  return response;
+}
+
 module.exports = {
   formatAsV1Response,
+  formatAsV2Response,
+  formatAsLDResponse,
   toTitleCase
 };

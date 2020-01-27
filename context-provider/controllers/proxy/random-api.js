@@ -3,8 +3,8 @@
 //
 
 const debug = require('debug')('tutorial:proxy');
-const Formatter = require('../../../lib/formatter');
-const monitor = require('../../../lib/monitoring');
+const Formatter = require('../../lib/formatter');
+const monitor = require('../../lib/monitoring');
 
 const LOREM_IPSUM =
   'lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ' +
@@ -24,24 +24,52 @@ function healthCheck(req, res) {
     boolean: randomValueForType('boolean'),
     number: randomValueForType('number'),
     structuredValue: randomValueForType('structuredValue'),
-    text: randomValueForType('text'),
+    text: randomValueForType('text')
   });
 }
 
 //
-// The Query Context endpoint responds with data in the NGSI v1 queryContext format
+// The queryContext endpoint responds with data in the legacy NGSI v1 format
 // This endpoint is called by the Orion Broker when "legacyForwarding"
 // is set to "true" during registration
 //
 // For the random content provider, the response is in the form of random values
 // which change with each request.
 //
-function queryContext(req, res) {
+function getAsLegacyNGSIv1(req, res) {
   monitor('queryContext', 'Data requested from Random API', req.body);
   const response = Formatter.formatAsV1Response(req, null, (name, type) => {
     return randomValueForType(type);
   });
 
+  res.send(response);
+}
+
+//
+// The op/query endpoint responds with data in the NGSI v2 format
+// This endpoint is called by the Orion Broker when "legacyForwarding"
+// is not set during registration
+//
+function getAsNGSIv2(req, res) {
+  monitor('op/query', 'Data requested from Random API', req.body);
+  const response = Formatter.formatAsV2Response(req, null, (name, type) => {
+    return randomValueForType(type);
+  });
+  res.send(response);
+}
+
+function getAsNgsiLD(req, res) {
+  monitor('entities', 'Data requested from Random API', req.body);
+  res.set('Content-Type', 'application/ld+json');
+  const response = Formatter.formatAsLDResponse(req, null, (name, type) => {
+    return randomValueForType(type);
+  });
+  if (req.headers.accept === 'application/json') {
+    res.set('Content-Type', 'application/json');
+    delete response['@context'];
+  } else {
+    res.set('Content-Type', 'application/ld+json');
+  }
   res.send(response);
 }
 
@@ -84,7 +112,7 @@ function randomValueForType(type) {
       break;
     case 'structuredvalue':
       ret = {
-        somevalue: 'this',
+        somevalue: 'this'
       };
       break;
     case 'string':
@@ -121,5 +149,7 @@ function getLoremIpsum() {
 
 module.exports = {
   healthCheck,
-  queryContext,
+  getAsLegacyNGSIv1,
+  getAsNGSIv2,
+  getAsNgsiLD
 };

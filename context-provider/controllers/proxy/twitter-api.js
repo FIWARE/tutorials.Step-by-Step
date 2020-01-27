@@ -7,9 +7,9 @@
 const debug = require('debug')('tutorial:proxy');
 const Twitter = require('twitter');
 const request = require('request-promise');
-const Formatter = require('../../../lib/formatter');
+const Formatter = require('../../lib/formatter');
 const _ = require('lodash');
-const monitor = require('../../../lib/monitoring');
+const monitor = require('../../lib/monitoring');
 
 // The  Twitter Consumer Key & Consumer Secret are personal to you.
 // Do not place them directly in the code - read them in as environment variables.
@@ -51,11 +51,11 @@ function healthCheck(req, res) {
 }
 
 //
-// The Query Context endpoint responds with data in the NGSI v1 queryContext format
+// The queryContext endpoint responds with data in the legacy NGSI v1 format
 // This endpoint is called by the Orion Broker when "legacyForwarding"
 // is set to "true" during registration
 //
-function queryContext(req, res) {
+function getAsLegacyNGSIv1(req, res) {
   monitor('queryContext', 'Data requested from Twitter API', req.body);
   makeTwitterRequest(
     { q: req.params.queryString },
@@ -85,6 +85,73 @@ function queryContext(req, res) {
 }
 
 //
+// The op/query endpoint responds with data in the NGSI v2 format
+// This endpoint is called by the Orion Broker when "legacyForwarding"
+// is not set during registration
+//
+function getAsNGSIv2(req, res) {
+  monitor('op/query', 'Data requested from Twitter API', req.body);
+  makeTwitterRequest(
+    { q: req.params.queryString },
+    (error, tweets) => {
+      if (tweets.statuses == null) {
+        // No tweets were returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+
+      res.set('Content-Type', 'application/json');
+      const payload = Formatter.formatAsV2Response(
+        req,
+        tweets.statuses,
+        getValuesFromTweets
+      );
+
+      debug(JSON.stringify(payload));
+
+      res.send(payload);
+    },
+    err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    }
+  );
+}
+
+function getAsNgsiLD(req, res) {
+  monitor('entities', 'Data requested from Twitter API', req.body);
+
+  makeTwitterRequest(
+    { q: req.params.queryString },
+    (error, tweets) => {
+      if (tweets.statuses == null) {
+        // No tweets were returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+
+      const response = Formatter.formatAsLDResponse(
+        req,
+        tweets.statuses,
+        getValuesFromTweets
+      );
+
+      if (req.headers.accept === 'application/json') {
+        res.set('Content-Type', 'application/json');
+        delete response['@context'];
+      } else {
+        res.set('Content-Type', 'application/ld+json');
+      }
+      res.send(response);
+    },
+    err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    }
+  );
+}
+
+//
 // When calling the twitter library, for an application with read-only
 // access we need to supply CONSUMER KEY, CONSUMER SECRET and a bearer token.
 //
@@ -97,18 +164,18 @@ function makeTwitterRequest(params, callback, errorHandler) {
     method: 'POST',
     auth: {
       user: TWITTER_CONSUMER_KEY,
-      pass: TWITTER_CONSUMER_SECRET,
+      pass: TWITTER_CONSUMER_SECRET
     },
     form: {
-      grant_type: 'client_credentials',
-    },
+      grant_type: 'client_credentials'
+    }
   })
     .then(function(result) {
       debug('Making a Twitter Search API request: ' + JSON.stringify(params));
       const client = new Twitter({
         consumer_key: TWITTER_CONSUMER_KEY,
         consumer_secret: TWITTER_CONSUMER_SECRET,
-        bearer_token: JSON.parse(result).access_token,
+        bearer_token: JSON.parse(result).access_token
       });
 
       client.get(TWITTER_SEARCH_PATH, params, callback);
@@ -140,5 +207,7 @@ function getValuesFromTweets(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext,
+  getAsLegacyNGSIv1,
+  getAsNGSIv2,
+  getAsNgsiLD
 };

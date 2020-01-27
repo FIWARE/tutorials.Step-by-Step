@@ -6,8 +6,8 @@
 
 const debug = require('debug')('tutorial:proxy');
 const request = require('request-promise');
-const Formatter = require('../../../lib/formatter');
-const monitor = require('../../../lib/monitoring');
+const Formatter = require('../../lib/formatter');
+const monitor = require('../../lib/monitoring');
 
 //  The  OpenWeatherMap API key is personal to you.
 //  Do not place them directly in the code - read them in as environment variables.
@@ -51,11 +51,11 @@ function healthCheck(req, res) {
 }
 
 //
-// The Query Context endpoint responds with data in the NGSI v1 queryContext format
+// The queryContext endpoint responds with data in the legacy NGSI v1 format
 // This endpoint is called by the Orion Broker when "legacyForwarding"
 // is set to "true" during registration
 //
-function queryContext(req, res) {
+function getAsLegacyNGSIv1(req, res) {
   monitor('queryContext', 'Data requested from OpenWeatherMap API', req.body);
   makeWeatherRequest(req.params.queryString)
     .then(result => {
@@ -80,6 +80,68 @@ function queryContext(req, res) {
 }
 
 //
+// The op/query endpoint responds with data in the NGSI v2 format
+// This endpoint is called by the Orion Broker when "legacyForwarding"
+// is not set during registration
+//
+function getAsNGSIv2(req, res) {
+  monitor('op/query', 'Data requested from OpenWeatherMap API', req.body);
+  makeWeatherRequest(req.params.queryString)
+    .then(result => {
+      // Weather observation data is held in the main attribute
+      const observation = JSON.parse(result).main;
+
+      if (observation == null) {
+        // No weather observation was returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+
+      res.set('Content-Type', 'application/json');
+      res.send(
+        Formatter.formatAsV2Response(req, observation, getValueFromObservation)
+      );
+    })
+    .catch(err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    });
+}
+
+function getAsNgsiLD(req, res) {
+  monitor('entities', 'Data requested from OpenWeatherMap API', req.body);
+  makeWeatherRequest(req.params.queryString)
+    .then(result => {
+      // Weather observation data is held in the main attribute
+      const observation = JSON.parse(result).main;
+
+      if (observation == null) {
+        // No weather observation was returned for the query.
+        throw new Error({ message: 'Not Found', statusCode: 404 });
+      }
+
+      const response = Formatter.formatAsLDResponse(
+        req,
+        observation,
+        getValueFromObservation
+      );
+
+      if (req.headers.accept === 'application/json') {
+        res.set('Content-Type', 'application/json');
+        delete response['@context'];
+      } else {
+        res.set('Content-Type', 'application/ld+json');
+      }
+      res.send(response);
+    })
+    .catch(err => {
+      debug(err);
+      res.statusCode = err.statusCode || 501;
+      res.send(err);
+    });
+}
+
+//
 // When calling the OpenWeatherMap API we need to supply the API Key as part of the
 // URL. This method logs the request and appends the query to the base URL
 //
@@ -87,7 +149,7 @@ function makeWeatherRequest(query) {
   debug('Making a OpenWeatherMap API request: ' + query);
   return request({
     url: OPENWEATHERMAP_URL + query,
-    method: 'GET',
+    method: 'GET'
   });
 }
 
@@ -112,5 +174,7 @@ function getValueFromObservation(name, type, key, data) {
 
 module.exports = {
   healthCheck,
-  queryContext,
+  getAsLegacyNGSIv1,
+  getAsNGSIv2,
+  getAsNgsiLD
 };

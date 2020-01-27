@@ -66,7 +66,7 @@ class UltralightMeasure {
       url: IOT_AGENT_URL,
       qs: { k: getAPIKey(deviceId), i: deviceId },
       headers: this.headers,
-      body: state,
+      body: state
     };
     const debugText =
       'POST ' + IOT_AGENT_URL + '?i=' + options.qs.i + '&k=' + options.qs.k;
