@@ -46,6 +46,8 @@ function parseMapping(input) {
 function formatAsV2Response(req, inputData, attributeValueCallback) {
   const mappedAttributes = parseMapping(req.params.mapping);
   const queryResponse = [];
+  const addUnitCode = _.indexOf(req.body.metadata, 'unitCode') > -1;
+  const addObservedAt = _.indexOf(req.body.metadata, 'observedAt') > -1;
 
   _.forEach(req.body.entities, entity => {
     const element = {
@@ -64,6 +66,21 @@ function formatAsV2Response(req, inputData, attributeValueCallback) {
             inputData
           )
         };
+
+        if (attribute === 'temperature' || attribute === 'relativeHumidity') {
+          if (addUnitCode) {
+            element.metadata = element.metadata || {};
+            if (attribute === 'temperature') {
+              element.metadata.unitCode = 'CEL';
+            } else if (attribute === 'relativeHumidity') {
+              element.metadata.unitCode = 'P1';
+            }
+          }
+          if (addObservedAt) {
+            element.metadata = element.metadata || {};
+            element.metadata.observedAt = moment.utc().format();
+          }
+        }
       }
     });
 
@@ -81,9 +98,6 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
   const ngsiV1Response = {
     contextResponses: []
   };
-
-  const addUnitCode = _.indexOf(req.body.meta, 'unitCode') > -1;
-  const addObservedAt = _.indexOf(req.body.meta, 'observedAt') > -1;
 
   _.forEach(req.body.entities, entity => {
     const entityResponse = {
@@ -111,21 +125,6 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
             inputData
           )
         };
-
-        if (attribute === 'temperature' || attribute === 'relativeHumidity') {
-          if (addUnitCode) {
-            element.metadata = element.metadata || {};
-            if (attribute === 'temperature') {
-              element.metadata.unitCode = 'CEL';
-            } else if (attribute === 'relativeHumidity') {
-              element.metadata.unitCode = 'P1';
-            }
-          }
-          if (addObservedAt) {
-            element.metadata = element.metadata || {};
-            element.metadata.observedAt = moment.utc().format();
-          }
-        }
 
         entityResponse.contextElement.attributes.push(element);
       }
