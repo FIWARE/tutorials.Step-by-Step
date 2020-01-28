@@ -56,7 +56,7 @@ function healthCheck(req, res) {
 // is set to "true" during registration
 //
 function getAsLegacyNGSIv1(req, res) {
-  monitor('queryContext', 'Data requested from Twitter API', req.body);
+  monitor('/queryContext', 'Data requested from Twitter API', req.body);
   makeTwitterRequest(
     { q: req.params.queryString },
     (error, tweets) => {
@@ -90,7 +90,7 @@ function getAsLegacyNGSIv1(req, res) {
 // is not set during registration
 //
 function getAsNGSIv2(req, res) {
-  monitor('op/query', 'Data requested from Twitter API', req.body);
+  monitor('/op/query', 'Data requested from Twitter API', req.body);
   makeTwitterRequest(
     { q: req.params.queryString },
     (error, tweets) => {
@@ -118,8 +118,11 @@ function getAsNGSIv2(req, res) {
   );
 }
 
+//
+// The /ngsi-ld/v1/entities/:id endpoint responds with data in the NGSI-LD format
+//
 function getAsNgsiLD(req, res) {
-  monitor('entities', 'Data requested from Twitter API', req.body);
+  monitor('/ngsi-ld/v1/entities', 'Data requested from Twitter API', req.body);
 
   makeTwitterRequest(
     { q: req.params.queryString },

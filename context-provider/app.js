@@ -38,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+app.use(bodyParser.json({ type: 'application/*+json' }));
 
 app.use(function(req, res, next) {
   res.locals.session = req.session;

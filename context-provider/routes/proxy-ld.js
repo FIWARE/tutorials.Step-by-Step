@@ -52,6 +52,23 @@ function temperatureDefault(req, res, next) {
   next();
 }
 
+function notSupported(req, res) {
+  res.statusCode = 501;
+  res.send({
+    type: ' http://uri.etsi.org/ngsi-ld/errors/OperationNotSupported',
+    title: 'Not Implemented',
+    detail:
+      "The '" +
+      req.params.proxy +
+      "' context provider does not support the given endpoint"
+  });
+}
+
+function noOp(req, res) {
+  res.statusCode = 204;
+  res.send();
+}
+
 router.get(
   '/catfacts/:type/:mapping/ngsi-ld/v1/entities/:id',
   CatFactsNGSIProxy.getAsNgsiLD
@@ -160,5 +177,38 @@ router.get(
   tweetDefaults,
   CatFactsNGSIProxy.getAsNgsiLD
 );
+
+// Not Supported Endpoints
+
+router.all('/:proxy/:attributes/ngsi-ld/v1/entities', notSupported);
+
+// Updatable Endpoints
+router.patch(
+  '/static/temperature/ngsi-ld/v1/entities/:id/attrs',
+  temperatureDefault,
+  weatherDefaults,
+  StaticNGSIProxy.updateEntity
+);
+router.patch(
+  '/static/relativeHumidity/ngsi-ld/v1/entities/:id/attrs',
+  humidityDefault,
+  weatherDefaults,
+  StaticNGSIProxy.updateEntity
+);
+router.patch(
+  '/static/tweets/ngsi-ld/v1/entities/:id/attrs',
+  tweetDefaults,
+  StaticNGSIProxy.updateEntity
+);
+router.patch(
+  '/static/weatherConditions/ngsi-ld/v1/entities/:id/attrs',
+  weatherDefaults,
+  StaticNGSIProxy.updateEntity
+);
+
+// Non-Updatable Endpoints
+router.all('/random/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
+router.all('/weather/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
+router.all('/catfacts/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
 
 module.exports = router;

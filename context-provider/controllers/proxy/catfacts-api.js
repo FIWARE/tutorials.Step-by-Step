@@ -50,7 +50,7 @@ function healthCheck(req, res) {
 // is set to "true" during registration
 //
 function getAsLegacyNGSIv1(req, res) {
-  monitor('queryContext', 'Data requested from Cat Facts API', req.body);
+  monitor('/queryContext', 'Data requested from Cat Facts API', req.body);
   makeCatFactsRequest()
     .then(result => {
       // Cat facts data is held in the main attribute
@@ -77,7 +77,7 @@ function getAsLegacyNGSIv1(req, res) {
 // is not set during registration
 //
 function getAsNGSIv2(req, res) {
-  monitor('op/query', 'Data requested from Cat Facts API', req.body);
+  monitor('/op/query', 'Data requested from Cat Facts API', req.body);
   makeCatFactsRequest()
     .then(result => {
       // Cat facts data is held in the main attribute
@@ -98,8 +98,15 @@ function getAsNGSIv2(req, res) {
     });
 }
 
+//
+// The /ngsi-ld/v1/entities/:id endpoint responds with data in the NGSI-LD format
+//
 function getAsNgsiLD(req, res) {
-  monitor('entities', 'Data requested from Cat Facts API', req.body);
+  monitor(
+    '/ngsi-ld/v1/entities',
+    'Data requested from Cat Facts API',
+    req.body
+  );
   makeCatFactsRequest()
     .then(result => {
       // Cat facts data is held in the main attribute

@@ -184,5 +184,6 @@ module.exports = {
   formatAsV1Response,
   formatAsV2Response,
   formatAsLDResponse,
-  toTitleCase
+  toTitleCase,
+  parseMapping
 };
