@@ -27,6 +27,7 @@
     "description": "fiware:description",
     "floorsAboveGround": "fiware:floorsAboveGround",
     "floorsBelowGround": "fiware:floorsBelowGround",
+    "tweets" : "tutorial:tweets",
     "owner": {
       "@id": "fiware:owner",   
       "@type": "@id"
