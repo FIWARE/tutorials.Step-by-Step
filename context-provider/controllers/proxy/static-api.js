@@ -109,10 +109,18 @@ function updateEntity(req, res) {
   res.send();
 }
 
+function updateSingleAttribute(req, res) {
+  monitor('/ngsi-ld/v1/entities', 'Update sent to the Static API', req.body);
+  staticValues[req.params.type] = req.body.value;
+  res.statusCode = 204;
+  res.send();
+}
+
 module.exports = {
   healthCheck,
   getAsLegacyNGSIv1,
   getAsNGSIv2,
   getAsNgsiLD,
-  updateEntity
+  updateEntity,
+  updateSingleAttribute
 };

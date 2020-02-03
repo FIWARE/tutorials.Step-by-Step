@@ -206,9 +206,35 @@ router.patch(
   StaticNGSIProxy.updateEntity
 );
 
+// Updatable Endpoints
+router.patch(
+  '/static/:attributes/ngsi-ld/v1/entities/:id/attrs/temperature',
+  (req, res) => {
+    req.params.type = 'number';
+    StaticNGSIProxy.updateSingleAttribute(req, res);
+  }
+);
+router.patch(
+  '/static/:attributes/ngsi-ld/v1/entities/:id/attrs/relativeHumidity',
+  (req, res) => {
+    req.params.type = 'number';
+    StaticNGSIProxy.updateSingleAttribute(req, res);
+  }
+);
+router.patch(
+  '/static/:attributes/ngsi-ld/v1/entities/:id/attrs/tweets',
+  (req, res) => {
+    req.params.type = 'list';
+    StaticNGSIProxy.updateSingleAttribute(req, res);
+  }
+);
+
 // Non-Updatable Endpoints
 router.all('/random/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
 router.all('/weather/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
 router.all('/catfacts/:attributes/ngsi-ld/v1/entities/:id/attrs', noOp);
+router.all('/random/:attributes/ngsi-ld/v1/entities/:id/attrs/:attr', noOp);
+router.all('/weather/:attributes/ngsi-ld/v1/entities/:id/attrs/:attr', noOp);
+router.all('/catfacts/:attributes/ngsi-ld/v1/entities/:id/attrs/:attr', noOp);
 
 module.exports = router;
