@@ -9,6 +9,8 @@ const monitor = require('../../lib/monitoring');
 const ngsiLD = require('../../lib/ngsi-ld');
 const _ = require('lodash');
 
+debug('Store is using NGSI-LD');
+
 const LinkHeader =
   '<https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json">';
 

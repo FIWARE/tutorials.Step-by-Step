@@ -11,6 +11,8 @@ const defaultClient = NgsiV2.ApiClient.instance;
 const debug = require('debug')('tutorial:ngsi-v2');
 const monitor = require('../../lib/monitoring');
 
+debug('Store is using NGSI-v2');
+
 // The basePath must be set - this is the location of the Orion
 // context broker. It is best to do this with an environment
 // variable (with a fallback if necessary)

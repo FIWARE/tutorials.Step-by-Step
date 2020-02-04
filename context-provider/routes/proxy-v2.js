@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const debug = require('debug')('tutorial:ngsi-v2');
 
 const StaticNGSIProxy = require('../controllers/proxy/static-api');
 const RandomNGSIProxy = require('../controllers/proxy/random-api');
@@ -7,6 +8,7 @@ const TwitterNGSIProxy = require('../controllers/proxy/twitter-api');
 const WeatherNGSIProxy = require('../controllers/proxy/openweathermap-api');
 const CatFactsNGSIProxy = require('../controllers/proxy/catfacts-api');
 
+debug('NGSI-v2 Context-Forwarding Support is available');
 /*
   Supported NGSI-v2 context provider endpoints
 
