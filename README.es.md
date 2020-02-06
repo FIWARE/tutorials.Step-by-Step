@@ -14,12 +14,7 @@
 >
 >![3 stars iHub](https://badgen.net/badge/iHub/3%20stars/yellow)
 >
->[![Twitter](https://raw.githubusercontent.com/FIWAREZone/misc/master/twitter.png)](https://twitter.com/FIWAREZone) 
-[![Linkedin](https://raw.githubusercontent.com/FIWAREZone/misc/master/linkedin.png)](https://www.linkedin.com/company/fiware-zone)
-[![Instagram](https://raw.githubusercontent.com/FIWAREZone/misc/master/instagram.png)](https://www.instagram.com/fiwarezone/)
-[![Github](https://raw.githubusercontent.com/FIWAREZone/misc/master/github.png)](https://github.com/FIWAREZone)
-[![Facebook](https://raw.githubusercontent.com/FIWAREZone/misc/master/facebook.png)](https://www.facebook.com/FIWAREZone/)
-
+>[![Twitter](https://raw.githubusercontent.com/FIWAREZone/misc/master/twitter.png)](https://twitter.com/FIWAREZone) [![Linkedin](https://raw.githubusercontent.com/FIWAREZone/misc/master/linkedin.png)](https://www.linkedin.com/company/fiware-zone) [![Instagram](https://raw.githubusercontent.com/FIWAREZone/misc/master/instagram.png)](https://www.instagram.com/fiwarezone/) [![Github](https://raw.githubusercontent.com/FIWAREZone/misc/master/github.png)](https://github.com/FIWAREZone) [![Facebook](https://raw.githubusercontent.com/FIWAREZone/misc/master/facebook.png)](https://www.facebook.com/FIWAREZone/)
 
 Esto es una colección de tutoriales para la plataforma FIWARE. Cada tutorial consiste en una serie de ejercicios para demostrar el correcto
 uso de componentes FIWARE individualmente, y mostrar el flujo del contexto con una solución Smart simple ya sea conectándose a una serie de 
@@ -27,7 +22,6 @@ dispositivos de IoT simulados o manipulando el contexto directamente mediante al
 
 | :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) | <img src="https://json-ld.org/favicon.ico" align="center" height="25"> [NGSI-LD Data Models](https://fiware.github.io/tutorials.Step-by-Step/schema/) | <img src="https://assets.getpostman.com/common-share/postman-logo-stacked.svg" align="center" height="25"> [Postman Collections](https://explore.postman.com/team/3mM5EY6ChBYp9D) |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-
 
 ## Instalación
 
@@ -44,9 +38,9 @@ git submodule update --init --recursive
 Cada tutorial ejecuta todos los componentes empleando [Docker](https://www.docker.com). **Docker** **Docker** es una tecnología de contenedores que 
 permite aislar diferentes componentes en sus respectivos entornos.
 
-- Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
-- Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
-- Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
+-  Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
+-  Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
+-  Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
 
 **Docker Compose** es una herramienta para definir y ejecutar aplicaciones Docker multi-contenedor. A
 Se utiliza el [archivo YAML](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) para configurar los 
@@ -63,7 +57,6 @@ docker version
 
 Por favor, asegúrese de que está utilizando la versión 18.03 o superior de Docker y la versión 1.21 o superior de Docker Compose y 
 actualícela si es necesario.
-
 
 ### Postman <img src="https://www.getpostman.com/favicon.ico" align="left"  height="30" width="30">
 
@@ -139,4 +132,3 @@ Las instrucciones completas se pueden encontrar en la [documentación](https://f
 ## License
 
 [MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
-
