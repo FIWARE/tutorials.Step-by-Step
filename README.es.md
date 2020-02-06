@@ -38,9 +38,9 @@ git submodule update --init --recursive
 Cada tutorial ejecuta todos los componentes empleando [Docker](https://www.docker.com). **Docker** **Docker** es una tecnología de contenedores que 
 permite aislar diferentes componentes en sus respectivos entornos.
 
--  Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
--  Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
--  Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
+-   Para instalar Docker en Windows siga las instrucciones [aquí](https://docs.docker.com/docker-for-windows/)
+-   Para instalar Docker en Mac siga las instrucciones [aquí](https://docs.docker.com/docker-for-mac/)
+-   Para instalar Docker en Linux siga las instrucciones [aquí](https://docs.docker.com/install/)
 
 **Docker Compose** es una herramienta para definir y ejecutar aplicaciones Docker multi-contenedor. A
 Se utiliza el [archivo YAML](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) para configurar los 
