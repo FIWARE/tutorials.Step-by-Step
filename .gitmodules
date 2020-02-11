@@ -75,7 +75,7 @@
 	path = tutorials.Big-Data-Analysis
 	url = https://github.com/FIWARE/tutorials.Big-Data-Analysis.git
 [submodule "tutorials.Accessing-Linked-Data"]
-	path = tutorials.Accessing-Linked-Data
+	path = tutorials.Working-with-Linked-Data
 	url = https://github.com/FIWARE/tutorials.Accessing-Linked-Data.git
 [submodule "tutorials.Custom-IoT-Agent"]
 	path = tutorials.Custom-IoT-Agent
