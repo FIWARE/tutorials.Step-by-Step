@@ -18,7 +18,7 @@
     "居住の": "fiware:residential",
 
     "場所": "core:location",
-    "名前": "core:name"
+    "名前": "core:name",
     "特性": "core:Property",
     "間柄": "core:Relationship",
     "地理的特性": "core:GeoProperty"
