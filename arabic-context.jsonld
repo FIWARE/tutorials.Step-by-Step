@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "النوع": "@type",
+    "الهوية": "@id",
+    "schema": "https://schema.org/",
+    "fiware": "https://uri.fiware.org/ns/data-models#",
+    "core": "https://uri.etsi.org/ngsi-ld/",
+    "البناء": "fiware:Building",
+    "العنوان": "schema:address",
+    "الفئة": { 
+      "@id" :"fiware:category",
+      "@type": "@vocab"
+    }, 
+    "تجاري": "fiware:commercial",
+    "مكتبي": "fiware:office",
+    "صناعي": "fiware:industrial",
+    "تجزئه": "fiware:retail",
+    "سكني": "fiware:residential",
+
+    "المكان": "core:location",
+    "الاسم": "core:name",
+    "الملكية": "core:Property",
+    "العلاقة": "core:Relationship",
+    "الخصائص الجغرافية": "core:GeoProperty"
+    }
+}
