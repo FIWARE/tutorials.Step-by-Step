@@ -130,7 +130,8 @@ These tutorials show how to create, process, analyze or visualize context inform
 
 <h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: Linked Data</h3>
 
-These tutorials show how to create, process, analyze or visualize context information
+These tutorials show how to use NGSI-LD which combines context data management with linked data concepts.
 
 &nbsp; 601. [Introduction to Linked Data](linked-data.md)<br/> &nbsp; 602.
-[Linked Data Relationships and Data Models](relationships-linked-data.md)<br/>
+[Linked Data Relationships and Data Models](relationships-linked-data.md)<br/> &nbsp; 603.
+[Traversing Linked Data](working-with-linked-data.md)<br/>

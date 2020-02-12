@@ -42,5 +42,6 @@ pages:
   - "Core Context Managment: NGSI-LD":
       - "Linked Data": "linked-data.md"
       - "Relationships & Data Models": "relationships-linked-data.md"
+      - "Traversing Linked Data": "working-with-linked-data.md"
   - "Appendix":
       - "Curl Commands": "cmds/administrating-xacml.md"
