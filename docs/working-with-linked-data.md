@@ -86,8 +86,8 @@ application runs on the following URLs:
 -   `http://localhost:3000/app/store/urn:ngsi-ld:Building:store003`
 -   `http://localhost:3000/app/store/urn:ngsi-ld:Building:store004`
 
-> :information_source: **Tip** Additionally, you can also watch the status of recent requests yourself by following the
-> container logs or viewing information on `localhost:3000/app/monitor` on a web browser.
+> **Tip** Additionally, you can also watch the status of recent requests yourself by following the container logs or
+> viewing information on `localhost:3000/app/monitor` on a web browser.
 >
 > ![FIWARE Monitor](https://fiware.github.io/tutorials.Working-with-Linked-Data/img/monitor.png)
 
