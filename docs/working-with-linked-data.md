@@ -367,7 +367,7 @@ curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 ```
 
 The response is a JSON Array of **Shelf** entities which includes as `stocks` attribute which can be manipulated
-further. The code below extracts the ids for later use.
+further. The code below extracts the IDs for later use.
 
 ```javascript
 const stockedProducts = [];
@@ -448,7 +448,7 @@ curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 
 ### Update the state of a shelf
 
-To update an entity a PATCH request is made using the id of the **Shelf** returned in the previous request
+To update an entity a PATCH request is made using the `id` of the **Shelf** returned in the previous request
 
 ```javascript
 const count = shelf[0].numberOfItems - 1;
