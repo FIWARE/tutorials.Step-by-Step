@@ -1,0 +1,26 @@
+{
+  "@context": {
+    "類": "@type",
+    "氏名": "@id",
+    "schema": "https://schema.org/",
+    "fiware": "https://uri.fiware.org/ns/data-models#",
+    "core": "https://uri.etsi.org/ngsi-ld/",
+    "る建物": "fiware:Building",
+    "住所": "schema:address",
+    "種類": { 
+      "@id" :"fiware:category",
+      "@type": "@vocab"
+    }, 
+    "商業の": "fiware:commercial",
+    "オフィス": "fiware:office",
+    "工業用": "fiware:industrial",
+    "小売り": "fiware:retail",
+    "居住の": "fiware:residential",
+
+    "場所": "core:location",
+    "名前": "core:name"
+    "特性": "core:Property",
+    "間柄": "core:Relationship",
+    "地理的特性": "core:GeoProperty"
+    }
+}
