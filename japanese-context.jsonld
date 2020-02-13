@@ -5,6 +5,7 @@
     "schema": "https://schema.org/",
     "fiware": "https://uri.fiware.org/ns/data-models#",
     "core": "https://uri.etsi.org/ngsi-ld/",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
     "る建物": "fiware:Building",
     "住所": "schema:address",
     "商業の": "fiware:commercial",
@@ -15,8 +16,12 @@
     "種類": { 
       "@id" :"fiware:category",
       "@type": "@vocab"
-    }, 
-    "値": "value",
+    },
+    "検証済み": "tutorial:verified",
+    "家具": "tutorial:furniture",
+    
+    "値": "core:hasValue",
+    "対象": "core:hasObject",
     "座標": "coordinates",
     "場所": "core:location",
     "名前": "core:name",
