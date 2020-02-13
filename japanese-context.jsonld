@@ -16,8 +16,8 @@
       "@id" :"fiware:category",
       "@type": "@vocab"
     }, 
-    "値": "core:value",
-    "座標": "core:coordinates",
+    "値": "value",
+    "座標": "coordinates",
     "場所": "core:location",
     "名前": "core:name",
     "特性": "core:Property",
