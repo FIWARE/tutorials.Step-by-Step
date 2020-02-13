@@ -7,7 +7,7 @@
     "core": "https://uri.etsi.org/ngsi-ld/",
     "る建物": "fiware:Building",
     "住所": "schema:address",
-    "郵便番号": "postalCode",
+    "種類": "fiware:category",
     "商業の": "fiware:commercial",
     "オフィス": "fiware:office",
     "工業用": "fiware:industrial",
