@@ -18,7 +18,7 @@
       "@type": "@vocab"
     },
     "検証済み": "tutorial:verified",
-    "家具": "tutorial:furniture",
+    "家具": "furniture",
     
     "値": "core:hasValue",
     "対象": "core:hasObject",
