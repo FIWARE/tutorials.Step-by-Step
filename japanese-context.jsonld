@@ -21,7 +21,7 @@
     "家具": "tutorial:furniture",
     
     "値": "core:hasValue",
-    "対象": "core:hasObject",
+    "対象": "object",
     "座標": "coordinates",
     "場所": "core:location",
     "名前": "core:name",
