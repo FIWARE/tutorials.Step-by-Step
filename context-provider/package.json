@@ -30,6 +30,7 @@
     "express": "~4.16.0",
     "express-session": "^1.15.6",
     "http-errors": "^1.7.0",
+    "jsonld": "^2.0.2",
     "lodash": "^4.17.15",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",

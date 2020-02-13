@@ -48,12 +48,15 @@ app.use(function(req, res, next) {
 if (NGSI_VERSION === 'ngsi-ld') {
   const proxyLDRouter = require('./routes/proxy-ld');
   const DeviceConvertor = require('./controllers/ngsi-ld/device-convert');
+  const japaneseRouter = require('./routes/japanese');
   app.use('/', proxyLDRouter);
   app.post('/device/subscription/initialize', DeviceConvertor.duplicateDevices);
   app.post(
     '/device/subscription/:attrib',
     DeviceConvertor.shadowDeviceMeasures
   );
+
+  app.use('/japanese/ngsi-ld/v1/', japaneseRouter);
 } else {
   const proxyV1Router = require('./routes/proxy-v1');
   const proxyV2Router = require('./routes/proxy-v2');

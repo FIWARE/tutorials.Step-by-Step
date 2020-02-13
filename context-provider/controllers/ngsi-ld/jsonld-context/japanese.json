@@ -1,0 +1,29 @@
+{
+  "@context": {
+
+    "core": "https://uri.etsi.org/ngsi-ld/",  
+    "値": "core:hasValue",
+    "物体": "core:hasObject",
+    "座標": "core:coordinates",
+    "場所": "core:location",
+    "名前": "core:name",
+    "特性": "core:Property",
+    "間柄": "core:Relationship",
+    "地理的特性": "core:GeoProperty",
+    "類": "@type",
+    "氏名": "@id",
+    
+    
+    "商業の": "commercial",
+    "オフィス": "office",
+    "工業用": "industrial",
+    "小売り": "retail",
+    "居住の": "residential",
+    "住所": "core:default-context/住所",
+    "種類": "core:default-context/種類",
+    "検証済み": "core:default-context/検証済み",
+    "家具": "core:default-context/家具",
+
+    "@vocab": "https://uri.etsi.org/ngsi-ld/default-context/"
+  }
+}
