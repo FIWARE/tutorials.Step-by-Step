@@ -18,10 +18,13 @@
       "@type": "@vocab"
     },
     "検証済み": "tutorial:verified",
-    "家具": "furniture",
+    "家具": "tutorial:furniture",
     
     "値": "core:hasValue",
     "対象": "core:hasObject",
+    
+    "値s": "core:hasValues",
+    "対象s": "core:hasObjects",
     "座標": "core:coordinates",
     "場所": "core:location",
     "名前": "core:name",
