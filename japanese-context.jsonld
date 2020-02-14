@@ -6,14 +6,14 @@
     "fiware": "https://uri.fiware.org/ns/data-models#",
     "core": "https://uri.etsi.org/ngsi-ld/",
     "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
-    "る建物": "fiware:Building",
+    "ビル": "fiware:Building",
     "住所": "schema:address",
-    "商業の": "fiware:commercial",
+    "コマーシャル": "fiware:commercial",
     "オフィス": "fiware:office",
-    "工業用": "fiware:industrial",
-    "小売り": "fiware:retail",
-    "居住の": "fiware:residential",
-    "種類": { 
+    "インダストリアル": "fiware:industrial",
+    "リテール": "fiware:retail",
+    "レジデンシャル": "fiware:residential",
+    "カテゴリー": { 
       "@id" :"fiware:category",
       "@type": "@vocab"
     },
@@ -21,13 +21,13 @@
     "家具": "tutorial:furniture",
     
     "値": "core:hasValue",
-    "物体": "core:hasObject",
+    "オブジェクト": "core:hasObject",
     
     "座標": "core:coordinates",
     "場所": "core:location",
     "名前": "core:name",
-    "特性": "core:Property",
-    "間柄": "core:Relationship",
-    "地理的特性": "core:GeoProperty"
+    "プロパティ": "core:Property",
+    "プロパティ": "core:Relationship",
+    "ジオプロパティ": "core:GeoProperty"
     }
 }
