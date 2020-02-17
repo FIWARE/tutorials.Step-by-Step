@@ -709,11 +709,11 @@ payload before sending data to the context broker.
 
 ```json
 {
-    "氏名": "urn:ngsi-ld:Building:store005",
-    "類": "ビル",
-    "カテゴリー": { "類": "プロパティ", "値": "コマーシャル" },
+    "識別子": "urn:ngsi-ld:Building:store005",
+    "タイプ": "ビル",
+    "カテゴリー": { "タイプ": "プロパティ", "値": "コマーシャル" },
     "住所": {
-        "類": "プロパティ",
+        "タイプ": "プロパティ",
         "値": {
             "addressLocality": "Marzahn",
             "addressRegion": "Berlin",
@@ -722,10 +722,10 @@ payload before sending data to the context broker.
         }
     },
     "場所": {
-        "類": "ジオプロパティ",
-        "値": { "類": "Point", "座標": [13.5646, 52.5435] }
+        "タイプ": "ジオプロパティ",
+        "値": { "タイプ": "Point", "座標": [13.5646, 52.5435] }
     },
-    "名前": { "類": "プロパティ", "値": "Yuusui-en" }
+    "名前": { "タイプ": "プロパティ", "値": "Yuusui-en" }
 }
 ```
 
