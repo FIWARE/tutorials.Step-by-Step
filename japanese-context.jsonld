@@ -1,7 +1,7 @@
 {
   "@context": {
-    "類": "@type",
-    "氏名": "@id",
+    "タイプ": "@type",
+    "識別子": "@id",
     "schema": "https://schema.org/",
     "fiware": "https://uri.fiware.org/ns/data-models#",
     "core": "https://uri.etsi.org/ngsi-ld/",
