@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fiware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) -
 a generic enabler which is used to persist context data into third-party databases using
@@ -231,7 +231,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.17.0_SNAPSHOT.etc"
+    "version": "1.18.0_SNAPSHOT.etc"
 }
 ```
 
@@ -265,7 +265,6 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
 -   The notification `url` must match the configured `CYGNUS_MONGO_SERVICE_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
 #### 2 Request:
@@ -288,8 +287,7 @@ curl -iX POST \
   "notification": {
     "http": {
       "url": "http://cygnus:5051/notify"
-    },
-    "attrsFormat": "legacy"
+    }
   },
   "throttling": 5
 }'
@@ -306,7 +304,8 @@ same for each database. The response will be **201 - Created**
 > value does not match the number of notified context responses
 > ```
 >
-> This is usually because the `"attrsFormat": "legacy"` flag has been omitted.
+> For versions of Cygnus prior to 1.18.0 an additional `attrsFormat=legacy` attribute was required in the subscription
+> since Cygnus currently only accepted notifications in the older NGSI v1 format.
 
 If a subscription has been created, you can check to see if it is firing by making a GET request to the
 `/v2/subscriptions` endpoint.
@@ -342,7 +341,6 @@ curl -X GET \
             "timesSent": 158,
             "lastNotification": "2018-07-02T07:59:21.00Z",
             "attrs": [],
-            "attrsFormat": "legacy",
             "http": {
                 "url": "http://cygnus:5050/notify"
             },
@@ -629,7 +627,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.17.0_SNAPSHOT.etc"
+    "version": "1.18.0_SNAPSHOT.etc"
 }
 ```
 
@@ -663,7 +661,6 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
 -   The notification `url` must match the configured `CYGNUS_POSTGRESQL_SERVICE_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
 #### 5 Request:
@@ -686,8 +683,7 @@ curl -iX POST \
   "notification": {
     "http": {
       "url": "http://cygnus:5055/notify"
-    },
-    "attrsFormat": "legacy"
+    }
   },
   "throttling": 5
 }'
@@ -966,7 +962,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.17.0_SNAPSHOT.etc"
+    "version": "1.18.0_SNAPSHOT.etc"
 }
 ```
 
@@ -1000,7 +996,6 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
 -   The notification `url` must match the configured `CYGNUS_MYSQL_SERVICE_PORT`
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
 #### 7 Request:
@@ -1023,8 +1018,7 @@ curl -iX POST \
   "notification": {
     "http": {
       "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+    }
   },
   "throttling": 5
 }'
@@ -1291,7 +1285,7 @@ The response will look similar to the following:
 ```json
 {
     "success": "true",
-    "version": "1.17.0_SNAPSHOT.etc"
+    "version": "1.18.0_SNAPSHOT.etc"
 }
 ```
 
@@ -1324,7 +1318,6 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that Cygnus will be informed of all context data changes.
--   The `attrsFormat=legacy` is required since Cygnus currently only accepts notifications in the older NGSI v1 format.
 -   The `throttling` value defines the rate that changes are sampled.
 
 When running in **multi-agent** mode, the notification `url` for each subscription must match the defaults for the given
@@ -1363,8 +1356,7 @@ curl -iX POST \
   "notification": {
     "http": {
       "url": "http://cygnus:5050/notify"
-    },
-    "attrsFormat": "legacy"
+    }
   },
   "throttling": 5
 }'
