@@ -66,7 +66,7 @@ router.post(
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature:temp';
-    req.params.getAsNGSIv2String = 'berlin,de';
+    req.params.queryString = 'berlin,de';
     next();
   },
   WeatherNGSIProxy.getAsNGSIv2
@@ -98,7 +98,7 @@ router.post(
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'relativeHumidity:humidity';
-    req.params.getAsNGSIv2String = 'berlin,de';
+    req.params.queryString = 'berlin,de';
     next();
   },
   WeatherNGSIProxy.getAsNGSIv2
@@ -130,7 +130,7 @@ router.post(
   (req, res, next) => {
     req.params.type = 'number';
     req.params.mapping = 'temperature:temp,relativeHumidity:humidity';
-    req.params.getAsNGSIv2String = 'berlin,de';
+    req.params.queryString = 'berlin,de';
     next();
   },
   WeatherNGSIProxy.getAsNGSIv2
@@ -162,7 +162,7 @@ router.post(
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:text';
-    req.params.getAsNGSIv2String = 'FIWARE';
+    req.params.queryString = 'FIWARE';
     next();
   },
   TwitterNGSIProxy.getAsNGSIv2
@@ -173,7 +173,7 @@ router.post(
   (req, res, next) => {
     req.params.type = 'list';
     req.params.mapping = 'tweets:fact';
-    req.params.getAsNGSIv2String = '';
+    req.params.queryString = '';
     next();
   },
   CatFactsNGSIProxy.getAsNGSIv2
