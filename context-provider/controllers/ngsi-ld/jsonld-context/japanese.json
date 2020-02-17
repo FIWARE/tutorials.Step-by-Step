@@ -10,8 +10,8 @@
     "プロパティ": "core:Property",
     "リレーションシップ": "core:Relationship",
     "ジオプロパティ": "core:GeoProperty",
-    "類": "@type",
-    "氏名": "@id",
+    "タイプ": "@type",
+    "識別子": "@id",
     
     
     "コマーシャル": "commercial",
