@@ -15,6 +15,15 @@ const GIT_COMMIT = process.env.GIT_COMMIT || 'unknown';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
+const NOTIFY_ATTRIBUTES = [
+  'refStore',
+  'refProduct',
+  'refShelf',
+  'type',
+  'locatedIn',
+  'stocks'
+];
+
 const NGSI_V2_STORES = [
   {
     href: 'app/store/urn:ngsi-ld:Store:001',
@@ -186,9 +195,9 @@ router.get(
 // Whenever a subscription is received, display it on the monitor
 // and notify any interested parties using Socket.io
 router.post('/subscription/:type', (req, res) => {
-  monitor('notify', req.params.type + ' received', req, req.body);
+  monitor('notify', req.params.type + ' received', req.body);
   _.forEach(req.body.data, item => {
-    broadcastEvents(req, item, ['refStore', 'refProduct', 'refShelf', 'type']);
+    broadcastEvents(req, item, NOTIFY_ATTRIBUTES);
   });
   res.status(204).send();
 });
