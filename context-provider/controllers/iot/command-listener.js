@@ -13,11 +13,49 @@ const IoTDevices = require('../../models/devices');
 // Connect to the context broker and use fallback values if necessary
 const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 const DEVICE_BROKER = process.env.DEVICE_BROKER || CONTEXT_BROKER;
+const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 const NGSI_PREFIX =
   process.env.NGSI_LD_PREFIX !== undefined
     ? process.env.NGSI_LD_PREFIX
     : 'urn:ngsi-ld:';
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
+
+function createNGSIv2Request(action, id) {
+  const method = 'PATCH';
+  const body = {};
+  const headers = {
+    'Content-Type': 'application/json',
+    'fiware-servicepath': '/',
+    'fiware-service': 'openiot'
+  };
+  const url = DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs';
+
+  body[action] = {
+    type: 'command',
+    value: ''
+  };
+
+  return { method, url, headers, body, json: true };
+}
+
+function createNGSILDRequest(action, id) {
+  const method = 'PATCH';
+  const body = {
+    type: 'Property',
+    value: ' '
+  };
+  const url =
+    DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs/' + action;
+  const headers = {
+    'Content-Type': 'application/json',
+    'NGSILD-Tenant': 'openiot',
+    'NGSILD-Path': '/',
+    'fiware-service': 'openiot',
+    'fiware-servicepath': '/'
+  };
+
+  return { method, url, headers, body, json: true };
+}
 
 // This function allows a Bell, Door or Lamp command to be sent to the Dummy IoT devices
 // via the Orion Context Broker and an IoT Agent.
@@ -46,24 +84,10 @@ function sendCommand(req, res) {
     id = 'Door:' + id;
   }
 
-  const payload = {};
-
-  payload[action] = {
-    type: 'command',
-    value: ''
-  };
-
-  const options = {
-    method: 'PATCH',
-    url: DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs',
-    headers: {
-      'Content-Type': 'application/json',
-      'fiware-servicepath': '/',
-      'fiware-service': 'openiot'
-    },
-    body: payload,
-    json: true
-  };
+  const options =
+    NGSI_VERSION === 'ngsi-v2'
+      ? createNGSIv2Request(action, id)
+      : createNGSILDRequest(action, id);
 
   if (req.session.access_token) {
     // If the system has been secured and we have logged in,
