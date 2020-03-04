@@ -58,6 +58,15 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+If you are using docker-compose in Ubuntu with VMware and faced the following error: 
+_ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?_
+
+It can be solved by owning the `/var/run/docker.sock` Unix socket as shown:
+
+```bash
+sudo chown $USER /var/run/docker.sock
+```
+
 ### Postman <img src="https://www.getpostman.com/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
 
 The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
