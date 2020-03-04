@@ -53,7 +53,7 @@ clients and enabling them to take part as DDS publishers and/or subscribers in t
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Fast-RTPS-Micro-RTPS.git
+git clone https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS.git
 
 ./services create
 ```

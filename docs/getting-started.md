@@ -94,7 +94,7 @@ All services can be initialised from the command-line using the `docker-compose`
 and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Getting-Started.git
+git clone https://github.com/FIWARE/tutorials.Getting-Started.git
 cd tutorials.Getting-Started
 
 docker-compose -p fiware up -d

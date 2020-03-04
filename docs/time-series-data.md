@@ -144,7 +144,7 @@ Before you start, you should ensure that you have obtained or built the necessar
 the repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Time-Series-Data.git
+git clone https://github.com/FIWARE/tutorials.Time-Series-Data.git
 cd tutorials.Time-Series-Data
 
 ./services create

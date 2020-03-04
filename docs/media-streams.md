@@ -139,7 +139,7 @@ The `kurento-examples` container is driven by environment variables as shown:
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Media-Streams.git
+git clone https://github.com/FIWARE/tutorials.Media-Streams.git
 cd tutorials.Media-Streams
 git submodule update --init --recursive
 

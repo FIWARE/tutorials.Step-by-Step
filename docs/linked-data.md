@@ -222,7 +222,7 @@ All services can be initialised from the command-line by running the
 repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Linked-Data.git
+git clone https://github.com/FIWARE/tutorials.Linked-Data.git
 cd tutorials.Linked-Data
 
 ./services start

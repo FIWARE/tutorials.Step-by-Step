@@ -134,7 +134,7 @@ Before you start you should ensure that you have obtained or built the necessary
 repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Short-Term-History.git
+git clone https://github.com/FIWARE/tutorials.Short-Term-History.git
 cd tutorials.Short-Term-History
 
 ./services create

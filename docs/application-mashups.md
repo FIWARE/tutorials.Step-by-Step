@@ -177,7 +177,7 @@ The `wirecloud` container is connecting to **Keyrock** and is driven by environm
 To start the installation, do the following:
 
 ```console
-git clone git@github.com:FIWARE/tutorials.Application-Mashup.git
+git clone https://github.com/FIWARE/tutorials.Application-Mashup.git
 cd tutorials.Application-Mashup
 
 ./services create

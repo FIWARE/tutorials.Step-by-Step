@@ -254,7 +254,7 @@ Before you start you should ensure that you have obtained or built the necessary
 repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.IoT-over-MQTT.git
+git clone https://github.com/FIWARE/tutorials.IoT-over-MQTT.git
 cd tutorials.IoT-over-MQTT
 
 ./services create

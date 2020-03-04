@@ -159,7 +159,7 @@ The all container configuration values found in the YAML file have been describe
 To start the installation, do the following:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Administrating-XACML.git
+git clone https://github.com/FIWARE/tutorials.Administrating-XACML.git
 cd tutorials.Administrating-XACML
 
 ./services create

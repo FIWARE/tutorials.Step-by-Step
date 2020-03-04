@@ -175,7 +175,7 @@ All services can be initialised from the command-line by running the bash script
 clone the repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone git@github.com:FIWARE/tutorials.Context-Providers.git
+git clone https://github.com/FIWARE/tutorials.Context-Providers.git
 cd tutorials.Context-Providers
 
 ./services create; ./services start;
