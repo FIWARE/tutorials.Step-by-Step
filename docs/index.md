@@ -56,7 +56,13 @@ If using a linux distro with an outdated docker-compose, the files can be instal
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+
 ```
+If you are using docker-compose in ubunto with VMware and faced the following error: 
+ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?
+
+You can solve it with this command : 
+sudo chown $USER /var/run/docker.sock
 
 ### Postman <img src="https://www.getpostman.com/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
 
