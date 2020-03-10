@@ -95,20 +95,22 @@ async function displayTillInfo(req, res) {
       headers
     );
 
-    monitor(
-      'NGSI',
-      'listEntities type=Shelf id=' + building.furniture.join(',')
-    );
+    const furniture = Array.isArray(building.furniture)
+      ? building.furniture
+      : [building.furniture];
+
+    monitor('NGSI', 'listEntities type=Shelf id=' + furniture.join(','));
     let productsList = await ngsiLD.listEntities(
       {
         type: 'Shelf',
         options: 'keyValues',
         attrs: 'stocks,numberOfItems',
-        id: building.furniture.join(',')
+        id: furniture.join(',')
       },
       headers
     );
 
+    productsList = Array.isArray(productsList) ? productsList : [productsList];
     productsList = _.groupBy(productsList, e => {
       return e.stocks;
     });
@@ -141,6 +143,9 @@ async function displayTillInfo(req, res) {
       headers
     );
 
+    productsInStore = Array.isArray(productsInStore)
+      ? productsInStore
+      : [productsInStore];
     productsInStore = _.mapValues(productsInStore, e => {
       e.price = e.price * 100;
       return e;
