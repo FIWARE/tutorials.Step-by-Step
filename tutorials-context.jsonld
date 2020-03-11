@@ -46,10 +46,7 @@
       "@id": "tutorial:locatedIn",   
       "@type": "@id"
     },
-    "maxCapacity":  {
-      "@id": "tutorial:maxCapacity",
-      "@type": "xsd:integer"
-    },  
+    "maxCapacity":  "tutorial:maxCapacity",
     "statusOfWork": { 
       "@id": "tutorial:statusOfWork",
       "@type": "@vocab"
@@ -58,30 +55,16 @@
     "completed": "tutorial:completed",
     "scheduled": "tutorial:scheduled",
     "inProgress": "tutorial:inProgress",
-    "stocks": {
-      "@id": "tutorial:stocks",   
-      "@type": "@id"
-    },
-    "currency": {
-      "@id": "tutorial:currency",
-      "@type": "xsd:string"
-    }, 
-    "price": {
-      "@id": "tutorial:price",
-      "@type": "xsd:decimal"
-    }, 
-    "size":  {
-      "@id": "tutorial:size",
-      "@type": "xsd:string"
-    },
+    
+    "stocks":  "tutorial:stocks",   
+    "currency": "tutorial:currency", 
+    "price": "tutorial:price",
+    "size":  "tutorial:size",
     "furniture": {
       "@id": "tutorial:furniture",   
       "@type": "@id"
     },
-    "verified": {
-      "@id": "tutorial:verified",
-      "@type": "xsd:boolean"
-    },
+    "verified": "@id": "tutorial:verified",
     "requestedFor": {
       "@id": "tutorial:requestedFor",   
       "@type": "@id"
@@ -94,18 +77,9 @@
       "@id": "tutorial:orderedProduct",   
       "@type": "@id"
     },
-    "orderDate": {
-      "@id": "tutorial:orderDate",   
-      "@type": "https://uri.etsi.org/ngsi-ld/DateTime"
-    },
-    "stockCount":  {
-      "@id": "tutorial:stockCount",
-      "@type": "xsd:integer"
-    }, 
-    "numberOfItems":  {
-      "@id": "tutorial:numberOfItems",
-      "@type": "xsd:integer"
-    }
+    "orderDate": "tutorial:orderDate",   
+    "stockCount":  "tutorial:stockCount",
+    "numberOfItems":  "tutorial:numberOfItems"
   },
   "@graph": [
     {
