@@ -64,7 +64,7 @@
       "@id": "tutorial:furniture",   
       "@type": "@id"
     },
-    "verified": "@id": "tutorial:verified",
+    "verified": "tutorial:verified",
     "requestedFor": {
       "@id": "tutorial:requestedFor",   
       "@type": "@id"
