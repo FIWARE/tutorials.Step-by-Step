@@ -86,6 +86,7 @@ function convertEntityToLD(json) {
 }
 
 // This is a promise to make an HTTP PATCH request to the /v2/entities end point
+// for each individual device.
 function upsertDeviceEntityAsLD(device) {
   return new Promise((resolve, reject) => {
     const json = convertEntityToLD(device);
@@ -110,6 +111,7 @@ function upsertDeviceEntityAsLD(device) {
 }
 
 // This is a promise to make an HTTP PATCH request to the /v2/entities end point
+// for each individual device reading.
 function upsertLinkedAttributeDataAsLD(device, refid, attrib) {
   return new Promise((resolve, reject) => {
     const payload = {};
@@ -153,6 +155,8 @@ function upsertLinkedAttributeDataAsLD(device, refid, attrib) {
   });
 }
 
+// Function to create NGSI-LD device entities
+// when receiving an NGSI-v2 subscription.
 function duplicateDevices(req, res) {
   async function copyEntityData(device, index) {
     await upsertDeviceEntityAsLD(device);
@@ -161,6 +165,9 @@ function duplicateDevices(req, res) {
   res.status(204).send();
 }
 
+// Function to update NGSI-LD device entities
+// and the linked data within the NGSI-LD building entities
+// when receiving an NGSI-v2 subscription.
 function shadowDeviceMeasures(req, res) {
   const attrib = req.params.attrib;
 

@@ -14,6 +14,16 @@ const SECRET =
 const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 
 const app = express();
+const mongoose = require('mongoose');
+
+const MONGO_DB = process.env.MONGO_URL
+  ? process.env.MONGO_URL
+  : 'mongodb://mongo-db:27017/address';
+
+mongoose.connect(MONGO_DB, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,9 +58,11 @@ app.use(function(req, res, next) {
 if (NGSI_VERSION === 'ngsi-ld') {
   const proxyLDRouter = require('./routes/proxy-ld');
   const DeviceConvertor = require('./controllers/ngsi-ld/device-convert');
+  const DataPersist = require('./controllers/ngsi-ld/building-update');
   const japaneseRouter = require('./routes/japanese');
   app.use('/', proxyLDRouter);
   app.post('/device/subscription/initialize', DeviceConvertor.duplicateDevices);
+  app.post('/building/subscription', DataPersist.duplicateBuildings);
   app.post(
     '/device/subscription/:attrib',
     DeviceConvertor.shadowDeviceMeasures
@@ -60,8 +72,10 @@ if (NGSI_VERSION === 'ngsi-ld') {
 } else {
   const proxyV1Router = require('./routes/proxy-v1');
   const proxyV2Router = require('./routes/proxy-v2');
+  const DataPersist = require('./controllers/ngsi-v2/building-update');
   app.use('/', proxyV1Router);
   app.use('/', proxyV2Router);
+  app.post('/building/subscription', DataPersist.duplicateBuildings);
 }
 
 app.use('/health', healthRouter);
