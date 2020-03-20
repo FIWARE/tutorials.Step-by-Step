@@ -153,6 +153,25 @@ router.get('/app/monitor', function(req, res) {
   res.render('monitor', { title: 'Event Monitor' });
 });
 
+// Display the app monitor page
+router.get('/device/history', function(req, res) {
+  const data = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
+  const stores = [];
+
+  if (process.env.CRATE_DB_SERVICE_URL || process.env.STH_COMET_SERVICE_URL) {
+    data.forEach(element => {
+      stores.push({
+        name: element.name,
+        href: element.href.replace('app/store/', 'history/')
+      });
+    });
+  }
+  res.render('history-index', {
+    title: 'Short-Term History',
+    stores
+  });
+});
+
 // Viewing Store information is secured by Keyrock PDP.
 // LEVEL 1: AUTHENTICATION ONLY - Users must be logged in to view the store page.
 router.get('/app/store/:storeId', Security.authenticate, Store.displayStore);

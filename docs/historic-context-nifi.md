@@ -32,7 +32,7 @@ A summary of the differences can be seen below:
 
 | Draco                                                                           | Cygnus                                                                           |
 | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| Offers an NGSI v2 interface for notifications                                   | Offers an NGSI v1 interface for notifications                                    |
+| Offers an NGSI v2 interface for notifications                                   | Offers an NGSI v2 interface for notifications                                    |
 | configurable subscription endpoint, but defaults to `/v2/notify`                | subscription endpoint listens on `/notify`                                       |
 | listens on a single port                                                        | listens on separate ports for each input                                         |
 | Configured by a graphical interface                                             | Configured via config files                                                      |

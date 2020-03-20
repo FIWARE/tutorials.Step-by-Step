@@ -1,5 +1,6 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fiware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to [FIWARE STH-Comet](https://fiware-sth-comet.readthedocs.io/) - a
 generic enabler which is used to retrieve trend data from a MongoDB database. The tutorial activates the IoT sensors
@@ -1083,9 +1084,7 @@ This is done by making a POST request to the `/v2/subscription` endpoint of the 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that **Cygnus** will be informed of all **Motion Sensor** data changes.
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since **Cygnus** currently only accepts notifications in the older NGSI v1
-    format.
+-   The notification `url` must match the configured `CYGNUS_MONGO_SERVICE_PORT`
 
 #### 14 Request:
 
@@ -1111,12 +1110,11 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
+      "url": "http://cygnus:5051/notify"
     },
     "attrs": [
       "count"
-    ],
-    "attrsFormat": "legacy"
+    ]
   }
 }'
 ```
@@ -1132,9 +1130,7 @@ the `throttling` attribute in the request body.
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors
 -   The `idPattern` in the request body ensures that **Cygnus** will be informed of all **Smart Lamp** data changes only
--   The notification `url` must match the configured `CYGNUS_API_PORT`
--   The `attrsFormat=legacy` is required since **Cygnus** currently only accepts notifications in the older NGSI v1
-    format.
+-   The notification `url` must match the configured `CYGNUS_MONGO_SERVICE_PORT`
 -   The `throttling` value defines the rate that changes are sampled.
 
 #### 15 Request:
@@ -1161,12 +1157,11 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-      "url": "http://cygnus:5050/notify"
+      "url": "http://cygnus:5051/notify"
     },
     "attrs": [
       "luminosity"
-    ],
-    "attrsFormat": "legacy"
+    ]
   },
   "throttling": 5
 }'
