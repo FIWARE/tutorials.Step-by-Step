@@ -87,5 +87,5 @@
 	path = tutorials.Edge-Computing
 	url = https://github.com/FIWARE/tutorials.Edge-Computing.git
 [submodule "LD-Subscriptions-Registrations"]
-	path = LD-Subscriptions-Registrations
+	path = tutorials.LD-Subscriptions-Registrations
 	url = https://github.com/FIWARE/tutorials.LD-Subscriptions-Registrations.git
