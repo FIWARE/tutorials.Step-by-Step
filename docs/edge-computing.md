@@ -133,7 +133,7 @@ repository:
   9e95c55a1eb7        fogflow/discovery   "/discovery"             10 seconds ago      Up 8 seconds        0.0.0.0:8090->8090/tcp                                  fogflow_discovery_1
 ```
 
--   Check the system status from the FogFlow DashBoard at `http://<coreservice_ip>/index.html`. Webpage to be displayed
+-   Check the system status from the FogFlow DashBoard at `http://<coreservice_ip>/index.html`. Web page to be displayed
     is shown in the figure below.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/dashboard.png)
@@ -222,7 +222,7 @@ FogFlow allows the developers to specify their own function code inside a regist
 [examples](https://github.com/smartfog/fogflow/tree/master/application/operator) to know how to create a customized
 operator.
 
-Python, Java and Javascript templates to write an operator can be found
+Python, Java and JavaScript templates to write an operator can be found
 [here](https://github.com/FIWARE/tutorials.Edge-Computing/tree/master/templates).
 
 For the current tutorial, refer the
@@ -269,7 +269,7 @@ exports.handler = function(contextEntity, publish, query, subscribe) {
 };
 ```
 
-There are two steps to register an operator in Fogflow.
+The following steps are required to register an operator in Fogflow.
 
 1.  **Register an Operator** to define what would be the name of Operator and what input parameters it would need. The
     following picture shows the list of all registered operators.
