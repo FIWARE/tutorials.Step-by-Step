@@ -144,4 +144,5 @@ These tutorials show how to use NGSI-LD which combines context data management w
 
 &nbsp; 601. [Introduction to Linked Data](linked-data.md)<br/> &nbsp; 602.
 [Linked Data Relationships and Data Models](relationships-linked-data.md)<br/> &nbsp; 603.
-[Traversing Linked Data](working-with-linked-data.md)<br/>
+[Traversing Linked Data](working-with-linked-data.md)<br/> &nbsp; 604.
+[Linked Data Subscriptions and Registrations](https://github.com/FIWARE/tutorials.LD-Subscriptions-Registrations)<br/>
