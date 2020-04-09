@@ -39,6 +39,7 @@ pages:
       - "Application Mashups": "application-mashups.md"
       - "Media Streams": "media-streams.md"
       - "Big Data Analysis": "big-data-analysis.md"
+      - "Cloud Edge Computing": "edge-computing.md"
   - "Core Context Managment: NGSI-LD":
       - "Linked Data": "linked-data.md"
       - "Relationships & Data Models": "relationships-linked-data.md"

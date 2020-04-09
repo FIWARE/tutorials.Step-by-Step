@@ -83,3 +83,6 @@
 [submodule "tutorials.IoT-Agent-JSON"]
 	path = tutorials.IoT-Agent-JSON
 	url = https://github.com/FIWARE/tutorials.IoT-Agent-JSON.git
+[submodule "tutorials.Edge-Computing"]
+	path = tutorials.Edge-Computing
+	url = https://github.com/FIWARE/tutorials.Edge-Computing.git

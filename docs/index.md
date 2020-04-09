@@ -58,8 +58,8 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-If you are using docker-compose in Ubuntu with VMware and faced the following error: 
-_ERROR: Couldn't connect to Docker daemon at http+docker://localunixsocket - is it running?_
+If you are using docker-compose in Ubuntu with VMware and faced the following error: _ERROR: Couldn't connect to Docker
+daemon at http+docker://localunixsocket - is it running?_
 
 It can be solved by owning the `/var/run/docker.sock` Unix socket as shown:
 
@@ -135,7 +135,8 @@ These tutorials show how to create, process, analyze or visualize context inform
 
 &nbsp; 501. [Creating Application Mashups](application-mashups.md)<br/> &nbsp; 503.
 [Introduction to Media Streams](media-streams.md)<br/> &nbsp; 505.
-[Real-time Processing and Big Data Analysis](big-data-analysis.md)<br/>
+[Real-time Processing and Big Data Analysis](big-data-analysis.md)<br/> &nbsp; 507.
+[Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing)<br/>
 
 <h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: Linked Data</h3>
 
