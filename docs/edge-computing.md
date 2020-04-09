@@ -16,11 +16,11 @@ this tutorial, which are relatable to the figure below.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/fogflow-overall-view.png)
 
-1. User provides his scenario to FogFlow, which includes what to do, when to do. FogFlow will figure out where to do.
-2. Sensors regularly send context data to FogFlow. Data may include environmental data like temperature, video
-   streaming, pictures, etc.
-3. FogFlow orchestrates processing flows at edges in no time. These processing flows may change the state of an actuator
-   or publish some data back to FogFlow, it is all about what user wants to do.
+1.  User provides his scenario to FogFlow, which includes what to do, when to do. FogFlow will figure out where to do.
+2.  Sensors regularly send context data to FogFlow. Data may include environmental data like temperature, video
+    streaming, pictures, etc.
+3.  FogFlow orchestrates processing flows at edges in no time. These processing flows may change the state of an
+    actuator or publish some data back to FogFlow, it is all about what user wants to do.
 
 Additional material to understand the developer know-hows, visit
 [FogFlow tutorial](https://fogflow.readthedocs.io/en/latest/introduction.html). FogFlow can also be integrated with
@@ -53,6 +53,24 @@ Logically, FogFlow consists of the following three layers:
 
 # Start Up
 
+Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
+repository and create the necessary images by running the commands as shown:
+
+```bash
+git clone https://github.com/FIWARE/tutorials.Edge-Computing.git
+cd tutorials.Edge-Computing
+
+./services create
+```
+
+Thereafter, all services can be initialized from the command-line by running the
+[services](https://github.com/FIWARE/tutorials.Edge-Computing/blob/master/services) Bash script provided within the
+repository:
+
+```bash
+./services start
+```
+
 ## FogFlow Cloud Node
 
 **Prerequisites** for starting up a cloud node are as follows:
@@ -68,13 +86,13 @@ Logically, FogFlow consists of the following three layers:
 
 **To start the installation of FogFlow cloud services, do the following:**
 
-1. Change the following IP addresses in config.json according to the current environment.
+1.  Change the following IP addresses in config.json according to the current environment.
 
-    - **coreservice_ip**: public IP address of the FogFlow cloud node.
-    - **external_hostip**: public IP address of the current cloud/edge node;
-    - **internal_hostip**: IP address of "docker0" network interface on the current node.
-    - **site_id**: unique string-based ID to identify the node in FogFlow system;
-    - **physical_location**: the geo-location of the node;
+    -   **coreservice_ip**: public IP address of the FogFlow cloud node.
+    -   **external_hostip**: public IP address of the current cloud/edge node;
+    -   **internal_hostip**: IP address of "docker0" network interface on the current node.
+    -   **site_id**: unique string-based ID to identify the node in FogFlow system;
+    -   **physical_location**: the geo-location of the node;
 
 ```json
 {
@@ -89,14 +107,14 @@ Logically, FogFlow consists of the following three layers:
 }
 ```
 
-2. Pull the docker images of FogFlow components and start them.
+2.  Pull the docker images of FogFlow components and start them.
 
 ```bash
   docker-compose pull
   docker-compose up -d
 ```
 
-3. Validate the FogFlow cloud node setup through any of these two ways:
+3.  Validate the FogFlow cloud node setup through any of these two ways:
 
 -   Check if all the containers are up and running using `docker ps -a`.
 
@@ -129,8 +147,8 @@ Logically, FogFlow consists of the following three layers:
 
 **To start the installation, do the following:**
 
-1. Change the configuration file similar to the cloud node, but now coreservice_ip will remain uniform because it is the
-   IP address of the cloud node.
+1.  Change the configuration file similar to the cloud node, but now coreservice_ip will remain uniform because it is
+    the IP address of the cloud node.
 
 ```json
 {
@@ -151,14 +169,14 @@ Logically, FogFlow consists of the following three layers:
 }
 ```
 
-2. Start both Edge IoT Broker and FogFlow Worker. If the edge node is ARM-basd, then attach arm as the command
-   parameter.
+2.  Start both Edge IoT Broker and FogFlow Worker. If the edge node is ARM-basd, then attach arm as the command
+    parameter.
 
 ```bash
   ./start.sh
 ```
 
-3. Stop both Edge IoT Broker and FogFlow Worker:
+3.  Stop both Edge IoT Broker and FogFlow Worker:
 
 ```bash
   ./stop.sh
@@ -253,8 +271,8 @@ exports.handler = function(contextEntity, publish, query, subscribe) {
 
 There are two steps to register an operator in Fogflow.
 
-1. **Register an Operator** to define what would be the name of Operator and what input parameters it would need. The
-   following picture shows the list of all registered operators.
+1.  **Register an Operator** to define what would be the name of Operator and what input parameters it would need. The
+    following picture shows the list of all registered operators.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/operator-list.png)
 
@@ -264,9 +282,9 @@ accessible to the outer world through this port.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/operator-registry.png)
 
-2. **Register a Docker Image and choose Operator** to define the docker image and associate an already registered
-   Operator with it. The following picture shows the list of registered docker images and the key information of each
-   image.
+2.  **Register a Docker Image and choose Operator** to define the docker image and associate an already registered
+    Operator with it. The following picture shows the list of registered docker images and the key information of each
+    image.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/dockerimage-registry-list.png)
 
@@ -275,7 +293,8 @@ registration.
 
 The form is explained as the following.
 
--   **Image:** the name of your operator docker image, must be consistent with the one you publish to [Docker Hub]
+-   **Image:** the name of your operator docker image, must be consistent with the one you publish to
+    [Docker Hub](https://hub.docker.com/)
 -   **Tag:** the tag you used to publish your operator docker image; by default it is "latest"
 -   **Hardware Type:** the hardware type that your docker image supports, including X86 or ARM (e.g. Raspberry Pi)
 -   **OS Type:** the operating system type that your docker image supports; currently this is only limited to Linux
@@ -452,21 +471,21 @@ topology in the following way using FogFlow Topology Editor.
 
 As seen in the picture, the following important information must be provided.
 
-1. define topology profile, including
+1.  define topology profile, including
 
-    - topology name: the unique name of your topology
-    - service description: some text to describe what this service is about
+    -   topology name: the unique name of your topology
+    -   service description: some text to describe what this service is about
 
-2. draw the graph of data processing flows within the service topology with a right click at some place of the design
-   board, choose either task or input streams or shuffle to define your data processing flows according to the design
-   you have in mind.
+2.  draw the graph of data processing flows within the service topology with a right click at some place of the design
+    board, choose either task or input streams or shuffle to define your data processing flows according to the design
+    you have in mind.
 
-3. define the profile for each element in the data flow including the following using the configuration button of each.
+3.  define the profile for each element in the data flow including the following using the configuration button of each.
 
-    - **Task** profile can be defined by specifying name, operator and entity type.
-    - **EntityStream** profile is updated with SelectedType, SelectedAttributes, Groupby, Scoped fields.
-    - **Shuffle** element serves as a connector between two tasks such that output of a task is the input for the
-      shuffle element and same is forwarded by Shuffle to another task (or tasks) as input.
+    -   **Task** profile can be defined by specifying name, operator and entity type.
+    -   **EntityStream** profile is updated with SelectedType, SelectedAttributes, Groupby, Scoped fields.
+    -   **Shuffle** element serves as a connector between two tasks such that output of a task is the input for the
+        shuffle element and same is forwarded by Shuffle to another task (or tasks) as input.
 
 ### Trigger the Service Topology by sending an Intent
 
