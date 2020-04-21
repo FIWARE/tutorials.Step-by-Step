@@ -47,13 +47,18 @@ if (DEVICE_TRANSPORT === 'HTTP') {
 // If the IoT Devices are configured to use the MQTT transport, then
 // subscribe to the assoicated topics for each device.
 if (DEVICE_TRANSPORT === 'MQTT') {
-  const apiKey = process.env.DUMMY_DEVICES_API_KEY || '1234';
-  const topics = '/' + apiKey + '/#';
+  const apiKeys =
+    process.env.DUMMY_DEVICES_API_KEYS ||
+    process.env.DUMMY_DEVICES_API_KEY ||
+    '1234';
 
   MQTT_CLIENT.on('connect', () => {
-    debug('Subscribing to MQTT Broker: ' + mqttBrokerUrl + ' ' + topics);
-    MQTT_CLIENT.subscribe(topics);
-    MQTT_CLIENT.subscribe(topics + '/#');
+    apiKeys.split(',').forEach(apiKey => {
+      const topic = '/' + apiKey + '/#';
+      debug('Subscribing to MQTT Broker: ' + mqttBrokerUrl + ' ' + topic);
+      MQTT_CLIENT.subscribe(topic);
+      MQTT_CLIENT.subscribe(topic + '/#');
+    });
   });
 
   mqtt.connect(mqttBrokerUrl);
