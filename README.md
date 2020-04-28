@@ -68,7 +68,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 
 ## Tutorials List
 
-### Core Context Managment: NGSI-v2 Fundamentals
+### Core Context Management: NGSI-v2 Fundamentals
 
 &nbsp; 101. [Getting Started](https://github.com/FIWARE/tutorials.Getting-Started)<br/> &nbsp; 102.
 [Entity Relationships](https://github.com/FIWARE/tutorials.Entity-Relationships)<br/> &nbsp; 103.
@@ -86,7 +86,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 [Creating a Custom IoT Agent](https://github.com/FIWARE/tutorials.Custom-IoT-Agent)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS)
 
-### Core Context Managment:Persisting Historic Data
+### Core Context Management:Persisting Historic Data
 
 &nbsp; 301.
 [Persisting Context Data using Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) - MongoDB, MySQL, PostgreSQL<br/>
