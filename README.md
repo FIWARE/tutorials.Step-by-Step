@@ -8,7 +8,7 @@
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 [![Build Status](https://img.shields.io/travis/FIWARE/tutorials.Step-by-Step.svg)](https://travis-ci.org/FIWARE/tutorials.Step-by-Step)
 
-This is a collection of tutorials for the FIWARE ecosystem for for NGSI-v2 developers. Each tutorial consists of a
+This is a collection of tutorials for the FIWARE ecosystem designed for NGSI-v2 developers. Each tutorial consists of a
 series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context data
 within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
 directly or programmatically.
