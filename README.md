@@ -1,14 +1,15 @@
-# FIWARE Step-by-Step Tutorials
+# FIWARE Step-by-Step Tutorials (NGSI-v2)
 
 [![Documentation](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/documentation.svg)](https://fiware-tutorials.rtfd.io)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Step-by-Step.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
 [![Docker](https://img.shields.io/docker/pulls/fiware/tutorials.context-provider.svg)](https://hub.docker.com/r/fiware/tutorials.context-provider/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 [<img src="docs/img/logo.png" align="right" width="162">](https://www.fiware.org/)<br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 [![Build Status](https://img.shields.io/travis/FIWARE/tutorials.Step-by-Step.svg)](https://travis-ci.org/FIWARE/tutorials.Step-by-Step)
 
-This is a collection of tutorials for the FIWARE ecosystem designed for NGSI-v2 developers. Each tutorial consists of a
+This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial consists of a
 series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context data
 within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
 directly or programmatically.
@@ -67,12 +68,16 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 
 ## Tutorials List
 
+### Core Context Managment: NGSI-v2 Fundamentals
+
 &nbsp; 101. [Getting Started](https://github.com/FIWARE/tutorials.Getting-Started)<br/> &nbsp; 102.
 [Entity Relationships](https://github.com/FIWARE/tutorials.Entity-Relationships)<br/> &nbsp; 103.
 [CRUD Operations](https://github.com/FIWARE/tutorials.CRUD-Operations)<br/> &nbsp; 104.
 [Context Providers](https://github.com/FIWARE/tutorials.Context-Providers)<br/> &nbsp; 105.
 [Altering the Context Programmatically](https://github.com/FIWARE/tutorials.Accessing-Context)<br/> &nbsp; 106.
-[Subscribing to Changes in Context](https://github.com/FIWARE/tutorials.Subscriptions)<br/>
+[Subscribing to Changes in Context](https://github.com/FIWARE/tutorials.Subscriptions)
+
+### Internet of Things, Robots and third-party systems
 
 &nbsp; 201. [Introduction to IoT Sensors](https://github.com/FIWARE/tutorials.IoT-Sensors)<br/> &nbsp; 202.
 [Provisioning an IoT Agent](https://github.com/FIWARE/tutorials.IoT-Agent)<br/> &nbsp; 203.
@@ -81,24 +86,32 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 [Creating a Custom IoT Agent](https://github.com/FIWARE/tutorials.Custom-IoT-Agent)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS)
 
+### Core Context Managment:Persisting Historic Data
+
 &nbsp; 301.
-[Persisting Context Data using Apache Flume (MongoDB, MySQL, PostgreSQL)](https://github.com/FIWARE/tutorials.Historic-Context-Flume)<br/>
+[Persisting Context Data using Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) - MongoDB, MySQL, PostgreSQL<br/>
 &nbsp; 302.
-[Persisting Context Data using Apache NIFI (MongoDB, MySQL, PostgreSQL)](https://github.com/FIWARE/tutorials.Historic-Context-NIFI)<br/>
+[Persisting Context Data using Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI) - MongoDB, MySQL, PostgreSQL<br/>
 &nbsp; 303. [Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History)<br/>
-&nbsp; 304. [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)<br/> &nbsp;
+&nbsp; 304. [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)
+
+### Security: Identity Management
 
 &nbsp; 401. [Managing Users and Organizations](https://github.com/FIWARE/tutorials.Identity-Management)<br/> &nbsp; 402.
 [Roles and Permissions](https://github.com/FIWARE/tutorials.Roles-Permissions)<br/> &nbsp; 403.
 [Securing Application Access](https://github.com/FIWARE/tutorials.Securing-Access)<br/> &nbsp; 404.
 [Securing Microservices with a PEP Proxy](https://github.com/FIWARE/tutorials.PEP-Proxy)<br/> &nbsp; 405.
 [XACML Rules-based Permissions](https://github.com/FIWARE/tutorials.XACML-Access-Rules)<br/> &nbsp; 406.
-[Administrating XACML via a PAP](https://github.com/FIWARE/tutorials.Administrating-XACML)<br/>
+[Administrating XACML via a PAP](https://github.com/FIWARE/tutorials.Administrating-XACML)
+
+### Processing, Analysis and Visualization
 
 &nbsp; 501. [Creating Application Mashups](https://github.com/FIWARE/tutorials.Application-Mashup)<br/> &nbsp; 503.
 [Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams)<br/> &nbsp; 505.
 [Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis)<br/> &nbsp; 507.
-[Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing)<br/>
+[Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing)
+
+### NGSI-LD for NGSI-v2 Developers
 
 &nbsp; 601. [Introduction to Linked Data](https://github.com/FIWARE/tutorials.Linked-Data)<br/> &nbsp; 602.
 [Linked Data Relationships and Data Models](https://github.com/FIWARE/tutorials.Relationships-Linked-Data)<br/>
