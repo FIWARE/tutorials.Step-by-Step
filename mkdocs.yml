@@ -10,8 +10,8 @@ google_analytics: ["UA-83719923-1", "fiware-tutorials.readthedocs.io"]
 extra_css: ["https://www.fiware.org/style/fiware_readthedocs.css", "https://www.fiware.org/style/fiware_readthedocs_neutral.css"]
 pages:
   - Home: "index.md"
-  - "Core Context Managment: Fundamentals":
-      - "Getting Started": "getting-started.md"
+  - "Core Context Managment: NGSI-v2":
+      - "Getting Started with NGSI-v2": "getting-started.md"
       - "Entity Relationships": "entity-relationships.md"
       - "CRUD Operations": "crud-operations.md"
       - "Context Providers": "context-providers.md"
