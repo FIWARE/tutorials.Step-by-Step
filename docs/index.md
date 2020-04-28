@@ -138,7 +138,7 @@ These tutorials show how to create, process, analyze or visualize context inform
 [Real-time Processing and Big Data Analysis](big-data-analysis.md)<br/> &nbsp; 507.
 [Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing)<br/>
 
-<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: Linked Data</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">NGSI-LD for NGSI-v2 Developers</h3>
 
 These tutorials show how to use NGSI-LD which combines context data management with linked data concepts.
 

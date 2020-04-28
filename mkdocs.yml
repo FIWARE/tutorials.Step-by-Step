@@ -40,9 +40,10 @@ pages:
       - "Media Streams": "media-streams.md"
       - "Big Data Analysis": "big-data-analysis.md"
       - "Cloud Edge Computing": "edge-computing.md"
-  - "Core Context Managment: NGSI-LD":
+  - "NGSI-LD for NGSI-v2 Developers":
       - "Linked Data": "linked-data.md"
       - "Relationships & Data Models": "relationships-linked-data.md"
       - "Traversing Linked Data": "working-with-linked-data.md"
+      - "Subscriptions and Registrations": "ld-subscriptions-registrations.md"
   - "Appendix":
       - "Curl Commands": "cmds/administrating-xacml.md"
