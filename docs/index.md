@@ -1,4 +1,4 @@
-# FIWARE Step-by-Step for <span style='color:#5dc0cf'>NGSI-v2</span>
+# <span style='color:#5dc0cf'>NGSI-v2</span> Step-by-Step
 
 [![Documentation](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/documentation.svg)](https://fiware-tutorials.rtfd.io)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
