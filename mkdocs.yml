@@ -1,4 +1,4 @@
-site_name: Step-by-Step
+site_name: "Step-by-Step<br/>for <span style='color:#5dc0cf'>NGSI-v2</span>"
 site_url: https://fiware-tutorials.readthedocs.org
 repo_url: https://github.com/fiware/tutorials.Step-by-Step
 site_description: Fiware Tutorial Documentation
@@ -10,7 +10,7 @@ google_analytics: ["UA-83719923-1", "fiware-tutorials.readthedocs.io"]
 extra_css: ["https://www.fiware.org/style/fiware_readthedocs.css", "https://www.fiware.org/style/fiware_readthedocs_neutral.css"]
 pages:
   - Home: "index.md"
-  - "Core Context Managment: NGSI-v2":
+  - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>The NGSI-v2 Interface</span>":
       - "Getting Started with NGSI-v2": "getting-started.md"
       - "Entity Relationships": "entity-relationships.md"
       - "CRUD Operations": "crud-operations.md"
@@ -23,7 +23,7 @@ pages:
       - "IoT Agent (JSON)": "iot-agent-json.md"
       - "IoT over MQTT": "iot-over-mqtt.md"
       - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
-  - "Core Context Managment: History Management":
+  - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>History Management</span>":
       - "Persisting Context (Apache Flume)": "historic-context-flume.md"
       - "Persisting Context (Apache NIFI)": "historic-context-nifi.md"
       - "Short Term History": "short-term-history.md"

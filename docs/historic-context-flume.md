@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) -
 a generic enabler which is used to persist context data into third-party databases using
@@ -74,11 +74,11 @@ Therefore the overall architecture will consist of the following elements:
 
 -   Three **FIWARE Generic Enablers**:
     -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests
-        using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   The FIWARE [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will
         receive northbound measurements from the dummy IoT devices in
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
-        format and convert them to [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
+        format and convert them to [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
         context broker to alter the state of the context entities
     -   FIWARE [Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) which will subscribe to context changes and
         persist them into a database (**MySQL** , **PostgreSQL** or **MongoDB**)
@@ -101,10 +101,10 @@ Therefore the overall architecture will consist of the following elements:
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
         protocol running over HTTP.
     -   The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
-        -   receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        -   receive requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
         -   makes requests to publicly available data sources using their own APIs in a proprietary format
         -   returns context data back to the Orion Context Broker in
-            [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
+            [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
 Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.

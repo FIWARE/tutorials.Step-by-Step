@@ -4,14 +4,14 @@
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Step-by-Step.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
 [![Docker](https://img.shields.io/docker/pulls/fiware/tutorials.context-provider.svg)](https://hub.docker.com/r/fiware/tutorials.context-provider/)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 [<img src="docs/img/logo.png" align="right" width="162">](https://www.fiware.org/)<br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 [![Build Status](https://img.shields.io/travis/FIWARE/tutorials.Step-by-Step.svg)](https://travis-ci.org/FIWARE/tutorials.Step-by-Step)
 
-This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial consists of a
-series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context data
-within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
+This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial consists
+of a series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context
+data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
 directly or programmatically.
 
 | :books: [Documentation](https://fiware-tutorials.rtfd.io) | :whale: [Docker Hub](https://hub.docker.com/r/fiware/tutorials.context-provider/) | <img src="https://json-ld.org/favicon.ico" align="center" height="25"> [NGSI-LD Data Models](https://fiware.github.io/tutorials.Step-by-Step/schema/) | <img src="https://assets.getpostman.com/common-share/postman-logo-stacked.svg" align="center" height="25"> [Postman Collections](https://explore.postman.com/team/3mM5EY6ChBYp9D) |
@@ -88,12 +88,12 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 
 ### Core Context Management:Persisting Historic Data
 
-&nbsp; 301.
-[Persisting Context Data using Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) - MongoDB, MySQL, PostgreSQL<br/>
-&nbsp; 302.
-[Persisting Context Data using Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI) - MongoDB, MySQL, PostgreSQL<br/>
-&nbsp; 303. [Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History)<br/>
-&nbsp; 304. [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)
+&nbsp; 301. [Persisting Context Data using Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) -
+MongoDB, MySQL, PostgreSQL<br/> &nbsp; 302.
+[Persisting Context Data using Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI) - MongoDB, MySQL,
+PostgreSQL<br/> &nbsp; 303.
+[Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History)<br/> &nbsp; 304.
+[Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)
 
 ### Security: Identity Management
 

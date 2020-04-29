@@ -1,4 +1,5 @@
 [![FIWARE Visualization](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/visualization.svg)](https://www.fiware.org/developers/catalogue/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to [FIWARE Wirecloud](https://Wirecloud.rtfd.io) - a generic enabler
 visualization tool which allows end users without programming skills to create web applications and dashboards to
@@ -78,9 +79,9 @@ sufficient for an application to qualify as _“Powered by FIWARE”_.
 Therefore the overall architecture will consist of the following elements:
 
 -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will receive
-    southbound requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
+    southbound requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
 -   The FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Management System

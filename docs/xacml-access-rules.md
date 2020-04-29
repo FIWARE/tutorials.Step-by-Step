@@ -142,9 +142,9 @@ keep persistence of the information they hold. We will also be using the dummy I
 Therefore the overall architecture will consist of the following elements:
 
 -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will receive
-    southbound requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
+    southbound requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
 -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) offer a complement Identity Management System

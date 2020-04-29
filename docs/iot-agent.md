@@ -1,11 +1,11 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://github.com/FIWARE/catalogue/blob/master/iot-agents/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![UltraLight 2.0](https://img.shields.io/badge/Payload-Ultralight-27ae60.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial introduces the concept of an **IoT Agent** and wires up the dummy
 [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) IoT
 devices created in the [previous tutorial](iot-sensors.md) so that measurements can be read and commands can be sent
-using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests sent to the
+using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests sent to the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
@@ -26,10 +26,10 @@ An IoT Agent is a component that lets a group of devices send their data to and 
 their own native protocols. IoT Agents should also be able to deal with security aspects of the FIWARE platform
 (authentication and authorization of the channel) and provide other common services to the device programmer.
 
-The Orion Context Broker exclusively uses [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for
+The Orion Context Broker exclusively uses [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for
 all of its interactions. Each IoT Agent provides a **North Port**
-[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface which is used for context broker interactions
-and all interactions beneath this port occur using the **native protocol** of the attached devices.
+[NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface which is used for context broker
+interactions and all interactions beneath this port occur using the **native protocol** of the attached devices.
 
 In effect, this brings a standard interface to all IoT interactions at the context information management level. Each
 group of IoT devices are able to use their own proprietary protocols and disparate transport mechanisms under the hood
@@ -136,9 +136,9 @@ persistence of the information they hold. We will also be using the dummy IoT de
 Therefore the overall architecture will consist of the following elements:
 
 -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will receive
-    southbound requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
+    southbound requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert them to
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     commands for the devices
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
@@ -146,10 +146,10 @@ Therefore the overall architecture will consist of the following elements:
         registrations
     -   Used by the **IoT Agent** to hold device information such as device URLs and Keys
 -   The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
-    -   receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    -   receive requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   makes requests to publicly available data sources using their own APIs in a proprietary format
     -   returns context data back to the Orion Context Broker in
-        [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
+        [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 -   The **Stock Management Frontend** is not used in this tutorial will it does the following:
     -   Display store information
     -   Show which products can be bought at each store

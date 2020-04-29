@@ -1,5 +1,5 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial teaches FIWARE users about batch commands and entity relationships. The tutorial builds
 on the data created in the previous [store finder example](getting-started.md) and creates and associates a series of
@@ -62,7 +62,7 @@ Currently, the Orion Context Broker relies on open source [MongoDB](https://www.
 persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
 -   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The underlying [MongoDB](https://www.mongodb.com/) database :
     -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
         registrations

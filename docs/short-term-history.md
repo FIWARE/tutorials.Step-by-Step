@@ -1,6 +1,6 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![NGSI v1](https://img.shields.io/badge/NGSI-v1-ff69b4.svg)](http://forge.fiware.org/docman/view.php/7/3213/FI-WARE_NGSI_RESTful_binding_v1.0.zip)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to [FIWARE STH-Comet](https://fiware-sth-comet.readthedocs.io/) - a
 generic enabler which is used to retrieve trend data from a MongoDB database. The tutorial activates the IoT sensors
@@ -91,11 +91,11 @@ Therefore the overall architecture will consist of the following elements:
 
 -   Four **FIWARE Generic Enablers**:
     -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests
-        using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   The FIWARE [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will
         receive northbound measurements from the dummy IoT devices in
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
-        format and convert them to [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
+        format and convert them to [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
         context broker to alter the state of the context entities
     -   FIWARE [STH-Comet](https://fiware-sth-comet.readthedocs.io/) will:
         -   interpret time-based data queries
@@ -119,10 +119,10 @@ Therefore the overall architecture will consist of the following elements:
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
         protocol running over HTTP.
     -   The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
-        -   receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        -   receive requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
         -   makes requests to publicly available data sources using their own APIs in a proprietary format
         -   returns context data back to the Orion Context Broker in
-            [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
+            [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
 Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
 from exposed ports.

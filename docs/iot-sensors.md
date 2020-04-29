@@ -1,5 +1,5 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://github.com/FIWARE/catalogue/blob/master/iot-agents/README.md)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![UltraLight 2.0](https://img.shields.io/badge/Payload-Ultralight-27ae60.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial is an introduction to IoT devices and the usage of the
 [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
@@ -233,9 +233,9 @@ are not used in this tutorial, but will be needed to complete the system subsequ
 
 -   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) is used for holding the context data of
     the smart solution. As you know all interactions with the context broker must be made using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   An IoT Agent acts as a middleware component converting
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests (from the context broker) into a protocol
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests (from the context broker) into a protocol
     (such as
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual))
     usable by the IoT devices themselves.

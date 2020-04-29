@@ -1,6 +1,6 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://github.com/FIWARE/catalogue/blob/master/iot-agents/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
-[![UltraLight 2.0](https://img.shields.io/badge/Ultralight-2.0-5dc0cf.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
+[![UltraLight 2.0](https://img.shields.io/badge/Payload-Ultralight-27ae60.svg)](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
 
 **Description:** This tutorial uses introduces the use of the MQTT protocol across IoT devices connecting to FIWARE. The
 [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) IoT
@@ -81,9 +81,9 @@ broker which is open source and available under the EPL/EDL.
 Therefore the overall architecture will consist of the following elements:
 
 -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The FIWARE [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will:
-    -   receive southbound requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert
+    -   receive southbound requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) and convert
         them to
         [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
         MQTT topics for the MQTT Broker
@@ -98,10 +98,10 @@ Therefore the overall architecture will consist of the following elements:
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over MQTT.
 -   The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
-    -   receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    -   receive requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   makes requests to publicly available data sources using their own APIs in a proprietary format
     -   returns context data back to the Orion Context Broker in
-        [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
+        [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 -   The **Stock Management Frontend** is not used in this tutorial will it does the following:
     -   Display store information
     -   Show which products can be bought at each store

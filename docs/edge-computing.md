@@ -1,4 +1,5 @@
 [![FIWARE Context processing, analysis and visualisation](https://nexus.lab.fiware.org/static/badges/chapters/processing.svg)](https://github.com/FIWARE/catalogue/blob/master/processing/README.md)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This is an introductory tutorial for [FIWARE FogFlow](https://fogflow.readthedocs.io/en/latest/) that
 allows its users to dynamically orchestrate the processing flows on edges. It explains how to enable FogFlow on a

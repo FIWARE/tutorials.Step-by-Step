@@ -1,4 +1,5 @@
 [![FIWARE Context processing, analysis and visualisation](https://nexus.lab.fiware.org/static/badges/chapters/processing.svg)](https://github.com/FIWARE/catalogue/blob/master/processing/README.md)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to the
 [FIWARE Cosmos Orion Flink Connector](http://fiware-cosmos-flink.rtfd.io), which facilitates Big Data analysis of
@@ -63,11 +64,11 @@ Therefore the overall architecture will consist of the following elements:
 
 -   Two **FIWARE Generic Enablers** as independent microservices:
     -   The FIWARE [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests
-        using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
     -   The FIWARE [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) which will
         receive northbound measurements from the dummy IoT devices in
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
-        format and convert them to [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
+        format and convert them to [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) requests for the
         context broker to alter the state of the context entities
 -   An [Apache Flink cluster](https://ci.apache.org/projects/flink/flink-docs-stable/concepts/runtime.html) consisting
     of a single **JobManager** and a single **TaskManager**
@@ -87,10 +88,10 @@ Therefore the overall architecture will consist of the following elements:
         -   Show which products can be bought at each store
         -   Allow users to "buy" products and reduce the stock count.
     -   The **Context Provider NGSI** proxy is not used in this tutorial. It does the following:
-        -   receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+        -   receive requests using [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
         -   makes requests to publicly available data sources using their own APIs in a proprietary format
         -   returns context data back to the Orion Context Broker in
-            [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
+            [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) format.
 
 The overall architecture can be seen below:
 
