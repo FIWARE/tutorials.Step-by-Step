@@ -62,7 +62,7 @@ tutorial:
 
 <h3>Video : Introduction to Keyrock</h3>
 
-[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=dHyVTan6bUY "Introduction")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=dHyVTan6bUY "Introduction")
 
 Click on the image above to watch an introductory video
 
@@ -278,7 +278,7 @@ obtain a new token.
 
 <h3>Video : Creating User Accounts with the Keyrock GUI</h3>
 
-[![](http://img.youtube.com/vi/dtKsjGbJ7Xc/0.jpg)](https://www.youtube.com/watch?v=dtKsjGbJ7Xc "Creating User Accounts")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=dtKsjGbJ7Xc "Creating User Accounts")
 
 Click on the image above to watch a video demonstrating how to create users with the **Keyrock** GUI
 

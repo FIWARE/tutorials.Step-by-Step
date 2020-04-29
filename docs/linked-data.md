@@ -53,7 +53,7 @@ sold at?"_
 
 ### Video: What is Linked Data?
 
-[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=4x_xzT5eF5Q "Introduction")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=4x_xzT5eF5Q "Introduction")
 
 Click on the image above to watch an introductory video on linked data concepts
 
@@ -74,7 +74,7 @@ Furthermore the JSON-LD specification enables you to define a unique `@type` ass
 
 ### Video: What is JSON-LD?
 
-[![](http://img.youtube.com/vi/dHyVTan6bUY/0.jpg)](https://www.youtube.com/watch?v=vioCbTo3C-4 "JSON-LD")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=vioCbTo3C-4 "JSON-LD")
 
 Click on the image above to watch a video describing the basic concepts behind JSON-LD.
 

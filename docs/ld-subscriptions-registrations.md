@@ -35,14 +35,14 @@ contract between the various components has changed to include minor updates.
 
 The relationship between our Linked Data entities is defined as shown, in addition to the existing data, the `tweets`
 attribute will be supplied by a _Context Provider_. In all other respects this model remains the same as the
-[previous tutorial](working-with-Linked-Data.md) :
+[previous tutorial](working-with-linked-data.md) :
 
 ![](https://fiware.github.io/tutorials.LD-Subscriptions-Registrations/img/entities.png)
 
 <h3>Stock Management frontend</h3>
 
 The simple Node.js Express application has updated to use NGSI-LD in the previous
-[tutorial](working-with-Linked-Data.md). We will use the monitor page to watch the status of recent requests, and a two
+[tutorial](working-with-linked-data.md). We will use the monitor page to watch the status of recent requests, and a two
 store pages to buy products. Once the services are running these pages can be accessed from the following URLs:
 
 <h4>Event Monitor</h4>
@@ -99,7 +99,7 @@ from exposed ports.
 ![](https://fiware.github.io/tutorials.LD-Subscriptions-Registrations/img/architecture.png)
 
 The necessary configuration information can be seen in the services section of the associated `orion-ld.yml` file. It
-has been described in a [previous tutorial](working-with-Linked-Data.md)
+has been described in a [previous tutorial](working-with-linked-data.md)
 
 # Start Up
 

@@ -731,7 +731,7 @@ payload before sending data to the context broker.
 
 #### Video: JSON-LD Compaction & Expansion
 
-[![](http://img.youtube.com/vi/Tm3fD89dqRE/0.jpg)](https://www.youtube.com/watch?v=Tm3fD89dqRE "JSON-LD Compaction & Expansion")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=Tm3fD89dqRE "JSON-LD Compaction & Expansion")
 
 Click on the image above to watch a video JSON-LD expansion and compaction with reference to the `@context` and
 interoperability.

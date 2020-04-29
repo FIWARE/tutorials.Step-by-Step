@@ -433,7 +433,7 @@ Applications are therefore a conceptual bucket holding who can do what on which 
 
 <h3>Video : Creating Applications with the Keyrock GUI</h3>
 
-[![](http://img.youtube.com/vi/pjsl0eHpFww/0.jpg)](https://www.youtube.com/watch?v=pjsl0eHpFww&t=470 "Creating Applications")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=pjsl0eHpFww&t=470 "Creating Applications")
 
 Click on the image above to watch a video demonstrating how to create applications using the **Keyrock** GUI
 

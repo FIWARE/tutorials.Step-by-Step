@@ -68,7 +68,7 @@ tutorial:
 
 ## Video : Introduction to Wilma PEP Proxy
 
-[![](http://img.youtube.com/vi/8tGbUI18udM/0.jpg)](https://www.youtube.com/watch?v=8tGbUI18udM "Introduction")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=8tGbUI18udM "Introduction")
 
 Click on the image above to see an introductory video
 
@@ -315,7 +315,7 @@ either the Keyrock GUI or by using the REST API.
 
 ## Video : Wilma PEP Proxy Configuration
 
-[![](http://img.youtube.com/vi/b4sYU78skrw/0.jpg)](https://www.youtube.com/watch?v=b4sYU78skrw "PEP Proxy Configuration")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=b4sYU78skrw "PEP Proxy Configuration")
 
 Click on the image above to see a video about configuring the Wilma PEP Proxy using the **Keyrock** GUI
 
@@ -699,7 +699,7 @@ To start the system with a PEP Proxy protecting access to **Orion**, run the fol
 
 <h3>Video : Securing A REST API</h3>
 
-[![](http://img.youtube.com/vi/coxFQEY0_So/0.jpg)](https://www.youtube.com/watch?v=coxFQEY0_So "Securing a REST API")
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=coxFQEY0_So "Securing a REST API")
 
 Click on the image above to see a video about securing a REST API using the Wilma PEP Proxy
 
