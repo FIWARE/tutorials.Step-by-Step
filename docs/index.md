@@ -1,6 +1,7 @@
-# FIWARE Step-by-Step
+# FIWARE Step-by-Step for <span style='color:#5dc0cf'>NGSI-v2</span>
 
 [![Documentation](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/documentation.svg)](https://fiware-tutorials.rtfd.io)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
 
 This is a collection of tutorials for the FIWARE system. Each tutorial consists of a series of exercises to demonstrate
@@ -20,10 +21,10 @@ The tutorials are split according to the chapters defined within the
 chapter hence the an introduction to a given enabler will occur before the full capabilities of that element are
 explored in more depth.
 
-It is recommended to start with reading the full **Core Context Management: Fundamentals** Chapter before moving on to
-other subjects, as this will give you an fuller understanding of the role of context data in general. However it is not
-necessary to follow all the subsequent tutorials sequentially - as FIWARE is a modular system, you can choose which
-enablers are of interest to you.
+It is recommended to start with reading the full **Core Context Management: The NGSI-v2 Interface** Chapter before
+moving on to other subjects, as this will give you an fuller understanding of the role of context data in general.
+However it is not necessary to follow all the subsequent tutorials sequentially - as FIWARE is a modular system, you can
+choose which enablers are of interest to you.
 
 ## Prerequisites
 
@@ -88,7 +89,7 @@ Scala code into a JAR file.
 
 ## List of Tutorials
 
-<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Managment: Fundamentals</h3>
+<h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Managment: The NGSI-v2 Interface</h3>
 
 These first tutorials are an introduction to the FIWARE Context Broker, and are an essential first step when learning to
 use FIWARE
