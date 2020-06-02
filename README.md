@@ -93,7 +93,8 @@ MongoDB, MySQL, PostgreSQL<br/> &nbsp; 302.
 [Persisting Context Data using Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI) - MongoDB, MySQL,
 PostgreSQL<br/> &nbsp; 303.
 [Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History)<br/> &nbsp; 304.
-[Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)
+[Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data)<br/> &nbsp; 305.
+[Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis)
 
 ### Security: Identity Management
 
@@ -107,8 +108,7 @@ PostgreSQL<br/> &nbsp; 303.
 ### Processing, Analysis and Visualization
 
 &nbsp; 501. [Creating Application Mashups](https://github.com/FIWARE/tutorials.Application-Mashup)<br/> &nbsp; 503.
-[Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams)<br/> &nbsp; 505.
-[Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis)<br/> &nbsp; 507.
+[Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams)<br/> &nbsp; 507.
 [Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing)
 
 ### NGSI-LD for NGSI-v2 Developers
