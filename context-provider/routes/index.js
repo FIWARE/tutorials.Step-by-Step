@@ -86,12 +86,12 @@ router.get('/', function(req, res) {
   const securityEnabled = SECURE_ENDPOINTS;
   const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
   res.render('index', {
-    title: 'FIWARE Tutorial',
     success: req.flash('success'),
     errors: req.flash('error'),
     info: req.flash('info'),
     securityEnabled,
-    stores
+    stores,
+    ngsi: NGSI_VERSION
   });
 });
 

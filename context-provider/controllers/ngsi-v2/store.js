@@ -75,12 +75,16 @@ function displayStore(req, res) {
     .then(store => {
       // If a store has been found display it on screen
       store.mapUrl = mapTileUrl(15, store.location);
-      return res.render('store', { title: store.name, store });
+      return res.render('store', { title: store.name, store, ngsi: 'ngsi-v2' });
     })
     .catch(error => {
       debug(error);
       // If no store has been found, display an error screen
-      return res.render('store-error', { title: 'Error', error });
+      return res.render('store-error', {
+        title: 'Error',
+        error,
+        ngsi: 'ngsi-v2'
+      });
     });
 }
 
