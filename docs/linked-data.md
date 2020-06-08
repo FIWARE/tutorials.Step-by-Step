@@ -381,9 +381,8 @@ curl -iX POST \
 The first request will take some time, as the context broker must navigate and load all of the files mentioned in the
 `@context`.
 
-> **Note**: if `https://schema.lab.fiware.org/ld/context` is unavailable, an alternative copy of the FIWARE data models
-> `@context` can be found on the FIWARE Data Models gh-pages on GitHub. Replace the @context value with:
-> `https://fiware.github.io/data-models/full-context.jsonld`.
+> **Note**: if `https://fiware.github.io/data-models/context.jsonld` is unavailable for some reason the request will
+> fail
 >
 > For a working production system it is essential that the `@context` files are always available to ensure third parties
 > can read the context. High availability infrastructure has not been considered for this tutorial to keep the
