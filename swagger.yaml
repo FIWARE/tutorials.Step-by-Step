@@ -1,0 +1,217 @@
+--- 
+components: 
+  schemas: 
+    Building: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/building.yaml#/Building"
+      properties: 
+        address: 
+          allOf: 
+            - 
+              $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/schema.org.yaml#/PostalAddress"
+          description: "The mailing address.\n"
+          externalDocs: 
+            url: "https://schema.org/address"
+          type: object
+          x-ngsi: 
+            attr-type: Property
+            model: "https://schema.org/address"
+            properties: 
+              verified: 
+                description: "Whether the address of the Store has been verified"
+                type: boolean
+                x-ngsi: 
+                  model: "https://schema.org/Boolean"
+                  type: Property
+                  uri: "https://fiware.github.io/tutorials.Step-by-Step/schema/verified"
+                  uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+            uri-prefix: "https://schema.org/"
+        furniture: 
+          description: "A list of Shelf Units found in the store"
+          format: URL
+          type: string
+          x-ngsi: 
+            model: "https://schema.org/URL"
+            type: Relationship
+            uri: "https://fiware.github.io/tutorials.Step-by-Step/schema/furniture"
+            uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+        humidity: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/saref-terms.yaml#/humidity"
+        temperature: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/saref-terms.yaml#/temperature"
+        tweets: 
+          description: "Tweets made by people within the Building"
+          items: 
+            type: string
+          type: array
+          x-ngsi: 
+            model: "https://schema.org/articleBody"
+            type: Relationship
+            uri: "https://fiware.github.io/tutorials.Step-by-Step/schema/tweets"
+            uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    Categories: 
+      description: "\n\
+          ### Commercial\n\n\
+          -   `commercial` -  A building where non-specific commercial activities take place, not necessarily an office building. Consider tagging the surrounding area using landuse=commercial. Use 'retail' if the building consists primarily of shops. \n\
+          -   `industrial` -  A building where some industrial process takes place. Use warehouse if the purpose is known to be primarily for storage/distribution. Consider using landuse=industrial for the surrounding area and the proposed industrial=* tag to describe the industrial activity. \n\
+          -   `kiosk area  A small one-room retail building. \n\
+          -   `office` -  An office building. Use building=office with office=* to describe the type of office. Consider tagging the surrounding area using landuse=commercial. Use 'retail' if the building consists primarily of shops. \n\
+          -   `retail` -  A building primarily used for selling goods that are sold to the public; use shop=* to identify the sort of goods sold or an appropriate amenity=* (pub, cafe, restaurant, etc.). Consider use landuse=retail for the surrounding area. \n\
+          -   `supermarket area  A building constructed to house a self-service large-area store.  \n\
+          -   `warehouse area  A building primarily used for the storage or goods or as part of a distribution system. \n"
+      enum: 
+        - commercial
+        - industrial
+        - kiosk
+        - office
+        - retail
+        - supermarket
+        - warehouse
+      externalDocs: 
+        url: "https://wiki.openstreetmap.org/wiki/Map_Features#Building"
+      type: string
+      x-ngsi: 
+        uri-prefix: "https://wiki.openstreetmap.org/wiki/Tag:building%3D"
+    ControlledProperties: 
+      description: "-   `fillingLevel` -   `humidity` -   `location` -   `motion`\n"
+      enum: 
+        - fillingLevel
+        - humidity
+        - location
+        - motion
+      type: string
+      x-ngsi: 
+        uri-prefix: "https://w3id.org/saref#"
+    Person: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/Common"
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/schema.org.yaml#/Person"
+    Product: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/Common"
+      description: "something sold in a Store"
+      properties: 
+        currency: 
+          description: "The currency used to price the product"
+          type: string
+          x-ngsi: 
+            attr-type: Property
+        name: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/name"
+        price: 
+          description: "The price of the Product"
+          type: number
+          x-ngsi: 
+            attr-type: Property
+        size: 
+          description: "The size of the Product in T-Shirt sizing (S,M,L,XL etc.)"
+          type: string
+          x-ngsi: 
+            attr-type: Property
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    Shelf: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/Common"
+      description: "a unit of Store Furniture. Products are found on a shelf"
+      properties: 
+        locatedIn: 
+          description: "The Building that the Shelf Unit is located in."
+          type: string
+          x-ngsi: 
+            attr-type: Relationship
+            properties: 
+              installedBy: 
+                description: "The Person who installed the shelf"
+                format: uri
+                type: string
+                x-ngsi: 
+                  attr-type: Relationship
+              statusOfWork: 
+                description: "The status of the shelf installation (e.g. pending, in progress, completed)"
+                type: string
+                x-ngsi: 
+                  attr-type: EnumProperty
+        location: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/location"
+        maxCapacity: 
+          description: "The maximum number of items the shelf can hold"
+          x-ngsi: 
+            attr-type: Property
+            type: integer
+        name: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/name"
+        numberOfItems: 
+          description: "The number of items of the product currently found on the shelf"
+          type: integer
+          x-ngsi: 
+            attr-type: Property
+        stocks: 
+          description: "The Product currently found on the Shelf Unit"
+          format: uri
+          type: string
+          x-ngsi: 
+            attr-type: Relationship
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    ShelfStatus: 
+      description: "`pending`, `inProgress`, `completed`\n"
+      enum: 
+        - pending
+        - inProgress
+        - completed
+      type: string
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    StockOrder: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/ngsi-ld.yaml#/Common"
+      description: "an entry in a list of items sold in one or more stores"
+      properties: 
+        orderDate: 
+          description: "The date the order was placed."
+          format: date-time
+          type: string
+          x-ngsi: 
+            attr-type: Property
+        orderedProduct: 
+          description: "The product associated to this stock item"
+          x-ngsi: 
+            attr-type: Relationship
+        requestedBy: 
+          description: "The Person who created this StockOrder"
+          x-ngsi: 
+            attr-type: Relationship
+        requestedFor: 
+          description: "The id of the store this product is sold by"
+          x-ngsi: 
+            attr-type: Relationship
+        stockCount: 
+          description: "The number of items left in stock in the warehouse"
+          type: integer
+          x-ngsi: 
+            attr-type: Property
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+info: 
+  description: "Data Models used within the Supermarket Tutorial"
+  title: Supermarket
+  version: "1.0.0"
+openapi: "3.0.0"
+paths: 
+  /ngsi-ld/v1/entities: 
+    get: 
+      responses: 
+        ? "200"
+        : 
+          content: 
+            application/ld+json: 
+              schema: 
+                type: object
+          description: OK
