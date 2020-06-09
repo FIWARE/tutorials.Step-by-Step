@@ -1,6 +1,19 @@
 --- 
 components: 
   schemas: 
+    Bell: 
+      description: "An alarm device or system of alarm devices gives an audible, visual or other form of alarm signal about a problem or condition\n"
+      properties: 
+        ring: 
+          format: command
+          type: string
+        ring_info: 
+          type: string
+        ring_status: 
+          type: string
+      type: object
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
     Building: 
       allOf: 
         - 
@@ -83,6 +96,83 @@ components:
       type: string
       x-ngsi: 
         uri-prefix: "https://w3id.org/saref#"
+    Door: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/device.yaml#/Device"
+      description: "A smart door can be locked or unlockded remotely and reports the status of the door.\n"
+      properties: 
+        close: 
+          format: command
+          type: string
+        close_info: 
+          type: string
+        close_status: 
+          type: string
+        lock: 
+          format: command
+          type: string
+        lock_info: 
+          type: string
+        lock_status: 
+          type: string
+        open: 
+          format: command
+          type: string
+        open_info: 
+          type: string
+        open_status: 
+          type: string
+        state: 
+          type: string
+        unlock: 
+          format: command
+          type: string
+        unlock_info: 
+          type: string
+        unlock_status: 
+          type: string
+      type: object
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    Lamp: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/device.yaml#/Device"
+      description: "Smart lighting options include Wi-Fi light bulbs that can be controlled from an app on your smartphone to turn on and off, dim and even change the color of the bulb\n"
+      properties: 
+        false: 
+          format: command
+          type: string
+        luminiscence: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/saref-terms.yaml#/luminiscence"
+        off_info: 
+          type: string
+        off_status: 
+          type: string
+        on_info: 
+          type: string
+        on_status: 
+          type: string
+        state: 
+          type: string
+        true: 
+          format: command
+          type: string
+      type: object
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
+    Motion: 
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/device.yaml#/Device"
+      description: "A motion detector is an electrical device that utilizes a sensor to detect nearby motion.\n"
+      properties: 
+        motion: 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/saref-terms.yaml#/motion"
+      type: object
+      x-ngsi: 
+        uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
     Person: 
       allOf: 
         - 
@@ -200,7 +290,7 @@ components:
       x-ngsi: 
         uri-prefix: "https://fiware.github.io/tutorials.Step-by-Step/schema/"
 info: 
-  description: "Data Models used within the Supermarket Tutorial"
+  description: "Data Models used within the FIWARE Supermarket Tutorial"
   title: Supermarket
   version: "1.0.0"
 openapi: "3.0.0"
