@@ -143,7 +143,7 @@ components:
           $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/device.yaml#/Device"
       description: "Smart lighting options include Wi-Fi light bulbs that can be controlled from an app on your smartphone to turn on and off, dim and even change the color of the bulb\n"
       properties: 
-        false: 
+        "off": 
           format: command
           type: string
         luminiscence: 
@@ -156,7 +156,7 @@ components:
           type: string
         on_status: 
           type: string
-        true: 
+        "on": 
           format: command
           type: string
       type: object
@@ -272,14 +272,20 @@ components:
             attr-type: Property
         orderedProduct: 
           description: "The product associated to this stock item"
+          format: uri
+          type: string
           x-ngsi: 
             attr-type: Relationship
         requestedBy: 
           description: "The Person who created this StockOrder"
+          format: uri
+          type: string
           x-ngsi: 
             attr-type: Relationship
         requestedFor: 
           description: "The id of the store this product is sold by"
+          format: uri
+          type: string
           x-ngsi: 
             attr-type: Relationship
         stockCount: 
