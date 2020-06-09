@@ -87,14 +87,13 @@ components:
       x-ngsi: 
         uri-prefix: "https://wiki.openstreetmap.org/wiki/Tag:building%3D"
     ControlledProperties: 
-      description: "-   `temperature` -   `humidity` -   `location` -   `motion` - `state`"
+      description: "-   `temperature` -   `humidity` -   `location` -   `motion`
       enum: 
         - temperature
         - humidity
         - location
         - motion
         - luminiscence
-        - state
       type: string
       x-ngsi: 
         uri-prefix: "https://w3id.org/saref#"
@@ -125,8 +124,6 @@ components:
           type: string
         open_status: 
           type: string
-        state: 
-          type: string
         unlock: 
           format: command
           type: string
@@ -155,8 +152,6 @@ components:
         on_info: 
           type: string
         on_status: 
-          type: string
-        state: 
           type: string
         true: 
           format: command
