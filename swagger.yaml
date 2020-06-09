@@ -1,7 +1,10 @@
 --- 
 components: 
   schemas: 
-    Bell: 
+    Bell:
+      allOf: 
+        - 
+          $ref: "https://fiware.github.io/tutorials.NGSI-LD/models/device.yaml#/Device"
       description: "An alarm device or system of alarm devices gives an audible, visual or other form of alarm signal about a problem or condition\n"
       properties: 
         ring: 
