@@ -87,12 +87,14 @@ components:
       x-ngsi: 
         uri-prefix: "https://wiki.openstreetmap.org/wiki/Tag:building%3D"
     ControlledProperties: 
-      description: "-   `fillingLevel` -   `humidity` -   `location` -   `motion`\n"
+      description: "-   `temperature` -   `humidity` -   `location` -   `motion` - `state`"
       enum: 
-        - fillingLevel
+        - temperature
         - humidity
         - location
         - motion
+        - luminiscence
+        - state
       type: string
       x-ngsi: 
         uri-prefix: "https://w3id.org/saref#"
