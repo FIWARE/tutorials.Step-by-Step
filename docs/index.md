@@ -106,7 +106,10 @@ Robots, IoT Sensors or other suppliers of context data such as social media. It 
 from the context broker to alter the state of real-world objects themselves.
 
 &nbsp; 201. [Introduction to IoT Sensors](iot-sensors.md)<br/> &nbsp; 202.
-[Provisioning an IoT Agent](iot-agent.md)<br/> &nbsp; 203. [IoT over MQTT](iot-over-mqtt.md)<br/> &nbsp; 250.
+[Provisioning an IoT Agent](iot-agent.md)<br/> &nbsp; 203. [IoT over MQTT](iot-over-mqtt.md)<br/> &nbsp; 203.
+[IoT over MQTT](iot-over-mqtt.md)<br/> &nbsp; 204.
+[Using an alternative IoT Agent](https://github.com/FIWARE/tutorials.IoT-Agent-JSON)<br/> &nbsp; 205.
+[Creating a Custom IoT Agent](https://github.com/FIWARE/tutorials.Custom-IoT-Agent)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](fast-rtps-micro-rtps.md)<br/>
 
 <h3 style="box-shadow: 0px 4px 0px 0px #233c68;">Core Context Management: History Management</h3>

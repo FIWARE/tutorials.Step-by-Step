@@ -22,6 +22,7 @@ pages:
       - "IoT Agent (Ultralight)": "iot-agent.md"
       - "IoT Agent (JSON)": "iot-agent-json.md"
       - "IoT over MQTT": "iot-over-mqtt.md"
+      - "Custom IoT Agent (XML)": "custom-iot-agent.md"
       - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
   - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>History Management</span>":
       - "Persisting Context (Apache Flume)": "historic-context-flume.md"
