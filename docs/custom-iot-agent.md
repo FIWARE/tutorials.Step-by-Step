@@ -1,6 +1,6 @@
 [![FIWARE IoT Agents](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/iot-agents.svg)](https://github.com/FIWARE/catalogue/blob/master/iot-agents/README.md)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
-![XML](https://img.shields.io/badge/Payload-XML-e8ce27.svg)
+[![XML](https://img.shields.io/badge/Payload-XML-e8ce27.svg)](custom-iot-agent.md)
 
 **Description:** This tutorial a wires up the dummy IoT devices which are responding using a custom
 [XML](https://www.w3.org/TR/xml11/) message format. A **custom IoT Agent** is created based on the IoT Agent Node.js
