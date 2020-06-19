@@ -68,7 +68,7 @@ lower-level CoAP transport used by the devices.
 
 The aim of this tutorial is to improve developer understanding of how to create their own custom IoT Agents, a series of
 simple modificiations has been made to the code of the Ultralight IoT Agent demonstrating how to make changes. The
-tutorial consists of a walk-through of the relevant code and a series of HTTP requests to connect the new IoT Agent. The
+tutorial consists of a walkthrough of the relevant code and a series of HTTP requests to connect the new IoT Agent. The
 code can be found within the current
 [GitHub Repository](https://github.com/FIWARE/tutorials.Custom-IoT-Agent/tree/master/iot-agent)
 
@@ -179,7 +179,7 @@ The code for the custom XML IoT Agent can be found within the
 [GitHub Repository](https://github.com/FIWARE/tutorials.Custom-IoT-Agent/tree/master/iot-agent) associated to this
 tutorial. It is a copy of the 1.12.0 version of the IoT Agent for Ultralight, lightly modified as described below. The
 associated [Dockerfile](https://github.com/FIWARE/tutorials.Custom-IoT-Agent/blob/master/iot-agent/Dockerfile) merely
-copies the code into an appropiate location within a Docker container running Node.js. This allows the component to be
+copies the code into an appropriate location within a Docker container running Node.js. This allows the component to be
 instansiated using a `docker-compose.yaml` file. The necessary configuration can be seen below:
 
 ```yaml
@@ -695,7 +695,7 @@ function createCommandPayload(device, command, attributes) {
 
 This is an amendment from the Ultralight protocol where the `@` and `|` symbol is generated for Ultralight devices.
 
-Howver creating a payload is only half the job, it must be sent to the device and understood, so communications must be
+However creating a payload is only half the job, it must be sent to the device and understood, so communications must be
 completed using a well-defined communications handshake. So after generating the payload the `sendXMLCommandHTTP()`
 method of `HTTPBindings.js` sends the message and passes the response to the `result()` method in `xmlParser.js` to
 interprets the command response from the device.
