@@ -102,7 +102,14 @@ router.get('/implicitGrant', Security.implicitGrant);
 router.post('/userCredentials', Security.userCredentialGrant);
 router.post('/refreshToken', Security.refreshTokenGrant);
 router.get('/authCodeGrant', Security.authCodeGrant);
+router.get('/hybrid', Security.hybrid);
 router.get('/logout', Security.logOut);
+
+// Open ID Connect 
+router.get('/authCodeOICGrant', Security.authCodeOICGrant);
+router.get('/implicitOICGrant', Security.implicitOICGrant);
+router.get('/hybridOICGrant', Security.hybridOICGrant);
+
 
 router.get('/version', function(req, res) {
   res.setHeader('Content-Type', 'application/json');

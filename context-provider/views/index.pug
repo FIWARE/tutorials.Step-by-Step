@@ -20,25 +20,41 @@ block content
 
   - if (securityEnabled)
     - if (!session.username)
-      div(style='width:20em;line-height: 1.6;')
-        ul
-          li
-            a.button(href="authCodeGrant") Authorization Code
-          li
-            a.button(href="clientCredentials") Client Credentials
-          li
-            a.button(href="implicitGrant") Implicit Grant
-        form(action='userCredentials',method='post')
-          div
-            label(for='email') email: &nbsp;
-              input(id='email',type='text',value='',placeholder='@',name='email')
-          div
-            label(for='password') password: &nbsp;
-              input(id='password',type='password',value='',placeholder='',name='password')
-          div  
+      h3 Sign In
+      div(style='display: flex; flex-wrap: wrap;')
+        div
+          h5 OAuth 2.0 Flows
+          div(style='width:20em;line-height: 1.6;')
             ul
               li
-                input.button(type='submit',value='User Credentials')
+                a.button(href="authCodeGrant") Authorization Code
+              li
+                a.button(href="implicitGrant") Implicit Grant
+              li
+                a.button(href="hybrid") Hybrid
+              li
+                a.button(href="clientCredentials") Client Credentials
+            form(action='userCredentials',method='post')
+              div
+                label(for='email') email: &nbsp;
+                input(id='email',type='text',value='',placeholder='@',name='email')
+              div
+                label(for='password') password: &nbsp;
+                input(id='password',type='password',value='',placeholder='',name='password')
+              div  
+                ul
+                  li
+                    input.button(type='submit',value='User Credentials')
+        div
+          h5 Open Id Connect Flows
+          div(style='width:20em;line-height: 1.6;')
+            ul
+              li
+                a.button(href="authCodeOICGrant") OpenID over Authorization Code
+              li
+                a.button(href="implicitOICGrant") OpenID over Implicit Grant
+              li
+                a.button(href="hybridOICGrant") OpenID over Hybrid
   div
     h3 Monitors
     a(href="app/monitor") App Monitor
