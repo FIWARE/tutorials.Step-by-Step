@@ -318,7 +318,7 @@ function authCodeOICGrantCallback(req, res) {
 
 // This function offers Open ID Connect over Implicit Grant
 function implicitOICGrant(req, res) {
-  debug('authCodeOICGrant');
+  debug('implicitOICGrant');
   const path = oa.getAuthorizeUrl('id_token', null, 'oic');
   return res.redirect(path);
 }

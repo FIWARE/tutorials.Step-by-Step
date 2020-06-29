@@ -13,6 +13,7 @@ const TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
 const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 const GIT_COMMIT = process.env.GIT_COMMIT || 'unknown';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
+const OIDC_ENABLED = process.env.OIDC_ENABLED || false;
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
 const NOTIFY_ATTRIBUTES = [
@@ -84,12 +85,14 @@ function broadcastEvents(req, item, types) {
 // Handles requests to the main page
 router.get('/', function(req, res) {
   const securityEnabled = SECURE_ENDPOINTS;
+  const oidcEnabled = OIDC_ENABLED; 
   const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
   res.render('index', {
     success: req.flash('success'),
     errors: req.flash('error'),
     info: req.flash('info'),
     securityEnabled,
+    oidcEnabled,
     stores,
     ngsi: NGSI_VERSION
   });
@@ -121,10 +124,12 @@ router.get('/device/monitor', function(req, res) {
   const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
   const title = 'IoT Devices (' + DEVICE_PAYLOAD + ' over ' + TRANSPORT + ')';
   const securityEnabled = SECURE_ENDPOINTS;
+  const oidcEnabled = OIDC_ENABLED; 
   res.render('device-monitor', {
     title,
     traffic,
-    securityEnabled
+    securityEnabled,
+    oidcEnabled
   });
 });
 
