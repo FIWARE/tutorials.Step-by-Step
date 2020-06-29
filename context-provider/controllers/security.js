@@ -368,7 +368,7 @@ function hybridOICGrantCallback(req, res) {
       return getUserFromIdToken(req, results.id_token);
     })
     .then(user => {
-      logUser(req, user, 'logged in with <strong>Hybrid Grant</strong>');
+      logUser(req, user, 'logged in with <strong>Open ID Connect over Hybrid Grant</strong>');
       return res.redirect('/');
     })
     .catch(error => {
