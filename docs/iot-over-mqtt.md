@@ -568,7 +568,7 @@ add the `fiware-service` and `fiware-service-path` headers.
 
 ```bash
 curl -G -X GET \
-  'http://localhost:1026/v2/entities/urn:ngsi-ld:Motion:001'
+  'http://localhost:1026/v2/entities/urn:ngsi-ld:Motion:001' \
   -d 'type=Motion' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /'
