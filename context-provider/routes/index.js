@@ -85,7 +85,7 @@ function broadcastEvents(req, item, types) {
 // Handles requests to the main page
 router.get('/', function(req, res) {
   const securityEnabled = SECURE_ENDPOINTS;
-  const oidcEnabled = OIDC_ENABLED; 
+  const oidcEnabled = OIDC_ENABLED;
   const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
   res.render('index', {
     success: req.flash('success'),
@@ -108,11 +108,10 @@ router.get('/authCodeGrant', Security.authCodeGrant);
 router.get('/hybrid', Security.hybrid);
 router.get('/logout', Security.logOut);
 
-// Open ID Connect 
+// Open ID Connect
 router.get('/authCodeOICGrant', Security.authCodeOICGrant);
 router.get('/implicitOICGrant', Security.implicitOICGrant);
 router.get('/hybridOICGrant', Security.hybridOICGrant);
-
 
 router.get('/version', function(req, res) {
   res.setHeader('Content-Type', 'application/json');
@@ -124,7 +123,7 @@ router.get('/device/monitor', function(req, res) {
   const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
   const title = 'IoT Devices (' + DEVICE_PAYLOAD + ' over ' + TRANSPORT + ')';
   const securityEnabled = SECURE_ENDPOINTS;
-  const oidcEnabled = OIDC_ENABLED; 
+  const oidcEnabled = OIDC_ENABLED;
   res.render('device-monitor', {
     title,
     traffic,
