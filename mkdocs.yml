@@ -37,6 +37,7 @@ pages:
       - "Securing Microservices": "pep-proxy.md"
       - "Ruleset-based Permissons": "xacml-access-rules.md"
       - "Administrating XACML Rules": "administrating-xacml.md"
+      - "Authenticating Identities (Open-ID)": "open-id-connect.md"
   - "Processing, Analysis and Visualization":
       - "Application Mashups": "application-mashups.md"
       - "Media Streams": "media-streams.md"

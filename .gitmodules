@@ -89,3 +89,6 @@
 [submodule "LD-Subscriptions-Registrations"]
 	path = tutorials.LD-Subscriptions-Registrations
 	url = https://github.com/FIWARE/tutorials.LD-Subscriptions-Registrations.git
+[submodule "tutorials.Securing-Access-OpenID-Connect"]
+	path = tutorials.Securing-Access-OpenID-Connect
+	url = https://github.com/FIWARE/tutorials.Securing-Access-OpenID-Connect.git
