@@ -155,19 +155,26 @@ exports.OAuth2.prototype._executeRequest = function(
   request.end();
 };
 
-exports.OAuth2.prototype.getAuthorizeUrl = function(responseType) {
+exports.OAuth2.prototype.getAuthorizeUrl = function(responseType, scope, state) {
   responseType = responseType || 'code';
 
-  return (
-    this._baseSite +
+  let authorizeUrl = this._baseSite +
     this._authorizeUrl +
     '?response_type=' +
     responseType +
     '&client_id=' +
     this._clientId +
-    '&state=xyz&redirect_uri=' +
-    this._callbackURL
-  );
+    '&redirect_uri=' +
+    this._callbackURL +
+    '&state=' + state
+
+  if (scope) {
+    authorizeUrl = authorizeUrl + 
+      '&scope=' + 
+      scope
+  }
+
+  return authorizeUrl;
 };
 
 function getResults(data) {
@@ -180,18 +187,20 @@ function getResults(data) {
   return results;
 }
 
-exports.OAuth2.prototype.getOAuthAccessToken = function(code) {
+exports.OAuth2.prototype.getOAuthAccessToken = function(code, grant_type) {
   const that = this;
 
   return new Promise((resolve, reject) => {
     const postData =
-      'grant_type=authorization_code&code=' +
+      'grant_type=' + 
+      grant_type +
+      '&code=' +
       code +
       '&redirect_uri=' +
       that._callbackURL;
 
     const postHeaders = {
-      Authorization: that.buildAuthHeader(),
+      'Authorization': that.buildAuthHeader(),
       'Content-Type': 'application/x-www-form-urlencoded',
       'Content-Length': postData.length
     };

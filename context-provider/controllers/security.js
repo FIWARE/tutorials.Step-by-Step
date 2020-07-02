@@ -1,6 +1,7 @@
 const Authzforce = require('../lib/azf').Authzforce;
 const OAuth2 = require('../lib/oauth2').OAuth2;
 const debug = require('debug')('tutorial:security');
+const jwt = require('jsonwebtoken')
 const keyrockPort = process.env.KEYROCK_PORT || '3005';
 const keyrockUrl =
   (process.env.KEYROCK_URL || 'http://localhost') + ':' + keyrockPort;
@@ -10,6 +11,8 @@ const clientId =
   process.env.KEYROCK_CLIENT_ID || 'tutorial-dckr-site-0000-xpresswebapp';
 const clientSecret =
   process.env.KEYROCK_CLIENT_SECRET || 'tutorial-dkcr-site-0000-clientsecret';
+const jwtSecret =
+  process.env.KEYROCK_JWT_SECRET || '123456789';
 const callbackURL = process.env.CALLBACK_URL || 'http://localhost:3000/login';
 const SECURE_ENDPOINTS = process.env.SECURE_ENDPOINTS || false;
 
@@ -27,13 +30,28 @@ const oa = new OAuth2(
 // Creates an authzforce library object with the config data
 const azf = new Authzforce(clientId);
 
-function logAccessToken(req, accessToken, refreshToken, store = true) {
-  debug('<strong>Access Token</strong> received ' + accessToken);
-  req.flash('info', 'access_token: <code>' + accessToken + '</code>');
-  req.session.access_token = store ? accessToken : undefined;
+// Stores states to differentiate from Open ID connect requests
+// from simple OAuth 2.0 requests
+let statesOIC = []
+
+function logAccessToken(req, accessToken, refreshToken, idToken, store = true) {
+  
+  if (accessToken) {
+    debug('<strong>Access Token</strong> received ' + accessToken);
+    req.flash('info', 'access_token: <code>' + accessToken + '</code>');
+    req.session.access_token = store ? accessToken : undefined;
+  }
+  
   if (refreshToken) {
+    debug('<strong>Refresh Token</strong> received ' + refreshToken);
     req.flash('info', 'refresh_token:  <code>' + refreshToken + '</code>');
     req.session.refresh_token = store ? refreshToken : undefined;
+  }
+
+  if (idToken) {
+    debug('<strong>Id Token</strong> received ' + idToken);
+    req.flash('info', 'id_token:  <code>' + idToken + '</code>');
+    req.session.id_token = store ? idToken : undefined;
   }
 }
 
@@ -60,28 +78,56 @@ function getUserFromAccessToken(req, accessToken) {
   });
 }
 
+function getUserFromIdToken(req, idToken) {
+  debug('getUserFromIdToken');
+  return new Promise(function(resolve, reject) {
+    jwt.verify(idToken, jwtSecret, function(error, decoded) {
+      if (error) return reject(error);
+      return resolve(decoded);
+    });
+  });
+}
+
 // Handles callback responses from Keyrock with the access code or token
 function logInCallback(req, res) {
-  if (req.query.token) {
-    // If we have received an access_token, this is an Implicit Grant
-    implicitGrantCallback(req, res);
-  } else if (req.query.code) {
-    // If no access_token is received, this is an authCode Grant
-    authCodeGrantCallback(req, res);
+  debug('logInCallback');
+  debug(req.query)
+  if (req.query.state === 'oic') {
+    if (req.query.token && req.query.code && req.query.id_token) {
+      // If we have received an access_token, id_token and a code, this is a Hybrid Grant
+      hybridOICGrantCallback(req, res);
+    } else if (req.query.id_token) {
+      // If we have received an access_token, this is an Implicit Grant
+      implicitOICGrantCallback(req, res);
+    } else if (req.query.code) {
+      // If no access_token is received, this is an authCode Grant
+      authCodeOICGrantCallback(req, res);
+    }
+  } else if (req.query.state === 'oauth2') {
+    if (req.query.token && req.query.code) {
+      // If we have received an access_token and a code, this is a Hybrid Grant
+      hybridGrantCallback(req, res);
+    } else if (req.query.token) {
+      // If we have received an access_token, this is an Implicit Grant
+      implicitGrantCallback(req, res);
+    } else if (req.query.code) {
+      // If no access_token is received, this is an authCode Grant
+      authCodeGrantCallback(req, res);
+    }
   }
 }
 
 // Redirection to Keyrock for an Implicit Token Grant
 function implicitGrant(req, res) {
   debug('implicitGrant');
-  const path = oa.getAuthorizeUrl('token');
+  const path = oa.getAuthorizeUrl('token', null, 'oauth2');
   return res.redirect(path);
 }
 // Response from Keyrock for an Implicit Token Grant
 function implicitGrantCallback(req, res) {
   debug('implicitGrantCallback');
   // With the implicit grant, an access token is included in the response
-  logAccessToken(req, req.query.token, null);
+  logAccessToken(req, req.query.token, null, null);
 
   return getUserFromAccessToken(req, req.query.token)
     .then(user => {
@@ -100,7 +146,7 @@ function implicitGrantCallback(req, res) {
 // Redirection to Keyrock for an Authorization Code Grant
 function authCodeGrant(req, res) {
   debug('authCodeGrant');
-  const path = oa.getAuthorizeUrl('code');
+  const path = oa.getAuthorizeUrl('code', null, 'oauth2');
   return res.redirect(path);
 }
 // Response from Keyrock for an Authorization Code Grant
@@ -110,9 +156,9 @@ function authCodeGrantCallback(req, res) {
   // We need to make a second request to obtain an access token
   debug('Auth Code received ' + req.query.code);
   return oa
-    .getOAuthAccessToken(req.query.code)
+    .getOAuthAccessToken(req.query.code, 'authorization_code')
     .then(results => {
-      logAccessToken(req, results.access_token, results.refresh_token);
+      logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
     .then(user => {
@@ -133,7 +179,7 @@ function clientCredentialGrant(req, res) {
 
   oa.getOAuthClientCredentials()
     .then(results => {
-      logAccessToken(req, results.access_token, results.refresh_token, false);
+      logAccessToken(req, results.access_token, results.refresh_token, null, false);
       req.flash(
         'success',
         'Application logged in with <strong>Client Credentials</strong>'
@@ -159,7 +205,7 @@ function userCredentialGrant(req, res) {
   // the response.
   oa.getOAuthPasswordCredentials(email, password)
     .then(results => {
-      logAccessToken(req, results.access_token, results.refresh_token);
+      logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
     .then(user => {
@@ -188,11 +234,141 @@ function refreshTokenGrant(req, res) {
   return oa
     .getOAuthRefreshToken(req.session.refresh_token)
     .then(results => {
-      logAccessToken(req, results.access_token, results.refresh_token);
+      logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
     .then(user => {
       logUser(req, user, '<strong>refreshed token</strong>');
+      return res.redirect('/');
+    })
+    .catch(error => {
+      debug(error);
+      req.flash('error', 'Access Denied');
+      return res.redirect('/');
+    });
+}
+
+
+// This function offers the Hybrid flow (Authorization Code and Implicit)
+function hybrid(req, res) {
+  debug('hybrid');
+  const path = oa.getAuthorizeUrl('code token', null, 'oauth2');
+  return res.redirect(path);
+}
+
+// Response from Keyrock for an Authorization Code Grant
+function hybridGrantCallback(req, res) {
+  debug('hybridGrantCallback');
+  // With the hybrid grant, a code is included in the response
+  // and an access token too
+  // We need to make a second request to obtain another 
+  // access token
+  debug('Auth Code received ' + req.query.code);
+  debug('Access Token received ' + req.query.token);
+  return oa
+    .getOAuthAccessToken(req.query.code, 'hybrid')
+    .then(results => {
+      logAccessToken(req, results.access_token, results.refresh_token, null);
+      return getUserFromAccessToken(req, results.access_token);
+    })
+    .then(user => {
+      logUser(req, user, 'logged in with <strong>Hybrid Grant</strong>');
+      return res.redirect('/');
+    })
+    .catch(error => {
+      debug(error);
+      req.flash('error', 'Access Denied');
+      return res.redirect('/');
+    });
+}
+
+
+//Authenticate using Open ID Connect
+
+// This function offers Open ID Connect over Authorization Code
+function authCodeOICGrant(req, res) {
+  debug('authCodeOICGrant');
+  const path = oa.getAuthorizeUrl('code', 'openid', 'oic');
+  return res.redirect(path);
+}
+
+// Response from Keyrock for an Authorization Code Grant with Open ID Connect
+function authCodeOICGrantCallback(req, res) {
+  debug('authCodeOICGrantCallback');
+  // With the authcode grant, a code is included in the response
+  // We need to make a second request to obtain an access token
+  debug('Auth Code received ' + req.query.code);
+  return oa
+    .getOAuthAccessToken(req.query.code, 'authorization_code')
+    .then(results => {
+      logAccessToken(req, null, null, results.id_token);
+      return getUserFromIdToken(req, results.id_token);
+    })
+    .then(user => {
+      logUser(req, user, 'logged in with <strong>Open ID Connect over Authorization Code</strong>');
+      return res.redirect('/');
+    })
+    .catch(error => {
+      debug(error);
+      req.flash('error', 'Access Denied');
+      return res.redirect('/');
+    });
+}
+
+
+// This function offers Open ID Connect over Implicit Grant
+function implicitOICGrant(req, res) {
+  debug('implicitOICGrant');
+  const path = oa.getAuthorizeUrl('id_token', null, 'oic');
+  return res.redirect(path);
+}
+
+// Response from Keyrock for an Implicit Token Grant
+function implicitOICGrantCallback(req, res) {
+  debug('implicitOICGrantCallback');
+
+  debug('Id Token received ' + req.query.id_token);
+  // With the implicit grant, an access token is included in the response
+  logAccessToken(req, null, null, req.query.id_token);
+
+  return getUserFromIdToken(req, req.query.id_token)
+    .then(user => {
+      logUser(req, user, 'logged in with <strong>Open ID Connect over Implicit Grant</strong>');
+      return res.redirect('/');
+    })
+    .catch(error => {
+      debug(error);
+      req.flash('error', 'Access Denied');
+      return res.redirect('/');
+    });
+}
+
+// This function offers Open ID Connect over Hybrid flow
+function hybridOICGrant(req, res) {
+  debug('hybridOICGrant');
+  const path = oa.getAuthorizeUrl('code id_token token', 'openid', 'oic');
+  return res.redirect(path);
+}
+
+// Response from Keyrock for an Authorization Code Grant
+function hybridOICGrantCallback(req, res) {
+  debug('hybridOICGrantCallback');
+  // With the hybrid grant, a code is included in the response
+  // and an access token too
+  // We need to make a second request to obtain another 
+  // access token
+  debug('Auth Code received ' + req.query.code);
+  debug('Access Token received ' + req.query.token);
+  debug('Id Token received ' + req.query.id_token);
+  return oa
+    .getOAuthAccessToken(req.query.code, 'hybrid')
+    .then(results => {
+      debug(results)
+      logAccessToken(req, results.access_token, results.refresh_token, results.id_token);
+      return getUserFromIdToken(req, results.id_token);
+    })
+    .then(user => {
+      logUser(req, user, 'logged in with <strong>Open ID Connect over Hybrid Grant</strong>');
       return res.redirect('/');
     })
     .catch(error => {
@@ -330,5 +506,9 @@ module.exports = {
   authorizeAdvancedXACML,
   logInCallback,
   logOut,
-  oa
+  oa,
+  hybrid,
+  authCodeOICGrant,
+  implicitOICGrant,
+  hybridOICGrant
 };
