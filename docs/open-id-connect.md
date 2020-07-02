@@ -61,7 +61,7 @@ A JWT has the following structure:
 Crypto-Algorithm ( base64urlEncoding(header) + '.' + base64urlEncoding(payload), secret)
 ```
 
-The JWT is the result of encoding each part using Base64 and concatenating them with points. For instance:
+The JWT is the result of encoding each part using base64 and concatenating them with points. For instance:
 
 ```text
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM6Ly9maXdhcmUtaWRtLmNvbSIsImlhdCI6MTUxNjIzOTAyMiwidXNlcm5hbWUiOiJBbGljZSIsImdyYXZhdGFyIjp0cnVlfQ.dZ7z0u_4FZC7xiVQDtGAl7NRT0fK8_5hJqYa9E-4xGE
@@ -432,7 +432,7 @@ The response displays the user on the top right of the screen, details of the to
 ## Hybrid Flow
 
 The [Hybrid](https://openid.net/specs/openid-connect-core-1_0.html#HybridFlowAuth) flow combines the authorization code
-and the implicit grant. It could be useful to parallelize process in the Front-End and the Back-End of applications. The
+and the implicit grant. It could be useful to parallelize process in the frontend and the backend of applications. The
 flow is similar to the authorization code grant but in this case tokens are generated in both authorization and token
 endpoint.
 
