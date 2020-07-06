@@ -226,10 +226,10 @@ Maven:
 ```bash
 cd cosmos-examples
 mvn install:install-file \
-  -Dfile=./orion.flink.connector-1.2.1.jar \
+  -Dfile=./orion.flink.connector-1.2.3.jar \
   -DgroupId=org.fiware.cosmos \
   -DartifactId=orion.flink.connector \
-  -Dversion=1.2.1 \
+  -Dversion=1.2.3 \
   -Dpackaging=jar
 ```
 
@@ -300,7 +300,8 @@ curl -iX POST \
   },
   "notification": {
     "http": {
-    "url": "http://jobmanager:9001
+        "url": "http://jobmanager:9001"
+    }
   }
 }'
 ```
