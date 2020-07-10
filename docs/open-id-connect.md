@@ -46,10 +46,18 @@ adds an additional ID token to the response which holds some basic user informat
 requested from the standardized `/userinfo` endpoint.
 
 OpenID connect requests follow a very similar flow to OAuth2 requests. They are distinguished by using the `openid`
-scope when making the initial request. The response contains an encoded JWT token (described below) holding elements
-such as the subject (`sub`) and issuing authority (`iss`) of the token.
+scope when making the initial request. The response contains an encoded JWT token holding elements described below:
 
-The full OpenID specification can be found [here](https://openid.net/specs/openid-connect-core-1_0.html)
+| name  | description                                       |
+| ----- | ------------------------------------------------- |
+| `iss` | Issuer Identifier for the Issuer of the response. |
+| `sub` | Subject Identifier.                               |
+| `aud` | Audience(s) that this ID Token is intended for.   |
+| `exp` | Expiration time.                                  |
+| `iat` | Time at which the JWT was issued.                 |
+
+Other entries may also be added. The full OpenID specification can be found
+[here](https://openid.net/specs/openid-connect-core-1_0.html)
 
 ## Standard Concepts of Json Web Tokens
 
@@ -280,7 +288,7 @@ FIWARE **Keyrock** complies with the OIDC standard described in
 [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) and supports all three standard
 authentication flows defined there.
 
-As OIDC is built on the top pf OAuth 2.0, when making requests to the OAuth Token Endpoint, the `Authorization` header
+As OIDC is built on the top of OAuth 2.0, when making requests to the OAuth Token Endpoint, the `Authorization` header
 is built by combining the application Client ID and Client Secret credentials provided by the **Keyrock** separated by a
 `:` and base-64encoded. The value can be generated as shown:
 
@@ -290,6 +298,67 @@ echo tutorial-dckr-site-0000-xpresswebapp:tutorial-dckr-site-0000-clientsecret |
 
 ```text
 dHV0b3JpYWwtZGNrci1zaXRlLTAwMDAteHByZXNzd2ViYXBwOnR1dG9yaWFsLWRja3Itc2l0ZS0wMDAwLWNsaWVudHNlY3JldAo=
+```
+
+## Enable OpenID Connect
+
+OpenID Connect can be enabled on a Keyrock's application either through the GUI or through the REST API.
+
+### GUI
+
+Once signed-in, users are able to activate OIDC in their application through the edit web page.
+
+![](https://fiware.github.io/tutorials.Securing-Access-OpenID-Connect/img/edit-OIDC.png)
+
+The secret to be used when validating JSON Web Tokens can be found in the application information web page.
+
+![](https://fiware.github.io/tutorials.Securing-Access-OpenID-Connect/img/jwtsecret-OIDC.png)
+
+The JWT secret could be also refreshed by clicking on the "Reset secret" button in the OAuth2 credentials section.
+
+![](https://fiware.github.io/tutorials.Securing-Access-OpenID-Connect/img/jwtsecret-reset-OIDC.png)
+
+### REST API
+
+Enabling OIDC can be also done when creating an application in Keyrock. It can be made via a POST request to the
+`/v1/applications` as described in
+[Roles and Permissions tutorial](https://github.com/FIWARE/tutorials.Roles-Permissions), including the `openid` into the
+`scope` attribute.
+
+```bash
+curl -iX POST \
+  'http://localhost:3005/v1/applications' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Auth-token: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' \
+  -d '{
+  "application": {
+    "name": "Tutorial Application",
+    "description": "FIWARE Application protected by OAuth2 and Keyrock",
+    "redirect_uri": "http://tutorial/login",
+    "url": "http://tutorial",
+    "grant_type": [
+      "authorization_code",
+      "implicit",
+      "password"
+    ],
+    "scope": "openid",
+    "token_types": ["permanent"]
+  }
+}'
+```
+
+If the applications has been already created, this can also be done from the command-line by making a PATCH request.
+
+```bash
+curl -X PATCH \
+  'http://localhost:3005/v1/applications/{{application-id}}' \
+  -H 'Content-Type: application/json' \
+  -H 'X-Auth-token: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' \
+  -d '{
+  "application": {
+    "scope": "openid"
+  }
+}'
 ```
 
 ## Authorization Code Flow
