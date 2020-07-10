@@ -30,9 +30,30 @@ authenticate users. OIDC was created to solve OAuth 2.0 authentication issue. Ei
 that identifies the user avoiding exposing the username and password. Particularly, OIDC generates a Json Web Token
 (JWT) that applications can intrinsically validate and obtain user information directly from itself.
 
+## :arrow_forward: Video: What is OpenID Connect?
+
+[![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=Kb56GzQ2pSk "OpenID connect")
+
+Click on the image above to watch a video on OpenID connect and identity.
+
+OAuth2 is a mechanism for granting access - specifically **Authorization** - _Can I do this?_). Technically, within the
+OAuth protocol there is no concept of **Identity** per-se and therefore it is not really designed for **Authentication**
+(_I am User X_) even if it is able to fulfil certain **Authentication** use cases such mobile app log in. OpenID
+provides an extension to OAuth2 enabling applications to obtain user information in a standard manner.
+
+OpenID connect works across multiple entity providers (such as **Keyrock**) and is operated using JSON Web tokens. It
+adds an additional ID token to the response which holds some basic user information, additional user information can be
+requested from the standardized `/userinfo` endpoint.
+
+OpenID connect requests follow a very similar flow to OAuth2 requests. They are distinguished by using the `openid`
+scope when making the initial request. The response contains an encoded JWT token (described below) holding elements
+such as the subject (`sub`) and issuing authority (`iss`) of the token.
+
+The full OpenID specification can be found [here](https://openid.net/specs/openid-connect-core-1_0.html)
+
 ## Standard Concepts of Json Web Tokens
 
-A JWT has the following structure:
+A JSON Web Token (JWT) has the following structure:
 
 -   Header. It identifies the algorithm used to sign the Json Web Token.
 
