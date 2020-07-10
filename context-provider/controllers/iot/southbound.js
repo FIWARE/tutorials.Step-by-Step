@@ -60,6 +60,13 @@ module.exports = {
     return Command.actuateLamp(req, res);
   },
 
+  // The dummy ISOBUS will just return success.
+  isobusHttpCommand(req, res) {
+    debug('isobusHttpCommand');
+    debug(req.body);
+    return res.status(200).send();
+  },
+
   // The device monitor will display all MQTT messages on screen.
   // cmd topics are consumed by the actuators (bell, lamp and door)
   processMqttMessage(topic, message) {

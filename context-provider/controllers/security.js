@@ -308,7 +308,10 @@ function authCodeOICGrantCallback(req, res) {
       logUser(
         req,
         user,
-        'logged in with <strong>Open ID Connect over Authorization Code</strong>'
+        'logged in with <strong>Open ID Connect over Authorization Code</strong>' +
+          '<pre><code>' +
+          JSON.stringify(user, null, 4) +
+          '</code></pre>'
       );
       return res.redirect('/');
     })
@@ -339,7 +342,10 @@ function implicitOICGrantCallback(req, res) {
       logUser(
         req,
         user,
-        'logged in with <strong>Open ID Connect over Implicit Grant</strong>'
+        'logged in with <strong>Open ID Connect over Implicit Grant</strong>' +
+          '<pre><code>' +
+          JSON.stringify(user, null, 4) +
+          '</code></pre>'
       );
       return res.redirect('/');
     })
