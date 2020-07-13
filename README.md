@@ -104,7 +104,7 @@ PostgreSQL<br/> &nbsp; 303.
 [Securing Microservices with a PEP Proxy](https://github.com/FIWARE/tutorials.PEP-Proxy)<br/> &nbsp; 405.
 [XACML Rules-based Permissions](https://github.com/FIWARE/tutorials.XACML-Access-Rules)<br/> &nbsp; 406.
 [Administrating XACML via a PAP](https://github.com/FIWARE/tutorials.Administrating-XACML)<br/> &nbsp; 407.
-[Authenticating Identities](https://github.com/FIWARE/tutorials.Securing-Access-OpenID-Connect)
+[Authenticating Identities (Open-ID Connect)](https://github.com/FIWARE/tutorials.Securing-Access-OpenID-Connect)
 
 ### Processing, Analysis and Visualization
 
