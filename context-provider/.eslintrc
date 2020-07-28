@@ -4,6 +4,7 @@
     "sourceType": "module"
   },
   "rules": {
-    "valid-jsdoc": 0
+    "valid-jsdoc": 0,
+    "no-shadow": 0
   }
 }

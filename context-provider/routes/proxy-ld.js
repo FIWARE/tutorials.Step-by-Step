@@ -63,7 +63,7 @@ function notSupported(req, res) {
     detail:
       "The '" +
       req.params.proxy +
-      "' context provider does not support the given endpoint"
+      "' context provider does not support the given endpoint",
   });
 }
 

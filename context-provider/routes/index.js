@@ -22,45 +22,45 @@ const NOTIFY_ATTRIBUTES = [
   'refShelf',
   'type',
   'locatedIn',
-  'stocks'
+  'stocks',
 ];
 
 const NGSI_V2_STORES = [
   {
     href: 'app/store/urn:ngsi-ld:Store:001',
-    name: 'Store 1'
+    name: 'Store 1',
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:002',
-    name: 'Store 2'
+    name: 'Store 2',
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:003',
-    name: 'Store 3'
+    name: 'Store 3',
   },
   {
     href: 'app/store/urn:ngsi-ld:Store:004',
-    name: 'Store 4'
-  }
+    name: 'Store 4',
+  },
 ];
 
 const NGSI_LD_STORES = [
   {
     href: 'app/store/urn:ngsi-ld:Building:store001',
-    name: 'Store 1'
+    name: 'Store 1',
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store002',
-    name: 'Store 2'
+    name: 'Store 2',
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store003',
-    name: 'Store 3'
+    name: 'Store 3',
   },
   {
     href: 'app/store/urn:ngsi-ld:Building:store004',
-    name: 'Store 4'
-  }
+    name: 'Store 4',
+  },
 ];
 
 // Error handler for async functions
@@ -75,7 +75,7 @@ function catchErrors(fn) {
 // who to send the event too.
 function broadcastEvents(req, item, types) {
   const message = req.params.type + ' received';
-  _.forEach(types, type => {
+  _.forEach(types, (type) => {
     if (item[type]) {
       monitor(item[type], message);
     }
@@ -83,7 +83,7 @@ function broadcastEvents(req, item, types) {
 }
 
 // Handles requests to the main page
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   const securityEnabled = SECURE_ENDPOINTS;
   const oidcEnabled = OIDC_ENABLED;
   const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
@@ -94,7 +94,7 @@ router.get('/', function(req, res) {
     securityEnabled,
     oidcEnabled,
     stores,
-    ngsi: NGSI_VERSION
+    ngsi: NGSI_VERSION,
   });
 });
 
@@ -113,13 +113,13 @@ router.get('/authCodeOICGrant', Security.authCodeOICGrant);
 router.get('/implicitOICGrant', Security.implicitOICGrant);
 router.get('/hybridOICGrant', Security.hybridOICGrant);
 
-router.get('/version', function(req, res) {
+router.get('/version', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.send({ gitHash: GIT_COMMIT });
 });
 
 // Render the monitoring page
-router.get('/device/monitor', function(req, res) {
+router.get('/device/monitor', function (req, res) {
   const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
   const title = 'IoT Devices (' + DEVICE_PAYLOAD + ' over ' + TRANSPORT + ')';
   const securityEnabled = SECURE_ENDPOINTS;
@@ -128,7 +128,7 @@ router.get('/device/monitor', function(req, res) {
     title,
     traffic,
     securityEnabled,
-    oidcEnabled
+    oidcEnabled,
   });
 });
 
@@ -160,26 +160,26 @@ if (process.env.CRATE_DB_SERVICE_URL) {
 }
 
 // Display the app monitor page
-router.get('/app/monitor', function(req, res) {
+router.get('/app/monitor', function (req, res) {
   res.render('monitor', { title: 'Event Monitor' });
 });
 
 // Display the app monitor page
-router.get('/device/history', function(req, res) {
+router.get('/device/history', function (req, res) {
   const data = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
   const stores = [];
 
   if (process.env.CRATE_DB_SERVICE_URL || process.env.STH_COMET_SERVICE_URL) {
-    data.forEach(element => {
+    data.forEach((element) => {
       stores.push({
         name: element.name,
-        href: element.href.replace('app/store/', 'history/')
+        href: element.href.replace('app/store/', 'history/'),
       });
     });
   }
   res.render('history-index', {
     title: 'Short-Term History',
-    stores
+    stores,
   });
 });
 
@@ -199,7 +199,7 @@ router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 //                                - use Authzforce as a PDP
 router.get(
   '/app/price-change',
-  function(req, res, next) {
+  function (req, res, next) {
     // Use Advanced Autorization if Authzforce is present.
     return AUTHZFORCE_ENABLED
       ? Security.authorizeAdvancedXACML(req, res, next)
@@ -213,7 +213,7 @@ router.get(
 //                                - use Authzforce as a PDP
 router.get(
   '/app/order-stock',
-  function(req, res, next) {
+  function (req, res, next) {
     // Use Advanced Authorization if Authzforce is present.
     return AUTHZFORCE_ENABLED
       ? Security.authorizeAdvancedXACML(req, res, next)
@@ -226,7 +226,7 @@ router.get(
 // and notify any interested parties using Socket.io
 router.post('/subscription/:type', (req, res) => {
   monitor('notify', req.params.type + ' received', req.body);
-  _.forEach(req.body.data, item => {
+  _.forEach(req.body.data, (item) => {
     broadcastEvents(req, item, NOTIFY_ATTRIBUTES);
   });
   res.status(204).send();

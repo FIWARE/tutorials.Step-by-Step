@@ -57,14 +57,14 @@ function logUser(req, user, message) {
 
 function getUserFromAccessToken(req, accessToken) {
   debug('getUserFromAccessToken');
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     // Using the access token asks the IDM for the user info
     oa.get(keyrockIPAddress + '/user', accessToken)
-      .then(response => {
+      .then((response) => {
         const user = JSON.parse(response);
         return resolve(user);
       })
-      .catch(error => {
+      .catch((error) => {
         debug(error);
         req.flash('error', 'User not found');
         return reject(error);
@@ -74,8 +74,8 @@ function getUserFromAccessToken(req, accessToken) {
 
 function getUserFromIdToken(req, idToken) {
   debug('getUserFromIdToken');
-  return new Promise(function(resolve, reject) {
-    jwt.verify(idToken, jwtSecret, function(error, decoded) {
+  return new Promise(function (resolve, reject) {
+    jwt.verify(idToken, jwtSecret, function (error, decoded) {
       if (error) {
         return reject(error);
       }
@@ -126,11 +126,11 @@ function implicitGrantCallback(req, res) {
   logAccessToken(req, req.query.token, null, null);
 
   return getUserFromAccessToken(req, req.query.token)
-    .then(user => {
+    .then((user) => {
       logUser(req, user, 'logged in with <strong>Implicit Grant</strong>');
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -153,15 +153,15 @@ function authCodeGrantCallback(req, res) {
   debug('Auth Code received ' + req.query.code);
   return oa
     .getOAuthAccessToken(req.query.code, 'authorization_code')
-    .then(results => {
+    .then((results) => {
       logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(req, user, 'logged in with <strong>Authorization Code</strong>');
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -174,7 +174,7 @@ function clientCredentialGrant(req, res) {
   debug('clientCredentialGrant');
 
   oa.getOAuthClientCredentials()
-    .then(results => {
+    .then((results) => {
       logAccessToken(
         req,
         results.access_token,
@@ -188,7 +188,7 @@ function clientCredentialGrant(req, res) {
       );
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -206,15 +206,15 @@ function userCredentialGrant(req, res) {
   // With the Password flow, an access token is returned in
   // the response.
   oa.getOAuthPasswordCredentials(email, password)
-    .then(results => {
+    .then((results) => {
       logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(req, user, 'logged in with <strong>Password</strong>');
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -235,15 +235,15 @@ function refreshTokenGrant(req, res) {
   // the response.
   return oa
     .getOAuthRefreshToken(req.session.refresh_token)
-    .then(results => {
+    .then((results) => {
       logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(req, user, '<strong>refreshed token</strong>');
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -268,15 +268,15 @@ function hybridGrantCallback(req, res) {
   debug('Access Token received ' + req.query.token);
   return oa
     .getOAuthAccessToken(req.query.code, 'hybrid')
-    .then(results => {
+    .then((results) => {
       logAccessToken(req, results.access_token, results.refresh_token, null);
       return getUserFromAccessToken(req, results.access_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(req, user, 'logged in with <strong>Hybrid Grant</strong>');
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -300,11 +300,11 @@ function authCodeOICGrantCallback(req, res) {
   debug('Auth Code received ' + req.query.code);
   return oa
     .getOAuthAccessToken(req.query.code, 'authorization_code')
-    .then(results => {
+    .then((results) => {
       logAccessToken(req, null, null, results.id_token);
       return getUserFromIdToken(req, results.id_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(
         req,
         user,
@@ -315,7 +315,7 @@ function authCodeOICGrantCallback(req, res) {
       );
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -338,7 +338,7 @@ function implicitOICGrantCallback(req, res) {
   logAccessToken(req, null, null, req.query.id_token);
 
   return getUserFromIdToken(req, req.query.id_token)
-    .then(user => {
+    .then((user) => {
       logUser(
         req,
         user,
@@ -349,7 +349,7 @@ function implicitOICGrantCallback(req, res) {
       );
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -375,7 +375,7 @@ function hybridOICGrantCallback(req, res) {
   debug('Id Token received ' + req.query.id_token);
   return oa
     .getOAuthAccessToken(req.query.code, 'hybrid')
-    .then(results => {
+    .then((results) => {
       debug(results);
       logAccessToken(
         req,
@@ -385,7 +385,7 @@ function hybridOICGrantCallback(req, res) {
       );
       return getUserFromIdToken(req, results.id_token);
     })
-    .then(user => {
+    .then((user) => {
       logUser(
         req,
         user,
@@ -393,7 +393,7 @@ function hybridOICGrantCallback(req, res) {
       );
       return res.redirect('/');
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       req.flash('error', 'Access Denied');
       return res.redirect('/');
@@ -452,12 +452,12 @@ function authorizeBasicPDP(req, res, next, resource = req.url) {
 
   return oa
     .get(keyrockUserUrl)
-    .then(response => {
+    .then((response) => {
       const user = JSON.parse(response);
       res.locals.authorized = user.authorization_decision === 'Permit';
       return next();
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       res.locals.authorized = false;
       return next();
@@ -485,7 +485,7 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 
   return oa
     .get(keyrockUserUrl)
-    .then(response => {
+    .then((response) => {
       const user = JSON.parse(response);
       return azf.policyDomainRequest(
         user.app_azf_domain,
@@ -496,11 +496,11 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
         user.email
       );
     })
-    .then(authzforceResponse => {
+    .then((authzforceResponse) => {
       res.locals.authorized = authzforceResponse === 'Permit';
       return next();
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       res.locals.authorized = false;
       return next();
@@ -532,5 +532,5 @@ module.exports = {
   hybrid,
   authCodeOICGrant,
   implicitOICGrant,
-  hybridOICGrant
+  hybridOICGrant,
 };

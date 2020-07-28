@@ -17,17 +17,17 @@ const staticValues = {
     'Wet it for use in hand-to-hand-combat;',
     'Wrap it round your head to ward off noxious fumes or to avoid the gaze of the Ravenous Bugblatter Beast of Traal  ' +
       '(a mindboggingly stupid animal, it assumes that if you can’t see it, it can’t see you – daft as a bush, but very, very ravenous);',
-    'You can wave your towel in emergencies as a distress signal, and of course dry yourself off with it if it still seems to be clean enough.'
+    'You can wave your towel in emergencies as a distress signal, and of course dry yourself off with it if it still seems to be clean enough.',
   ],
   boolean: true,
   float: 42.0,
   integer: 42,
   number: 42,
   structuredvalue: {
-    somevalue: 'this'
+    somevalue: 'this',
   },
   string: 'I never could get the hang of thursdays',
-  text: 'I never could get the hang of thursdays'
+  text: 'I never could get the hang of thursdays',
 };
 
 //
@@ -41,7 +41,7 @@ function healthCheck(req, res) {
     boolean: staticValues.boolean,
     number: staticValues.number,
     structuredValue: staticValues.structuredValue,
-    text: staticValues.text
+    text: staticValues.text,
   });
 }
 
@@ -122,5 +122,5 @@ module.exports = {
   getAsNGSIv2,
   getAsNgsiLD,
   updateEntity,
-  updateSingleAttribute
+  updateSingleAttribute,
 };

@@ -67,7 +67,7 @@ async function displayStore(req, res) {
     return res.render('store-error', {
       title: 'Error',
       error,
-      ngsi: 'ngsi-ld'
+      ngsi: 'ngsi-ld',
     });
   }
 }
@@ -94,7 +94,7 @@ async function displayTillInfo(req, res) {
       {
         type: 'Building',
         options: 'keyValues',
-        attrs: 'furniture'
+        attrs: 'furniture',
       },
       headers
     );
@@ -109,13 +109,13 @@ async function displayTillInfo(req, res) {
         type: 'Shelf',
         options: 'keyValues',
         attrs: 'stocks,numberOfItems',
-        id: furniture.join(',')
+        id: furniture.join(','),
       },
       headers
     );
 
     productsList = Array.isArray(productsList) ? productsList : [productsList];
-    productsList = _.groupBy(productsList, e => {
+    productsList = _.groupBy(productsList, (e) => {
       return e.stocks;
     });
 
@@ -125,11 +125,11 @@ async function displayTillInfo(req, res) {
         refProduct: key,
         shelfCount: _.reduce(
           value,
-          function(sum, shelf) {
+          function (sum, shelf) {
             return sum + shelf.numberOfItems;
           },
           0
-        )
+        ),
       });
     });
 
@@ -142,7 +142,7 @@ async function displayTillInfo(req, res) {
         type: 'Product',
         options: 'keyValues',
         attrs: 'name,price',
-        id: stockedProducts.join(',')
+        id: stockedProducts.join(','),
       },
       headers
     );
@@ -150,7 +150,7 @@ async function displayTillInfo(req, res) {
     productsInStore = Array.isArray(productsInStore)
       ? productsInStore
       : [productsInStore];
-    productsInStore = _.mapValues(productsInStore, e => {
+    productsInStore = _.mapValues(productsInStore, (e) => {
       e.price = e.price * 100;
       return e;
     });
@@ -159,7 +159,7 @@ async function displayTillInfo(req, res) {
       products: productsInStore,
       inventory,
       ngsiLd: true,
-      storeId: req.params.storeId
+      storeId: req.params.storeId,
     });
   } catch (error) {
     debug(error);
@@ -168,7 +168,7 @@ async function displayTillInfo(req, res) {
       products: {},
       inventory: {},
       ngsiLd: true,
-      storeId: req.params.storeId
+      storeId: req.params.storeId,
     });
   }
 }
@@ -191,7 +191,7 @@ async function buyItem(req, res) {
         '";stocks=="' +
         req.body.productId +
         '"',
-      limit: 1
+      limit: 1,
     },
     headers
   );
@@ -199,7 +199,7 @@ async function buyItem(req, res) {
   const count = shelf[0].numberOfItems - 1;
 
   monitor('NGSI', 'updateAttribute ' + shelf[0].id, {
-    numberOfItems: { type: 'Property', value: count }
+    numberOfItems: { type: 'Property', value: count },
   });
   await ngsiLD.updateAttribute(
     shelf[0].id,
@@ -245,5 +245,5 @@ module.exports = {
   displayTillInfo,
   displayWarehouseInfo,
   priceChange,
-  orderStock
+  orderStock,
 };

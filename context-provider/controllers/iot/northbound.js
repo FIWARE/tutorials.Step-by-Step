@@ -24,10 +24,10 @@ function setAuthToken(header) {
         process.env.DUMMY_DEVICES_USER,
         process.env.DUMMY_DEVICES_PASSWORD
       )
-      .then(results => {
+      .then((results) => {
         header['X-Auth-Token'] = results.access_token;
       })
-      .catch(error => {
+      .catch((error) => {
         debug(error);
       });
   }
@@ -69,5 +69,5 @@ module.exports = {
       debug('sendMQTTMeasure: ' + deviceId);
       Measure.sendAsMQTT(deviceId, state);
     }
-  }
+  },
 };

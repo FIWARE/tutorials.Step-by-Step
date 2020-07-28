@@ -14,10 +14,10 @@ const DEVICE_TRANSPORT = process.env.DUMMY_DEVICES_TRANSPORT || 'HTTP';
 function rawBody(req, res, next) {
   req.setEncoding('utf8');
   req.body = '';
-  req.on('data', function(chunk) {
+  req.on('data', function (chunk) {
     req.body += chunk;
   });
-  req.on('end', function() {
+  req.on('end', function () {
     next();
   });
 }
@@ -55,7 +55,7 @@ if (DEVICE_TRANSPORT === 'MQTT') {
     '1234';
 
   MQTT_CLIENT.on('connect', () => {
-    apiKeys.split(',').forEach(apiKey => {
+    apiKeys.split(',').forEach((apiKey) => {
       const topic = '/' + apiKey + '/#';
       debug('Subscribing to MQTT Broker: ' + mqttBrokerUrl + ' ' + topic);
       MQTT_CLIENT.subscribe(topic);
@@ -65,7 +65,7 @@ if (DEVICE_TRANSPORT === 'MQTT') {
 
   mqtt.connect(mqttBrokerUrl);
 
-  MQTT_CLIENT.on('message', function(topic, message) {
+  MQTT_CLIENT.on('message', function (topic, message) {
     // message is a buffer. The IoT devices will be listening and
     // responding to commands going southbound.
     Southbound.processMqttMessage(topic.toString(), message.toString());
@@ -73,7 +73,7 @@ if (DEVICE_TRANSPORT === 'MQTT') {
 }
 
 // catch 404 and forward to error handler
-iot.use(function(req, res) {
+iot.use(function (req, res) {
   res.status(404).send(new createError.NotFound());
 });
 

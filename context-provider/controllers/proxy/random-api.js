@@ -24,7 +24,7 @@ function healthCheck(req, res) {
     boolean: randomValueForType('boolean'),
     number: randomValueForType('number'),
     structuredValue: randomValueForType('structuredValue'),
-    text: randomValueForType('text')
+    text: randomValueForType('text'),
   });
 }
 
@@ -115,7 +115,7 @@ function randomValueForType(type) {
       break;
     case 'structuredvalue':
       ret = {
-        somevalue: 'this'
+        somevalue: 'this',
       };
       break;
     case 'string':
@@ -154,5 +154,5 @@ module.exports = {
   healthCheck,
   getAsLegacyNGSIv1,
   getAsNGSIv2,
-  getAsNgsiLD
+  getAsNgsiLD,
 };

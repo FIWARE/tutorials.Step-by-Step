@@ -26,13 +26,13 @@ function createNGSIv2Request(action, id) {
   const headers = {
     'Content-Type': 'application/json',
     'fiware-servicepath': '/',
-    'fiware-service': 'openiot'
+    'fiware-service': 'openiot',
   };
   const url = DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs';
 
   body[action] = {
     type: 'command',
-    value: ''
+    value: '',
   };
 
   return { method, url, headers, body, json: true };
@@ -42,7 +42,7 @@ function createNGSILDRequest(action, id) {
   const method = 'PATCH';
   const body = {
     type: 'Property',
-    value: ' '
+    value: ' ',
   };
   const url =
     DEVICE_BROKER + '/entities/' + NGSI_PREFIX + id + '/attrs/' + action;
@@ -51,7 +51,7 @@ function createNGSILDRequest(action, id) {
     'NGSILD-Tenant': 'openiot',
     'NGSILD-Path': '/',
     'fiware-service': 'openiot',
-    'fiware-servicepath': '/'
+    'fiware-servicepath': '/',
   };
 
   return { method, url, headers, body, json: true };
@@ -95,7 +95,7 @@ function sendCommand(req, res) {
     options.headers['X-Auth-Token'] = req.session.access_token;
   }
 
-  request(options, error => {
+  request(options, (error) => {
     if (error) {
       debug(error);
     }
@@ -130,5 +130,5 @@ function accessControl(req, res, next) {
 
 module.exports = {
   accessControl,
-  sendCommand
+  sendCommand,
 };

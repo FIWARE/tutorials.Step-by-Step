@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
       '/health/random',
       '/health/static',
       '/health/weather',
-      '/health/twitter'
-    ]
+      '/health/twitter',
+    ],
   });
 });
 

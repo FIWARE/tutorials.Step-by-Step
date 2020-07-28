@@ -6,7 +6,7 @@ const moment = require('moment');
 // Entity types are typically title cased following Schema.org
 //
 function toTitleCase(str) {
-  return str.replace(/\w\S*/g, txt => {
+  return str.replace(/\w\S*/g, (txt) => {
     return txt.charAt(0).toUpperCase() + txt.substr(1);
   });
 }
@@ -31,7 +31,7 @@ function toTitleCase(str) {
 function parseMapping(input) {
   const mappedAttributes = {};
 
-  _.forEach(input.split(','), element => {
+  _.forEach(input.split(','), (element) => {
     if (element.includes(':')) {
       const splitElement = element.split(':');
       mappedAttributes[splitElement[0]] = splitElement[1];
@@ -49,13 +49,13 @@ function formatAsV2Response(req, inputData, attributeValueCallback) {
   const addUnitCode = _.indexOf(req.body.metadata, 'unitCode') > -1;
   const addObservedAt = _.indexOf(req.body.metadata, 'observedAt') > -1;
 
-  _.forEach(req.body.entities, entity => {
+  _.forEach(req.body.entities, (entity) => {
     const element = {
       id: entity.id,
-      type: entity.type
+      type: entity.type,
     };
 
-    _.forEach(req.body.attrs, attribute => {
+    _.forEach(req.body.attrs, (attribute) => {
       if (mappedAttributes[attribute]) {
         element[attribute] = {
           type: toTitleCase(req.params.type),
@@ -64,7 +64,7 @@ function formatAsV2Response(req, inputData, attributeValueCallback) {
             req.params.type,
             mappedAttributes[attribute],
             inputData
-          )
+          ),
         };
 
         if (attribute === 'temperature' || attribute === 'relativeHumidity') {
@@ -96,24 +96,24 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
   const mappedAttributes = parseMapping(req.params.mapping);
 
   const ngsiV1Response = {
-    contextResponses: []
+    contextResponses: [],
   };
 
-  _.forEach(req.body.entities, entity => {
+  _.forEach(req.body.entities, (entity) => {
     const entityResponse = {
       contextElement: {
         attributes: [],
         id: entity.id,
         isPattern: 'false',
-        type: entity.type
+        type: entity.type,
       },
       statusCode: {
         code: '200',
-        reasonPhrase: 'OK'
-      }
+        reasonPhrase: 'OK',
+      },
     };
 
-    _.forEach(req.body.attributes, attribute => {
+    _.forEach(req.body.attributes, (attribute) => {
       if (mappedAttributes[attribute]) {
         const element = {
           name: attribute,
@@ -123,7 +123,7 @@ function formatAsV1Response(req, inputData, attributeValueCallback) {
             req.params.type,
             mappedAttributes[attribute],
             inputData
-          )
+          ),
         };
 
         entityResponse.contextElement.attributes.push(element);
@@ -149,10 +149,10 @@ function formatAsLDResponse(req, inputData, attributeValueCallback) {
   const response = {
     '@context': links.context,
     id: req.params.id,
-    type
+    type,
   };
 
-  _.forEach(attrs, attribute => {
+  _.forEach(attrs, (attribute) => {
     if (mappedAttributes[attribute]) {
       const value = attributeValueCallback(
         attribute,
@@ -165,7 +165,7 @@ function formatAsLDResponse(req, inputData, attributeValueCallback) {
       } else {
         response[attribute] = {
           type: 'Property',
-          value
+          value,
         };
         if (attribute === 'temperature') {
           response.temperature.unitCode = 'CEL';
@@ -185,5 +185,5 @@ module.exports = {
   formatAsV2Response,
   formatAsLDResponse,
   toTitleCase,
-  parseMapping
+  parseMapping,
 };

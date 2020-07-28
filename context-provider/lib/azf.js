@@ -6,11 +6,11 @@ const authzforcePort = process.env.AUTHZFORCE_PORT || '8080';
 const authzforceUrl =
   (process.env.AUTHZFORCE_URL || 'http://localhost') + ':' + authzforcePort;
 
-exports.Authzforce = function(clientId) {
+exports.Authzforce = function (clientId) {
   this._clientId = clientId;
 };
 
-exports.Authzforce.prototype.policyDomainRequest = function(
+exports.Authzforce.prototype.policyDomainRequest = function (
   domain,
   roles,
   resource,
@@ -94,16 +94,16 @@ exports.Authzforce.prototype.policyDomainRequest = function(
     method: 'POST',
     url: authzforceUrl + '/authzforce-ce/domains/' + domain + '/pdp',
     headers: { 'Content-Type': 'application/xml' },
-    body
+    body,
   };
 
   return new Promise((resolve, reject) => {
-    request(options, function(error, response, body) {
+    request(options, function (error, response, body) {
       let decision;
       xml2js.parseString(
         body,
         { tagNameProcessors: [xml2js.processors.stripPrefix] },
-        function(err, jsonRes) {
+        function (err, jsonRes) {
           decision = jsonRes.Response.Result[0].Decision[0];
         }
       );

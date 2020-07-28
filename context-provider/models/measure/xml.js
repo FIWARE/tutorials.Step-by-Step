@@ -71,11 +71,11 @@ class XMLMeasure {
       method: 'POST',
       url: IOT_AGENT_URL,
       headers: this.headers,
-      body: payload
+      body: payload,
     };
     const debugText = 'POST ' + IOT_AGENT_URL;
 
-    request(options, error => {
+    request(options, (error) => {
       if (error) {
         debug(debugText + ' ' + error.code);
       }

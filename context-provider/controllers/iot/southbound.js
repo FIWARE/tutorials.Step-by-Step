@@ -74,5 +74,5 @@ module.exports = {
     const mqttBrokerUrl = process.env.MQTT_BROKER_URL || 'mqtt://mosquitto';
     SOCKET_IO.emit('mqtt', mqttBrokerUrl + topic + '  ' + message);
     Command.processMqttMessage(topic, message);
-  }
+  },
 };

@@ -72,18 +72,18 @@ function displayStore(req, res) {
     { options: 'keyValues', type: 'Store' },
     setAuthHeaders(req)
   )
-    .then(store => {
+    .then((store) => {
       // If a store has been found display it on screen
       store.mapUrl = mapTileUrl(15, store.location);
       return res.render('store', { title: store.name, store, ngsi: 'ngsi-v2' });
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       // If no store has been found, display an error screen
       return res.render('store-error', {
         title: 'Error',
         error,
-        ngsi: 'ngsi-v2'
+        ngsi: 'ngsi-v2',
       });
     });
 }
@@ -108,7 +108,7 @@ function displayTillInfo(req, res) {
     listEntities(
       {
         options: 'keyValues',
-        type: 'Product'
+        type: 'Product',
       },
       setAuthHeaders(req)
     ),
@@ -116,28 +116,28 @@ function displayTillInfo(req, res) {
       {
         q: 'refStore==' + req.params.storeId,
         options: 'keyValues',
-        type: 'InventoryItem'
+        type: 'InventoryItem',
       },
       setAuthHeaders(req)
-    )
+    ),
   ])
-    .then(values => {
+    .then((values) => {
       // If values have been found display it on screen
       return res.render('till', {
         products: values[0],
         inventory: values[1],
         ngsiLd: false,
-        storeId: req.params.storeId
+        storeId: req.params.storeId,
       });
     })
-    .catch(error => {
+    .catch((error) => {
       debug(error);
       // An error occurred, return with no results
       return res.render('till', {
         products: {},
         inventory: {},
         ngsiLd: false,
-        storeId: req.params.storeId
+        storeId: req.params.storeId,
       });
     });
 }
@@ -164,20 +164,20 @@ async function buyItem(req, res) {
     req.params.inventoryId,
     {
       options: 'keyValues',
-      type: 'InventoryItem'
+      type: 'InventoryItem',
     },
     setAuthHeaders(req)
   );
   const count = inventory.shelfCount - 1;
 
   monitor('NGSI', 'updateExistingEntityAttributes ' + req.params.inventoryId, {
-    shelfCount: { type: 'Integer', value: count }
+    shelfCount: { type: 'Integer', value: count },
   });
   await updateExistingEntityAttributes(
     req.params.inventoryId,
     { shelfCount: { type: 'Integer', value: count } },
     {
-      type: 'InventoryItem'
+      type: 'InventoryItem',
     },
     setAuthHeaders(req)
   );
@@ -261,5 +261,5 @@ module.exports = {
   displayTillInfo,
   displayWarehouseInfo,
   priceChange,
-  orderStock
+  orderStock,
 };

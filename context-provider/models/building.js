@@ -7,17 +7,17 @@ const { Schema } = mongoose;
 // Define schema for building items
 const BuildingSchema = new Schema({
   id: {
-    type: String
+    type: String,
   },
   name: {
-    type: String
+    type: String,
   },
   address: {
-    type: Object
+    type: Object,
   },
   verified: {
-    type: Boolean
-  }
+    type: Boolean,
+  },
 });
 
 BuildingSchema.index({ id: 1 }, { unique: true });

@@ -16,7 +16,7 @@ class BuildingUpdate {
       id,
       name,
       address,
-      verified
+      verified,
     };
     return this.model.findOneAndUpdate({ id }, newBuilding, { upsert: true });
   }
@@ -50,8 +50,8 @@ class BuildingUpdate {
       $set: {
         name: object.name,
         address: object.address,
-        verified: object.verified
-      }
+        verified: object.verified,
+      },
     });
   }
 }

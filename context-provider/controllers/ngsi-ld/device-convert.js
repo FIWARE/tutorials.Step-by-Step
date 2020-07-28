@@ -50,7 +50,7 @@ function convertAttributeToLD(attr) {
   }
 
   if (attr.metadata) {
-    Object.keys(attr.metadata).forEach(function(key) {
+    Object.keys(attr.metadata).forEach(function (key) {
       switch (key) {
         case 'observedAt':
           obj[key] = attr.metadata[key].value;
@@ -66,7 +66,7 @@ function convertAttributeToLD(attr) {
 
 function convertEntityToLD(json) {
   const obj = { '@context': dataModelContext };
-  Object.keys(json).forEach(function(key) {
+  Object.keys(json).forEach(function (key) {
     switch (key) {
       case 'id':
         obj[key] = json[key];
@@ -101,8 +101,8 @@ function upsertDeviceEntityAsLD(device) {
         Link:
           '<' +
           dataModelContext +
-          '>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
-      }
+          '>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"',
+      },
     };
     request(options, (error, response, body) => {
       return error ? reject(error) : resolve();
@@ -125,15 +125,15 @@ function upsertLinkedAttributeDataAsLD(device, refid, attrib) {
       metadata: {
         providedBy: {
           type: 'Relationship',
-          value: device.id
-        }
-      }
+          value: device.id,
+        },
+      },
     };
 
     if (device.supportedUnits) {
       payload[attrib].metadata.unitCode = {
         type: 'Text',
-        value: device.supportedUnits.value
+        value: device.supportedUnits.value,
       };
     }
     if (device[attrib].metadata && device[attrib].metadata.TimeInstant) {
@@ -145,7 +145,7 @@ function upsertLinkedAttributeDataAsLD(device, refid, attrib) {
       url: basePath + '/entities/' + device[refid].value + '/attrs',
       headers,
       body: convertEntityToLD(payload),
-      json: true
+      json: true,
     };
 
     debug(JSON.stringify(options));
@@ -184,5 +184,5 @@ function shadowDeviceMeasures(req, res) {
 
 module.exports = {
   duplicateDevices,
-  shadowDeviceMeasures
+  shadowDeviceMeasures,
 };

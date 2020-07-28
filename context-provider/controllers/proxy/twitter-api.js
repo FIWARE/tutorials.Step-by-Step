@@ -39,7 +39,7 @@ function healthCheck(req, res) {
       monitor('health', 'Twitter API is healthy');
       res.send(tweets);
     },
-    err => {
+    (err) => {
       debug(
         'Twitter is not responding - have you added your Consumer Key & Consumer Secret as environment variables?'
       );
@@ -76,7 +76,7 @@ function getAsLegacyNGSIv1(req, res) {
 
       res.send(payload);
     },
-    err => {
+    (err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -110,7 +110,7 @@ function getAsNGSIv2(req, res) {
 
       res.send(payload);
     },
-    err => {
+    (err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -146,7 +146,7 @@ function getAsNgsiLD(req, res) {
       }
       res.send(response);
     },
-    err => {
+    (err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -167,18 +167,18 @@ function makeTwitterRequest(params, callback, errorHandler) {
     method: 'POST',
     auth: {
       user: TWITTER_CONSUMER_KEY,
-      pass: TWITTER_CONSUMER_SECRET
+      pass: TWITTER_CONSUMER_SECRET,
     },
     form: {
-      grant_type: 'client_credentials'
-    }
+      grant_type: 'client_credentials',
+    },
   })
-    .then(function(result) {
+    .then(function (result) {
       debug('Making a Twitter Search API request: ' + JSON.stringify(params));
       const client = new Twitter({
         consumer_key: TWITTER_CONSUMER_KEY,
         consumer_secret: TWITTER_CONSUMER_SECRET,
-        bearer_token: JSON.parse(result).access_token
+        bearer_token: JSON.parse(result).access_token,
       });
 
       client.get(TWITTER_SEARCH_PATH, params, callback);
@@ -200,7 +200,7 @@ function getValuesFromTweets(name, type, key, data) {
   const value = [];
   // In order to avoid script injections attack in some circustances
   // certain  characters are forbidden in any request:
-  _.forEach(data, element => {
+  _.forEach(data, (element) => {
     value.push(element[key].replace(/[<>"'=;()?/%&]/g, ''));
   });
 
@@ -212,5 +212,5 @@ module.exports = {
   healthCheck,
   getAsLegacyNGSIv1,
   getAsNGSIv2,
-  getAsNgsiLD
+  getAsNgsiLD,
 };

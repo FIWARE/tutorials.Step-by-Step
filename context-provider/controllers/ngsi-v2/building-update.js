@@ -10,7 +10,7 @@ function upsertToMongoDB(building) {
       .then(() => {
         return resolve();
       })
-      .catch(error => {
+      .catch((error) => {
         return reject(error);
       });
   });
@@ -28,5 +28,5 @@ function duplicateBuildings(req, res) {
 }
 
 module.exports = {
-  duplicateBuildings
+  duplicateBuildings,
 };

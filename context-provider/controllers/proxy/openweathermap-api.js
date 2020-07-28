@@ -27,7 +27,7 @@ const OPENWEATHERMAP_URL =
 function healthCheck(req, res) {
   debug('healthCheck for OpenWeatherMap API');
   makeWeatherRequest('berlin,de')
-    .then(result => {
+    .then((result) => {
       const response = JSON.parse(result).response || {};
       if (response.error) {
         // An error response was returned for the query for Berlin.
@@ -40,7 +40,7 @@ function healthCheck(req, res) {
       res.set('Content-Type', 'application/json');
       res.send(result);
     })
-    .catch(err => {
+    .catch((err) => {
       debug(
         'OpenWeatherMap API is not responding - have you added your KeyID as an environment variable?'
       );
@@ -58,7 +58,7 @@ function healthCheck(req, res) {
 function getAsLegacyNGSIv1(req, res) {
   monitor('/queryContext', 'Data requested from OpenWeatherMap API', req.body);
   makeWeatherRequest(req.params.queryString)
-    .then(result => {
+    .then((result) => {
       // Weather observation data is held in the main attribute
       const observation = JSON.parse(result).main;
 
@@ -72,7 +72,7 @@ function getAsLegacyNGSIv1(req, res) {
         Formatter.formatAsV1Response(req, observation, getValueFromObservation)
       );
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -87,7 +87,7 @@ function getAsLegacyNGSIv1(req, res) {
 function getAsNGSIv2(req, res) {
   monitor('/op/query', 'Data requested from OpenWeatherMap API', req.body);
   makeWeatherRequest(req.params.queryString)
-    .then(result => {
+    .then((result) => {
       // Weather observation data is held in the main attribute
       const observation = JSON.parse(result).main;
 
@@ -101,7 +101,7 @@ function getAsNGSIv2(req, res) {
         Formatter.formatAsV2Response(req, observation, getValueFromObservation)
       );
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -118,7 +118,7 @@ function getAsNgsiLD(req, res) {
     req.body
   );
   makeWeatherRequest(req.params.queryString)
-    .then(result => {
+    .then((result) => {
       // Weather observation data is held in the main attribute
       const observation = JSON.parse(result).main;
 
@@ -141,7 +141,7 @@ function getAsNgsiLD(req, res) {
       }
       res.send(response);
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -156,7 +156,7 @@ function makeWeatherRequest(query) {
   debug('Making a OpenWeatherMap API request: ' + query);
   return request({
     url: OPENWEATHERMAP_URL + query,
-    method: 'GET'
+    method: 'GET',
   });
 }
 
@@ -183,5 +183,5 @@ module.exports = {
   healthCheck,
   getAsLegacyNGSIv1,
   getAsNGSIv2,
-  getAsNgsiLD
+  getAsNgsiLD,
 };

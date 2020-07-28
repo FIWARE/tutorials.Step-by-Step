@@ -36,7 +36,7 @@ function createAttribute(entityId, body, headers = {}) {
     method: 'POST',
     body,
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -61,7 +61,7 @@ function updateAttribute(entityId, body, headers = {}) {
     method: 'PATCH',
     body,
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -72,7 +72,7 @@ function deleteAttribute(entityId, headers = {}) {
     url: BASE_PATH + '/entities/' + entityId + '/attrs',
     method: 'DELETE',
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -107,7 +107,7 @@ function deleteEntity(entityId, headers = {}) {
     url: BASE_PATH + '/entities/' + entityId,
     method: 'DELETE',
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -119,7 +119,7 @@ function readEntity(entityId, opts, headers = {}) {
     url: BASE_PATH + '/entities/' + entityId,
     method: 'GET',
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -131,7 +131,7 @@ function listEntities(opts, headers = {}) {
     url: BASE_PATH + '/entities',
     method: 'GET',
     headers,
-    json: true
+    json: true,
   });
 }
 
@@ -145,5 +145,5 @@ module.exports = {
   updateEntity,
   deleteEntity,
   listEntities,
-  setHeaders
+  setHeaders,
 };

@@ -25,7 +25,7 @@ const CAT_FACTS_URL = 'https://catfact.ninja/facts?limit=5';
 function healthCheck(req, res) {
   debug('healthCheck for Cat Facts API');
   makeCatFactsRequest()
-    .then(result => {
+    .then((result) => {
       const response = JSON.parse(result).response || {};
       if (response.error) {
         // An error response was returned
@@ -36,7 +36,7 @@ function healthCheck(req, res) {
       res.set('Content-Type', 'application/json');
       res.send(result);
     })
-    .catch(err => {
+    .catch((err) => {
       debug('Cat Facts API is not responding');
       monitor('health', 'Cat Facts API is unhealthy');
       res.statusCode = err.statusCode || 501;
@@ -52,7 +52,7 @@ function healthCheck(req, res) {
 function getAsLegacyNGSIv1(req, res) {
   monitor('/queryContext', 'Data requested from Cat Facts API', req.body);
   makeCatFactsRequest()
-    .then(result => {
+    .then((result) => {
       // Cat facts data is held in the main attribute
       const facts = JSON.parse(result).data;
 
@@ -64,7 +64,7 @@ function getAsLegacyNGSIv1(req, res) {
       res.set('Content-Type', 'application/json');
       res.send(Formatter.formatAsV1Response(req, facts, getValuesFromCatFacts));
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -79,7 +79,7 @@ function getAsLegacyNGSIv1(req, res) {
 function getAsNGSIv2(req, res) {
   monitor('/op/query', 'Data requested from Cat Facts API', req.body);
   makeCatFactsRequest()
-    .then(result => {
+    .then((result) => {
       // Cat facts data is held in the main attribute
       const facts = JSON.parse(result).data;
 
@@ -91,7 +91,7 @@ function getAsNGSIv2(req, res) {
       res.set('Content-Type', 'application/json');
       res.send(Formatter.formatAsV2Response(req, facts, getValuesFromCatFacts));
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -108,7 +108,7 @@ function getAsNgsiLD(req, res) {
     req.body
   );
   makeCatFactsRequest()
-    .then(result => {
+    .then((result) => {
       // Cat facts data is held in the main attribute
       const facts = JSON.parse(result).data;
 
@@ -130,7 +130,7 @@ function getAsNgsiLD(req, res) {
       }
       res.send(response);
     })
-    .catch(err => {
+    .catch((err) => {
       debug(err);
       res.statusCode = err.statusCode || 501;
       res.send(err);
@@ -145,7 +145,7 @@ function makeCatFactsRequest() {
   debug('Making a Cat Facts API request');
   return request({
     url: CAT_FACTS_URL,
-    method: 'GET'
+    method: 'GET',
   });
 }
 
@@ -163,7 +163,7 @@ function getValuesFromCatFacts(name, type, key, data) {
   const value = [];
   // In order to avoid script injections attack in some circustances
   // certain  characters are forbidden in any request:
-  _.forEach(data, element => {
+  _.forEach(data, (element) => {
     value.push(element.fact.replace(/[<>"'=;()?/%&]/g, ''));
   });
 
@@ -175,5 +175,5 @@ module.exports = {
   healthCheck,
   getAsLegacyNGSIv1,
   getAsNGSIv2,
-  getAsNgsiLD
+  getAsNgsiLD,
 };

@@ -28,7 +28,7 @@ const MOTION_DETECTED = 'c|1';
 const VALID_COMMANDS = {
   door: ['open', 'close', 'lock', 'unlock'],
   lamp: ['on', 'off'],
-  bell: ['ring']
+  bell: ['ring'],
 };
 
 // Change the state of a dummy IoT device based on the command received.
@@ -74,7 +74,7 @@ function initDevices() {
   // Once a minute, read the existing state of the dummy devices
   const deviceIds = myCache.keys();
   let wait = 4000;
-  _.forEach(deviceIds, deviceId => {
+  _.forEach(deviceIds, (deviceId) => {
     wait = wait + 1999;
     setTimeout(setUpSensorReading, wait, deviceId);
   });
@@ -120,7 +120,7 @@ function activateDoor() {
   isDoorActive = true;
   const deviceIds = myCache.keys();
 
-  _.forEach(deviceIds, deviceId => {
+  _.forEach(deviceIds, (deviceId) => {
     const state = getDeviceState(deviceId);
     const isSensor = true;
 
@@ -150,7 +150,7 @@ function activateDevices() {
 
   const deviceIds = myCache.keys();
 
-  _.forEach(deviceIds, deviceId => {
+  _.forEach(deviceIds, (deviceId) => {
     const state = getDeviceState(deviceId);
     let isSensor = true;
 
@@ -260,7 +260,7 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
 // e.g. s|ON,l|1000
 function toUltraLight(object) {
   const strArray = [];
-  _.forEach(object, function(value, key) {
+  _.forEach(object, function (value, key) {
     strArray.push(key + '|' + value);
   });
   return strArray.join('|');
@@ -324,5 +324,5 @@ module.exports = {
   actuateDevice,
   fireMotionSensor,
   notFound,
-  isUnknownCommand
+  isUnknownCommand,
 };
