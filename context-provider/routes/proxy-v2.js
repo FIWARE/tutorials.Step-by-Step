@@ -31,152 +31,146 @@ debug('NGSI-v2 Context-Forwarding Support is available');
 router.post('/catfacts/:type/:mapping/op/query', CatFactsNGSIProxy.getAsNGSIv2);
 router.post('/random/:type/:mapping/op/query', RandomNGSIProxy.getAsNGSIv2);
 router.post('/static/:type/:mapping/op/query', StaticNGSIProxy.getAsNGSIv2);
-router.post(
-  '/twitter/:type/:mapping/:queryString/op/query',
-  TwitterNGSIProxy.getAsNGSIv2
-);
-router.post(
-  '/weather/:type/:mapping/:queryString/op/query',
-  WeatherNGSIProxy.getAsNGSIv2
-);
+router.post('/twitter/:type/:mapping/:queryString/op/query', TwitterNGSIProxy.getAsNGSIv2);
+router.post('/weather/:type/:mapping/:queryString/op/query', WeatherNGSIProxy.getAsNGSIv2);
 
 // Convenience endpoints for temperature readings
 router.post(
-  '/random/temperature/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature';
-    next();
-  },
-  RandomNGSIProxy.getAsNGSIv2
+    '/random/temperature/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature';
+        next();
+    },
+    RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/temperature/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature';
-    next();
-  },
-  StaticNGSIProxy.getAsNGSIv2
+    '/static/temperature/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature';
+        next();
+    },
+    StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/temperature/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature:temp';
-    req.params.queryString = 'berlin,de';
-    next();
-  },
-  WeatherNGSIProxy.getAsNGSIv2
+    '/weather/temperature/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature:temp';
+        req.params.queryString = 'berlin,de';
+        next();
+    },
+    WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for humidity readings
 router.post(
-  '/random/relativeHumidity/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'relativeHumidity';
-    next();
-  },
-  RandomNGSIProxy.getAsNGSIv2
+    '/random/relativeHumidity/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'relativeHumidity';
+        next();
+    },
+    RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/relativeHumidity/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'relativeHumidity';
-    next();
-  },
-  StaticNGSIProxy.getAsNGSIv2
+    '/static/relativeHumidity/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'relativeHumidity';
+        next();
+    },
+    StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/relativeHumidity/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'relativeHumidity:humidity';
-    req.params.queryString = 'berlin,de';
-    next();
-  },
-  WeatherNGSIProxy.getAsNGSIv2
+    '/weather/relativeHumidity/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'relativeHumidity:humidity';
+        req.params.queryString = 'berlin,de';
+        next();
+    },
+    WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for weather conditions readings
 router.post(
-  '/random/weatherConditions/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature,relativeHumidity';
-    next();
-  },
-  RandomNGSIProxy.getAsNGSIv2
+    '/random/weatherConditions/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature,relativeHumidity';
+        next();
+    },
+    RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/weatherConditions/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature,relativeHumidity';
-    next();
-  },
-  StaticNGSIProxy.getAsNGSIv2
+    '/static/weatherConditions/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature,relativeHumidity';
+        next();
+    },
+    StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/weather/weatherConditions/op/query',
-  (req, res, next) => {
-    req.params.type = 'number';
-    req.params.mapping = 'temperature:temp,relativeHumidity:humidity';
-    req.params.queryString = 'berlin,de';
-    next();
-  },
-  WeatherNGSIProxy.getAsNGSIv2
+    '/weather/weatherConditions/op/query',
+    (req, res, next) => {
+        req.params.type = 'number';
+        req.params.mapping = 'temperature:temp,relativeHumidity:humidity';
+        req.params.queryString = 'berlin,de';
+        next();
+    },
+    WeatherNGSIProxy.getAsNGSIv2
 );
 
 // Convenience endpoints for tweets readings
 router.post(
-  '/random/tweets/op/query',
-  (req, res, next) => {
-    req.params.type = 'list';
-    req.params.mapping = 'tweets:array';
-    next();
-  },
-  RandomNGSIProxy.getAsNGSIv2
+    '/random/tweets/op/query',
+    (req, res, next) => {
+        req.params.type = 'list';
+        req.params.mapping = 'tweets:array';
+        next();
+    },
+    RandomNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/static/tweets/op/query',
-  (req, res, next) => {
-    req.params.type = 'list';
-    req.params.mapping = 'tweets:array';
-    next();
-  },
-  StaticNGSIProxy.getAsNGSIv2
+    '/static/tweets/op/query',
+    (req, res, next) => {
+        req.params.type = 'list';
+        req.params.mapping = 'tweets:array';
+        next();
+    },
+    StaticNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/twitter/tweets/op/query',
-  (req, res, next) => {
-    req.params.type = 'list';
-    req.params.mapping = 'tweets:text';
-    req.params.queryString = 'FIWARE';
-    next();
-  },
-  TwitterNGSIProxy.getAsNGSIv2
+    '/twitter/tweets/op/query',
+    (req, res, next) => {
+        req.params.type = 'list';
+        req.params.mapping = 'tweets:text';
+        req.params.queryString = 'FIWARE';
+        next();
+    },
+    TwitterNGSIProxy.getAsNGSIv2
 );
 
 router.post(
-  '/catfacts/tweets/op/query',
-  (req, res, next) => {
-    req.params.type = 'list';
-    req.params.mapping = 'tweets:fact';
-    req.params.queryString = '';
-    next();
-  },
-  CatFactsNGSIProxy.getAsNGSIv2
+    '/catfacts/tweets/op/query',
+    (req, res, next) => {
+        req.params.type = 'list';
+        req.params.mapping = 'tweets:fact';
+        req.params.queryString = '';
+        next();
+    },
+    CatFactsNGSIProxy.getAsNGSIv2
 );
 
 module.exports = router;

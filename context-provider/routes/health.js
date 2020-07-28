@@ -14,15 +14,9 @@ router.get('/twitter', TwitterNGSIProxy.healthCheck);
 router.get('/weather', WeatherNGSIProxy.healthCheck);
 
 router.get('/', (req, res) => {
-  res.status(200).send({
-    health_urls: [
-      '/health/catfacts',
-      '/health/random',
-      '/health/static',
-      '/health/weather',
-      '/health/twitter',
-    ],
-  });
+    res.status(200).send({
+        health_urls: ['/health/catfacts', '/health/random', '/health/static', '/health/weather', '/health/twitter']
+    });
 });
 
 module.exports = router;
