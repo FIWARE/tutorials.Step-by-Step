@@ -384,15 +384,15 @@ The following people at `test.com` legitimately have accounts within the Applica
     -   Detective1
     -   Detective2
 
-| Name       | eMail                     | Password |
-| ---------- | ------------------------- | -------- |
-| alice      | alice-the-admin@test.com  | `test`   |
-| bob        | bob-the-manager@test.com  | `test`   |
-| charlie    | charlie-security@test.com | `test`   |
-| manager1   | manager1@test.com         | `test`   |
-| manager2   | manager2@test.com         | `test`   |
-| detective1 | detective1@test.com       | `test`   |
-| detective2 | detective2@test.com       | `test`   |
+| Name       | eMail                       | Password |
+| ---------- | --------------------------- | -------- |
+| alice      | `alice-the-admin@test.com`  | `test`   |
+| bob        | `bob-the-manager@test.com`  | `test`   |
+| charlie    | `charlie-security@test.com` | `test`   |
+| manager1   | `manager1@test.com`         | `test`   |
+| manager2   | `manager2@test.com`         | `test`   |
+| detective1 | `detective1@test.com`       | `test`   |
+| detective2 | `detective2@test.com`       | `test`   |
 
 The following people at `example.com` have signed up for accounts, but have no reason to be granted access
 
@@ -400,11 +400,11 @@ The following people at `example.com` have signed up for accounts, but have no r
 -   Mallory - Mallory the malicious attacker
 -   Rob - Rob the Robber
 
-| Name    | eMail               | Password |
-| ------- | ------------------- | -------- |
-| eve     | eve@example.com     | `test`   |
-| mallory | mallory@example.com | `test`   |
-| rob     | rob@example.com     | `test`   |
+| Name    | eMail                 | Password |
+| ------- | --------------------- | -------- |
+| eve     | `eve@example.com`     | `test`   |
+| mallory | `mallory@example.com` | `test`   |
+| rob     | `rob@example.com`     | `test`   |
 
 ### Authzforce - Obtain Version Information
 

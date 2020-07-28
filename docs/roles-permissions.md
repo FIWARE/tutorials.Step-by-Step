@@ -258,16 +258,16 @@ The following people at `example.com` have signed up for accounts, but have no r
 
 | Name       | eMail                     | Password | UUID                                   |
 | ---------- | ------------------------- | -------- | -------------------------------------- |
-| alice      | alice-the-admin@test.com  | `test`   | `aaaaaaaa-good-0000-0000-000000000000` |
-| bob        | bob-the-manager@test.com  | `test`   | `bbbbbbbb-good-0000-0000-000000000000` |
-| charlie    | charlie-security@test.com | `test`   | `cccccccc-good-0000-0000-000000000000` |
-| manager1   | manager1@test.com         | `test`   | `manager1-good-0000-0000-000000000000` |
-| manager2   | manager2@test.com         | `test`   | `manager2-good-0000-0000-000000000000` |
-| detective1 | detective1@test.com       | `test`   | `secure01-good-0000-0000-000000000000` |
-| detective2 | detective2@test.com       | `test`   | `secure02-good-0000-0000-000000000000` |
-| eve        | eve@example.com           | `test`   | `eeeeeeee-evil-0000-0000-000000000000` |
-| mallory    | mallory@example.com       | `test`   | `mmmmmmmm-evil-0000-0000-000000000000` |
-| rob        | rob@example.com           | `test`   | `rrrrrrrr-evil-0000-0000-000000000000` |
+| alice      | `alice-the-admin@test.com`  | `test`   | `aaaaaaaa-good-0000-0000-000000000000` |
+| bob        | `bob-the-manager@test.com`  | `test`   | `bbbbbbbb-good-0000-0000-000000000000` |
+| charlie    | `charlie-security@test.com` | `test`   | `cccccccc-good-0000-0000-000000000000` |
+| manager1   | `manager1@test.com`         | `test`   | `manager1-good-0000-0000-000000000000` |
+| manager2   | `manager2@test.com`         | `test`   | `manager2-good-0000-0000-000000000000` |
+| detective1 | `detective1@test.com`       | `test`   | `secure01-good-0000-0000-000000000000` |
+| detective2 | `detective2@test.com`       | `test`   | `secure02-good-0000-0000-000000000000` |
+| eve        | `eve@example.com`           | `test`   | `eeeeeeee-evil-0000-0000-000000000000` |
+| mallory    | `mallory@example.com`       | `test`   | `mmmmmmmm-evil-0000-0000-000000000000` |
+| rob        | `rob@example.com`           | `test`   | `rrrrrrrr-evil-0000-0000-000000000000` |
 
 Two organizations have also been set up by Alice:
 

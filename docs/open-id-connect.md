@@ -231,21 +231,21 @@ The following people at `example.com` have signed up for accounts, but have no r
    For more details <b>(Click to expand)</b>
   </summary>
 
-| Name       | eMail                     | Password |
-| ---------- | ------------------------- | -------- |
-| alice      | alice-the-admin@test.com  | `test`   |
-| bob        | bob-the-manager@test.com  | `test`   |
-| charlie    | charlie-security@test.com | `test`   |
-| manager1   | manager1@test.com         | `test`   |
-| manager2   | manager2@test.com         | `test`   |
-| detective1 | detective1@test.com       | `test`   |
-| detective2 | detective2@test.com       | `test`   |
+| Name       | eMail                       | Password |
+| ---------- | --------------------------- | -------- |
+| alice      | `alice-the-admin@test.com`  | `test`   |
+| bob        | `bob-the-manager@test.com`  | `test`   |
+| charlie    | `charlie-security@test.com` | `test`   |
+| manager1   | `manager1@test.com`         | `test`   |
+| manager2   | `manager2@test.com`         | `test`   |
+| detective1 | `detective1@test.com`       | `test`   |
+| detective2 | `detective2@test.com`       | `test`   |
 
-| Name    | eMail               | Password |
-| ------- | ------------------- | -------- |
-| eve     | eve@example.com     | `test`   |
-| mallory | mallory@example.com | `test`   |
-| rob     | rob@example.com     | `test`   |
+| Name    | eMail                 | Password |
+| ------- | --------------------- | -------- |
+| eve     | `eve@example.com`     | `test`   |
+| mallory | `mallory@example.com` | `test`   |
+| rob     | `rob@example.com`     | `test`   |
 
 </details>
 
