@@ -48,6 +48,8 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
   wget --no-check-certificate -O source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
   unzip source.zip && \
   rm source.zip && \
+  rm -rf "${GITHUB_REPOSITORY}-${RELEASE}/tutorials.Step-by-Step-*/tutorials.*/" && \
+  rm -rf "${GITHUB_REPOSITORY}-${RELEASE}/docs/" && \
   mv "${GITHUB_REPOSITORY}-${RELEASE}"/context-provider /usr/src/app && \
   rm -rf "${GITHUB_REPOSITORY}-${RELEASE}" && \
   # Remove unzip and clean apt cache
@@ -62,16 +64,22 @@ RUN npm install --production && \
     npm cache clean --force --loglevel=error && \
     rm -rf /root/.npm/cache/*
 
-# Ports used by application
-# EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
-# Start the application
-# CMD ["npm", "start" ]
-
-
-
 # Create an anonymous user
 RUN sed -i -r "/^(root|nobody)/!d" /etc/passwd /etc/shadow /etc/group \
     && sed -i -r 's#^(.*):[^:]*$#\1:/sbin/nologin#' /etc/passwd
+
+# Ports used by application
+EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
+# Start the application
+CMD ["npm", "start" ]
+
+HEALTHCHECK --interval=5s --timeout=3s --start-period=10s \
+  CMD ["/usr/local/bin/node" "./healthcheck"]
+
+
+#
+# The following creates a distroless build for production.
+#
 
 FROM gcr.io/distroless/nodejs:${NODE_MAJOR_VERSION}
 COPY --from=build-env /usr/src/app /usr/src/app
@@ -83,5 +91,4 @@ EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
 # Start the application
 CMD ["./bin/www"]
 
-HEALTHCHECK --interval=5m --timeout=3s --start-period=10s \
-  CMD node healthcheck.js
+HEALTHCHECK NONE
