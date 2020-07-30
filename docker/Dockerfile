@@ -82,3 +82,6 @@ WORKDIR /usr/src/app
 EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
 # Start the application
 CMD ["./bin/www"]
+
+HEALTHCHECK --interval=5m --timeout=3s --start-period=10s \
+  CMD node healthcheck.js
