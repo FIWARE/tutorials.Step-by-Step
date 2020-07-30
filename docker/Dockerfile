@@ -1,5 +1,8 @@
+
+ARG  NODE_MAJOR_VERSION=10
 ARG  NODE_VERSION=10.17.0-slim
-FROM node:${NODE_VERSION}
+
+FROM node:${NODE_VERSION} AS build-env
 ARG GITHUB_ACCOUNT=fiware
 ARG GITHUB_REPOSITORY=tutorials.Step-by-Step
 ARG DOWNLOAD=latest
@@ -54,11 +57,28 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
 
 # Create app directory
 WORKDIR /usr/src/app
-
+# Install the app
 RUN npm install --production && \
+    npm cache clean --force --loglevel=error && \
     rm -rf /root/.npm/cache/*
 
 # Ports used by application
-EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
+# EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
+# Start the application
+# CMD ["npm", "start" ]
 
-CMD ["npm", "start" ]
+
+
+# Create an anonymous user
+RUN sed -i -r "/^(root|nobody)/!d" /etc/passwd /etc/shadow /etc/group \
+    && sed -i -r 's#^(.*):[^:]*$#\1:/sbin/nologin#' /etc/passwd
+
+FROM gcr.io/distroless/nodejs:${NODE_MAJOR_VERSION}
+COPY --from=build-env /usr/src/app /usr/src/app
+USER nobody
+WORKDIR /usr/src/app
+
+# Ports used by application
+EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
+# Start the application
+CMD ["./bin/www"]
