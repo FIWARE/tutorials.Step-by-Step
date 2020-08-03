@@ -58,6 +58,7 @@
   },
   "scripts": {
     "start": "node ./bin/www",
+    "healthcheck": "node ./bin/healthcheck",
     "lint": "eslint . --cache --fix",
     "prettier": "prettier --parser flow --config .prettierrc.json --write **/**/*.js  **/*.js *.js",
     "test": "eslint ."

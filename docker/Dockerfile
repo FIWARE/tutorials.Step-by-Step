@@ -1,19 +1,12 @@
-
-ARG  NODE_MAJOR_VERSION=10
-ARG  NODE_VERSION=10.17.0-slim
+ARG  NODE_VERSION=10
 
 FROM node:${NODE_VERSION} AS build-env
+
 ARG GITHUB_ACCOUNT=fiware
 ARG GITHUB_REPOSITORY=tutorials.Step-by-Step
 ARG DOWNLOAD=latest
 
-# Copying Build time arguments to environment variables so they are persisted at run time and can be 
-# inspected within a running container.
-# see: https://vsupalov.com/docker-build-time-env-values/  for a deeper explanation.
-
-ENV GITHUB_ACCOUNT=${GITHUB_ACCOUNT}
-ENV GITHUB_REPOSITORY=${GITHUB_REPOSITORY}
-ENV DOWNLOAD=${DOWNLOAD}
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 #
 # The following RUN command retrieves the source code from GitHub.
@@ -30,6 +23,9 @@ ENV DOWNLOAD=${DOWNLOAD}
 #
 # COPY context-provider /usr/src/app
 #
+
+
+# hadolint ignore=DL3008
 RUN if [ "${DOWNLOAD}" = "latest" ] ; \
   then \
     RELEASE="master"; \
@@ -45,7 +41,7 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
   # Ensure that unzip is installed, and download the sources
   apt-get update && \
   apt-get install -y  --no-install-recommends unzip && \
-  wget --no-check-certificate -O source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
+  curl -so source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
   unzip source.zip && \
   rm source.zip && \
   rm -rf "${GITHUB_REPOSITORY}-${RELEASE}/tutorials.Step-by-Step-*/tutorials.*/" && \
@@ -67,23 +63,41 @@ RUN npm install --production && \
 # Create an anonymous user
 RUN sed -i -r "/^(root|nobody)/!d" /etc/passwd /etc/shadow /etc/group \
     && sed -i -r 's#^(.*):[^:]*$#\1:/sbin/nologin#' /etc/passwd
+USER node
+ENV NODE_ENV=development
+
 
 # Ports used by application
 EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
 # Start the application
 CMD ["npm", "start" ]
 
-HEALTHCHECK --interval=5s --timeout=3s --start-period=10s \
-  CMD ["/usr/local/bin/node" "./healthcheck"]
-
+HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
+   CMD npm run healthcheck
 
 #
 # The following creates a distroless build for production.
 #
 
-FROM gcr.io/distroless/nodejs:${NODE_MAJOR_VERSION}
+FROM gcr.io/distroless/nodejs:${NODE_VERSION}
+ARG GITHUB_ACCOUNT
+ARG GITHUB_REPOSITORY
+ARG NODE_VERSION
+
+LABEL "maintainer"="FIWARE Foundation <fiware.eu@gmail.com>"
+LABEL "org.opencontainers.image.authors"="https://www.fiware.org/contact-us/"
+LABEL "org.opencontainers.image.documentation"="http://fiware-tutorials.rtfd.io/"
+LABEL "org.opencontainers.image.vendor"="FIWARE Foundation"
+LABEL "org.opencontainers.image.licenses"="MIT"
+LABEL "org.opencontainers.image.title"="FIWARE Step-by-Step Tutorials"
+LABEL "org.opencontainers.image.description"="Simple Node.js express application for use with the FIWARE Step-by-Step tutorials"
+LABEL "org.opencontainers.image.source"=https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}
+LABEL "org.nodejs.version"=${NODE_VERSION}
+
 COPY --from=build-env /usr/src/app /usr/src/app
 USER nobody
+ENV NODE_ENV=production
+
 WORKDIR /usr/src/app
 
 # Ports used by application
@@ -91,4 +105,5 @@ EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
 # Start the application
 CMD ["./bin/www"]
 
-HEALTHCHECK NONE
+HEALTHCHECK  --interval=30s --timeout=3s --start-period=10s \
+  CMD ["/nodejs/bin/node", "./bin/healthcheck"]

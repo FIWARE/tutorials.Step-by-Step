@@ -1,11 +1,13 @@
+#!/usr/bin/env node
+
+
 const http = require('http');
-const port = process.env.HEALTHCHECK_PORT || '3000';
-const host = process.env.HEALTHCHECK_HOST || 'localhost';
+const port = process.env.WEB_APP_PORT || '3000';
 const path = process.env.HEALTHCHECK_PATH || '/version';
 const httpCode = process.env.HEALTHCHECK_CODE || 200;
 
 const options = {
-  host,
+  host: 'localhost',
   port,
   timeout: 2000,
   method: 'GET',

@@ -1,0 +1,11 @@
+# SOURCE_COMMIT=$(git rev-parse --short HEAD);
+# BUILD_DATE=$(date +%Y-%m-%d);
+# DOCKER_TAG=$(cat package.json |  grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]');
+
+docker build --build-arg SOURCE_BRANCH=$SOURCE_BRANCH \
+	--label "org.opencontainers.image.created"=$(date +%Y-%m-%d) \
+	--label "org.opencontainers.image.revision"=$SOURCE_COMMIT \
+	--label "org.opencontainers.image.version"=$DOCKER_TAG \
+	-t $IMAGE_NAME .
+
+

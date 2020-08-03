@@ -2,6 +2,9 @@ branches:
   only:
     - master
 
+services:
+  - docker
+
 jobs:
   include:
     - stage: test
@@ -24,6 +27,14 @@ jobs:
       script:
         - npm run lint:md
         - npm run lint:text
+
+    - stage: test
+      name: "Dockerfile Tests"
+      language: bash
+      before_script:
+        - docker pull hadolint/hadolint
+      script:
+        - docker run --rm -i hadolint/hadolint < ./docker/Dockerfile
 
 
 notifications:
