@@ -41,7 +41,7 @@ RUN if [ "${DOWNLOAD}" = "latest" ] ; \
   # Ensure that unzip is installed, and download the sources
   apt-get update && \
   apt-get install -y  --no-install-recommends unzip && \
-  curl -so source.zip https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip && \
+  curl -s -L https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip > source.zip && \
   unzip source.zip && \
   rm source.zip && \
   rm -rf "${GITHUB_REPOSITORY}-${RELEASE}/tutorials.Step-by-Step-*/tutorials.*/" && \
