@@ -15,9 +15,9 @@ const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 const app = express();
 const mongoose = require('mongoose');
 
-const MONGO_DB = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://mongo-db:27017/address';
+const MONGO_DB = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://mongo-db:27017';
 
-mongoose.connect(MONGO_DB, {
+mongoose.connect(MONGO_DB + '/address', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -32,13 +32,28 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(flash());
 
-app.use(
-    session({
-        secret: SECRET,
-        resave: false,
-        saveUninitialized: true
-    })
-);
+if (process.env.NODE_ENV === 'production') {
+    // Use Mongo-DB to store session data.
+    const MongoStore = require('connect-mongo')(session);
+    app.use(
+        session({
+            resave: false,
+            saveUninitialized: true,
+            secret: SECRET,
+            store: new MongoStore({ url: MONGO_DB + '/sessions' })
+        })
+    );
+} else {
+    // Use Memstore for session data.
+    app.use(
+        session({
+            secret: SECRET,
+            resave: false,
+            saveUninitialized: true
+        })
+    );
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
