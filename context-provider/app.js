@@ -9,6 +9,7 @@ const healthRouter = require('./routes/health');
 const crypto = require('crypto');
 const session = require('express-session');
 const flash = require('connect-flash');
+const debug = require('debug')('tutorial:application');
 const SECRET = process.env.SESSION_SECRET || crypto.randomBytes(20).toString('hex');
 const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 
@@ -17,10 +18,22 @@ const mongoose = require('mongoose');
 
 const MONGO_DB = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://mongo-db:27017';
 
-mongoose.connect(MONGO_DB + '/address', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+const connectWithRetry = () => {
+    mongoose
+        .connect(MONGO_DB + '/address', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        .then(() => {
+            debug('MongoDB is connected to the web');
+        })
+        .catch((err) => {
+            debug('MongoDB connection with web unsuccessful: ' + JSON.stringify(err));
+            debug('retry after 5 seconds.');
+            setTimeout(connectWithRetry, 5000);
+        });
+};
+connectWithRetry();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
