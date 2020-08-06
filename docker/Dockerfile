@@ -1,7 +1,6 @@
 ARG NODE_VERSION=10
 ARG GITHUB_ACCOUNT=fiware
 ARG GITHUB_REPOSITORY=tutorials.Step-by-Step
-ARG TARGET=/opt/tutorial
 ARG DOWNLOAD=latest
 ARG SOURCE_BRANCH=master
 
@@ -24,7 +23,6 @@ ARG SOURCE_BRANCH=master
 #
 ######################################################################################## 
 FROM node:${NODE_VERSION} AS builder
-ARG TARGET
 ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG DOWNLOAD
@@ -36,7 +34,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # the repository and replace the whole RUN statement below by the following COPY statement 
 # in your local source using :
 #
-# COPY ./context-provider ${TARGET}
+# COPY ./context-provider /opt/tutorial
 #
 
 # hadolint ignore=DL3008
@@ -59,14 +57,14 @@ RUN \
   curl -s -L https://github.com/"${GITHUB_ACCOUNT}"/"${GITHUB_REPOSITORY}"/archive/"${RELEASE}".zip > source.zip && \
   unzip source.zip -x "*/docs/**" "*/.*" && \
   rm source.zip && \
-  mv "${GITHUB_REPOSITORY}-${RELEASE_CONCAT}/context-provider" "${TARGET}" && \
+  mv "${GITHUB_REPOSITORY}-${RELEASE_CONCAT}/context-provider" /opt/tutorial && \
   # Remove unzip and clean apt cache
   apt-get clean && \
   apt-get remove -y unzip && \
   apt-get -y autoremove && \
   rm -rf /var/lib/apt/lists/* 
 
-WORKDIR "${TARGET}"
+WORKDIR /opt/tutorial
 
 # hadolint ignore=DL3008
 RUN \
@@ -83,7 +81,7 @@ USER node
 ENV NODE_ENV=development
 # Ports used by application
 EXPOSE ${WEB_APP_PORT:-3000} ${DUMMY_DEVICES_PORT:-3001}
-CMD ["node", "${TARGET}/bin/www"]
+CMD ["node", "/opt/tutorial/bin/www"]
 HEALTHCHECK --interval=30s --timeout=3s --start-period=10s \
    CMD npm run healthcheck
 
@@ -103,7 +101,6 @@ RUN sed -i -r "/^(root|nobody)/!d" /etc/passwd /etc/shadow /etc/group \
 #
 
 FROM gcr.io/distroless/nodejs:${NODE_VERSION}
-ARG TARGET
 ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG NODE_VERSION
@@ -118,8 +115,8 @@ LABEL "org.opencontainers.image.description"="Simple Node.js express application
 LABEL "org.opencontainers.image.source"=https://github.com/${GITHUB_ACCOUNT}/${GITHUB_REPOSITORY}
 LABEL "org.nodejs.version"=${NODE_VERSION}
 
-COPY --from=builder "${TARGET}" "${TARGET}"
-WORKDIR "${TARGET}"
+COPY --from=builder /opt/tutorial /opt/tutorial
+WORKDIR /opt/tutorial
 
 USER nobody
 ENV NODE_ENV=production

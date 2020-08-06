@@ -16,19 +16,19 @@ const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
 const app = express();
 const mongoose = require('mongoose');
 
-const MONGO_DB = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://mongo-db:27017';
+const MONGO_DB =  process.env.MONGO_URL || 'mongodb://localhost:27017';
 
 const connectWithRetry = () => {
     mongoose
-        .connect(MONGO_DB + '/address', {
+        .connect(MONGO_DB + '/session', {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
         .then(() => {
-            debug('MongoDB is connected to the web');
+            debug('MongoDB is connected.');
         })
         .catch((err) => {
-            debug('MongoDB connection with web unsuccessful: ' + JSON.stringify(err));
+            debug('MongoDB connection unsuccessful: ' + JSON.stringify(err));
             debug('retry after 5 seconds.');
             setTimeout(connectWithRetry, 5000);
         });
