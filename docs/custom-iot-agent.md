@@ -417,7 +417,7 @@ not hold sufficient information.
 ### Provisioning a Sensor
 
 It is common good practice to use URNs following the NGSI-LD
-[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf) when creating
+[specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) when creating
 entities. Furthermore it is easier to understand meaningful names when defining data attributes. These mappings can be
 defined by provisioning a device individually.
 
