@@ -29,7 +29,7 @@ between generic enablers. [Postman documentation](https://fiware.github.io/tutor
 >
 > — Quran 6.151, Sūrat al-Anʻām
 
-[Previous tutorials](https://github.com/FIWARE/tutorials.Securing-Access) have introduced a simple access control system
+[Previous tutorials](securing-access.md) have introduced a simple access control system
 based on _authentication_ (level 1) or _basic authorization_ access to resources based on a role (level 2). These
 policies are easy to create, but the rules within them are very black and white, rules cannot rely on one another, have
 exception clauses or offer access based on time limits or attribute values. There is also no mechanism to resolve
@@ -168,7 +168,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Allows users to "buy" products and reduce the stock count.
     -   Allows authorized users into restricted areas, it also delegates authorization decisions to the **Authzforce**
         PDP
--   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors) using the
+-   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP - access to certain resources is restricted.
 
@@ -757,7 +757,7 @@ As a reminder, there are three Levels of PDP Access Control:
 
 Within FIWARE, Level 3 access control can be provided by adding **Authzforce** to the existing security microservices
 (IDM and PEP Proxy) within the Smart Application infrastructure. Access control levels 1 and 2 have been covered in
-[previous tutorials](https://github.com/FIWARE/tutorials.Securing-Access) and can be fulfilled using **Keyrock** alone
+[previous tutorials](securing-access.md) and can be fulfilled using **Keyrock** alone
 or with or without an associated PEP Proxy.
 
 ## Advanced Authorization

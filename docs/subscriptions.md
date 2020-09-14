@@ -4,7 +4,7 @@
 **Description:** This tutorial teaches FIWARE users about how to create and manage context data subscriptions. The
 tutorial builds on the entities and
 [Stock Management Frontend](https://github.com/FIWARE/tutorials.Step-by-Step/tree/master/context-provider) application
-created in the previous [example](https://github.com/FIWARE/tutorials.Accessing-Context/) to enable users to understand
+created in the previous [example](accessing-context.md) to enable users to understand
 the [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) Subscribe/Notify paradigm and how to use NGSI
 subscriptions within their own code.
 

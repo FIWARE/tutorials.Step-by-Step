@@ -19,7 +19,7 @@ authenticating other services are described in detail.
 >
 > — Gandalf (The Fellowship of the Ring by J.R.R Tolkein)
 
-The [previous tutorial](https://github.com/FIWARE/tutorials.Securing-Access) demonstrated that it is possible to Permit
+The [previous tutorial](securing-access.md) demonstrated that it is possible to Permit
 or Deny access to resources based on an authenticated user identifying themselves within an application. It was simply a
 matter of the code following a different line of execution if the `access_token` was not found (Level 1 -
 _Authentication Access_), or confirming that a given `access_token` had appropriate rights (Level 2 - _Basic
@@ -115,7 +115,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Shows which products can be bought at each store
     -   Allows users to "buy" products and reduce the stock count.
     -   Allows authorized users into restricted areas
--   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors) using the
+-   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP - access to certain resources is restricted.
 

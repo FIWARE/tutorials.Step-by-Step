@@ -93,8 +93,8 @@ tutorial:
 # Architecture
 
 This application adds OAuth2-driven security into the existing Stock Management and Sensors-based application created in
-[previous tutorials](https://github.com/FIWARE/tutorials.IoT-Agent/) by using the data created in the first
-[security tutorial](https://github.com/FIWARE/tutorials.Identity-Management/) and reading it programatically. It will
+[previous tutorials](iot-agent.md) by using the data created in the first
+[security tutorial](identity-management.md) and reading it programatically. It will
 make use of three FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) and integrates the use of the
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler. Usage of the Orion Context Broker is sufficient
@@ -128,7 +128,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Shows which products can be bought at each store
     -   Allows users to "buy" products and reduce the stock count.
     -   Allows authorized users into restricted areas
--   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors) using the
+-   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
     [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP - access to certain resources is restricted.
 

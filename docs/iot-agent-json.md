@@ -127,7 +127,7 @@ This base functionality has been abstracted out into a common
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context
 broker. Details of the architecture and protocol used can be found in the
-[IoT Sensors tutorial](https://github.com/FIWARE/tutorials.IoT-Sensors) The state of each device can be seen on the JSON
+[IoT Sensors tutorial](iot-sensors.md) The state of each device can be seen on the JSON
 device monitor web page found at: `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.IoT-Agent-JSON/img/device-monitor.png)
@@ -165,7 +165,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Display store information
     -   Show which products can be bought at each store
     -   Allow users to "buy" products and reduce the stock count.
--   A webserver acting as set of [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors) using the
+-   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
     [JSON](https://fiware-iotagent-json.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) protocol
     running over HTTP.
 
@@ -774,14 +774,14 @@ available. In other words the IoT Agent registered itself as a
 
 Once the commands have been registered it will be possible to ring the **Bell**, open and close the **Smart Door** and
 switch the **Smart Lamp** on and off by sending requests to the Orion Context Broker, rather than sending JSON requests
-directly the IoT devices as we did in the [previous tutorial](https://github.com/FIWARE/tutorials.IoT-Sensors)
+directly the IoT devices as we did in the [previous tutorial](iot-sensors.md)
 
 All the communications leaving and arriving at the North port of the IoT Agent use the standard NGSI syntax. The
 transport protocol used between the IoT devices and the IoT Agent is irrelevant to this layer of communication.
 Effectively the IoT Agent is offering a simplified facade pattern of well-known endpoints to actuate any device.
 
 Therefore this section of registering and invoking commands **duplicates** the instructions found in the
-[previous tutorial](https://github.com/FIWARE/tutorials.IoT-Agent)
+[previous tutorial](iot-agent.md)
 
 ### Ringing the Bell
 

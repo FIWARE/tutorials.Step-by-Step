@@ -62,7 +62,7 @@ Once a mashup has been wired up and created it can be also be shared wholesale w
 # Architecture
 
 This application adds the **Wirecloud** application mashup into the existing Stock Management and Sensors-based
-application created in [previous tutorials](https://github.com/FIWARE/tutorials.IoT-Agent/). The aim of the tutorial is
+application created in [previous tutorials](iot-agent.md). The aim of the tutorial is
 to be able to monitor devices and wire-up a simple supermarket finder. This monitoring tool mashup will be able to
 duplicate and replace much of the visualisation functionality already found in the tutorial application itself (which is
 written in PUG, Node.JS and JavaScript). The aim is to create an equivalent application without resorting to writing a

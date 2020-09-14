@@ -4,7 +4,7 @@
 **Description:** This tutorial is an introduction to
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to persist
 context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the
-[previous tutorial](https://github.com/FIWARE/tutorials.IoT-Agent) and persists measurements from those sensors into the
+[previous tutorial](iot-agent.md) and persists measurements from those sensors into the
 database. To retrieve time-based aggregations of such data, users can either use **QuantumLeap** query API or connect
 directly to the **CrateDB** HTTP endpoint. Results are visualised on a graph or via the **Grafana** time series
 analytics tool.
@@ -23,9 +23,9 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > — Emily Dickinson
 
 Previous tutorials have shown how to persist historic context data into a range of databases such as **MySQL** and
-**PostgreSQL**. using [Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context) and
-[Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context) Furthermore, the
-[Short Term Historic](https://github.com/FIWARE/tutorials.Short-Term-History) tutorial has introduced the
+**PostgreSQL**. using [Apache Flume](historic-context-flume.md) and
+[Apache NIFI](historic-context-nifi.md) Furthermore, the
+[Short Term Historic](short-term-history.md) tutorial has introduced the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic enabler for persisting and querying historic context data
 using a **MongoDB** database.
 
@@ -78,7 +78,7 @@ available licensed under the Apache License 2.0. More information can be found a
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context
 broker. Details of the architecture and protocol used can be found in the
-[IoT Sensors tutorial](https://github.com/FIWARE/tutorials.IoT-Sensors). The state of each device can be seen on the
+[IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on the
 UltraLight device monitor web page found at: `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Time-Series-Data/img/device-monitor.png)
@@ -95,7 +95,7 @@ web page found at: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 # Architecture
 
 This application builds on the components and dummy IoT devices created in
-[previous tutorials](https://github.com/FIWARE/tutorials.IoT-Agent/). It will use three FIWARE components: the
+[previous tutorials](iot-agent.md). It will use three FIWARE components: the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/), and
 [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) .
@@ -126,7 +126,7 @@ Therefore the overall architecture will consist of the following elements:
     -   offers an HTTP endpoint to interpret time-based data queries
 
 -   A **Context Provider**: - A webserver acting as set of
-    [dummy IoT devices](https://github.com/FIWARE/tutorials.IoT-Sensors) using the
+    [dummy IoT devices](iot-sensors.md) using the
     [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP. - Note the **Stock Management Frontend** and **Context Provider NGSI** proxy are not
     used in this tutorial.

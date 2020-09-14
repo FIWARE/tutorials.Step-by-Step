@@ -2,7 +2,7 @@
 [![OpenID 1.0](https://img.shields.io/badge/OpenID-1.0-ff7059.svg)](https://openid.net/specs/openid-connect-core-1_0.html)
 
 **Description:** This tutorial complements the previous
-[Securing Access tutorial](https://github.com/FIWARE/tutorials.Securing-Access). This tutorial also secures access to a
+[Securing Access tutorial](securing-access.md). This tutorial also secures access to a
 FIWARE application but using various **OpenID Connect** flows to authenticate users.
 
 # Authenticating Identities (Open-ID)
@@ -99,12 +99,12 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM
 # Architecture
 
 This application adds OIDC-driven security into the existing Stock Management and Sensors-based application created in
-[previous tutorials](https://github.com/FIWARE/tutorials.IoT-Agent/) by using the data created in the first
-[security tutorial](https://github.com/FIWARE/tutorials.Identity-Management/) and reading it programmatically. It will
+[previous tutorials](iot-agent.md) by using the data created in the first
+[security tutorial](identity-management.md) and reading it programmatically. It will
 make use of one FIWARE component - the [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler.
 **Keyrock** uses its own [MySQL](https://www.mysql.com/) database. This tutorial only focus on granting JWT by the use
 of OIDC. You can practice using the tokens to securely access sensor information in the tutorial
-[Securing Access tutorial](https://github.com/FIWARE/tutorials.Securing-Access).
+[Securing Access tutorial](securing-access.md).
 
 Therefore the overall architecture will consist of the following elements:
 

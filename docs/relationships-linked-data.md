@@ -46,7 +46,7 @@ complex knowledge graph.
 
 In order for computers to be able to navigate linked data structures, proper ontologically correct data models must be
 created and a full `@context` must be defined and made accessible. We can do this by reviewing and updating the existing
-data models from the NGSI v2 [Entity Relationships](https://github.com/FIWARE/tutorials.Entity-Relationships) tutorial.
+data models from the NGSI v2 [Entity Relationships](entity-relationships.md) tutorial.
 
 ### Revision: Data Models for a Stock management system as defined using NGSI-v2
 
