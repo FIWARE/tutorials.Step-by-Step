@@ -878,7 +878,7 @@ The `mysql-db` container is driven by environment variables as shown:
 | Key                 | Value.     | Description                                                                                                                                                                                           |
 | ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | MYSQL_ROOT_PASSWORD | `123`.     | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
-| MYSQL_ROOT_HOST     | `postgres` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
+| MYSQL_ROOT_HOST     | `%` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
 > **Note:** Using the default `root` user and displaying the password in an environment variables like this is a
 > security risk. Whereas this is acceptable practice in a tutorial, for a production environment, you can avoid this
