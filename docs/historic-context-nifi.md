@@ -21,7 +21,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > — George R.R. Martin (A Dance With Dragons)
 
 [FIWARE Draco](https://fiware-draco.readthedocs.io/en/latest/) is an alternative generic enabler which is able to
-persist historical context data to a series of databases. Like **Cygnus** - **Draco** is able subscribe to chnages of
+persist historical context data to a series of databases. Like **Cygnus** - **Draco** is able subscribe to changes of
 state from the **Orion Context Broker** and provide a funnel to process that data before persisting to a data sink.
 
 As mentioned previously, persisting historical context data is useful for big data analysis or discovering trends or
@@ -924,7 +924,7 @@ The `mysql-db` container is driven by environment variables as shown:
 | Key                 | Value.     | Description                                                                                                                                                                                           |
 | ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | MYSQL_ROOT_PASSWORD | `123`.     | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
-| MYSQL_ROOT_HOST     | `postgres` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
+| MYSQL_ROOT_HOST     | `%` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
 <h3>MySQL - Draco Configuration</h3>
 
