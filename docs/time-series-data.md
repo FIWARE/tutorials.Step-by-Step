@@ -257,7 +257,7 @@ QuantumLeap docs.
 The rate of change of the **Motion Sensor** is driven by events in the real-world. We need to receive every event to be
 able to aggregate the results.
 
-This is done by making a POST request to the `/v2/subscription` endpoint of the **Orion Context Broker**.
+This is done by making a POST request to the `/v2/subscriptions` endpoint of the **Orion Context Broker**.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors
@@ -309,7 +309,7 @@ curl -iX POST \
 The luminosity of the Smart Lamp is constantly changing, we only need to sample the values to be able to work out
 relevant statistics such as minimum and maximum values and rates of change.
 
-This is done by making a POST request to the `/v2/subscription` endpoint of the **Orion Context Broker** and including
+This is done by making a POST request to the `/v2/subscriptions` endpoint of the **Orion Context Broker** and including
 the `throttling` attribute in the request body.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
@@ -1039,7 +1039,7 @@ values
 
 ![](https://fiware.github.io/tutorials.Time-Series-Data/img/grafana-crate-connect.png)
 
-Click on the Save and test button and make sure it says _Database Connection OK_.
+Click on the _Save & Test_ button and make sure it says _Database Connection OK_.
 
 ### Configuring a Dashboard
 
