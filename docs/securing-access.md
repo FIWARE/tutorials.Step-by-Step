@@ -298,7 +298,7 @@ When making requests the `Authorization` header is built by combining the applic
 credentials provided by the **Keyrock** separated by a `:` and base-64encoded. The value can be generated as shown:
 
 ```bash
-echo tutorial-dckr-site-0000-xpresswebapp:tutorial-dckr-site-0000-clientsecret | base64
+echo -n tutorial-dckr-site-0000-xpresswebapp:tutorial-dckr-site-0000-clientsecret | base64
 ```
 
 ```
