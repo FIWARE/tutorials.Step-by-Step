@@ -274,7 +274,7 @@ Submit new job
 
 Once a dynamic context system is up and running (execute `Logger`), we need to inform **Flink** of changes in context.
 
-This is done by making a POST request to the `/v2/subscription` endpoint of the Orion Context Broker.
+This is done by making a POST request to the `/v2/subscriptions` endpoint of the Orion Context Broker.
 
 -   The `fiware-service` and `fiware-servicepath` headers are used to filter the subscription to only listen to
     measurements from the attached IoT Sensors, since they had been provisioned using these settings
