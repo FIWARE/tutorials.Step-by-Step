@@ -533,8 +533,8 @@ curl -X GET \
 
 #### Response
 
-The response returns a list of available revisions of the given policy which are available within. the **Authzforce**
-container. This corresponds the named XML files `1.xml`, `2.xml` etc.
+The response returns a list of all the PolicySets of the given `domain-id` which are available within the **Authzforce**
+container. In this case the policy-ids of the PolicySets returned are `f8194af5-8a07-486a-9581-c1f05d05483c` and `root`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
