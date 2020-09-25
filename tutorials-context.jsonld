@@ -44,7 +44,7 @@
     "furniture": "tutorial:furniture",   
     "verified": "tutorial:verified",
     "requestedFor": "tutorial:requestedFor",   
-    "requestedBy": "@id": "tutorial:requestedBy",   
+    "requestedBy": "tutorial:requestedBy",   
     "orderedProduct": "tutorial:orderedProduct",   
     "orderDate": "tutorial:orderDate",   
     "stockCount":  "tutorial:stockCount",
