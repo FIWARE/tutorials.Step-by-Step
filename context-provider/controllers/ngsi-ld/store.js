@@ -84,11 +84,10 @@ async function displayTillInfo(req, res) {
         const inventory = [];
         const headers = ngsiLD.setHeaders(req.session.access_token, LinkHeader);
 
-        monitor('NGSI', 'readEntity type=Building id=' + req.params.storeId);
+        monitor('NGSI', 'readEntity id=' + req.params.storeId);
         const building = await ngsiLD.readEntity(
             req.params.storeId,
             {
-                type: 'Building',
                 options: 'keyValues',
                 attrs: 'furniture'
             },
