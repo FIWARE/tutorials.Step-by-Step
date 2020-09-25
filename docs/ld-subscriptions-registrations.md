@@ -330,6 +330,12 @@ For partial registrations the situation is more complex
 Each partial registration is saying _"additional augmented context for this entity is held elsewhere"_. The entity data
 can be requested and modified via requests to this context broker.
 
+Note that within the context broker a single entity cannot partake in both a simple registration and a partial registration at the same time, as this would indicate that both the whole entity and only part of that entity are to be retrieved remotely and this is nonsensical. If such a situation is requested, the context broker will return with a `409` - **Conflict** HTTP response.
+
+Also, a simple registration for an entity will be rejected if an entity already exists within the context broker, and a partial registration for an entity attribute will be rejected if the attribute exists within the context broker (or is already subject to a partial registration). The latter may be ovecome with the use of the `datasetId`.
+
+Internally the [X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For) header is used to avoid circular dependencies  where **context broker A** registers an entity with **context broker B** which registers an entity with **context broker C** which registers an entity with **context broker A** again. The `X-Forwarded-For` Header is removed prior to responding to a client however.
+
 With normal operation, the NGSI-LD response does not expose whether data collated from multiple sources is held directly
 within the context broker or whether the information has been retrieved externally. It is only when an error occurs
 (e.g. timeout) that the HTTP status error code reveals that externally held information could not be retrieved or
