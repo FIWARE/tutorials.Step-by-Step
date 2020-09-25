@@ -13,10 +13,7 @@
     "StockOrder": "tutorial:StockOrder",
     "Person": "schema:Person",
     "address": "schema:address",
-    "category": { 
-      "@id" :"fiware:category",
-      "@type": "@vocab"
-    }, 
+    "category": "fiware:category",
     "commercial": "fiware:commercial",
     "office": "fiware:office",
     "industrial": "fiware:industrial",
@@ -28,55 +25,27 @@
     "floorsAboveGround": "fiware:floorsAboveGround",
     "floorsBelowGround": "fiware:floorsBelowGround",
     "tweets" : "tutorial:tweets",
-    "owner": {
-      "@id": "fiware:owner",   
-      "@type": "@id"
-    },
-    "occupier": {
-      "@id": "fiware:occupier",   
-      "@type": "@id"
-    },
+    "owner": "fiware:owner",   
+    "occupier": "fiware:occupier",   
     "refMap": "fiware:refMap",
     "source": "fiware:source", 
-    "installedBy": {
-      "@id": "tutorial:installedBy",   
-      "@type": "@id"
-    },  
-    "locatedIn": {
-      "@id": "tutorial:locatedIn",   
-      "@type": "@id"
-    },
+    "installedBy": "tutorial:installedBy",   
+    "locatedIn": "tutorial:locatedIn",   
     "maxCapacity":  "tutorial:maxCapacity",
-    "statusOfWork": { 
-      "@id": "tutorial:statusOfWork",
-      "@type": "@vocab"
-    },
+    "statusOfWork": "tutorial:statusOfWork",
     "requested": "tutorial:requested",
     "completed": "tutorial:completed",
     "scheduled": "tutorial:scheduled",
     "inProgress": "tutorial:inProgress",
-    
     "stocks":  "tutorial:stocks",   
     "currency": "tutorial:currency", 
     "price": "tutorial:price",
     "size":  "tutorial:size",
-    "furniture": {
-      "@id": "tutorial:furniture",   
-      "@type": "@id"
-    },
+    "furniture": "tutorial:furniture",   
     "verified": "tutorial:verified",
-    "requestedFor": {
-      "@id": "tutorial:requestedFor",   
-      "@type": "@id"
-    },
-    "requestedBy": {
-      "@id": "tutorial:requestedBy",   
-      "@type": "@id"
-    },
-    "orderedProduct": {
-      "@id": "tutorial:orderedProduct",   
-      "@type": "@id"
-    },
+    "requestedFor": "tutorial:requestedFor",   
+    "requestedBy": "@id": "tutorial:requestedBy",   
+    "orderedProduct": "tutorial:orderedProduct",   
     "orderDate": "tutorial:orderDate",   
     "stockCount":  "tutorial:stockCount",
     "numberOfItems":  "tutorial:numberOfItems"
