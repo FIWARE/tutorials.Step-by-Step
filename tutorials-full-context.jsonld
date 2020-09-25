@@ -1,0 +1,443 @@
+{
+  "@context": {
+    "type": "@type",
+    "id": "@id",
+    "schema": "https://schema.org/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "fiware": "https://uri.fiware.org/ns/data-models#",
+    "tutorial": "https://fiware.github.io/tutorials.Step-by-Step/schema/",
+    "Building": "fiware:Building",
+    "Product": "tutorial:Product",
+    "Shelf": "tutorial:Shelf",
+    "StockOrder": "tutorial:StockOrder",
+    "Person": "schema:Person",
+    "address": "schema:address",
+    "category": { 
+      "@id" :"fiware:category",
+      "@type": "@vocab"
+    }, 
+    "commercial": "fiware:commercial",
+    "office": "fiware:office",
+    "industrial": "fiware:industrial",
+    "retail": "fiware:retail",
+    "residential": "fiware:residential",
+    "containedInPlace": "fiware:containedInPlace",
+    "dataProvider": "fiware:dataProvider",
+    "description": "fiware:description",
+    "floorsAboveGround": "fiware:floorsAboveGround",
+    "floorsBelowGround": "fiware:floorsBelowGround",
+    "tweets" : "tutorial:tweets",
+    "owner": {
+      "@id": "fiware:owner",   
+      "@type": "@id"
+    },
+    "occupier": {
+      "@id": "fiware:occupier",   
+      "@type": "@id"
+    },
+    "refMap": "fiware:refMap",
+    "source": "fiware:source", 
+    "installedBy": {
+      "@id": "tutorial:installedBy",   
+      "@type": "@id"
+    },  
+    "locatedIn": {
+      "@id": "tutorial:locatedIn",   
+      "@type": "@id"
+    },
+    "maxCapacity":  "tutorial:maxCapacity",
+    "statusOfWork": { 
+      "@id": "tutorial:statusOfWork",
+      "@type": "@vocab"
+    },
+    "requested": "tutorial:requested",
+    "completed": "tutorial:completed",
+    "scheduled": "tutorial:scheduled",
+    "inProgress": "tutorial:inProgress",
+    
+    "stocks":  "tutorial:stocks",   
+    "currency": "tutorial:currency", 
+    "price": "tutorial:price",
+    "size":  "tutorial:size",
+    "furniture": {
+      "@id": "tutorial:furniture",   
+      "@type": "@id"
+    },
+    "verified": "tutorial:verified",
+    "requestedFor": {
+      "@id": "tutorial:requestedFor",   
+      "@type": "@id"
+    },
+    "requestedBy": {
+      "@id": "tutorial:requestedBy",   
+      "@type": "@id"
+    },
+    "orderedProduct": {
+      "@id": "tutorial:orderedProduct",   
+      "@type": "@id"
+    },
+    "orderDate": "tutorial:orderDate",   
+    "stockCount":  "tutorial:stockCount",
+    "numberOfItems":  "tutorial:numberOfItems"
+  },
+  "@graph": [
+    {
+      "@id": "tutorial:Product",
+      "@type": "rdfs:Class",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Product is something sold in a Store."
+        },
+        {
+          "@language": "ja",
+          "@value": "製品はストアで販売されている物"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value":    "Product"
+        },
+        {
+          "@language": "ja",
+          "@value": "製品"
+        }
+      ],      
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:Shelf",
+      "@type": "rdfs:Class",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "A Shelf is a unit of Store Furniture"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚はストア用家具のユニット"
+        }
+      ],
+      "rdfs:label":
+      [
+        { 
+          "@language": "en",
+          "@value": "Shelf"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚"
+        }
+      ],
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutorial:StockOrder",
+      "@type": "rdfs:Class",
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "StockOrder an entry in a list of items sold in one or more stores"
+        },
+        {
+          "@language": "ja",
+          "@value": "在庫注文は1つ以上のストアで販売されるアイテムの一覧のエントリ"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "StockOrder"
+        },
+        {
+          "@language": "ja",
+          "@value": "在庫注文"
+        }
+      ],
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Intangible"
+      }
+    },
+    {
+      "@id": "schema:Person",
+      "@type": "rdfs:Class",
+      "http://purl.org/dc/terms/source": {
+        "@id": "http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_rNews"
+      },
+      "http://www.w3.org/2002/07/owl#equivalentClass": {
+        "@id": "http://xmlns.com/foaf/0.1/Person"
+      },
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "A person (alive, dead, undead, or fictional)."
+        },
+        {
+          "@language": "ja",
+          "@value": "人 (生きている, 死んでいる, 完全に死んでいない, または架空の人)"
+        }
+      ],
+      "rdfs:label": 
+      [
+        { 
+          "@language": "en",
+          "@value": "Person"
+        },
+        {
+          "@language": "ja",
+          "@value": "人"
+        }
+      ],
+      "rdfs:subClassOf": {
+        "@id": "http://schema.org/Thing"
+      }
+    },
+    {
+      "@id": "tutoral:requestedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        },
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Object requested by person."
+        },
+        {
+          "@language": "ja",
+          "@value": "人が要求したオブジェクト"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "requestedBy"
+        },
+        {
+          "@language": "ja",
+          "@value": "要求者"
+        }
+      ]
+    },
+    {
+      "@id": "tutoral:installedBy",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "schema:Person"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Person who installs an Object"
+        },
+        {
+          "@language": "ja",
+          "@value": "オブジェクトを設置する人"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "installedBy"
+        },
+        {
+          "@language": "ja",
+          "@value": "設置者"
+        }
+      ]
+    },
+    {
+      "@id": "tutorial:furniture",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Units found within a Building"
+        },
+        {
+          "@language": "ja",
+          "@value": "建物内で見つかったユニット"
+        }
+      ],
+      "rdfs:label": [  
+        {
+          "@language": "en",
+          "@value":   "furniture"
+        },
+        {
+          "@language": "ja",
+          "@value": "家具"
+        }
+      ]
+    },
+    {
+      "@id": "tutorial:locatedIn",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Building in which an item is found"
+        },
+        {
+          "@language": "ja",
+          "@value": "アイテムが見つかった建物"
+        }
+      ],
+      "rdfs:label": [
+        {
+          "@language": "en",
+          "@value":   "locatedIn"
+        },
+        {
+          "@language": "ja",
+          "@value": "置き場所"
+        }
+      ]
+    },
+    {
+      "@id": "tutorial:stocks",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:Shelf"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "The product found on a shelf"
+        },
+        {
+          "@language": "ja",
+          "@value": "棚の上にある製品"
+        }
+      ],
+      "rdfs:label": [
+        {
+          "@language": "en",
+          "@value": "stocks"
+        },
+        {
+          "@language": "ja",
+          "@value": "在庫"
+        }
+      ]
+    },
+    {
+      "@id": "tutorial:requestedFor",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "fiware:Building"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "Store for which an item is requested"
+        },
+        {
+          "@language": "ja",
+          "@value": "アイテムが要求されたストア"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "requestedFor"
+        },
+        {
+          "@language": "ja",
+          "@value": "要求対象"
+        }
+      ]
+    },
+    {
+      "@id": "tutorial:orderedProduct",
+      "@type": "https://uri.etsi.org/ngsi-ld/Relationship",
+      "schema:domainIncludes": [
+        {
+          "@id": "tutorial:StockOrder"
+        }
+      ],
+      "schema:rangeIncludes": [
+        {
+          "@id": "tutorial:Product"
+        }
+      ],
+      "rdfs:comment": [
+        {
+          "@language": "en",
+          "@value": "The Product ordered for a store"
+        },
+        {
+          "@language": "ja",
+          "@value": "ストアで注文された製品"
+        }
+      ],
+      "rdfs:label": [
+        { 
+          "@language": "en",
+          "@value": "orderedProduct"
+        },
+        {
+          "@language": "ja",
+          "@value": "注文された製品"
+        }
+      ]
+    }
+  ]
+}
