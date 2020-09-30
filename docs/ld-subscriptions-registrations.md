@@ -356,7 +356,7 @@ The body of the request is similar to the NGSI-v2 equivalent with the following 
 #### 4 Request:
 
 ```bash
-curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/csourceRegistrations/' \
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/csourceRegistrations/' \
 -H 'Content-Type: application/json' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 --data-raw ' {
@@ -381,14 +381,15 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/csourceRegistrations/' \
 ### Read Registration Details
 
 Retrieving the registration details can be made by sending a GET request to the `/ngsi-ld/v1/csourceRegistrations/`
-endpoint, along with an appropriate JSON-LD context in the `Link` header.
+endpoint, along with an appropriate JSON-LD context in the `Link` header and the type of entity to filter.
 
 #### 5 Request:
 
 ```bash
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/csourceRegistrations/' \
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/csourceRegistrations/' \
 -H 'Accept: application/ld+json' \
--H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+-H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'type=Building'
 ```
 
 #### Response:
@@ -428,10 +429,13 @@ existing entity held within the context broker.
 #### 6 Request:
 
 ```bash
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store001' \
+curl -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store001' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Content-Type: application/json'
 ```
+
+> Note that at the time of writing, for the federated Scorpio broker, this request indicates the retrieval of a local entity only - forwarded data from a registration must be retrieved using: `/ngsi-ld/v1/entities/?id=urn:ngsi-ld:Building:store001` instead.
+
 
 #### Response:
 
