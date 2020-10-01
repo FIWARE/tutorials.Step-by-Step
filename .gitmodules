@@ -24,7 +24,7 @@
 	branch = NGSI-v2
 [submodule "tutorials.Historic-Context"]
 	path = tutorials.Historic-Context-Flume
-	url = https://github.com/FIWARE/tutorials.Historic-Context.git
+	url = https://github.com/FIWARE/tutorials.Historic-Context-Flume.git
 	branch = NGSI-v2
 [submodule "tutorials.IoT-Agent"]
 	path = tutorials.IoT-Agent
