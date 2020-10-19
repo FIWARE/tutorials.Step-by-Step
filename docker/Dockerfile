@@ -3,7 +3,7 @@ ARG GITHUB_ACCOUNT=fiware
 ARG GITHUB_REPOSITORY=tutorials.Step-by-Step
 ARG DOWNLOAD=latest
 ARG SOURCE_BRANCH=master
-
+ARG SOURCE_COMMIT=unknown
 
 ########################################################################################
 #
@@ -104,6 +104,8 @@ FROM gcr.io/distroless/nodejs:${NODE_VERSION}
 ARG GITHUB_ACCOUNT
 ARG GITHUB_REPOSITORY
 ARG NODE_VERSION
+ARG SOURCE_COMMIT
+ENV GIT_COMMIT=$SOURCE_COMMIT
 
 LABEL "maintainer"="FIWARE Foundation <fiware.eu@gmail.com>"
 LABEL "org.opencontainers.image.authors"="https://www.fiware.org/contact-us/"
