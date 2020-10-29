@@ -17,43 +17,55 @@ const DEVICE_PAYLOAD = process.env.DUMMY_DEVICES_PAYLOAD || 'ultralight';
 // This function offers the Password Authentication flow for a secured IoT Sensors
 // It is just a user filling out the Username and password form and adding the access token to
 // subsequent requests.
-function setAuthToken(header) {
-    if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD) {
-        Security.oa
-            .getOAuthPasswordCredentials(process.env.DUMMY_DEVICES_USER, process.env.DUMMY_DEVICES_PASSWORD)
-            .then((results) => {
-                header['X-Auth-Token'] = results.access_token;
-            })
-            .catch((error) => {
-                debug(error);
-            });
+function setAuthToken(header, callback) {
+    
+    Security.oa
+        .getOAuthPasswordCredentials(process.env.DUMMY_DEVICES_USER, process.env.DUMMY_DEVICES_PASSWORD)
+        .then((results) => {
+            header['X-Auth-Token'] = results.access_token;
+            callback();
+        })
+        .catch((error) => {
+            debug(error);
+            debug('retry after 5 seconds.');
+            setTimeout(function () {
+                setAuthToken(header, callback);
+            }, 5000);
+        });
+    
+}
+
+
+function setDevice(){
+    switch (DEVICE_PAYLOAD.toLowerCase()) {
+        case 'ultralight':
+            Measure = new UltralightMeasure(headers);
+            break;
+        case 'json':
+            Measure = new JSONMeasure(headers);
+            break;
+        case 'lorawan':
+            //Measure = new LoraMeasure();
+            break;
+        case 'sigfox':
+            //Measure = new SigfoxMeasure();
+            break;
+        case 'xml':
+            Measure = new XMLMeasure(headers);
+            break;
+        default:
+            debug('Device payload not recognized. Using default');
+            Measure = new UltralightMeasure(headers);
+            break;
     }
 }
 
 let Measure;
 const headers = {};
-setAuthToken(headers);
-
-switch (DEVICE_PAYLOAD.toLowerCase()) {
-    case 'ultralight':
-        Measure = new UltralightMeasure(headers);
-        break;
-    case 'json':
-        Measure = new JSONMeasure(headers);
-        break;
-    case 'lorawan':
-        //Measure = new LoraMeasure();
-        break;
-    case 'sigfox':
-        //Measure = new SigfoxMeasure();
-        break;
-    case 'xml':
-        Measure = new XMLMeasure(headers);
-        break;
-    default:
-        debug('Device payload not recognized. Using default');
-        Measure = new UltralightMeasure(headers);
-        break;
+if (process.env.DUMMY_DEVICES_USER && process.env.DUMMY_DEVICES_PASSWORD) {
+    setAuthToken(headers, setDevice);
+} else {
+    setDevice();
 }
 
 module.exports = {
