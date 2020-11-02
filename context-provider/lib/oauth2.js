@@ -45,6 +45,7 @@ exports.OAuth2.prototype._getAccessTokenUrl = function () {
 // e.g. Authorization: Bearer <token>  # Build "Bearer <token>"
 exports.OAuth2.prototype.buildAuthHeader = function () {
     const key = this._clientId + ':' + this._clientSecret;
+    // eslint-disable-next-line new-cap
     const base64 = new Buffer.from(key).toString('base64');
     return this._authMethod + ' ' + base64;
 };
