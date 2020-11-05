@@ -176,15 +176,24 @@ Grafana analytics tool. The rest of the system providing the context data has be
 
 ```yaml
 crate-db:
-    image: crate:3.1.2
+    image: crate:4.1.4
     hostname: crate-db
     ports:
         - "4200:4200"
         - "4300:4300"
     command:
-        crate -Clicense.enterprise=false -Cauth.host_based.enabled=false  -Ccluster.name=democluster
+        crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster
         -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+    environment:
+        - CRATE_HEAP_SIZE=2g
 ```
+
+If CrateDB exits immediately with a
+`max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]` error, this can be fixed
+by running the `sudo sysctl -w vm.max_map_count=262144` command on the host machine. For further information look within
+the CrateDB [documentation](https://crate.io/docs/crate/howtos/en/latest/admin/bootstrap-checks.html#bootstrap-checks)
+and Docker
+[troubleshooting guide](https://crate.io/docs/crate/howtos/en/latest/deployment/containers/docker.html#troubleshooting)
 
 <h3>QuantumLeap Configuration</h3>
 
