@@ -270,18 +270,18 @@ var wss = new ws.Server({
     path: "/helloworld"
 });
 
-wss.on("connection", function(ws) {
+wss.on("connection", function (ws) {
     var sessionId = null;
     var request = ws.upgradeReq;
     var response = {
         writeHead: {}
     };
 
-    sessionHandler(request, response, function(err) {
+    sessionHandler(request, response, function (err) {
         sessionId = request.session.id;
     });
 
-    ws.on("error", error => {
+    ws.on("error", (error) => {
         stop(sessionId);
     });
 
@@ -289,13 +289,13 @@ wss.on("connection", function(ws) {
         stop(sessionId);
     });
 
-    ws.on("message", _message => {
+    ws.on("message", (_message) => {
         var message = JSON.parse(_message);
 
         switch (message.id) {
             case "start":
                 sessionId = request.session.id;
-                start(sessionId, ws, message.sdpOffer, function(error, sdpAnswer) {
+                start(sessionId, ws, message.sdpOffer, function (error, sdpAnswer) {
                     ws.send(
                         JSON.stringify({
                             id: "startResponse",
@@ -374,8 +374,8 @@ function start(sessionId, ws, sdpOffer, callback) {
                     }
                 }
                 // Connect it back on itself (i.e. in loopback)
-                connectMediaElements(webRtcEndpoint, error => {
-                    webRtcEndpoint.on("OnIceCandidate", function(event) {
+                connectMediaElements(webRtcEndpoint, (error) => {
+                    webRtcEndpoint.on("OnIceCandidate", function (event) {
                         const candidate = kurento.getComplexType("IceCandidate")(event.candidate);
                         ws.send(
                             JSON.stringify({
@@ -393,7 +393,7 @@ function start(sessionId, ws, sdpOffer, callback) {
                         return callback(null, sdpAnswer);
                     });
 
-                    webRtcEndpoint.gatherCandidates(error => {
+                    webRtcEndpoint.gatherCandidates((error) => {
                         if (error) {
                             return callback(error);
                         }
@@ -420,7 +420,7 @@ function createMediaElements(pipeline, ws, callback) {
 
 ```javascript
 function connectMediaElements(webRtcEndpoint, callback) {
-    webRtcEndpoint.connect(webRtcEndpoint, error => {
+    webRtcEndpoint.connect(webRtcEndpoint, (error) => {
         if (error) {
             return callback(error);
         }
@@ -475,7 +475,7 @@ function start() {
         onicecandidate: onIceCandidate
     };
 
-    webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options, function(error) {
+    webRtcPeer = kurentoUtils.WebRtcPeer.WebRtcPeerSendrecv(options, function (error) {
         if (error) return onError(error);
         this.generateOffer(onOffer);
     });
@@ -500,7 +500,7 @@ Whenever a WebSocket message is received, either starting communication, changin
 an appropriate action is taken.
 
 ```javascript
-ws.onmessage = function(message) {
+ws.onmessage = function (message) {
     var parsedMessage = JSON.parse(message.data);
 
     switch (parsedMessage.id) {
@@ -591,7 +591,7 @@ function createMediaElements(pipeline, ws, callback) {
                 -1.2,
                 1.6,
                 1.6,
-                function(error) {
+                function (error) {
                     if (error) {
                         return callback(error);
                     }
@@ -605,11 +605,11 @@ function createMediaElements(pipeline, ws, callback) {
 
 ```javascript
 function connectMediaElements(webRtcEndpoint, faceOverlayFilter, callback) {
-    webRtcEndpoint.connect(faceOverlayFilter, error => {
+    webRtcEndpoint.connect(faceOverlayFilter, (error) => {
         if (error) {
             return callback(error);
         }
-        faceOverlayFilter.connect(webRtcEndpoint, error => {
+        faceOverlayFilter.connect(webRtcEndpoint, (error) => {
             if (error) {
                 return callback(error);
             }
@@ -747,12 +747,12 @@ function createMediaElements(pipeline, ws, callback) {
 
 ```javascript
 function connectMediaElements(webRtcEndpoint, filter, callback) {
-    webRtcEndpoint.connect(filter, error => {
+    webRtcEndpoint.connect(filter, (error) => {
         if (error) {
             return callback(error);
         }
 
-        filter.connect(webRtcEndpoint, error => {
+        filter.connect(webRtcEndpoint, (error) => {
             if (error) {
                 return callback(error);
             }

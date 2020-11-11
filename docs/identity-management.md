@@ -852,9 +852,9 @@ The response returns the details of the organization.
 
 ### List all Organizations
 
-Obtaining a complete list of all organizations is a super-admin permission requiring the `X-Auth-token` - most users will only
-be permitted to return users within their own organization. Listing users can be done by making a GET request to the
-`/v1/organizations` endpoint
+Obtaining a complete list of all organizations is a super-admin permission requiring the `X-Auth-token` - most users
+will only be permitted to return users within their own organization. Listing users can be done by making a GET request
+to the `/v1/organizations` endpoint
 
 #### 11 Request:
 

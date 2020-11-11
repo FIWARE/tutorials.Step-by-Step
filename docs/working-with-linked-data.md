@@ -373,7 +373,7 @@ further. The code below extracts the IDs for later use.
 ```javascript
 const stockedProducts = [];
 
-productsList = _.groupBy(productsList, e => {
+productsList = _.groupBy(productsList, (e) => {
     return e.stocks;
 });
 _.forEach(productsList, (value, key) => {
@@ -674,14 +674,14 @@ function translateRequest(req, res) {
         qs: req.query,
         json: true
     })
-        .then(async function(cbResponse) {
+        .then(async function (cbResponse) {
             cbResponse["@context"] = coreContext;
             const expanded = await jsonld.expand(cbResponse);
             const compacted = await jsonld.compact(expanded, japaneseContext);
             delete compacted["@context"];
             return res.send(compacted);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             return res.send(err);
         });
 }

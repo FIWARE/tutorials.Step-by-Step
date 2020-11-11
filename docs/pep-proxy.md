@@ -19,12 +19,11 @@ authenticating other services are described in detail.
 >
 > — Gandalf (The Fellowship of the Ring by J.R.R Tolkein)
 
-The [previous tutorial](securing-access.md) demonstrated that it is possible to Permit
-or Deny access to resources based on an authenticated user identifying themselves within an application. It was simply a
-matter of the code following a different line of execution if the `access_token` was not found (Level 1 -
-_Authentication Access_), or confirming that a given `access_token` had appropriate rights (Level 2 - _Basic
-Authorization_). The same method of securing access can be applied by placing a Policy Enforcement Point (PEP) in front
-of other services within a FIWARE-based Smart Solution.
+The [previous tutorial](securing-access.md) demonstrated that it is possible to Permit or Deny access to resources based
+on an authenticated user identifying themselves within an application. It was simply a matter of the code following a
+different line of execution if the `access_token` was not found (Level 1 - _Authentication Access_), or confirming that
+a given `access_token` had appropriate rights (Level 2 - _Basic Authorization_). The same method of securing access can
+be applied by placing a Policy Enforcement Point (PEP) in front of other services within a FIWARE-based Smart Solution.
 
 A **PEP Proxy** lies in front of a secured resource and is an endpoint found at "well-known" public location. It serves
 as a gatekeeper for resource access. Users or other actors must supply sufficient information to the **PEP Proxy** to
@@ -806,7 +805,7 @@ function userCredentialGrant(req, res) {
     const email = req.body.email;
     const password = req.body.password;
 
-    oa.getOAuthPasswordCredentials(email, password).then(results => {
+    oa.getOAuthPasswordCredentials(email, password).then((results) => {
         req.session.access_token = results.access_token;
         return;
     });
@@ -1049,11 +1048,11 @@ const DUMMY_DEVICE_HTTP_HEADERS = { "Content-Type": "text/plain" };
 function initSecureDevices() {
     Security.oa
         .getOAuthPasswordCredentials(process.env.DUMMY_DEVICES_USER, process.env.DUMMY_DEVICES_PASSWORD)
-        .then(results => {
+        .then((results) => {
             DUMMY_DEVICE_HTTP_HEADERS["X-Auth-Token"] = results.access_token;
             return;
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             return;
         });
@@ -1071,7 +1070,7 @@ const options = {
     body: state
 };
 
-request(options, error => {
+request(options, (error) => {
     if (error) {
         debug(debugText + " " + error.code);
     }

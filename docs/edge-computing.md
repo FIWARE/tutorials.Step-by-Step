@@ -232,7 +232,7 @@ content in `function.js` file and build the docker image by running the build fi
 operator.
 
 ```javascript
-exports.handler = function(contextEntity, publish, query, subscribe) {
+exports.handler = function (contextEntity, publish, query, subscribe) {
     console.log("enter into the user-defined fog function");
 
     var entityID = contextEntity.entityId.id;

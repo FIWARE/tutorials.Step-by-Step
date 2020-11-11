@@ -193,7 +193,7 @@ The following people at `test.com` legitimately have accounts within the Applica
     -   Detective1
     -   Detective2
 
-| Name       | eMail                      | Password |
+| Name       | eMail                       | Password |
 | ---------- | --------------------------- | -------- |
 | alice      | `alice-the-admin@test.com`  | `test`   |
 | bob        | `bob-the-manager@test.com`  | `test`   |
@@ -1036,7 +1036,7 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             const user = JSON.parse(response);
             return azf.policyDomainRequest(
                 user.app_azf_domain,
@@ -1047,11 +1047,11 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
                 user.email
             );
         })
-        .then(authzforceResponse => {
+        .then((authzforceResponse) => {
             res.locals.authorized = authzforceResponse === "Permit";
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();
@@ -1082,9 +1082,9 @@ function policyDomainRequest(domain, roles, resource, action, username, email) {
     };
 
     return new Promise((resolve, reject) => {
-        request(options, function(error, response, body) {
+        request(options, function (error, response, body) {
             let decision;
-            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function(err, jsonRes) {
+            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function (err, jsonRes) {
                 // The decision is found within the /Response/Result[0]/Decision[0] XPath
                 decision = jsonRes.Response.Result[0].Decision[0];
             });

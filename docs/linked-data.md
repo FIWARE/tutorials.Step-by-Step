@@ -22,8 +22,8 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 >
 > ― Malcolm Gladwell, The Tipping Point
 
-The introduction to FIWARE [Getting Started tutorial](getting-started.md) introduced
-the [NGSI v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface that is commonly used to create and
+The introduction to FIWARE [Getting Started tutorial](getting-started.md) introduced the
+[NGSI v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) interface that is commonly used to create and
 manipulate context data entities. An evolution of that interface has created a supplementary specification called
 [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
 as a mechanism to enhance context data entities through adding the concept of **linked data**. This tutorial will
@@ -493,8 +493,8 @@ curl -G -X GET \
 
 #### Response:
 
-The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld`) and
-all attributes are expanded whenever possible.
+The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld`)
+and all attributes are expanded whenever possible.
 
 -   `id`, `type`, `location` and `name` are defined in the core context and are not expanded.
 -   `address` has been mapped to `http://schema.org/address`
@@ -588,8 +588,8 @@ curl -G -X GET \
 
 #### Response:
 
-The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld`) and
-all attributes are expanded whenever possible.
+The response returns the Core `@context` by default (`https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.3.jsonld`)
+and all attributes are expanded whenever possible.
 
 ```json
 {

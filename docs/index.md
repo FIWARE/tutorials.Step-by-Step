@@ -71,8 +71,8 @@ sudo chown $USER /var/run/docker.sock
 ### Postman <img src="https://www.getpostman.com/favicon-32x32.png" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
 
 The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
-framework for REST APIs. The tool can be downloaded from [www.getpostman.com](https://www.getpostman.com). All the FIWARE
-Postman collections can downloaded directly from the
+framework for REST APIs. The tool can be downloaded from [www.getpostman.com](https://www.getpostman.com). All the
+FIWARE Postman collections can downloaded directly from the
 [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
 
 ### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">

@@ -921,10 +921,10 @@ The `mysql-db` container is listening on a single port:
 
 The `mysql-db` container is driven by environment variables as shown:
 
-| Key                 | Value.     | Description                                                                                                                                                                                           |
-| ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MYSQL_ROOT_PASSWORD | `123`.     | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
-| MYSQL_ROOT_HOST     | `%` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
+| Key                 | Value. | Description                                                                                                                                                                                           |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MYSQL_ROOT_PASSWORD | `123`. | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
+| MYSQL_ROOT_HOST     | `%`    | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
 <h3>MySQL - Draco Configuration</h3>
 

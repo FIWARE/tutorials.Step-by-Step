@@ -4,10 +4,9 @@
 **Description:** This tutorial is an introduction to
 [FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to persist
 context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the
-[previous tutorial](iot-agent.md) and persists measurements from those sensors into the
-database. To retrieve time-based aggregations of such data, users can either use **QuantumLeap** query API or connect
-directly to the **CrateDB** HTTP endpoint. Results are visualised on a graph or via the **Grafana** time series
-analytics tool.
+[previous tutorial](iot-agent.md) and persists measurements from those sensors into the database. To retrieve time-based
+aggregations of such data, users can either use **QuantumLeap** query API or connect directly to the **CrateDB** HTTP
+endpoint. Results are visualised on a graph or via the **Grafana** time series analytics tool.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Time-Series-Data/)
@@ -23,9 +22,8 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 > — Emily Dickinson
 
 Previous tutorials have shown how to persist historic context data into a range of databases such as **MySQL** and
-**PostgreSQL**. using [Apache Flume](historic-context-flume.md) and
-[Apache NIFI](historic-context-nifi.md) Furthermore, the
-[Short Term Historic](short-term-history.md) tutorial has introduced the
+**PostgreSQL**. using [Apache Flume](historic-context-flume.md) and [Apache NIFI](historic-context-nifi.md) Furthermore,
+the [Short Term Historic](short-term-history.md) tutorial has introduced the
 [STH-Comet](https://fiware-sth-comet.readthedocs.io/) generic enabler for persisting and querying historic context data
 using a **MongoDB** database.
 
@@ -77,9 +75,9 @@ available licensed under the Apache License 2.0. More information can be found a
 #### Device Monitor
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context
-broker. Details of the architecture and protocol used can be found in the
-[IoT Sensors tutorial](iot-sensors.md). The state of each device can be seen on the
-UltraLight device monitor web page found at: `http://localhost:3000/device/monitor`
+broker. Details of the architecture and protocol used can be found in the [IoT Sensors tutorial](iot-sensors.md). The
+state of each device can be seen on the UltraLight device monitor web page found at:
+`http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Time-Series-Data/img/device-monitor.png)
 
@@ -94,9 +92,8 @@ web page found at: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
 # Architecture
 
-This application builds on the components and dummy IoT devices created in
-[previous tutorials](iot-agent.md). It will use three FIWARE components: the
-[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
+This application builds on the components and dummy IoT devices created in [previous tutorials](iot-agent.md). It will
+use three FIWARE components: the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/), and
 [QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) .
 
@@ -125,8 +122,7 @@ Therefore the overall architecture will consist of the following elements:
     -   Used as a data sink to hold time-based historical context data
     -   offers an HTTP endpoint to interpret time-based data queries
 
--   A **Context Provider**: - A webserver acting as set of
-    [dummy IoT devices](iot-sensors.md) using the
+-   A **Context Provider**: - A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
     [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
     protocol running over HTTP. - Note the **Stock Management Frontend** and **Context Provider NGSI** proxy are not
     used in this tutorial.
@@ -182,8 +178,8 @@ crate-db:
         - "4200:4200"
         - "4300:4300"
     command:
-        crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster
-        -Chttp.cors.enabled=true -Chttp.cors.allow-origin="*"
+        crate -Cauth.host_based.enabled=false  -Ccluster.name=democluster -Chttp.cors.enabled=true
+        -Chttp.cors.allow-origin="*"
     environment:
         - CRATE_HEAP_SIZE=2g
 ```
@@ -973,7 +969,7 @@ The basic processing consists of two-step - retrieval and attribute mapping, sam
 
 ```javascript
 function readCrateLampLuminosity(id, aggMethod) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         const sqlStatement =
             "SELECT DATE_FORMAT (DATE_TRUNC ('minute', time_index)) AS minute, " +
             aggMethod +
@@ -1003,7 +999,7 @@ function crateToTimeSeries(crateResponse, aggMethod, hexColor) {
     const color = [];
 
     if (crateResponse && crateResponse.rows && crateResponse.rows.length > 0) {
-        _.forEach(crateResponse.rows, element => {
+        _.forEach(crateResponse.rows, (element) => {
             const date = moment(element[0]);
             data.push({ t: date, y: element[1] });
             labels.push(date.format("HH:mm"));

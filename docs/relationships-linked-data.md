@@ -820,8 +820,8 @@ The response contains an array displaying
 
 ### Adding a 1-many relationship
 
-To add a 1-many relationship, add an array of Relationship items as the attribute. This can be used for simple links without
-additional data. This method is used to add **Shelf** entities as `furniture` in the **Store**.
+To add a 1-many relationship, add an array of Relationship items as the attribute. This can be used for simple links
+without additional data. This method is used to add **Shelf** entities as `furniture` in the **Store**.
 
 This is the reciprocal relationship to the `locatedIn` attribute on **Shelf**
 

@@ -4,8 +4,8 @@
 **Description:** This tutorial is an introduction to [FIWARE Cygnus](https://fiware-cygnus.readthedocs.io/en/latest/) -
 a generic enabler which is used to persist context data into third-party databases using
 [Apache Flume](https://flume.apache.org) creating a historical view of the context. The tutorial activates the IoT
-sensors connected in the [previous tutorial](iot-agent.md) and persists measurements
-from those sensors into a database for further analysis.
+sensors connected in the [previous tutorial](iot-agent.md) and persists measurements from those sensors into a database
+for further analysis.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.Historic-Context-Flume/)
@@ -875,10 +875,10 @@ The `mysql-db` container is listening on a single port:
 
 The `mysql-db` container is driven by environment variables as shown:
 
-| Key                 | Value.     | Description                                                                                                                                                                                           |
-| ------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MYSQL_ROOT_PASSWORD | `123`.     | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
-| MYSQL_ROOT_HOST     | `%` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
+| Key                 | Value. | Description                                                                                                                                                                                           |
+| ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| MYSQL_ROOT_PASSWORD | `123`. | specifies a password that is set for the MySQL `root` account.                                                                                                                                        |
+| MYSQL_ROOT_HOST     | `%`    | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
 > **Note:** Using the default `root` user and displaying the password in an environment variables like this is a
 > security risk. Whereas this is acceptable practice in a tutorial, for a production environment, you can avoid this

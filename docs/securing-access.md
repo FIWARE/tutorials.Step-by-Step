@@ -93,9 +93,9 @@ tutorial:
 # Architecture
 
 This application adds OAuth2-driven security into the existing Stock Management and Sensors-based application created in
-[previous tutorials](iot-agent.md) by using the data created in the first
-[security tutorial](identity-management.md) and reading it programatically. It will
-make use of three FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
+[previous tutorials](iot-agent.md) by using the data created in the first [security tutorial](identity-management.md)
+and reading it programatically. It will make use of three FIWARE components - the
+[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/),the
 [IoT Agent for UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/) and integrates the use of the
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler. Usage of the Orion Context Broker is sufficient
 for an application to qualify as _“Powered by FIWARE”_.
@@ -397,11 +397,11 @@ function userCredentialGrant(req, res) {
     const password = req.body.password;
 
     oa.getOAuthPasswordCredentials(email, password)
-        .then(results => {
+        .then((results) => {
             logAccessToken(req, results.access_token);
             return getUserFromAccessToken(req, results.access_token);
         })
-        .then(user => {
+        .then((user) => {
             // Store User and return
         });
 }
@@ -409,13 +409,13 @@ function userCredentialGrant(req, res) {
 
 ```javascript
 function getUserFromAccessToken(req, accessToken) {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         oa.get(keyrockIPAddress + "/user", accessToken)
-            .then(response => {
+            .then((response) => {
                 const user = JSON.parse(response);
                 return resolve(user);
             })
-            .catch(error => {
+            .catch((error) => {
                 req.flash("error", "User not found");
                 return reject(error);
             });
@@ -467,10 +467,10 @@ interim access code is received from **Keyrock** and second request must be made
 function authCodeGrantCallback(req, res) {
     return oa
         .getOAuthAccessToken(req.query.code)
-        .then(results => {
+        .then((results) => {
             return getUserFromAccessToken(req, results.access_token);
         })
-        .then(user => {
+        .then((user) => {
             // Store User and return
         });
 }
@@ -520,7 +520,7 @@ usable access token is received from **Keyrock**
 
 ```javascript
 function implicitGrantCallback(req, res) {
-    return getUserFromAccessToken(req, req.query.token).then(user => {
+    return getUserFromAccessToken(req, req.query.token).then((user) => {
         // Store User and return
     });
 }
@@ -587,7 +587,7 @@ The code is similar to the User Credential Grant, but without an explicit userna
 
 ```javascript
 function clientCredentialGrant(req, res) {
-    oa.getOAuthClientCredentials().then(results => {
+    oa.getOAuthClientCredentials().then((results) => {
         // Store Access token
     });
 }
@@ -678,7 +678,7 @@ used to receive a new `access_token` once the previous token has expired.
 
 ```javascript
 function refreshTokenGrant(req, res) {
-    return oa.getOAuthRefreshToken(req.session.refresh_token).then(results => {
+    return oa.getOAuthRefreshToken(req.session.refresh_token).then((results) => {
         // Store new Access Token
     });
 }
@@ -748,11 +748,11 @@ function pdpAuthentication(req, res, next) {
         keyrockIPAddress + "/user" + "?access_token=" + req.session.access_token + "&app_id=" + clientId;
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             res.locals.authorized = true;
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();
@@ -836,12 +836,12 @@ function pdpBasicAuthorization(req, res, next, url = req.url) {
         clientId;
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             const user = JSON.parse(response);
             res.locals.authorized = user.authorization_decision === "Permit";
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();

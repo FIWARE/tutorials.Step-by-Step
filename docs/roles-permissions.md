@@ -256,8 +256,8 @@ The following people at `example.com` have signed up for accounts, but have no r
 -   Mallory - Mallory the malicious attacker
 -   Rob - Rob the Robber
 
-| Name       | eMail                     | Password | UUID                                   |
-| ---------- | ------------------------- | -------- | -------------------------------------- |
+| Name       | eMail                       | Password | UUID                                   |
+| ---------- | --------------------------- | -------- | -------------------------------------- |
 | alice      | `alice-the-admin@test.com`  | `test`   | `aaaaaaaa-good-0000-0000-000000000000` |
 | bob        | `bob-the-manager@test.com`  | `test`   | `bbbbbbbb-good-0000-0000-000000000000` |
 | charlie    | `charlie-security@test.com` | `test`   | `cccccccc-good-0000-0000-000000000000` |

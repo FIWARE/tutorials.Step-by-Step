@@ -29,11 +29,10 @@ between generic enablers. [Postman documentation](https://fiware.github.io/tutor
 >
 > — Quran 6.151, Sūrat al-Anʻām
 
-[Previous tutorials](securing-access.md) have introduced a simple access control system
-based on _authentication_ (level 1) or _basic authorization_ access to resources based on a role (level 2). These
-policies are easy to create, but the rules within them are very black and white, rules cannot rely on one another, have
-exception clauses or offer access based on time limits or attribute values. There is also no mechanism to resolve
-different rules in the case of conflict.
+[Previous tutorials](securing-access.md) have introduced a simple access control system based on _authentication_
+(level 1) or _basic authorization_ access to resources based on a role (level 2). These policies are easy to create, but
+the rules within them are very black and white, rules cannot rely on one another, have exception clauses or offer access
+based on time limits or attribute values. There is also no mechanism to resolve different rules in the case of conflict.
 
 To satisfy a complex access control scenario, an additional arbitration microservice is required, which is able to come
 to a judgement on each Permit/Deny policy decision by reading and interpreting the full set of access control rules, and
@@ -757,8 +756,8 @@ As a reminder, there are three Levels of PDP Access Control:
 
 Within FIWARE, Level 3 access control can be provided by adding **Authzforce** to the existing security microservices
 (IDM and PEP Proxy) within the Smart Application infrastructure. Access control levels 1 and 2 have been covered in
-[previous tutorials](securing-access.md) and can be fulfilled using **Keyrock** alone
-or with or without an associated PEP Proxy.
+[previous tutorials](securing-access.md) and can be fulfilled using **Keyrock** alone or with or without an associated
+PEP Proxy.
 
 ## Advanced Authorization
 
@@ -926,15 +925,15 @@ function authorizeAdvancedXACML(req, res, next, resource = req.url) {
 
     return oa
         .get(keyrockUserUrl)
-        .then(response => {
+        .then((response) => {
             const user = JSON.parse(response);
             return azf.policyDomainRequest(user.app_azf_domain, user.roles, resource, req.method);
         })
-        .then(authzforceResponse => {
+        .then((authzforceResponse) => {
             res.locals.authorized = authzforceResponse === "Permit";
             return next();
         })
-        .catch(error => {
+        .catch((error) => {
             debug(error);
             res.locals.authorized = false;
             return next();
@@ -966,9 +965,9 @@ function policyDomainRequest(domain, roles, resource, action) {
     };
 
     return new Promise((resolve, reject) => {
-        request(options, function(error, response, body) {
+        request(options, function (error, response, body) {
             let decision;
-            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function(err, jsonRes) {
+            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function (err, jsonRes) {
                 // The decision is found within the /Response/Result[0]/Decision[0] XPath
                 decision = jsonRes.Response.Result[0].Decision[0];
             });

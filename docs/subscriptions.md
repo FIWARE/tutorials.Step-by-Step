@@ -4,8 +4,8 @@
 **Description:** This tutorial teaches FIWARE users about how to create and manage context data subscriptions. The
 tutorial builds on the entities and
 [Stock Management Frontend](https://github.com/FIWARE/tutorials.Step-by-Step/tree/master/context-provider) application
-created in the previous [example](accessing-context.md) to enable users to understand
-the [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) Subscribe/Notify paradigm and how to use NGSI
+created in the previous [example](accessing-context.md) to enable users to understand the
+[NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) Subscribe/Notify paradigm and how to use NGSI
 subscriptions within their own code.
 
 The tutorial refers to Stock Management actions made within the browser combined with [cUrl](https://ec.haxx.se/)
@@ -188,7 +188,7 @@ Code within the Stock Management frontend application handles received the POST 
 
 ```javascript
 router.post("/subscription/:type", (req, res) => {
-    _.forEach(req.body.data, item => {
+    _.forEach(req.body.data, (item) => {
         broadcastEvents(req, item, ["refStore", "refProduct", "refShelf", "type"]);
     });
     res.status(204).send();
@@ -196,7 +196,7 @@ router.post("/subscription/:type", (req, res) => {
 
 function broadcastEvents(req, item, types) {
     const message = req.params.type + " received";
-    _.forEach(types, type => {
+    _.forEach(types, (type) => {
         if (item[type]) {
             req.app.get("io").emit(item[type], message);
         }

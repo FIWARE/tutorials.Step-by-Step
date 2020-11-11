@@ -1,9 +1,8 @@
 [![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://github.com/FIWARE/catalogue/blob/master/security/README.md)
 [![OpenID 1.0](https://img.shields.io/badge/OpenID-1.0-ff7059.svg)](https://openid.net/specs/openid-connect-core-1_0.html)
 
-**Description:** This tutorial complements the previous
-[Securing Access tutorial](securing-access.md). This tutorial also secures access to a
-FIWARE application but using various **OpenID Connect** flows to authenticate users.
+**Description:** This tutorial complements the previous [Securing Access tutorial](securing-access.md). This tutorial
+also secures access to a FIWARE application but using various **OpenID Connect** flows to authenticate users.
 
 # Authenticating Identities (Open-ID)
 
@@ -99,12 +98,11 @@ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM
 # Architecture
 
 This application adds OIDC-driven security into the existing Stock Management and Sensors-based application created in
-[previous tutorials](iot-agent.md) by using the data created in the first
-[security tutorial](identity-management.md) and reading it programmatically. It will
-make use of one FIWARE component - the [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler.
-**Keyrock** uses its own [MySQL](https://www.mysql.com/) database. This tutorial only focus on granting JWT by the use
-of OIDC. You can practice using the tokens to securely access sensor information in the tutorial
-[Securing Access tutorial](securing-access.md).
+[previous tutorials](iot-agent.md) by using the data created in the first [security tutorial](identity-management.md)
+and reading it programmatically. It will make use of one FIWARE component - the
+[Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Generic enabler. **Keyrock** uses its own
+[MySQL](https://www.mysql.com/) database. This tutorial only focus on granting JWT by the use of OIDC. You can practice
+using the tokens to securely access sensor information in the tutorial [Securing Access tutorial](securing-access.md).
 
 Therefore the overall architecture will consist of the following elements:
 
@@ -397,10 +395,10 @@ interim access code is received from **Keyrock** and second request must be made
 function authCodeOICGrantCallback(req, res) {
     return oa
         .getOAuthAccessToken(req.query.code, "authorization_code")
-        .then(results => {
+        .then((results) => {
             return getUserFromIdToken(req, results.id_token);
         })
-        .then(user => {
+        .then((user) => {
             // Store user
         });
 }
@@ -411,8 +409,8 @@ through the environment variables and obtain the user information from that id_t
 
 ```javascript
 function getUserFromIdToken(req, idToken) {
-    return new Promise(function(resolve, reject) {
-        jwt.verify(idToken, jwtSecret, function(error, decoded) {
+    return new Promise(function (resolve, reject) {
+        jwt.verify(idToken, jwtSecret, function (error, decoded) {
             // Decoded --> Json with user, token and issuer information
         });
     });
@@ -490,7 +488,7 @@ usable access token is received from **Keyrock**
 
 ```javascript
 function implicitOICGrantCallback(req, res) {
-    return getUserFromIdToken(req, req.query.id_token).then(user => {
+    return getUserFromIdToken(req, req.query.id_token).then((user) => {
         // Store User and return
     });
 }
@@ -549,10 +547,10 @@ interim access code is received from **Keyrock** and second request must be made
 function authCodeOICGrantCallback(req, res) {
     return oa
         .getOAuthAccessToken(req.query.code, "hybrid")
-        .then(results => {
+        .then((results) => {
             return getUserFromIdToken(req, results.id_token);
         })
-        .then(user => {
+        .then((user) => {
             // Store User and return
         });
 }
