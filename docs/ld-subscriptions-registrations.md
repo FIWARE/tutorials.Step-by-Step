@@ -317,7 +317,10 @@ multiple context providers. For a simple registration, all context requests are 
 | **DELETE** | Pass request to **Context Provider**                                        | Delete the entity within the **Context Provider**, Respond to the context broker with a status code |
 
 Effectively every simple registration is saying _"this entity is held elsewhere"_, but the entity data can be requested
-and modified via requests to this context broker.
+and modified via requests to this context broker. All context brokers should support simple registrations, and indeed,
+simple registrations such as these are necessary for the operation of federated arrays of context brokers working in
+large scale systems, where there is no concept of "entity exclusiveness", that is no entity is bound to an individual
+broker.
 
 For partial registrations the situation is more complex
 
@@ -328,7 +331,9 @@ For partial registrations the situation is more complex
 | **DELETE** | If deleting an entity, remove the complete local instance. If deleting locally held attributes remove them. If deleting attributes held in the **Context Provider**, pass request on to **Context Provider**                | Delete the entity attributes within the **Context Provider**, Respond to the context broker with a status code                       |
 
 Each partial registration is saying _"additional augmented context for this entity is held elsewhere"_. The entity data
-can be requested and modified via requests to this context broker.
+can be requested and modified via requests to this context broker. In this case the entity data is effectively bound to
+an individual context broker, and therefore may need special processing when running in a large-scale federated
+environment. Covering the special needs of the federation use-case is not the concern of this tutorial here.
 
 Note that within the context broker a single entity cannot partake in both a simple registration and a partial
 registration at the same time, as this would indicate that both the whole entity and only part of that entity are to be
