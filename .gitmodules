@@ -95,10 +95,6 @@
 	path = tutorials.Relationships-Linked-Data
 	url = https://github.com/FIWARE/tutorials.Relationships-Linked-Data.git
 	branch = NGSI-v2
-[submodule "tutorials.Big-Data-Analysis"]
-	path = tutorials.Big-Data-Analysis
-	url = https://github.com/FIWARE/tutorials.Big-Data-Analysis.git
-	branch = NGSI-v2
 [submodule "tutorials.Accessing-Linked-Data"]
 	path = tutorials.Working-with-Linked-Data
 	url = https://github.com/FIWARE/tutorials.Accessing-Linked-Data.git
@@ -122,4 +118,8 @@
 [submodule "tutorials.Securing-Access-OpenID-Connect"]
 	path = tutorials.Securing-Access-OpenID-Connect
 	url = https://github.com/FIWARE/tutorials.Securing-Access-OpenID-Connect.git
+	branch = NGSI-v2
+[submodule "tutorials.Big-Data-Flink"]
+	path = tutorials.Big-Data-Flink
+	url = https://github.com/FIWARE/tutorials.Big-Data-Flink
 	branch = NGSI-v2
