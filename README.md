@@ -73,8 +73,8 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 [Entity Relationships](https://github.com/FIWARE/tutorials.Entity-Relationships/tree/NGSI-v2)<br/> &nbsp; 103.
 [CRUD Operations](https://github.com/FIWARE/tutorials.CRUD-Operations/tree/NGSI-v2)<br/> &nbsp; 104.
 [Context Providers](https://github.com/FIWARE/tutorials.Context-Providers/tree/NGSI-v2)<br/> &nbsp; 105.
-[Altering the Context Programmatically](https://github.com/FIWARE/tutorials.Accessing-Context/tree/NGSI-v2)<br/> &nbsp; 106.
-[Subscribing to Changes in Context](https://github.com/FIWARE/tutorials.Subscriptions/tree/NGSI-v2)
+[Altering the Context Programmatically](https://github.com/FIWARE/tutorials.Accessing-Context/tree/NGSI-v2)<br/>
+&nbsp; 106. [Subscribing to Changes in Context](https://github.com/FIWARE/tutorials.Subscriptions/tree/NGSI-v2)
 
 ### Internet of Things, Robots and third-party systems
 
@@ -91,14 +91,16 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 MongoDB, MySQL, PostgreSQL<br/> &nbsp; 302.
 [Persisting Context Data using Apache NIFI](https://github.com/FIWARE/tutorials.Historic-Context-NIFI) - MongoDB, MySQL,
 PostgreSQL<br/> &nbsp; 303.
-[Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History/tree/NGSI-v2)<br/> &nbsp; 304.
-[Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data/tree/NGSI-v2)<br/> &nbsp; 305.
-[Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis/tree/NGSI-v2)
+[Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History/tree/NGSI-v2)<br/>
+&nbsp; 304.
+[Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data/tree/NGSI-v2)<br/>
+&nbsp; 305. [Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Analysis/tree/NGSI-v2)
 
 ### Security: Identity Management
 
-&nbsp; 401. [Managing Users and Organizations](https://github.com/FIWARE/tutorials.Identity-Management/tree/NGSI-v2)<br/> &nbsp; 402.
-[Roles and Permissions](https://github.com/FIWARE/tutorials.Roles-Permissions/tree/NGSI-v2)<br/> &nbsp; 403.
+&nbsp; 401.
+[Managing Users and Organizations](https://github.com/FIWARE/tutorials.Identity-Management/tree/NGSI-v2)<br/>
+&nbsp; 402. [Roles and Permissions](https://github.com/FIWARE/tutorials.Roles-Permissions/tree/NGSI-v2)<br/> &nbsp; 403.
 [Securing Application Access](https://github.com/FIWARE/tutorials.Securing-Access/tree/NGSI-v2)<br/> &nbsp; 404.
 [Securing Microservices with a PEP Proxy](https://github.com/FIWARE/tutorials.PEP-Proxy/tree/NGSI-v2)<br/> &nbsp; 405.
 [XACML Rules-based Permissions](https://github.com/FIWARE/tutorials.XACML-Access-Rules/tree/NGSI-v2)<br/> &nbsp; 406.
@@ -107,15 +109,16 @@ PostgreSQL<br/> &nbsp; 303.
 
 ### Processing, Analysis and Visualization
 
-&nbsp; 501. [Creating Application Mashups](https://github.com/FIWARE/tutorials.Application-Mashup/tree/NGSI-v2)<br/> &nbsp; 503.
-[Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams/tree/NGSI-v2)<br/> &nbsp; 507.
-[Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing/tree/NGSI-v2)
+&nbsp; 501. [Creating Application Mashups](https://github.com/FIWARE/tutorials.Application-Mashup/tree/NGSI-v2)<br/>
+&nbsp; 503. [Introduction to Media Streams](https://github.com/FIWARE/tutorials.Media-Streams/tree/NGSI-v2)<br/>
+&nbsp; 507. [Cloud-Edge Computing](https://github.com/FIWARE/tutorials.Edge-Computing/tree/NGSI-v2)
 
 ### NGSI-LD for NGSI-v2 Developers
 
 &nbsp; 601. [Introduction to Linked Data](https://github.com/FIWARE/tutorials.Linked-Data/tree/NGSI-v2)<br/> &nbsp; 602.
 [Linked Data Relationships and Data Models](https://github.com/FIWARE/tutorials.Relationships-Linked-Data/tree/NGSI-v2)<br/>
-&nbsp; 603. [Traversing Linked Data Programmatically](https://github.com/FIWARE/tutorials.Accessing-Linked-Data/tree/NGSI-v2)<br/>
+&nbsp; 603.
+[Traversing Linked Data Programmatically](https://github.com/FIWARE/tutorials.Accessing-Linked-Data/tree/NGSI-v2)<br/>
 &nbsp; 604.
 [Linked Data Subscriptions and Registrations](https://github.com/FIWARE/tutorials.LD-Subscriptions-Registrations/tree/NGSI-v2)<br/>
 
