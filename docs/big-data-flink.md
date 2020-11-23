@@ -162,8 +162,8 @@ the repository and create the necessary images by running the commands shown bel
 of the commands as a privileged user:
 
 ```bash
-git clone https://github.com/FIWARE/tutorials.Big-Data-Analysis.git
-cd tutorials.Big-Data-Analysis
+git clone https://github.com/FIWARE/tutorials.Big-Data-Flink.git
+cd tutorials.Big-Data-Flink
 ./services create
 ```
 
@@ -210,7 +210,7 @@ The `orion-flink.connect.jar` offers both **Source** and **Sink** operations. It
 necessary Scala code to connect the streaming dataflow pipeline operations together. The processing code can be complied
 into a JAR file which can be uploaded to the flink cluster. Two examples will be detailed below, all the source code for
 this tutorial can be found within the
-[cosmos-examples](https://github.com/FIWARE/tutorials.Big-Data-Analysis/tree/master/cosmos-examples) directory.
+[cosmos-examples](https://github.com/FIWARE/tutorials.Big-Data-Flink/tree/master/cosmos-examples) directory.
 
 Further Flink processing examples can be found on the
 [Apache Flink site](https://ci.apache.org/projects/flink/flink-docs-release-1.9/getting-started) and
@@ -257,7 +257,7 @@ on the same page:
 The first example makes use of the `OrionSource` operator in order to receive notifications from the Orion Context
 Broker. Specifically, the example counts the number notifications that each type of device sends in one minute. You can
 find the source code of the example in
-[org/fiware/cosmos/tutorial/Logger.scala](https://github.com/FIWARE/tutorials.Big-Data-Analysis/blob/master/cosmos-examples/src/main/scala/org/fiware/cosmos/tutorial/Logger.scala)
+[org/fiware/cosmos/tutorial/Logger.scala](https://github.com/FIWARE/tutorials.Big-Data-Flink/blob/master/cosmos-examples/src/main/scala/org/fiware/cosmos/tutorial/Logger.scala)
 
 ### Logger - Installing the JAR
 
@@ -457,7 +457,7 @@ The second example switches on a lamp when its motion sensor detects movement.
 The dataflow stream uses the `OrionSource` operator in order to receive notifications and filters the input to only
 respond to motion senseors and then uses the `OrionSink` to push processed context back to the Context Broker. You can
 find the source code of the example in
-[org/fiware/cosmos/tutorial/Feedback.scala](https://github.com/FIWARE/tutorials.Big-Data-Analysis/blob/master/cosmos-examples/src/main/scala/org/fiware/cosmos/tutorial/Feedback.scala)
+[org/fiware/cosmos/tutorial/Feedback.scala](https://github.com/FIWARE/tutorials.Big-Data-Flink/blob/master/cosmos-examples/src/main/scala/org/fiware/cosmos/tutorial/Feedback.scala)
 
 ### Feedback Loop - Installing the JAR
 

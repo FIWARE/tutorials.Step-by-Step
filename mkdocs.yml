@@ -30,6 +30,7 @@ pages:
       - "Short Term History": "short-term-history.md"
       - "Time-Series Data": "time-series-data.md"
       - "Big Data Analysis (Flink)": "big-data-flink.md"
+      - "Big Data Analysis (Spark)": "big-data-spark.md"
   - "Identity Management":
       - "Administrating Users": "identity-management.md"
       - "Managing Roles and Permissions": "roles-permissions.md"

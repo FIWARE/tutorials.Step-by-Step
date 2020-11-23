@@ -123,3 +123,6 @@
 	path = tutorials.Big-Data-Flink
 	url = https://github.com/FIWARE/tutorials.Big-Data-Flink
 	branch = NGSI-v2
+[submodule "tutorials.Big-Data-Spark"]
+	path = tutorials.Big-Data-Spark
+	url = https://github.com/FIWARE/tutorials.Big-Data-Spark
