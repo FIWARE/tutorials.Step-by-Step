@@ -40,7 +40,7 @@ question.
 For the purpose of this tutorial we will amend code from the existing Ultralight IoT Agent to process a similar custom
 XML format. A direct comparison of the two IoT Agents can be seen below:
 
-| IoT Agent for Ultralight                                            | IoT Agent for JSON                                                                    | Protocol's Area of Concern |
+| IoT Agent for Ultralight                                            | IoT Agent for XML                                                                     | Protocol's Area of Concern |
 | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | -------------------------- |
 | Sample Measure `c\|1`                                               | Sample Measure `<measure device="lamp002" key="xxx">`<br/>&nbsp;`<c value="1"/>`<br/> |
 | `</measure>`                                                        | Message Payload                                                                       |
@@ -89,7 +89,7 @@ This base functionality has been abstracted out into a common
 
 For the purpose of this tutorial, a series of dummy IoT devices have been created, which will be attached to the context
 broker. Details of the architecture and protocol used can be found in the [IoT Sensors tutorial](iot-sensors.md) The
-state of each device can be seen on the JSON device monitor web page found at: `http://localhost:3000/device/monitor`
+state of each device can be seen on the XML device monitor web page found at: `http://localhost:3000/device/monitor`
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Custom-IoT-Agent/img/device-monitor.png)
 
@@ -154,7 +154,7 @@ tutorial:
 The `tutorial` container is listening on two ports:
 
 -   Port `3000` is exposed so we can see the web page displaying the Dummy IoT devices.
--   Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make JSON commands without being
+-   Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make XML commands without being
     part of the same network.
 
 The `tutorial` container is driven by environment variables as shown:
@@ -163,8 +163,8 @@ The `tutorial` container is driven by environment variables as shown:
 | ----------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | DEBUG                   | `tutorial:*`                 | Debug flag used for logging                                                                                                        |
 | WEB_APP_PORT            | `3000`                       | Port used by web-app which displays the dummy device data                                                                          |
-| IOTA_HTTP_HOST          | `iot-agent`                  | The hostname of the IoT Agent for JSON - see below                                                                                 |
-| IOTA_HTTP_PORT          | `7896`                       | The port that the IoT Agent for JSON will be listening on. `7896` is a common default for JSON over HTTP                           |
+| IOTA_HTTP_HOST          | `iot-agent`                  | The hostname of the IoT Agent for XML - see below                                                                                 |
+| IOTA_HTTP_PORT          | `7896`                       | The port that the IoT Agent for XML will be listening on. `7896` is a common default for comms over HTTP                           |
 | DUMMY_DEVICES_PORT      | `3001`                       | Port used by the dummy IoT devices to receive commands                                                                             |
 | DUMMY_DEVICES_API_KEY   | `4jggokgpepnvsb2uv4s40d59ov` | Random security key used for IoT interactions - used to ensure the integrity of interactions between the devices and the IoT Agent |
 | DUMMY_DEVICES_TRANSPORT | `HTTP`                       | The transport protocol used by the dummy IoT devices                                                                               |
@@ -210,7 +210,7 @@ iot-agent:
         - IOTA_AUTOCAST=true
         - IOTA_MONGO_HOST=mongo-db
         - IOTA_MONGO_PORT=27017
-        - IOTA_MONGO_DB=iotagentjson
+        - IOTA_MONGO_DB=iotagentxml
         - IOTA_HTTP_PORT=7896
         - IOTA_PROVIDER_URL=http://iot-agent:4041
         - IOTA_DEFAULT_RESOURCE=/iot/xml
@@ -219,7 +219,7 @@ iot-agent:
 The `iot-agent` container relies on the precence of the Orion Context Broker and uses a MongoDB database to hold device
 information such as device URLs and Keys. The container is listening on two ports:
 
--   Port `7896` is exposed to receive JSON measurements over HTTP from the Dummy IoT devices
+-   Port `7896` is exposed to receive XML measurements over HTTP from the Dummy IoT devices
 -   Port `4041` is exposed purely for tutorial access - so that cUrl or Postman can make provisioning commands without
     being part of the same network.
 
@@ -234,10 +234,10 @@ The `iot-agent` container is driven by environment variables as shown:
 | IOTA_LOG_LEVEL        | `DEBUG`                 | The log level of the IoT Agent                                                                                                                        |
 | IOTA_TIMESTAMP        | `true`                  | Whether to supply timestamp information with each measurement received from attached devices                                                          |
 | IOTA_CB_NGSI_VERSION  | `v2`                    | Whether to supply use NGSI v2 when sending updates for active attributes                                                                              |
-| IOTA_AUTOCAST         | `true`                  | Ensure JSON number values are read as numbers not strings                                                                                             |
+| IOTA_AUTOCAST         | `true`                  | Ensure XML number values are read as numbers not strings                                                                                             |
 | IOTA_MONGO_HOST       | `context-db`            | The hostname of mongoDB - used for holding device information                                                                                         |
 | IOTA_MONGO_PORT       | `27017`                 | The port mongoDB is listening on                                                                                                                      |
-| IOTA_MONGO_DB         | `iotagentjson`          | The name of the database used in mongoDB                                                                                                              |
+| IOTA_MONGO_DB         | `iotagentxml`          | The name of the database used in mongoDB                                                                                                              |
 | IOTA_HTTP_PORT        | `7896`                  | The port where the IoT Agent listens for IoT device traffic over HTTP                                                                                 |
 | IOTA_PROVIDER_URL     | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
 | IOTA_DEFAULT_RESOURCE | `/iot/xml`              | The default path the IoT Agent uses listenening for custom XML measures.                                                                              |
@@ -562,7 +562,7 @@ within the context data.
 ### Provisioning an Actuator
 
 Provisioning an actuator is similar to provisioning a sensor. This time an `endpoint` attribute holds the location where
-the IoT Agent needs to send the JSON command and the `commands` array includes a list of each command that can be
+the IoT Agent needs to send the XML command and the `commands` array includes a list of each command that can be
 invoked. The example below provisions a bell with the `deviceId=bell001`. The endpoint is
 `http://iot-sensors:3001/iot/bell001` and it can accept the `ring` command. The `transport=HTTP` attribute defines the
 communications protocol to be used.
