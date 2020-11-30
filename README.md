@@ -85,7 +85,7 @@ to provide a command-line functionality similar to a Linux distribution on Windo
 [Creating a Custom IoT Agent](https://github.com/FIWARE/tutorials.Custom-IoT-Agent/tree/NGSI-v2)<br/> &nbsp; 250.
 [Introduction to Fast-RTPS and Micro-RTPS](https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS/tree/NGSI-v2)
 
-### Core Context Management:Persisting Historic Data
+### Core Context Management: Manipulating Context Data and Persisting Historic Data
 
 &nbsp; 301. [Persisting Context Data using Apache Flume](https://github.com/FIWARE/tutorials.Historic-Context-Flume) -
 MongoDB, MySQL, PostgreSQL<br/> &nbsp; 302.
@@ -94,7 +94,7 @@ PostgreSQL<br/> &nbsp; 303.
 [Querying Time Series Data (MongoDB)](https://github.com/FIWARE/tutorials.Short-Term-History/tree/NGSI-v2)<br/>
 &nbsp; 304.
 [Querying Time Series Data (CrateDB)](https://github.com/FIWARE/tutorials.Time-Series-Data/tree/NGSI-v2)<br/>
-&nbsp; 305. [Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Flink/tree/NGSI-v2)
+&nbsp; 305. [Big Data Analysis (Flink)](https://github.com/FIWARE/tutorials.Big-Data-Flink/tree/NGSI-v2)<br/>
 &nbsp; 306. [Big Data Analysis (Spark)](https://github.com/FIWARE/tutorials.Big-Data-Spark/tree/NGSI-v2)
 
 ### Security: Identity Management
