@@ -24,7 +24,7 @@ pages:
       - "IoT over MQTT": "iot-over-mqtt.md"
       - "Custom IoT Agent (XML)": "custom-iot-agent.md"
       - "Fast RTPS-Micro RTPS": "fast-rtps-micro-rtps.md"
-  - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>History Management</span>":
+  - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>Processing & History Management</span>":
       - "Persisting Context (Apache Flume)": "historic-context-flume.md"
       - "Persisting Context (Apache NIFI)": "historic-context-nifi.md"
       - "Short Term History": "short-term-history.md"
