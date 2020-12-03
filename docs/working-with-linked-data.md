@@ -269,7 +269,7 @@ The equivalent cUrl statement can be seen below:
 ```bash
 curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store001/' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -d 'options=keyValues'
 ```
 
@@ -316,7 +316,7 @@ The equivalent cUrl statement can be seen below:
 ```bash
 curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store001/' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -d 'options=keyValues' \
 -d 'attrs=furniture' \
 ```
@@ -359,7 +359,7 @@ The equivalent cUrl statement can be seen below:
 ```bash
 curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d 'type=Shelf' \
 -d 'options=keyValues' \
@@ -403,7 +403,7 @@ The equivalent cUrl statement can be seen below:
 ```bash
 curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d 'type=Product' \
 -d 'options=keyValues' \
@@ -440,7 +440,7 @@ The equivalent cUrl statement can be seen below:
 ```bash
 curl -G -X GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -H 'Accept: application/json' \
 -d 'type=Shelf' \
 -d 'options=keyValues' \
@@ -563,7 +563,7 @@ is pointing to the tutorial JSON-LD `@context` file.
 
 ```bash
 curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store005' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/tutorials-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -612,7 +612,7 @@ supplied in the `Link` header.
 
 ```bash
 curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Building:store003' \
--H 'Content-Type: application/ld+json' \
+-H 'Content-Type: application/json' \
 -H 'Link: <https://fiware.github.io/tutorials.Step-by-Step/japanese-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
