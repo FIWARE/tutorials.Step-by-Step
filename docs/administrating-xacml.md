@@ -645,15 +645,15 @@ are applied:
 #### Security Staff
 
 -   Can unlock the door at any time
--   Can ring the alarm bell before 9 a.m. or after 5 p.m.
+-   Can ring the alarm bell before 8 a.m. or after 5 p.m. UTC.
 -   Can access the **context broker** data at any time
 
 #### Mangement
 
 -   Have access to the price change area
 -   Have access to the stock count area
--   Can ring the alarm bell between 9 a.m. and 5 p.m.
--   Can access the **context broker** data from 9 a.m. to 5 p.m.
+-   Can ring the alarm bell between 8 a.m. or after 5 p.m. UTC.
+-   Can access the **context broker** data from 8 a.m. or after 5 p.m. UTC.
 
 As you can see some of the new rules now have a time element to them and are no longer simple Verb-Resource rules.
 
@@ -780,7 +780,7 @@ details of the associated XACML `<Rule>` the `action` and `resource` fields are 
 
 There is already one `<Rule>` within the `xml` attribute, which states the following:
 
-> **Security Staff** Can only ring the alarm bell **before** 9 a.m. or **after** 5 p.m.
+> **Security Staff** Can only ring the alarm bell **before** 8 a.m. or **after** 5 p.m. UTC.
 
 To see the full `<Rule>` [**(Click to EXPAND)**](cmds/administrating-xacml.md#13-request)
 
@@ -809,7 +809,7 @@ on the current server time.
 ### Deny Access to a Resource
 
 To request a decision from Authzforce, make a POST request to the `domains/{domain-id}/pdp` endpoint. In this case the
-user has the is requesting access to `POST` to the `/ring/bell` endpoint.
+user is requesting access to `POST` to the `/bell/ring` endpoint.
 
 #### 14 Request
 
@@ -845,7 +845,7 @@ curl -X POST \
 
 The response for the request includes a `<Decision>` element to `Permit` or `Deny` access to the resource.
 
-If the time on the server is between 9 a.m. and 5 p.m. the access request will be denied.
+If the time on the server is between 8 a.m. and 5 p.m. the access request will be denied.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -860,7 +860,7 @@ If the time on the server is between 9 a.m. and 5 p.m. the access request will b
 
 The policy will now be updated as follows:
 
-> **Security Staff** Can only ring the alarm bell before 9 a.m. or after 5 p.m., except for **Charlie** who can ring the
+> **Security Staff** Can only ring the alarm bell before 8 a.m. or after 5 p.m., except for **Charlie** who can ring the
 > bell at any time
 
 This means that the `alrmbell-ring-24hr-xaml-000000000000` permission will need to be amended to apply two rules:
@@ -1112,7 +1112,7 @@ Detective1 works for Charlie and has the **security** role
     permission
 -   Open the Device Monitor on `http://localhost:3000/device/monitor`
     -   Unlock a door - access is **permitted** - This is a security only permission
-    -   Ring a bell - access is **denied** - This is not permitted to security users between 9 a.m. and 5 p.m.
+    -   Ring a bell - access is **denied** - This is not permitted to security users between 8 a.m. and 5 p.m.
 
 #### Charlie the Security Manager
 
