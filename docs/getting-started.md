@@ -58,7 +58,7 @@ will need to follow the instructions found [here](https://docs.docker.com/compos
 First pull the necessary Docker images from Docker Hub and create a network for our containers to connect to:
 
 ```bash
-docker pull mongo:3.6
+docker pull mongo:4.2
 docker pull fiware/orion
 docker network create fiware_default
 ```
@@ -68,7 +68,7 @@ with the following command:
 
 ```bash
 docker run -d --name=mongo-db --network=fiware_default \
-  --expose=27017 mongo:3.6 --bind_ip_all --smallfiles
+  --expose=27017 mongo:4.2 --bind_ip_all --smallfiles
 ```
 
 The Orion Context Broker can be started and connected to the network with the following command:
