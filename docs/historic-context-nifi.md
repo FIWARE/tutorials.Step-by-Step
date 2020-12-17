@@ -151,7 +151,6 @@ mongo-db:
         - "27017:27017"
     networks:
         - default
-
 ```
 
 <h3>MongoDB - Draco Configuration</h3>

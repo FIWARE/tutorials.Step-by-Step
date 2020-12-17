@@ -154,8 +154,8 @@ tutorial:
 The `tutorial` container is listening on two ports:
 
 -   Port `3000` is exposed so we can see the web page displaying the Dummy IoT devices.
--   Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make XML commands without being
-    part of the same network.
+-   Port `3001` is exposed purely for tutorial access - so that cUrl or Postman can make XML commands without being part
+    of the same network.
 
 The `tutorial` container is driven by environment variables as shown:
 
@@ -163,7 +163,7 @@ The `tutorial` container is driven by environment variables as shown:
 | ----------------------- | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | DEBUG                   | `tutorial:*`                 | Debug flag used for logging                                                                                                        |
 | WEB_APP_PORT            | `3000`                       | Port used by web-app which displays the dummy device data                                                                          |
-| IOTA_HTTP_HOST          | `iot-agent`                  | The hostname of the IoT Agent for XML - see below                                                                                 |
+| IOTA_HTTP_HOST          | `iot-agent`                  | The hostname of the IoT Agent for XML - see below                                                                                  |
 | IOTA_HTTP_PORT          | `7896`                       | The port that the IoT Agent for XML will be listening on. `7896` is a common default for comms over HTTP                           |
 | DUMMY_DEVICES_PORT      | `3001`                       | Port used by the dummy IoT devices to receive commands                                                                             |
 | DUMMY_DEVICES_API_KEY   | `4jggokgpepnvsb2uv4s40d59ov` | Random security key used for IoT interactions - used to ensure the integrity of interactions between the devices and the IoT Agent |
@@ -234,10 +234,10 @@ The `iot-agent` container is driven by environment variables as shown:
 | IOTA_LOG_LEVEL        | `DEBUG`                 | The log level of the IoT Agent                                                                                                                        |
 | IOTA_TIMESTAMP        | `true`                  | Whether to supply timestamp information with each measurement received from attached devices                                                          |
 | IOTA_CB_NGSI_VERSION  | `v2`                    | Whether to supply use NGSI v2 when sending updates for active attributes                                                                              |
-| IOTA_AUTOCAST         | `true`                  | Ensure XML number values are read as numbers not strings                                                                                             |
+| IOTA_AUTOCAST         | `true`                  | Ensure XML number values are read as numbers not strings                                                                                              |
 | IOTA_MONGO_HOST       | `context-db`            | The hostname of mongoDB - used for holding device information                                                                                         |
 | IOTA_MONGO_PORT       | `27017`                 | The port mongoDB is listening on                                                                                                                      |
-| IOTA_MONGO_DB         | `iotagentxml`          | The name of the database used in mongoDB                                                                                                              |
+| IOTA_MONGO_DB         | `iotagentxml`           | The name of the database used in mongoDB                                                                                                              |
 | IOTA_HTTP_PORT        | `7896`                  | The port where the IoT Agent listens for IoT device traffic over HTTP                                                                                 |
 | IOTA_PROVIDER_URL     | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
 | IOTA_DEFAULT_RESOURCE | `/iot/xml`              | The default path the IoT Agent uses listenening for custom XML measures.                                                                              |
@@ -377,7 +377,7 @@ This means that attributes from the XML request can be accessed using the square
 
 ```javascript
 function checkMandatoryParams(queryPayload) {
-    return function (req, res, next) {
+    return function(req, res, next) {
         var notFoundParams = [],
             error;
 
@@ -681,7 +681,7 @@ function createCommandPayload(device, command, attributes) {
     if (typeof attributes === "object") {
         let payload = "<" + command + '  device="' + device.id + '">';
 
-        Object.keys(attributes).forEach(function (key, value) {
+        Object.keys(attributes).forEach(function(key, value) {
             payload = payload + "<" + key + ">" + value + "</" + key + ">";
         });
         payload = payload + "</" + command + ">";

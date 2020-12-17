@@ -188,7 +188,7 @@ Code within the Stock Management frontend application handles received the POST 
 
 ```javascript
 router.post("/subscription/:type", (req, res) => {
-    _.forEach(req.body.data, (item) => {
+    _.forEach(req.body.data, item => {
         broadcastEvents(req, item, ["refStore", "refProduct", "refShelf", "type"]);
     });
     res.status(204).send();
@@ -196,7 +196,7 @@ router.post("/subscription/:type", (req, res) => {
 
 function broadcastEvents(req, item, types) {
     const message = req.params.type + " received";
-    _.forEach(types, (type) => {
+    _.forEach(types, type => {
         if (item[type]) {
             req.app.get("io").emit(item[type], message);
         }

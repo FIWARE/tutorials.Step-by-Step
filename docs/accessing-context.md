@@ -81,7 +81,7 @@ const options = {
     qs: { options: "keyValues" }
 };
 
-request(options, function (error, response, body) {
+request(options, function(error, response, body) {
     if (error) throw new Error(error);
     console.log(body);
 });
@@ -307,7 +307,7 @@ GET request and make the necessary HTTP call:
 
 ```javascript
 function retrieveEntity(entityId, opts) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const apiInstance = new NgsiV2.EntitiesApi();
         apiInstance.retrieveEntity(entityId, opts, (error, data) => {
             return error ? reject(error) : resolve(data);
@@ -321,11 +321,11 @@ This enables us to wrap the requests in `Promises` as shown:
 ```javascript
 function displayStore(req, res) {
     retrieveEntity(req.params.storeId, { options: "keyValues", type: "Store" })
-        .then((store) => {
+        .then(store => {
             // If a store has been found display it on screen
             return res.render("store", { title: store.name, store });
         })
-        .catch((error) => {
+        .catch(error => {
             debug(error);
             // If no store has been found, display an error screen
             return res.render("store-error", { title: "Error", error });
@@ -427,14 +427,14 @@ function displayTillInfo(req, res) {
             type: "InventoryItem"
         })
     ])
-        .then((values) => {
+        .then(values => {
             // If values have been found display it on screen
             return res.render("till", {
                 products: values[0],
                 inventory: values[1]
             });
         })
-        .catch((error) => {
+        .catch(error => {
             debug(error);
             // An error occurred, return with no results
             return res.render("till", { products: {}, inventory: {} });
@@ -442,7 +442,7 @@ function displayTillInfo(req, res) {
 }
 
 function listEntities(opts) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const apiInstance = new NgsiV2.EntitiesApi();
         apiInstance.listEntities(opts, (error, data) => {
             return error ? reject(error) : resolve(data);
@@ -516,7 +516,7 @@ async function buyItem(req, res) {
 }
 
 function updateExistingEntityAttributes(entityId, body, opts) {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const apiInstance = new NgsiV2.EntitiesApi();
         apiInstance.updateExistingEntityAttributes(entityId, body, opts, (error, data) => {
             return error ? reject(error) : resolve(data);

@@ -100,7 +100,6 @@ mongo-db:
         - "27017:27017"
     networks:
         - default
-
 ```
 
 Both containers reside on the same network - the Orion Context Broker is listening on port `1026` and MongoDB is

@@ -1,11 +1,12 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/static/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/processing/README.md)
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
-**Description:**  This tutorial is an introduction to the [FIWARE Cosmos Orion Spark Connector](http://fiware-cosmos-spark.rtfd.io), which
-enables easier Big Data analysis over context, integrated with one of the most popular BigData platforms:
-[Apache Spark](https://spark.apache.org/). Apache Spark is a framework and distributed processing engine for stateful
-computations over unbounded and bounded data streams. Spark has been designed to run in all common cluster environments,
-perform computations at in-memory speed and at any scale.
+**Description:** This tutorial is an introduction to the
+[FIWARE Cosmos Orion Spark Connector](http://fiware-cosmos-spark.rtfd.io), which enables easier Big Data analysis over
+context, integrated with one of the most popular BigData platforms: [Apache Spark](https://spark.apache.org/). Apache
+Spark is a framework and distributed processing engine for stateful computations over unbounded and bounded data
+streams. Spark has been designed to run in all common cluster environments, perform computations at in-memory speed and
+at any scale.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as Postman documentation:
 
@@ -30,10 +31,9 @@ data sets which would be too complex to be dealt with using traditional methods.
 correlations.
 
 As we have seen, context data is core to any Smart Solution, and the Context Broker is able to monitor changes of state
-and raise [subscription events](subscriptions) as the context changes. For smaller
-installations, each subscription event can be processed one-by-one by a single receiving endpoint, however as the system
-grows, another technique will be required to avoid overwhelming the listener, potentially blocking resources and missing
-updates.
+and raise [subscription events](subscriptions) as the context changes. For smaller installations, each subscription
+event can be processed one-by-one by a single receiving endpoint, however as the system grows, another technique will be
+required to avoid overwhelming the listener, potentially blocking resources and missing updates.
 
 **Apache Spark** is an open-source distributed general-purpose cluster-computing framework. It provides an interface for
 programming entire clusters with implicit data parallelism and fault tolerance. The **Cosmos Spark** connector allows
@@ -47,9 +47,8 @@ which is processing a continuous stream of context-data events.
 
 # Architecture
 
-This application builds on the components and dummy IoT devices created in
-[previous tutorials](iot-agent.md). It will make use of three FIWARE components - the
-[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
+This application builds on the components and dummy IoT devices created in [previous tutorials](iot-agent.md). It will
+make use of three FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
 [IoT Agent for Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/), and the
 [Cosmos Orion Spark Connector](https://fiware-cosmos-spark.readthedocs.io/en/latest/) for connecting Orion to an
 [Apache Spark cluster](https://spark.apache.org/docs/latest/cluster-overview.html). The Spark cluster itself will
@@ -137,7 +136,6 @@ The `spark-worker-1` container is listening on one port:
 
 -   Port `9001` is exposed so that the installation can receive context data subscriptions.
 -   Ports `8081` is exposed so we can see the web frontend of the Apache Spark-Worker-1 Dashboard.
-
 
 # Start Up
 
@@ -465,8 +463,6 @@ In order to run this job, you need to user the spark-submit command again, speci
 --conf "spark.driver.extraJavaOptions=-Dlog4jspark.root.logger=WARN,console"
 ```
 
-
-
 ## Feedback Loop - Persisting Context Data
 
 The second example switches on a lamp when its motion sensor detects movement.
@@ -590,4 +586,3 @@ The operations performed on data in this tutorial were very simple. If you would
 for performing real-time predictions using Machine Learning check out the
 [demo](https://github.com/ging/fiware-global-summit-berlin-2019-ml/) presented at the FIWARE Global Summit in Berlin
 (2019).
-
