@@ -272,6 +272,12 @@ Submit new job
 -   **Filename:** `cosmos-examples-1.1.jar`
 -   **Entry Class:** `org.fiware.cosmos.tutorial.Logger`
 
+An alternative would be to use curl on the command line as shown:
+
+```bash
+curl -X POST -H "Expect:" -F "jarfile=@/cosmos-examples-1.1.jar" http://localhost:8081/jars/upload
+```
+
 ### Logger - Subscribing to context changes
 
 Once a dynamic context system is up and running (we have deployed the `Logger` job in the Flink cluster), we need to
