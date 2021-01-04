@@ -60,10 +60,17 @@ framework for REST APIs. The tool can be downloaded from [www.getpostman.com](ww
 Postman collections can downloaded directly from the
 [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
 
-### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30">
+### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
 
 We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
 to provide a command-line functionality similar to a Linux distribution on Windows.
+
+### Apache Maven <img src="https://maven.apache.org/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
+
+[Apache Maven](https://maven.apache.org/download.cgi) is a software project management and comprehension tool. Based on
+the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a
+central piece of information. Maven can be used to define and download our dependencies and to build and package Java or
+Scala code into a JAR file.
 
 ## Tutorials List
 
