@@ -15,7 +15,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 <hr class="core"/>
 
-# Real-time Processing and Big Data Analysis
+# Real-time Processing and Big Data Analysis using Apache Flink
 
 > "Who controls the past controls the future: who controls the present controls the past."
 >
@@ -82,8 +82,7 @@ Therefore the overall architecture will consist of the following elements:
         registrations
     -   Used by the **IoT Agent** to hold device information such as device URLs and Keys
 -   Three **Context Providers**:
-    -   A webserver acting as set of [dummy IoT devices](iot-sensors.md)
-        using the
+    -   A webserver acting as set of [dummy IoT devices](iot-sensors.md) using the
         [Ultralight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual)
         protocol running over HTTP.
     -   The **Stock Management Frontend** is not used in this tutorial. It does the following:

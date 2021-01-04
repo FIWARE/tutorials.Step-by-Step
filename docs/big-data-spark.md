@@ -14,7 +14,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 <hr class="core"/>
 
-# Real-time Processing and Big Data Analysis (Apache Spark)
+# Real-time Processing and Big Data Analysis using Apache Spark
 
 > "You have to find what sparks a light in you so that you in your own way can illuminate the world."
 >
@@ -31,7 +31,7 @@ data sets which would be too complex to be dealt with using traditional methods.
 correlations.
 
 As we have seen, context data is core to any Smart Solution, and the Context Broker is able to monitor changes of state
-and raise [subscription events](subscriptions) as the context changes. For smaller installations, each subscription
+and raise [subscription events](subscriptions.md) as the context changes. For smaller installations, each subscription
 event can be processed one-by-one by a single receiving endpoint, however as the system grows, another technique will be
 required to avoid overwhelming the listener, potentially blocking resources and missing updates.
 
@@ -57,7 +57,7 @@ the tasks.
 
 Both the Orion Context Broker and the IoT Agent rely on open source [MongoDB](https://www.mongodb.com/) technology to
 keep persistence of the information they hold. We will also be using the dummy IoT devices created in the
-[previous tutorial](iot-Agent.md).
+[previous tutorial](iot-agent.md).
 
 Therefore the overall architecture will consist of the following elements:
 
@@ -185,7 +185,7 @@ This means that to create a streaming data flow we must supply the following:
 -   Business logic to define the transform operations
 -   A mechanism for pushing Context data back to the context broker as a **Sink Operator**
 
-The **Cosmos Spark** connector - `orion.spark.connector-1.2.1.jar` offers both **Source** and **Sink** operators. It
+The **Cosmos Spark** connector - `orion.spark.connector-1.2.2.jar` offers both **Source** and **Sink** operators. It
 therefore only remains to write the necessary Scala code to connect the streaming dataflow pipeline operations together.
 The processing code can be complied into a JAR file which can be uploaded to the spark cluster. Two examples will be
 detailed below, all the source code for this tutorial can be found within the
@@ -204,12 +204,12 @@ Maven:
 
 ```bash
 cd cosmos-examples
-curl -LO https://github.com/ging/fiware-cosmos-orion-spark-connector/releases/download/FIWARE_7.9/orion.spark.connector-1.2.1.jar
+curl -LO https://github.com/ging/fiware-cosmos-orion-spark-connector/releases/download/FIWARE_7.9.1/orion.spark.connector-1.2.2.jar
 mvn install:install-file \
-  -Dfile=./orion.spark.connector-1.2.1.jar \
+  -Dfile=./orion.spark.connector-1.2.2.jar \
   -DgroupId=org.fiware.cosmos \
   -DartifactId=orion.spark.connector \
-  -Dversion=1.2.1 \
+  -Dversion=1.2.2 \
   -Dpackaging=jar
 ```
 
@@ -220,7 +220,7 @@ Thereafter the source code can be compiled by running the `mvn package` command 
 mvn package
 ```
 
-A new JAR file called `cosmos-examples-1.2.1.jar` will be created within the `cosmos-examples/target` directory.
+A new JAR file called `cosmos-examples-1.2.2.jar` will be created within the `cosmos-examples/target` directory.
 
 ### Generating a stream of Context Data
 
@@ -253,7 +253,7 @@ And run the following command to run the generated JAR package in the Spark clus
 /spark/bin/spark-submit \
 --class  org.fiware.cosmos.tutorial.Logger \
 --master  spark://spark-master:7077 \
---deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.1.jar \
+--deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.2.jar \
 --conf "spark.driver.extraJavaOptions=-Dlog4jspark.root.logger=WARN,console"
 ```
 
@@ -459,7 +459,7 @@ In order to run this job, you need to user the spark-submit command again, speci
 /spark/bin/spark-submit \
 --class  org.fiware.cosmos.tutorial.LoggerLD \
 --master  spark://spark-master:7077 \
---deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.1.jar \
+--deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.2.jar \
 --conf "spark.driver.extraJavaOptions=-Dlog4jspark.root.logger=WARN,console"
 ```
 
@@ -478,7 +478,7 @@ find the source code of the example in
 /spark/bin/spark-submit  \
 --class  org.fiware.cosmos.tutorial.Feedback \
 --master  spark://spark-master:7077 \
---deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.1.jar \
+--deploy-mode client /home/cosmos-examples/target/cosmos-examples-1.2.2.jar \
 --conf "spark.driver.extraJavaOptions=-Dlog4jspark.root.logger=WARN,console"
 ```
 
