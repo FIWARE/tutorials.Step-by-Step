@@ -6,7 +6,7 @@ const http = require('http');
 
 const URL = require('url');
 
-exports.OAuth2 = function (
+exports.OAuth2 = function(
     clientId,
     clientSecret,
     baseSite,
@@ -33,24 +33,24 @@ exports.OAuth2 = function (
 // ( http://tools.ietf.org/html/draft-ietf-oauth-v2-16#section-7 )
 // it isn't clear what the correct value should be atm, so allowing
 // for specific (temporary?) override for now.
-exports.OAuth2.prototype.setAccessTokenName = function (name) {
+exports.OAuth2.prototype.setAccessTokenName = function(name) {
     this._accessTokenName = name;
 };
 
-exports.OAuth2.prototype._getAccessTokenUrl = function () {
+exports.OAuth2.prototype._getAccessTokenUrl = function() {
     return this._baseIPAddress + this._accessTokenUrl;
 };
 
 // Build the authorization header. In particular, build the part after the colon.
 // e.g. Authorization: Bearer <token>  # Build "Bearer <token>"
-exports.OAuth2.prototype.buildAuthHeader = function () {
+exports.OAuth2.prototype.buildAuthHeader = function() {
     const key = this._clientId + ':' + this._clientSecret;
     // eslint-disable-next-line new-cap
     const base64 = new Buffer.from(key).toString('base64');
     return this._authMethod + ' ' + base64;
 };
 
-exports.OAuth2.prototype._request = function (method, url, headers, postBody, accessToken, callback) {
+exports.OAuth2.prototype._request = function(method, url, headers, postBody, accessToken, callback) {
     let httpLibrary = https;
     const parsedUrl = URL.parse(url, true);
     if (parsedUrl.protocol === 'https:' && !parsedUrl.port) {
@@ -96,7 +96,7 @@ exports.OAuth2.prototype._request = function (method, url, headers, postBody, ac
     this._executeRequest(httpLibrary, options, postBody, callback);
 };
 
-exports.OAuth2.prototype._executeRequest = function (httpLibrary, options, postBody, callback) {
+exports.OAuth2.prototype._executeRequest = function(httpLibrary, options, postBody, callback) {
     // Some hosts *cough* google appear to close the connection early / send no content-length header
     // allow this behaviour.
     const allowEarlyClose = options.host && options.host.match('.*google(apis)?.com$');
@@ -119,20 +119,20 @@ exports.OAuth2.prototype._executeRequest = function (httpLibrary, options, postB
 
     let result = '';
 
-    const request = httpLibrary.request(options, function (response) {
-        response.on('data', function (chunk) {
+    const request = httpLibrary.request(options, function(response) {
+        response.on('data', function(chunk) {
             result += chunk;
         });
-        response.on('close', function (err) {
+        response.on('close', function(err) {
             if (allowEarlyClose) {
                 passBackControl(response, result, err);
             }
         });
-        response.addListener('end', function () {
+        response.addListener('end', function() {
             passBackControl(response, result);
         });
     });
-    request.on('error', function (e) {
+    request.on('error', function(e) {
         callbackCalled = true;
         callback(e);
     });
@@ -143,7 +143,7 @@ exports.OAuth2.prototype._executeRequest = function (httpLibrary, options, postB
     request.end();
 };
 
-exports.OAuth2.prototype.getAuthorizeUrl = function (responseType, scope, state) {
+exports.OAuth2.prototype.getAuthorizeUrl = function(responseType, scope, state) {
     responseType = responseType || 'code';
 
     let authorizeUrl =
@@ -175,7 +175,7 @@ function getResults(data) {
     return results;
 }
 
-exports.OAuth2.prototype.getOAuthAccessToken = function (code, grantType) {
+exports.OAuth2.prototype.getOAuthAccessToken = function(code, grantType) {
     const that = this;
 
     return new Promise((resolve, reject) => {
@@ -193,7 +193,7 @@ exports.OAuth2.prototype.getOAuthAccessToken = function (code, grantType) {
     });
 };
 
-exports.OAuth2.prototype.getOAuthClientCredentials = function () {
+exports.OAuth2.prototype.getOAuthClientCredentials = function() {
     const that = this;
     return new Promise((resolve, reject) => {
         const postData = 'grant_type=client_credentials';
@@ -209,7 +209,7 @@ exports.OAuth2.prototype.getOAuthClientCredentials = function () {
     });
 };
 
-exports.OAuth2.prototype.getOAuthPasswordCredentials = function (username, password) {
+exports.OAuth2.prototype.getOAuthPasswordCredentials = function(username, password) {
     const that = this;
     return new Promise((resolve, reject) => {
         const postData = 'grant_type=password&username=' + username + '&password=' + password;
@@ -225,7 +225,7 @@ exports.OAuth2.prototype.getOAuthPasswordCredentials = function (username, passw
     });
 };
 
-exports.OAuth2.prototype.getOAuthRefreshToken = function (refreshToken) {
+exports.OAuth2.prototype.getOAuthRefreshToken = function(refreshToken) {
     const that = this;
 
     return new Promise((resolve, reject) => {
@@ -243,7 +243,7 @@ exports.OAuth2.prototype.getOAuthRefreshToken = function (refreshToken) {
     });
 };
 
-exports.OAuth2.prototype.get = function (url, accessToken) {
+exports.OAuth2.prototype.get = function(url, accessToken) {
     const that = this;
     return new Promise((resolve, reject) => {
         that._request('GET', url, {}, '', accessToken, (error, data) => {

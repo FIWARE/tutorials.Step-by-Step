@@ -10,7 +10,7 @@ const nsgiLdPrefix = process.env.NGSI_LD_PREFIX !== undefined ? process.env.NGSI
 
 function readCometMotionCount(id, aggMethod) {
     debug('readCometMotionCount');
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const options = {
             method: 'GET',
             url: cometUrl + 'Motion/id/' + nsgiLdPrefix + 'Motion:' + id + '/attributes/count',
@@ -29,7 +29,7 @@ function readCometMotionCount(id, aggMethod) {
 
 function readCrateMotionCount(id, aggMethod) {
     debug('readCrateMotionCount');
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const sqlStatement =
             "SELECT DATE_FORMAT (DATE_TRUNC ('minute', time_index)) AS minute, " +
             aggMethod +
@@ -53,7 +53,7 @@ function readCrateMotionCount(id, aggMethod) {
 
 function readCrateLampLuminosity(id, aggMethod) {
     debug('readCrateLampLuminosity');
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const sqlStatement =
             "SELECT DATE_FORMAT (DATE_TRUNC ('minute', time_index)) AS minute, " +
             aggMethod +
@@ -77,7 +77,7 @@ function readCrateLampLuminosity(id, aggMethod) {
 
 function readCometLampLuminosity(id, aggMethod) {
     debug('readCometLampLuminosity');
-    return new Promise(function (resolve, reject) {
+    return new Promise(function(resolve, reject) {
         const options = {
             method: 'GET',
             url: cometUrl + 'Lamp/id/' + nsgiLdPrefix + 'Lamp:' + id + '/attributes/luminosity',

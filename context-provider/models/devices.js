@@ -260,7 +260,7 @@ function setDeviceState(deviceId, state, isSensor = true, force = false) {
 // e.g. s|ON,l|1000
 function toUltraLight(object) {
     const strArray = [];
-    _.forEach(object, function (value, key) {
+    _.forEach(object, function(value, key) {
         strArray.push(key + '|' + value);
     });
     return strArray.join('|');

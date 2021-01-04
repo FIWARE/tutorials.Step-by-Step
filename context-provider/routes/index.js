@@ -76,7 +76,7 @@ function broadcastEvents(req, item, types) {
 }
 
 // Handles requests to the main page
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
     const securityEnabled = SECURE_ENDPOINTS;
     const oidcEnabled = OIDC_ENABLED;
     const stores = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
@@ -106,13 +106,13 @@ router.get('/authCodeOICGrant', Security.authCodeOICGrant);
 router.get('/implicitOICGrant', Security.implicitOICGrant);
 router.get('/hybridOICGrant', Security.hybridOICGrant);
 
-router.get('/version', function (req, res) {
+router.get('/version', function(req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send({ gitHash: GIT_COMMIT });
 });
 
 // Render the monitoring page
-router.get('/device/monitor', function (req, res) {
+router.get('/device/monitor', function(req, res) {
     const traffic = TRANSPORT === 'HTTP' ? 'Northbound Traffic' : 'MQTT Messages';
     const title = 'IoT Devices (' + DEVICE_PAYLOAD + ' over ' + TRANSPORT + ')';
     const securityEnabled = SECURE_ENDPOINTS;
@@ -143,12 +143,12 @@ if (process.env.CRATE_DB_SERVICE_URL) {
 }
 
 // Display the app monitor page
-router.get('/app/monitor', function (req, res) {
+router.get('/app/monitor', function(req, res) {
     res.render('monitor', { title: 'Event Monitor' });
 });
 
 // Display the app monitor page
-router.get('/device/history', function (req, res) {
+router.get('/device/history', function(req, res) {
     const data = NGSI_VERSION === 'ngsi-v2' ? NGSI_V2_STORES : NGSI_LD_STORES;
     const stores = [];
 
@@ -182,7 +182,7 @@ router.post('/app/inventory/:inventoryId', catchErrors(Store.buyItem));
 //                                - use Authzforce as a PDP
 router.get(
     '/app/price-change',
-    function (req, res, next) {
+    function(req, res, next) {
         // Use Advanced Autorization if Authzforce is present.
         return AUTHZFORCE_ENABLED
             ? Security.authorizeAdvancedXACML(req, res, next)
@@ -196,7 +196,7 @@ router.get(
 //                                - use Authzforce as a PDP
 router.get(
     '/app/order-stock',
-    function (req, res, next) {
+    function(req, res, next) {
         // Use Advanced Authorization if Authzforce is present.
         return AUTHZFORCE_ENABLED
             ? Security.authorizeAdvancedXACML(req, res, next)

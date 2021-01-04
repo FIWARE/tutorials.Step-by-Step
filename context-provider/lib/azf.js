@@ -5,11 +5,11 @@ const debug = require('debug')('tutorial:azf');
 const authzforcePort = process.env.AUTHZFORCE_PORT || '8080';
 const authzforceUrl = (process.env.AUTHZFORCE_URL || 'http://localhost') + ':' + authzforcePort;
 
-exports.Authzforce = function (clientId) {
+exports.Authzforce = function(clientId) {
     this._clientId = clientId;
 };
 
-exports.Authzforce.prototype.policyDomainRequest = function (domain, roles, resource, action, username, email) {
+exports.Authzforce.prototype.policyDomainRequest = function(domain, roles, resource, action, username, email) {
     const that = this;
 
     let body =
@@ -90,9 +90,9 @@ exports.Authzforce.prototype.policyDomainRequest = function (domain, roles, reso
     };
 
     return new Promise((resolve, reject) => {
-        request(options, function (error, response, body) {
+        request(options, function(error, response, body) {
             let decision;
-            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function (err, jsonRes) {
+            xml2js.parseString(body, { tagNameProcessors: [xml2js.processors.stripPrefix] }, function(err, jsonRes) {
                 decision = jsonRes.Response.Result[0].Decision[0];
             });
             debug('policyDomainRequest returns:' + decision);
