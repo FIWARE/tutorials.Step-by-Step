@@ -90,7 +90,7 @@ Therefore the overall architecture will consist of the following elements:
     -   listen to the **MQTT Broker** on registered topics to send measurements northbound
 -   The [Mosquitto](https://mosquitto.org/) **MQTT Broker** which acts as a central communication point, passing MQTT
     topics between the **IoT Agent** and IoT devices as necessary.
--   The underlying [MongoDB](https://www.mongodb.com/) database :
+-   The underlying [MongoDB](https://www.mongodb.com/) database:
     -   Used by the **Orion Context Broker** to hold context data information such as data entities, subscriptions and
         registrations
     -   Used by the **IoT Agent** to hold device information such as device URLs and Keys
