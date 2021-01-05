@@ -383,7 +383,7 @@ The response will look similar to the following:
 The IoT Agent acts as a middleware between the IoT devices and the context broker. It therefore needs to be able to
 create context data entities with unique IDs. Once a service has been provisioned and an unknown device makes a
 measurement the IoT Agent add this to the context using the supplied `<device-id>` (unless the device is recognized and
-can be mapped to a known ID.
+can be mapped to a known ID).
 
 There is no guarantee that every supplied IoT device `<device-id>` will always be unique, therefore all provisioning
 requests to the IoT Agent require two mandatory headers:
