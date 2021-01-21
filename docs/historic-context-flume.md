@@ -275,7 +275,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus (Mongo-DB) of all context changes",
+  "description": "Notify Cygnus Mongo-DB of all context changes",
   "subject": {
     "entities": [
       {
@@ -324,7 +324,7 @@ curl -X GET \
 [
     {
         "id": "5b39d7c866df40ed84284174",
-        "description": "Notify Cygnus ,Mongo-DB, of all context changes",
+        "description": "Notify Cygnus Mongo-DB of all context changes",
         "status": "active",
         "subject": {
             "entities": [
@@ -671,7 +671,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus ,Postgres, of all context changes",
+  "description": "Notify Cygnus Postgres of all context changes",
   "subject": {
     "entities": [
       {
@@ -1006,7 +1006,7 @@ curl -iX POST \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
-  "description": "Notify Cygnus ,MySQL, of all context changes",
+  "description": "Notify Cygnus MySQL of all context changes",
   "subject": {
     "entities": [
       {
