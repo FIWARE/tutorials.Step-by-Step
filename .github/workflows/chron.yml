@@ -18,5 +18,6 @@ jobs:
       run: | 
         git submodule foreach './services create' || true
     - name: Run Script
-      run: | 
+      run: |
+        git rm tutorials.Historic-Context-NIFI 
         git submodule foreach './services start && ./services stop' || true
