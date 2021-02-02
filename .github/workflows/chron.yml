@@ -14,6 +14,9 @@ jobs:
         persist-credentials: false 
         fetch-depth: 0
         submodules: recursive
+    - name: Build Images
+      run: | 
+        git submodule foreach './services create' || true
     - name: Run Script
       run: | 
         git submodule foreach './services start && ./services stop'
