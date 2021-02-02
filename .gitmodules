@@ -18,10 +18,6 @@
 	path = tutorials.Entity-Relationships
 	url = https://github.com/FIWARE/tutorials.Entity-Relationships.git
 	branch = NGSI-v2
-[submodule "tutorials.Fast-RTPS-Micro-RTPS"]
-	path = tutorials.Fast-RTPS-Micro-RTPS
-	url = https://github.com/FIWARE/tutorials.Fast-RTPS-Micro-RTPS.git
-	branch = NGSI-v2
 [submodule "tutorials.Historic-Context"]
 	path = tutorials.Historic-Context-Flume
 	url = https://github.com/FIWARE/tutorials.Historic-Context-Flume.git
