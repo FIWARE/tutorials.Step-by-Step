@@ -16,4 +16,4 @@ jobs:
         submodules: recursive
     - name: Run Script
       run: | 
-        git submodule foreach './services start && ./services stop`'
+        git submodule foreach './services start && ./services stop'
