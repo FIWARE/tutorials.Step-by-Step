@@ -1,4 +1,4 @@
-# Step-by-Step Tutorials <a href="https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf" rel="nofollow" class="rich-diff-level-one"><img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" /></a>[<img src="docs/img/logo.png" align="left" width="162">](https://www.fiware.org/)
+# Step-by-Step Tutorials <a href="https://fiware-ges.github.io/orion/api/v2/stable/" rel="nofollow" class="rich-diff-level-one"><img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" /></a>[<img src="docs/img/logo.png" align="left" width="162">](https://www.fiware.org/)
 
 [![Documentation](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/documentation.svg)](https://fiware-tutorials.rtfd.io)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Step-by-Step.svg)](https://opensource.org/licenses/MIT)
