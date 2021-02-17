@@ -881,7 +881,7 @@ curl -G -X GET \
     -H 'Link: <https://fiware.github.io/data-models/context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
     -H 'Accept: application/json' \
     -d 'type=Building' \
-    -d 'mq=address.verified==true' \
+    -d 'q=address.verified==true' \
     -d 'options=keyValues'
 ```
 
