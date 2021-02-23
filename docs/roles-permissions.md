@@ -1,8 +1,8 @@
 [![FIWARE Security](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/security.svg)](https://github.com/FIWARE/catalogue/blob/master/security/README.md)
 
-**Description:** The tutorial explains how to create applications, and how to assign roles and permissions to them. It
-takes the users and organizations created in the [previous tutorial](identity-management.md) and ensures that only
-legitimate users will have access to resources.
+**Description:** The tutorial explains how to create applications, and how to assign roles and permissions to them. It takes the users
+and organizations created in the [previous tutorial](identity-management.md) and
+ensures that only legitimate users will have access to resources.
 
 The tutorial demonstrates examples of interactions using the **Keyrock** GUI, as well [cUrl](https://ec.haxx.se/)
 commands used to access the **Keyrock** REST API -
@@ -19,13 +19,14 @@ commands used to access the **Keyrock** REST API -
 >
 > — Paulo Coelho (The Alchemist)
 
-Authorization is the function of specifying access rights/privileges to resources related to information security. More
-formally, "to authorize" is to define an access policy. With identity management controlled via the FIWARE **Keyrock**
-Generic Enabler, User access is granted based on permissions assigned to a role.
+Authorization is the function of specifying access rights/privileges to resources related to information
+security. More formally, "to authorize" is to define an access policy. With identity
+management controlled via the FIWARE **Keyrock** Generic Enabler, User access is granted based on permissions assigned
+to a role.
 
 Every application secured by the **Keyrock** generic enabler can define a set of permissions - i.e. a set of things that
-can be done within the application. For example within the application, the ability to send a commmand to unlock a Smart
-Door could be secured behind a `Unlock Door` permission. Similarly the ability to send a commmand to ring the alarm bell
+can be done within the application. For example within the application, the ability to send a command to unlock a Smart
+Door could be secured behind a `Unlock Door` permission. Similarly, the ability to send a command to ring the alarm bell
 could be secured behind a `Ring Bell` permission, and the ability to alter prices could be secured behind a
 `Price Change` permission
 
@@ -49,20 +50,20 @@ are groups of actions which can be done by a type of user of that application.
 
 The following common objects are found with the **Keyrock** Identity Management database:
 
--   **User** - Any signed up user able to identify themselves with an eMail and password. Users can be assigned rights
+-   **User** - Any signed-up user able to identify themselves with an eMail and password. Users can be assigned rights
     individually or as a group
 -   **Application** - Any securable FIWARE application consisting of a series of microservices
 -   **Organization** - A group of users who can be assigned a series of rights. Altering the rights of the organization
     effects the access of all users of that organization
 -   **OrganizationRole** - Users can either be members or admins of an organization - Admins are able to add and remove
-    users from their organization, members merely gain the roles and permissions of an organiation. This allows each
-    organization to be responisible for their members and removes the need for a super-admin to administer all rights
+    users from their organization, members merely gain the roles and permissions of an organization. This allows each
+    organization to be responsible for their members and removes the need for a super-admin to administer all rights
 -   **Role** - A role is a descriptive bucket for a set of permissions. A role can be assigned to either a single user
     or an organization. A signed-in user gains all the permissions from all of their own roles plus all of the roles
     associated to their organization
 -   **Permission** - An ability to do something on a resource within the system
 
-Additionally two further non-human application objects can be secured within a FIWARE application:
+Additionally, two further non-human application objects can be secured within a FIWARE application:
 
 -   **IoTAgent** - a proxy between IoT Sensors and the Context Broker
 -   **PEPProxy** - a middleware for use between generic enablers challenging the rights of a user.
@@ -78,7 +79,7 @@ tutorial:
 
 This introduction will only make use of one FIWARE component - the
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Management Generic Enabler. Usage of **Keyrock** alone
-is insufficient for an application to qualify as _“Powered by FIWARE”_. Additionally will be persisting user data in a
+is insufficient for an application to qualify as _“Powered by FIWARE”_. Additionally, will be persisting user data in a
 **MySQL** database.
 
 The overall architecture will consist of the following elements:
@@ -87,14 +88,14 @@ The overall architecture will consist of the following elements:
 
     -   FIWARE [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) offer a complement Identity Management System
         including:
-        -   An OAuth2 authentication system for Applications and Users
+        -   An authentication system for Applications and Users
         -   A site graphical frontend for Identity Management Administration
         -   An equivalent REST API for Identity Management via HTTP requests
 
 -   One [MySQL](https://www.mysql.com/) database :
-    -   Used to persist user identities, applications, roles and permsissions
+    -   Used to persist user identities, applications, roles and permissions
 
-Since all interactions between the services are initiated by HTTP requests, the services can be containerized and run
+Since all interactions between the elements are initiated by HTTP requests, the entities can be containerized and run
 from exposed ports.
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/architecture.png)
@@ -134,9 +135,9 @@ The `keyrock` container is a web application server listening on two ports:
 -   Port `3005` has been exposed for HTTP traffic so we can display the web page and interact with the REST API.
 -   Port `3443` has been exposed for secure HTTPS traffic for the site and REST API
 
-> **Note** HTTPS should be used throughout for any secured application, but to do this properly, **Keyrock** requires a
-> trusted SSL certificate - the default certificate is self-certified and available for testing purposes. The
-> certificates can be overridden by attaching a volume to replace the files under `/opt/fiware-idm/certs`.
+> **Note** HTTPS should be used throughout for any secured application, but to do this properly,
+> **Keyrock** requires a trusted SSL certificate - the default certificate is self-certified and available for testing
+> purposes. The certificates can be overridden by attaching a volume to replace the files under `/opt/fiware-idm/certs`.
 >
 > In a production environment, all access should occur over HTTPS, to avoid sending any sensitive information using
 > plain-text. Alternatively HTTP can be used within a private network behind a configured HTTPS Reverse Proxy
@@ -158,9 +159,10 @@ The `keyrock` container is driven by environment variables as shown:
 | IDM_HTTPS_ENABLED | `true`                  | Whether to offer HTTPS Support - this will use the self-signed certs unless overridden                                       |
 | IDM_HTTPS_PORT    | `3443`                  | Port used by the **Keyrock** App Server for HTTP traffic this has been altered from the default 443                          |
 
-> **Note** that this example has secured the MySQL password using **Docker Secrets** By using `IDM_DB_PASS` with the
-> `_FILE` suffix and referring to a secrets file location. This avoids exposing the password as an `ENV` variable in
-> plain-text - either in the `Dockerfile` Image or as an injected variable which could be read using `docker inspect`.
+> **Note** that this example has secured the MySQL password using **Docker Secrets** By using
+> `IDM_DB_PASS` with the `_FILE` suffix and referring to a secrets file location. This avoids exposing the password as
+> an `ENV` variable in plain-text - either in the `Dockerfile` Image or as an injected variable which could be read
+> using `docker inspect`.
 >
 > The following list of variables (where used) should be set via secrets with the `_FILE` suffix in a Production System:
 >
@@ -206,7 +208,7 @@ The `mysql-db` container is driven by environment variables as shown:
 
 | Key                 | Value. | Description                                                                                                                                                                                           |
 | ------------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MYSQL_ROOT_PASSWORD | `123`. | specifies a password that is set for the MySQL `root` account - secured by **Docker Secrets** (see below)                                                                                             |
+| MYSQL_ROOT_PASSWORD | `123`  | specifies a password that is set for the MySQL `root` account - secured by **Docker Secrets** (see below)                                                                                             |
 | MYSQL_ROOT_HOST     | `root` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
 # Start Up
@@ -216,6 +218,7 @@ To start the installation, do the following:
 ```bash
 git clone https://github.com/FIWARE/tutorials.Roles-Permissions.git
 cd tutorials.Roles-Permissions
+git checkout NGSI-v2
 
 ./services create
 ```
@@ -223,7 +226,7 @@ cd tutorials.Roles-Permissions
 > **Note** The initial creation of Docker images can take up to three minutes
 
 Thereafter, all services can be initialized from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.Roles-Permissions/blob/master/services) Bash script provided within the
+[services](https://github.com/FIWARE/tutorials.Roles-Permissions/blob/NGSI-v2/services) Bash script provided within the
 repository:
 
 ```bash
@@ -232,8 +235,8 @@ repository:
 
 Where `<command>` will vary depending upon the exercise we wish to activate.
 
-**Note:** If you want to clean up and start over again you can do so with the following command:
-
+> **Note:** If you want to clean up and start over again you can do so with the following command:
+>
 > ```
 > ./services stop
 > ```
@@ -276,9 +279,10 @@ Two organizations have also been set up by Alice:
 | Security   | Security Group for Store Detectives | `security-team-0000-0000-000000000000` |
 | Management | Management Group for Store Managers | `managers-team-0000-0000-000000000000` |
 
-To save time, the data creating users and organizations from the [previous tutorial](identity-management.md) has been
-downloaded and is automatically persisted to the MySQL database on start-up so the asigned UUIDs do not change and the
-data does not need to be entered again
+To save time, the data creating users and organizations from the
+[previous tutorial](identity-management.md) has been downloaded and is automatically
+persisted to the MySQL database on start-up, so the assigned UUIDs do not change, and the data does not need to be
+entered again
 
 To refresh your memory about how to create users and organizations, you can log in at `http://localhost:3005/idm` using
 the account `alice-the-admin@test.com` with a password of `test`.
@@ -287,9 +291,9 @@ the account `alice-the-admin@test.com` with a password of `test`.
 
 and look at the organizations list.
 
-<h3>Reading directly from the Keyrock MySQL Database</h3>
+### Reading directly from the Keyrock MySQL Database
 
-All Identify Management records and releationships are held within the attached MySQL database. This can be accessed by
+All Identify Management records and relationships are held within the attached MySQL database. This can be accessed by
 entering the running Docker container as shown:
 
 ```bash
@@ -309,14 +313,14 @@ SQL commands can then be entered from the command-line. e.g.:
 select id, username, email, password from user;
 ```
 
-The **Keyrock** MySQL database deals with all aspects of application security including storing users, passwords etc;
+The **Keyrock** MySQL database deals with all aspects of application security including storing users, password etc;
 defining access rights and dealing with OAuth2 authorization protocols. The complete database relationship diagram can
 be found [here](https://fiware.github.io/tutorials.Roles-Permissions/img/keyrock-db.png)
 
-<h3>UUIDs within Keyrock</h3>
+### UUIDs within Keyrock
 
 All IDs and tokens within **Keyrock** are subject to change. The following values will need to be amended when querying
-for records .Record IDs use Universally Unique Identifiers - UUIDs.
+for records. Record IDs use Universally Unique Identifiers - UUIDs.
 
 | Key                    | Description                                                                    | Sample Value                                              |
 | ---------------------- | ------------------------------------------------------------------------------ | --------------------------------------------------------- |
@@ -333,7 +337,7 @@ for records .Record IDs use Universally Unique Identifiers - UUIDs.
 | `pep-proxy-id`         | ID of an existing PEP Proxy, found with the `pep_proxy` table                  | `iot_sensor_f3d0245b-3330-4e64-a513-81bf4b0dae64`         |
 
 Tokens are designed to expire after a set period. If the `X-Auth-token` value you are using has expired, log-in again to
-obtain a new token. For this tutorial, a long lasting set of tokens has been created for each user and persisted into
+obtain a new token. For this tutorial, a long-lasting set of tokens has been created for each user and persisted into
 the database, so there is usually no need to refresh tokens.
 
 ## Logging In via REST API calls
@@ -388,10 +392,10 @@ You can use the long-lasting `X-Auth-token=aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa`
 tutorial.
 
 The presence of a (time-limited) token is sufficient to find out more information about the user. To find information
-about Bob, use the long-lasting token `X-Subject-token=bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb`
+about Bob, use the long-lasting token `X-Subject-token=bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb`.
 
-This request indicates that _the user authorized with the token `{{X-Auth-token}}` (i.e Alice) is enquiring about the
-user holding the token `{{X-Subject-token}}` (i.e Bob)_
+This request indicates that _the user authorized with the token `{{X-Auth-token}}` (i.e. Alice) is enquiring about the
+user holding the token `{{X-Subject-token}}` (i.e. Bob)_.
 
 #### 2 Request:
 
@@ -409,17 +413,19 @@ The response will return the details of the associated user. As you can see Bob 
 
 ```json
 {
-    "access_token":"bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-    "expires":"2026-07-30T12:38:13.000Z",
-    "valid":true,
-    "User":{
-        "id":"bbbbbbbb-good-0000-0000-000000000000",
-        "username":"bob",
-        "email":"bob-the-manager@test.com",
-        "date_password":"2018-07-30T11:41:14.000Z",
-        "enabled":true,
-        "admin":false
-    }
+  "access_token": "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+  "expires": "2026-07-30T12:38:13.000Z",
+  "valid": true,
+  "User": {
+    "scope": [],
+    "id": "bbbbbbbb-good-0000-0000-000000000000",
+    "username": "bob",
+    "email": "bob-the-manager@test.com",
+    "date_password": "2018-07-30T11:41:14.000Z",
+    "enabled": true,
+    "admin": false
+  }
+}
 ```
 
 # Managing Applications
@@ -431,7 +437,7 @@ set of permissible actions and to hold a list of permitted users (or groups of u
 
 Applications are therefore a conceptual bucket holding who can do what on which resource.
 
-<h3>Video : Creating Applications with the Keyrock GUI</h3>
+## Video : Creating Applications with the Keyrock GUI
 
 [![](https://fiware.github.io/tutorials.Step-by-Step/img/video-logo.png)](https://www.youtube.com/watch?v=pjsl0eHpFww&t=470 "Creating Applications")
 
@@ -452,11 +458,12 @@ From the homepage of the GUI, a new application can be created by clicking the *
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/create-app.png)
 
-To create a new application via the REST API, send a POST request to the `/v1/application` endpoint containing details
+To create a new application via the REST API, send a POST request to the `/v1/applications` endpoint containing details
 of the application such as `name` and `description`, along with OAuth information fields such as the `url` of the
 webservice to be protected, and `redirect_uri` (where a user will be challenged for their credentials). The
-`grant_types` are chosen from the available list of OAuth2 grant flows. The headers include the `X-Auth-token` from a
-previously logged in user will automatically be granted a provider role over the application.
+`grant_types` are chosen from the available list of OAuth2 grant flows which are discussed in a
+[subsequent tutorial](https://fiware.github.io/tutorials.Securing-Access) The headers include the `X-Auth-token` from a
+previously logged-in user will automatically be granted a provider role over the application.
 
 #### 3 Request:
 
@@ -478,7 +485,8 @@ curl -iX POST \
       "authorization_code",
       "implicit",
       "password"
-    ]
+    ],
+    "token_types": ["permanent"]
   }
 }'
 ```
@@ -490,21 +498,25 @@ The response includes a Client ID and Secret which can be used to secure the app
 ```json
 {
     "application": {
-        "id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482",
-        "secret": "aa2d0845-0a8e-4ae8-addf-3c87bcab19e1",
+        "id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2",
+        "secret": "d4128d06-1cba-4c33-9a3d-ff2de51940b5",
         "image": "default",
+        "jwt_secret": null,
         "name": "Tutorial Application",
         "description": "FIWARE Application protected by OAuth2 and Keyrock",
         "redirect_uri": "http://tutorial/login",
         "url": "http://tutorial",
         "grant_type": "password,authorization_code,implicit",
-        "response_type": "code,token"
+        "token_types": "permanent,bearer",
+        "response_type": "code,token",
+        "scope": null
     }
 }
+
 ```
 
 Copy the Application Client ID to be used for all other application requests - in the case above the ID is
-`3782c5e3-88f9-481a-9b3c-2f2d6f604482`
+`6632bb2e-c8e5-418f-ba5b-c269d8a53dd2`.
 
 ### Read Application Details
 
@@ -513,7 +525,7 @@ listed under that ID. The `X-Auth-token` must be supplied in the headers.
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/app-with-oauth.png)
 
-#### 4 Request
+#### 4 Request:
 
 ```bash
 curl -X GET \
@@ -527,26 +539,38 @@ curl -X GET \
 ```json
 {
     "application": {
-        "id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482",
+        "id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2",
         "name": "Tutorial Application",
         "description": "FIWARE Application protected by OAuth2 and Keyrock",
-        "secret": "aa2d0845-0a8e-4ae8-addf-3c87bcab19e1",
+        "secret": "d4128d06-1cba-4c33-9a3d-ff2de51940b5",
         "url": "http://tutorial",
         "redirect_uri": "http://tutorial/login",
+        "redirect_sign_out_uri": null,
         "image": "default",
         "grant_type": "password,authorization_code,implicit",
         "response_type": "code,token",
+        "token_types": "permanent,bearer",
+        "jwt_secret": null,
         "client_type": null,
         "scope": null,
-        "extra": null
+        "extra": null,
+        "urls": {
+            "permissions_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/permissions",
+            "roles_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/roles",
+            "users_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/users",
+            "pep_proxies_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/pep_proxies",
+            "iot_agents_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/iot_agents",
+            "trusted_applications_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/trusted_applications"
+        }
     }
 }
+
 ```
 
 ### List all Applications
 
 Users will only be permitted to return applications they are associated with. Listing applications can be done by making
-a GET request to the `/v1/applications` endpoint and supplying the `X-Auth-token` Header
+a GET request to the `/v1/applications` endpoint and supplying the `X-Auth-token` Header.
 
 #### 5 Request:
 
@@ -563,15 +587,26 @@ curl -X GET \
 {
     "applications": [
         {
-            "id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482",
+            "id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2",
             "name": "Tutorial Application",
             "description": "FIWARE Application protected by OAuth2 and Keyrock",
             "image": "default",
             "url": "http://tutorial",
             "redirect_uri": "http://tutorial/login",
+            "redirect_sign_out_uri": null,
             "grant_type": "password,authorization_code,implicit",
             "response_type": "code,token",
-            "client_type": null
+            "token_types": "permanent,bearer",
+            "jwt_secret": null,
+            "client_type": null,
+            "urls": {
+                "permissions_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/permissions",
+                "roles_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/roles",
+                "users_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/users",
+                "pep_proxies_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/pep_proxies",
+                "iot_agents_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/iot_agents",
+                "trusted_applications_url": "/v1/applications/6632bb2e-c8e5-418f-ba5b-c269d8a53dd2/trusted_applications"
+            }
         }
     ]
 }
@@ -580,8 +615,8 @@ curl -X GET \
 ### Update an Application
 
 Within the GUI, users can be updated by selecting an application and clicking on `edit`. This can also be done from the
-command-line by making PATCH request to `/v1/applications/<applications-id>` endpoint when the applications ID is known.
-The `X-Auth-token` header must also be set, since a User can only edit applications he is associated with.
+command-line by making PATCH request to `/v1/applications/{{applications-id}}` endpoint when the applications ID is
+known. The `X-Auth-token` header must also be set, since a User can only edit applications he is associated with.
 
 #### 6 Request:
 
@@ -613,8 +648,10 @@ The response lists the fields which have been updated, note that the `redirect_u
         "name": "Tutorial New Name",
         "description": "This is a new description",
         "grant_type": "password,authorization_code",
-        "response_type": "code"
-    }
+        "response_type": "code",
+        "token_types": "permanent,bearer,bearer",
+        "scope": ""
+   }
 }
 ```
 
@@ -622,7 +659,7 @@ The response lists the fields which have been updated, note that the `redirect_u
 
 Within the GUI, users can delete an application by selecting an application and clicking on `edit`, then scrolling to
 the bottom of the page and selecting **Remove Application**. This can also be done from the command-line by sending a
-DELETE request to the `/v1/applications/<applications-id>` endpoint. The `X-Auth-token` header must also be set.
+DELETE request to the `/v1/applications/{{applications-id}}` endpoint. The `X-Auth-token` header must also be set.
 
 #### 7 Request:
 
@@ -636,17 +673,17 @@ curl -iX DELETE \
 ## Permission CRUD Actions
 
 An application permission is an allowable action on a resource within that application. Each resource is defined by a
-URL (e.g. `/price-change`) and the action is any HTTP verb (e.g. GET)
+URL (e.g. `/price-change`) and the action is any HTTP verb (e.g. GET):
 
--   the combination will be used to ensure only permitted users are able to access the `/price-change` resource.
+-   The combination will be used to ensure only permitted users are able to access the `/price-change` resource.
 
 Further advanced permission rules can be described using XACML - this is the subject of another tutorial.
 
 It should be emphasized that permissions are always found bound to an application - abstract permissions do not exist on
-their own. The standard permision CRUD actions are assigned to the appropriate HTTP verbs (POST, GET, PATCH and DELETE)
-under the `/v1/applications/{{application-id}}/permissions` endpoint
+their own. The standard permission CRUD actions are assigned to the appropriate HTTP verbs (POST, GET, PATCH and DELETE)
+under the `/v1/applications/{{application-id}}/permissions` endpoint:
 
--   as you can see the `<application-id>` itself is integral to the URL.
+-   As you can see the `<application-id>` itself is integral to the URL.
 
 Permissions are usually defined once and set-up when the application is created. If the design of your use-case means
 that you find you need to alter the permissions regularly, then the definition has probably been defined incorrectly or
@@ -663,7 +700,7 @@ and then pressing the plus next to the Permissions label.
 Just fill out the wizard and click save.
 
 To create a new permission via the REST API, send a POST request to the `/applications/{{application-id}}/permissions`
-endpoint containing the `action`and `resource` along with the `X-Auth-token` header from a previously logged in user.
+endpoint containing the `action` and `resource` along with the `X-Auth-token` header from a previously logged-in user.
 
 #### 8 Request:
 
@@ -688,19 +725,20 @@ The response returns the details of the newly created permission.
 ```json
 {
     "permission": {
-        "id": "c8ace792-d058-4650-9958-59753215e1cc",
+        "id": "8052b95b-3ff6-481c-b779-893b6c3f1488",
         "is_internal": false,
         "name": "Access Price Changes",
         "action": "GET",
         "resource": "/price-change",
-        "oauth_client_id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482"
-    }
+        "is_regex": false,
+        "oauth_client_id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2"
+  }
 }
 ```
 
 ### Read Permission Details
 
-The `/applications/{{application-id}}/permissions/{permission-id}}` endpoint will return the permission listed under
+The `/applications/{{application-id}}/permissions/{{permission-id}}` endpoint will return the permission listed under
 that ID. The `X-Auth-token` must be supplied in the headers.
 
 #### 9 Request:
@@ -719,14 +757,15 @@ The response returns the details of the requested permission.
 ```json
 {
     "permission": {
-        "id": "c21983d5-58f9-4bcc-b2b0-f21819080ad0",
-        "name": "Enable Alarm Bell",
+        "id": "8052b95b-3ff6-481c-b779-893b6c3f1488",
+        "name": "Access Price Changes",
         "description": null,
         "is_internal": false,
-        "action": "POST",
-        "resource": "/ring",
+        "action": "GET",
+        "resource": "/price-change",
+        "is_regex": 0,
         "xml": null,
-        "oauth_client_id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482"
+        "oauth_client_id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2"
     }
 }
 ```
@@ -734,9 +773,9 @@ The response returns the details of the requested permission.
 ### List Permissions
 
 Listing the permissions with an application can be done by making a GET request to the
-`/v1/applications/{{application-id}}/permissions/` endpoint
+`/v1/applications/{{application-id}}/permissions` endpoint.
 
-#### 10 Request:
+#### 1:zero: Request:
 
 ```bash
 curl -X GET \
@@ -748,28 +787,22 @@ curl -X GET \
 #### Response:
 
 The complete list of permissions includes any custom permissions created previously plus all the standard permissions
-which are avaiable by default
+which are available by default.
 
 ```json
 {
     "permissions": [
         {
-            "id": "c8ace792-d058-4650-9958-59753215e1cc",
+            "id": "8052b95b-3ff6-481c-b779-893b6c3f1488",
             "name": "Access Price Changes",
             "description": null,
             "action": "GET",
             "resource": "/price-change",
             "xml": null
         },
-        {
-            "id": "c21983d5-58f9-4bcc-b2b0-f21819080ad0",
-            "name": "Enable Alarm Bell",
-            "description": null,
-            "action": "POST",
-            "resource": "/ring",
-            "xml": null
-        },
+
         ...etc
+
         {
             "id": "2",
             "name": "Manage the application",
@@ -793,7 +826,7 @@ which are avaiable by default
 ### Update a Permission
 
 To amend the details of an existing permission, a PATCH request is send to the
-`/applications/{{application-id}}/permissions/{permission-id}}` endpoint.
+`/applications/{{application-id}}/permissions/{{permission-id}}` endpoint.
 
 #### 11 Request:
 
@@ -804,9 +837,9 @@ curl -X PATCH \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
   "permission": {
-    "name": "Ring Alarm Bell",
-    "action": "POST",
-    "resource": "/ring"
+    "name": "Access Price Changes 1",
+    "action": "GET",
+    "resource": "/price-change"
   }
 }'
 ```
@@ -818,12 +851,12 @@ The response contains a list of the fields which have been amended.
 ```json
 {
     "values_updated": {
-        "name": "Ring Alarm Bell"
+        "name": "Access Price Changes 1"
     }
 }
 ```
 
-### Delete an Permission
+### Delete a Permission
 
 Deleting a permission from an application automatically removes that permission from any associated roles.
 
@@ -856,7 +889,7 @@ There are two predefined roles with **Keyrock** :
     -   Get and assign all internal application roles
 
 Using our Supermarket Store Example, Alice the admin would be assigned the _Provider_ role, she could then create any
-additional application-specific roles needed (such as _Management_ or _Security_)
+additional application-specific roles needed (such as _Management_ or _Security_).
 
 Once again, roles are always directly bound to an application - abstract roles do not exist on their own. The standard
 CRUD actions are assigned to the appropriate HTTP verbs (POST, GET, PATCH and DELETE) under the
@@ -872,7 +905,7 @@ then pressing the plus next to the Role label.
 Just fill out the wizard and click save.
 
 To create a new role via the REST API, send a POST request to the `/applications/{{application-id}}/roles` endpoint
-containing the `name` of the new role, with the `X-Auth-token` header from a previously logged in user.
+containing the `name` of the new role, with the `X-Auth-token` header from a previously logged-in user.
 
 #### 13 Request:
 
@@ -895,17 +928,17 @@ The details of the created role are returned
 ```json
 {
     "role": {
-        "id": "bc64fe78-f440-4ce0-815d-78b1d3d8b9a1",
+        "id": "9d66bf12-8f6a-4455-9697-eb5560b1d2cd",
         "is_internal": false,
         "name": "Management",
-        "oauth_client_id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482"
+        "oauth_client_id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2"
     }
 }
 ```
 
 ### Read Role Details
 
-The `/applications/{{application-id}}/roles/{role-id}}` endpoint will return the role listed under that ID. The
+The `/applications/{{application-id}}/roles/{{role-id}}` endpoint will return the role listed under that ID. The
 `X-Auth-token` must be supplied in the headers.
 
 #### 14 Request:
@@ -924,10 +957,10 @@ The response returns the details of the requested role.
 ```json
 {
     "role": {
-        "id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c",
-        "name": "Security",
+        "id": "9d66bf12-8f6a-4455-9697-eb5560b1d2cd",
+        "name": "Management",
         "is_internal": false,
-        "oauth_client_id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482"
+        "oauth_client_id": "6632bb2e-c8e5-418f-ba5b-c269d8a53dd2"
     }
 }
 ```
@@ -935,7 +968,7 @@ The response returns the details of the requested role.
 ### List Roles
 
 Listing all the roles offered by an application can be done by making a GET request to the
-`/v1/applications/{{application-id/roles` endpoint
+`/v1/applications/{{application-id}}/roles` endpoint.
 
 #### 15 Request:
 
@@ -962,12 +995,8 @@ A summary of all roles associated with the application is returned containing bo
             "name": "Provider"
         },
         {
-            "id": "bc64fe78-f440-4ce0-815d-78b1d3d8b9a1",
+            "id": "9d66bf12-8f6a-4455-9697-eb5560b1d2cd",
             "name": "Management"
-        },
-        {
-            "id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c",
-            "name": "Security"
         }
     ]
 }
@@ -976,7 +1005,7 @@ A summary of all roles associated with the application is returned containing bo
 ### Update a Role
 
 It is possible to amend the name of a role using a PATCH request is sent to the
-`/applications/{{application-id}}/permissions/{permission-id}}` endpoint.
+`/applications/{{application-id}}/roles/{{role-id}}` endpoint.
 
 #### 16 Request:
 
@@ -987,7 +1016,7 @@ curl -iX PATCH \
   -H 'X-Auth-token: {{X-Auth-token}}' \
   -d '{
   "role": {
-    "name": "Security Team"
+    "name": "Management Team"
   }
 }'
 ```
@@ -999,7 +1028,7 @@ The response contains a list of the fields which have been amended.
 ```json
 {
     "values_updated": {
-        "name": "Security Team"
+        "name": "Management Team"
     }
 }
 ```
@@ -1028,7 +1057,7 @@ Within the GUI, select the role and check permissions from the list before savin
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/add-permission-to-role.png)
 
-To add a permission using the REST API make a PUT request as shown, including the `<application-id>`, `<role-id>` and
+To add a permission using the REST API makes a PUT request as shown, including the `<application-id>`, `<role-id>` and
 `<permission-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
 #### 18 Request:
@@ -1042,13 +1071,13 @@ curl -iX PUT \
 
 #### Response:
 
-The response returns the permissions for the role
+The response returns the permissions for the role.
 
 ```json
 {
     "role_permission_assignments": {
-        "role_id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c",
-        "permission_id": "c21983d5-58f9-4bcc-b2b0-f21819080ad0"
+        "role_id": "9d66bf12-8f6a-4455-9697-eb5560b1d2cd",
+        "permission_id": "8052b95b-3ff6-481c-b779-893b6c3f1488"
     }
 }
 ```
@@ -1073,21 +1102,12 @@ curl -X GET \
 {
     "role_permission_assignments": [
         {
-            "id": "c21983d5-58f9-4bcc-b2b0-f21819080ad0",
+            "id": "8052b95b-3ff6-481c-b779-893b6c3f1488",
             "is_internal": false,
-            "name": "Ring Alarm Bell",
+            "name": "Access Price Changes 1",
             "description": null,
-            "action": "POST",
-            "resource": "/ring",
-            "xml": null
-        },
-        {
-            "id": "2d611223-0b9e-4ffb-83b4-518e236890b6",
-            "is_internal": false,
-            "name": "Unlock",
-            "description": "Unlock main entrance",
-            "action": "POST",
-            "resource": "/door/unlock",
+            "action": "GET",
+            "resource": "/price-change",
             "xml": null
         }
     ]
@@ -1096,10 +1116,10 @@ curl -X GET \
 
 ### Remove a Permission from a Role
 
-To remove a permission using the REST API make a DELETE request as shown, including the `<application-id>`, `<role-id>`
+To remove a permission using the REST API makes a DELETE request as shown, including the `<application-id>`, `<role-id>`
 and `<permission-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
-#### 20 Request:
+#### 2:zero: Request:
 
 ```bash
 curl -X DELETE \
@@ -1110,9 +1130,9 @@ curl -X DELETE \
 
 # Authorizing Application Access
 
-In the end, a user logs into an application , identifies himself and then is granted a list of permissions that the user
-is able to do. However it should be emphasized that it is the application, not the user that holds and offers the
-permissions, and the user is merely associated with a aggregated list of permissions via the role(s) they have been
+In the end, a user logs into an application, identifies himself and then is granted a list of permissions that the user
+is able to do. However, it should be emphasized that it is the application, not the user that holds and offers the
+permissions, and the user is merely associated with an aggregated list of permissions via the role(s) they have been
 granted.
 
 The application can grant roles to either Users or Organizations - the latter should always be preferred, as it allows
@@ -1135,13 +1155,13 @@ organization must also have be created as was demonstrated in the previous tutor
 
 ### Grant a Role to an Organization
 
-To grant an organization access to an application, click on the appliation to get to the details page and scroll to the
+To grant an organization access to an application, click on the application to get to the details page and scroll to the
 bottom of the page, click the **Authorize** button and select the relevant organization.
 
 ![](https://fiware.github.io/tutorials.Roles-Permissions/img/add-role-to-org.png)
 
 A Role can be granted to either `members` or `owners` of an Organization. Using the REST API, the role can be granted
-making a PUT request as shown, including the `<application-id>`, `<role-id>` and `<organzation-id>` in the URL path and
+making a PUT request as shown, including the `<application-id>`, `<organzation-id>` and `<role-id>` in the URL path and
 identifying themselves using an `X-Auth-Token` in the header.
 
 #### 21 Request:
@@ -1149,7 +1169,7 @@ identifying themselves using an `X-Auth-Token` in the header.
 This example adds the role to all members of the organization
 
 ```bash
-curl -iX PUT \
+curl -X PUT \
   'http://localhost:3005/v1/applications/{{application-id}}/organizations/{{organization-id}}/roles/{{role-id}}/organization_roles/member' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
@@ -1163,7 +1183,7 @@ The response lists the role assignment as shown:
 {
     "role_organization_assignments": {
         "role_id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c",
-        "organization_id": "security-0000-0000-0000-000000000000",
+        "organization_id": "security-team-0000-0000-000000000000",
         "oauth_client_id": "3782c5e3-88f9-481a-9b3c-2f2d6f604482",
         "role_organization": "member"
     }
@@ -1173,7 +1193,7 @@ The response lists the role assignment as shown:
 ### List Granted Organization Roles
 
 A full list of roles granted to an organization can be retrieved by making a GET request to the
-`/v1/applications/{{application-id}}/organizations/{{organization-id}}/roles` endpoint
+`/v1/applications/{{application-id}}/organizations/{{organization-id}}/roles` endpoint.
 
 #### 22 Request:
 
@@ -1186,13 +1206,13 @@ curl -X GET \
 
 #### Response:
 
-The response shows all roles assigned to the organization
+The response shows all roles assigned to the organization.
 
 ```json
 {
     "role_organization_assignments": [
         {
-            "organization_id": "security-0000-0000-0000-000000000000",
+            "organization_id": "security-team-0000-0000-000000000000",
             "role_id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c"
         }
     ]
@@ -1217,15 +1237,14 @@ curl -iX DELETE \
 
 ## Authorizing Individual User Accounts
 
-A defined role cannot be granted to a user unless the role has already been associated to an application
+A defined role cannot be granted to a user unless the role has already been associated to an application.
 
 ### Grant a Role to a User
 
 Granting User access via the GUI can be done in the same manner as for organizations.
 
-A Role can be granted to either `members` or `owners` of an Organization. Using the REST API, the role can be granted
-making a PUT request as shown, including the `<application-id>`, `<role-id>` and `<user-id>` in the URL path and
-identifying themselves using an `X-Auth-Token` in the header.
+Using the REST API, the role can be granted making a PUT request as shown, including the `<application-id>`, `<role-id>`
+and `<user-id>` in the URL path and identifying themselves using an `X-Auth-Token` in the header.
 
 #### 24 Request:
 
@@ -1251,7 +1270,7 @@ curl -iX PUT \
 ### List Granted User Roles
 
 To list the roles granted to an Individual user, make a GET request to the
-`v1/applications/{{application-id}}/users/{{user-id}}/roles` endpoint
+`v1/applications/{{application-id}}/users/{{user-id}}/roles` endpoint.
 
 #### 25 Request:
 
@@ -1264,7 +1283,7 @@ curl -X GET \
 
 #### Response:
 
-The response returns all roles assigned to the user
+The response returns all roles assigned to the user.
 
 ```json
 {
@@ -1279,23 +1298,23 @@ The response returns all roles assigned to the user
 
 ### Revoke a Role from a User
 
-In a similar manner to organizations, to revoke a user role using the REST API make a DELETE request as shown, including
+Similarly to organizations, to revoke a user role using the REST API makes a DELETE request as shown, including
 the `<application-id>`, `<user-id>` and `<role-id>` in the URL path and identifying themselves using an `X-Auth-Token`
 in the header.
 
 #### 26 Request:
 
 ```bash
-curl -iX DELETE \
+curl -X DELETE \
   'http://localhost:3005/v1/applications/{{application-id}}/users/{{user-id}}/roles/{{role-id}}' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
-## List Application Grantees
+# List Application Grantees
 
 By creating a series of roles and granting them to Users and Organizations, we have made an association between them.
-The REST API offers two convienience methods exist to list all the grantees of an application
+The REST API offers two convenience methods exist to list all the grantees of an application.
 
 ### List Authorized Organizations
 
@@ -1306,7 +1325,7 @@ To list all organizations which are authorized to use an application, make a GET
 
 ```bash
 curl -X GET \
-  'http://localhost:3005/v1/applications/{{application-id}}/organizations/{{organizations-id}}/roles' \
+  'http://localhost:3005/v1/applications/{{application-id}}/organizations' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1320,7 +1339,7 @@ Individual members are not listed.
 {
     "role_organization_assignments": [
         {
-            "organization_id": "security-0000-0000-0000-000000000000",
+            "organization_id": "security-team-0000-0000-000000000000",
             "role_organization": "member",
             "role_id": "64535f4d-04b6-4688-a9bb-81b8df7c4e2c"
         }
@@ -1337,7 +1356,7 @@ To list all individual users who are authorized to use an application, make a GE
 
 ```bash
 curl -X GET \
-  'http://localhost:3005/v1/applications/{{application-id}}/users/{{user-id}}/roles' \
+  'http://localhost:3005/v1/applications/{{application-id}}/users' \
   -H 'Content-Type: application/json' \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
@@ -1361,3 +1380,4 @@ that users of an organization granted access are not listed.
     ]
 }
 ```
+
