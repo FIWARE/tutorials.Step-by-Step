@@ -1178,28 +1178,35 @@ curl -X POST \
 
 ### IoT Agent - provisioning a trusted service group
 
-The Access token (also known as a Trust Token) must be added to the service group.
+The Access token (also known as a Trust Token) must be added to the service group. The `resource` and `apikey` correspond
+to the values set-up within the service group provisioning stage. In this case the Motion sensor group had been provisioned
+as shown:
+
+```json
+{
+     "apikey":      "1068318794",
+     "cbroker":     "http://orion:1026",
+     "entity_type": "Motion",
+     "resource":    "/iot/d",
+}
+```
 
 #### 18 Request:
 
 ```bash
-curl -iX POST \
-  'http://localhost:4041/iot/services' \
+curl -iX PUT \
+  'http://localhost:4041/iot/services?resource=/iot/d&apikey=1068318794' \
   -H 'Content-Type: application/json' \
   -H 'fiware-service: openiot' \
   -H 'fiware-servicepath: /' \
   -d '{
- "services": [
-   {
-     "apikey":      "4jggokgpepnvsb2uv4s40d59ov",
-     "cbroker":     "http://orion:1026",
-     "entity_type": "Motion",
-     "resource":    "/iot/d",
-     "trust": "e37aeef5d48c9c1a3d4adf72626a8745918d4355"
-   }
- ]
+     "cbroker": "http://orion-proxy:1027",
+     "trust": "30a5ce4c71e416bd199dcdcb7f8bcd8d70e8bb5e"
 }'
 ```
+
+The Motion sensor requests are now sent via the `orion-proxy` and identify themselves using the generated trust token.
+
 
 ### IoT Agent - provisioning a sensor
 
