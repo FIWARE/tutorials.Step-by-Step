@@ -1,10 +1,9 @@
 [![FIWARE Context processing, analysis and visualisation](https://nexus.lab.fiware.org/static/badges/chapters/processing.svg)](https://github.com/FIWARE/catalogue/blob/master/processing/README.md)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
-**Description:** This is an introductory tutorial for [FIWARE FogFlow](https://fogflow.readthedocs.io/en/latest/) that
-allows its users to dynamically orchestrate the processing flows on edges. It explains how to enable FogFlow on a
-distributed or a single node system, register user defined workload patterns and orchestrate them on the edges in the
-form of running tasks. For better understanding, examples have been included in the tutorial.
+**Description:** This is an introductory tutorial for [FIWARE FogFlow](https://fogflow.readthedocs.io/en/latest/) that allows its users
+to dynamically orchestrate the processing flows on edges. It explains how to enable FogFlow on a distributed or a single
+node system, register user defined workload patterns and orchestrate them on the edges in the form of running tasks. For
+better understanding, examples have been included in the tutorial.
 
 <hr class="processing"/>
 
@@ -23,13 +22,7 @@ this tutorial, which are relatable to the figure below.
 3.  FogFlow orchestrates processing flows at edges in no time. These processing flows may change the state of an
     actuator or publish some data back to FogFlow, it is all about what user wants to do.
 
-Additional material to understand the developer know-hows, visit
-[FogFlow tutorial](https://fogflow.readthedocs.io/en/latest/introduction.html). FogFlow can also be integrated with
-other FIWARE Ges.
-
--   [Integrate FogFlow with Scorpio Broker](https://fogflow.readthedocs.io/en/latest/scorpioIntegration.html)
--   [Integrate FogFlow with QuantumLeap](https://fogflow.readthedocs.io/en/latest/QuantumLeapIntegration.html)
--   [Integrate FogFlow with WireCloud](https://fogflow.readthedocs.io/en/latest/wirecloudIntegration.html)
+<hr class="processing"/>
 
 # Architecture
 
@@ -72,7 +65,7 @@ repository:
 ./services start
 ```
 
-## FogFlow Cloud Node
+## Setup FogFlow Cloud Node
 
 **Prerequisites** for starting up a cloud node are as follows:
 
@@ -89,24 +82,40 @@ repository:
 
 1.  Change the following IP addresses in config.json according to the current environment.
 
-    -   **coreservice_ip**: public IP address of the FogFlow cloud node.
-    -   **external_hostip**: public IP address of the current cloud/edge node;
-    -   **internal_hostip**: IP address of "docker0" network interface on the current node.
-    -   **site_id**: unique string-based ID to identify the node in FogFlow system;
-    -   **physical_location**: the geo-location of the node;
+    -   **my_hostip**: Public IP address of the FogFlow cloud node.
+    -   **site_id**: Unique string-based ID to identify the node in FogFlow system.
+    -   **physical_location**: The geo-location of the node.
+    -   **worker.capacity**: It means the maximal number of docker containers that the FogFlow node can invoke. By
+        default its value is "8"
 
 ```json
 {
-    "coreservice_ip": "10.156.0.9",
-    "external_hostip": "10.156.0.9",
-    "internal_hostip": "172.17.0.1",
+    "my_hostip": "10.156.0.9",
     "physical_location": {
         "longitude": 139.709059,
         "latitude": 35.692221
     },
-    "site_id": "001"
+    "site_id": "001",
+    "worker": {
+        "container_autoremove": false,
+        "start_actual_task": true,
+        "capacity": 8
+    }
 }
 ```
+
+> ## Important !
+>
+> Please DO NOT use “127.0.0.1” as the IP address of my_hostip, because it is only accessible to a running task inside a
+> docker container.
+>
+> **Firewall rules**: To make your FogFlow web portal accessible, the following ports 80 and 5672 over TCP must be open.
+>
+> **Mac Users**: If you like to test FogFlow on your Macbook, please install Docker Desktop and also use
+> “host.docker.internal” as my_hostip in the configuration file.
+>
+> If you need to change the port number(s), please make sure the change is consistence in all these three configuration
+> files.
 
 2.  Pull the docker images of FogFlow components and start them.
 
@@ -124,14 +133,16 @@ repository:
 ```
 
 ```text
-  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                   NAMES
-  90868b310608        nginx:latest        "nginx -g 'daemon of…"   5 seconds ago       Up 3 seconds        0.0.0.0:80->80/tcp                                      fogflow_nginx_1
-  d4fd1aee2655        fogflow/worker      "/worker"                6 seconds ago       Up 2 seconds                                                                fogflow_cloud_worker_1
-  428e69bf5998        fogflow/master      "/master"                6 seconds ago       Up 4 seconds        0.0.0.0:1060->1060/tcp                                  fogflow_master_1
-  9da1124a43b4        fogflow/designer    "node main.js"           7 seconds ago       Up 5 seconds        0.0.0.0:1030->1030/tcp, 0.0.0.0:8080->8080/tcp          fogflow_designer_1
-  bb8e25e5a75d        fogflow/broker      "/broker"                9 seconds ago       Up 7 seconds        0.0.0.0:8070->8070/tcp                                  fogflow_cloud_broker_1
-  7f3ce330c204        rabbitmq:3          "docker-entrypoint.s…"   10 seconds ago      Up 6 seconds        4369/tcp, 5671/tcp, 25672/tcp, 0.0.0.0:5672->5672/tcp   fogflow_rabbitmq_1
-  9e95c55a1eb7        fogflow/discovery   "/discovery"             10 seconds ago      Up 8 seconds        0.0.0.0:8090->8090/tcp                                  fogflow_discovery_1
+   CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS         PORTS                                                                                            NAMES
+   e412877b4862   nginx:latest            "/docker-entrypoint.…"   2 minutes ago   Up 2 minutes   0.0.0.0:80->80/tcp                                                                               tutorialsedgecomputing_nginx_1
+   29ea8555685d   fogflow/master:3.2      "/master"                2 minutes ago   Up 2 minutes   0.0.0.0:1060->1060/tcp                                                                           tutorialsedgecomputing_master_1
+   aaa2f29959e7   fogflow/worker:3.2      "/worker"                2 minutes ago   Up 2 minutes                                                                                                    tutorialsedgecomputing_cloud_worker_1
+   1298fe46bf1e   fogflow/designer:3.2    "node main.js"           2 minutes ago   Up 2 minutes   0.0.0.0:1030->1030/tcp, 0.0.0.0:8080->8080/tcp                                                   tutorialsedgecomputing_designer_1
+   644333fa6215   fogflow/broker:3.2      "/broker"                2 minutes ago   Up 2 minutes   0.0.0.0:8070->8070/tcp                                                                           tutorialsedgecomputing_cloud_broker_1
+   acd974d6c040   fogflow/discovery:3.2   "/discovery"             2 minutes ago   Up 2 minutes   0.0.0.0:8090->8090/tcp                                                                           tutorialsedgecomputing_discovery_1
+   cce2c64503d9   dgraph/standalone       "/run.sh"                2 minutes ago   Up 2 minutes   0.0.0.0:6080->6080/tcp, 0.0.0.0:8000->8000/tcp, 0.0.0.0:8082->8080/tcp, 0.0.0.0:9082->9080/tcp   tutorialsedgecomputing_dgraph_1
+   925d1deb343f   rabbitmq:3              "docker-entrypoint.s…"   2 minutes ago   Up 2 minutes   4369/tcp, 5671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:5672->5672/tcp                           tutorialsedgecomputing_rabbitmq_1
+
 ```
 
 -   Check the system status from the FogFlow DashBoard at `http://<coreservice_ip>/index.html`. Web page to be displayed
@@ -139,23 +150,22 @@ repository:
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/dashboard.png)
 
-## FogFlow Edge Node
+## Setup FogFlow Edge Node
 
 **Prerequisites** for starting up an edge node are as follows:
 
 -   **Docker:** Please refer to
-    [Install Docker CE on Respberry Pi](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html).
+    [Install Docker CE on Raspberry Pi](https://withblue.ink/2019/07/13/yes-you-can-run-docker-on-raspbian.html).
 
 **To start the installation, do the following:**
 
-1.  Change the configuration file similar to the cloud node, but now coreservice_ip will remain uniform because it is
-    the IP address of the cloud node.
+1.  Change the configuration file similar to the cloud node, but now **coreservice_ip** will remain uniform because it
+    is the IP address of the cloud node. **my_hostip** will change to the public IP address of edge node.
 
 ```json
 {
     "coreservice_ip": "10.156.0.9",
-    "external_hostip": "10.156.0.10",
-    "internal_hostip": "172.17.0.1",
+    "my_hostip": "172.17.0.1",
     "physical_location": {
         "longitude": 138.709059,
         "latitude": 36.692221
@@ -170,7 +180,7 @@ repository:
 }
 ```
 
-2.  Start both Edge IoT Broker and FogFlow Worker. If the edge node is ARM-basd, then attach arm as the command
+2.  Start both Edge IoT Broker and FogFlow Worker. If the edge node is ARM-based, then attach arm as the command
     parameter.
 
 ```bash
@@ -190,23 +200,23 @@ data flow from broker towards the actuator devices. FogFlow relies on this bi-di
 actual idea behind it.
 
 To receive data from the sensor devices, refer
-[connect to a sensor device](https://fogflow.readthedocs.io/en/latest/example3.html). The tutorial contains examples of
-both NGSI and Non-NGSI devices.
+[connect to a sensor device](https://fogflow.readthedocs.io/en/latest/integration.html#northbound-integration). The
+tutorial contains examples of both NGSI and Non-NGSI devices.
 
 FogFlow can change the state of connected actuator devices, such as, locking a door, switching on a lamp, turning a
 shield on or off, etc. through its dynamic processing flows. To **connect to an actuator device**, refer
-[Integrate an actuator device with FogFlow](https://fogflow.readthedocs.io/en/latest/example5.html). This tutorial also
-contains examples of both NGSI and Non-NGSI devices (especially, the UltraLight and MQTT ones).
+[Integrate an actuator device with FogFlow](https://fogflow.readthedocs.io/en/latest/integration.html#southbound-integration).
+This tutorial also contains examples of both NGSI and Non-NGSI devices (especially, the UltraLight and MQTT ones).
 
 To get a basic idea of how Southbound actually works in the context of FIWARE, refer
-[this](https://fiware-tutorials.readthedocs.io/en/latest/iot-agent/index.html#southbound-traffic-commands) tutorial.
+[this](iot-agent.md#southbound-traffic-commands) tutorial.
 
 # Dynamic Orchestration at Edges using FogFlow
 
 Before moving further, users must have a look at the following:
 
--   [Core concepts](https://fogflow.readthedocs.io/en/latest/concept.html) of FogFlow and
--   [Intent-based programming model](https://fogflow.readthedocs.io/en/latest/programming.html)
+-   [Core concepts](https://fogflow.readthedocs.io/en/latest/core_concept.html) of FogFlow and
+-   [Intent-based programming model](https://fogflow.readthedocs.io/en/latest/intent_based_program.html)
 
 ## Define and trigger a Fog Function
 
@@ -215,75 +225,36 @@ processing logic (or operator) and then the rest will be done by FogFlow automat
 
 -   triggering the submitted fog function when its input data are available
 -   deciding how many instances are to be created according to the defined granularity
--   deciding where to deploy the created instances or processings flows
+-   deciding where to deploy the created instances or processing flows
 
 ### Register the Task Operators
 
 FogFlow allows the developers to specify their own function code inside a registered operator. Check out some
-[examples](https://github.com/smartfog/fogflow/tree/master/application/operator) to know how to create a customized
-operator.
+[examples](https://github.com/smartfog/fogflow/tree/master/application/operator) and this
+[tutorial](https://fogflow.readthedocs.io/en/latest/intent_based_program.html#provide-the-code-of-your-own-function) to
+know how to create a customized operator.
 
 Python, Java and JavaScript templates to write an operator can be found
 [here](https://github.com/FIWARE/tutorials.Edge-Computing/tree/master/templates).
 
-For the current tutorial, refer the
-[dummy operator code](https://github.com/FIWARE/tutorials.Edge-Computing/tree/master/dummy). Replace the following
-content in `function.js` file and build the docker image by running the build file. This image can be used as an
-operator.
-
-```javascript
-exports.handler = function(contextEntity, publish, query, subscribe) {
-    console.log("enter into the user-defined fog function");
-
-    var entityID = contextEntity.entityId.id;
-
-    if (contextEntity == null) {
-        return;
-    }
-    if (contextEntity.attributes == null) {
-        return;
-    }
-
-    var updateEntity = {};
-    updateEntity.entityId = {
-        id: "Stream.result." + entityID,
-        type: "result",
-        isPattern: false
-    };
-    updateEntity.attributes = {};
-    updateEntity.attributes.city = {
-        type: "string",
-        value: "Heidelberg"
-    };
-
-    updateEntity.metadata = {};
-    updateEntity.metadata.location = {
-        type: "point",
-        value: {
-            latitude: 33.0,
-            longitude: -1.0
-        }
-    };
-
-    console.log("publish: ", updateEntity);
-    publish(updateEntity);
-};
-```
+For the current tutorial, refer the steps mentioned below.
 
 The following steps are required to register an operator in Fogflow.
 
-1.  **Register an Operator** to define what would be the name of Operator and what input parameters it would need. The
-    following picture shows the list of all registered operators.
+1.  **Register an Operator** means to define what would be the name of Operator and what input parameters it would need.
 
-![](https://fiware.github.io/tutorials.Edge-Computing/img/operator-list.png)
-
-To register a new operator, click on "register" button, create an operator and add parameters to it. To define the port
-for the operator application, use "service_port" and give a valid port number as its value. The application would be
-accessible to the outer world through this port.
+To register Operator, open fogflow dashboard. Select Operator Registry Tab from horizontal bar, select operator from
+menu on left and then click register button. Right click on workspace and select operator from drop down list and enter
+details as shown and at last click on submit.
 
 ![](https://fiware.github.io/tutorials.Edge-Computing/img/operator-registry.png)
 
-2.  **Register a Docker Image and choose Operator** to define the docker image and associate an already registered
+> **Note :**
+>
+> User can add parameters to operator. To define the port for the operator application, use "service_port" and give a
+> valid port number as its value. The application would be accessible to the outer world through this port.
+
+2.  **Register a Docker Image and choose Operator** means to define the docker image and associate an already registered
     Operator with it. The following picture shows the list of registered docker images and the key information of each
     image.
 
@@ -297,7 +268,7 @@ The form is explained as the following.
 -   **Image:** the name of your operator docker image, must be consistent with the one you publish to
     [Docker Hub](https://hub.docker.com/)
 -   **Tag:** the tag you used to publish your operator docker image; by default it is "latest"
--   **Hardware Type:** the hardware type that your docker image supports, including X86 or ARM (e.g. Raspberry Pi)
+-   **Hardware Type:** the hardware type that your docker image supports, including x86 or ARM (e.g. Raspberry Pi)
 -   **OS Type:** the operating system type that your docker image supports; currently this is only limited to Linux
 -   **Operator:** the operator name, which must be unique and will be used when defining a service topology
 -   **Prefetched:** if this is checked, that means all edge nodes will start to fetch this docker image in advance;
@@ -376,6 +347,8 @@ fog function automatically.
 
 The other way to trigger the fog function is to send an NGSI entity update in the form of a POST request to the FogFlow
 broker to create the "Temperature" sensor entity.
+
+#### 1 Request
 
 ```bash
 curl -iX POST \
@@ -495,7 +468,7 @@ Service Topology can be triggered in two steps:
 -   Sending a high level intent object which breaks the service topology into separate tasks
 -   Providing Input Streams to the tasks of that service topology.
 
-The intent object is sent using the fogflow dashboard with the following properties:
+The intent object is sent using the FogFlow dashboard with the following properties:
 
 -   **Topology:** specifies which topology the intent object is meant for.
 -   **Priority:** defines the priority level of all tasks in your topology, which will be utilized by edge nodes to
@@ -519,6 +492,8 @@ Here are curl examples to send Input streams for Anomaly-Detector use case. It r
 > to send PowerPanel data.
 >
 > The Curl case assumes that the cloud IoT Broker is running on localhost on port 8070.
+
+#### 2 Request
 
 ```bash
 curl -iX POST \
@@ -561,5 +536,46 @@ curl -iX POST \
 ```
 
 Outputs of the Service Topology will be published to the Broker, any application subscribing to the data will receive
-the notification. An actuator device can also receive these streams as inputs from the Broker. Resulting streams will be
+the notification. An actuator device can also receive these streams as inputs from the Broker. Resulting streams will
 also be visible in the Streams menu on FogFlow dashboard.
+
+# Next Steps
+
+For additional material to understand how FogFlow works, visit
+[FogFlow tutorial](https://fogflow.readthedocs.io/en/latest/introduction.html). FogFlow can also be integrated with
+other FIWARE GEs.
+
+-   **Integrate FogFlow with NGSI-LD Broker**: FogFlow has evolved into a robust platform that supports cloud and edge
+    nodes. The main concept of having distributed edges for edge-computation has evolved with the interaction of Fogflow
+    and other NGSI-LD brokers. NGSI-LD technology is the new horizon of data communication and data representation.
+    Fogflow is now a NGSI_LD compliant broker. For detailed information, please refer this
+    [tutorial](https://fogflow.readthedocs.io/en/latest/scorpioIntegration.html).
+
+-   **Integrate FogFlow with Monitoring Tools**: FogFlow has a distributed architecture and therefore it generates a
+    need to monitor the distributed components of Fogflow from a platform. For this cause Fogflow has integrated grafana
+    and elastisearch, to monitor various components like memory utilisation, CPU utilisation and services current state
+    etc.. To have more details over this topic, follow this
+    [tutorial](https://fogflow.readthedocs.io/en/latest/system_monitoring.html).
+
+-   **Integrate FogFlow with Security Components**: FogFlow has enhanced itself, by supporting security features. The
+    communication between IoT devices and edges, and communication between cloud and edge has been secured using IDM
+    (Identity Manager - Keyrock) and Wilma (PEP-Proxy). To know more about the security setup in FogFlow, follow this
+    [tutorial](https://fogflow.readthedocs.io/en/latest/https.html#secure-fogflow-using-identity-management).
+
+-   **Integrate FogFlow with QuantumLeap**: FogFlow can integrate with QuantumLeap, which is a REST service for storing,
+    querying and retrieving NGSI-v2 spatial-temporal data. QuantumLeap converts NGSI semi-structured data into tabular
+    format and stores it in a time-series database. This has opened up new possibilities for utilising FogFlow in
+    different scenarios. For more on this, refer the
+    [tutorial](https://fogflow.readthedocs.io/en/latest/quantumleapIntegration.html).
+
+-   **Integrate FogFlow with WireCloud**: FogFlow has pitched in with different and versatile edge platform technology.
+    WireCloud builds on cutting-edge end-user development, RIA and semantic technologies to offer a next-generation
+    end-user centred web application mashup platform aimed at leveraging the long tail of the Internet of Services. For
+    more on Fogflow and WireCloud, follow the
+    [tutorial](https://fogflow.readthedocs.io/en/latest/wirecloudIntegration.html).
+
+---
+
+## License
+
+[MIT](LICENSE) © 2020-2021 FIWARE Foundation e.V.
