@@ -569,8 +569,8 @@ other FIWARE GEs.
     [tutorial](https://fogflow.readthedocs.io/en/latest/quantumleapIntegration.html).
 
 -   **Integrate FogFlow with WireCloud**: FogFlow has pitched in with different and versatile edge platform technology.
-    WireCloud builds on cutting-edge end-user development, RIA and semantic technologies to offer a next-generation
-    end-user centred web application mashup platform aimed at leveraging the long tail of the Internet of Services. For
+    WireCloud builds on cutting-edge end user development, RIA and semantic technologies to offer a next-generation
+    end user centred web application mashup platform aimed at leveraging the long tail of the Internet of Services. For
     more on Fogflow and WireCloud, follow the
     [tutorial](https://fogflow.readthedocs.io/en/latest/wirecloudIntegration.html).
 
