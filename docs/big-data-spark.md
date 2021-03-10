@@ -144,8 +144,9 @@ the repository and create the necessary images by running the commands shown bel
 of the commands as a privileged user:
 
 ```bash
-git clone https://github.com/ging/fiware-cosmos-orion-spark-connector-tutorial.git
-cd fiware-cosmos-orion-spark-connector-tutorial
+git clone https://github.com/FIWARE/tutorials.Big-Data-Spark.git
+cd tutorials.Big-Data-Spark
+checkout NGSI-v2
 ./services create
 ```
 
