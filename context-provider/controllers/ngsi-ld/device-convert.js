@@ -47,10 +47,17 @@ function convertAttributeToLD(attr) {
             obj.value = { '@type': attr.type, '@value': attr.value };
     }
 
+    if (obj.value === null){
+        obj.value = { '@type': 'Intangible', '@value': null };
+    }
+
     if (attr.metadata) {
         Object.keys(attr.metadata).forEach(function (key) {
             switch (key) {
-                case 'observedAt':
+               case 'observedAt':
+                    obj[key] = attr.metadata[key].value;
+                    break;
+                case 'unitCode':
                     obj[key] = attr.metadata[key].value;
                     break;
                 default:
@@ -95,11 +102,13 @@ function upsertDeviceEntityAsLD(device) {
             method: 'POST',
             json: [json],
             headers: {
-                'Content-Type': 'application/ld+json',
+                'Content-Type': 'application/json',
                 Link:
                     '<' + dataModelContext + '>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
             }
         };
+
+        debug(JSON.stringify(options));
         request(options, (error, response, body) => {
             return error ? reject(error) : resolve();
         });

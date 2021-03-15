@@ -14,6 +14,7 @@ const IoTDevices = require('../../models/devices');
 const CONTEXT_BROKER = process.env.CONTEXT_BROKER || 'http://localhost:1026/v2';
 const DEVICE_BROKER = process.env.DEVICE_BROKER || CONTEXT_BROKER;
 const NGSI_VERSION = process.env.NGSI_VERSION || 'ngsi-v2';
+const DEVICE_VERSION = process.env.DEVICE_VERSION || NGSI_VERSION;
 const NGSI_PREFIX = process.env.NGSI_LD_PREFIX !== undefined ? process.env.NGSI_LD_PREFIX : 'urn:ngsi-ld:';
 const AUTHZFORCE_ENABLED = process.env.AUTHZFORCE_ENABLED || false;
 
@@ -80,7 +81,7 @@ function sendCommand(req, res) {
         id = 'Door:' + id;
     }
 
-    const options = NGSI_VERSION === 'ngsi-v2' ? createNGSIv2Request(action, id) : createNGSILDRequest(action, id);
+    const options = DEVICE_VERSION === 'ngsi-v2' ? createNGSIv2Request(action, id) : createNGSILDRequest(action, id);
 
     if (req.session.access_token) {
         // If the system has been secured and we have logged in,
