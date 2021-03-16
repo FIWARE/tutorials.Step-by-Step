@@ -2,7 +2,7 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/)
 
 **Description:** This tutorial is an introduction to
-[FIWARE QuantumLeap](https://smartsdk.github.io/ngsi-timeseries-api/) - a generic enabler which is used to persist
+[FIWARE QuantumLeap](https://quantumleap.readthedocs.io/en/latest/) - a generic enabler which is used to persist
 context data into a **CrateDB** database. The tutorial activates the IoT sensors connected in the
 [previous tutorial](iot-agent.md) and persists measurements from those sensors into the database. To retrieve time-based
 aggregations of such data, users can either use **QuantumLeap** query API or connect directly to the **CrateDB** HTTP
