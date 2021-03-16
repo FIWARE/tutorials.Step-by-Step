@@ -54,7 +54,10 @@ function convertAttributeToLD(attr) {
     if (attr.metadata) {
         Object.keys(attr.metadata).forEach(function (key) {
             switch (key) {
-               case 'observedAt':
+                case 'TimeInstant':
+                    obj.observedAt = attr.metadata[key].value;
+                    break;
+                case 'observedAt':
                     obj[key] = attr.metadata[key].value;
                     break;
                 case 'unitCode':
@@ -98,7 +101,7 @@ function upsertDeviceEntityAsLD(device) {
         delete json['@context']; // Not required for Linked Data Upsert.
 
         const options = {
-            url: basePath + '/entityOperations/upsert/',
+            url: basePath + '/entityOperations/upsert/?options=update',
             method: 'POST',
             json: [json],
             headers: {
