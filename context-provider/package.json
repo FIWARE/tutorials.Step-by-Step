@@ -41,7 +41,7 @@
     "ngsi_v2": "0.1.0",
     "node-cache": "^5.1.2",
     "parse-links": "^0.1.0",
-    "pug": "3.0.0",
+    "pug": "3.0.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.6",
     "socket.io": "^2.3.0",
