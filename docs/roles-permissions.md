@@ -75,7 +75,7 @@ tutorial:
 
 ---
 
-# Architecture
+## Architecture
 
 This introduction will only make use of one FIWARE component - the
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Management Generic Enabler. Usage of **Keyrock** alone
@@ -211,7 +211,7 @@ The `mysql-db` container is driven by environment variables as shown:
 | MYSQL_ROOT_PASSWORD | `123`  | specifies a password that is set for the MySQL `root` account - secured by **Docker Secrets** (see below)                                                                                             |
 | MYSQL_ROOT_HOST     | `root` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -428,7 +428,7 @@ The response will return the details of the associated user. As you can see Bob 
 }
 ```
 
-# Managing Applications
+## Managing Applications
 
 Any FIWARE application can be broken down into a collection of microservices. These microservices connect together to
 read and alter the state of the real world. Security can be added to these services by restricting actions on these
@@ -1128,7 +1128,7 @@ curl -X DELETE \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
-# Authorizing Application Access
+## Authorizing Application Access
 
 In the end, a user logs into an application, identifies himself and then is granted a list of permissions that the user
 is able to do. However, it should be emphasized that it is the application, not the user that holds and offers the
@@ -1311,7 +1311,7 @@ curl -X DELETE \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
-# List Application Grantees
+## List Application Grantees
 
 By creating a series of roles and granting them to Users and Organizations, we have made an association between them.
 The REST API offers two convenience methods exist to list all the grantees of an application.

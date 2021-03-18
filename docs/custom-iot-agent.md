@@ -93,7 +93,7 @@ state of each device can be seen on the XML device monitor web page found at: `h
 
 ![FIWARE Monitor](https://fiware.github.io/tutorials.Custom-IoT-Agent/img/device-monitor.png)
 
-# Architecture
+## Architecture
 
 This application builds on the components created in
 [previous tutorials](https://github.com/FIWARE/tutorials.Subscriptions/). It will make use of one FIWARE component - the
@@ -242,7 +242,7 @@ The `iot-agent` container is driven by environment variables as shown:
 | IOTA_PROVIDER_URL     | `http://iot-agent:4041` | URL passed to the Context Broker when commands are registered, used as a forwarding URL location when the Context Broker issues a command to a device |
 | IOTA_DEFAULT_RESOURCE | `/iot/xml`              | The default path the IoT Agent uses listenening for custom XML measures.                                                                              |
 
-# Start Up
+## Start Up
 
 Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
 repository and create the necessary images by running the commands as shown:
@@ -268,7 +268,7 @@ repository:
 > ./services stop
 > ```
 
-# Creating a Custom IoT Agent
+## Creating a Custom IoT Agent
 
 The following section consists of a series of HTTP commands used to provision the IoT Agent and receive measures and
 send commands. The relevant amended code within the Custom IoT Agent is discussed as each action is processed.

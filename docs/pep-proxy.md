@@ -73,7 +73,7 @@ Click on the image above to see an introductory video
 
 ---
 
-# Architecture
+## Architecture
 
 This application protects access to the existing Stock Management and Sensors-based application by adding PEP Proxy
 instances around the services created in previous tutorials and uses data pre-populated into the **MySQL** database used
@@ -123,7 +123,7 @@ from exposed ports.
 
 The specific architecture of each section of the tutorial is discussed below.
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -305,7 +305,7 @@ The response will return the details of the associated user
 }
 ```
 
-# Managing PEP Proxies and IoT Agents
+## Managing PEP Proxies and IoT Agents
 
 User accounts have been created in a [previous tutorial](identity-management.md). Non-human actors such as a PEP Proxy
 can be set up in the same manner. The account for each PEP Proxy, IoT Agent or IoT Sensor will merely consist of a
@@ -567,7 +567,7 @@ curl -X DELETE \
   -H 'X-Auth-token: {{X-Auth-token}}'
 ```
 
-# Secure traffic between an Application and the Context Broker
+## Secure traffic between an Application and the Context Broker
 
 ![](https://fiware.github.io/tutorials.PEP-Proxy/img/pep-proxy-orion.png)
 
@@ -851,7 +851,7 @@ async function buyItem(req, res) {
 }
 ```
 
-# Securing an IoT Agent South Port
+## Securing an IoT Agent South Port
 
 ![](https://fiware.github.io/tutorials.PEP-Proxy/img/pep-proxy-south-port.png)
 
@@ -1076,7 +1076,7 @@ request(options, error => {
 });
 ```
 
-# Securing an IoT Agent North Port
+## Securing an IoT Agent North Port
 
 ![](https://fiware.github.io/tutorials.PEP-Proxy/img/pep-proxy-north-port.png)
 

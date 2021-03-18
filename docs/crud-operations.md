@@ -52,7 +52,7 @@ product price could change, stock could be sold and the number of items on the s
 
 ---
 
-# Architecture
+## Architecture
 
 This application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Using the Orion Context Broker is sufficient for
@@ -107,7 +107,7 @@ listening on the default port `27017`. For the sake of this tutorial, we have al
 outside the network so that cUrl or Postman can access them without having to be run from inside the network. The
 command-line initialization should be self explanatory.
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the bash script provided within the repository. Please
 clone the repository and create the necessary images by running the commands as shown below:
@@ -128,7 +128,7 @@ This command will also import seed data from the previous
 > ./services stop
 > ```
 
-# What is CRUD?
+## What is CRUD?
 
 **Create**, **Read**, **Update** and **Delete** are the four basic functions of persistent storage. These operations are
 usually referred to using the acronym **CRUD**. Within a database each of these operations map directly to a series of
@@ -197,7 +197,7 @@ Batch operations are always triggered by a POST request where the payload is an 
 -   `entities` is an array of objects holding the list of entities to update, along with the relevant entity data used
     to perform the operation.
 
-# Example CRUD Operations using FIWARE
+## Example CRUD Operations using FIWARE
 
 The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial
 seed data has been imported from the previous tutorial.

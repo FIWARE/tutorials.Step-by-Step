@@ -67,7 +67,7 @@ state of each device can be seen on the UltraLight device monitor web page found
 
 ---
 
-# Architecture
+## Architecture
 
 This application builds on the components created in [previous tutorials](iot-agent.md). It will make use of two FIWARE
 components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) and the
@@ -248,7 +248,7 @@ The `iot-agent` container is driven by environment variables as shown:
 As you can see, use of the MQTT transport is driven by only two environment variables `IOTA_MQTT_HOST` and
 `IOTA_MQTT_PORT`
 
-# Start Up
+## Start Up
 
 Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
 repository and create the necessary images by running the commands as shown:
@@ -276,7 +276,7 @@ repository:
 
 ---
 
-# Provisioning an IoT Agent (UltraLight over MQTT)
+## Provisioning an IoT Agent (UltraLight over MQTT)
 
 To follow the tutorial correctly please ensure you have the device monitor page available in your browser and click on
 the page to enable audio before you enter any cUrl commands. The device monitor displays the current state of an array

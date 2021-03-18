@@ -37,7 +37,7 @@ eProsima Fast RTPS has been adopted by multiple organizations in many sectors in
 -   Robotics: ROS (Robotic Operating System) as their default middleware for ROS2.
 -   EU R&D: FIWARE Incubated GE.
 
-# What is Micro-RTPS?
+## What is Micro-RTPS?
 
 [eProsima](http://www.eprosima.com/) [Micro-RTPS](http://micro-xrce-dds.readthedocs.io) protocols for RTPS (Real Time
 Publish Subscribe) as used in robotics and extremely constrained devices, which is a software solution that provides
@@ -48,7 +48,7 @@ clients and enabling them to take part as DDS publishers and/or subscribers in t
 
 ---
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -76,7 +76,7 @@ the repository:
 
 ---
 
-# Introduction to Fast-RTPS
+## Introduction to Fast-RTPS
 
 The goal of this section is to provide you with a simple getting started guide on how to install and use Fast-RTPS. In
 the subsequent tutorials we will discuss how Fast-RTPS (and therefore ROS2) can be connected to the Orion Context Broker
@@ -192,7 +192,7 @@ Other examples are available in the `examples` folder, which are beyond the scop
 information, please refer to the
 [official Fast-RTPS documentation](http://eprosima-fast-rtps.readthedocs.io/en/latest/).
 
-# Introduction to Micro-RTPS
+## Introduction to Micro-RTPS
 
 The goal of this section is to provide you with a simple getting started guide on how to install and use Micro-RTPS.
 

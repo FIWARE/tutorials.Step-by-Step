@@ -64,7 +64,7 @@ Store002 can be found at: `http://localhost:3000/app/store/urn:ngsi-ld:Building:
 
 ![Store2](https://fiware.github.io/tutorials.LD-Subscriptions-Registrations/img/store2.png)
 
-# Architecture
+## Architecture
 
 The demo Supermarket application will send and receive NGSI-LD calls to a compliant context broker. Since the NGSI-LD
 interface is available on an experimental version of the
@@ -102,7 +102,7 @@ from exposed ports.
 The necessary configuration information can be seen in the services section of the associated `orion-ld.yml` file. It
 has been described in a [previous tutorial](working-with-linked-data.md)
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.LD-Subscriptions-Registrations/blob/master/services) Bash script provided
@@ -123,7 +123,7 @@ cd tutorials.LD-Subscriptions-Registrations
 
 ---
 
-# Interactions between Components
+## Interactions between Components
 
 ## Using Subscriptions with NGSI-LD
 

@@ -59,7 +59,7 @@ this case. Creating your own widgets will be the subject of a subsequent tutoria
 
 Once a mashup has been wired up and created it can be also be shared wholesale with end users. \
 
-# Architecture
+## Architecture
 
 This application adds the **Wirecloud** application mashup into the existing Stock Management and Sensors-based
 application created in [previous tutorials](iot-agent.md). The aim of the tutorial is to be able to monitor devices and
@@ -172,7 +172,7 @@ The `wirecloud` container is connecting to **Keyrock** and is driven by environm
 | SOCIAL_AUTH_FIWARE_KEY    | `wirecloud-dckr-site-0000-00000000000` | The Client ID defined by **Keyrock** for **Wirecloud**                               |
 | SOCIAL_AUTH_FIWARE_SECRET | `wirecloud-docker-000000-clientsecret` | The Client Secret defined by **Keyrock** for **Wirecloud**                           |
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -220,7 +220,7 @@ page and sign in to **Keyrock** using `alice-the-admin@test.com` with the passwo
 > -   The `admin` role has a single blank permission.
 > -   The `admin` role has been assigned to Alice.
 
-# Adding Resources to Wirecloud
+## Adding Resources to Wirecloud
 
 As noted above, **Wirecloud** relies on widgets and operators to connect to NGSI sources, manipulate data and display
 something on screen. As a first step these widgets (`*.wgt`) must be uploaded into **Wirecloud**. It is possible to do
@@ -284,7 +284,7 @@ workspace can be selected on click
 You can return to the homepage by selecting the back button
 ![.](https://fiware.github.io/tutorials.Application-Mashup/img/back-button.png)
 
-# Creating Application Mashups
+## Creating Application Mashups
 
 An application mashup can be created by adding widgets to a workspace. At a minimum there must be one data source and
 one visual component, but some widgets combine these functions into a single browser widget.

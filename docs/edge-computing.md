@@ -24,7 +24,7 @@ this tutorial, which are relatable to the figure below.
 
 <hr class="processing"/>
 
-# Architecture
+## Architecture
 
 The FogFlow framework operates on a geo-distributed, hierarchical, and heterogeneous ICT infrastructure that includes
 cloud nodes, edge nodes, and IoT devices. The following figure illustrates the system architecture of FogFlow and its
@@ -45,7 +45,7 @@ Logically, FogFlow consists of the following three layers:
     interfaces provided by the context management layer. Edge workers (and of course the cloud worker) come under this
     layer.
 
-# Start Up
+## Start Up
 
 Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
 repository and create the necessary images by running the commands as shown:
@@ -193,7 +193,7 @@ repository:
   ./stop.sh
 ```
 
-# Connect IoT Devices to FogFlow
+## Connect IoT Devices to FogFlow
 
 When data flow from a sensor device towards broker, it is called Northbound Flow, whereas it is Southbound Flow, when
 data flow from broker towards the actuator devices. FogFlow relies on this bi-directional data flow to realize the
@@ -211,7 +211,7 @@ This tutorial also contains examples of both NGSI and Non-NGSI devices (especial
 To get a basic idea of how Southbound actually works in the context of FIWARE, refer
 [this](iot-agent.md#southbound-traffic-commands) tutorial.
 
-# Dynamic Orchestration at Edges using FogFlow
+## Dynamic Orchestration at Edges using FogFlow
 
 Before moving further, users must have a look at the following:
 
@@ -539,7 +539,7 @@ Outputs of the Service Topology will be published to the Broker, any application
 the notification. An actuator device can also receive these streams as inputs from the Broker. Resulting streams will
 also be visible in the Streams menu on FogFlow dashboard.
 
-# Next Steps
+## Next Steps
 
 For additional material to understand how FogFlow works, visit
 [FogFlow tutorial](https://fogflow.readthedocs.io/en/latest/introduction.html). FogFlow can also be integrated with

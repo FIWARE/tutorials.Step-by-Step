@@ -99,7 +99,7 @@ The full code to supply each request to **Authzforce** can be found within the t
 Obviously the definition of _"all of the information necessary"_ may change over time, applications must therefore be
 flexible enough to be able to modify the requests sent to ensure that sufficient information is passed.
 
-# Architecture
+## Architecture
 
 This application demonstrates the admininistration of level 3 Advanced Authorization security into the existing Stock
 Management and Sensors-based application created in [previous tutorials](xacml-access-rules.md) and secures access to
@@ -154,7 +154,7 @@ from exposed ports.
 
 The all container configuration values found in the YAML file have been described in previous tutorials.
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -217,7 +217,7 @@ reason to be granted access
 | mallory | `mallory@example.com` | `test`   |
 | rob     | `rob@example.com`     | `test`   |
 
-# XACML Administration
+## XACML Administration
 
 To apply an access control policy, it is necessary to be able to do the following:
 

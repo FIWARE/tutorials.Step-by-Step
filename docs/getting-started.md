@@ -12,7 +12,9 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 <hr class="core"/>
 
-# Architecture
+# Getting Started with NGSI-v2
+
+## Architecture
 
 Our demo application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper

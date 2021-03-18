@@ -8,7 +8,7 @@ use_directory_urls: false
 theme: readthedocs
 google_analytics: ["UA-83719923-1", "fiware-tutorials.readthedocs.io"]
 extra_css: ["https://www.fiware.org/style/fiware_readthedocs.css", "https://www.fiware.org/style/fiware_readthedocs_neutral.css"]
-pages:
+nav:
   - Home: "index.md"
   - "<span style='font-size:105%;padding:0px'>Core Context Management: </span><span style='font-size:105%;padding:0px'>The NGSI-v2 Interface</span>":
       - "Getting Started with NGSI-v2": "getting-started.md"

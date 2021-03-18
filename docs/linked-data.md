@@ -151,7 +151,7 @@ As you can see the knowledge graph is well defined and can be expanded indefinit
 
 Relationships will be dealt with in more detail in a subsequent tutorial.
 
-# Architecture
+## Architecture
 
 The demo application will send and receive NGSI-LD calls to a compliant context broker. Since both NGSI v2 and NGSI-LD
 interfaces are available to an experimental version fo the
@@ -216,7 +216,7 @@ initialization should be self explanatory.
 The only notable difference to the introductory tutorials is that the required image name is currently
 `fiware/orion-ld`.
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.Linked-Data/blob/master/services) Bash script provided within the
@@ -239,7 +239,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 ---
 
-# Creating a "Powered by FIWARE" app based on Linked Data
+## Creating a "Powered by FIWARE" app based on Linked Data
 
 This tutorial recreates the same data entities as the initial _"Powered by FIWARE"_ supermarket finder app, but using
 NGSI-LD linked data entities rather than NGSI v2.

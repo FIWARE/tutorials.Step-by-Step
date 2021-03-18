@@ -78,7 +78,7 @@ web page found at: `http://localhost:3000/device/history/urn:ngsi-ld:Store:001`
 
 ---
 
-# Architecture
+## Architecture
 
 This application builds on the components and dummy IoT devices created in [previous tutorials](iot-agent.md). It will
 use three or four FIWARE components depending on the configuration of the system: the
@@ -129,7 +129,7 @@ from exposed ports.
 
 The specific architecture of both the _minimal_ and _formal_ configurations is discussed below.
 
-# Start Up
+## Start Up
 
 Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
 repository and create the necessary images by running the commands as shown:
@@ -160,7 +160,7 @@ the previous tutorials and provision the dummy IoT sensors on startup.
 
 ---
 
-# _minimal_ mode (STH-Comet only)
+## _minimal_ mode (STH-Comet only)
 
 In the _minimal_ configuration, **STH-Comet** is used to persisting historic context data and also used to make
 time-based queries. All operations take place on the same port `8666`. The MongoDB instance listening on the standard
@@ -379,7 +379,7 @@ curl -iX POST \
 }'
 ```
 
-# Time Series Data Queries
+## Time Series Data Queries
 
 The queries in this section assume you have already connected **STH-Comet** using either _minimal_ mode or _formal_ mode
 and have collected some data.
@@ -894,7 +894,7 @@ curl -G -X GET \
 }
 ```
 
-# _formal_ mode (Cygnus + STH-Comet)
+## _formal_ mode (Cygnus + STH-Comet)
 
 The _formal_ configuration is uses **Cygnus** to persist historic context data into a MongoDB database in the same
 manner as had been presented in the [previous tutorial](historic-context-flume.md). The existing MongoDB instance
@@ -1170,7 +1170,7 @@ curl -iX POST \
 When reading data from the database, there is no difference between _minimal_ and _formal_ mode, please refer to the
 previous section of this tutorial to request time-series data from **STH-Comet**
 
-# Accessing Time Series Data Programmatically
+## Accessing Time Series Data Programmatically
 
 Once the JSON response for a specified time series has been retrieved, displaying the raw data is of little use to an
 end user. It must be manipulated to be displayed in a bar chart, line graph or table listing. This is not within the

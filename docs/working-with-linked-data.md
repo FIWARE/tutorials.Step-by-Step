@@ -76,7 +76,7 @@ business logic goals.
 Obviously, your choice of programming language will depend upon your own business needs - when reading the code below
 please keep this in mind and substitute Node.js with your own programming language as appropriate.
 
-# Stock Management Frontend
+## Stock Management Frontend
 
 All the code Node.js Express for the demo can be found within the `ngsi-ld` folder within the GitHub repository.
 [Stock Management example](https://github.com/FIWARE/tutorials.Step-by-Step/tree/master/context-provider). The
@@ -92,7 +92,7 @@ application runs on the following URLs:
 >
 > ![FIWARE Monitor](https://fiware.github.io/tutorials.Working-with-Linked-Data/img/monitor.png)
 
-# Architecture
+## Architecture
 
 The demo Supermarket application will send and receive NGSI-LD calls to a compliant context broker. Since the NGSI-LD
 interface is available on an experimental version of the
@@ -157,7 +157,7 @@ tutorial.
 The configuration information for MongoDB and the Orion Context Broker has been described in a
 [previous tutorial](relationships-linked-data.md)
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.Relationships-Linked-Data/blob/master/services) Bash script provided
@@ -178,7 +178,7 @@ cd tutorials.Working-with-Linked-Data
 
 ---
 
-# Traversing Linked Data Programmatically
+## Traversing Linked Data Programmatically
 
 Goto `http://localhost:3000/app/store/urn:ngsi-ld:Building:store001` to display and interact with the working
 Supermarket data application.

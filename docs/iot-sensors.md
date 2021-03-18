@@ -52,7 +52,7 @@ diagram below:
 
 ![](https://fiware.github.io/tutorials.IoT-Sensors/img/entities.png)
 
-# What is Ultralight 2.0?
+## What is Ultralight 2.0?
 
 [UltraLight 2.0](https://fiware-iotagent-ul.readthedocs.io/en/latest/usermanual/index.html#user-programmers-manual) is a
 lightweight text based protocol for constrained devices and communications where bandwidth and device memory resources
@@ -175,7 +175,7 @@ the context broker. The state of each device can be seen on the UltraLight devic
 
 ---
 
-# Architecture
+## Architecture
 
 The demo application will only make use of a single custom component acting as a set of dummy IoT devices. Every IoT
 device will be using the
@@ -244,7 +244,7 @@ It is therefore necessary to understand a sample device protocol first, and comp
 the system to subsequently understand the purpose of the IoT Agent middleware. In this tutorial you will be playing the
 role of an IoT Agent making commands to devices and receiving measurements from them.
 
-# Start Up
+## Start Up
 
 All services can be initialized from the command-line by running the bash script provided within the repository. Please
 clone the repository and create the necessary images by running the commands as shown:
@@ -266,7 +266,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 ---
 
-# Communicating with IoT Devices
+## Communicating with IoT Devices
 
 To follow the tutorial correctly please ensure you have the device monitor page available in your browser and click on
 the page to enable audio before you enter any cUrl commands. The device monitor displays the current state of an array

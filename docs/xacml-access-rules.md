@@ -123,7 +123,7 @@ Further information can be found within the
 
 ---
 
-# Architecture
+## Architecture
 
 This application adds level 3 _Advanced Authorization_ security into the existing Stock Management and Sensors-based
 application created in [previous tutorials](https://github.com/FIWARE/tutorials.Securing-Access/) and secures access to
@@ -344,7 +344,7 @@ The `tutorial` container is now secured by **Authzforce**, and is driven by envi
 
 The other `tutorial` container configuration values described in the YAML file have been described in previous tutorials
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -437,7 +437,7 @@ The response returns information about the version of Authzforce.
    doc="https://authzforce.github.io/fiware/authorization-pdp-api-spec/5.2/"/>
 ```
 
-# Using an XACML Server
+## Using an XACML Server
 
 **Authzforce** is a Policy Decision Point (PDP) Generic Enabler, which makes authorization decisions based on
 `<PolicySet>` information written in [XACML](https://www.oasis-open.org/committees/tc_home.php?wg_abbrev=xacml). This
@@ -746,7 +746,7 @@ an unsuccessful request includes a `<Decision>` element which will `Deny` access
 </ns3:Response>
 ```
 
-# PDP - Advanced Authorization
+## PDP - Advanced Authorization
 
 As a reminder, there are three Levels of PDP Access Control:
 

@@ -53,7 +53,7 @@ media server.
 
 ---
 
-# Architecture
+## Architecture
 
 This application will only make use of one FIWARE component - the
 [Kurento Media Server](http://kurento.readthedocs.io/)). Usage of the Media server alone is insufficient for an
@@ -134,7 +134,7 @@ The `kurento-examples` container is driven by environment variables as shown:
 | APP_SERVER_PORT   | `8443`             | Port used by the App Server                                                      |
 | TUTORIAL_NAME     | none               | The name of the example to run                                                   |
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -166,7 +166,7 @@ Where `<command>` will vary depending upon the exercise we wish to activate.
 
 ---
 
-# Connecting to a Media Sever
+## Connecting to a Media Sever
 
 Before describing a proper context-related example, we will first examine a minimal set-up "Hello World" example to
 check that we are able to connect to the **Kurento Media Server** and send and receive a video stream. This is a very
@@ -522,7 +522,7 @@ ws.onmessage = function(message) {
 
 A fuller description of the code can be found within the **Kurento** documentation.
 
-# Altering Media Streams
+## Altering Media Streams
 
 In order to alter context, we will need to be able to process the media stream. This second example builds on the
 previous WebRTC loopback video communication but also analyzes and alters the media stream by detecting faces and
@@ -633,7 +633,7 @@ The functions called in the `start()` function remain the same - the media strea
 a pipeline before being retuned to the web page. The result is that the video stream is now intercepted and altered as
 demonstrated.
 
-# Raising Context Events
+## Raising Context Events
 
 A media stream can also be analyzed and used to raise context-related events. The final example of this tutorial adds a
 vehicle number plate detector filter element to the WebRTC video communication

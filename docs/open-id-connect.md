@@ -95,7 +95,7 @@ The JWT is the result of encoding each part using base64 and concatenating them 
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiaXNzIjoiaHR0cHM6Ly9maXdhcmUtaWRtLmNvbSIsImlhdCI6MTUxNjIzOTAyMiwidXNlcm5hbWUiOiJBbGljZSIsImdyYXZhdGFyIjp0cnVlfQ.dZ7z0u_4FZC7xiVQDtGAl7NRT0fK8_5hJqYa9E-4xGE
 ```
 
-# Architecture
+## Architecture
 
 This application adds OIDC-driven security into the existing Stock Management and Sensors-based application created in
 [previous tutorials](iot-agent.md) by using the data created in the first [security tutorial](identity-management.md)
@@ -177,7 +177,7 @@ The `tutorial` container is driven by environment variables as shown:
 
 The other `tutorial` container configuration values described in the YAML file have been described in previous tutorials
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -280,7 +280,7 @@ To refresh your memory about how to create users and organizations and applicati
 
 and look around.
 
-# OIDC Flows
+## OIDC Flows
 
 FIWARE **Keyrock** complies with the OIDC standard described in
 [OpenID Connect 1.0](https://openid.net/specs/openid-connect-core-1_0.html) and supports all three standard

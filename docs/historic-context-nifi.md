@@ -50,7 +50,7 @@ state of each device can be seen on the UltraLight device monitor web page found
 
 ---
 
-# Architecture
+## Architecture
 
 This application builds on the components and dummy IoT devices created in [previous tutorials](iot-agent.md). It will
 make use of three FIWARE components - the [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/), the
@@ -101,7 +101,7 @@ from exposed ports.
 
 The specific architecture of each section of the tutorial is discussed below.
 
-# Start Up
+## Start Up
 
 Before you start you should ensure that you have obtained or built the necessary Docker images locally. Please clone the
 repository and create the necessary images by running the commands as shown:
@@ -132,7 +132,7 @@ from the previous tutorials and provision the dummy IoT sensors on startup.
 
 ---
 
-# MongoDB - Persisting Context Data into a Database
+## MongoDB - Persisting Context Data into a Database
 
 Persisting historic context data using MongoDB technology is relatively simple to configure since we are already using a
 MongoDB instance to hold data related to the Orion Context Broker and the IoT Agent. The MongoDB instance is listening
@@ -505,7 +505,7 @@ exit
 exit
 ```
 
-# PostgreSQL - Persisting Context Data into a Database
+## PostgreSQL - Persisting Context Data into a Database
 
 To persist historic context data into an alternative database such as **PostgreSQL**, we will need an additional
 container which hosts the PostgreSQL server - the default Docker image for this data can be used. The PostgreSQL
@@ -878,7 +878,7 @@ To leave the Postgres client and leave interactive mode, run the following:
 
 You will then return to the command-line.
 
-# MySQL - Persisting Context Data into a Database
+## MySQL - Persisting Context Data into a Database
 
 Similarly, to persisting historic context data into **MySQL**, we will again need an additional container which hosts
 the MySQL server, once again the default Docker image for this data can be used. The MySQL instance is listening on the
@@ -1251,7 +1251,7 @@ To leave the MySQL client and leave interactive mode, run the following:
 
 You will then return to the command-line.
 
-# Multi-Agent - Persisting Context Data into a multiple Databases
+## Multi-Agent - Persisting Context Data into a multiple Databases
 
 It is also possible to configure Draco to populate multiple databases simultaneously. We can combine the architecture
 from the three previous examples and configure Draco to store data in multiple sinks.

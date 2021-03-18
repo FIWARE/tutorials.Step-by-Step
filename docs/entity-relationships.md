@@ -52,7 +52,7 @@ change its price, stock could be sold and the shelf count of stock could be redu
 
 ---
 
-# Architecture
+## Architecture
 
 This application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper
@@ -108,7 +108,7 @@ listening on the default port `27071`. Both containers are also exposing the sam
 the tutorial access - so that cUrl or Postman can access them without being part of the same network. The command-line
 initialization should be self explanatory.
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.Entity-Relationships/blob/master/services) Bash script provided within
@@ -131,7 +131,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 ---
 
-# Creating and Associating Data Entities
+## Creating and Associating Data Entities
 
 ## Creating Several Entities at Once
 

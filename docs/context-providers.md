@@ -74,7 +74,7 @@ The relationship between our entities is defined as shown:
 
 ---
 
-# Architecture
+## Architecture
 
 This application will only make use of one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper
@@ -169,7 +169,7 @@ environment:
 
 If you do not wish to sign-up for an API key, you can use data from the random data context provider instead.
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the bash script provided within the repository. Please
 clone the repository and create the necessary images by running the commands as shown:
@@ -191,7 +191,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 ---
 
-# Using a Context Provider
+## Using a Context Provider
 
 > **Tip** You can also watch the status of recent requests yourself by following the container logs or viewing
 > information on `localhost:3000/app/monitor` on a web browser.

@@ -64,7 +64,7 @@ Store002 can be found at: `http://localhost:3000/app/store/urn:ngsi-ld:Store:002
 
 ---
 
-# Architecture
+## Architecture
 
 This application will make use of only one FIWARE component - the
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Usage of the Orion Context Broker (with proper
@@ -100,7 +100,7 @@ from exposed ports.
 The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file.
 It has been described in a [previous tutorial](context-providers.md)
 
-# Start Up
+## Start Up
 
 All services can be initialized from the command-line by running the bash script provided within the repository. Please
 clone the repository and create the necessary images by running the commands as shown:
@@ -122,7 +122,7 @@ This command will also import seed data from the previous [Stock Management exam
 
 ---
 
-# Using Subscriptions
+## Using Subscriptions
 
 To follow the tutorial correctly please ensure you have the follow pages available on tabs in your browser before you
 enter any cUrl commands.

@@ -90,7 +90,7 @@ tutorial:
 
 ---
 
-# Architecture
+## Architecture
 
 This application adds OAuth2-driven security into the existing Stock Management and Sensors-based application created in
 [previous tutorials](iot-agent.md) by using the data created in the first [security tutorial](identity-management.md)
@@ -195,7 +195,7 @@ Docker network. Similarly the `CALLBACK_URL` contains `localhost` as it is assum
 from the same machine. All of these values should be replaced with appropriate proxies and DNS settings for a production
 environment, but production deployment is beyond the scope of this tutorial.
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -289,7 +289,7 @@ To refresh your memory about how to create users and organizations and applicati
 
 and look around.
 
-# OAuth2 Grant Flows
+## OAuth2 Grant Flows
 
 As noted in the documentation, FIWARE **Keyrock** complies with the OAuth2 standard described in
 [RFC 6749](http://tools.ietf.org/html/rfc6749) and supports all four standard grant types defined there.

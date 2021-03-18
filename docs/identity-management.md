@@ -68,7 +68,7 @@ Click on the image above to watch an introductory video
 
 ---
 
-# Architecture
+## Architecture
 
 This introduction will only make use of one FIWARE component - the
 [Keyrock](https://fiware-idm.readthedocs.io/en/latest/) Identity Management Generic Enabler. Usage of **Keyrock** alone
@@ -202,7 +202,7 @@ The `mysql-db` container is driven by environment variables as shown:
 | MYSQL_ROOT_PASSWORD | `123`. | specifies a password that is set for the MySQL `root` account - secured by **Docker Secrets** (see below)                                                                                             |
 | MYSQL_ROOT_HOST     | `root` | By default, MySQL creates the `root'@'localhost` account. This account can only be connected to from inside the container. Setting this environment variable allows root connections from other hosts |
 
-# Start Up
+## Start Up
 
 To start the installation, do the following:
 
@@ -274,7 +274,7 @@ obtain a new token.
 
 ---
 
-# Authentication
+## Authentication
 
 <h3>Video : Creating User Accounts with the Keyrock GUI</h3>
 
@@ -425,7 +425,7 @@ Connection: keep-alive
 }
 ```
 
-# Administrating User Accounts
+## Administrating User Accounts
 
 Users accounts are at the heart of any identity management system. The essential fields of every account hold a unique
 username and email address to identify the user, along with a password for authentication. The other optional fields add
@@ -745,7 +745,7 @@ curl -iX DELETE \
 
 ---
 
-# Grouping User Accounts under Organizations
+## Grouping User Accounts under Organizations
 
 For any identity management system of a reasonable size, it is useful to be able to assign roles to groups of users,
 rather than setting them up individually. Since user administration is a time consuming business, it is also necessary

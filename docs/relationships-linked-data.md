@@ -252,7 +252,7 @@ robot if the underlying system were to change, provided that the Properties and 
 names (FQNs) and a complete `@graph`. For example the JSON short name attributes could be amended or the relationships
 redesigned but their real intent (which resolves to a fixed FQN) could still be discovered and used.
 
-# Architecture
+## Architecture
 
 The demo application will send and receive NGSI-LD calls to a compliant context broker. Since both NGSI v2 and NGSI-LD
 interfaces are available to an experimental version fo the
@@ -313,7 +313,7 @@ initialization should be self explanatory.
 The only notable difference to the introductory tutorials is that the required image name is currently
 `fiware/orion-ld`.
 
-# Start Up
+## Start Up
 
 All services can be initialised from the command-line by running the
 [services](https://github.com/FIWARE/tutorials.Relationships-Linked-Data/blob/master/services) Bash script provided

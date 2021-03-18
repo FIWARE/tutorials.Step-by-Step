@@ -47,7 +47,7 @@ Obviously, in reality, our existing Supermarket scenario is far too small to req
 will serve as a basis for demonstrating the type of real-time processing which may be required in a larger solution
 which is processing a continuous stream of context-data events.
 
-# Architecture
+## Architecture
 
 This application builds on the components and dummy IoT devices created in
 [previous tutorials](https://github.com/FIWARE/tutorials.IoT-Agent/). It will make use of three FIWARE components - the
@@ -157,7 +157,7 @@ The containers within the flink cluster are driven by a single environment varia
 | ----------------------- | ------------ | --------------------------------------------------------------------- |
 | JOB_MANAGER_RPC_ADDRESS | `jobmanager` | URL of the _master_ Job Manager which coordinates the task processing |
 
-# Start Up
+## Start Up
 
 Before you start, you should ensure that you have obtained or built the necessary Docker images locally. Please clone
 the repository and create the necessary images by running the commands shown below. Note that you might need to run some
@@ -184,7 +184,7 @@ To start the system, run the following command:
 > ./services stop
 > ```
 
-# Real-time Processing Operations
+## Real-time Processing Operations
 
 Dataflow within **Apache Flink** is defined within the
 [Flink documentation](https://ci.apache.org/projects/flink/flink-docs-release-1.9/concepts/programming-model.html) as
