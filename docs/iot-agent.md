@@ -553,7 +553,7 @@ the attribute - this represents the last time the entity and attribute have been
 each new entity because the `IOTA_TIMESTAMP` environment variable was set when the IoT Agent was started up. The
 `refStore` attribute comes from the `static_attributes` set when the device was provisioned.
 
-### Provisioning an Actuator
+### Provisioning an Actuator via a Command
 
 Provisioning an actuator is similar to provisioning a sensor. This time an `endpoint` attribute holds the location where
 the IoT Agent needs to send the UltraLight command and the `commands` array includes a list of each command that can be
@@ -590,12 +590,58 @@ curl -iX POST \
 '
 ```
 
+### Provisioning an Actuator via a Bidirectional attribute
+
+An actuator can also be provisioned using a bidirectional attribute. Once again an `endpoint` attribute holds
+the location where the IoT Agent needs to send the UltraLight command. The `ring` attribute is defined using an `expression` and mapped to  itself in the `reverse` direction. When an update to the `ring` attribute is received, it is also sent to the device itself. Internally the difference is that this method relies on a subscription rather than a registration.
+
+#### 7 Request:
+
+```bash
+curl -L -X POST 'http://localhost:4041/iot/devices' \
+-H 'fiware-service: openiot' \
+-H 'fiware-servicepath: /' \
+-H 'Content-Type: application/json' \
+-H 'Cookie: _csrf=MAPTGFPcoPnewsGCWklHi4Mq' \
+--data-raw '{
+  "devices": [
+    {
+      "device_id": "bell002",
+      "entity_name": "urn:ngsi-ld:Bell:002",
+      "entity_type": "Bell",
+      "protocol": "PDI-IoTA-UltraLight",
+      "transport": "HTTP",
+      "endpoint": "http://context-provider:3001/iot/bell002",
+      "attributes": [
+          {
+          "name":"ring",
+          "type":"Text",
+          "expression": "${@ring}",
+          "reverse": [
+            {
+              "object_id":"ring",
+              "type": "Text",
+              "expression": "${@ring}"
+            }
+          ]
+        }
+      ],
+       "static_attributes": [
+         {"name":"refStore", "type": "Relationship","value": "urn:ngsi-ld:Store:002"}
+        ]
+    }
+  ]
+}
+'
+```
+
+
 Before we wire-up the context broker, we can test that a command can be send to a device by making a REST request
 directly to the IoT Agent's North Port using the `/v2/op/update` endpoint. It is this endpoint that will eventually be
 invoked by the context broker once we have connected it up. To test the configuration you can run the command directly
 as shown:
 
-#### 7 Request:
+#### 8 Request:
 
 ```bash
 curl -iX POST \
@@ -624,7 +670,7 @@ If you are viewing the device monitor page, you can also see the state of the be
 
 The result of the command to ring the bell can be read by querying the entity within the Orion Context Broker.
 
-#### 8 Request:
+#### 9 Request:
 
 ```bash
 curl -G -X GET \
@@ -657,7 +703,7 @@ command can be seen in the value of the `ring_info` attribute.
 Provisioning a device which offers both commands and measurements is merely a matter of making an HTTP POST request with
 both `attributes` and `command` attributes in the body of the request.
 
-#### 9 Request:
+#### 10 Request:
 
 ```bash
 curl -iX POST \
@@ -696,7 +742,7 @@ curl -iX POST \
 
 Similarly, a **Smart Lamp** with two commands (`on` and `off`) and two attributes can be provisioned as follows:
 
-#### 10 Request:
+#### 11 Request:
 
 ```bash
 curl -iX POST \
@@ -732,7 +778,7 @@ curl -iX POST \
 
 The full list of provisioned devices can be obtained by making a GET request to the `/iot/devices` endpoint.
 
-#### 11 Request:
+#### 12 Request:
 
 ```bash
 curl -X GET \
@@ -755,7 +801,7 @@ requests directly the IoT devices as we did in the [previous tutorial](iot-senso
 
 To invoke the `ring` command, the `ring` attribute must be updated in the context.
 
-#### 12 Request:
+#### 13 Request:
 
 ```bash
 curl -iX PATCH \
@@ -779,7 +825,7 @@ If you are viewing the device monitor page, you can also see the state of the be
 
 To invoke the `open` command, the `open` attribute must be updated in the context.
 
-#### 13 Request:
+#### 14 Request:
 
 ```bash
 curl -iX PATCH \
