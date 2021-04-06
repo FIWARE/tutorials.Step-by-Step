@@ -23,7 +23,7 @@ or manipulating the context directly or programmatically.
 ## [<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />]("https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) Smart Farm
 
 This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-LD** developers. Linked data concepts are explained
-using the entities from a Smart Farm. Each tutorial then demonstrate the correct use of individual FIWARE components via the **NGSI-LD**
+using the entities from a Smart Farm. Each tutorial then demonstrates the correct use of individual FIWARE components via the **NGSI-LD**
 interface and shows the flow of context data within a simple Smart Solution either by connecting to a series of dummy IoT devices or 
 manipulating the context directly or programmatically.
 
