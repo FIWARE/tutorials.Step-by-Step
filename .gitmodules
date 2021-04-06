@@ -1,6 +1,6 @@
 [submodule ".NGSI-v2"]
-	path = .NGSI-v2
+	path = NGSI-v2
 	url = https://github.com/FIWARE/tutorials.NGSI-v2
 [submodule ".NGSI-LD"]
-	path = .NGSI-LD
+	path = NGSI-LD
 	url = https://github.com/FIWARE/tutorials.NGSI-LD
