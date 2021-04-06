@@ -9,7 +9,7 @@ source code, documentation and Docker images.
 
 ## [<img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" width="90"  align="left" />]("https://fiware-ges.github.io/orion/api/v2/stable/) Smart Supermarket
 
-This is a collection of tutorialsfor the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial,  based around a 
+This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial,  based around a 
 Smart Supermarket  consists of a series of exercises to demonstrate the correct use of individual FIWARE components using **NGSI-v2**
 interfaces and shows the flow of context data within a simple Smart Solution either by connecting to a series of dummy IoT devices 
 or manipulating the context directly or programmatically.
