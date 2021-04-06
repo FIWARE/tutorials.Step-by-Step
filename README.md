@@ -40,7 +40,7 @@ cd tutorials.Step-by-Step/
 git submodule update --init --recursive
 ```
 
-The **NGSI-v2** and **NGSI-LD** tutorials are then available under `NGSI-v2` and `NGSI-LD` respectiveely.
+The **NGSI-v2** and **NGSI-LD** tutorials are then available under the `NGSI-v2` and `NGSI-LD` directories respectively.
 
 ### Docker and Docker Compose <img src="https://www.docker.com/favicon.ico" align="left"  height="30" width="30">
 
