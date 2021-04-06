@@ -40,6 +40,8 @@ cd tutorials.Step-by-Step/
 git submodule update --init --recursive
 ```
 
+The **NGSI-v2** and **NGSI-LD** tutorials are then available under `NGSI-v2` and `NGSI-LD` respectiveely.
+
 ### Docker and Docker Compose <img src="https://www.docker.com/favicon.ico" align="left"  height="30" width="30">
 
 Each tutorial runs all components using [Docker](https://www.docker.com). **Docker** is a container technology which
