@@ -3,35 +3,32 @@
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.Step-by-Step.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://img.shields.io/badge/tag-fiware-orange.svg?logo=stackoverflow)](https://stackoverflow.com/questions/tagged/fiware)
 
-
-This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** and **NGSI-LD** developers. Each tutorial consists
-of a series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context
-data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
-directly or programmatically.
-
+This is an umbrella repository which holds collections of  **NGSI-v2** and **NGSI-LD** tutorials for developers wishing to 
+learn about the [FIWARE](https://www.fiware.org/) ecosystem and allow users and developers to easily navigate to the relevant 
+source code, documentation and Docker images.
 
 ## [<img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" width="90"  align="left" />]("https://fiware-ges.github.io/orion/api/v2/stable/) Smart Supermarket
 
-This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial consists
-of a series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context
-data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
-directly or programmatically.
+This is a collection of tutorialsfor the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial,  based around a 
+Smart Supermarket  consists of a series of exercises to demonstrate the correct use of individual FIWARE components using **NGSI-v2**
+interfaces and shows the flow of context data within a simple Smart Solution either by connecting to a series of dummy IoT devices 
+or manipulating the context directly or programmatically.
 
-| :books: [NGSI-v2<br>Documentation](https://fiware-tutorials.rtfd.io) |
-| -------------------------------------------------------------------- | 
+| :movie_camera: [Introduction<br>to NGSI-v2](https://www.youtube.com/watch?v=pK4GgYjlmdY)| :books: [NGSI-v2 Tutorial<br>Documentation](https://fiware-tutorials.rtfd.io) | 
+| -------------------------------------------------------------------- | --- |
 
 
 🇯🇵 このチュートリアルは[日本語](https://fiware-tutorials.letsfiware.jp/)でもご覧いただけます。<br/>
 
 ## [<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />]("https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf) Smart Farm
 
-This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-LD** developers. Each tutorial consists
-of a series of exercises to demonstrate the correct use of individual FIWARE components and shows the flow of context
-data within a simple Smart Solution either by connecting to a series of dummy IoT devices or manipulating the context
-directly or programmatically.
+This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-LD** developers. Linked data concepts are explained
+using the entities from a Smart Farm. Each tutorial then demonstrate the correct use of individual FIWARE components via the **NGSI-LD**
+interface and shows the flow of context data within a simple Smart Solution either by connecting to a series of dummy IoT devices or 
+manipulating the context directly or programmatically.
 
-| :books: [NGSI-LD<br>Documentation](https://ngsi-ld-tutorials.rtfd.io/) | 
-| ---------------------------------------------------------------------- | 
+| :movie_camera: [Introduction<br>to Linked Data](https://www.youtube.com/watch?v=4x_xzT5eF5Q) |  :movie_camera: [Introduction<br>to NGSI-LD](https://www.youtube.com/watch?v=rZ13IyLpAtA) | :books: [NGSI-LD Tutorial<br>Documentation](https://ngsi-ld-tutorials.rtfd.io/) | 
+|---| ---------------------------------------------------------------------- | --- |
 
 ## Install
 
