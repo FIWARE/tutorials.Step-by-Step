@@ -18,12 +18,14 @@ jobs:
         git submodule update --init --recursive
         git submodule update --recursive --remote
     - name: Commit files
+      continue-on-error: true
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "Update Submodules" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
+      continue-on-error: true
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
