@@ -1,0 +1,9 @@
+{
+  "@context": {
+    "example": "https://example.com/",
+    "Beatle": "example:Beatle",
+    "age": "example:age"
+    "born": "example:born"
+    "spouse": "example:spouse"
+  }
+}
