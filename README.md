@@ -66,7 +66,7 @@ docker version
 Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
 necessary.
 
-### Postman <img src="https://www.postman.com/favicon-32x32.png" align="left"  height="30" width="30">
+### Postman <img src="https://raw.githubusercontent.com/FIWARE/tutorials.Step-by-Step/master/img/postman.svg" align="left"  height="30" width="30">
 
 The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
 framework for REST APIs. The tool can be downloaded from [www.getpostman.com](www.getpostman.com). All the FIWARE
