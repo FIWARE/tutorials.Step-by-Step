@@ -7,6 +7,9 @@ This is an umbrella repository which holds collections of  **NGSI-v2** and **NGS
 learn about the [FIWARE](https://www.fiware.org/) ecosystem and allow users and developers to easily navigate to the relevant 
 source code, documentation and Docker images.
 
+| <a href="https://www.fiware.org/global-summit/"><img src="https://fiware.github.io//catalogue/img/Summit23.png" width="240" height="70" /></a> | <a href="https://www.eventbrite.com/e/fiware-on-site-training-tickets-591474775977"><img src="https://fiware.github.io//catalogue/img/Training23.png" width="240" height="70" /></a> |
+| --- | --- |
+
 ## [<img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" width="90"  align="left" />]("https://fiware-ges.github.io/orion/api/v2/stable/) Smart Supermarket
 
 This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial,  based around a 
