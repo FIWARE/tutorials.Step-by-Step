@@ -12,6 +12,24 @@ source code, documentation and Docker images.
 | --- | --- |
 --->
 
+---
+
+> [!NOTE]
+>  ### Should I be using NGSI-v2 or NGSI-LD?
+> 
+>  FIWARE offers two flavours of the NGSI interfaces:
+>
+>  -  **NGSI-v2** offers JSON based interoperability used in individual Smart Systems
+>  -  **NGSI-LD** offers JSON-LD based interoperability used for Federations and Data Spaces
+>
+>  NGSI-v2 is ideal for creating individual applications offering interoperable interfaces for web services or IoT devices. It is easier to understand than NGSI-LD and does not require a [JSON-LD
+`@context`](https://www.w3.org/TR/json-ld11/#the-context).
+>
+>  However, NGSI-LD and Linked Data is necessary when creating a data space or introducing a system of systems aproach, and in situations requiring
+>  interoperability across apps and organisations.
+
+---
+
 ## [<img src="https://img.shields.io/badge/NGSI-v2-5dc0cf.svg" width="90"  align="left" />]("https://fiware-ges.github.io/orion/api/v2/stable/) Smart Supermarket
 
 This is a collection of tutorials for the FIWARE ecosystem designed for **NGSI-v2** developers. Each tutorial,  based around a 
@@ -34,21 +52,6 @@ manipulating the context directly or programmatically.
 
 | :movie_camera: [Introduction<br>to Linked Data](https://www.youtube.com/watch?v=4x_xzT5eF5Q) |  :movie_camera: [Introduction<br>to NGSI-LD](https://www.youtube.com/watch?v=rZ13IyLpAtA) | :books: [NGSI-LD Tutorial<br>Documentation](https://ngsi-ld-tutorials.rtfd.io/) | 
 |---| ---------------------------------------------------------------------- | --- |
-
-
---- 
-
-### Should I use NGSI-v2 or NGSI-LD?
-
-FIWARE offers two flavours of the NGSI interfaces:
-
--  **NGSI-v2** offers JSON based interoperability used in individual Smart Systems
--  **NGSI-LD** offers JSON-LD based interoperability used for Federations and Data Spaces
-
-NGSI-v2 is ideal for creating individual applications offering interoperable interfaces for web services or IoT devices. It is easier to understand than NGSI-LD and does not require a [JSON-LD
-`@context`](https://www.w3.org/TR/json-ld11/#the-context).
-
-However, NGSI-LD and Linked Data is necessary when creating a data space or introducing a system of systems aproach, and in situations requiring  interoperability across apps and organisations.
 
 ---
 
@@ -95,10 +98,6 @@ framework for REST APIs. The tool can be downloaded from [www.getpostman.com](ww
 Postman collections can downloaded directly from the
 [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
 
-### Cygwin for Windows <img src="https://www.cygwin.com/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
-
-We will start up our services using a simple Bash script. Windows users should download [cygwin](http://www.cygwin.com/)
-to provide a command-line functionality similar to a Linux distribution on Windows.
 
 ### Apache Maven <img src="https://maven.apache.org/favicon.ico" align="left"  height="30" width="30" style="border-right-style:solid; border-right-width:10px; border-color:transparent; background: transparent">
 
