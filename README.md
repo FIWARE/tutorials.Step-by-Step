@@ -88,7 +88,7 @@ docker-compose -v
 docker version
 ```
 
-Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
+Please ensure that you are using Docker version 24.0.x or higher and Docker Compose 2.24.x or higher and upgrade if
 necessary.
 
 ### Postman <img src="https://raw.githubusercontent.com/FIWARE/tutorials.Step-by-Step/master/img/postman.svg" align="left"  height="30" width="30">
@@ -105,6 +105,12 @@ Postman collections can downloaded directly from the
 the concept of a project object model (POM), Maven can manage a project's build, reporting and documentation from a
 central piece of information. Maven can be used to define and download our dependencies and to build and package Java or
 Scala code into a JAR file.
+
+### Windows Subsystem for Linux
+
+We will start up our services using a simple bash script. Windows users should download the
+[Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/install) to provide a command-line
+functionality similar to a Linux distribution on Windows.
 
 ---
 
