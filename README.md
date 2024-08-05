@@ -94,7 +94,7 @@ necessary.
 ### Postman <img src="https://raw.githubusercontent.com/FIWARE/tutorials.Step-by-Step/master/img/postman.svg" align="left"  height="30" width="30">
 
 The tutorials which use HTTP requests supply a collection for use with the Postman utility. Postman is a testing
-framework for REST APIs. The tool can be downloaded from [www.getpostman.com](www.getpostman.com). All the FIWARE
+framework for REST APIs. The tool can be downloaded from [www.getpostman.com](https://www.postman.com/downloads/). All the FIWARE
 Postman collections can downloaded directly from the
 [Postman API network](https://explore.postman.com/team/3mM5EY6ChBYp9D)
 
