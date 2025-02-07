@@ -1,0 +1,26 @@
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/jws-2020/v1"
+  ],
+  "id": "did:web:fiware.github.io:tutorials.Step-by-Step:bob",
+  "verificationMethod": [
+    {
+      "id": "did:fiware.github.io:tutorials.Step-by-Step:bob#owner",
+      "type": "JsonWebKey2020",
+      "controller": "did:web:fiware.github.io:tutorials.Step-by-Step:bob",
+      "publicKeyJwk": {
+        "kty": "EC",
+        "crv": "secp256k1",
+        "x": "Nd3DeQ7G/1pTeYM6viWK6plbSD9E7cA9C2ONG9qG3CQ=",
+        "y": "LuMt0dFWni1/fs/VqfjNOHAZT3PWGxKU8kUlLffGtjM="
+      }
+    }
+  ],
+  "authentication": [
+    "did:web:fiware.github.io:tutorials.Step-by-Step:bob#owner"
+  ],
+  "assertionMethod": [
+    "did:web:fiware.github.io:tutorials.Step-by-Step:bob#owner"
+  ]
+}

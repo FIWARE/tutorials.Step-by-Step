@@ -3,12 +3,12 @@
     "https://www.w3.org/ns/did/v1",
     "https://w3id.org/security/suites/jws-2020/v1"
   ],
-  "id": "did:fiware.github.io:tutorials.Step-by-Step:alice",
+  "id": "did:web:fiware.github.io:tutorials.Step-by-Step:farmer",
   "verificationMethod": [
     {
-      "id": "did:fiware.github.io:tutorials.Step-by-Step:alice#owner",
+      "id": "did:fiware.github.io:tutorials.Step-by-Step:farmer#owner",
       "type": "JsonWebKey2020",
-      "controller": "did:fiware.github.io:tutorials.Step-by-Step:alice",
+      "controller": "did:web:fiware.github.io:tutorials.Step-by-Step:farmer",
       "publicKeyJwk": {
         "kty": "EC",
         "crv": "secp256k1",
@@ -18,9 +18,9 @@
     }
   ],
   "authentication": [
-    "did:fiware.github.io:tutorials.Step-by-Step:alice#owner"
+    "did:web:fiware.github.io:tutorials.Step-by-Step:farmer#owner"
   ],
   "assertionMethod": [
-    "did:fiware.github.io:tutorials.Step-by-Step:alice#owner"
+    "did:web:fiware.github.io:tutorials.Step-by-Step:farmer#owner"
   ]
 }
