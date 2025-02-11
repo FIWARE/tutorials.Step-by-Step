@@ -1,0 +1,16 @@
+{
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://fiware.github.io/tutorials.Step-by-Step/credentials.jsonld"
+    ],
+    "type": ["VerifiableCredential", "IDCard"],
+    "credentialSubject": {
+      "id": "urn:id-card:alice:001",
+      "personalIdentifier": 123456789,
+      "name": "Alice",
+      "dateOfBirth": "1984-09-17",
+      "placeOfBirth": "Berlin",
+      "currentAddress": "Franklinstrasse 12A, 10587, Berlin",
+      "gender": "Male"
+    }
+}

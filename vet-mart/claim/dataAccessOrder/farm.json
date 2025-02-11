@@ -1,0 +1,16 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://fiware.github.io/tutorials.Step-by-Step/credentials.jsonld"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "DataAccessOrder"
+  ],
+  "credentialSubject": {
+    "description": "Veterinary Record Access",
+    "dateOfIssue": "2022-07-10",
+    "dateOfExpiry": "2037-01-11",
+    "status": "Purchased"
+  }
+}

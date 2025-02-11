@@ -1,0 +1,16 @@
+{
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://fiware.github.io/tutorials.Step-by-Step/credentials.jsonld"
+    ],
+    "type": ["VerifiableCredential", "IDCard"],
+    "credentialSubject": {
+      "id": "urn:id-card:bob:001",
+      "personalIdentifier": 999999999,
+      "name": "Bob",
+      "dateOfBirth": "1975-11-17",
+      "placeOfBirth": "Frankfurt",
+      "currentAddress": "Helmholtzstrasse 11, 10587, Berlin",
+      "gender": "Male"
+    }
+}

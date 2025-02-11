@@ -1,0 +1,13 @@
+ {
+    "@context": [
+      "https://www.w3.org/2018/credentials/v1",
+      "https://fiware.github.io/tutorials.Step-by-Step/credentials.jsonld"
+    ],
+    "type": ["VerifiableCredential", "EmploymentCredential"],
+    "credentialSubject": {
+      "employerIdentifier": "12345",
+      "name": "Bob",
+      "jobTitle": "Farm Worker",
+      "startDate": "2020-11-23"
+    }
+  }
