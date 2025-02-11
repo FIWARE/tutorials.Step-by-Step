@@ -13,6 +13,6 @@
       "dateOfExpiry": "2037-01-09",
       "issuingAuthority": "DVLA",
       "licenseNumber": "ALICE12345XX9IJ35",
-      "vehicleCategories"
+      "vehicleCategories":["B", "B1", "C"]
     }
 }
