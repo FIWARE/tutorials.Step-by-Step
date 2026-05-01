@@ -4,6 +4,8 @@
 .Trash-*
 .nfs*
 *.DS_Store
+.claude/
+.gemini/
 .AppleDouble
 .LSOverride
 Icon

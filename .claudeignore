@@ -1,0 +1,68 @@
+# AI Ignore patterns to optimize context window
+# This file is used by Claude/Antigravity to skip irrelevant files
+
+# Version Control
+.git/
+
+# Dependencies and Lockfiles
+node_modules/
+package-lock.json
+yarn.lock
+composer.lock
+
+# OS Generated Files
+.DS_Store
+Thumbs.db
+.AppleDouble
+.LSOverride
+Icon
+
+# Logs and Temporary Files
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pids/
+*.pid
+*.seed
+*.pid.lock
+tmp/
+
+# Data and Persistence (Tutorial Specific)
+**/mysql-data/
+**/mongo-db/
+**/postgres-db/
+**/mongo-data/
+
+# Build Artifacts
+.next/
+dist/
+build/
+*.tgz
+*.zip
+
+# Images and Binary Assets
+img/
+**/img/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.pdf
+*.ico
+
+# Sensitive Data
+.env
+.env.*
+secrets.txt
+
+# AI Tooling State
+.claude/
+.gemini/
+.antigravity/
+.system_generated/
+implementation_plan.md
+task.md
+walkthrough.md
