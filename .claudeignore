@@ -1,14 +1,27 @@
 # AI Ignore patterns to optimize context window
 # This file is used by Claude/Antigravity to skip irrelevant files
 
-# Version Control
+# Version Control & Git Noise (Crucial for Cache Stabilization)
 .git/
+.git/objects/
+.git/refs/
+.git/logs/
 
 # Dependencies and Lockfiles
 node_modules/
 package-lock.json
 yarn.lock
 composer.lock
+.venv/
+venv/
+vendor/
+
+# Python Compilation Binaries
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+pip-log.txt
 
 # OS Generated Files
 .DS_Store
@@ -28,15 +41,28 @@ pids/
 *.seed
 *.pid.lock
 tmp/
+.cache/
+
+# Code Quality & Test Coverage
+.eslintcache
+.stylelintcache
+coverage/
+*.lcov
+.nyc_output/
 
 # Data and Persistence (Tutorial Specific)
 **/mysql-data/
 **/mongo-db/
 **/postgres-db/
 **/mongo-data/
+**/docker-data/
+*.csv
+*.xlsx
+*.jsonl
 
 # Build Artifacts
 .next/
+.turbo/
 dist/
 build/
 *.tgz
