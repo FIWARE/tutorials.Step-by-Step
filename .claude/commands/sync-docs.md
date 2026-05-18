@@ -1,5 +1,5 @@
 ---
-description: Diff a tutorial README against its ReadTheDocs docs file and optionally update the docs file. Applies all README-to-docs transformation rules (strip ToC/Prerequisites/image header, plain-number headings, bash fences, relative links, Description prefix, hr divider).
+description: Diff a tutorial README against its ReadTheDocs docs file and optionally update the docs file. Works for both NGSI-v2 and NGSI-LD tutorials. Applies all README-to-docs transformation rules per the relevant template in .claude/templates/.
 model: claude-haiku-4-5-20251001
 allowed-tools:
   - Read
@@ -8,6 +8,10 @@ allowed-tools:
 ---
 
 Compare the README.md for the tutorial at `$ARGUMENTS` against its corresponding ReadTheDocs docs file. Show a diff of any divergence, then offer to update the docs file to match.
+
+**Template references** (read these before starting to understand the expected format):
+- NGSI-v2: `.claude/templates/ngsi-v2-docs-template.md`
+- NGSI-LD: `.claude/templates/ngsi-ld-docs-template.md`
 
 ## Step 1 — Resolve tutorial path and find the docs file
 
@@ -31,102 +35,61 @@ The docs files for all tutorials in a submodule are centralised under `$SUBMODUL
 
 ## Step 2 — Understand the docs format conventions
 
-A `README.md` is the source of truth for content. The `docs/*.md` file is **not** a mechanical copy of the README — it has its own established format conventions for ReadTheDocs/MkDocs. Use the existing docs file as the reference for format; only propagate content changes from the README.
+First determine which submodule the tutorial belongs to (NGSI-v2 or NGSI-LD), then read the corresponding template:
+- NGSI-v2: `.claude/templates/ngsi-v2-docs-template.md`
+- NGSI-LD: `.claude/templates/ngsi-ld-docs-template.md`
 
-### Omit from docs (never present)
+A `README.md` is the source of truth for **content**. The `docs/*.md` file is **not** a mechanical copy — it has its own established format for ReadTheDocs/MkDocs. Use the existing docs file as the reference for format; only propagate content changes from the README.
 
-- The `<h1 align="center">` HTML block at the top (the logo image header).
-- The `## <TutorialName>` heading immediately after the image block.
-- The language switcher link (e.g. `-   このチュートリアルは[日本語](...)`).
-- The `## Contents` section including its `<details><summary>...</summary>` ToC block.
-- The `## License` section and the trailing `---` before it.
-- The `## Prerequisites` section and all its subsections — **NGSI-LD only**. In NGSI-v2 docs the Prerequisites section is retained.
+### Rules common to both NGSI-v2 and NGSI-LD
 
-### Structure of a correctly-synced docs file
+**Always omit:**
+- `<h1 align="center">` image block at the top
+- `## <TutorialName>` heading immediately after the image block
+- Language switcher line (e.g. `-   このチュートリアルは[日本語](...)`)
+- `## Contents` / `<details>` ToC block
+- `## License` section and trailing `---` before it
+- `#!/bin/bash` shebang at the top of git-clone code blocks
 
-```
-[Badges — same as README, no ## heading wrapper]
-
-**Description:** [first prose sentence from README intro paragraph]
-
-[Rest of intro paragraph]
-
-[Postman/Codespaces badge buttons]
-
-<hr class="core"/>
-
-# [First README `#` content heading — this is the MkDocs page title]
-
-> "[Opening quote from README]"
->
-> — [Attribution]
-
-[Intro prose from under the first `#` heading]
-
-<h3>[README `##` sub-sections within the intro — HTML tag keeps them out of MkDocs nav]</h3>
-
-[Content]
-
----
-
-## Architecture
-
-[README `# Architecture` body]
-
-### Video: NGSI-v2 Core Context Management
-
-[![](https://fiware.github.io/tutorials.NGSI-LD/img/video-logo.png)](https://www.youtube.com/watch?v=XXXX 'NGSI-v2 ...')
-
-Click on the image above to watch a demo of this tutorial describing how to ...
-
-## Prerequisites   ← NGSI-v2 only
-
-[README `# Prerequisites` body]
-
-## Start Up
-
-[README `# Start Up` body]
-
-> **Note:** If you want to clean up and start over again you can do so with the following command:
->
-> ```
-> ./services stop
-> ```
-
----
-
-## [Main Operations Section]
-
-[Numbered request/response blocks]
-
----
-```
-
-### Transformation rules applied to content copied from README
+**Always transform:**
 
 | README element | Docs equivalent |
 |---|---|
-| Badges + intro paragraph | Same badges (no `##` wrapper); `**Description:** ` prefix on first prose sentence; `<hr class="core"/>` before first `#` heading |
-| README `# Foo` (all except first `#` heading) | `## Foo` |
-| README `## Bar` | `### Bar` |
-| README `##` sub-sections within the first `#` block | `<h3>Bar</h3>` (HTML tag, keeps out of MkDocs TOC) |
-| README `###` sub-sub-sections within the first `#` block | `<h4>Baz</h4>` |
-| `#### 1️⃣ Request:` (emoji number heading) | `#### 1 Request:` (plain digit, no emoji) |
+| Badges + intro paragraph | Same badges (no `##` wrapper); `**Description:** ` prefix on first prose sentence |
+| `<hr class="..."/>` | Placed after badges/intro, before first `#` heading; class matches the chapter |
+| First README `#` content heading | `#` (MkDocs page title — stays at `#` level) |
+| All subsequent `#` headings | `##` |
+| `##` headings within first `#` intro block | `<h3>...</h3>` (HTML tag, keeps out of MkDocs TOC) |
+| `###` headings within first `#` intro block | `<h4>...</h4>` |
+| `##` headings elsewhere | `###` |
+| `###` headings elsewhere | `####` |
+| `#### 1️⃣ Request:` / `#### 1️⃣0️⃣ Request:` | `#### 1 Request:` / `#### 10 Request:` (plain digits) |
 | ` ```console ` fenced block | ` ```bash ` |
-| GET request inline query params e.g. `?type=Foo&options=keyValues` | `-G -d 'type=Foo' -d 'options=keyValues'` style for readability |
-| `> [!NOTE]` followed by body | `> **Note:** body` |
-| `> [!TIP]` followed by body | `> **Tip** body` |
-| Absolute GitHub cross-tutorial links `(https://github.com/FIWARE/tutorials.SomeName)` | Relative doc links `(some-name.md)` using the nav map from `mkdocs.yml` |
-| `#!/bin/bash` at the top of a git-clone code block | Remove — not present in README |
+| `> [!NOTE]` + body | `> **Note:** body` |
+| `> [!TIP]` + body | `> **Tip** body` |
+| Absolute GitHub cross-tutorial links | Relative `.md` links via `mkdocs.yml` nav map |
 
-### Added to docs only (not in README)
+**Always preserve:** body prose, non-curl code blocks, blockquotes, images, tables, YAML snippets.
 
-- `### Video: NGSI-v2 Core Context Management` block immediately after `## Architecture`
-- `---` horizontal rules between major top-level sections (before `## Architecture`, before main operations section, etc.)
+### NGSI-v2 specific rules
 
-### Preserved as-is
+- Prerequisites section **is retained** in NGSI-v2 docs.
+- `---` horizontal rule is added **before `## Architecture`** (separating intro from Architecture).
+- `---` horizontal rules are added before each major operations section.
+- Video section title is always `### Video: NGSI-v2 Core Context Management` — placed after `## Architecture`.
+- GET request inline query params → `-G -d 'param=value'` style.
+- Start Up uses `./services create; ./services start;` pattern.
 
-All body prose, code blocks (non-curl), blockquotes, images, tables, YAML snippets.
+### NGSI-LD specific rules
+
+- Prerequisites section is **always omitted** in NGSI-LD docs.
+- **No `---` before `## Architecture`** — intro flows directly into Architecture without a divider.
+- `---` horizontal rules are added only before major operations sections (not before Architecture).
+- Video section title varies per tutorial (`### Video: {Title}`) — present only when a video exists.
+- Video section is placed **within `## Architecture`** (as a `###` sub-section).
+- Start Up section uses `git checkout NGSI-LD` and `./services [orion|scorpio|stellio]` pattern.
+- `<hr>` class depends on chapter: `core` for Core CM, `iotagents` for IoT Agents, etc.
+- Badge set depends on chapter — consult the existing docs file or the NGSI-LD template.
 
 ## Step 3 — Identify content divergence
 
